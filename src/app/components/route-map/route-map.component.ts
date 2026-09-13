@@ -490,7 +490,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       if (filterCategory === 'all') return true;
       if (filterCategory === 'town' && (p.category === 'town' || p.type === 'locality')) return true;
       if (filterCategory === 'bike_shop' && p.category === 'bike_shop') return true;
-      if (filterCategory === 'grocery' && (p.category === 'grocery' || p.category === 'gas_station')) return true;
+      if (filterCategory === 'grocery' && (p.category === 'grocery' || p.category === 'gas_station' || p.category === 'water')) return true;
       if (filterCategory === 'campground' && isCamp) return true;
       if (filterCategory === 'hotel' && isHotel) return true;
       if (filterCategory === 'laundromat' && (p.category === 'laundromat' || p.category === 'laundry')) {
@@ -638,6 +638,14 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
           label: 'Laundry',
           badgeColor: '#6366f1',
           description: 'Laundromat & laundry services'
+        };
+      case 'water':
+        return {
+          emoji: '💧',
+          bg: 'bg-cyan-600',
+          label: 'Water',
+          badgeColor: '#06b6d4',
+          description: 'Water source / Cache'
         };
       default:
         return {

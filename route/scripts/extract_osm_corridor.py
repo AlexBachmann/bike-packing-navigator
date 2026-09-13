@@ -89,6 +89,10 @@ def main():
     parser.add_argument("--buffer-km", type=float, default=18.0, help="Corridor buffer distance in km (default: 18.0)")
     parser.add_argument("--input-pbf", required=False, help="Optional raw OSM PBF to clip with osmium")
     parser.add_argument("--output-pbf", required=False, help="Optional destination clipped PBF")
+    parser.add_argument("--extract-water-access", action="store_true", help="Extract river and lake access points from corridor")
+    parser.add_argument("--water-output", required=False, help="Output path for water access waypoints JSON")
+    parser.add_argument("--segment-km", type=float, default=5.0, help="Max 1 water waypoint per N km along river/lake (default: 5.0)")
+    parser.add_argument("--max-dist-m", type=float, default=250.0, help="Max distance in meters to trail for water access (default: 250.0)")
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[2]  # repository root
@@ -136,6 +140,33 @@ def main():
         cmd = ["osmium", "extract", "-p", str(output_geojson), str(args.input_pbf), "-o", str(args.output_pbf), "--overwrite"]
         subprocess.run(cmd, check=True)
         print(f"[OSM Corridor] Successfully created clipped PBF: {args.output_pbf}")
+
+    # Optional river & lake water access point extraction
+    if args.extract_water_access and track_path and track_path.exists():
+        water_out = Path(args.water_output) if args.water_output else output_geojson.parent / "water_access.json"
+        pbf_source = args.output_pbf if (args.output_pbf and os.path.exists(args.output_pbf)) else args.input_pbf
+        try:
+            from extract_water_access import extract_water_access
+            extract_water_access(
+                track_path=str(track_path),
+                output_path=str(water_out),
+                osm_pbf=str(pbf_source) if pbf_source and os.path.exists(pbf_source) else None,
+                corridor_geojson=str(output_geojson),
+                segment_km=args.segment_km,
+                max_dist_m=args.max_dist_m
+            )
+        except ImportError:
+            # Fallback when run from different directory
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from extract_water_access import extract_water_access
+            extract_water_access(
+                track_path=str(track_path),
+                output_path=str(water_out),
+                osm_pbf=str(pbf_source) if pbf_source and os.path.exists(pbf_source) else None,
+                corridor_geojson=str(output_geojson),
+                segment_km=args.segment_km,
+                max_dist_m=args.max_dist_m
+            )
 
 if __name__ == "__main__":
     main()

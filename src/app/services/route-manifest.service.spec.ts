@@ -44,6 +44,22 @@ describe('RouteManifestService', () => {
       description: 'Colorado Trail route',
       startCoordinates: [39.49, -105.09],
       bounds: [[37.27, -107.88], [39.49, -105.09]]
+    },
+    {
+      id: 'arizona-trail-300',
+      name: 'Arizona Trail Race 300 (2025)',
+      shortName: 'Arizona Trail 300',
+      badge: 'AZT',
+      startLocation: 'Coronado National Memorial, AZ',
+      endLocation: 'Picketpost Trailhead (Superior), AZ',
+      totalDistanceMiles: 305.0,
+      totalDistanceKm: 490.8,
+      elevationGainFt: 40866,
+      elevationGainM: 12456,
+      iconicCheckpoints: ['Coronado National Memorial', 'Mount Lemmon', 'Picketpost Trailhead'],
+      description: 'AZT 300 race route',
+      startCoordinates: [31.3387, -110.3379],
+      bounds: [[31.3387, -111.1763], [33.272, -110.3319]]
     }
   ];
 
@@ -76,8 +92,8 @@ describe('RouteManifestService', () => {
 
   it('should load route manifest from /data/routes.json', () => {
     service.loadManifest().subscribe((routes) => {
-      expect(routes.length).toBe(2);
-      expect(service.availableRoutes().length).toBe(2);
+      expect(routes.length).toBe(3);
+      expect(service.availableRoutes().length).toBe(3);
     });
 
     const req = httpMock.expectOne('/data/routes.json');
@@ -89,6 +105,7 @@ describe('RouteManifestService', () => {
     service.availableRoutes.set(mockRoutes);
     expect(service.validateRouteId('tour-divide-2025')).toBe(true);
     expect(service.validateRouteId('colorado-trail')).toBe(true);
+    expect(service.validateRouteId('arizona-trail-300')).toBe(true);
     expect(service.validateRouteId('unknown-route')).toBe(false);
   });
 
@@ -99,6 +116,16 @@ describe('RouteManifestService', () => {
     expect(success).toBe(true);
     expect(service.activeRouteId()).toBe('colorado-trail');
     expect(service.activeRouteSummary()?.name).toBe('Colorado Trail');
+  });
+
+  it('should switch routes to arizona-trail-300 when online', async () => {
+    service.availableRoutes.set(mockRoutes);
+    const success = await service.selectRoute('arizona-trail-300');
+
+    expect(success).toBe(true);
+    expect(service.activeRouteId()).toBe('arizona-trail-300');
+    expect(service.activeRouteSummary()?.name).toBe('Arizona Trail Race 300 (2025)');
+    expect(service.activeRouteSummary()?.badge).toBe('AZT');
   });
 
   it('should block switching to uncached route when offline and show warning toast', async () => {

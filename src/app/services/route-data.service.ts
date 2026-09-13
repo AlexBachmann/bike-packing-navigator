@@ -396,7 +396,13 @@ export class RouteDataService implements OnDestroy {
           const hasDirectMatch = filterCategories.has(p.category);
           const isLaundryMatch =
             (filterCategories.has('laundromat') || filterCategories.has('laundry')) && isLaundry;
-          if (!hasDirectMatch && !isLaundryMatch) {
+          const isWaterMatch =
+            p.category === 'water' &&
+            (filterCategories.has('water') ||
+              filterCategories.has('grocery') ||
+              filterCategories.has('gas_station') ||
+              filterCategories.size >= 9);
+          if (!hasDirectMatch && !isLaundryMatch && !isWaterMatch) {
             return false;
           }
         }

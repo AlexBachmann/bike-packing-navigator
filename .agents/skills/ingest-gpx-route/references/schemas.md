@@ -156,11 +156,37 @@ POIs and resupply resources along the route.
     "address": "Waterton Canyon, Littleton, CO",
     "google_maps_url": "https://maps.google.com/?...",
     "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "azt_freeman_road_cache",
+    "name": "Freeman Road Trailhead & Water Cache",
+    "category": "water",
+    "type": "water",
+    "town": "Florence Junction",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.8555,
+      "lon": -110.8645
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 392.0,
+    "route_mile": 243.6,
+    "address": "Freeman Rd, Pinal County, AZ",
+    "google_maps_url": "https://maps.google.com/?q=32.8555,-110.8645",
+    "business_status": "OPERATIONAL",
+    "description": "Vital lifeline water cache maintained by the Arizona Trail Association in the Tortilla Mountains. Unfiltered cache containers."
   }
 ]
 ```
 **Valid Categories:**
 `town`, `campground`, `hotel`, `grocery`, `restaurant`, `bike`, `water`, `laundry`, `services`
+
+**Water Category (`category: "water"`):**
+- **Purpose**: Represents life-safety backcountry water resources (natural springs, perennial creek pools, USFS/BLM potable spigots, and volunteer trail angel water caches).
+- **UI Badge**: Displays cyan pill `{ icon: "💧", label: "Water", badgeClass: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" }`.
+- **Map Marker**: Rendered as a cyan water droplet pin (`💧 Water`, color `#06b6d4`, background `bg-cyan-600`).
+- **Resupply Planner**: Classified as an active resupply stop in `ResupplyPlannerComponent`, allowing riders to plan hydration intervals between water points.
+- **Filtering**: Preserved on default route load (`filterCategories.size >= 9`) and grouped under Grocery/Stores ("Food & water resupply") filters.
 
 ---
 

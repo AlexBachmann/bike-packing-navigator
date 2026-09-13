@@ -25,21 +25,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "all.json",
-                "input": "route/places",
-                "output": "data/places"
-              },
-              {
-                "glob": "tour-divide-2025.gpx",
-                "input": "route",
-                "output": "data"
-              },
-              {
-                "glob": "route-track.json",
-                "input": "route",
-                "output": "data"
               }
             ],
             "styles": [

@@ -60,6 +60,9 @@ CATEGORY_MAP = {
     'bike_shop': 'bike',
     'laundromat': 'laundry',
     'laundry': 'laundry',
+    'drinking_water': 'water',
+    'water_point': 'water',
+    'spring': 'water',
     'gas_station': 'services',
     'post_office': 'services',
     'pharmacy': 'services'
@@ -191,8 +194,16 @@ def main():
     parser.add_argument("--output", required=False, help="Path to output places.json")
     parser.add_argument("--cache", required=False, help="Path to cache file")
     parser.add_argument("--towns", required=False, help="Path to towns JSON")
-    parser.add_argument("--api-key", default=os.environ.get("GOOGLE_PLACES_API_KEY") or os.environ.get("GOOGLE_MAPS_API_KEY"), help="Google Places API Key")
+    parser.add_argument("--water", required=False, help="Path to water sources JSON (springs, caches, spigots)")
     parser.add_argument("--backcountry-interval-km", type=float, default=12.0, help="Sampling interval in km for backcountry")
+    parser.add_argument(
+        "--api-key",
+        default=os.environ.get("GOOGLE_CLOUD_API_KEY")
+        or os.environ.get("GOOGLE_PLACES_API_KEY")
+        or os.environ.get("GOOGLE_MAPS_API_KEY")
+        or os.environ.get("GOOGLE_API_KEY"),
+        help="Google Places API Key (reads GOOGLE_CLOUD_API_KEY, GOOGLE_PLACES_API_KEY, etc.)"
+    )
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[2]  # repository root
@@ -318,7 +329,54 @@ def main():
                         "business_status": p.get("businessStatus", "OPERATIONAL")
                     }
 
-    # 2. Backcountry sampling along the route track
+    # 2. Process water sources (springs, caches, spigots, river/lake access) if present
+    water_paths = []
+    if args.water:
+        if isinstance(args.water, list):
+            water_paths.extend(args.water)
+        elif "," in str(args.water):
+            water_paths.extend([p.strip() for p in str(args.water).split(",")])
+        else:
+            water_paths.append(str(args.water))
+
+    for wp in water_paths:
+        w_path = Path(wp)
+        if w_path.exists():
+            try:
+                with open(w_path, "r", encoding="utf-8") as f:
+                    water_sources = json.load(f)
+                print(f"[PLACES] Processing {len(water_sources)} water sources from {w_path}...")
+                for idx, w in enumerate(water_sources):
+                    wid = w.get("id") or f"water_{idx+1}"
+                    wloc = w.get("location") or {}
+                    wlat = w.get("lat") if "lat" in w else wloc.get("lat")
+                    wlon = w.get("lon") if "lon" in w else wloc.get("lon")
+                    if wlat is None or wlon is None:
+                        continue
+
+                    wdist_trail, wr_km, wr_mi = project_onto_track(wlat, wlon, track_coords, track_kms)
+                    places_by_id[wid] = {
+                        "id": wid,
+                        "name": w.get("name", "Water Source"),
+                        "category": "water",
+                        "type": w.get("type", "water"),
+                        "town": w.get("town", ""),
+                        "is_in_town": w.get("is_in_town", False),
+                        "location": {"lat": wlat, "lon": wlon},
+                        "distance_to_trail_km": wdist_trail,
+                        "route_km": wr_km,
+                        "route_mile": wr_mi,
+                        "address": w.get("address", ""),
+                        "google_maps_url": w.get("google_maps_url") or f"https://maps.google.com/?q={wlat},{wlon}",
+                        "business_status": w.get("business_status", "OPERATIONAL"),
+                        "province_state": w.get("province_state", ""),
+                        "country": w.get("country", ""),
+                        "description": w.get("description", "Reliable water source or cache.")
+                    }
+            except Exception as e:
+                print(f"[PLACES WARNING] Failed to load water sources from {w_path}: {e}", file=sys.stderr)
+
+    # 3. Backcountry sampling along the route track
     step_km = args.backcountry_interval_km
     curr_target_km = step_km * 0.5
     checkpoints = []

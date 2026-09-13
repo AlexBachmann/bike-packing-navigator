@@ -95,6 +95,58 @@
         ]
       ],
       "dataPath": "/data/routes/colorado-trail"
+    },
+    {
+      "id": "arizona-trail-300",
+      "name": "Arizona Trail Race 300 (2025)",
+      "shortName": "Arizona Trail 300",
+      "badge": "AZT",
+      "startLocation": "Coronado National Memorial, AZ",
+      "endLocation": "Picketpost Trailhead (Superior), AZ",
+      "startPoint": "Coronado National Memorial, AZ",
+      "endPoint": "Picketpost Trailhead (Superior), AZ",
+      "totalDistanceMiles": 305.0,
+      "totalDistanceKm": 490.8,
+      "distanceMiles": 305.0,
+      "distanceKm": 490.8,
+      "elevationGainFt": 40866,
+      "elevationGainM": 12456,
+      "elevationGainFeet": 40866,
+      "elevationGainMeters": 12456,
+      "highestElevationFeet": 8234,
+      "highestElevationMeters": 2510,
+      "highestPoint": "Mount Lemmon / Dan Saddle (8,234 ft)",
+      "iconicPass": "Mount Lemmon / Dan Saddle (8,234 ft)",
+      "iconicCheckpoints": [
+        "Coronado National Memorial",
+        "Canelo Pass",
+        "Patagonia",
+        "Kentucky Camp",
+        "Colossal Cave",
+        "Redington Pass",
+        "Mount Lemmon (Dan Saddle)",
+        "Oracle",
+        "Freeman Road Cache",
+        "Ripsey Ridge",
+        "Gila River (Kelvin)",
+        "Picketpost Trailhead"
+      ],
+      "description": "The premier 300-mile self-supported bikepacking race across southern Arizona's rugged Sky Islands, climbing from the Mexico border over 8,200-foot Mount Lemmon to Picketpost Mountain.",
+      "startCoordinates": [
+        31.33874,
+        -110.3379
+      ],
+      "bounds": [
+        [
+          31.3387,
+          -111.1763
+        ],
+        [
+          33.272,
+          -110.3319
+        ]
+      ],
+      "dataPath": "/data/routes/arizona-trail-300"
     }
   ]
 }

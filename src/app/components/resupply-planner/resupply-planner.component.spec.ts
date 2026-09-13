@@ -174,6 +174,31 @@ describe('ResupplyPlannerComponent', () => {
       expect(stops[1].name).toBe('Eureka Resupply Hub');
     });
 
+    it('should classify water sources as upcoming resupply stops with water droplet badge', () => {
+      routeService.places.set([
+        ...mockPlaces,
+        {
+          id: 'azt_freeman_water',
+          name: 'Freeman Road Water Cache',
+          category: 'water',
+          type: 'water',
+          town: 'Florence Junction',
+          is_in_town: false,
+          location: { lat: 32.855, lon: -110.864 },
+          distance_to_trail_km: 0.0,
+          route_km: 384.3,
+          route_mile: 238.8
+        }
+      ]);
+      fixture.detectChanges();
+
+      const stops = component.upcomingStops();
+      const waterStop = stops.find((s) => s.id === 'azt_freeman_water');
+      expect(waterStop).toBeDefined();
+      expect(waterStop?.badgeIcon).toBe('💧');
+      expect(waterStop?.badgeLabel).toBe('Water');
+    });
+
     it('should compute distance ahead in active units (miles vs km)', () => {
       fixture.componentRef.setInput('currentMile', 0);
       fixture.componentRef.setInput('unit', 'miles');

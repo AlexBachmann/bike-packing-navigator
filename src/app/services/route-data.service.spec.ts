@@ -81,6 +81,36 @@ describe('RouteDataService', () => {
     expect(service.totalDistanceMiles).toBe(535);
   });
 
+  it('should flush previous data and load new files when switching to arizona-trail-300', () => {
+    service.loadRoute('arizona-trail-300');
+
+    httpMock.expectOne('/data/routes/arizona-trail-300/places.json').flush([
+      { id: 'azt-1', name: 'Montezuma Pass', route_mile: 2.4, category: 'campground', type: 'campground', location: { lat: 31.37, lon: -110.33 } }
+    ]);
+    httpMock.expectOne('/data/routes/arizona-trail-300/route-track.json').flush({
+      total_km: 490.8,
+      total_miles: 305.0,
+      points: [[31.33874, -110.3379, 1634.7, 0, 0]]
+    });
+    httpMock.expectOne('/data/routes/arizona-trail-300/surfaces.json').flush([
+      [0.0, 14.7, 'path', 'ground', 'grade4']
+    ]);
+    httpMock.expectOne('/data/routes/arizona-trail-300/climbs.json').flush([
+      { id: 'climb-1', name: 'Montezuma Canyon Saddle', startMile: 0, endMile: 2.4, startKm: 0, endKm: 3.9 }
+    ]);
+    httpMock.expectOne('/data/routes/arizona-trail-300/passes.json').flush([
+      { id: 'pass-1', name: 'Montezuma Canyon Saddle (5,782 ft)', routeMile: 2.4, routeKm: 3.9 }
+    ]);
+    httpMock.expectOne('/data/routes/arizona-trail-300/milestones.json').flush([
+      { name: 'Coronado National Memorial, AZ', mile: 0.0, km: 0.0, elevation: 1635, state: 'AZ' }
+    ]);
+
+    expect(service.activeRouteId()).toBe('arizona-trail-300');
+    expect(service.totalDistanceMiles).toBe(305.0);
+    expect(service.places().length).toBe(1);
+    expect(service.trackPoints().length).toBe(1);
+  });
+
   it('should load route from IndexedDB without network requests when offline', async () => {
     const offlineStorage = TestBed.inject(OfflineStorageService);
     const networkStatus = TestBed.inject(NetworkStatusService);

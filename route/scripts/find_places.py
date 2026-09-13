@@ -680,12 +680,12 @@ Examples:
         "--api-key",
         type=str,
         default=(
-            os.getenv("GOOGLE_MAPS_API_KEY")
-            or os.getenv("GOOGLE_CLOUD_API_KEY")
-            or os.getenv("GOOGLE_CLOOUD_API_KEY")
+            os.getenv("GOOGLE_CLOUD_API_KEY")
+            or os.getenv("GOOGLE_PLACES_API_KEY")
+            or os.getenv("GOOGLE_MAPS_API_KEY")
             or os.getenv("GOOGLE_API_KEY")
         ),
-        help="Google Maps API Key (or set GOOGLE_MAPS_API_KEY env var)",
+        help="Google API Key (reads GOOGLE_CLOUD_API_KEY, GOOGLE_PLACES_API_KEY, or GOOGLE_MAPS_API_KEY env var)",
     )
     auth_group.add_argument(
         "--mock",
@@ -804,8 +804,8 @@ def main():
         if not args.api_key:
             print("\n" + "!" * 80, file=sys.stderr)
             print("[ERROR] Google Maps API key not found!", file=sys.stderr)
-            print("Please provide an API key using --api-key or set the GOOGLE_MAPS_API_KEY environment variable:", file=sys.stderr)
-            print("   export GOOGLE_MAPS_API_KEY='your-api-key-here'", file=sys.stderr)
+            print("Please provide an API key using --api-key or set the GOOGLE_CLOUD_API_KEY environment variable:", file=sys.stderr)
+            print("   export GOOGLE_CLOUD_API_KEY='your-api-key-here'", file=sys.stderr)
             print("\nRequired Google Cloud APIs to enable on your project:", file=sys.stderr)
             print("   1. Places API (or Places API (New))", file=sys.stderr)
             print("   2. Geocoding API (recommended for town/locality resolution)", file=sys.stderr)

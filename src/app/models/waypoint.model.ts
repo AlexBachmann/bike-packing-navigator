@@ -104,6 +104,9 @@ export function getCategoryBadge(category: string): { icon: string; label: strin
   const key = category === 'laundry' ? 'laundromat' : category;
   const found = AVAILABLE_CATEGORIES.find((c) => c.key === key);
   if (found) return found;
+  if (category === 'water') {
+    return { icon: '💧', label: 'Water', badgeClass: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' };
+  }
   return { icon: '📍', label: category, badgeClass: 'bg-slate-700/50 text-slate-300 border-slate-600' };
 }
 

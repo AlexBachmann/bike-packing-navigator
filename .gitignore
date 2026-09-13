@@ -9,6 +9,11 @@
 /bazel-out
 *.tsbuildinfo
 
+/.agents
+!/.agents/skills
+!/.agents/scripts
+!/.agents/hoooks
+
 # ==========================================
 # Dependencies & Package Managers
 # ==========================================

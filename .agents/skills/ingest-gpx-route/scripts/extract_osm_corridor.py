@@ -84,9 +84,31 @@ def main():
     parser.add_argument("--track", required=True, help="Path to input route-track.json")
     parser.add_argument("--output-geojson", required=True, help="Path to output corridor.geojson")
     parser.add_argument("--buffer-km", type=float, default=18.0, help="Buffer radius in km (default: 18)")
+    parser.add_argument("--extract-water-access", action="store_true", help="Extract river and lake access points from corridor")
+    parser.add_argument("--water-output", required=False, help="Output path for water access waypoints JSON")
+    parser.add_argument("--segment-km", type=float, default=5.0, help="Max 1 water waypoint per N km along river/lake (default: 5.0)")
+    parser.add_argument("--max-dist-m", type=float, default=250.0, help="Max distance in meters to trail for water access (default: 250.0)")
+    parser.add_argument("--osm-pbf", required=False, help="Optional OSM corridor PBF extract")
     args = parser.parse_args()
 
     generate_corridor(args.track, args.output_geojson, args.buffer_km)
+
+    if args.extract_water_access:
+        water_out = args.water_output or os.path.join(os.path.dirname(os.path.abspath(args.output_geojson)), "water_access.json")
+        try:
+            from extract_water_access import extract_water_access
+        except ImportError:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from extract_water_access import extract_water_access
+
+        extract_water_access(
+            track_path=args.track,
+            output_path=water_out,
+            osm_pbf=args.osm_pbf,
+            corridor_geojson=args.output_geojson,
+            segment_km=args.segment_km,
+            max_dist_m=args.max_dist_m
+        )
 
 if __name__ == "__main__":
     main()

@@ -57,8 +57,18 @@ def main():
     parser.add_argument("--start-location", default="Start Trailhead", help="Starting City/Location")
     parser.add_argument("--end-location", default="Finish Line", help="Ending City/Location")
     parser.add_argument("--description", default="", help="Route description")
-    parser.add_argument("--api-key", default=os.environ.get("GOOGLE_PLACES_API_KEY") or os.environ.get("GOOGLE_MAPS_API_KEY"), help="Google Places API Key")
     parser.add_argument("--corridor-pbf", required=False, help="Optional OSM corridor PBF extract")
+    parser.add_argument("--water", required=False, help="Optional path to water sources JSON file to merge")
+    parser.add_argument("--find-water-access", action="store_true", help="Extract river and lake access points from OSM corridor (max 1 per 5km)")
+    parser.add_argument("--segment-km", type=float, default=5.0, help="Max 1 water waypoint per N km along river/lake (default: 5.0)")
+    parser.add_argument(
+        "--api-key",
+        default=os.environ.get("GOOGLE_CLOUD_API_KEY")
+        or os.environ.get("GOOGLE_PLACES_API_KEY")
+        or os.environ.get("GOOGLE_MAPS_API_KEY")
+        or os.environ.get("GOOGLE_API_KEY"),
+        help="Google Places API Key (reads GOOGLE_CLOUD_API_KEY, GOOGLE_PLACES_API_KEY, etc.)"
+    )
     args = parser.parse_args()
 
     gpx_path = Path(args.gpx).resolve()
@@ -103,12 +113,21 @@ def main():
 
     # Step 2: Generate 18 km OSM Corridor Buffer
     print("\n--- [Step 2/6] Generating 18 km OSM Buffer Corridor ---")
-    run_command([
+    corridor_cmd = [
         sys.executable, str(SCRIPT_DIR / "extract_osm_corridor.py"),
         "--track", str(track_out),
         "--output-geojson", str(corridor_out),
         "--buffer-km", "18.0"
-    ])
+    ]
+    if args.find_water_access:
+        corridor_cmd.extend([
+            "--extract-water-access",
+            "--water-output", str(route_out_dir / "water_access.json"),
+            "--segment-km", str(args.segment_km)
+        ])
+        if args.corridor_pbf:
+            corridor_cmd.extend(["--osm-pbf", args.corridor_pbf])
+    run_command(corridor_cmd)
 
     # Step 3: Road Classes & Surfaces
     print("\n--- [Step 3/6] Modeling Route Surfaces (Gravel, Dirt, Paved) ---")
@@ -144,13 +163,21 @@ def main():
     ])
 
     # Step 6: Google Places POI Extraction
-    print("\n--- [Step 6/6] Extracting POIs via Google Places API (New) Pro Tier ---")
+    print("\n--- [Step 6/6] Extracting POIs via Google Places API & Water Sources ---")
     places_cmd = [
         sys.executable, str(SCRIPT_DIR / "populate_places.py"),
         "--track", str(track_out),
         "--output", str(places_out),
         "--cache", str(cache_places)
     ]
+    water_files = []
+    if args.water:
+        water_files.append(str(Path(args.water).resolve()))
+    water_access_out = route_out_dir / "water_access.json"
+    if water_access_out.exists():
+        water_files.append(str(water_access_out))
+    if water_files:
+        places_cmd.extend(["--water", ",".join(water_files)])
     if args.api_key:
         places_cmd.extend(["--api-key", args.api_key])
     run_command(places_cmd)

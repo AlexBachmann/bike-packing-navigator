@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Coronado National Memorial, AZ",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 1635,
+    "state": "AZ"
+  },
+  {
+    "name": "Parker Canyon Lake, AZ",
+    "mile": 20.1,
+    "km": 32.3,
+    "elevation": 1659,
+    "state": "AZ"
+  },
+  {
+    "name": "Canelo Pass Trailhead, AZ",
+    "mile": 24.8,
+    "km": 39.9,
+    "elevation": 1847,
+    "state": "AZ"
+  },
+  {
+    "name": "Patagonia, AZ",
+    "mile": 49.8,
+    "km": 80.2,
+    "elevation": 1296,
+    "state": "AZ"
+  },
+  {
+    "name": "Gardner Canyon, AZ",
+    "mile": 63.2,
+    "km": 101.8,
+    "elevation": 1654,
+    "state": "AZ"
+  },
+  {
+    "name": "Kentucky Camp, AZ",
+    "mile": 76.3,
+    "km": 122.8,
+    "elevation": 1703,
+    "state": "AZ"
+  },
+  {
+    "name": "Cienega Creek / Marsh Station, AZ",
+    "mile": 92.2,
+    "km": 148.4,
+    "elevation": 1446,
+    "state": "AZ"
+  },
+  {
+    "name": "Colossal Cave Mountain Park, AZ",
+    "mile": 115.9,
+    "km": 186.5,
+    "elevation": 1068,
+    "state": "AZ"
+  },
+  {
+    "name": "Redington Pass Summit, AZ",
+    "mile": 152.9,
+    "km": 246.1,
+    "elevation": 1269,
+    "state": "AZ"
+  },
+  {
+    "name": "Mount Lemmon (Dan Saddle), AZ",
+    "mile": 184.3,
+    "km": 296.6,
+    "elevation": 2510,
+    "state": "AZ"
+  },
+  {
+    "name": "Oracle (Tiger Mine Trailhead), AZ",
+    "mile": 211.9,
+    "km": 341.0,
+    "elevation": 1258,
+    "state": "AZ"
+  },
+  {
+    "name": "Freeman Road Water Cache, AZ",
+    "mile": 238.8,
+    "km": 384.3,
+    "elevation": 1237,
+    "state": "AZ"
+  },
+  {
+    "name": "Ripsey Ridge Summit, AZ",
+    "mile": 260.8,
+    "km": 419.8,
+    "elevation": 1084,
+    "state": "AZ"
+  },
+  {
+    "name": "Kelvin / Gila River Crossing, AZ",
+    "mile": 270.8,
+    "km": 435.9,
+    "elevation": 654,
+    "state": "AZ"
+  },
+  {
+    "name": "White Canyon Wilderness, AZ",
+    "mile": 291.1,
+    "km": 468.5,
+    "elevation": 1081,
+    "state": "AZ"
+  },
+  {
+    "name": "Picketpost Trailhead (Superior), AZ",
+    "mile": 305.0,
+    "km": 490.8,
+    "elevation": 729,
+    "state": "AZ"
+  }
+]

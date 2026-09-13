@@ -152,12 +152,14 @@ export class ResupplyPlannerComponent {
         cat === 'grocery' ||
         cat === 'gas_station' ||
         cat === 'town' ||
+        cat === 'water' ||
         type === 'convenience_store' ||
         type === 'supermarket' ||
         type === 'grocery' ||
         type === 'gas_station' ||
         type === 'town' ||
-        type === 'locality'
+        type === 'locality' ||
+        type === 'water'
       );
     };
 
@@ -194,6 +196,9 @@ export class ResupplyPlannerComponent {
       } else if (cat === 'gas_station' || type === 'gas_station') {
         badgeIcon = '⛽';
         badgeLabel = 'Gas / Store';
+      } else if (cat === 'water' || type === 'water') {
+        badgeIcon = '💧';
+        badgeLabel = 'Water';
       }
 
       return {

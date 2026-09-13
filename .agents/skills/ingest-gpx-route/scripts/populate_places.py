@@ -52,6 +52,9 @@ CATEGORY_MAP = {
     'bicycle_repair_service': 'bike',
     'bike_shop': 'bike',
     'laundromat': 'laundry',
+    'drinking_water': 'water',
+    'water_point': 'water',
+    'spring': 'water',
     'gas_station': 'services',
     'post_office': 'services',
     'pharmacy': 'services'
@@ -178,7 +181,8 @@ def run_extraction(
     output_path: str,
     cache_path: str,
     api_key: Optional[str] = None,
-    towns_path: Optional[str] = None
+    towns_path: Optional[str] = None,
+    water_path: Optional[str] = None
 ):
     with open(track_path, "r", encoding="utf-8") as f:
         track_data = json.load(f)
@@ -194,7 +198,52 @@ def run_extraction(
     cache = PlacesCache(cache_path)
     places_by_id: Dict[str, Dict[str, Any]] = {}
 
-    # 1. Backcountry sampling checkpoints every 12 km
+    # 1. Merge verified water sources (springs, caches, spigots, river/lake access) if provided
+    water_paths = []
+    if water_path:
+        if isinstance(water_path, list):
+            water_paths.extend(water_path)
+        elif "," in str(water_path):
+            water_paths.extend([p.strip() for p in str(water_path).split(",")])
+        else:
+            water_paths.append(str(water_path))
+
+    for wp in water_paths:
+        if os.path.exists(wp):
+            try:
+                with open(wp, "r", encoding="utf-8") as f:
+                    water_sources = json.load(f)
+                print(f"[PLACES] Merging {len(water_sources)} water sources from {wp}...")
+                for idx, w in enumerate(water_sources):
+                    wid = w.get("id") or f"water_{idx+1}"
+                    plat = w.get("lat") if "lat" in w else w.get("location", {}).get("lat")
+                    plon = w.get("lon") if "lon" in w else w.get("location", {}).get("lon")
+                    if plat is None or plon is None:
+                        continue
+
+                    dist_to_trail, r_km, r_mi = project_onto_track(plat, plon, track_coords, track_kms)
+                    places_by_id[wid] = {
+                        "id": wid,
+                        "name": w.get("name", "Water Source"),
+                        "category": "water",
+                        "type": w.get("type", "water"),
+                        "town": w.get("town", ""),
+                        "is_in_town": w.get("is_in_town", False),
+                        "location": {"lat": plat, "lon": plon},
+                        "distance_to_trail_km": dist_to_trail,
+                        "route_km": r_km,
+                        "route_mile": r_mi,
+                        "address": w.get("address", ""),
+                        "google_maps_url": w.get("google_maps_url") or f"https://maps.google.com/?q={plat},{plon}",
+                        "business_status": w.get("business_status", "OPERATIONAL"),
+                        "province_state": w.get("province_state", ""),
+                        "country": w.get("country", ""),
+                        "description": w.get("description", "Reliable water source or cache.")
+                    }
+            except Exception as e:
+                print(f"[PLACES WARNING] Failed to merge water sources from {wp}: {e}", file=sys.stderr)
+
+    # 2. Backcountry sampling checkpoints every 12 km
     sample_interval_km = 12.0
     curr_target_km = 6.0
     checkpoints = []
@@ -269,11 +318,19 @@ def main():
     parser.add_argument("--track", required=True, help="Path to input route-track.json")
     parser.add_argument("--output", required=True, help="Path to output places.json")
     parser.add_argument("--cache", default="route/places/.cache_places_api.json", help="Path to persistent cache file")
-    parser.add_argument("--api-key", default=os.environ.get("GOOGLE_PLACES_API_KEY") or os.environ.get("GOOGLE_MAPS_API_KEY"), help="Google Places API Key")
     parser.add_argument("--towns", required=False, help="Optional towns JSON filepath")
+    parser.add_argument("--water", required=False, help="Optional water sources JSON filepath (springs, caches, spigots)")
+    parser.add_argument(
+        "--api-key",
+        default=os.environ.get("GOOGLE_CLOUD_API_KEY")
+        or os.environ.get("GOOGLE_PLACES_API_KEY")
+        or os.environ.get("GOOGLE_MAPS_API_KEY")
+        or os.environ.get("GOOGLE_API_KEY"),
+        help="Google Places API Key (reads GOOGLE_CLOUD_API_KEY, GOOGLE_PLACES_API_KEY, etc.)"
+    )
     args = parser.parse_args()
 
-    run_extraction(args.track, args.output, args.cache, args.api_key, args.towns)
+    run_extraction(args.track, args.output, args.cache, args.api_key, args.towns, args.water)
 
 if __name__ == "__main__":
     main()

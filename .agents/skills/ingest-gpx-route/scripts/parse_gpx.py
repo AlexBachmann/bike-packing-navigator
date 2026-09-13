@@ -58,7 +58,17 @@ def parse_gpx(gpx_path: str) -> Tuple[List[List[float]], Dict[str, Any]]:
     for pt in trkpts:
         lat = float(pt.attrib['lat'])
         lon = float(pt.attrib['lon'])
-        ele_elem = pt.find('ele') or pt.find('{http://www.topografix.com/GPX/1/1}ele') or pt.find('{http://www.topografix.com/GPX/1/0}ele')
+        ele_elem = None
+        for tag in ('ele', '{http://www.topografix.com/GPX/1/1}ele', '{http://www.topografix.com/GPX/1/0}ele'):
+            found = pt.find(tag)
+            if found is not None:
+                ele_elem = found
+                break
+        if ele_elem is None:
+            for child in pt:
+                if child.tag.endswith('ele'):
+                    ele_elem = child
+                    break
         ele = float(ele_elem.text) if ele_elem is not None and ele_elem.text else 0.0
         raw_coords.append((lat, lon, ele))
 

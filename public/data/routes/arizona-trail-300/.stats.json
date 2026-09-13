@@ -1,0 +1,31 @@
+{
+  "total_km": 490.8,
+  "total_miles": 305.0,
+  "elevation_gain_m": 12456,
+  "elevation_gain_ft": 40866,
+  "highest_elevation_m": 2510,
+  "highest_elevation_ft": 8234,
+  "highest_coords": [
+    32.41541,
+    -110.73146
+  ],
+  "start_coordinates": [
+    31.33874,
+    -110.3379
+  ],
+  "end_coordinates": [
+    33.27197,
+    -111.17626
+  ],
+  "bounds": [
+    [
+      31.3387,
+      -111.1763
+    ],
+    [
+      33.272,
+      -110.3319
+    ]
+  ],
+  "point_count": 9931
+}
