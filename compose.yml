@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bike-packing-navigator
+    restart: unless-stopped
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.angular
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+      - NG_CLI_ANALYTICS=false
+    stdin_open: true
+    tty: true
+    command: npm start

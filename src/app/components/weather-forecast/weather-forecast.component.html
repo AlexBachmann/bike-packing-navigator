@@ -1,0 +1,366 @@
+<div class="bg-slate-900 border border-slate-700/80 rounded-2xl p-4 sm:p-5 shadow-2xl text-slate-200">
+  <!-- Header Bar -->
+  <div class="pb-3 border-b border-slate-800">
+    <div class="flex items-center justify-between gap-2">
+      <!-- Title & Icon -->
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="text-xl sm:text-2xl shrink-0">⛅</span>
+        <h2 class="text-sm sm:text-lg font-bold text-white tracking-tight truncate">
+          Trail Weather Forecast
+        </h2>
+      </div>
+
+      <!-- Actions: Refresh & Close -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- Refresh Button -->
+        <button
+          type="button"
+          (click)="onRefresh(true)"
+          [disabled]="weatherService.isLoading()"
+          class="px-2 sm:px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 transition-colors disabled:opacity-50"
+          title="Refresh weather data (fair use 30m throttle)"
+        >
+          @if (weatherService.isLoading()) {
+            <svg class="animate-spin h-3.5 w-3.5 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="hidden sm:inline">Updating...</span>
+          } @else {
+            <span class="text-xs">🔄</span>
+            <span class="hidden sm:inline">Refresh</span>
+          }
+        </button>
+
+        <!-- Close Button -->
+        <button
+          type="button"
+          (click)="onClose()"
+          class="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+          aria-label="Close weather modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Subtitle Meta Row: Badge & Metadata -->
+    <div class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-400">
+      <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800/80 whitespace-nowrap shrink-0">
+        Next 24 Hours
+      </span>
+      <span class="flex items-center gap-1.5 whitespace-nowrap">
+        <span class="text-slate-600">•</span>
+        <span><span class="hidden sm:inline">Powered by </span>Open-Meteo</span>
+      </span>
+      <span class="flex items-center gap-1.5 whitespace-nowrap">
+        <span class="text-slate-600">•</span>
+        <span [title]="'Cache interval is 30 minutes to preserve fair use'">
+          Updated {{ lastUpdatedFormatted() }}
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Throttle / Offline Notification Bar -->
+  <div class="mt-3 flex flex-wrap items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-slate-950/60 border border-slate-800/80 gap-2">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full" [ngClass]="weatherService.isStale() ? 'bg-amber-400' : 'bg-emerald-400'"></span>
+      <span class="text-slate-300">
+        @if (weatherService.isStale()) {
+          Cache is over 6 hours old. Reconnect to cell service to refresh.
+        } @else {
+          Offline Ready • Cached locally on device
+        }
+      </span>
+    </div>
+
+    @if (weatherService.minutesUntilNextAllowedRefresh() > 0) {
+      <div class="text-slate-400 text-[11px] font-mono">
+        Auto-sync in {{ weatherService.minutesUntilNextAllowedRefresh() }}m (Fair use)
+      </div>
+    }
+  </div>
+
+  @if (segments().length === 0) {
+    <!-- Empty / Loading state -->
+    <div class="py-12 text-center text-slate-400">
+      @if (weatherService.isLoading()) {
+        <div class="flex flex-col items-center gap-3">
+          <svg class="animate-spin h-8 w-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p class="text-sm">Fetching mountain weather forecasts from Open-Meteo...</p>
+        </div>
+      } @else {
+        <p class="text-sm">No forecast data available. Connect to cell service and tap Refresh.</p>
+      }
+    </div>
+  } @else {
+    <!-- 2-Hour Forward Trail Outlook (Priority Alert Card) -->
+    @let outlook = twoHourOutlook();
+    <div
+      class="mt-4 rounded-2xl p-4 border transition-all"
+      [ngClass]="{
+        'bg-rose-950/40 border-rose-500/70 text-rose-100 shadow-xl shadow-rose-950/40': outlook.alertKind === 'thunderstorm',
+        'bg-amber-950/40 border-amber-500/70 text-amber-100 shadow-xl shadow-amber-950/40': outlook.alertKind === 'mud',
+        'bg-orange-950/40 border-orange-500/70 text-orange-100 shadow-xl shadow-orange-950/40': outlook.alertKind === 'headwind',
+        'bg-emerald-950/40 border-emerald-500/70 text-emerald-100 shadow-xl shadow-emerald-950/40': outlook.alertKind === 'tailwind',
+        'bg-slate-950/70 border-slate-800 text-slate-200': outlook.alertKind === 'normal'
+      }"
+    >
+      <!-- Top Header Row: Icon + Badge on left, ETA on right -->
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <div
+            class="text-xl sm:text-2xl shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center border shadow-inner"
+            [ngClass]="{
+              'bg-rose-900/50 border-rose-500/40 animate-pulse': outlook.alertKind === 'thunderstorm',
+              'bg-amber-900/50 border-amber-500/40 animate-pulse': outlook.alertKind === 'mud',
+              'bg-orange-900/50 border-orange-500/40 animate-pulse': outlook.alertKind === 'headwind',
+              'bg-emerald-900/50 border-emerald-500/40 animate-pulse': outlook.alertKind === 'tailwind',
+              'bg-slate-800/80 border-slate-700': outlook.alertKind === 'normal'
+            }"
+          >
+            {{ outlook.icon }}
+          </div>
+
+          <span
+            class="text-[10px] sm:text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded-full border tracking-wide truncate"
+            [ngClass]="{
+              'bg-rose-500/20 text-rose-300 border-rose-500/40': outlook.alertKind === 'thunderstorm',
+              'bg-amber-500/20 text-amber-300 border-amber-500/40': outlook.alertKind === 'mud',
+              'bg-orange-500/20 text-orange-300 border-orange-500/40': outlook.alertKind === 'headwind',
+              'bg-emerald-500/20 text-emerald-300 border-emerald-500/40': outlook.alertKind === 'tailwind',
+              'bg-slate-700/40 text-slate-300 border-slate-600/40': outlook.alertKind === 'normal'
+            }"
+          >
+            Next 2 Hours • {{ outlook.badgeText }}
+          </span>
+        </div>
+
+        @if (outlook.etaFormatted) {
+          <div class="text-[11px] font-mono text-slate-300 font-semibold flex items-center gap-1.5 shrink-0">
+            <span>⏱️ In ~{{ outlook.etaFormatted }}</span>
+            @if (outlook.locationKmRange) {
+              <span>•</span>
+              <span>📍 {{ formatDistance(outlook.locationKmRange.startKm) }}</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Title & Details (Full Width) -->
+      <h3 class="text-sm sm:text-base font-bold text-white leading-snug">
+        {{ outlook.title }}
+      </h3>
+
+      <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+        {{ outlook.detailMessage }}
+      </p>
+
+      <!-- Key Hazard / Weather Metrics -->
+      @if (outlook.metrics) {
+        <div class="mt-2.5 flex flex-wrap gap-2 text-[11px] font-mono">
+          @if (outlook.metrics.precipitationMm !== undefined && outlook.metrics.precipitationMm > 0) {
+            <span class="px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-700 text-cyan-300 flex items-center gap-1">
+              <span>🌧️</span> Rain: <strong class="text-white">{{ formatPrecip(outlook.metrics.precipitationMm) }}/h</strong>
+            </span>
+          }
+          @if (outlook.metrics.surface) {
+            <span class="px-2 py-0.5 rounded-md bg-slate-900/90 border border-slate-700 text-amber-300 flex items-center gap-1">
+              <span>🛣️</span> Surface: <strong class="text-white">{{ outlook.metrics.surface }}{{ outlook.metrics.tracktype ? ' (' + outlook.metrics.tracktype + ')' : '' }}</strong>
+            </span>
+          }
+          @if (outlook.metrics.headwindKmh !== undefined && outlook.metrics.headwindKmh > 0) {
+            <span class="px-2 py-0.5 rounded-md bg-slate-900/90 border border-rose-700/60 text-rose-300 flex items-center gap-1">
+              <span>🌬️</span> Headwind: <strong class="text-rose-200">{{ formatSpeed(outlook.metrics.headwindKmh) }}</strong> ({{ outlook.metrics.windCardinal }})
+            </span>
+          }
+          @if (outlook.metrics.tailwindKmh !== undefined && outlook.metrics.tailwindKmh > 0) {
+            <span class="px-2 py-0.5 rounded-md bg-slate-900/90 border border-emerald-700/60 text-emerald-300 flex items-center gap-1">
+              <span>💨</span> Tailwind: <strong class="text-emerald-200">{{ formatSpeed(outlook.metrics.tailwindKmh) }}</strong> ({{ outlook.metrics.windCardinal }})
+            </span>
+          }
+        </div>
+      }
+
+      <!-- Tactical Advice Box (Single Column on Mobile) -->
+      <div class="mt-3 pt-2.5 border-t border-white/10 text-xs">
+        <div class="font-bold text-white mb-1 flex items-center gap-1.5">
+          <span>💡</span>
+          <span>Tactical Advice:</span>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          {{ outlook.advice }}
+        </p>
+      </div>
+    </div>
+
+    <!-- 50 km Segment Selector Strip -->
+    <div class="mt-4">
+      <div class="text-[11px] font-mono uppercase text-slate-400 tracking-wider mb-1.5 flex items-center justify-between">
+        <span>Route Waypoint Segments (Every 50 km)</span>
+        <span class="text-[10px] text-cyan-400 font-semibold">Select point to inspect</span>
+      </div>
+
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
+        @for (seg of segments(); track $index) {
+          <button
+            type="button"
+            (click)="selectSegment($index)"
+            class="px-3 py-2 rounded-xl text-left font-mono transition-all border shrink-0 flex items-center gap-2.5"
+            [ngClass]="selectedSegmentIndex() === $index
+              ? 'bg-slate-800 border-cyan-500 shadow-md text-white'
+              : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-400'"
+          >
+            <span class="text-xl">{{ seg.current.weatherIcon }}</span>
+            <div>
+              <div class="text-xs font-bold leading-tight" [ngClass]="selectedSegmentIndex() === $index ? 'text-cyan-300' : 'text-slate-200'">
+                {{ seg.label }}
+              </div>
+              <div class="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                <span>{{ isMiles() ? seg.current.tempF + '°F' : seg.current.tempC + '°C' }}</span>
+                <span>•</span>
+                <span>{{ isMiles() ? seg.current.windSpeedMph + ' mph ' : seg.current.windSpeedKmh + ' km/h ' }}{{ seg.current.windCardinal }}</span>
+              </div>
+            </div>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Active Segment Details Card -->
+    @if (activeSegment(); as active) {
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <!-- Main Temperature & Condition Card -->
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 flex items-center gap-4">
+          <span class="text-4xl sm:text-5xl shrink-0">{{ active.current.weatherIcon }}</span>
+          <div>
+            <div class="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
+              {{ isMiles() ? active.current.tempF + '°F' : active.current.tempC + '°C' }}
+            </div>
+            <div class="text-xs font-semibold text-slate-300 mt-0.5">
+              {{ active.current.weatherDescription }}
+            </div>
+            <div class="text-[11px] font-mono text-slate-400 mt-1">
+              Alt: {{ active.elevationM.toLocaleString() }} m
+            </div>
+          </div>
+        </div>
+
+        <!-- Rain / Precipitation Card -->
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <span>🌧️</span> Rain & Precipitation
+            </span>
+            <span
+              class="text-[10px] font-mono px-1.5 py-0.5 rounded uppercase font-bold"
+              [ngClass]="active.current.precipitationMm > 2 ? 'bg-rose-950 text-rose-300 border border-rose-800' : active.current.precipitationMm > 0 ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'bg-emerald-950 text-emerald-300 border border-emerald-800'"
+            >
+              {{ active.current.precipitationMm > 2 ? 'Heavy Rain' : active.current.precipitationMm > 0 ? 'Rain' : 'Dry' }}
+            </span>
+          </div>
+
+          <div class="my-2">
+            <div class="text-xl font-bold font-mono text-cyan-300">
+              {{ isMiles() ? active.current.precipitationInches + ' in' : active.current.precipitationMm + ' mm' }}
+            </div>
+            <div class="text-[11px] text-slate-400">
+              Immediate expected rainfall
+            </div>
+          </div>
+        </div>
+
+        <!-- Wind Speed & Direction Card -->
+        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <span>💨</span> Wind
+            </span>
+            <span class="text-[11px] font-mono text-cyan-400 font-bold">
+              {{ active.current.windCardinal }} ({{ active.current.windDirectionDeg }}°)
+            </span>
+          </div>
+
+          <div class="my-2 flex items-center gap-3">
+            <!-- Rotated Compass Arrow -->
+            <div
+              class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-cyan-400 border border-slate-700 shrink-0"
+              [style.transform]="'rotate(' + active.current.windDirectionDeg + 'deg)'"
+              title="Wind direction arrow"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
+              </svg>
+            </div>
+
+            <div>
+              <div class="text-xl font-bold font-mono text-white">
+                {{ isMiles() ? active.current.windSpeedMph + ' mph' : active.current.windSpeedKmh + ' km/h' }}
+              </div>
+              <div class="text-[11px] text-slate-400">
+                Wind speed at 10m
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 24-Hour Hourly Timeline Strip -->
+      <div class="mt-4">
+        <div class="text-[11px] font-mono uppercase text-slate-400 tracking-wider mb-2 flex items-center justify-between">
+          <span>24-Hour Hourly Forecast (Next 24h)</span>
+          <span class="text-[10px] text-slate-400">Local time</span>
+        </div>
+
+        <div class="overflow-x-auto pb-2 scrollbar-thin">
+          <div class="flex items-center gap-1.5 min-w-max">
+            @for (hour of active.hourly24h; track $index) {
+              <div class="bg-slate-950/90 border border-slate-800/80 rounded-xl p-2 w-16 text-center shrink-0 flex flex-col items-center justify-between gap-1 hover:border-cyan-500 transition-colors">
+                <!-- Hour -->
+                <span class="text-[10px] font-mono text-slate-400">
+                  {{ formatHourTime(hour.time) }}
+                </span>
+
+                <!-- Weather Icon -->
+                <span class="text-lg" [title]="hour.weatherDescription">
+                  {{ hour.weatherIcon }}
+                </span>
+
+                <!-- Temp -->
+                <span class="text-xs font-bold font-mono text-white">
+                  {{ isMiles() ? hour.tempF + '°' : hour.tempC + '°' }}
+                </span>
+
+                <!-- Rain indicator if > 0 -->
+                @if (hour.precipitationMm > 0) {
+                  <span class="text-[9px] font-mono text-cyan-300 bg-cyan-950 px-1 py-0.5 rounded font-bold">
+                    {{ isMiles() ? hour.precipitationInches + 'in' : hour.precipitationMm + 'mm' }}
+                  </span>
+                } @else {
+                  <span class="text-[9px] font-mono text-slate-500">-</span>
+                }
+
+                <!-- Wind Arrow & Speed -->
+                <div class="flex items-center gap-0.5 text-[9px] font-mono text-slate-400 mt-0.5" [title]="hour.windCardinal + ' ' + (isMiles() ? hour.windSpeedMph + ' mph' : hour.windSpeedKmh + ' km/h')">
+                  <span
+                    class="inline-block transform"
+                    [style.transform]="'rotate(' + hour.windDirectionDeg + 'deg)'"
+                  >
+                    ↑
+                  </span>
+                  <span>{{ isMiles() ? hour.windSpeedMph : hour.windSpeedKmh }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>

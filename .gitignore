@@ -1,0 +1,135 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# ==========================================
+# Compiled & Build Output (Angular / TypeScript)
+# ==========================================
+/dist
+/.angular
+/out-tsc
+/bazel-out
+*.tsbuildinfo
+
+# ==========================================
+# Dependencies & Package Managers
+# ==========================================
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store
+
+# ==========================================
+# Runtime, Logs & Temporary Files
+# ==========================================
+/tmp
+*.tmp
+*.temp
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+.nyc_output
+
+# ==========================================
+# Python & Data Pipeline Artifacts
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==========================================
+# Route Data Pipeline & Large Datasets
+# ==========================================
+# Downloaded 3D DEM rasters, hillshades, contours (e.g. 2GB+ Copernicus DEM)
+route/terrain/
+*.tif
+*.tiff
+*.vrt
+*.gpkg
+
+# OpenStreetMap binary extract dumps (80MB+)
+*.osm.pbf
+*.pbf
+
+# Google Places API persistent request caches
+route/places/.cache*
+*.cache_places_api*.json
+*.cache.json
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+*.env
+!.env.example
+!.env.sample
+
+# Docker Compose overrides (local secrets & configs)
+compose.override.yml
+compose.*.override.yml
+docker-compose.override.yml
+docker-compose.*.override.yml
+
+# ==========================================
+# IDEs and Code Editors
+# ==========================================
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+.history/*
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/mcp.json
+
+# ==========================================
+# System Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+

@@ -1,0 +1,34 @@
+<div class="bg-slate-900/60 border-b border-slate-800">
+  <div class="max-w-2xl mx-auto w-full px-4 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+    <button
+      type="button"
+      (click)="onSelectAll()"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold shrink-0 transition-all border cursor-pointer select-none"
+      [ngClass]="selectedCategories().size === availableCategories().length ? 'bg-slate-700 text-white border-slate-500' : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200'"
+      title="Show all waypoint categories"
+    >
+      All
+    </button>
+    @for (cat of availableCategories(); track cat.key) {
+      <button
+        type="button"
+        (pointerdown)="onPointerDown(cat.key, $event)"
+        (pointerup)="onPointerUp($event)"
+        (pointermove)="onPointerMove($event)"
+        (pointerleave)="onCancelPress()"
+        (pointercancel)="onCancelPress()"
+        (contextmenu)="$event.preventDefault()"
+        (click)="onCategoryClick(cat.key, $event)"
+        class="px-2.5 py-1 rounded-full text-xs font-semibold shrink-0 transition-all border flex items-center gap-1 cursor-pointer select-none"
+        [ngClass]="[
+          selectedCategories().has(cat.key) ? cat.badgeClass : 'bg-slate-900 text-slate-500 border-slate-800/80 opacity-60',
+          holdingCategory() === cat.key ? 'scale-95 ring-2 ring-emerald-400/60 brightness-125' : ''
+        ]"
+        [title]="'Click to solo ' + cat.label + '. Hold 1s to deselect.'"
+      >
+        <span>{{ cat.icon }}</span>
+        <span>{{ cat.label }}</span>
+      </button>
+    }
+  </div>
+</div>

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "town_waterton",
+    "name": "Waterton Canyon",
+    "category": "town",
+    "type": "town",
+    "town": "Waterton Canyon",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.4909,
+      "lon": -105.0942
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 0.0,
+    "route_mile": 0.0,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Northern terminus of the Colorado Trail at Waterton Canyon Trailhead."
+  },
+  {
+    "id": "town_buffalo_creek",
+    "name": "Buffalo Creek",
+    "category": "town",
+    "type": "town",
+    "town": "Buffalo Creek",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.3875,
+      "lon": -105.2711
+    },
+    "distance_to_trail_km": 2.54,
+    "route_km": 37.6,
+    "route_mile": 23.3,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Pike National Forest mountain bike paradise: general store, fire station, camping."
+  },
+  {
+    "id": "town_bailey",
+    "name": "Bailey",
+    "category": "town",
+    "type": "town",
+    "town": "Bailey",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.4042,
+      "lon": -105.4747
+    },
+    "distance_to_trail_km": 9.66,
+    "route_km": 63.7,
+    "route_mile": 39.6,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Highway 285 mountain town: grocery, restaurants, coffee, lodging."
+  },
+  {
+    "id": "town_jefferson",
+    "name": "Jefferson",
+    "category": "town",
+    "type": "town",
+    "town": "Jefferson",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.3789,
+      "lon": -105.8011
+    },
+    "distance_to_trail_km": 4.8,
+    "route_km": 188.3,
+    "route_mile": 117.0,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "South Park resupply at the base of Kenosha and Georgia Passes."
+  },
+  {
+    "id": "town_breckenridge",
+    "name": "Breckenridge",
+    "category": "town",
+    "type": "town",
+    "town": "Breckenridge",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.4817,
+      "lon": -106.0384
+    },
+    "distance_to_trail_km": 6.17,
+    "route_km": 240.7,
+    "route_mile": 149.6,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Major mountain resort: full bike shops, City Market supermarket, lodging, restaurants."
+  },
+  {
+    "id": "town_frisco",
+    "name": "Frisco",
+    "category": "town",
+    "type": "town",
+    "town": "Frisco",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.5744,
+      "lon": -106.0975
+    },
+    "distance_to_trail_km": 4.07,
+    "route_km": 242.7,
+    "route_mile": 150.8,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Summit County cycling hub: Whole Foods, bike shops, hotels, laundromat."
+  },
+  {
+    "id": "town_copper_mountain",
+    "name": "Copper Mountain",
+    "category": "town",
+    "type": "town",
+    "town": "Copper Mountain",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.5022,
+      "lon": -106.1511
+    },
+    "distance_to_trail_km": 0.09,
+    "route_km": 261.3,
+    "route_mile": 162.3,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Resort village at the foot of Searles Pass: dining, lodging, convenience store."
+  },
+  {
+    "id": "town_camp_hale",
+    "name": "Camp Hale",
+    "category": "town",
+    "type": "town",
+    "town": "Camp Hale",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.4317,
+      "lon": -106.3267
+    },
+    "distance_to_trail_km": 2.18,
+    "route_km": 290.4,
+    "route_mile": 180.4,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Historic 10th Mountain Division training grounds and national monument."
+  },
+  {
+    "id": "town_leadville",
+    "name": "Leadville",
+    "category": "town",
+    "type": "town",
+    "town": "Leadville",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.2508,
+      "lon": -106.2925
+    },
+    "distance_to_trail_km": 3.26,
+    "route_km": 315.0,
+    "route_mile": 195.7,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Historic highest incorporated city (10,152 ft): Safeway, Cycles of Life bike shop, hostels, motels."
+  },
+  {
+    "id": "town_twin_lakes",
+    "name": "Twin Lakes",
+    "category": "town",
+    "type": "town",
+    "town": "Twin Lakes",
+    "is_in_town": true,
+    "location": {
+      "lat": 39.0817,
+      "lon": -106.3811
+    },
+    "distance_to_trail_km": 4.4,
+    "route_km": 351.3,
+    "route_mile": 218.3,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Collegiate gateway: General store, historic inn, food truck, lakeside camping."
+  },
+  {
+    "id": "town_buena_vista",
+    "name": "Buena Vista",
+    "category": "town",
+    "type": "town",
+    "town": "Buena Vista",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.8422,
+      "lon": -106.1311
+    },
+    "distance_to_trail_km": 0.17,
+    "route_km": 389.4,
+    "route_mile": 242.0,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Arkansas River hub: The Trailhead outfitter, supermarkets, breweries, lodging."
+  },
+  {
+    "id": "town_mt_princeton",
+    "name": "Mount Princeton",
+    "category": "town",
+    "type": "town",
+    "town": "Mount Princeton",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.7328,
+      "lon": -106.1611
+    },
+    "distance_to_trail_km": 0.27,
+    "route_km": 416.4,
+    "route_mile": 258.8,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Hot springs resort, store, and Chalk Creek canyon resupply."
+  },
+  {
+    "id": "town_salida",
+    "name": "Salida",
+    "category": "town",
+    "type": "town",
+    "town": "Salida",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.5347,
+      "lon": -105.9989
+    },
+    "distance_to_trail_km": 18.5,
+    "route_km": 439.5,
+    "route_mile": 273.1,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "World-famous cycling community: Absolute Bikes, hostels, supermarkets, hot springs."
+  },
+  {
+    "id": "town_poncha_springs",
+    "name": "Poncha Springs",
+    "category": "town",
+    "type": "town",
+    "town": "Poncha Springs",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.5133,
+      "lon": -106.0772
+    },
+    "distance_to_trail_km": 13.85,
+    "route_km": 447.5,
+    "route_mile": 278.1,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Crossroads at the base of Monarch Pass: gas, dining, camping."
+  },
+  {
+    "id": "town_monarch",
+    "name": "Monarch Crest",
+    "category": "town",
+    "type": "town",
+    "town": "Monarch Crest",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.4964,
+      "lon": -106.3253
+    },
+    "distance_to_trail_km": 4.3,
+    "route_km": 462.3,
+    "route_mile": 287.3,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Monarch Pass scenic tram, store, and pass crest at 11,312 ft."
+  },
+  {
+    "id": "town_sargents",
+    "name": "Sargents",
+    "category": "town",
+    "type": "town",
+    "town": "Sargents",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.4042,
+      "lon": -106.4139
+    },
+    "distance_to_trail_km": 10.95,
+    "route_km": 492.2,
+    "route_mile": 305.8,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Base of Marshall Pass: Sargents Country Store, gas, cabins, and cafe."
+  },
+  {
+    "id": "town_creede",
+    "name": "Creede",
+    "category": "town",
+    "type": "town",
+    "town": "Creede",
+    "is_in_town": true,
+    "location": {
+      "lat": 37.8492,
+      "lon": -106.9264
+    },
+    "distance_to_trail_km": 26.2,
+    "route_km": 613.2,
+    "route_mile": 381.0,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Historic silver mining canyon town: grocery, hotel, dining."
+  },
+  {
+    "id": "town_lake_city",
+    "name": "Lake City",
+    "category": "town",
+    "type": "town",
+    "town": "Lake City",
+    "is_in_town": true,
+    "location": {
+      "lat": 38.03,
+      "lon": -107.315
+    },
+    "distance_to_trail_km": 9.1,
+    "route_km": 629.2,
+    "route_mile": 391.0,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Remote San Juan mountain town: Sportsman outfitter, grocery, cabins, bakery."
+  },
+  {
+    "id": "town_silverton",
+    "name": "Silverton",
+    "category": "town",
+    "type": "town",
+    "town": "Silverton",
+    "is_in_town": true,
+    "location": {
+      "lat": 37.8119,
+      "lon": -107.6644
+    },
+    "distance_to_trail_km": 0.21,
+    "route_km": 707.1,
+    "route_mile": 439.4,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Historic high San Juan mining town: grocery, motels, hostels, cafes, bike repairs."
+  },
+  {
+    "id": "town_durango",
+    "name": "Durango",
+    "category": "town",
+    "type": "town",
+    "town": "Durango",
+    "is_in_town": true,
+    "location": {
+      "lat": 37.2753,
+      "lon": -107.8801
+    },
+    "distance_to_trail_km": 6.56,
+    "route_km": 828.3,
+    "route_mile": 514.7,
+    "province_state": "CO",
+    "country": "USA",
+    "description": "Southern terminus of the Colorado Trail: full bike shops, supermarkets, hotels, transit."
+  }
+]

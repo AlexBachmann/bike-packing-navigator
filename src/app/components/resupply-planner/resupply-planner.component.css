@@ -1,0 +1,4 @@
+/* Custom scrollbars and range slider accents for Resupply Planner */
+input[type='range'] {
+  accent-color: #10b981;
+}

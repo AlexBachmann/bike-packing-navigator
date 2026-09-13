@@ -1,0 +1,11 @@
+# Example Docker Compose override template
+# Copy this file to compose.override.yml and fill in your API key:
+#   cp compose.override.yml.example compose.override.yml
+
+services:
+  app:
+    environment:
+      # Google Places API (New) key used by route enrichment and POI scripts
+      # (e.g. populate_places.py, find_places.py, ingest_pipeline.py)
+      - GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
+      - GOOGLE_MAPS_API_KEY=your_google_places_api_key_here

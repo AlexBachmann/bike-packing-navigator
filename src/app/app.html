@@ -1,0 +1,182 @@
+<div
+  class="flex flex-col bg-slate-950 text-slate-100 font-sans select-none"
+  [ngClass]="activeTab() === 'map'
+    ? 'h-screen h-[100dvh] overflow-hidden'
+    : 'min-h-screen pb-20'"
+>
+
+  <!-- Floating Toast Notification Container -->
+  @if (toastService.currentToast(); as toast) {
+    <div
+      class="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-md w-[92%] px-4 py-3 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 flex items-start gap-3"
+      [ngClass]="{
+        'bg-amber-950/95 border-amber-500/80 text-amber-100 shadow-amber-950/50': toast.type === 'warning',
+        'bg-rose-950/95 border-rose-500/80 text-rose-100 shadow-rose-950/50': toast.type === 'error',
+        'bg-slate-900/95 border-slate-700 text-slate-100 shadow-black/60': toast.type === 'info',
+        'bg-emerald-950/95 border-emerald-500/80 text-emerald-100 shadow-emerald-950/50': toast.type === 'success'
+      }"
+      role="alert"
+    >
+      <div class="text-xl shrink-0 mt-0.5">
+        @if (toast.type === 'warning') { 📡 }
+        @else if (toast.type === 'error') { ⚠️ }
+        @else if (toast.type === 'success') { ✅ }
+        @else { ℹ️ }
+      </div>
+      <div class="flex-1 min-w-0">
+        @if (toast.title) {
+          <div class="font-bold text-xs tracking-wider uppercase opacity-90">{{ toast.title }}</div>
+        }
+        <div class="text-xs leading-relaxed font-medium mt-0.5">{{ toast.message }}</div>
+      </div>
+      <button
+        type="button"
+        (click)="toastService.dismiss(toast.id)"
+        class="p-1 rounded-lg hover:bg-white/10 active:scale-95 transition text-slate-300 hover:text-white cursor-pointer shrink-0"
+        aria-label="Dismiss notification"
+      >
+        ✕
+      </button>
+    </div>
+  }
+
+  <!-- Sticky Top Header: Telemetry & Rider Location -->
+  <app-telemetry-header
+    [activeRouteId]="activeRouteId()"
+    [availableRoutes]="manifestService.availableRoutes()"
+    [currentMile]="currentMile()"
+    [isHeaderCollapsed]="isHeaderCollapsed()"
+    [gpsState]="gpsState()"
+    [nextTown]="nextTown()"
+    [nextBikeShop]="nextBikeShop()"
+    (toggleHeaderCollapse)="toggleHeaderCollapse()"
+    (toggleGps)="toggleGps()"
+    (dismissGpsAlert)="dismissGpsAlert()"
+    (clearGpsError)="clearGpsError()"
+    (stepLocation)="stepLocation($event)"
+    (sliderChange)="onSliderChange($event)"
+    (routeChange)="selectRoute($event)"
+    (openWeatherModal)="showWeatherModal.set(true)"
+    (openRouteModal)="showRouteModal.set(true)"
+  />
+
+  <!-- Category Filter Strip (Horizontal Scroll) - Only on Waypoints Feed Tab when a route is active -->
+  @if (activeRouteId() && activeTab() === 'waypoints') {
+    <app-category-filter
+      [selectedCategories]="selectedCategories()"
+      [availableCategories]="availableCategories"
+      [holdingCategory]="holdingCategory()"
+      (selectAll)="selectAllCategories()"
+      (categoryClick)="handleCategoryClick($event.category, $event.event)"
+      (pointerDown)="handleCategoryPointerDown($event.category, $event.event)"
+      (pointerUp)="handleCategoryPointerUp($event)"
+      (pointerMove)="handleCategoryPointerMove($event)"
+      (cancelPress)="cancelCategoryPress()"
+    />
+  }
+
+  <!-- Main View Router Container -->
+  <main
+    class="max-w-2xl mx-auto w-full transition-all"
+    [ngClass]="activeTab() === 'map'
+      ? 'flex-1 min-h-0 flex flex-col p-2 sm:p-3 pb-[68px]'
+      : 'flex-1 p-4'"
+  >
+    <!-- Welcome Screen when no route is active -->
+    @if (!activeRouteId()) {
+      <app-welcome-screen
+        [unit]="unit()"
+        (routeSelect)="selectRoute($event)"
+      />
+    } @else {
+      <!-- TAB 1: WAYPOINTS FEED -->
+      @if (activeTab() === 'waypoints') {
+        <app-waypoints-list
+          [waypoints]="waypointsAhead()"
+          [unit]="unit()"
+          [currentMile]="currentMile()"
+          [isLoading]="routeService.isLoading()"
+          [error]="routeService.error()"
+          [(searchQuery)]="searchQuery"
+        />
+      }
+
+      <!-- TAB 2: ELEVATION PROFILE & PASS TRACKER -->
+      @if (activeTab() === 'profile') {
+        <app-elevation-profile
+          [currentMile]="currentMile()"
+          [unit]="unit()"
+          [avgSpeedMph]="avgSpeedMph()"
+          [riderPowerWatts]="riderPowerWatts()"
+          (selectMile)="selectMileFromUser($event)"
+        />
+      }
+
+      <!-- TAB 3: LIVE ROUTE CORRIDOR MAP -->
+      @if (activeTab() === 'map') {
+        <app-route-map
+          [currentMile]="currentMile()"
+          [unit]="unit()"
+          [gpsState]="gpsState()"
+          (selectMile)="selectMileFromUser($event)"
+        />
+      }
+
+      <!-- TAB 4: RESUPPLY PLANNER -->
+      @if (activeTab() === 'resupply') {
+        <app-resupply-planner
+          [currentMile]="currentMile()"
+          [unit]="unit()"
+          (selectMile)="selectMileFromUser($event)"
+        />
+      }
+
+      <!-- TAB 5: SETTINGS (RIDER, RIG & STORAGE) -->
+      @if (activeTab() === 'settings') {
+        <app-settings-tab />
+      }
+    }
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar (5 Thumb Friendly Tabs) -->
+  <app-bottom-nav
+    [activeTab]="activeTab()"
+    (tabChange)="switchTab($event)"
+  />
+
+  <!-- Weather Forecast Modal Overlay -->
+  @if (showWeatherModal()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/75 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Trail Weather Forecast"
+    >
+      <div class="max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl">
+        <app-weather-forecast (close)="showWeatherModal.set(false)" />
+      </div>
+    </div>
+  }
+
+  <!-- Route Selection Modal Overlay -->
+  @if (showRouteModal()) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/80 backdrop-blur-md animate-in fade-in duration-150"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="route-modal-title"
+      (click)="showRouteModal.set(false)"
+    >
+      <div class="max-w-2xl w-full max-h-[90vh] overflow-hidden rounded-2xl shadow-2xl" (click)="$event.stopPropagation()">
+        <app-route-selector-modal
+          [activeRouteId]="activeRouteId()"
+          [availableRoutes]="manifestService.availableRoutes()"
+          [unit]="unit()"
+          (routeSelect)="selectRoute($event); showRouteModal.set(false)"
+          (close)="showRouteModal.set(false)"
+        />
+      </div>
+    </div>
+  }
+
+</div>

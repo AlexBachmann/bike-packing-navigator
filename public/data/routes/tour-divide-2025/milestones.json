@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Banff, AB",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 1408,
+    "state": "AB"
+  },
+  {
+    "name": "Elkford, BC",
+    "mile": 99.3,
+    "km": 159.8,
+    "elevation": 1300,
+    "state": "BC"
+  },
+  {
+    "name": "Fernie, BC",
+    "mile": 154.5,
+    "km": 248.6,
+    "elevation": 1010,
+    "state": "BC"
+  },
+  {
+    "name": "Eureka, MT",
+    "mile": 215.0,
+    "km": 346.0,
+    "elevation": 880,
+    "state": "MT"
+  },
+  {
+    "name": "Whitefish, MT",
+    "mile": 285.0,
+    "km": 458.7,
+    "elevation": 923,
+    "state": "MT"
+  },
+  {
+    "name": "Seeley Lake, MT",
+    "mile": 460.0,
+    "km": 740.3,
+    "elevation": 1220,
+    "state": "MT"
+  },
+  {
+    "name": "Ovando, MT",
+    "mile": 530.2,
+    "km": 853.3,
+    "elevation": 1250,
+    "state": "MT"
+  },
+  {
+    "name": "Helena, MT",
+    "mile": 550.0,
+    "km": 885.1,
+    "elevation": 1237,
+    "state": "MT"
+  },
+  {
+    "name": "Butte, MT",
+    "mile": 670.0,
+    "km": 1078.3,
+    "elevation": 1688,
+    "state": "MT"
+  },
+  {
+    "name": "Lima, MT",
+    "mile": 880.0,
+    "km": 1416.2,
+    "elevation": 1906,
+    "state": "MT"
+  },
+  {
+    "name": "Flagg Ranch, WY",
+    "mile": 1060.0,
+    "km": 1705.9,
+    "elevation": 2085,
+    "state": "WY"
+  },
+  {
+    "name": "Pinedale, WY",
+    "mile": 1220.0,
+    "km": 1963.4,
+    "elevation": 2189,
+    "state": "WY"
+  },
+  {
+    "name": "Wamsutter, WY",
+    "mile": 1393.6,
+    "km": 2242.8,
+    "elevation": 2045,
+    "state": "WY"
+  },
+  {
+    "name": "Rawlins, WY",
+    "mile": 1475.0,
+    "km": 2373.8,
+    "elevation": 2059,
+    "state": "WY"
+  },
+  {
+    "name": "Steamboat Springs, CO",
+    "mile": 1680.0,
+    "km": 2703.7,
+    "elevation": 2052,
+    "state": "CO"
+  },
+  {
+    "name": "Breckenridge, CO",
+    "mile": 1820.0,
+    "km": 2929.0,
+    "elevation": 2926,
+    "state": "CO"
+  },
+  {
+    "name": "Salida, CO",
+    "mile": 1940.0,
+    "km": 3122.1,
+    "elevation": 2157,
+    "state": "CO"
+  },
+  {
+    "name": "Del Norte, CO",
+    "mile": 2060.0,
+    "km": 3315.2,
+    "elevation": 2403,
+    "state": "CO"
+  },
+  {
+    "name": "Cuba, NM",
+    "mile": 2360.0,
+    "km": 3798.1,
+    "elevation": 2105,
+    "state": "NM"
+  },
+  {
+    "name": "Pie Town, NM",
+    "mile": 2500.0,
+    "km": 4023.4,
+    "elevation": 2370,
+    "state": "NM"
+  },
+  {
+    "name": "Silver City, NM",
+    "mile": 2595.0,
+    "km": 4176.2,
+    "elevation": 1797,
+    "state": "NM"
+  },
+  {
+    "name": "Antelope Wells, NM",
+    "mile": 2679.2,
+    "km": 4311.8,
+    "elevation": 1478,
+    "state": "NM"
+  }
+]

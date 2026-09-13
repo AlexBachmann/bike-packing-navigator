@@ -1,0 +1,74 @@
+<div class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-3.5 hover:border-slate-700 transition flex flex-col gap-2">
+  
+  <!-- Card Header: Category Badge + Distance & ETE -->
+  <div class="flex items-center justify-between gap-2">
+    <span class="px-2 py-0.5 rounded-md text-[11px] font-semibold border flex items-center gap-1 {{ categoryBadge().badgeClass }}">
+      <span>{{ categoryBadge().icon }}</span>
+      <span>{{ categoryBadge().label }}</span>
+    </span>
+
+    <!-- Distance Ahead & Time -->
+    <div class="text-right">
+      <div class="font-mono font-bold text-white text-sm">
+        @if (unit() === 'miles') {
+          +{{ waypoint().distanceAheadMiles.toFixed(1) }} mi
+        } @else {
+          +{{ waypoint().distanceAheadKm.toFixed(1) }} km
+        }
+      </div>
+      <div class="text-[10px] font-mono text-emerald-400 font-medium">
+        in ~{{ waypoint().estimatedTimeFormatted }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Place Title & Town -->
+  <div>
+    <h3 class="font-bold text-white text-sm leading-snug">{{ waypoint().name }}</h3>
+    @if (waypoint().town) {
+      <p class="text-xs text-slate-400 font-medium mt-0.5">
+        in <span class="text-slate-200">{{ waypoint().town }}</span>
+        @if (waypoint().province_state) {
+          <span>, {{ waypoint().province_state }}</span>
+        }
+      </p>
+    }
+  </div>
+
+  <!-- Footer Info: Off-trail Distance & External Link -->
+  <div class="flex items-center justify-between pt-2 border-t border-slate-800/60 text-[11px] text-slate-400">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">
+        @if (unit() === 'miles') {
+          Mile {{ waypoint().route_mile.toFixed(1) }}
+        } @else {
+          KM {{ waypoint().route_km.toFixed(1) }}
+        }
+      </span>
+      @if (waypoint().distance_to_trail_km > 0.05) {
+        <span class="text-amber-400/90 text-[10px]">
+          @if (unit() === 'miles') {
+            ↳ {{ (waypoint().distance_to_trail_km * 0.621371).toFixed(1) }} mi off route
+          } @else {
+            ↳ {{ waypoint().distance_to_trail_km.toFixed(1) }} km off route
+          }
+        </span>
+      } @else {
+        <span class="text-emerald-400/80 text-[10px]">✔ On Trail</span>
+      }
+    </div>
+
+    @if (waypoint().google_maps_url) {
+      <a
+        [href]="waypoint().google_maps_url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1"
+      >
+        <span>Maps</span>
+        <span class="text-[10px]">↗</span>
+      </a>
+    }
+  </div>
+
+</div>

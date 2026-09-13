@@ -1,0 +1,602 @@
+<div class="space-y-4">
+
+  <!-- Rider & Rig Setup Card -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="font-bold text-white text-sm flex items-center gap-1.5">
+          <span>🚴</span>
+          <span>Rider & Rig Setup</span>
+        </h2>
+        <p class="text-[11px] text-slate-400 mt-0.5">Stored in local storage for climb power & water planning.</p>
+      </div>
+
+      <!-- Weight Unit Toggle Button -->
+      <button
+        type="button"
+        (click)="settings.toggleWeightUnit()"
+        class="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 hover:border-slate-600 text-xs font-mono font-semibold text-emerald-400 flex items-center gap-1 cursor-pointer transition"
+      >
+        <span>Unit:</span>
+        <span class="text-white">{{ settings.weightUnit() === 'kg' ? 'KG' : 'LBS' }}</span>
+      </button>
+    </div>
+
+    <div class="space-y-3.5">
+      <!-- 1. Rider Weight -->
+      <div>
+        <div class="flex items-center justify-between text-xs mb-1">
+          <label class="text-slate-300 font-medium">Rider Weight</label>
+          <span class="text-[10px] text-slate-500 font-mono">in {{ settings.weightUnit() }}</span>
+        </div>
+        <div class="relative">
+          <input
+            type="number"
+            [min]="30"
+            [max]="250"
+            step="0.5"
+            [ngModel]="settings.riderWeight()"
+            (ngModelChange)="settings.setRiderWeight($event)"
+            placeholder="e.g. {{ settings.weightUnit() === 'kg' ? '75.0' : '165.0' }}"
+            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+          />
+          <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">{{ settings.weightUnit() }}</span>
+        </div>
+      </div>
+
+      <!-- 2. Bike Weight (dry, without water/food) -->
+      <div>
+        <div class="flex items-center justify-between text-xs mb-1">
+          <label class="text-slate-300 font-medium">Bike Weight (Dry)</label>
+          <span class="text-[10px] text-slate-500 font-mono">without water & food</span>
+        </div>
+        <div class="relative">
+          <input
+            type="number"
+            [min]="4"
+            [max]="50"
+            step="0.1"
+            [ngModel]="settings.bikeWeight()"
+            (ngModelChange)="settings.setBikeWeight($event)"
+            placeholder="e.g. {{ settings.weightUnit() === 'kg' ? '12.5' : '27.5' }}"
+            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+          />
+          <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">{{ settings.weightUnit() }}</span>
+        </div>
+        <p class="text-[10px] text-slate-500 mt-1">Weight of bike + bags + gear (excluding consumable water and food).</p>
+      </div>
+
+      <!-- 3. Water Capacity (in Liters) -->
+      <div>
+        <div class="flex items-center justify-between text-xs mb-1">
+          <label class="text-slate-300 font-medium">Water Carrying Capacity</label>
+          <span class="text-[10px] text-emerald-400 font-mono">in Liters</span>
+        </div>
+        <div class="relative">
+          <input
+            type="number"
+            [min]="0"
+            [max]="15"
+            step="0.25"
+            [ngModel]="settings.waterCapacityLiters()"
+            (ngModelChange)="settings.setWaterCapacity($event)"
+            placeholder="e.g. 4.0"
+            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+          />
+          <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">Liters (L)</span>
+        </div>
+        <p class="text-[10px] text-slate-500 mt-1">Total volume of bottles + bladder / hydration packs (1 L = 1 kg / 2.2 lbs).</p>
+      </div>
+    </div>
+
+    <!-- Total Rig Weight Summary Bar -->
+    @if (settings.totalLoadedWeight() !== null) {
+      <div class="mt-4 pt-3 border-t border-slate-800 grid grid-cols-3 gap-2 text-center text-xs">
+        <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-[9px] uppercase font-mono text-slate-500">Water Wt</div>
+          <div class="font-mono font-bold text-cyan-400 mt-0.5">{{ settings.waterWeightInUnit() }} {{ settings.weightUnit() }}</div>
+        </div>
+        <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-[9px] uppercase font-mono text-slate-500">Base Rig</div>
+          <div class="font-mono font-bold text-slate-300 mt-0.5">{{ settings.totalBaseWeight() }} {{ settings.weightUnit() }}</div>
+        </div>
+        <div class="bg-slate-950/60 p-2 rounded-lg border border-emerald-900/50">
+          <div class="text-[9px] uppercase font-mono text-emerald-400">Total Loaded</div>
+          <div class="font-mono font-bold text-emerald-300 mt-0.5">{{ settings.totalLoadedWeight() }} {{ settings.weightUnit() }}</div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Pace & ETA Model Card -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="font-bold text-white text-sm flex items-center gap-1.5">
+          <span>⏱️</span>
+          <span>Pace & ETA Calculation</span>
+        </h2>
+        <p class="text-[11px] text-slate-400 mt-0.5">Switch between rider power or average speed estimation.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2 mb-2">
+      <button
+        type="button"
+        (click)="settings.setPaceMode('power')"
+        class="p-2.5 rounded-lg border text-left cursor-pointer transition"
+        [ngClass]="paceMode() === 'power'
+          ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-300 shadow-sm'
+          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'"
+      >
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-xs flex items-center gap-1.5">⚡ Power Model</span>
+          @if (paceMode() === 'power') {
+            <span class="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/20 px-1.5 py-0.5 rounded">ACTIVE</span>
+          }
+        </div>
+        <p class="text-[10px] text-slate-400 mt-1">Estimates climbing speed based on rider power ({{ riderPowerWatts() }}W) and total rig weight.</p>
+      </button>
+
+      <button
+        type="button"
+        (click)="settings.setPaceMode('speed')"
+        class="p-2.5 rounded-lg border text-left cursor-pointer transition"
+        [ngClass]="paceMode() === 'speed'
+          ? 'bg-cyan-500/10 border-cyan-500/50 text-cyan-300 shadow-sm'
+          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'"
+      >
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-xs flex items-center gap-1.5">🚴 Speed Model</span>
+          @if (paceMode() === 'speed') {
+            <span class="text-[10px] text-cyan-400 font-mono font-bold bg-cyan-500/20 px-1.5 py-0.5 rounded">ACTIVE</span>
+          }
+        </div>
+        <p class="text-[10px] text-slate-400 mt-1">Estimates travel time using continuous flat average speed ({{ displaySpeed().toFixed(1) }} {{ speedUnit() }}).</p>
+      </button>
+    </div>
+
+    <!-- Power Model Advanced Parameters (Climb Surge & Hike-a-Bike) -->
+    @if (paceMode() === 'power') {
+      <div class="mt-4 pt-3 border-t border-slate-800 space-y-3.5">
+        <div>
+          <div class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
+            <span>⚡</span>
+            <span>Climb Surge & Hike-a-Bike Parameters</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed mt-1">
+            We use the following parameters in the Power Model (only) to estimate your speed in different segments depending on various variables. It's completely okay to give rough estimates based on your fitness level.
+          </p>
+        </div>
+
+        <!-- 1. Climb Surge (%) -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <label class="text-slate-300 font-medium">Climb Surge</label>
+            <span class="text-[10px] text-emerald-400 font-mono">max +{{ settings.climbSurgeWattsDelta() }}W</span>
+          </div>
+          <div class="relative">
+            <input
+              type="number"
+              [min]="0"
+              [max]="100"
+              step="5"
+              [ngModel]="settings.climbSurgePercent()"
+              (ngModelChange)="settings.setClimbSurgePercent($event)"
+              class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+            />
+            <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">% extra power</span>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1">
+            Extra power you can output on steep climbs to stay on the bike. At {{ riderPowerWatts() }}W baseline: max {{ settings.maxClimbSurgePowerWatts() }}W.
+          </p>
+        </div>
+
+        <!-- 2. Climb Surge Duration (min) -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <label class="text-slate-300 font-medium">Climb Surge Duration</label>
+            <span class="text-[10px] text-emerald-400 font-mono">in minutes</span>
+          </div>
+          <div class="relative">
+            <input
+              type="number"
+              [min]="1"
+              [max]="60"
+              step="1"
+              [ngModel]="settings.climbSurgeDurationMinutes()"
+              (ngModelChange)="settings.setClimbSurgeDurationMinutes($event)"
+              class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+            />
+            <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">Minutes</span>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1">
+            Maximum time holding excessive power. Reaching this limit triggers a 15-min hike-a-bike cool-off (cancelled early if summit is reached).
+          </p>
+        </div>
+
+        <!-- 3. Hike-a-Bike Speed Threshold -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <label class="text-slate-300 font-medium">Hike-a-Bike Speed Threshold</label>
+            <span class="text-[10px] text-amber-400 font-mono">switch to push</span>
+          </div>
+          <div class="relative">
+            <input
+              type="number"
+              [min]="settings.distanceUnit() === 'miles' ? 1 : 2"
+              [max]="settings.distanceUnit() === 'miles' ? 10 : 15"
+              [step]="settings.distanceUnit() === 'miles' ? 0.1 : 0.5"
+              [ngModel]="settings.displayHikeBikeThreshold()"
+              (ngModelChange)="settings.setHikeBikeThresholdInUnit($event)"
+              placeholder="e.g. {{ settings.distanceUnit() === 'miles' ? '3.7' : '6.0' }}"
+              class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+            />
+            <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">
+              @if (settings.distanceUnit() === 'miles') {
+                mph ({{ settings.hikeBikeThresholdKmh().toFixed(1) }} km/h)
+              } @else {
+                km/h ({{ (settings.hikeBikeThresholdKmh() * 0.621371).toFixed(1) }} mph)
+              }
+            </span>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1">
+            If riding speed drops below this threshold even with Climb Surge, you jump off and push the bike.
+          </p>
+        </div>
+
+        <!-- 4. Average Hike-a-Bike Speed -->
+        <div>
+          <div class="flex items-center justify-between text-xs mb-1">
+            <label class="text-slate-300 font-medium">Average Hike-a-Bike Speed (Flat)</label>
+            <span class="text-[10px] text-teal-400 font-mono">base walking</span>
+          </div>
+          <div class="relative">
+            <input
+              type="number"
+              [min]="settings.distanceUnit() === 'miles' ? 0.5 : 1"
+              [max]="settings.distanceUnit() === 'miles' ? 5 : 8"
+              [step]="settings.distanceUnit() === 'miles' ? 0.1 : 0.5"
+              [ngModel]="settings.displayHikeBikeBaseSpeed()"
+              (ngModelChange)="settings.setHikeBikeBaseSpeedInUnit($event)"
+              placeholder="e.g. {{ settings.distanceUnit() === 'miles' ? '2.5' : '4.0' }}"
+              class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white font-mono placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition"
+            />
+            <span class="absolute right-3 top-2.5 text-xs font-mono text-slate-500">
+              @if (settings.distanceUnit() === 'miles') {
+                mph ({{ settings.hikeBikeBaseSpeedKmh().toFixed(1) }} km/h)
+              } @else {
+                km/h ({{ (settings.hikeBikeBaseSpeedKmh() * 0.621371).toFixed(1) }} mph)
+              }
+            </span>
+          </div>
+          <p class="text-[10px] text-slate-500 mt-1">
+            Enter your base walking speed while pushing your loaded bike on flat ground. The app automatically scales this down for you based on climb gradient (e.g. half speed at 20% grade), trail surface, and rig weight.
+          </p>
+        </div>
+
+      </div>
+    }
+  </div>
+
+  <!-- Map Style Preference Card -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="font-bold text-white text-sm flex items-center gap-1.5">
+          <span>🗺️</span>
+          <span>Default Map Style</span>
+        </h2>
+        <p class="text-[11px] text-slate-400 mt-0.5">Persisted base layer for the route map across reloads.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+      <button
+        type="button"
+        (click)="settings.setMapStyle('dark')"
+        class="p-2.5 rounded-lg border text-left cursor-pointer transition"
+        [ngClass]="settings.mapStyle() === 'dark'
+          ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-300 shadow-sm'
+          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'"
+      >
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-xs flex items-center gap-1.5">🌓 Dark Matter</span>
+          @if (settings.mapStyle() === 'dark') {
+            <span class="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/20 px-1.5 py-0.5 rounded">ACTIVE</span>
+          }
+        </div>
+        <p class="text-[10px] text-slate-400 mt-1">High-contrast slate canvas. Maximizes visibility of neon trail & POIs with low glare.</p>
+      </button>
+
+      <button
+        type="button"
+        (click)="settings.setMapStyle('topo')"
+        class="p-2.5 rounded-lg border text-left cursor-pointer transition"
+        [ngClass]="settings.mapStyle() === 'topo'
+          ? 'bg-emerald-500/10 border-emerald-500/50 text-emerald-300 shadow-sm'
+          : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'"
+      >
+        <div class="flex items-center justify-between">
+          <span class="font-bold text-xs flex items-center gap-1.5">🏔️ Topographic</span>
+          @if (settings.mapStyle() === 'topo') {
+            <span class="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/20 px-1.5 py-0.5 rounded">ACTIVE</span>
+          }
+        </div>
+        <p class="text-[10px] text-slate-400 mt-1">Esri World Topographic map with shaded mountain relief, elevation contours & passes.</p>
+      </button>
+    </div>
+  </div>
+
+  <!-- Screen Wake Lock Preference Card -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <h2 class="font-bold text-white text-sm flex items-center gap-1.5">
+          <span>💡</span>
+          <span>Keep Screen Awake</span>
+        </h2>
+        <p class="text-[11px] text-slate-400 mt-0.5">Prevents screen timeout and display sleep while mounted on bike handlebars.</p>
+      </div>
+
+      <!-- Wake Lock Status & Toggle -->
+      <div class="flex items-center gap-2 shrink-0">
+        @if (!wakeLock.isSupported()) {
+          <span class="text-[10px] font-mono font-bold text-slate-500 bg-slate-800 px-2 py-1 rounded">NOT SUPPORTED</span>
+        } @else if (!pwaInstall.isStandalone()) {
+          <!-- PWA Install Required Badge & Disabled Toggle -->
+          <span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            INSTALL REQUIRED
+          </span>
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            title="Install app to enable Keep Screen Awake"
+            class="relative inline-flex h-6 w-11 shrink-0 opacity-40 cursor-not-allowed rounded-full border-2 border-transparent bg-slate-800"
+            role="switch"
+            [attr.aria-checked]="false"
+          >
+            <span class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-slate-400 shadow translate-x-0"></span>
+          </button>
+        } @else {
+          <!-- Active PWA Standalone Mode -->
+          @if (wakeLock.isActive()) {
+            <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/20 border border-emerald-500/40 px-2 py-1 rounded flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              AWAKE
+            </span>
+          } @else {
+            <span class="text-[10px] font-mono font-bold text-slate-400 bg-slate-800 border border-slate-700 px-2 py-1 rounded">
+              IDLE
+            </span>
+          }
+
+          <button
+            type="button"
+            (click)="settings.toggleKeepScreenAwake()"
+            class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none"
+            [ngClass]="settings.keepScreenAwake() ? 'bg-emerald-600' : 'bg-slate-800'"
+            role="switch"
+            [attr.aria-checked]="settings.keepScreenAwake()"
+          >
+            <span
+              class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+              [ngClass]="settings.keepScreenAwake() ? 'translate-x-5' : 'translate-x-0'"
+            ></span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- PWA Install Required Notice & CTA Banner -->
+    @if (wakeLock.isSupported() && !pwaInstall.isStandalone()) {
+      <div class="mt-3 pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-amber-500/5 rounded-lg p-3 border border-amber-500/20">
+        <div class="space-y-1">
+          <div class="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
+            <span>🔒</span>
+            <span>App Installation Required</span>
+          </div>
+          <p class="text-[11px] text-slate-300 leading-relaxed">
+            Keep Screen Awake is only available when Bikepack Navigator is installed as a Progressive Web App. Installing ensures continuous screen power on your handlebars without browser timeouts.
+          </p>
+        </div>
+        <button
+          type="button"
+          (click)="pwaInstall.promptInstall()"
+          class="shrink-0 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-bold font-mono tracking-wide shadow-lg shadow-emerald-950/50 transition cursor-pointer"
+        >
+          <span>📲</span>
+          <span>{{ pwaInstall.isIOS() ? 'Add to Home Screen' : 'Install App to Enable' }}</span>
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Anonymous Usage Telemetry & Offline Analytics -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+    <div class="flex items-center justify-between gap-3">
+      <div class="space-y-1">
+        <div class="flex items-center gap-1.5">
+          <span class="text-sm">🛡️</span>
+          <h2 class="font-bold text-white text-sm">Anonymous Telemetry & Analytics</h2>
+        </div>
+        <p class="text-[11px] text-slate-400 max-w-sm leading-relaxed">
+          Report anonymous app usage to Google Analytics. Built for remote bikepacking: events are securely cached offline on your device and posted automatically when cellular service returns.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        @if (settings.anonymousTelemetryEnabled()) {
+          <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/20 border border-emerald-500/40 px-2 py-1 rounded">
+            ACTIVE
+          </span>
+        } @else {
+          <span class="text-[10px] font-mono font-bold text-slate-400 bg-slate-800 border border-slate-700 px-2 py-1 rounded">
+            PAUSED
+          </span>
+        }
+
+        <button
+          type="button"
+          (click)="settings.toggleAnonymousTelemetry()"
+          class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none"
+          [ngClass]="settings.anonymousTelemetryEnabled() ? 'bg-emerald-600' : 'bg-slate-800'"
+          role="switch"
+          [attr.aria-checked]="settings.anonymousTelemetryEnabled()"
+        >
+          <span
+            class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+            [ngClass]="settings.anonymousTelemetryEnabled() ? 'translate-x-5' : 'translate-x-0'"
+          ></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Privacy Badges & Safeguards -->
+    <div class="mt-3 pt-3 border-t border-slate-800/80 grid grid-cols-3 gap-2 text-center text-xs">
+      <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800/60">
+        <div class="text-[9px] uppercase font-mono text-slate-500">Location Privacy</div>
+        <div class="font-mono text-[11px] font-bold text-emerald-400 mt-0.5">Broad Area Only</div>
+      </div>
+      <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800/60">
+        <div class="text-[9px] uppercase font-mono text-slate-500">IP Privacy</div>
+        <div class="font-mono text-[11px] font-bold text-cyan-400 mt-0.5">Anonymized IP</div>
+      </div>
+      <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800/60">
+        <div class="text-[9px] uppercase font-mono text-slate-500">Off-Grid PWA</div>
+        <div class="font-mono text-[11px] font-bold text-amber-400 mt-0.5">Offline Queued</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local Storage Management & Clear -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <h2 class="font-bold text-white text-sm flex items-center gap-1.5">
+          <span>💾</span>
+          <span>Local Storage</span>
+        </h2>
+        <p class="text-[11px] text-slate-400 mt-0.5">All weights, water capacity, pace, and units are saved in browser storage.</p>
+      </div>
+
+      <button
+        type="button"
+        (click)="openClearConfirm()"
+        class="px-3 py-1.5 bg-rose-950/50 hover:bg-rose-900/70 active:bg-rose-800 text-rose-300 border border-rose-800/60 rounded-lg text-xs font-semibold font-mono transition cursor-pointer shrink-0"
+      >
+        Clear Storage
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Clear Local Storage Confirmation Modal -->
+@if (showClearConfirm()) {
+  <div class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
+    <div class="bg-slate-900 border border-rose-500/40 rounded-2xl max-w-sm w-full p-5 shadow-2xl shadow-black/90 flex flex-col gap-3">
+      <div class="flex items-center gap-2.5 text-rose-400">
+        <span class="text-2xl leading-none">⚠️</span>
+        <h3 class="font-bold text-white text-base">Clear Local Storage?</h3>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        This will permanently wipe all stored data from your browser, including rider weight, bike dry weight, water capacity, and pace settings.
+      </p>
+      <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-800 mt-1">
+        <button
+          type="button"
+          (click)="cancelClearConfirm()"
+          class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          (click)="confirmClearLocalStorage()"
+          class="px-3.5 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-xs font-semibold text-white transition shadow-lg shadow-rose-950 cursor-pointer"
+        >
+          Yes, Clear Storage
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- PWA Install Guide Modal (iOS Safari & Browser fallback) -->
+@if (pwaInstall.showInstallModal()) {
+  <div class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150">
+    <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-sm w-full p-5 shadow-2xl shadow-black/90 flex flex-col gap-3.5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-emerald-400">
+          <span class="text-xl leading-none">📲</span>
+          <h3 class="font-bold text-white text-base">Install Bikepack Navigator</h3>
+        </div>
+        <button
+          type="button"
+          (click)="pwaInstall.closeInstallModal()"
+          class="text-slate-400 hover:text-white text-lg leading-none p-1 transition cursor-pointer"
+        >
+          ✕
+        </button>
+      </div>
+
+      @if (pwaInstall.isIOS()) {
+        <!-- iOS Safari Instructions -->
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Follow these quick steps in Safari on your iPhone or iPad:
+        </p>
+        <ol class="text-xs text-slate-300 space-y-2.5 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">1</span>
+            <span>Tap the <strong class="text-white">Share</strong> button <span class="font-mono text-emerald-400">⎋</span> at the bottom of Safari.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">2</span>
+            <span>Scroll down and tap <strong class="text-white">Add to Home Screen</strong> <span class="font-mono text-emerald-400">⊞</span>.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">3</span>
+            <span>Tap <strong class="text-white">Add</strong> in the top-right corner.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">4</span>
+            <span>Launch from your <strong class="text-white">Home Screen</strong> to activate Keep Screen Awake!</span>
+          </li>
+        </ol>
+      } @else {
+        <!-- Desktop / Android Fallback Instructions -->
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Install the app to enable continuous screen power on your handlebars:
+        </p>
+        <ol class="text-xs text-slate-300 space-y-2.5 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">1</span>
+            <span>Look for the <strong class="text-white">Install</strong> icon (⊕ or ⬇️) in your browser's address bar.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">2</span>
+            <span>Or click the browser menu (<strong class="text-white font-mono">⋮</strong>) and select <strong class="text-white">Install Bikepack Navigator</strong>.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-[11px] shrink-0 mt-0.5">3</span>
+            <span>Open the installed app to unlock screen wake lock and full offline mode.</span>
+          </li>
+        </ol>
+      }
+
+      <div class="flex items-center justify-end pt-2 border-t border-slate-800">
+        <button
+          type="button"
+          (click)="pwaInstall.closeInstallModal()"
+          class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold text-white transition shadow-lg shadow-emerald-950 cursor-pointer"
+        >
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+}
+

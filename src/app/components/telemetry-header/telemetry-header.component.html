@@ -1,0 +1,320 @@
+<header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg shadow-black/30">
+  <div class="max-w-2xl mx-auto w-full px-4 py-3">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <!-- Top-Left Header Route Selector Trigger Button -->
+      <button
+        type="button"
+        (click)="openRouteModal.emit()"
+        class="flex items-center space-x-2 text-left p-1 rounded-xl hover:bg-slate-800/80 active:scale-[0.98] transition cursor-pointer border border-transparent hover:border-slate-700/60 group min-w-0 flex-1 mr-2"
+        aria-haspopup="dialog"
+        title="Click to browse and select bikepacking routes"
+      >
+        <!-- Dynamic Route Badge -->
+        <div
+          class="w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm shrink-0 shadow-sm transition"
+          [ngClass]="activeRouteSummary()
+            ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 group-hover:bg-emerald-500/30'
+            : 'bg-amber-500/20 border border-amber-500/30 text-amber-400 group-hover:bg-amber-500/30 animate-pulse'"
+        >
+          {{ activeRouteSummary()?.badge || activeRouteSummary()?.shortName || '🧭' }}
+        </div>
+
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="text-xs font-bold text-white group-hover:text-emerald-300 truncate transition">
+              {{ activeRouteSummary()?.name || 'Select a Route...' }}
+            </span>
+            <span class="text-[9px] text-slate-400 group-hover:text-slate-200 shrink-0 transition">
+              ▼
+            </span>
+          </div>
+
+          @if (activeRouteSummary()) {
+            <p class="text-[10px] text-slate-400 font-mono truncate mt-0.5">
+              {{ unit() === 'miles' ? activeRouteSummary()!.totalDistanceMiles.toLocaleString() + ' mi' : activeRouteSummary()!.totalDistanceKm.toLocaleString() + ' km' }}
+              • {{ activeRouteSummary()!.startLocation }} → {{ activeRouteSummary()!.endLocation }}
+            </p>
+          } @else {
+            <p class="text-[10px] text-amber-400/90 font-mono truncate mt-0.5 animate-pulse">
+              No route selected — choose a route
+            </p>
+          }
+        </div>
+      </button>
+
+    <!-- Units & Pace Setting (Power / Speed Stepper) -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <button
+        type="button"
+        (click)="toggleUnit()"
+        class="px-2 py-1 rounded bg-slate-800 border border-slate-700 text-slate-300 hover:text-white text-xs font-mono font-semibold cursor-pointer shrink-0"
+        title="Toggle Miles / Kilometers"
+      >
+        {{ unit() === 'miles' ? 'MILES' : 'KM' }}
+      </button>
+
+      <!-- Pace Control: Power (Watts) or Average Speed with - / + Steppers -->
+      <div class="flex items-center bg-slate-800/90 border border-slate-700 rounded-lg p-0.5 text-xs font-mono shrink-0">
+        <button
+          type="button"
+          (click)="paceMode() === 'power' ? adjustPower(-10) : adjustSpeed(-0.5)"
+          class="w-6 h-6 flex items-center justify-center rounded bg-slate-900/60 hover:bg-slate-700 active:bg-emerald-600 text-slate-300 hover:text-white font-bold text-xs cursor-pointer transition select-none"
+          [title]="paceMode() === 'power' ? 'Decrease 10 W' : ('Decrease 0.5 ' + speedUnit())"
+        >
+          −
+        </button>
+        <!-- Clickable badge to toggle between Power and Speed modes -->
+        <button
+          type="button"
+          (click)="togglePaceMode()"
+          class="px-1.5 py-0.5 rounded hover:bg-slate-700/80 active:bg-slate-600 transition font-bold flex items-center gap-1 justify-center text-xs cursor-pointer select-none group"
+          [class.text-emerald-400]="paceMode() === 'power'"
+          [class.text-cyan-400]="paceMode() === 'speed'"
+          [title]="paceMode() === 'power' ? 'Mode: Power (Watts). Click to switch to Speed.' : 'Mode: Average Speed. Click to switch to Power.'"
+        >
+          @if (paceMode() === 'power') {
+            <span>⚡</span>
+            <span>{{ riderPowerWatts() }}W</span>
+            <span class="text-[10px] text-slate-500 group-hover:text-emerald-300 transition" title="Switch to Speed">⇄</span>
+          } @else {
+            <span>{{ displaySpeed().toFixed(1) }} {{ speedUnit() }}</span>
+            <span class="text-[10px] text-slate-500 group-hover:text-cyan-300 transition" title="Switch to Power">⇄</span>
+          }
+        </button>
+        <button
+          type="button"
+          (click)="paceMode() === 'power' ? adjustPower(10) : adjustSpeed(0.5)"
+          class="w-6 h-6 flex items-center justify-center rounded bg-slate-900/60 hover:bg-slate-700 active:bg-emerald-600 text-slate-300 hover:text-white font-bold text-xs cursor-pointer transition select-none"
+          [title]="paceMode() === 'power' ? 'Increase 10 W' : ('Increase 0.5 ' + speedUnit())"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Mile/KM Marker Selector & Route Telemetry (Only when route is active) -->
+  @if (activeRouteId()) {
+    <div class="bg-slate-950/80 rounded-xl p-2.5 border border-slate-800">
+    <div class="flex items-center justify-between text-xs mb-1.5 gap-2">
+      <div class="flex items-center gap-1.5 min-w-0">
+        <span class="text-slate-400 font-mono uppercase text-[10px] tracking-wider whitespace-nowrap">
+          <span class="hidden sm:inline">Current </span>Location
+        </span>
+        <button
+          type="button"
+          (click)="toggleGps.emit()"
+          [title]="gpsState().enabled ? 'GPS tracking active (every 30s). Click to pause.' : 'Acquire GPS location from browser'"
+          class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold transition flex items-center gap-1 border cursor-pointer whitespace-nowrap shrink-0"
+          [ngClass]="gpsState().enabled
+            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-sm shadow-emerald-950'
+            : 'bg-slate-800 text-slate-300 hover:text-white border-slate-700'"
+          [disabled]="gpsState().loading"
+        >
+          @if (gpsState().loading) {
+            <span class="w-2 h-2 rounded-full border border-emerald-400 border-t-transparent animate-spin"></span>
+            <span>Locating...</span>
+          } @else if (gpsState().enabled) {
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>GPS</span>
+          } @else {
+            <span>📍 GPS</span>
+          }
+        </button>
+
+        <!-- Weather Pill Button (2-Hour Hazard Priority Icon & Current Telemetry) -->
+        @if (weatherService.currentWeather(); as weather) {
+          @let outlook = twoHourOutlook();
+          <button
+            type="button"
+            (click)="openWeatherModal.emit()"
+            class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold transition flex items-center gap-1 border cursor-pointer whitespace-nowrap shrink-0 shadow-sm"
+            [ngClass]="{
+              'bg-rose-950/70 border-rose-500/90 text-rose-200 animate-pulse': outlook.alertKind === 'thunderstorm',
+              'bg-amber-950/70 border-amber-500/90 text-amber-200 animate-pulse': outlook.alertKind === 'mud',
+              'bg-orange-950/70 border-orange-500/90 text-orange-200 animate-pulse': outlook.alertKind === 'headwind',
+              'bg-emerald-950/70 border-emerald-500/90 text-emerald-200 animate-pulse': outlook.alertKind === 'tailwind',
+              'bg-slate-800/90 border-slate-700 text-slate-200': outlook.alertKind === 'normal'
+            }"
+            [title]="outlook.summary + ' • Click to view full forecast.'"
+          >
+            <span class="text-xs" [title]="outlook.title">{{ outlook.icon }}</span>
+            <span class="font-bold text-white">{{ unit() === 'miles' ? weather.tempF + '°F' : weather.tempC + '°C' }}</span>
+            <span class="text-slate-400 hidden xs:inline">{{ unit() === 'miles' ? weather.precipitationInches + 'in' : weather.precipitationMm + 'mm' }}</span>
+            <span class="text-cyan-400 hidden sm:inline">{{ unit() === 'miles' ? weather.windSpeedMph + 'mph' : weather.windSpeedKmh + 'km/h' }} {{ weather.windCardinal }}</span>
+          </button>
+        }
+      </div>
+
+      <div class="flex items-center gap-1.5 shrink-0">
+        <div class="font-mono font-bold text-emerald-400 text-xs sm:text-sm whitespace-nowrap">
+          @if (unit() === 'miles') {
+            Mile {{ currentMile().toFixed(1) }} <span class="text-[11px] sm:text-xs text-slate-500 font-normal">/ {{ routeService.totalDistanceMiles }}</span>
+          } @else {
+            KM {{ (currentMile() * 1.60934).toFixed(1) }} <span class="text-[11px] sm:text-xs text-slate-500 font-normal">/ {{ routeService.totalDistanceKm }}</span>
+          }
+        </div>
+        <button
+          type="button"
+          (click)="toggleHeaderCollapse.emit()"
+          class="w-5 h-5 flex items-center justify-center rounded hover:bg-slate-800 active:bg-slate-700 text-slate-400 hover:text-slate-200 transition text-[9px] font-mono cursor-pointer shrink-0 select-none"
+          [title]="isHeaderCollapsed() ? 'Expand next resupply & bike shop' : 'Collapse next resupply & bike shop'"
+        >
+          {{ isHeaderCollapsed() ? '▼' : '▲' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Steppers & Slider -->
+    <div class="flex items-center gap-1.5 mb-1.5">
+      @for (s of steppers; track s.label) {
+        @if (s.delta < 0) {
+          <button
+            type="button"
+            (click)="onStepLocation(s.delta)"
+            class="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[11px] font-mono font-bold text-slate-300 transition shrink-0"
+          >
+            {{ s.label }}
+          </button>
+        }
+      }
+      <input
+        type="range"
+        [min]="0"
+        [max]="maxDistanceInUnit()"
+        [step]="sliderStep()"
+        [ngModel]="currentDistanceInUnit()"
+        (ngModelChange)="onSliderChange($event)"
+        class="flex-1 accent-emerald-500 h-2 bg-slate-800 rounded-lg cursor-pointer"
+      />
+      @for (s of steppers; track s.label) {
+        @if (s.delta > 0) {
+          <button
+            type="button"
+            (click)="onStepLocation(s.delta)"
+            class="px-2 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-[11px] font-mono font-bold text-slate-300 transition shrink-0"
+          >
+            {{ s.label }}
+          </button>
+        }
+      }
+    </div>
+
+    <!-- Off-Route Warning Alert (> 10 km) -->
+    @if (gpsState().enabled && gpsState().projection?.isOffRoute) {
+      <div class="mt-2 p-2.5 rounded-lg bg-rose-950/50 border border-rose-500/40 flex items-start gap-2.5 text-xs animate-in fade-in">
+        <span class="text-base leading-none shrink-0">⚠️</span>
+        <div class="flex-1 min-w-0">
+          <div class="font-bold text-rose-300 flex items-center justify-between text-[11px]">
+            <span>Off-Route Alert (&gt; 10 km)</span>
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono text-[10px] text-rose-300 bg-rose-900/60 px-1.5 py-0.5 rounded border border-rose-700/60">
+                @if (unit() === 'miles') {
+                  {{ gpsState().projection?.distanceMiles?.toFixed(1) }} mi off route
+                } @else {
+                  {{ gpsState().projection?.distanceKm?.toFixed(1) }} km off route
+                }
+              </span>
+              <button type="button" (click)="dismissGpsAlert.emit()" title="Dismiss alert" class="text-rose-400 hover:text-white text-xs px-1 cursor-pointer">✕</button>
+            </div>
+          </div>
+          <p class="text-[10px] text-rose-200/90 mt-1 leading-snug">
+            You are currently outside the 10 km corridor. Nearest route checkpoint is at 
+            <span class="font-mono font-semibold text-white">
+              @if (unit() === 'miles') {
+                Mile {{ gpsState().projection?.projectedRouteMile?.toFixed(1) }}
+              } @else {
+                KM {{ (gpsState().projection?.projectedRouteMile! * 1.60934).toFixed(1) }}
+              }
+            </span>.
+            Slider position was not modified.
+          </p>
+        </div>
+      </div>
+    }
+
+    <!-- On-Route Projection Status Banner (<= 10 km) -->
+    @if (gpsState().enabled && gpsState().projection && !gpsState().projection?.isOffRoute) {
+      <div class="mt-2 px-2.5 py-1.5 rounded-lg bg-emerald-950/50 border border-emerald-500/30 flex items-center justify-between text-xs font-mono">
+        <div class="flex items-center gap-1.5 text-emerald-300 text-[11px] truncate">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+          <span class="font-semibold text-white">On Route:</span>
+          <span>
+            @if (unit() === 'miles') {
+              Mile {{ gpsState().projection?.projectedRouteMile?.toFixed(1) }}
+            } @else {
+              KM {{ (gpsState().projection?.projectedRouteMile! * 1.60934).toFixed(1) }}
+            }
+          </span>
+          <span class="text-emerald-400 text-[10px]">
+            ({{ gpsState().projection?.distanceKm! < 1 ? (gpsState().projection?.distanceKm! * 1000).toFixed(0) + 'm' : (unit() === 'miles' ? gpsState().projection?.distanceMiles?.toFixed(1) + ' mi' : gpsState().projection?.distanceKm?.toFixed(1) + ' km') }} off centerline)
+          </span>
+        </div>
+        @if (gpsState().lastUpdated) {
+          <span class="text-[9px] text-slate-500 shrink-0">{{ gpsState().lastUpdated | date:'HH:mm:ss' }}</span>
+        }
+      </div>
+    }
+
+    <!-- Geolocation Error Banner -->
+    @if (gpsState().enabled && gpsState().error) {
+      <div class="mt-2 p-2 rounded-lg bg-amber-950/40 border border-amber-500/30 flex items-center gap-2 text-xs text-amber-300">
+        <span>⚠️</span>
+        <span class="text-[10px] flex-1">{{ gpsState().error }}</span>
+        <button type="button" (click)="clearGpsError.emit()" class="text-slate-400 hover:text-white text-xs">✕</button>
+      </div>
+    }
+
+    <!-- Critical Next Waypoints Bar (Collapsible on Scroll) -->
+    <div
+      class="grid grid-cols-2 gap-2 text-xs transition-all duration-300 ease-in-out overflow-hidden"
+      [ngClass]="isHeaderCollapsed()
+        ? 'max-h-0 opacity-0 mt-0 pt-0 border-t-0 pointer-events-none'
+        : 'max-h-24 opacity-100 mt-2 pt-2 border-t border-slate-800/80'"
+    >
+      <div class="flex items-center gap-1.5 overflow-hidden">
+        <span class="text-sm">🏘️</span>
+        <div class="truncate">
+          <div class="text-[9px] text-slate-500 uppercase font-mono">Next Resupply Town</div>
+          @if (nextTown()) {
+            <div class="truncate font-semibold text-white">
+              {{ nextTown()?.name }}
+              <span class="text-emerald-400 font-mono text-[11px]">
+                @if (unit() === 'miles') {
+                  (+{{ (nextTown()!.route_mile - currentMile()).toFixed(1) }} mi)
+                } @else {
+                  (+{{ ((nextTown()!.route_mile - currentMile()) * 1.60934).toFixed(1) }} km)
+                }
+              </span>
+            </div>
+          } @else {
+            <div class="text-slate-500 italic">Route finish ahead</div>
+          }
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 overflow-hidden">
+        <span class="text-sm">🚲</span>
+        <div class="truncate">
+          <div class="text-[9px] text-slate-500 uppercase font-mono">Next Bike Shop</div>
+          @if (nextBikeShop()) {
+            <div class="truncate font-semibold text-white">
+              {{ nextBikeShop()?.town || nextBikeShop()?.name }}
+              <span class="text-blue-400 font-mono text-[11px]">
+                @if (unit() === 'miles') {
+                  (+{{ (nextBikeShop()!.route_mile - currentMile()).toFixed(1) }} mi)
+                } @else {
+                  (+{{ ((nextBikeShop()!.route_mile - currentMile()) * 1.60934).toFixed(1) }} km)
+                }
+              </span>
+            </div>
+          } @else {
+            <div class="text-slate-500 italic">None ahead</div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+</div>
+</header>

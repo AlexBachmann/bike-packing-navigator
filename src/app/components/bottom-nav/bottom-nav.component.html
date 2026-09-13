@@ -1,0 +1,58 @@
+<nav aria-label="Main navigation" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 shadow-2xl">
+  <div class="max-w-2xl mx-auto w-full py-2 px-3 flex justify-around items-center">
+    <button
+      type="button"
+      (click)="onTabClick('waypoints')"
+      [attr.aria-current]="activeTab() === 'waypoints' ? 'page' : null"
+      class="flex flex-col items-center gap-1 transition cursor-pointer"
+      [ngClass]="activeTab() === 'waypoints' ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'"
+    >
+      <span class="text-lg leading-none">📍</span>
+      <span class="text-[10px] font-mono">Waypoints</span>
+    </button>
+
+    <button
+      type="button"
+      (click)="onTabClick('profile')"
+      [attr.aria-current]="activeTab() === 'profile' ? 'page' : null"
+      class="flex flex-col items-center gap-1 transition cursor-pointer"
+      [ngClass]="activeTab() === 'profile' ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'"
+    >
+      <span class="text-lg leading-none">📈</span>
+      <span class="text-[10px] font-mono">Profile</span>
+    </button>
+
+    <button
+      type="button"
+      (click)="onTabClick('map')"
+      [attr.aria-current]="activeTab() === 'map' ? 'page' : null"
+      class="flex flex-col items-center gap-1 transition cursor-pointer"
+      [ngClass]="activeTab() === 'map' ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'"
+    >
+      <span class="text-lg leading-none">🗺️</span>
+      <span class="text-[10px] font-mono">Map</span>
+    </button>
+
+    <button
+      type="button"
+      (click)="onTabClick('resupply')"
+      [attr.aria-current]="activeTab() === 'resupply' ? 'page' : null"
+      class="flex flex-col items-center gap-1 transition cursor-pointer"
+      [ngClass]="activeTab() === 'resupply' ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'"
+    >
+      <span class="text-lg leading-none">🛒</span>
+      <span class="text-[10px] font-mono">Resupply</span>
+    </button>
+
+    <button
+      type="button"
+      (click)="onTabClick('settings')"
+      [attr.aria-current]="activeTab() === 'settings' ? 'page' : null"
+      class="flex flex-col items-center gap-1 transition cursor-pointer"
+      [ngClass]="activeTab() === 'settings' ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'"
+    >
+      <span class="text-lg leading-none">⚙️</span>
+      <span class="text-[10px] font-mono">Settings</span>
+    </button>
+  </div>
+</nav>

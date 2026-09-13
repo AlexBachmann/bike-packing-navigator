@@ -1,0 +1,45 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies & build outputs
+node_modules
+.angular
+dist
+tmp
+out-tsc
+bazel-out
+coverage
+
+# Large geospatial datasets & caches
+route/terrain/
+*.tif
+*.tiff
+*.vrt
+*.gpkg
+*.osm.pbf
+*.pbf
+route/places/.cache*
+*.cache_places_api*.json
+*.cache.json
+
+# Python bytecode & environments
+__pycache__
+*.py[cod]
+*$py.class
+.venv
+venv
+env
+
+# Local environments & secrets
+.env
+.env.*
+compose.override.yml
+compose.*.override.yml
+docker-compose.override.yml
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.idea
+.vscode

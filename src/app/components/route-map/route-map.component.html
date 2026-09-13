@@ -1,0 +1,135 @@
+<div class="relative flex-1 min-h-0 w-full h-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950 isolate">
+
+  <!-- Top Floating POI Category Filters (Bounded inside map container, stops before zoom buttons) -->
+  <div class="absolute top-2.5 left-2.5 right-12 z-20 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+    <button
+      type="button"
+      (click)="setPoiFilter('all')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'all'
+        ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      All
+    </button>
+    <button
+      type="button"
+      (click)="setPoiFilter('town')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'town'
+        ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      <span>🏘️</span>
+      <span>Towns</span>
+    </button>
+    <button
+      type="button"
+      (click)="setPoiFilter('bike_shop')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'bike_shop'
+        ? 'bg-blue-500 text-white border-blue-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      <span>🚲</span>
+      <span>Shops</span>
+    </button>
+    <button
+      type="button"
+      (click)="setPoiFilter('campground')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'campground'
+        ? 'bg-teal-500 text-slate-950 border-teal-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      <span>⛺</span>
+      <span>Camp</span>
+    </button>
+    <button
+      type="button"
+      (click)="setPoiFilter('hotel')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'hotel'
+        ? 'bg-purple-500 text-white border-purple-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      <span>🏨</span>
+      <span>Lodging</span>
+    </button>
+    <button
+      type="button"
+      (click)="setPoiFilter('grocery')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'grocery'
+        ? 'bg-amber-500 text-slate-950 border-amber-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      <span>🛒</span>
+      <span>Stores</span>
+    </button>
+    <button
+      type="button"
+      (click)="setPoiFilter('laundromat')"
+      class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+      [ngClass]="activePoiFilter() === 'laundromat'
+        ? 'bg-indigo-500 text-white border-indigo-400 font-bold'
+        : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+    >
+      <span>🧺</span>
+      <span>Laundry</span>
+    </button>
+  </div>
+
+  <!-- Leaflet Map Canvas (Fills entire container) -->
+  <div #mapContainer class="w-full h-full z-0"></div>
+
+  <!-- Floating Map Controls (Bottom Right, safely inside container) -->
+  <div class="absolute bottom-3 right-2.5 z-20 flex flex-col gap-1.5">
+    <!-- Center on Rider Button -->
+    <button
+      type="button"
+      (click)="centerOnRider()"
+      title="Center map on current rider location"
+      aria-label="Center map on current rider location"
+      class="w-9 h-9 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-emerald-400 border border-slate-700/80 shadow-lg backdrop-blur-md flex items-center justify-center text-base cursor-pointer transition active:scale-95"
+    >
+      🎯
+    </button>
+
+    <!-- Fit Full Route Button -->
+    <button
+      type="button"
+      (click)="fitFullRoute()"
+      [title]="'Zoom out to show entire ' + (routeService.totalDistanceKm ? routeService.totalDistanceKm.toLocaleString() : 'route') + ' km route'"
+      [attr.aria-label]="'Zoom out to show entire ' + (routeService.totalDistanceKm ? routeService.totalDistanceKm.toLocaleString() : 'route') + ' km route'"
+      class="w-9 h-9 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 shadow-lg backdrop-blur-md flex items-center justify-center text-sm cursor-pointer transition active:scale-95"
+    >
+      📍
+    </button>
+
+    <!-- Toggle Map Layer Button -->
+    <button
+      type="button"
+      (click)="toggleMapStyle()"
+      [title]="mapStyle() === 'dark' ? 'Switch to Topographic Contours' : 'Switch to Dark Matter Style'"
+      [attr.aria-label]="mapStyle() === 'dark' ? 'Switch to Topographic Contours' : 'Switch to Dark Matter Style'"
+      class="w-9 h-9 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 shadow-lg backdrop-blur-md flex items-center justify-center text-sm cursor-pointer transition active:scale-95"
+    >
+      {{ mapStyle() === 'dark' ? '🗺️' : '🌓' }}
+    </button>
+  </div>
+
+  <!-- Bottom Floating Telemetry Info Pill (Bottom Left, safely inside container) -->
+  <div class="absolute bottom-3 left-2.5 z-20 bg-slate-950/90 border border-slate-800 rounded-xl px-2.5 py-1 text-xs font-mono backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+    <span class="text-slate-400 text-[11px]">Position:</span>
+    <span class="font-bold text-white text-[11px]">
+      @if (unit() === 'miles') {
+        Mile {{ currentMile().toFixed(1) }}
+      } @else {
+        KM {{ (currentMile() * 1.60934).toFixed(1) }}
+      }
+    </span>
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+<!-- Search Input -->
+<div class="relative mb-3">
+  <input
+    type="text"
+    [ngModel]="searchQuery()"
+    (ngModelChange)="searchQuery.set($event)"
+    placeholder="Search places, towns, or services..."
+    class="w-full bg-slate-900/90 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
+  />
+  @if (searchQuery()) {
+    <button type="button" aria-label="Clear search" (click)="clearSearch()" class="absolute right-3 top-2 text-slate-400 text-xs hover:text-white cursor-pointer">✕</button>
+  }
+</div>
+
+<!-- Loading / Error States -->
+@if (isLoading()) {
+  <div class="py-12 text-center text-slate-400 font-mono text-xs flex flex-col items-center gap-2">
+    <div class="w-6 h-6 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+    <span>Loading Waypoints & POIs...</span>
+  </div>
+} @else if (error()) {
+  <div class="p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-400 text-xs text-center font-mono">
+    {{ error() }}
+  </div>
+} @else {
+  <!-- Waypoint Cards List -->
+  <div class="space-y-2.5">
+    @for (wp of waypoints(); track wp.id) {
+      <app-waypoint-card [waypoint]="wp" [unit]="unit()" />
+    } @empty {
+      <div class="py-12 text-center text-slate-500 text-xs">
+        No waypoints match the selected filters ahead of Mile {{ currentMile().toFixed(1) }}.
+      </div>
+    }
+  </div>
+}

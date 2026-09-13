@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Waterton Canyon Trailhead, CO",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 1675,
+    "state": "CO"
+  },
+  {
+    "name": "South Platte River / Strontia Springs, CO",
+    "mile": 16.9,
+    "km": 27.2,
+    "elevation": 1985,
+    "state": "CO"
+  },
+  {
+    "name": "Buffalo Creek, CO",
+    "mile": 28.1,
+    "km": 45.3,
+    "elevation": 2388,
+    "state": "CO"
+  },
+  {
+    "name": "Wellington Lake / Stony Pass, CO",
+    "mile": 44.8,
+    "km": 72.2,
+    "elevation": 2612,
+    "state": "CO"
+  },
+  {
+    "name": "Tarryall River / Lost Park Road, CO",
+    "mile": 73.6,
+    "km": 118.5,
+    "elevation": 2553,
+    "state": "CO"
+  },
+  {
+    "name": "Jefferson / South Park, CO",
+    "mile": 96.3,
+    "km": 155.0,
+    "elevation": 2743,
+    "state": "CO"
+  },
+  {
+    "name": "Kenosha Pass, CO",
+    "mile": 113.2,
+    "km": 182.2,
+    "elevation": 3177,
+    "state": "CO"
+  },
+  {
+    "name": "Georgia Pass, CO",
+    "mile": 127.4,
+    "km": 205.0,
+    "elevation": 3620,
+    "state": "CO"
+  },
+  {
+    "name": "Breckenridge (Swan River), CO",
+    "mile": 144.2,
+    "km": 232.0,
+    "elevation": 2934,
+    "state": "CO"
+  },
+  {
+    "name": "Frisco / Miners Creek, CO",
+    "mile": 153.2,
+    "km": 246.5,
+    "elevation": 3279,
+    "state": "CO"
+  },
+  {
+    "name": "Copper Mountain, CO",
+    "mile": 164.8,
+    "km": 265.2,
+    "elevation": 3187,
+    "state": "CO"
+  },
+  {
+    "name": "Searles & Kokomo Pass, CO",
+    "mile": 172.8,
+    "km": 278.1,
+    "elevation": 3740,
+    "state": "CO"
+  },
+  {
+    "name": "Tennessee Pass / Camp Hale, CO",
+    "mile": 185.6,
+    "km": 298.7,
+    "elevation": 3162,
+    "state": "CO"
+  },
+  {
+    "name": "Leadville / Turquoise Lake, CO",
+    "mile": 202.0,
+    "km": 325.0,
+    "elevation": 2892,
+    "state": "CO"
+  },
+  {
+    "name": "Twin Lakes, CO",
+    "mile": 221.5,
+    "km": 356.5,
+    "elevation": 2868,
+    "state": "CO"
+  },
+  {
+    "name": "Buena Vista / Harvard Flank, CO",
+    "mile": 245.6,
+    "km": 395.2,
+    "elevation": 2523,
+    "state": "CO"
+  },
+  {
+    "name": "Mount Princeton Hot Springs, CO",
+    "mile": 264.1,
+    "km": 425.0,
+    "elevation": 2735,
+    "state": "CO"
+  },
+  {
+    "name": "Monarch Pass / Crest Trail, CO",
+    "mile": 292.2,
+    "km": 470.3,
+    "elevation": 3636,
+    "state": "CO"
+  },
+  {
+    "name": "Marshall Pass, CO",
+    "mile": 297.4,
+    "km": 478.6,
+    "elevation": 3322,
+    "state": "CO"
+  },
+  {
+    "name": "Sargents Mesa, CO",
+    "mile": 319.1,
+    "km": 513.5,
+    "elevation": 3588,
+    "state": "CO"
+  },
+  {
+    "name": "Cochetopa Pass, CO",
+    "mile": 336.0,
+    "km": 540.7,
+    "elevation": 3126,
+    "state": "CO"
+  },
+  {
+    "name": "Los Pinos Pass / Cebolla Creek, CO",
+    "mile": 371.0,
+    "km": 597.0,
+    "elevation": 3201,
+    "state": "CO"
+  },
+  {
+    "name": "Spring Creek Pass, CO",
+    "mile": 394.9,
+    "km": 635.5,
+    "elevation": 3440,
+    "state": "CO"
+  },
+  {
+    "name": "Coney Summit (13,258 ft), CO",
+    "mile": 411.3,
+    "km": 662.0,
+    "elevation": 4041,
+    "state": "CO"
+  },
+  {
+    "name": "Stony Pass Saddle (Silverton), CO",
+    "mile": 424.7,
+    "km": 683.5,
+    "elevation": 3958,
+    "state": "CO"
+  },
+  {
+    "name": "Molas Pass / Highway 550, CO",
+    "mile": 446.3,
+    "km": 718.3,
+    "elevation": 3520,
+    "state": "CO"
+  },
+  {
+    "name": "Blackhawk Pass, CO",
+    "mile": 469.2,
+    "km": 755.1,
+    "elevation": 3656,
+    "state": "CO"
+  },
+  {
+    "name": "Hotel Draw / Scotch Creek, CO",
+    "mile": 481.8,
+    "km": 775.4,
+    "elevation": 3344,
+    "state": "CO"
+  },
+  {
+    "name": "Kennebec Pass / La Plata, CO",
+    "mile": 491.5,
+    "km": 791.0,
+    "elevation": 3745,
+    "state": "CO"
+  },
+  {
+    "name": "Durango Junction Creek Trailhead, CO",
+    "mile": 514.7,
+    "km": 828.3,
+    "elevation": 2132,
+    "state": "CO"
+  }
+]

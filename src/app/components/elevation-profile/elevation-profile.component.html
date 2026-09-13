@@ -1,0 +1,1125 @@
+<div class="space-y-4">
+
+  <!-- Zoom Selector & Window Header -->
+  <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="text-base">📈</span>
+        <h2 class="font-bold text-white text-sm">Elevation Profile & Pass Tracker</h2>
+      </div>
+      <p class="text-[11px] text-slate-400 mt-0.5 font-mono">
+        @if (unit() === 'miles') {
+          Window: Mi {{ activeWindow().start.toFixed(1) }} → {{ activeWindow().end.toFixed(1) }}
+        } @else {
+          Window: KM {{ (activeWindow().start * 1.60934).toFixed(1) }} → {{ (activeWindow().end * 1.60934).toFixed(1) }}
+        }
+      </p>
+    </div>
+
+    <!-- Tactical Zoom Mode Selector -->
+    <div class="flex items-center bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs font-mono shrink-0 overflow-x-auto no-scrollbar">
+      <button
+        type="button"
+        (click)="setZoom('next10')"
+        class="px-2 py-1 rounded-md transition font-semibold cursor-pointer shrink-0"
+        [ngClass]="zoomMode() === 'next10' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-white'"
+      >
+        @if (unit() === 'miles') {
+          10 mi
+        } @else {
+          10 km
+        }
+      </button>
+      <button
+        type="button"
+        (click)="setZoom('next25')"
+        class="px-2 py-1 rounded-md transition font-semibold cursor-pointer shrink-0"
+        [ngClass]="zoomMode() === 'next25' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-white'"
+      >
+        @if (unit() === 'miles') {
+          25 mi
+        } @else {
+          25 km
+        }
+      </button>
+      <button
+        type="button"
+        (click)="setZoom('next50')"
+        class="px-2 py-1 rounded-md transition font-semibold cursor-pointer shrink-0"
+        [ngClass]="zoomMode() === 'next50' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-white'"
+      >
+        @if (unit() === 'miles') {
+          50 mi
+        } @else {
+          50 km
+        }
+      </button>
+      <button
+        type="button"
+        (click)="setZoom('next100')"
+        class="px-2 py-1 rounded-md transition font-semibold cursor-pointer shrink-0"
+        [ngClass]="zoomMode() === 'next100' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-white'"
+      >
+        @if (unit() === 'miles') {
+          100 mi
+        } @else {
+          100 km
+        }
+      </button>
+      <button
+        type="button"
+        (click)="setZoom('full')"
+        class="px-2 py-1 rounded-md transition font-semibold cursor-pointer shrink-0"
+        [ngClass]="zoomMode() === 'full' ? 'bg-emerald-500 text-slate-950 shadow-sm' : 'text-slate-400 hover:text-white'"
+      >
+        All
+      </button>
+    </div>
+  </div>
+
+  <!-- Telemetry Bar: Altitude & Climb Gain -->
+  <div class="grid grid-cols-3 gap-2 text-center text-xs">
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl px-1.5 py-2">
+      <div class="text-[8.5px] uppercase font-mono text-slate-500 truncate">Rider Altitude</div>
+      <div class="font-mono font-bold text-emerald-400 text-xs sm:text-sm mt-0.5 whitespace-nowrap tracking-tight">
+        @if (unit() === 'miles') {
+          {{ currentRiderEle().feet.toLocaleString() }} ft
+        } @else {
+          {{ currentRiderEle().meters.toLocaleString() }} m
+        }
+      </div>
+    </div>
+
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl px-1.5 py-2">
+      <div class="text-[8.5px] uppercase font-mono text-slate-500 truncate">Climb In Window</div>
+      <div class="font-mono font-bold text-amber-400 text-xs sm:text-sm mt-0.5 whitespace-nowrap tracking-tight">
+        @if (unit() === 'miles') {
+          +{{ chartStats().gainFeet.toLocaleString() }} ft
+        } @else {
+          +{{ chartStats().gainMeters.toLocaleString() }} m
+        }
+      </div>
+    </div>
+
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl px-1.5 py-2">
+      <div class="text-[8.5px] uppercase font-mono text-slate-500 truncate">Elevation Range</div>
+      <div class="font-mono font-bold text-cyan-400 text-[11px] sm:text-xs mt-0.5 whitespace-nowrap tracking-tight">
+        @if (unit() === 'miles') {
+          {{ chartStats().minFeet }} - {{ chartStats().maxFeet }} ft
+        } @else {
+          {{ chartStats().minMeters }} - {{ chartStats().maxMeters }} m
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive SVG Elevation Graph Container -->
+  <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 shadow-xl relative overflow-hidden">
+    
+    <!-- Scrubbing Tooltip HUD (shown when user touches/drags on chart) -->
+    @if (scrubData(); as s) {
+      <div
+        class="absolute top-3 sm:top-4 z-20 bg-slate-950/95 border border-emerald-500/50 rounded-lg p-2.5 text-xs shadow-2xl backdrop-blur-md w-[190px] sm:w-[200px]"
+        [ngClass]="popupSide() === 'left' ? 'left-3 sm:left-4' : 'right-3 sm:right-4'"
+      >
+        <div class="flex items-center justify-between gap-1.5 border-b border-slate-800 pb-1.5 mb-1.5">
+          <span class="font-mono font-bold text-white text-[11px] truncate">
+            @if (unit() === 'miles') {
+              Mi {{ s.routeMile.toFixed(1) }}
+            } @else {
+              KM {{ s.routeKm.toFixed(1) }}
+            }
+          </span>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <!-- Grade Badge -->
+            <span
+              class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded border"
+              [ngClass]="{
+                'bg-emerald-950 text-emerald-300 border-emerald-700': s.gradePercent < 4 && s.gradePercent >= -4,
+                'bg-yellow-950 text-yellow-300 border-yellow-700': s.gradePercent >= 4 && s.gradePercent < 8,
+                'bg-orange-950 text-orange-300 border-orange-700': s.gradePercent >= 8 && s.gradePercent < 12,
+                'bg-rose-950 text-rose-300 border-rose-700': s.gradePercent >= 12,
+                'bg-cyan-950 text-cyan-300 border-cyan-700': s.gradePercent < -4
+              }"
+            >
+              {{ s.gradePercent > 0 ? '+' : '' }}{{ s.gradePercent }}%
+            </span>
+
+            <!-- Close button for touch / desktop -->
+            <button
+              type="button"
+              (click)="clearScrub(true); $event.stopPropagation()"
+              class="w-5 h-5 flex items-center justify-center rounded text-slate-400 hover:text-white hover:bg-slate-800 active:bg-slate-700 text-xs font-mono transition cursor-pointer -mr-1"
+              title="Close inspection window"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-1 font-mono text-[10px] text-slate-300">
+          <div class="flex justify-between">
+            <span class="text-slate-500">Altitude:</span>
+            <span class="text-emerald-400 font-bold">
+              @if (unit() === 'miles') {
+                {{ s.elevationFeet.toLocaleString() }} ft
+              } @else {
+                {{ s.elevationMeters.toLocaleString() }} m
+              }
+            </span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">From Rider:</span>
+            <span>
+              @if (unit() === 'miles') {
+                {{ s.distanceAheadMiles > 0 ? '+' : '' }}{{ s.distanceAheadMiles }} mi
+              } @else {
+                {{ s.distanceAheadKm > 0 ? '+' : '' }}{{ s.distanceAheadKm }} km
+              }
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          (click)="jumpToMile(s.routeMile)"
+          class="w-full mt-2 py-1 bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-bold text-[10px] font-mono rounded transition cursor-pointer"
+        >
+          Jump Rider Here
+        </button>
+      </div>
+    }
+
+    <!-- SVG Canvas -->
+    <div
+      class="relative w-full aspect-[800/240] cursor-crosshair touch-none select-none"
+      (mousemove)="handleMouseMove($event)"
+      (click)="handleClick($event)"
+      (touchmove)="handleTouchMove($event)"
+      (touchstart)="handleTouchStart($event)"
+      (mouseleave)="onMouseLeave()"
+    >
+      <svg
+        [attr.viewBox]="'0 0 ' + svgWidth + ' ' + svgHeight"
+        class="w-full h-full overflow-visible"
+      >
+        <defs>
+          <!-- Dynamic Linear Gradient for Elevation Area Fill -->
+          <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#10b981" stop-opacity="0.35" />
+            <stop offset="60%" stop-color="#059669" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#022c22" stop-opacity="0.0" />
+          </linearGradient>
+
+          <!-- Dynamic Horizontal Gradient for Slope Coloring -->
+          <linearGradient id="slopeStrokeGradient" x1="0%" y1="0" x2="100%" y2="0">
+            @for (stop of gradientStops(); track $index) {
+              <stop [attr.offset]="stop.offset" [attr.stop-color]="stop.color" />
+            }
+          </linearGradient>
+        </defs>
+
+        <!-- Horizontal Gridlines & Elevation Labels -->
+        <line [attr.x1]="padLeft" [attr.y1]="padTop" [attr.x2]="svgWidth - padRight" [attr.y2]="padTop" stroke="#334155" stroke-dasharray="3,3" stroke-width="0.8" opacity="0.6" />
+        <line [attr.x1]="padLeft" [attr.y1]="(padTop + svgHeight - padBottom) / 2" [attr.x2]="svgWidth - padRight" [attr.y2]="(padTop + svgHeight - padBottom) / 2" stroke="#334155" stroke-dasharray="3,3" stroke-width="0.8" opacity="0.4" />
+        <line [attr.x1]="padLeft" [attr.y1]="svgHeight - padBottom" [attr.x2]="svgWidth - padRight" [attr.y2]="svgHeight - padBottom" stroke="#475569" stroke-width="1" />
+
+        <!-- Vertical Midpoint Gridline -->
+        <line
+          [attr.x1]="(padLeft + svgWidth - padRight) / 2"
+          [attr.y1]="padTop"
+          [attr.x2]="(padLeft + svgWidth - padRight) / 2"
+          [attr.y2]="svgHeight - padBottom"
+          stroke="#334155"
+          stroke-dasharray="3,3"
+          stroke-width="0.8"
+          opacity="0.3"
+        />
+
+        <!-- Elevation Axis Labels (Left) -->
+        <text [attr.x]="padLeft - 6" [attr.y]="padTop + 4" fill="#94a3b8" font-size="9" text-anchor="end" font-family="monospace">
+          @if (unit() === 'miles') {
+            {{ chartStats().maxFeet }}'
+          } @else {
+            {{ chartStats().maxMeters }}m
+          }
+        </text>
+        <text [attr.x]="padLeft - 6" [attr.y]="(padTop + svgHeight - padBottom) / 2 + 3" fill="#64748b" font-size="8.5" text-anchor="end" font-family="monospace" opacity="0.75">
+          @if (unit() === 'miles') {
+            {{ Math.round((chartStats().minFeet + chartStats().maxFeet) / 2) }}'
+          } @else {
+            {{ Math.round((chartStats().minMeters + chartStats().maxMeters) / 2) }}m
+          }
+        </text>
+        <text [attr.x]="padLeft - 6" [attr.y]="svgHeight - padBottom" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">
+          @if (unit() === 'miles') {
+            {{ chartStats().minFeet }}'
+          } @else {
+            {{ chartStats().minMeters }}m
+          }
+        </text>
+
+        <!-- Distance Axis Labels (Bottom) -->
+        <text [attr.x]="padLeft" [attr.y]="svgHeight - 10" fill="#64748b" font-size="9" text-anchor="start" font-family="monospace">
+          @if (unit() === 'miles') {
+            Mi {{ activeWindow().start.toFixed(0) }}
+          } @else {
+            KM {{ (activeWindow().start * 1.60934).toFixed(0) }}
+          }
+        </text>
+        <text [attr.x]="(padLeft + svgWidth - padRight) / 2" [attr.y]="svgHeight - 10" fill="#64748b" font-size="9" text-anchor="middle" font-family="monospace">
+          @if (unit() === 'miles') {
+            Mi {{ ((activeWindow().start + activeWindow().end) / 2).toFixed(0) }}
+          } @else {
+            KM {{ (((activeWindow().start + activeWindow().end) / 2) * 1.60934).toFixed(0) }}
+          }
+        </text>
+        <text [attr.x]="svgWidth - padRight" [attr.y]="svgHeight - 10" fill="#64748b" font-size="9" text-anchor="end" font-family="monospace">
+          @if (unit() === 'miles') {
+            Mi {{ activeWindow().end.toFixed(0) }}
+          } @else {
+            KM {{ (activeWindow().end * 1.60934).toFixed(0) }}
+          }
+        </text>
+
+        <!-- Area Fill under Mountain Curve -->
+        @if (areaPathD()) {
+          <path [attr.d]="areaPathD()" fill="url(#areaGradient)" />
+        }
+
+        <!-- Elevation Curve Stroke with Slope Gradients -->
+        @if (linePathD()) {
+          <path
+            [attr.d]="linePathD()"
+            fill="none"
+            stroke="url(#slopeStrokeGradient)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
+
+        <!-- Mountain Pass Summit Markers on Curve -->
+        @for (pass of visiblePasses(); track pass.id) {
+          <g (click)="jumpToMile(pass.routeMile)" class="cursor-pointer group">
+            <title>{{ pass.name }}: {{ unit() === 'miles' ? pass.elevationFeet.toLocaleString() + ' ft (Mile ' + pass.routeMile.toFixed(1) + ')' : pass.elevationMeters.toLocaleString() + ' m (KM ' + pass.routeKm.toFixed(1) + ')' }}</title>
+            <!-- Summit vertical pin line -->
+            <line
+              [attr.x1]="pass.svgX"
+              [attr.y1]="pass.svgY"
+              [attr.x2]="pass.svgX"
+              [attr.y2]="Math.max(12, pass.svgY - 18)"
+              stroke="#f59e0b"
+              stroke-width="1.2"
+              stroke-dasharray="2,2"
+            />
+            <!-- Summit flag circle -->
+            <circle
+              [attr.cx]="pass.svgX"
+              [attr.cy]="pass.svgY"
+              r="3.5"
+              fill="#f59e0b"
+              stroke="#0f172a"
+              stroke-width="1.5"
+            />
+            <!-- Pass name text label -->
+            <text
+              [attr.x]="pass.svgX"
+              [attr.y]="Math.max(10, pass.svgY - 22)"
+              fill="#fbbf24"
+              font-size="8.5"
+              font-weight="bold"
+              text-anchor="middle"
+              font-family="monospace"
+              class="drop-shadow"
+            >
+              ▲ {{ pass.name }}
+            </text>
+          </g>
+        }
+
+        <!-- Current Rider Location Vertical Indicator & Dot -->
+        @if (riderSvgPos(); as rider) {
+          <g>
+            <!-- Vertical Line to bottom -->
+            <line
+              [attr.x1]="rider.x"
+              [attr.y1]="rider.y"
+              [attr.x2]="rider.x"
+              [attr.y2]="svgHeight - padBottom"
+              stroke="#34d399"
+              stroke-width="1.5"
+              stroke-dasharray="3,3"
+            />
+            <!-- Glowing Outer Pulse Ring -->
+            <circle
+              [attr.cx]="rider.x"
+              [attr.cy]="rider.y"
+              r="7"
+              fill="#10b981"
+              fill-opacity="0.3"
+              class="animate-ping"
+            />
+            <!-- Rider Dot -->
+            <circle
+              [attr.cx]="rider.x"
+              [attr.cy]="rider.y"
+              r="4.5"
+              fill="#10b981"
+              stroke="#ffffff"
+              stroke-width="2"
+            />
+            <!-- Rider Marker Label -->
+            <text
+              [attr.x]="rider.x"
+              [attr.y]="Math.max(14, rider.y - 12)"
+              fill="#34d399"
+              font-size="9"
+              font-weight="bold"
+              text-anchor="middle"
+              font-family="monospace"
+            >
+              🚴 YOU
+            </text>
+          </g>
+        }
+
+        <!-- Interactive Scrubbing Crosshair -->
+        @if (scrubX() !== null && scrubY() !== null) {
+          <g>
+            <line
+              [attr.x1]="scrubX()!"
+              [attr.y1]="padTop"
+              [attr.x2]="scrubX()!"
+              [attr.y2]="svgHeight - padBottom"
+              stroke="#ffffff"
+              stroke-width="1"
+              stroke-dasharray="2,2"
+              opacity="0.8"
+            />
+            <circle
+              [attr.cx]="scrubX()!"
+              [attr.cy]="scrubY()!"
+              r="5"
+              fill="#38bdf8"
+              stroke="#ffffff"
+              stroke-width="2"
+            />
+          </g>
+        }
+      </svg>
+    </div>
+
+    <!-- Chart Interaction Prompt -->
+    <div class="mt-2 text-center text-[10px] text-slate-500 font-mono">
+      💡 Touch & scrub along profile to inspect grades, summits, and jump position.
+    </div>
+  </div>
+
+  <!-- Climb Gradient Legend Strip -->
+  <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-2.5 flex items-center justify-around text-[10px] font-mono">
+    <div class="flex items-center gap-1.5">
+      <span class="w-3 h-2 rounded bg-emerald-500 inline-block"></span>
+      <span class="text-slate-300">&lt; 4% Flat</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-3 h-2 rounded bg-yellow-500 inline-block"></span>
+      <span class="text-slate-300">4-8% Moderate</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-3 h-2 rounded bg-orange-500 inline-block"></span>
+      <span class="text-slate-300">8-12% Steep</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="w-3 h-2 rounded bg-rose-500 inline-block"></span>
+      <span class="text-slate-300">&gt; 12% Extreme</span>
+    </div>
+  </div>
+
+  <!-- Trail Weather Section (Next 24h & 50km Segments) -->
+  @if (weatherService.currentWeather(); as weather) {
+    <div class="bg-slate-900/80 border border-slate-800 rounded-xl overflow-hidden shadow-lg transition-all">
+      <div
+        class="p-3 flex items-center justify-between cursor-pointer hover:bg-slate-800/40 transition-colors"
+        (click)="isWeatherExpanded.set(!isWeatherExpanded())"
+      >
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="text-2xl">{{ weather.weatherIcon }}</span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-white uppercase tracking-wider">Trail Weather</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+                Next 24h
+              </span>
+            </div>
+            <div class="text-[11px] text-slate-300 flex items-center gap-2 font-mono mt-0.5 truncate">
+              <span class="font-bold text-white">{{ unit() === 'miles' ? weather.tempF + '°F' : weather.tempC + '°C' }}</span>
+              <span>•</span>
+              <span>{{ weather.weatherDescription }}</span>
+              <span>•</span>
+              <span class="text-cyan-400">{{ unit() === 'miles' ? weather.windSpeedMph + ' mph ' : weather.windSpeedKmh + ' km/h ' }}{{ weather.windCardinal }}</span>
+              @if (weather.precipitationMm > 0) {
+                <span>•</span>
+                <span class="text-rose-300 font-bold">🌧️ {{ unit() === 'miles' ? weather.precipitationInches + 'in' : weather.precipitationMm + 'mm' }}</span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="px-2.5 py-1 rounded-lg text-xs font-mono font-semibold bg-slate-800 text-slate-300 hover:text-white border border-slate-700 transition shrink-0 flex items-center gap-1"
+        >
+          <span>{{ isWeatherExpanded() ? 'Hide' : '24h Forecast' }}</span>
+          <span>{{ isWeatherExpanded() ? '▲' : '▼' }}</span>
+        </button>
+      </div>
+
+      <!-- Expandable Full Weather Forecast Component -->
+      @if (isWeatherExpanded()) {
+        <div class="border-t border-slate-800 p-2 bg-slate-950/40">
+          <app-weather-forecast (close)="isWeatherExpanded.set(false)" />
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Upcoming Climbs Tracker List -->
+  <div class="space-y-3">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1">
+      <div>
+        <h3 class="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-1.5">
+          <span>⛰️</span>
+          <span>Upcoming Climbs</span>
+        </h3>
+        <p class="text-[10px] text-slate-400 font-mono mt-0.5">
+          Climbs (&gt;500m @ &ge;5% or &gt;2km @ &ge;4%) &amp; iconic passes
+        </p>
+      </div>
+
+      <!-- Climb Filter Selector Tabs -->
+      <div class="flex items-center bg-slate-950 p-1 rounded-lg border border-slate-800 text-xs font-mono shrink-0">
+        <button
+          type="button"
+          (click)="setClimbFilter('window')"
+          class="px-2.5 py-1 rounded-md transition font-semibold cursor-pointer shrink-0 text-[11px]"
+          [ngClass]="climbFilter() === 'window' ? 'bg-emerald-500 text-slate-950 shadow-sm font-bold' : 'text-slate-400 hover:text-white'"
+        >
+          In Window ({{ windowClimbsCount() }})
+        </button>
+        <button
+          type="button"
+          (click)="setClimbFilter('upcoming')"
+          class="px-2.5 py-1 rounded-md transition font-semibold cursor-pointer shrink-0 text-[11px]"
+          [ngClass]="climbFilter() === 'upcoming' ? 'bg-emerald-500 text-slate-950 shadow-sm font-bold' : 'text-slate-400 hover:text-white'"
+        >
+          Upcoming ({{ upcomingClimbsCount() }})
+        </button>
+        <button
+          type="button"
+          (click)="setClimbFilter('all')"
+          class="px-2.5 py-1 rounded-md transition font-semibold cursor-pointer shrink-0 text-[11px]"
+          [ngClass]="climbFilter() === 'all' ? 'bg-emerald-500 text-slate-950 shadow-sm font-bold' : 'text-slate-400 hover:text-white'"
+        >
+          All ({{ allClimbs.length }})
+        </button>
+      </div>
+    </div>
+
+    @if (filteredClimbs().length === 0) {
+      <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 text-center">
+        <span class="text-2xl block mb-2">🏔️</span>
+        <p class="text-sm font-semibold text-slate-300">No climbs in this window</p>
+        <p class="text-xs text-slate-500 mt-1">Try switching to the Upcoming or All filter, or zoom out the profile.</p>
+        <button
+          type="button"
+          (click)="setClimbFilter('upcoming')"
+          class="mt-3 px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-semibold hover:bg-emerald-500/30 transition cursor-pointer"
+        >
+          Show All Upcoming Climbs ({{ upcomingClimbsCount() }})
+        </button>
+      </div>
+    } @else {
+      <div class="space-y-2.5">
+        @for (climb of filteredClimbs(); track climb.id) {
+          <div
+            class="bg-slate-900/80 border rounded-xl p-3.5 transition flex flex-col gap-2.5"
+            [ngClass]="{
+              'border-amber-500/50 bg-amber-950/20 shadow-lg shadow-amber-950/20': climb.status === 'climbing',
+              'border-slate-800/90 hover:border-slate-700': climb.status === 'upcoming',
+              'opacity-60 border-slate-800/60 bg-slate-900/50': climb.status === 'passed'
+            }"
+          >
+            <!-- Climb Header -->
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <!-- Status Badge -->
+                @if (climb.status === 'passed') {
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700">
+                    ✔ PASSED
+                  </span>
+                } @else if (climb.status === 'climbing') {
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/25 text-amber-300 border border-amber-500/50 animate-pulse flex items-center gap-1">
+                    <span>⚡</span> CURRENT CLIMB
+                  </span>
+                } @else {
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                    UPCOMING
+                  </span>
+                }
+
+                <!-- Iconic Pass Badge -->
+                @if (climb.isIconic) {
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950/80 text-amber-300 border border-amber-500/60 flex items-center gap-1">
+                    <span>🏔️</span> ICONIC PASS
+                  </span>
+                }
+
+                <!-- State Badge -->
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-300 border border-slate-700">
+                  {{ climb.state }}
+                </span>
+
+                <!-- Difficulty Badge -->
+                @if (climb.difficulty) {
+                  <span
+                    class="px-1.5 py-0.5 rounded text-[10px] font-mono uppercase"
+                    [ngClass]="{
+                      'bg-rose-950 text-rose-300 border border-rose-800': climb.difficulty === 'extreme',
+                      'bg-orange-950 text-orange-300 border border-orange-800': climb.difficulty === 'difficult',
+                      'bg-yellow-950 text-yellow-300 border border-yellow-800': climb.difficulty === 'moderate'
+                    }"
+                  >
+                    {{ climb.difficulty }}
+                  </span>
+                }
+              </div>
+
+              <!-- Miniature Profile Sparkline -->
+              @if (climb.miniProfile) {
+                <div
+                  class="flex-1 flex items-center justify-center min-w-[65px] max-w-[170px] sm:max-w-[220px] h-9 sm:h-10 px-1.5 self-center"
+                  [ngClass]="climb.status === 'passed' ? 'opacity-50' : 'opacity-100'"
+                  title="Miniature elevation profile"
+                >
+                  <svg
+                    [attr.viewBox]="'0 0 ' + climb.miniProfile.width + ' 36'"
+                    preserveAspectRatio="none"
+                    [style.width.px]="climb.miniProfile.width"
+                    class="max-w-full h-9 sm:h-10 overflow-visible shrink-0"
+                    aria-label="Miniature climb profile"
+                  >
+                    <defs>
+                      <!-- Dynamic Horizontal Gradient for Slope Coloring -->
+                      <linearGradient [id]="'miniSlopeGrad-' + climb.id" x1="0%" y1="0%" x2="100%" y2="0%">
+                        @for (stop of climb.miniProfile.gradientStops; track $index) {
+                          <stop [attr.offset]="stop.offset" [attr.stop-color]="stop.color" />
+                        }
+                      </linearGradient>
+
+                      <!-- Emerald/Teal Area Fill matching Main Elevation Profile -->
+                      <linearGradient [id]="'miniAreaGrad-' + climb.id" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#10b981" stop-opacity="0.32" />
+                        <stop offset="60%" stop-color="#059669" stop-opacity="0.12" />
+                        <stop offset="100%" stop-color="#022c22" stop-opacity="0.0" />
+                      </linearGradient>
+                    </defs>
+
+                    <!-- Area Fill -->
+                    <path
+                      [attr.d]="climb.miniProfile.areaPathD"
+                      [attr.fill]="'url(#miniAreaGrad-' + climb.id + ')'"
+                    />
+
+                    <!-- Elevation Profile Line with Multi-Color Grade Slope -->
+                    <path
+                      [attr.d]="climb.miniProfile.linePathD"
+                      fill="none"
+                      [attr.stroke]="'url(#miniSlopeGrad-' + climb.id + ')'"
+                      stroke-width="1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+
+                    <!-- Base Anchor Dot -->
+                    <circle
+                      [attr.cx]="climb.miniProfile.startPoint.x"
+                      [attr.cy]="climb.miniProfile.startPoint.y"
+                      r="1.4"
+                      class="fill-slate-400 opacity-80"
+                    />
+
+                    <!-- Summit Peak Dot -->
+                    <circle
+                      [attr.cx]="climb.miniProfile.summitPoint.x"
+                      [attr.cy]="climb.miniProfile.summitPoint.y"
+                      r="2"
+                      class="fill-cyan-300 stroke-slate-950 stroke-[0.8]"
+                    />
+
+                    <!-- Active Climbing Rider Position Dot & Guideline -->
+                    @if (climb.status === 'climbing' && climb.miniProfile.riderDot) {
+                      <line
+                        [attr.x1]="climb.miniProfile.riderDot.x"
+                        [attr.y1]="climb.miniProfile.riderDot.y"
+                        [attr.x2]="climb.miniProfile.riderDot.x"
+                        [attr.y2]="36"
+                        stroke="#38bdf8"
+                        stroke-dasharray="1.5,1.5"
+                        stroke-width="0.8"
+                        opacity="0.7"
+                      />
+                      <circle
+                        [attr.cx]="climb.miniProfile.riderDot.x"
+                        [attr.cy]="climb.miniProfile.riderDot.y"
+                        r="4"
+                        class="fill-cyan-400/30 animate-ping"
+                      />
+                      <circle
+                        [attr.cx]="climb.miniProfile.riderDot.x"
+                        [attr.cy]="climb.miniProfile.riderDot.y"
+                        r="2"
+                        class="fill-cyan-300 stroke-slate-950 stroke-[1]"
+                      />
+                    }
+
+                    <!-- Thunderstorm Hazard Indicator on Miniature Profile -->
+                    @if (climb.miniProfile.thunderstormHazardPoint) {
+                      <circle
+                        [attr.cx]="climb.miniProfile.thunderstormHazardPoint.x"
+                        [attr.cy]="climb.miniProfile.thunderstormHazardPoint.y"
+                        r="6"
+                        class="fill-rose-500/50 animate-ping"
+                      />
+                      <circle
+                        [attr.cx]="climb.miniProfile.thunderstormHazardPoint.x"
+                        [attr.cy]="climb.miniProfile.thunderstormHazardPoint.y"
+                        r="3.5"
+                        class="fill-rose-600 stroke-amber-300 stroke-[0.8]"
+                      />
+                      <text
+                        [attr.x]="climb.miniProfile.thunderstormHazardPoint.x"
+                        [attr.y]="climb.miniProfile.thunderstormHazardPoint.y + 3"
+                        text-anchor="middle"
+                        font-size="8"
+                        font-weight="bold"
+                        class="select-none fill-amber-300 pointer-events-none"
+                      >
+                        ⚡
+                      </text>
+                    }
+                  </svg>
+                </div>
+              }
+
+              <!-- Summit Elevation & Span -->
+              <div class="text-right font-mono shrink-0">
+                <div class="font-bold text-white text-xs">
+                  @if (unit() === 'miles') {
+                    {{ climb.summitElevationFeet.toLocaleString() }} ft
+                  } @else {
+                    {{ climb.summitElevationMeters.toLocaleString() }} m
+                  }
+                </div>
+                <div class="text-[10px] text-slate-400">
+                  @if (unit() === 'miles') {
+                    Mi {{ climb.startMile.toFixed(1) }} → {{ climb.endMile.toFixed(1) }}
+                  } @else {
+                    KM {{ climb.startKm.toFixed(1) }} → {{ climb.endKm.toFixed(1) }}
+                  }
+                </div>
+              </div>
+            </div>
+
+            <!-- Climb Name & Description/Notes -->
+            <div>
+              <h4 class="font-bold text-white text-sm leading-snug flex flex-wrap items-center gap-1.5 break-words">
+                <span>{{ climb.name }}</span>
+              </h4>
+
+              <!-- Geographic Context: Trail, Park & Landmark Badges -->
+              @if (climb.trailName || climb.parkName || climb.landmark) {
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-slate-400 mt-1">
+                  @if (climb.trailName) {
+                    <span class="inline-flex items-center gap-1 text-emerald-400 font-medium">
+                      <span class="select-none">🌲</span>
+                      <span>{{ climb.trailName }}</span>
+                    </span>
+                  }
+                  @if (climb.parkName) {
+                    <span class="inline-flex items-center gap-1 text-slate-400 text-[11px]">
+                      @if (climb.trailName) {
+                        <span class="text-slate-600 select-none">•</span>
+                      }
+                      <span>🏞️ {{ climb.parkName }}</span>
+                    </span>
+                  }
+                  @if (climb.landmark) {
+                    <span class="inline-flex items-center gap-1 text-sky-400/90 text-[11px]">
+                      @if (climb.trailName || climb.parkName) {
+                        <span class="text-slate-600 select-none">•</span>
+                      }
+                      <span>⛰️ {{ climb.landmark }}</span>
+                    </span>
+                  }
+                </div>
+              }
+
+              <!-- Narrative / Contextual Trail Guide Notes -->
+              @if (climb.notes) {
+                <div class="mt-2 text-xs text-slate-300/90 leading-relaxed bg-slate-950/60 rounded-lg border-l-2 border-emerald-500/80 pl-3 pr-2.5 py-2 font-sans break-words">
+                  {{ climb.notes }}
+                </div>
+              }
+            </div>
+
+            <!-- Arrival Weather & Thunderstorm Hazard Section -->
+            @if (climb.climbWeather) {
+              <!-- Severe Thunderstorm Hazard Alert Banner -->
+              @if (climb.climbWeather.hasThunderstormHazard && climb.climbWeather.thunderstormHazard) {
+                <div class="rounded-xl p-3 bg-gradient-to-r from-rose-950/95 via-red-950/90 to-amber-950/80 border-2 border-rose-500/90 text-rose-100 flex items-start gap-3 shadow-lg shadow-rose-950/50 animate-pulse">
+                  <span class="text-2xl select-none shrink-0 leading-none mt-0.5">⚡</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex flex-wrap items-center justify-between gap-1.5">
+                      <span class="font-bold text-xs uppercase tracking-wider text-rose-300 flex items-center gap-1.5">
+                        <span>⚠️</span>
+                        <span>Thunderstorm Hazard at Arrival</span>
+                      </span>
+                      <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-900/90 border border-rose-500/80 font-bold text-white shadow-sm">
+                        ETA: ~{{ climb.climbWeather.thunderstormHazard.estimatedTimeFormatted }}
+                      </span>
+                    </div>
+                    <p class="text-xs text-rose-200 mt-1 leading-snug font-medium">
+                      {{ climb.climbWeather.thunderstormHazard.message }}.
+                    </p>
+                    <p class="text-[10px] text-rose-300/90 font-mono mt-1 flex items-center gap-1">
+                      <span>⚡</span>
+                      <span>High lightning exposure hazard above treeline. Plan ascent timing or seek shelter before summiting.</span>
+                    </p>
+                  </div>
+                </div>
+              }
+
+              <!-- Arrival Weather Summary Pill & Breakdown Toggle -->
+              <div class="flex flex-wrap items-center justify-between gap-2 px-3 py-1.5 rounded-lg bg-slate-950/80 border border-slate-800/90 text-[11px] font-mono">
+                <div class="flex flex-wrap items-center gap-2 text-slate-300">
+                  <span class="text-sm">{{ climb.climbWeather.summitWeather.weatherAtArrival.weatherIcon }}</span>
+                  <span class="font-semibold text-white">
+                    Summit at ETA (~{{ climb.climbWeather.estimatedSummitTimeFormatted }}):
+                  </span>
+                  <span [ngClass]="climb.climbWeather.hasThunderstormHazard ? 'text-rose-400 font-bold' : 'text-slate-300'">
+                    {{ climb.climbWeather.summitWeather.weatherAtArrival.weatherDescription }},
+                  </span>
+                  <span class="font-bold text-emerald-400">
+                    @if (unit() === 'miles') {
+                      {{ climb.climbWeather.summitWeather.weatherAtArrival.tempF }}°F
+                    } @else {
+                      {{ climb.climbWeather.summitWeather.weatherAtArrival.tempC }}°C
+                    }
+                  </span>
+                  <span class="text-slate-400">
+                    • 💨
+                    @if (unit() === 'miles') {
+                      {{ climb.climbWeather.summitWeather.weatherAtArrival.windSpeedMph }} mph
+                    } @else {
+                      {{ climb.climbWeather.summitWeather.weatherAtArrival.windSpeedKmh }} km/h
+                    }
+                    {{ climb.climbWeather.summitWeather.weatherAtArrival.windCardinal }}
+                  </span>
+                  <span class="text-slate-400">
+                    • 🌧️
+                    @if (unit() === 'miles') {
+                      {{ climb.climbWeather.summitWeather.weatherAtArrival.precipitationInches }} in
+                    } @else {
+                      {{ climb.climbWeather.summitWeather.weatherAtArrival.precipitationMm }} mm
+                    }
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  (click)="toggleClimbWeatherBreakdown(climb.id)"
+                  class="text-[10px] text-emerald-400 hover:text-emerald-300 font-semibold cursor-pointer shrink-0 transition flex items-center gap-1 ml-auto"
+                >
+                  <span>{{ isClimbWeatherExpanded(climb.id) ? '▲ Hide breakdown' : '▼ 1 km weather breakdown' }}</span>
+                </button>
+              </div>
+
+              <!-- Fine-Grained 1 km Breakdown Drawer -->
+              @if (isClimbWeatherExpanded(climb.id)) {
+                <div class="rounded-lg bg-slate-950 border border-slate-800 p-2.5 space-y-2">
+                  <div class="flex items-center justify-between text-[10px] text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 pb-1 px-1">
+                    <span>1 KM Interval Forecast (matched to your estimated arrival)</span>
+                    <span class="text-emerald-400 font-semibold">{{ climb.climbWeather.kmPoints.length }} points</span>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto pr-1">
+                    @for (pt of climb.climbWeather.kmPoints; track pt.climbKm) {
+                      <div
+                        class="p-2.5 rounded-lg border text-[11px] font-mono flex items-center justify-between gap-2 transition"
+                        [ngClass]="{
+                          'bg-rose-950/60 border-rose-500/80 text-rose-200': pt.weatherAtArrival.isThunderstorm,
+                          'bg-slate-900/80 border-slate-800/80 text-slate-300': !pt.weatherAtArrival.isThunderstorm
+                        }"
+                      >
+                        <div class="flex items-center gap-2 min-w-0">
+                          <span class="text-lg shrink-0 select-none">{{ pt.weatherAtArrival.weatherIcon }}</span>
+                          <div class="min-w-0">
+                            <div class="font-bold text-white text-[11px] flex flex-wrap items-center gap-1.5 leading-tight">
+                              <span>
+                                @if ($first) {
+                                  Base
+                                } @else if ($last) {
+                                  Summit
+                                } @else {
+                                  @if (unit() === 'miles') {
+                                    +{{ (pt.climbKm / 1.60934).toFixed(1) }} mi
+                                  } @else {
+                                    +{{ pt.climbKm.toFixed(1) }} km
+                                  }
+                                }
+                              </span>
+                              <span class="text-[10px] text-slate-400 font-normal">
+                                @if (unit() === 'miles') {
+                                  (Mi {{ pt.routeMile.toFixed(1) }})
+                                } @else {
+                                  (KM {{ pt.routeKm.toFixed(1) }})
+                                }
+                              </span>
+                              @if (pt.weatherAtArrival.isThunderstorm) {
+                                <span class="px-1 py-0.5 rounded text-[8.5px] font-bold bg-rose-500/30 text-rose-300 border border-rose-500/50 leading-none">
+                                  ⚡ STORM
+                                </span>
+                              }
+                            </div>
+                            <div class="text-[9.5px] text-slate-400 mt-0.5 leading-tight">
+                              Elev: {{ unit() === 'miles' ? pt.elevationFt.toLocaleString() + ' ft' : pt.elevationM.toLocaleString() + ' m' }}
+                              • ETA: {{ pt.estimatedArrivalFormatted }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-right shrink-0">
+                          <div class="font-bold text-xs" [ngClass]="pt.weatherAtArrival.isThunderstorm ? 'text-rose-300' : 'text-slate-100'">
+                            @if (unit() === 'miles') {
+                              {{ pt.weatherAtArrival.tempF }}°F
+                            } @else {
+                              {{ pt.weatherAtArrival.tempC }}°C
+                            }
+                          </div>
+                          <div class="text-[9.5px] text-slate-400 mt-0.5 leading-tight">
+                            @if (unit() === 'miles') {
+                              {{ pt.weatherAtArrival.precipitationInches > 0 ? pt.weatherAtArrival.precipitationInches + 'in' : 'Dry' }}
+                              • {{ pt.weatherAtArrival.windSpeedMph }}mph
+                            } @else {
+                              {{ pt.weatherAtArrival.precipitationMm > 0 ? pt.weatherAtArrival.precipitationMm + 'mm' : 'Dry' }}
+                              • {{ pt.weatherAtArrival.windSpeedKmh }}km/h
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            }
+
+            <!-- Surface Firmness Grade & Explanation from OpenStreetMap -->
+            @if (climb.firmness) {
+              <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+                <span
+                  class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] border font-mono"
+                  [ngClass]="{
+                    'bg-emerald-950/40 text-emerald-400 border-emerald-800/60': climb.tracktype === 'grade1',
+                    'bg-amber-950/40 text-amber-400 border-amber-800/60': climb.tracktype === 'grade2',
+                    'bg-yellow-950/40 text-yellow-400 border-yellow-800/60': climb.tracktype === 'grade3',
+                    'bg-orange-950/40 text-orange-400 border-orange-800/60': climb.tracktype === 'grade4',
+                    'bg-rose-950/40 text-rose-400 border-rose-800/60': climb.tracktype === 'grade5'
+                  }"
+                >
+                  <span>🧱</span>
+                  <span>{{ climb.firmness }}</span>
+                </span>
+              </div>
+            }
+
+            <!-- Estimation Metrics (Estimated Time & Hike-a-Bike) -->
+            <div class="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+              <!-- Estimated Time Pill -->
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700/80 text-slate-200">
+                <span class="text-xs">⏱️</span>
+                <span class="text-slate-400 font-medium">
+                  {{ climb.status === 'climbing' ? 'Estimated time remaining:' : 'Estimated time:' }}
+                </span>
+                <span class="font-bold text-amber-400">~{{ climb.estimatedTimeFormatted }}</span>
+              </span>
+
+              <!-- Hike-a-Bike Pill (Power Mode Only) -->
+              @if (isPowerMode()) {
+                <span
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px]"
+                  [ngClass]="climb.hikeBikeDistanceMeters > 0 ? 'bg-amber-950/40 border-amber-700/60 text-amber-300' : 'bg-emerald-950/30 border-emerald-800/40 text-emerald-400'"
+                >
+                  <span class="text-xs">{{ climb.hikeBikeDistanceMeters > 0 ? '🥾' : '🚴' }}</span>
+                  <span class="opacity-80">
+                    {{ climb.status === 'climbing' ? 'Est. hike-a-bike remaining:' : 'Est. hike-a-bike:' }}
+                  </span>
+                  <span class="font-bold">
+                    @if (climb.hikeBikeDistanceMeters > 0) {
+                      {{ unit() === 'miles' ? climb.hikeBikeDistanceMiles.toFixed(1) + ' mi' : climb.hikeBikeDistanceKm.toFixed(1) + ' km' }}
+                      • ~{{ climb.hikeBikeTimeFormatted }}
+                    } @else {
+                      0 (100% rideable)
+                    }
+                  </span>
+                </span>
+              }
+            </div>
+
+            <!-- Telemetry Stats Pill Strip -->
+            <div class="grid grid-cols-4 gap-1.5 bg-slate-950/60 p-2 rounded-lg border border-slate-800/80 text-center font-mono text-[10px]">
+              <div>
+                <span class="text-slate-500 uppercase block text-[8.5px]">Length</span>
+                <span class="font-bold text-slate-200">
+                  @if (unit() === 'miles') {
+                    {{ climb.lengthMiles.toFixed(1) }} mi
+                  } @else {
+                    {{ climb.lengthKm.toFixed(1) }} km
+                  }
+                </span>
+              </div>
+              <div>
+                <span class="text-slate-500 uppercase block text-[8.5px]">Gain</span>
+                <span class="font-bold text-amber-400">
+                  @if (unit() === 'miles') {
+                    +{{ climb.elevationGainFeet.toLocaleString() }} ft
+                  } @else {
+                    +{{ climb.elevationGainMeters.toLocaleString() }} m
+                  }
+                </span>
+              </div>
+              <div>
+                <span class="text-slate-500 uppercase block text-[8.5px]">Avg Grade</span>
+                <span
+                  class="font-bold"
+                  [ngClass]="{
+                    'text-emerald-400': climb.avgGradePercent < 5,
+                    'text-yellow-400': climb.avgGradePercent >= 5 && climb.avgGradePercent < 7,
+                    'text-orange-400': climb.avgGradePercent >= 7 && climb.avgGradePercent < 10,
+                    'text-rose-400': climb.avgGradePercent >= 10
+                  }"
+                >
+                  {{ climb.avgGradePercent }}%
+                </span>
+              </div>
+              <div>
+                <span class="text-slate-500 uppercase block text-[8.5px]">Max Grade</span>
+                <span
+                  class="font-bold"
+                  [ngClass]="{
+                    'text-yellow-400': climb.maxGradePercent < 8,
+                    'text-orange-400': climb.maxGradePercent >= 8 && climb.maxGradePercent < 13,
+                    'text-rose-400': climb.maxGradePercent >= 13
+                  }"
+                >
+                  {{ climb.maxGradePercent }}%
+                </span>
+              </div>
+            </div>
+
+            <!-- Live Progress Bar if Currently Climbing -->
+            @if (climb.status === 'climbing') {
+              <div class="space-y-1">
+                <div class="flex justify-between text-[10px] font-mono">
+                  <span class="text-amber-400 font-bold">Climbing: {{ climb.climbCompletedPercent }}% completed</span>
+                  <span class="text-slate-300 font-semibold">
+                    @if (unit() === 'miles') {
+                      {{ climb.distanceToSummitMiles.toFixed(1) }} mi to summit
+                    } @else {
+                      {{ climb.distanceToSummitKm.toFixed(1) }} km to summit
+                    }
+                    • ~{{ climb.estimatedTimeFormatted }} left
+                  </span>
+                </div>
+                <div class="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden border border-slate-800">
+                  <div class="bg-amber-400 h-full rounded-full transition-all duration-300" [style.width.%]="climb.climbCompletedPercent"></div>
+                </div>
+              </div>
+            }
+
+            <!-- Distance Status & Jump Buttons Footer -->
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs gap-2">
+              <div class="flex items-center gap-3 font-mono text-[11px]">
+                @if (climb.status === 'upcoming') {
+                  <div>
+                    <span class="text-slate-500 text-[9px] uppercase block">Starts In</span>
+                    <span class="font-semibold text-emerald-400">
+                      @if (unit() === 'miles') {
+                        +{{ climb.distanceToStartMiles.toFixed(1) }} mi
+                      } @else {
+                        +{{ climb.distanceToStartKm.toFixed(1) }} km
+                      }
+                    </span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 text-[9px] uppercase block">Summit Ahead</span>
+                    <span class="font-semibold text-white">
+                      @if (unit() === 'miles') {
+                        +{{ climb.distanceToSummitMiles.toFixed(1) }} mi
+                      } @else {
+                        +{{ climb.distanceToSummitKm.toFixed(1) }} km
+                      }
+                    </span>
+                  </div>
+                } @else if (climb.status === 'climbing') {
+                  <div>
+                    <span class="text-slate-500 text-[9px] uppercase block">Remaining Climb</span>
+                    <span class="font-semibold text-amber-400">
+                      @if (unit() === 'miles') {
+                        +{{ climb.climbRemainingFeet.toLocaleString() }} ft
+                      } @else {
+                        +{{ climb.climbRemainingMeters.toLocaleString() }} m
+                      }
+                    </span>
+                  </div>
+                } @else {
+                  <div>
+                    <span class="text-slate-500 text-[9px] uppercase block">Summit Passed</span>
+                    <span class="font-semibold text-slate-400">
+                      @if (unit() === 'miles') {
+                        {{ climb.distanceAgoMiles.toFixed(1) }} mi ago
+                      } @else {
+                        {{ climb.distanceAgoKm.toFixed(1) }} km ago
+                      }
+                    </span>
+                  </div>
+                }
+              </div>
+
+              <!-- Jump Action Buttons (Base and Summit) -->
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  (click)="jumpToMile(climb.startMile)"
+                  title="Jump rider to base of climb"
+                  class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-emerald-600/30 border border-slate-700 font-mono text-[10px] text-slate-300 hover:text-white transition cursor-pointer"
+                >
+                  Base ↳
+                </button>
+                <button
+                  type="button"
+                  (click)="jumpToMile(climb.endMile)"
+                  title="Jump rider to summit of climb"
+                  class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-emerald-600/30 border border-slate-700 font-mono text-[10px] text-slate-300 hover:text-white transition cursor-pointer"
+                >
+                  Summit ↳
+                </button>
+              </div>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+
+</div>

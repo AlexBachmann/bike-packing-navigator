@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+/* Ensure SVG text doesn't select on drag */
+svg text {
+  user-select: none;
+  -webkit-user-select: none;
+}
