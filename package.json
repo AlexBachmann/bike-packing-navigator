@@ -6,6 +6,7 @@
     "start": "ng serve --host 0.0.0.0 --port 4200 --poll 2000",
     "prebuild": "rm -rf dist",
     "build": "ng build",
+    "build:gh-pages": "rm -rf dist && ng build --configuration production --base-href /bike-packing-navigator/ && cp dist/tour-divide-27/browser/index.html dist/tour-divide-27/browser/404.html",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

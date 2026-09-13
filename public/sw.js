@@ -146,15 +146,15 @@ async function queueAnalyticsRequest(request) {
 
 // Essential static entry points to pre-cache on install
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/favicon.ico',
-  '/manifest.webmanifest',
-  '/icons/icon.svg',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/icons/apple-touch-icon.png',
-  '/data/routes.json'
+  './',
+  './index.html',
+  './favicon.ico',
+  './manifest.webmanifest',
+  './icons/icon.svg',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/apple-touch-icon.png',
+  './data/routes.json'
 ];
 
 self.addEventListener('install', (event) => {
