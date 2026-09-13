@@ -9,10 +9,10 @@
 /bazel-out
 *.tsbuildinfo
 
-/.agents
+/.agents/*
 !/.agents/skills
 !/.agents/scripts
-!/.agents/hoooks
+!/.agents/hooks.json
 
 # ==========================================
 # Dependencies & Package Managers
@@ -84,9 +84,10 @@ route/terrain/
 *.osm.pbf
 *.pbf
 
-# Google Places API persistent request caches
+# Google Places API & Overpass persistent request caches
 route/places/.cache*
 *.cache_places_api*.json
+*.cache_overpass*.json
 *.cache.json
 
 # ==========================================

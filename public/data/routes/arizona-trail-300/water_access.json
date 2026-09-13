@@ -1,0 +1,1541 @@
+[
+  {
+    "id": "water_osm_cave_canyon_5km",
+    "name": "Cave Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.37268,
+      "lon": -110.3463
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 5.6,
+    "route_mile": 3.5,
+    "address": "Cave Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.37268,-110.34630",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Cave Canyon). 30m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_bear_creek_7km",
+    "name": "Bear Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.38008,
+      "lon": -110.36306
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 7.8,
+    "route_mile": 4.8,
+    "address": "Bear Creek",
+    "google_maps_url": "https://maps.google.com/?q=31.38008,-110.36306",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Bear Creek). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_joaquin_creek_11km",
+    "name": "Joaquin Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.37651,
+      "lon": -110.39449
+    },
+    "distance_to_trail_km": 0.098,
+    "route_km": 11.3,
+    "route_mile": 7.0,
+    "address": "Joaquin Creek",
+    "google_maps_url": "https://maps.google.com/?q=31.37651,-110.39449",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Joaquin Creek). 98m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_sunnyside_canyon_16km",
+    "name": "Sunnyside Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.41007,
+      "lon": -110.4214
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 16.2,
+    "route_mile": 10.1,
+    "address": "Sunnyside Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.41007,-110.42140",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Sunnyside Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_scotia_canyon_25km",
+    "name": "Scotia Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.4421,
+      "lon": -110.41435
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 25.2,
+    "route_mile": 15.7,
+    "address": "Scotia Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.44210,-110.41435",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Scotia Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_bodie_canyon_29km",
+    "name": "Bodie Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.41526,
+      "lon": -110.43361
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 29.1,
+    "route_mile": 18.1,
+    "address": "Bodie Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.41526,-110.43361",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Bodie Canyon). 40m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_canyon_stream_34km",
+    "name": "Canyon Stream (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.41953,
+      "lon": -110.4739
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 34.0,
+    "route_mile": 21.1,
+    "address": "Canyon Stream",
+    "google_maps_url": "https://maps.google.com/?q=31.41953,-110.47390",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (Canyon Stream). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_parker_canyon_34km",
+    "name": "Parker Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.41946,
+      "lon": -110.47385
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 34.0,
+    "route_mile": 21.1,
+    "address": "Parker Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.41946,-110.47385",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Parker Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_collins_canyon_40km",
+    "name": "Collins Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.45826,
+      "lon": -110.49762
+    },
+    "distance_to_trail_km": 0.029,
+    "route_km": 40.2,
+    "route_mile": 25.0,
+    "address": "Collins Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.45826,-110.49762",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Collins Canyon). 29m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_cherry_creek_42km",
+    "name": "Cherry Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.46787,
+      "lon": -110.50742
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 42.2,
+    "route_mile": 26.2,
+    "address": "Cherry Creek",
+    "google_maps_url": "https://maps.google.com/?q=31.46787,-110.50742",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Cherry Creek). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_pauline_canyon_43km",
+    "name": "Pauline Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.47575,
+      "lon": -110.5101
+    },
+    "distance_to_trail_km": 0.183,
+    "route_km": 43.0,
+    "route_mile": 26.7,
+    "address": "Pauline Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.47575,-110.51010",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Pauline Canyon). 183m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_middle_canyon_45km",
+    "name": "Middle Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.48599,
+      "lon": -110.52742
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 45.9,
+    "route_mile": 28.5,
+    "address": "Middle Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.48599,-110.52742",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Middle Canyon). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_westert_canyon_51km",
+    "name": "Westert Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.51124,
+      "lon": -110.55737
+    },
+    "distance_to_trail_km": 0.041,
+    "route_km": 51.9,
+    "route_mile": 32.3,
+    "address": "Westert Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.51124,-110.55737",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Westert Canyon). 41m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_down_under_tank_57km",
+    "name": "Down Under Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.51914,
+      "lon": -110.59731
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 57.7,
+    "route_mile": 35.8,
+    "address": "Down Under Tank",
+    "google_maps_url": "https://maps.google.com/?q=31.51914,-110.59731",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Down Under Tank). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_redrock_canyon_60km",
+    "name": "Redrock Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.52347,
+      "lon": -110.62325
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 60.9,
+    "route_mile": 37.8,
+    "address": "Redrock Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.52347,-110.62325",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Redrock Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_gate_spring_64km",
+    "name": "Gate Spring (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.53196,
+      "lon": -110.64967
+    },
+    "distance_to_trail_km": 0.071,
+    "route_km": 64.2,
+    "route_mile": 39.9,
+    "address": "Gate Spring",
+    "google_maps_url": "https://maps.google.com/?q=31.53196,-110.64967",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Gate Spring). 71m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_lampshire_canyon_66km",
+    "name": "Lampshire Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.54199,
+      "lon": -110.65754
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 66.0,
+    "route_mile": 41.0,
+    "address": "Lampshire Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.54199,-110.65754",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Lampshire Canyon). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_corral_canyon_78km",
+    "name": "Corral Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.59601,
+      "lon": -110.7086
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 78.0,
+    "route_mile": 48.5,
+    "address": "Corral Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.59601,-110.70860",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Corral Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_sonoita_creek_80km",
+    "name": "Sonoita Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.59506,
+      "lon": -110.72327
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 80.6,
+    "route_mile": 50.1,
+    "address": "Sonoita Creek",
+    "google_maps_url": "https://maps.google.com/?q=31.59506,-110.72327",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Sonoita Creek). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_big_casa_blanca_canyon_wash_80km",
+    "name": "Big Casa Blanca Canyon Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.59597,
+      "lon": -110.72427
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 80.8,
+    "route_mile": 50.2,
+    "address": "Big Casa Blanca Canyon Wash",
+    "google_maps_url": "https://maps.google.com/?q=31.59597,-110.72427",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Big Casa Blanca Canyon Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_little_casa_blanca_canyon_wash_85km",
+    "name": "Little Casa Blanca Canyon Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.61486,
+      "lon": -110.7518
+    },
+    "distance_to_trail_km": 0.019,
+    "route_km": 85.3,
+    "route_mile": 53.0,
+    "address": "Little Casa Blanca Canyon Wash",
+    "google_maps_url": "https://maps.google.com/?q=31.61486,-110.75180",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Little Casa Blanca Canyon Wash). 19m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_wood_canyon_101km",
+    "name": "Wood Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.67025,
+      "lon": -110.76812
+    },
+    "distance_to_trail_km": 0.025,
+    "route_km": 101.3,
+    "route_mile": 63.0,
+    "address": "Wood Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.67025,-110.76812",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Wood Canyon). 25m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_bathtub_tank_102km",
+    "name": "Bathtub Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.67692,
+      "lon": -110.76635
+    },
+    "distance_to_trail_km": 0.18,
+    "route_km": 102.8,
+    "route_mile": 63.9,
+    "address": "Bathtub Tank",
+    "google_maps_url": "https://maps.google.com/?q=31.67692,-110.76635",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Bathtub Tank). 180m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_adobe_canyon_104km",
+    "name": "Adobe Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.68157,
+      "lon": -110.77111
+    },
+    "distance_to_trail_km": 0.007,
+    "route_km": 104.0,
+    "route_mile": 64.6,
+    "address": "Adobe Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.68157,-110.77111",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Adobe Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_el_pilar_tank_104km",
+    "name": "El Pilar Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.68208,
+      "lon": -110.76903
+    },
+    "distance_to_trail_km": 0.036,
+    "route_km": 104.4,
+    "route_mile": 64.8,
+    "address": "El Pilar Tank",
+    "google_maps_url": "https://maps.google.com/?q=31.68208,-110.76903",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (El Pilar Tank). 36m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_gardner_canyon_110km",
+    "name": "Gardner Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.70687,
+      "lon": -110.77545
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 110.1,
+    "route_mile": 68.4,
+    "address": "Gardner Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.70687,-110.77545",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Gardner Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_cave_creek_113km",
+    "name": "Cave Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.71881,
+      "lon": -110.75852
+    },
+    "distance_to_trail_km": 0.132,
+    "route_km": 113.4,
+    "route_mile": 70.5,
+    "address": "Cave Creek",
+    "google_maps_url": "https://maps.google.com/?q=31.71881,-110.75852",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Cave Creek). 132m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oak_tree_canyon_135km",
+    "name": "Oak Tree Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.8099,
+      "lon": -110.72492
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 135.3,
+    "route_mile": 84.0,
+    "address": "Oak Tree Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.80990,-110.72492",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Oak Tree Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_barrel_canyon_140km",
+    "name": "Barrel Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.84568,
+      "lon": -110.71725
+    },
+    "distance_to_trail_km": 0.075,
+    "route_km": 140.8,
+    "route_mile": 87.5,
+    "address": "Barrel Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.84568,-110.71725",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Barrel Canyon). 75m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_mccleary_canyon_140km",
+    "name": "McCleary Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.84583,
+      "lon": -110.71796
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 140.8,
+    "route_mile": 87.5,
+    "address": "McCleary Canyon",
+    "google_maps_url": "https://maps.google.com/?q=31.84583,-110.71796",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (McCleary Canyon). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_twin_tanks_156km",
+    "name": "Twin Tanks (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.91105,
+      "lon": -110.66878
+    },
+    "distance_to_trail_km": 0.029,
+    "route_km": 156.6,
+    "route_mile": 97.3,
+    "address": "Twin Tanks",
+    "google_maps_url": "https://maps.google.com/?q=31.91105,-110.66878",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Twin Tanks). 29m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_azt_las_cinegas_173km",
+    "name": "AZT - Las Cinegas (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.99719,
+      "lon": -110.65281
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 173.9,
+    "route_mile": 108.1,
+    "address": "AZT - Las Cinegas",
+    "google_maps_url": "https://maps.google.com/?q=31.99719,-110.65281",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (AZT - Las Cinegas). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_cienega_creek_177km",
+    "name": "Cienega Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.01846,
+      "lon": -110.64368
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 177.0,
+    "route_mile": 110.0,
+    "address": "Cienega Creek",
+    "google_maps_url": "https://maps.google.com/?q=32.01846,-110.64368",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Cienega Creek). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_aqua_verde_creek_184km",
+    "name": "Aqua Verde Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.05058,
+      "lon": -110.63079
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 184.8,
+    "route_mile": 114.8,
+    "address": "Aqua Verde Creek",
+    "google_maps_url": "https://maps.google.com/?q=32.05058,-110.63079",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Aqua Verde Creek). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_posta_quemada_canyon_186km",
+    "name": "Posta Quemada Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.05975,
+      "lon": -110.62981
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 186.6,
+    "route_mile": 116.0,
+    "address": "Posta Quemada Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.05975,-110.62981",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Posta Quemada Canyon). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_coyote_canyon_203km",
+    "name": "Coyote Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.09346,
+      "lon": -110.66379
+    },
+    "distance_to_trail_km": 0.024,
+    "route_km": 203.1,
+    "route_mile": 126.2,
+    "address": "Coyote Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.09346,-110.66379",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Coyote Canyon). 24m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_rincon_creek_211km",
+    "name": "Rincon Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.13272,
+      "lon": -110.73193
+    },
+    "distance_to_trail_km": 0.077,
+    "route_km": 211.7,
+    "route_mile": 131.5,
+    "address": "Rincon Creek",
+    "google_maps_url": "https://maps.google.com/?q=32.13272,-110.73193",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Rincon Creek). 77m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_box_canyon_213km",
+    "name": "Box Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.14414,
+      "lon": -110.73444
+    },
+    "distance_to_trail_km": 0.062,
+    "route_km": 213.2,
+    "route_mile": 132.5,
+    "address": "Box Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.14414,-110.73444",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Box Canyon). 62m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_box_canyon_wash_213km",
+    "name": "Box Canyon Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.14401,
+      "lon": -110.73414
+    },
+    "distance_to_trail_km": 0.047,
+    "route_km": 213.2,
+    "route_mile": 132.5,
+    "address": "Box Canyon Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.14401,-110.73414",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Box Canyon Wash). 47m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_javelina_wash_225km",
+    "name": "Javelina Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.23407,
+      "lon": -110.72043
+    },
+    "distance_to_trail_km": 0.065,
+    "route_km": 225.0,
+    "route_mile": 139.8,
+    "address": "Javelina Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.23407,-110.72043",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Javelina Wash). 65m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_canyon_del_satto_231km",
+    "name": "Canyon del Satto (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.25391,
+      "lon": -110.67378
+    },
+    "distance_to_trail_km": 0.042,
+    "route_km": 231.6,
+    "route_mile": 143.9,
+    "address": "Canyon del Satto",
+    "google_maps_url": "https://maps.google.com/?q=32.25391,-110.67378",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Canyon del Satto). 42m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_tanque_verde_wash_232km",
+    "name": "Tanque Verde Wash (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.25005,
+      "lon": -110.66963
+    },
+    "distance_to_trail_km": 0.237,
+    "route_km": 232.1,
+    "route_mile": 144.2,
+    "address": "Tanque Verde Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.25005,-110.66963",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Tanque Verde Wash). 237m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_chiva_tank_243km",
+    "name": "Chiva Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.27507,
+      "lon": -110.60801
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 243.0,
+    "route_mile": 151.0,
+    "address": "Chiva Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.27507,-110.60801",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Chiva Tank). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_italian_trap_tank_248km",
+    "name": "Italian Trap Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.28866,
+      "lon": -110.57399
+    },
+    "distance_to_trail_km": 0.186,
+    "route_km": 248.1,
+    "route_mile": 154.2,
+    "address": "Italian Trap Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.28866,-110.57399",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Italian Trap Tank). 186m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_tanque_verde_canyon_249km",
+    "name": "Tanque Verde Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.28063,
+      "lon": -110.57644
+    },
+    "distance_to_trail_km": 0.114,
+    "route_km": 249.2,
+    "route_mile": 154.9,
+    "address": "Tanque Verde Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.28063,-110.57644",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Tanque Verde Canyon). 114m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_white_tank_253km",
+    "name": "White Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.30853,
+      "lon": -110.57611
+    },
+    "distance_to_trail_km": 0.151,
+    "route_km": 253.9,
+    "route_mile": 157.8,
+    "address": "White Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.30853,-110.57611",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (White Tank). 151m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_youtcy_canyon_255km",
+    "name": "Youtcy Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.31672,
+      "lon": -110.58353
+    },
+    "distance_to_trail_km": 0.029,
+    "route_km": 255.4,
+    "route_mile": 158.7,
+    "address": "Youtcy Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.31672,-110.58353",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Youtcy Canyon). 29m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_the_lake_260km",
+    "name": "The Lake (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.32165,
+      "lon": -110.62178
+    },
+    "distance_to_trail_km": 0.082,
+    "route_km": 260.5,
+    "route_mile": 161.8,
+    "address": "The Lake",
+    "google_maps_url": "https://maps.google.com/?q=32.32165,-110.62178",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (The Lake). 82m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_agua_caliente_canyon_263km",
+    "name": "Agua Caliente Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.32108,
+      "lon": -110.64911
+    },
+    "distance_to_trail_km": 0.126,
+    "route_km": 263.5,
+    "route_mile": 163.8,
+    "address": "Agua Caliente Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.32108,-110.64911",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Agua Caliente Canyon). 126m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_la_milagrosa_266km",
+    "name": "La Milagrosa (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.32565,
+      "lon": -110.67162
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 266.0,
+    "route_mile": 165.3,
+    "address": "La Milagrosa",
+    "google_maps_url": "https://maps.google.com/?q=32.32565,-110.67162",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (La Milagrosa). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_molino_canyon_270km",
+    "name": "Molino Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.33693,
+      "lon": -110.69174
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 270.3,
+    "route_mile": 168.0,
+    "address": "Molino Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.33693,-110.69174",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Molino Canyon). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_soldier_canyon_274km",
+    "name": "Soldier Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.33921,
+      "lon": -110.7178
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 274.7,
+    "route_mile": 170.7,
+    "address": "Soldier Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.33921,-110.71780",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Soldier Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_bear_creek_282km",
+    "name": "Bear Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.37682,
+      "lon": -110.68751
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 282.1,
+    "route_mile": 175.3,
+    "address": "Bear Creek",
+    "google_maps_url": "https://maps.google.com/?q=32.37682,-110.68751",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Bear Creek). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_palisade_canyon_294km",
+    "name": "Palisade Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.41099,
+      "lon": -110.71562
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 294.6,
+    "route_mile": 183.1,
+    "address": "Palisade Canyon",
+    "google_maps_url": "https://maps.google.com/?q=32.41099,-110.71562",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Palisade Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_boy_scout_spring_295km",
+    "name": "Boy Scout Spring (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.41168,
+      "lon": -110.72343
+    },
+    "distance_to_trail_km": 0.088,
+    "route_km": 295.3,
+    "route_mile": 183.5,
+    "address": "Boy Scout Spring",
+    "google_maps_url": "https://maps.google.com/?q=32.41168,-110.72343",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Boy Scout Spring). 88m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_palisade_spring_295km",
+    "name": "Palisade Spring (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.41142,
+      "lon": -110.72295
+    },
+    "distance_to_trail_km": 0.049,
+    "route_km": 295.3,
+    "route_mile": 183.5,
+    "address": "Palisade Spring",
+    "google_maps_url": "https://maps.google.com/?q=32.41142,-110.72295",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Palisade Spring). 49m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_bear_wallow_spring_298km",
+    "name": "Bear Wallow Spring (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.42063,
+      "lon": -110.73175
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 298.3,
+    "route_mile": 185.3,
+    "address": "Bear Wallow Spring",
+    "google_maps_url": "https://maps.google.com/?q=32.42063,-110.73175",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Bear Wallow Spring). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_soldier_lake_tank_300km",
+    "name": "Soldier Lake Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.42606,
+      "lon": -110.7453
+    },
+    "distance_to_trail_km": 0.157,
+    "route_km": 300.1,
+    "route_mile": 186.5,
+    "address": "Soldier Lake Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.42606,-110.74530",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Soldier Lake Tank). 157m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_busch_spring_302km",
+    "name": "Busch Spring (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.43608,
+      "lon": -110.76001
+    },
+    "distance_to_trail_km": 0.129,
+    "route_km": 302.5,
+    "route_mile": 188.0,
+    "address": "Busch Spring",
+    "google_maps_url": "https://maps.google.com/?q=32.43608,-110.76001",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Busch Spring). 129m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_sabino_creek_303km",
+    "name": "Sabino Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.44291,
+      "lon": -110.75979
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 303.3,
+    "route_mile": 188.5,
+    "address": "Sabino Creek",
+    "google_maps_url": "https://maps.google.com/?q=32.44291,-110.75979",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Sabino Creek). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_east_fork_ca\u00f1ada_del_oro_309km",
+    "name": "East Fork Ca\u00f1ada del Oro (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.48045,
+      "lon": -110.76502
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 309.5,
+    "route_mile": 192.3,
+    "address": "East Fork Ca\u00f1ada del Oro",
+    "google_maps_url": "https://maps.google.com/?q=32.48045,-110.76502",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (East Fork Ca\u00f1ada del Oro). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_american_flag_tank_327km",
+    "name": "American Flag Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.57621,
+      "lon": -110.72982
+    },
+    "distance_to_trail_km": 0.151,
+    "route_km": 327.9,
+    "route_mile": 203.7,
+    "address": "American Flag Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.57621,-110.72982",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (American Flag Tank). 151m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_american_flag_wash_328km",
+    "name": "American Flag Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.57821,
+      "lon": -110.72505
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 328.6,
+    "route_mile": 204.2,
+    "address": "American Flag Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.57821,-110.72505",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (American Flag Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_cottonwood_wash_335km",
+    "name": "Cottonwood Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.61893,
+      "lon": -110.715
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 335.5,
+    "route_mile": 208.5,
+    "address": "Cottonwood Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.61893,-110.71500",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Cottonwood Wash). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_cherry_valley_wash_340km",
+    "name": "Cherry Valley Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.63187,
+      "lon": -110.73931
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 340.6,
+    "route_mile": 211.6,
+    "address": "Cherry Valley Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.63187,-110.73931",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Cherry Valley Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_tucson_wash_350km",
+    "name": "Tucson Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.68281,
+      "lon": -110.75204
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 350.4,
+    "route_mile": 217.7,
+    "address": "Tucson Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.68281,-110.75204",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Tucson Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_corner_tank_354km",
+    "name": "Corner Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.71324,
+      "lon": -110.76237
+    },
+    "distance_to_trail_km": 0.119,
+    "route_km": 354.9,
+    "route_mile": 220.5,
+    "address": "Corner Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.71324,-110.76237",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Corner Tank). 119m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_camp_grant_wash_369km",
+    "name": "Camp Grant Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.79941,
+      "lon": -110.78378
+    },
+    "distance_to_trail_km": 0.045,
+    "route_km": 369.5,
+    "route_mile": 229.6,
+    "address": "Camp Grant Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.79941,-110.78378",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Camp Grant Wash). 45m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_bloodsucker_wash_369km",
+    "name": "Bloodsucker Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.80044,
+      "lon": -110.78345
+    },
+    "distance_to_trail_km": 0.034,
+    "route_km": 369.6,
+    "route_mile": 229.7,
+    "address": "Bloodsucker Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.80044,-110.78345",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Bloodsucker Wash). 34m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_putnam_wash_374km",
+    "name": "Putnam Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.82482,
+      "lon": -110.80896
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 374.4,
+    "route_mile": 232.6,
+    "address": "Putnam Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.82482,-110.80896",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Putnam Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_dodson_wash_378km",
+    "name": "Dodson Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.83677,
+      "lon": -110.83433
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 378.2,
+    "route_mile": 235.0,
+    "address": "Dodson Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.83677,-110.83433",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Dodson Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_antelope_tank_378km",
+    "name": "Antelope Tank (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.83808,
+      "lon": -110.8334
+    },
+    "distance_to_trail_km": 0.153,
+    "route_km": 378.2,
+    "route_mile": 235.0,
+    "address": "Antelope Tank",
+    "google_maps_url": "https://maps.google.com/?q=32.83808,-110.83340",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Antelope Tank). 153m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_james_wash_385km",
+    "name": "James Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.86349,
+      "lon": -110.87159
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 385.6,
+    "route_mile": 239.6,
+    "address": "James Wash",
+    "google_maps_url": "https://maps.google.com/?q=32.86349,-110.87159",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (James Wash). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ripsey_wash_416km",
+    "name": "Ripsey Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.02647,
+      "lon": -110.98329
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 416.3,
+    "route_mile": 258.7,
+    "address": "Ripsey Wash",
+    "google_maps_url": "https://maps.google.com/?q=33.02647,-110.98329",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ripsey Wash). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_mineral_creek_432km",
+    "name": "Mineral Creek (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.10489,
+      "lon": -110.97468
+    },
+    "distance_to_trail_km": 0.007,
+    "route_km": 432.0,
+    "route_mile": 268.5,
+    "address": "Mineral Creek",
+    "google_maps_url": "https://maps.google.com/?q=33.10489,-110.97468",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Mineral Creek). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_gila_river_437km",
+    "name": "Gila River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.10604,
+      "lon": -111.00364
+    },
+    "distance_to_trail_km": 0.031,
+    "route_km": 437.5,
+    "route_mile": 271.8,
+    "address": "Gila River",
+    "google_maps_url": "https://maps.google.com/?q=33.10604,-111.00364",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Gila River). 31m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_walnut_canyon_wash_450km",
+    "name": "Walnut Canyon Wash (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.11649,
+      "lon": -111.08888
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 450.0,
+    "route_mile": 279.6,
+    "address": "Walnut Canyon Wash",
+    "google_maps_url": "https://maps.google.com/?q=33.11649,-111.08888",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Walnut Canyon Wash). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_gila_river_452km",
+    "name": "Gila River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.10784,
+      "lon": -111.1087
+    },
+    "distance_to_trail_km": 0.027,
+    "route_km": 452.6,
+    "route_mile": 281.3,
+    "address": "Gila River",
+    "google_maps_url": "https://maps.google.com/?q=33.10784,-111.10870",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Gila River). 27m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_gila_river_457km",
+    "name": "Gila River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.11179,
+      "lon": -111.14684
+    },
+    "distance_to_trail_km": 0.224,
+    "route_km": 457.3,
+    "route_mile": 284.2,
+    "address": "Gila River",
+    "google_maps_url": "https://maps.google.com/?q=33.11179,-111.14684",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Gila River). 224m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_trough_spring_479km",
+    "name": "Trough Spring (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.21995,
+      "lon": -111.14924
+    },
+    "distance_to_trail_km": 0.239,
+    "route_km": 479.3,
+    "route_mile": 297.8,
+    "address": "Trough Spring",
+    "google_maps_url": "https://maps.google.com/?q=33.21995,-111.14924",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Trough Spring). 239m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_alamo_canyon_487km",
+    "name": "Alamo Canyon (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.24938,
+      "lon": -111.16916
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 487.0,
+    "route_mile": 302.6,
+    "address": "Alamo Canyon",
+    "google_maps_url": "https://maps.google.com/?q=33.24938,-111.16916",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Alamo Canyon). Directly on trail. Natural water source (filtration/treatment required)."
+  }
+]

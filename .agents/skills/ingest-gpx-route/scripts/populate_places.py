@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 """
-populate_places.py - Extract POIs along a route using Google Places API (New).
+populate_places.py - Route-Agnostic POI Extractor using Google Places API (New).
 
-Cost-Optimized Architecture ($0.00 Out-of-Pocket):
-- Operates strictly in the 'Nearby Search (Pro)' SKU tier (5,000 FREE calls/month).
+Guarantees $0.00 Out-of-Pocket Cost:
+- Operates strictly in the 'Nearby Search (Pro)' SKU tier (5,000 FREE requests/month).
 - Field Mask strictly limited to Pro tier fields:
   places.id,places.displayName,places.primaryType,places.types,places.formattedAddress,
   places.location,places.regularOpeningHours,places.googleMapsUri,places.businessStatus
-- Persistent disk cache ensures re-runs consume 0 API requests.
+- Persistent local caching (.cache_places_api_<route>.json) ensures 0 API cost on re-runs.
 
 Usage:
-  python3 populate_places.py --track <path_to_route_track_json> --output <path_to_places_json> [--cache <path_to_cache>] [--api-key <key>] [--towns <path_to_towns>]
+  # Target by route ID:
+  python3 populate_places.py --route colorado-trail
+  python3 populate_places.py --route tour-divide-2025
+
+  # Target with explicit paths:
+  python3 populate_places.py --track path/to/route-track.json --output path/to/places.json [--cache path/to/cache.json] [--towns path/to/towns.json]
 """
 
 import argparse
@@ -19,7 +24,9 @@ import math
 import os
 import sys
 import time
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
 import requests
 
 def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -52,6 +59,7 @@ CATEGORY_MAP = {
     'bicycle_repair_service': 'bike',
     'bike_shop': 'bike',
     'laundromat': 'laundry',
+    'laundry': 'laundry',
     'drinking_water': 'water',
     'water_point': 'water',
     'spring': 'water',
@@ -61,16 +69,18 @@ CATEGORY_MAP = {
 }
 
 class PlacesCache:
-    def __init__(self, cache_file: str):
-        self.cache_file = cache_file
+    def __init__(self, cache_files: List[Path]):
+        self.cache_files = cache_files
         self.cache: Dict[str, Any] = {}
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
-                    self.cache = json.load(f)
-                print(f"[PLACES] Loaded {len(self.cache)} cached queries from {cache_file}")
-            except Exception as e:
-                print(f"[PLACES] Cache load warning: {e}", file=sys.stderr)
+        for cf in cache_files:
+            if cf.exists():
+                try:
+                    with open(cf, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        self.cache.update(data)
+                    print(f"[CACHE] Loaded {len(data)} cached entries from {cf.name}")
+                except Exception as e:
+                    print(f"[CACHE LOAD WARN] {e}", file=sys.stderr)
 
     def get(self, key: str) -> Optional[List[Dict[str, Any]]]:
         return self.cache.get(key)
@@ -79,13 +89,14 @@ class PlacesCache:
         self.cache[key] = data
 
     def save(self):
+        primary_cache = self.cache_files[0]
         try:
-            os.makedirs(os.path.dirname(os.path.abspath(self.cache_file)), exist_ok=True)
-            with open(self.cache_file, 'w', encoding='utf-8') as f:
+            primary_cache.parent.mkdir(parents=True, exist_ok=True)
+            with open(primary_cache, "w", encoding="utf-8") as f:
                 json.dump(self.cache, f, indent=2, ensure_ascii=False)
-            print(f"[PLACES] Saved {len(self.cache)} cached queries to {self.cache_file}")
+            print(f"[CACHE] Saved {len(self.cache)} cached queries to {primary_cache.name}")
         except Exception as e:
-            print(f"[PLACES] Cache save warning: {e}", file=sys.stderr)
+            print(f"[CACHE SAVE WARN] {e}", file=sys.stderr)
 
 def fetch_places_nearby(
     lat: float,
@@ -126,14 +137,14 @@ def fetch_places_nearby(
     }
 
     try:
-        time.sleep(0.08) # Respect rate limits
+        time.sleep(0.08) # Rate limiting protection
         resp = requests.post(url, headers=headers, json=body, timeout=12)
         if resp.status_code == 200:
             data = resp.json().get("places", [])
             cache.set(key, data)
             return data
         else:
-            print(f"[PLACES API WARN] {resp.status_code}: {resp.text[:120]}", file=sys.stderr)
+            print(f"[PLACES API {resp.status_code}] {resp.text[:140]}", file=sys.stderr)
             return []
     except Exception as err:
         print(f"[PLACES API ERR] {err}", file=sys.stderr)
@@ -149,7 +160,7 @@ def project_onto_track(
     best_i = 0
     n = len(track_coords)
 
-    # Step 1: Coarse grid search every 10 points
+    # Coarse pass every 10 points
     for i in range(0, n, 10):
         lat, lon = track_coords[i]
         dlat = (lat - plat) * 111.0
@@ -159,7 +170,7 @@ def project_onto_track(
             min_d = d
             best_i = i
 
-    # Step 2: Fine pass in window
+    # Fine pass
     start = max(0, best_i - 15)
     end = min(n, best_i + 16)
     best_dist_km = 999999.0
@@ -176,52 +187,174 @@ def project_onto_track(
     r_mi = r_km * 0.621371
     return round(best_dist_km, 2), round(r_km, 1), round(r_mi, 1)
 
-def run_extraction(
-    track_path: str,
-    output_path: str,
-    cache_path: str,
-    api_key: Optional[str] = None,
-    towns_path: Optional[str] = None,
-    water_path: Optional[str] = None
-):
+def main():
+    parser = argparse.ArgumentParser(description="Extract POIs for any target route using Places API (New)")
+    parser.add_argument("--route", required=False, help="Route slug ID (e.g. colorado-trail, tour-divide-2025)")
+    parser.add_argument("--track", required=False, help="Path to route-track.json")
+    parser.add_argument("--output", required=False, help="Path to output places.json")
+    parser.add_argument("--cache", required=False, help="Path to cache file")
+    parser.add_argument("--towns", required=False, help="Path to towns JSON")
+    parser.add_argument("--water", required=False, help="Path to water sources JSON (springs, caches, spigots)")
+    parser.add_argument("--backcountry-interval-km", type=float, default=12.0, help="Sampling interval in km for backcountry")
+    parser.add_argument(
+        "--api-key",
+        default=os.environ.get("GOOGLE_CLOUD_API_KEY")
+        or os.environ.get("GOOGLE_PLACES_API_KEY")
+        or os.environ.get("GOOGLE_MAPS_API_KEY")
+        or os.environ.get("GOOGLE_API_KEY"),
+        help="Google Places API Key (reads GOOGLE_CLOUD_API_KEY, GOOGLE_PLACES_API_KEY, etc.)"
+    )
+    args = parser.parse_args()
+
+    project_root = Path(__file__).resolve().parents[2]  # repository root
+
+    if args.route:
+        route_dir = project_root / "public" / "data" / "routes" / args.route
+        track_path = route_dir / "route-track.json"
+        output_path = route_dir / "places.json"
+        towns_path = route_dir / "towns.json"
+        cache_path = project_root / "route" / "places" / f".cache_places_api_{args.route}.json"
+        fallback_cache = project_root / "route" / "places" / ".cache_places_api.json"
+    else:
+        if not args.track or not args.output:
+            print("Error: Either --route or both --track and --output must be provided.", file=sys.stderr)
+            sys.exit(1)
+        track_path = Path(args.track)
+        output_path = Path(args.output)
+        towns_path = Path(args.towns) if args.towns else None
+        cache_path = Path(args.cache) if args.cache else project_root / "route" / "places" / ".cache_places_api.json"
+        fallback_cache = project_root / "route" / "places" / ".cache_places_api.json"
+
+    if not track_path.exists():
+        print(f"Error: Track file not found: {track_path}", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"[PLACES] Loading route track: {track_path}")
     with open(track_path, "r", encoding="utf-8") as f:
         track_data = json.load(f)
 
     points = track_data.get("points", [])
     if not points:
-        raise ValueError("No points found in route-track.json")
+        print(f"Error: No points found in {track_path}", file=sys.stderr)
+        sys.exit(1)
 
     track_coords = [(p[0], p[1]) for p in points]
     track_kms = [p[3] for p in points]
     total_km = track_kms[-1]
 
-    cache = PlacesCache(cache_path)
+    cache_files = [cache_path]
+    if fallback_cache.exists() and fallback_cache != cache_path:
+        cache_files.append(fallback_cache)
+    cache = PlacesCache(cache_files)
+
     places_by_id: Dict[str, Dict[str, Any]] = {}
 
-    # 1. Merge verified water sources (springs, caches, spigots, river/lake access) if provided
-    water_paths = []
-    if water_path:
-        if isinstance(water_path, list):
-            water_paths.extend(water_path)
-        elif "," in str(water_path):
-            water_paths.extend([p.strip() for p in str(water_path).split(",")])
-        else:
-            water_paths.append(str(water_path))
+    # 1. Process towns if present
+    towns: List[Dict[str, Any]] = []
+    if towns_path and towns_path.exists():
+        with open(towns_path, "r", encoding="utf-8") as f:
+            towns = json.load(f)
+        print(f"[PLACES] Processing {len(towns)} defined towns...")
 
-    for wp in water_paths:
-        if os.path.exists(wp):
-            try:
-                with open(wp, "r", encoding="utf-8") as f:
-                    water_sources = json.load(f)
-                print(f"[PLACES] Merging {len(water_sources)} water sources from {wp}...")
-                for idx, w in enumerate(water_sources):
-                    wid = w.get("id") or f"water_{idx+1}"
-                    plat = w.get("lat") if "lat" in w else w.get("location", {}).get("lat")
-                    plon = w.get("lon") if "lon" in w else w.get("location", {}).get("lon")
+        for t in towns:
+            t_loc = t.get("location") or {}
+            tlat = t.get("lat") or t_loc.get("lat")
+            tlon = t.get("lon") or t_loc.get("lon")
+            tname = t.get("name", "Town")
+            if tlat is None or tlon is None:
+                continue
+
+            dist_to_trail, r_km, r_mi = project_onto_track(tlat, tlon, track_coords, track_kms)
+            tid = t.get("id") or f"town_{tname.lower().replace(' ', '_')}"
+
+            places_by_id[tid] = {
+                "id": tid,
+                "name": tname,
+                "category": "town",
+                "type": "town",
+                "town": tname,
+                "is_in_town": True,
+                "location": {"lat": tlat, "lon": tlon},
+                "distance_to_trail_km": dist_to_trail,
+                "route_km": r_km,
+                "route_mile": r_mi,
+                "province_state": t.get("province_state") or t.get("state", ""),
+                "country": t.get("country", ""),
+                "description": t.get("description", f"Town resupply hub: {tname}.")
+            }
+
+            # Search 5 categories in town center (radius ~4.5 km)
+            s_radius = t.get("search_radius", 4500)
+            town_query_groups = [
+                ["laundromat", "gas_station", "pharmacy", "post_office"],
+                ["bicycle_store"],
+                ["supermarket", "grocery_store", "convenience_store", "campground"],
+                ["lodging", "hotel", "motel", "hostel"],
+                ["restaurant", "cafe", "bakery", "fast_food"]
+            ]
+            for group in town_query_groups:
+                raw_places = fetch_places_nearby(tlat, tlon, s_radius, group, args.api_key or "", cache)
+                for p in raw_places:
+                    pid = p.get("id")
+                    if not pid or pid in places_by_id:
+                        continue
+                    ploc = p.get("location", {})
+                    plat = ploc.get("latitude")
+                    plon = ploc.get("longitude")
                     if plat is None or plon is None:
                         continue
 
-                    dist_to_trail, r_km, r_mi = project_onto_track(plat, plon, track_coords, track_kms)
+                    pdist_trail, pr_km, pr_mi = project_onto_track(plat, plon, track_coords, track_kms)
+                    ptypes = p.get("types", [])
+                    primary = p.get("primaryType", "")
+                    cat = "services"
+                    for ct in [primary] + ptypes:
+                        if ct in CATEGORY_MAP:
+                            cat = CATEGORY_MAP[ct]
+                            break
+
+                    places_by_id[pid] = {
+                        "id": pid,
+                        "name": p.get("displayName", {}).get("text", "Place"),
+                        "category": cat,
+                        "type": cat,
+                        "town": tname,
+                        "is_in_town": True,
+                        "location": {"lat": plat, "lon": plon},
+                        "distance_to_trail_km": pdist_trail,
+                        "route_km": pr_km,
+                        "route_mile": pr_mi,
+                        "address": p.get("formattedAddress", ""),
+                        "google_maps_url": p.get("googleMapsUri", ""),
+                        "business_status": p.get("businessStatus", "OPERATIONAL")
+                    }
+
+    # 2. Process water sources (springs, caches, spigots, river/lake access) if present
+    water_paths = []
+    if args.water:
+        if isinstance(args.water, list):
+            water_paths.extend(args.water)
+        elif "," in str(args.water):
+            water_paths.extend([p.strip() for p in str(args.water).split(",")])
+        else:
+            water_paths.append(str(args.water))
+
+    for wp in water_paths:
+        w_path = Path(wp)
+        if w_path.exists():
+            try:
+                with open(w_path, "r", encoding="utf-8") as f:
+                    water_sources = json.load(f)
+                print(f"[PLACES] Processing {len(water_sources)} water sources from {w_path}...")
+                for idx, w in enumerate(water_sources):
+                    wid = w.get("id") or f"water_{idx+1}"
+                    wloc = w.get("location") or {}
+                    wlat = w.get("lat") if "lat" in w else wloc.get("lat")
+                    wlon = w.get("lon") if "lon" in w else wloc.get("lon")
+                    if wlat is None or wlon is None:
+                        continue
+
+                    wdist_trail, wr_km, wr_mi = project_onto_track(wlat, wlon, track_coords, track_kms)
                     places_by_id[wid] = {
                         "id": wid,
                         "name": w.get("name", "Water Source"),
@@ -229,45 +362,44 @@ def run_extraction(
                         "type": w.get("type", "water"),
                         "town": w.get("town", ""),
                         "is_in_town": w.get("is_in_town", False),
-                        "location": {"lat": plat, "lon": plon},
-                        "distance_to_trail_km": dist_to_trail,
-                        "route_km": r_km,
-                        "route_mile": r_mi,
+                        "location": {"lat": wlat, "lon": wlon},
+                        "distance_to_trail_km": wdist_trail,
+                        "route_km": wr_km,
+                        "route_mile": wr_mi,
                         "address": w.get("address", ""),
-                        "google_maps_url": w.get("google_maps_url") or f"https://maps.google.com/?q={plat},{plon}",
+                        "google_maps_url": w.get("google_maps_url") or f"https://maps.google.com/?q={wlat},{wlon}",
                         "business_status": w.get("business_status", "OPERATIONAL"),
                         "province_state": w.get("province_state", ""),
                         "country": w.get("country", ""),
                         "description": w.get("description", "Reliable water source or cache.")
                     }
             except Exception as e:
-                print(f"[PLACES WARNING] Failed to merge water sources from {wp}: {e}", file=sys.stderr)
+                print(f"[PLACES WARNING] Failed to load water sources from {w_path}: {e}", file=sys.stderr)
 
-    # 2. Backcountry sampling checkpoints every 12 km
-    sample_interval_km = 12.0
-    curr_target_km = 6.0
+    # 3. Backcountry sampling along the route track
+    step_km = args.backcountry_interval_km
+    curr_target_km = step_km * 0.5
     checkpoints = []
 
     while curr_target_km < total_km:
         pt = min(points, key=lambda p: abs(p[3] - curr_target_km))
         checkpoints.append(pt)
-        curr_target_km += sample_interval_km
+        curr_target_km += step_km
 
-    print(f"[PLACES] Sampling {len(checkpoints)} backcountry checkpoints along route...")
-
+    print(f"[PLACES] Sampling {len(checkpoints)} backcountry checkpoints along {total_km:.1f} km route...")
     backcountry_types = ["campground", "lodging", "grocery_store", "store", "restaurant", "gas_station"]
 
     for idx, cp in enumerate(checkpoints):
         lat, lon, ele, km, mi = cp
-        raw_places = fetch_places_nearby(lat, lon, 7000.0, backcountry_types, api_key or "", cache)
+        raw_places = fetch_places_nearby(lat, lon, 7000.0, backcountry_types, args.api_key or "", cache)
         for p in raw_places:
             pid = p.get("id")
             if not pid or pid in places_by_id:
                 continue
 
-            loc = p.get("location", {})
-            plat = loc.get("latitude")
-            plon = loc.get("longitude")
+            ploc = p.get("location", {})
+            plat = ploc.get("latitude")
+            plon = ploc.get("longitude")
             if plat is None or plon is None:
                 continue
 
@@ -278,15 +410,14 @@ def run_extraction(
                 ptypes = p.get("types", [])
                 primary = p.get("primaryType", "")
                 cat = "services"
-                for t in [primary] + ptypes:
-                    if t in CATEGORY_MAP:
-                        cat = CATEGORY_MAP[t]
+                for ct in [primary] + ptypes:
+                    if ct in CATEGORY_MAP:
+                        cat = CATEGORY_MAP[ct]
                         break
 
-                display_name = p.get("displayName", {}).get("text", "Waypoint")
                 places_by_id[pid] = {
                     "id": pid,
-                    "name": display_name,
+                    "name": p.get("displayName", {}).get("text", "Waypoint"),
                     "category": cat,
                     "type": cat,
                     "town": "",
@@ -303,34 +434,15 @@ def run_extraction(
     # Save cache
     cache.save()
 
-    # Convert to sorted list
+    # Sort results by route mile
     result_places = list(places_by_id.values())
     result_places.sort(key=lambda p: p["route_mile"])
 
-    os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(result_places, f, indent=2)
 
-    print(f"[PLACES] Extracted {len(result_places)} places saved to {output_path}")
-
-def main():
-    parser = argparse.ArgumentParser(description="Extract POIs using Google Places API (New) Pro tier")
-    parser.add_argument("--track", required=True, help="Path to input route-track.json")
-    parser.add_argument("--output", required=True, help="Path to output places.json")
-    parser.add_argument("--cache", default="route/places/.cache_places_api.json", help="Path to persistent cache file")
-    parser.add_argument("--towns", required=False, help="Optional towns JSON filepath")
-    parser.add_argument("--water", required=False, help="Optional water sources JSON filepath (springs, caches, spigots)")
-    parser.add_argument(
-        "--api-key",
-        default=os.environ.get("GOOGLE_CLOUD_API_KEY")
-        or os.environ.get("GOOGLE_PLACES_API_KEY")
-        or os.environ.get("GOOGLE_MAPS_API_KEY")
-        or os.environ.get("GOOGLE_API_KEY"),
-        help="Google Places API Key (reads GOOGLE_CLOUD_API_KEY, GOOGLE_PLACES_API_KEY, etc.)"
-    )
-    args = parser.parse_args()
-
-    run_extraction(args.track, args.output, args.cache, args.api_key, args.towns, args.water)
+    print(f"[PLACES] Extracted {len(result_places)} places saved to {output_path}!")
 
 if __name__ == "__main__":
     main()
