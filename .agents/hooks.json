@@ -1,0 +1,15 @@
+{
+  "safety-gate": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "run_command",
+        "hooks": [
+          {
+            "command": "./scripts/safety-check.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
