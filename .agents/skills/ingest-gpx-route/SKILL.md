@@ -19,7 +19,7 @@ Use this skill whenever:
 
 ## The 6 Required Route Datasets
 Every route in the application requires a dedicated directory at:
-`src/private/tour-divide-27/public/data/routes/<route-id>/`
+`public/data/routes/<route-id>/`
 
 Containing these 6 standardized JSON files:
 1. **`route-track.json`**: Dense coordinates `[lat, lon, ele, cum_km, cum_mi]`, total distance, and bounds.
@@ -30,7 +30,7 @@ Containing these 6 standardized JSON files:
 6. **`places.json`**: Filtered and categorized POIs (campsites, hotels, groceries, restaurants, bike shops, water, laundromats) projected onto the trail.
 
 And registration in the central route manifest:
-- **`src/private/tour-divide-27/public/data/routes.json`**
+- **`public/data/routes.json`**
 
 ---
 
@@ -42,14 +42,14 @@ docker compose exec -T app <command>
 ```
 
 The pipeline scripts are located in:
-`src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/`
+`.agents/skills/ingest-gpx-route/scripts/`
 
 ---
 
 ## Complete End-to-End Workflow
 
 ### Step 1: Place the GPX File & Determine Metadata
-Place or locate the user's GPX file in the workspace (e.g., `src/private/tour-divide-27/route/<filename>.gpx`).
+Place or locate the user's GPX file in the workspace (e.g., `route/<filename>.gpx`).
 Determine:
 - **Route ID Slug**: Lowercase, hyphenated (e.g., `colorado-trail`, `arizona-trail`, `timber-trail`).
 - **Full Name**: e.g., `The Colorado Trail`.
@@ -64,8 +64,8 @@ Determine:
 Execute the master orchestrator inside Docker:
 
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py \
-  --gpx "src/private/tour-divide-27/route/<filename>.gpx" \
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py \
+  --gpx "route/<filename>.gpx" \
   --id "<route-id>" \
   --name "<Full Route Name>" \
   --short-name "<Short Name>" \
@@ -87,43 +87,43 @@ If you need to customize parameters or run individual stages:
 
 #### 1. Parse GPX Track & Calculate Telemetry
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/parse_gpx.py \
-  --gpx "src/private/tour-divide-27/route/<filename>.gpx" \
-  --output "src/private/tour-divide-27/public/data/routes/<route-id>/route-track.json" \
-  --stats "src/private/tour-divide-27/public/data/routes/<route-id>/.stats.json"
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/parse_gpx.py \
+  --gpx "route/<filename>.gpx" \
+  --output "public/data/routes/<route-id>/route-track.json" \
+  --stats "public/data/routes/<route-id>/.stats.json"
 ```
 
 #### 2. Generate 18 km OSM Corridor Buffer
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/extract_osm_corridor.py \
-  --track "src/private/tour-divide-27/public/data/routes/<route-id>/route-track.json" \
-  --output-geojson "src/private/tour-divide-27/public/data/routes/<route-id>/corridor.geojson" \
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_osm_corridor.py \
+  --track "public/data/routes/<route-id>/route-track.json" \
+  --output-geojson "public/data/routes/<route-id>/corridor.geojson" \
   --buffer-km 18.0
 ```
 
 #### 3. Model Route Surfaces (Gravel, Dirt, Paved)
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/generate_surfaces.py \
-  --track "src/private/tour-divide-27/public/data/routes/<route-id>/route-track.json" \
-  --output "src/private/tour-divide-27/public/data/routes/<route-id>/surfaces.json"
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/generate_surfaces.py \
+  --track "public/data/routes/<route-id>/route-track.json" \
+  --output "public/data/routes/<route-id>/surfaces.json"
 ```
 *(Optionally pass `--osm-pbf <path_to_corridor_pbf>` if an OSM PBF extract is available).*
 
 #### 4. Extract Climbs & Mountain Passes (with OSM Geographic Enrichment)
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/extract_climbs_passes.py \
-  --track "src/private/tour-divide-27/public/data/routes/<route-id>/route-track.json" \
-  --output-climbs "src/private/tour-divide-27/public/data/routes/<route-id>/climbs.json" \
-  --output-passes "src/private/tour-divide-27/public/data/routes/<route-id>/passes.json" \
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_climbs_passes.py \
+  --track "public/data/routes/<route-id>/route-track.json" \
+  --output-climbs "public/data/routes/<route-id>/climbs.json" \
+  --output-passes "public/data/routes/<route-id>/passes.json" \
   --state "<ST>" \
   [--osm-pbf "path/to/corridor.osm.pbf"]
 ```
 
 #### 5. Generate Navigation Milestones
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/extract_milestones.py \
-  --track "src/private/tour-divide-27/public/data/routes/<route-id>/route-track.json" \
-  --output "src/private/tour-divide-27/public/data/routes/<route-id>/milestones.json" \
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_milestones.py \
+  --track "public/data/routes/<route-id>/route-track.json" \
+  --output "public/data/routes/<route-id>/milestones.json" \
   --interval-miles 35.0 \
   --start-name "<Start Location>" \
   --end-name "<End Location>"
@@ -131,23 +131,23 @@ docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ing
 
 #### 6. Extract POIs via Google Places API (New) Pro Tier ($0 Cost)
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/populate_places.py \
-  --track "src/private/tour-divide-27/public/data/routes/<route-id>/route-track.json" \
-  --output "src/private/tour-divide-27/public/data/routes/<route-id>/places.json" \
-  --cache "src/private/tour-divide-27/route/places/.cache_places_api_<route-id>.json"
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/populate_places.py \
+  --track "public/data/routes/<route-id>/route-track.json" \
+  --output "public/data/routes/<route-id>/places.json" \
+  --cache "route/places/.cache_places_api_<route-id>.json"
 ```
 
 #### 7. Register Route in Manifest (`routes.json`)
 ```bash
-docker compose exec -T app python3 src/private/tour-divide-27/.agents/skills/ingest-gpx-route/scripts/register_manifest.py \
-  --routes-json "src/private/tour-divide-27/public/data/routes.json" \
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/register_manifest.py \
+  --routes-json "public/data/routes.json" \
   --id "<route-id>" \
   --name "<Full Route Name>" \
   --short-name "<Short Name>" \
   --badge "<BADGE>" \
   --start-location "<Start Location>" \
   --end-location "<End Location>" \
-  --stats "src/private/tour-divide-27/public/data/routes/<route-id>/.stats.json" \
+  --stats "public/data/routes/<route-id>/.stats.json" \
   --description "<Description>"
 ```
 
@@ -187,13 +187,13 @@ Once the data files are generated and the route is registered in `routes.json`:
 
 1. **Run Unit Tests**:
    ```bash
-   docker compose exec -T app bash -c "cd src/private/tour-divide-27 && npm test -- --watch=false"
+   docker compose exec -T app npm test
    ```
    All test suites must pass (100% green).
 
 2. **Verify Production Build**:
    ```bash
-   docker compose exec -T app bash -c "cd src/private/tour-divide-27 && npm run build"
+   docker compose exec -T app npm run build
    ```
    Must compile with 0 errors.
 

@@ -126,7 +126,7 @@ def main():
     parser.add_argument("--dem-only", action="store_true", help="Only download DEM COGs (skip hillshade/contours)")
     args = parser.parse_args()
 
-    project_root = Path(__file__).resolve().parents[2] # src/private/tour-divide-27
+    project_root = Path(__file__).resolve().parents[2]  # repository root
 
     if args.route:
         corridor_path = project_root / "public" / "data" / "routes" / args.route / "corridor.geojson"

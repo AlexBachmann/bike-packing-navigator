@@ -18,7 +18,10 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(function() {});
+      var swUrl = new URL('sw.js', document.baseURI).href;
+      navigator.serviceWorker.register(swUrl, { scope: document.baseURI }).catch(function(err) {
+        console.warn('[SW] Registration failed:', err);
+      });
     }
   </script>
   <!-- Google tag (gtag.js) with Maximum User Anonymization -->

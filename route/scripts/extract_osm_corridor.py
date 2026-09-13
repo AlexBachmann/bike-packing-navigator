@@ -91,7 +91,7 @@ def main():
     parser.add_argument("--output-pbf", required=False, help="Optional destination clipped PBF")
     args = parser.parse_args()
 
-    project_root = Path(__file__).resolve().parents[2] # src/private/tour-divide-27
+    project_root = Path(__file__).resolve().parents[2]  # repository root
 
     route_name = args.route or "Route"
     coords: List[Tuple[float, float]] = []

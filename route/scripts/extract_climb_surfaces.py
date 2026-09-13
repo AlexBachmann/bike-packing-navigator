@@ -258,7 +258,7 @@ def main():
     parser.add_argument("--update-ts", action="store_true", help="Also write updates to src/app/data/climbs.data.ts if available")
     args = parser.parse_args()
 
-    project_root = Path(__file__).resolve().parents[2]  # src/private/tour-divide-27
+    project_root = Path(__file__).resolve().parents[2]  # repository root
 
     if args.route:
         route_dir = project_root / "public" / "data" / "routes" / args.route

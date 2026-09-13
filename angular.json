@@ -9,7 +9,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "tour-divide-27": {
+    "bike-packing-navigator": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -74,10 +74,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tour-divide-27:build:production"
+              "buildTarget": "bike-packing-navigator:build:production"
             },
             "development": {
-              "buildTarget": "tour-divide-27:build:development"
+              "buildTarget": "bike-packing-navigator:build:development"
             }
           },
           "defaultConfiguration": "development"

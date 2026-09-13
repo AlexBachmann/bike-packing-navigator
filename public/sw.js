@@ -1,5 +1,5 @@
 // Service Worker for Full Offline PWA Support & Map Tile Caching
-const SHELL_CACHE_NAME = 'bikepack-app-shell-v1';
+const SHELL_CACHE_NAME = 'bikepack-app-shell-v2';
 const TILE_CACHE_NAME = 'bikepack-map-tiles-v1';
 const ANALYTICS_DB_NAME = 'bikepack-offline-analytics';
 const ANALYTICS_STORE_NAME = 'queued-requests';
@@ -151,8 +151,10 @@ const PRECACHE_URLS = [
   './favicon.ico',
   './manifest.webmanifest',
   './icons/icon.svg',
+  './icons/icon-maskable.svg',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png',
   './data/routes.json'
 ];
@@ -296,30 +298,33 @@ self.addEventListener('fetch', (event) => {
     event.request.headers.get('accept')?.includes('text/html');
 
   if (isNavigate) {
+    const scopeUrl = self.registration.scope;
+    const indexUrl = new URL('index.html', self.registration.scope).href;
+
     event.respondWith(
       fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.ok) {
             const copy = networkResponse.clone();
             caches.open(SHELL_CACHE_NAME).then((cache) => {
-              cache.put('/index.html', copy);
+              cache.put(indexUrl, copy);
             }).catch(() => {});
           }
           return networkResponse;
         })
         .catch(async () => {
-          // Network failed (offline!). Try cached match for request URL, then fallback to /index.html or /
+          // Network failed (offline!). Try cached match for request URL, then fallback to index.html or scope
           const cache = await caches.open(SHELL_CACHE_NAME);
           const cached =
             (await cache.match(event.request)) ||
             (await cache.match(event.request, { ignoreSearch: true })) ||
-            (await cache.match('/index.html')) ||
-            (await cache.match('/'));
+            (await cache.match(indexUrl)) ||
+            (await cache.match(scopeUrl));
           if (cached) {
             return cached;
           }
           return new Response(
-            '<!doctype html><html><head><meta charset="utf-8"><title>Offline</title></head><body><h1>Bikepack Navigator</h1><p>Please connect to internet once to download route data.</p></body></html>',
+            '<!doctype html><html><head><meta charset="utf-8"><title>Offline</title></head><body><h1>Bike Packing Navigator</h1><p>Please connect to internet once to download route data.</p></body></html>',
             { headers: { 'Content-Type': 'text/html' }, status: 200 }
           );
         })

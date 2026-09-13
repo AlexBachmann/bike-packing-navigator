@@ -1,10 +1,10 @@
 {
-  "id": "/",
-  "name": "Bikepack Navigator",
+  "id": "./",
+  "name": "Bike Packing Navigator",
   "short_name": "Bikepack",
   "description": "Offline-first GPS trail companion, elevation profile, and resupply navigator for endurance bikepackers.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "display_override": [
     "standalone",
@@ -21,41 +21,47 @@
   ],
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-maskable-512.png",
+      "src": "icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/icons/icon.svg",
+      "src": "icons/icon.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
     {
       "name": "Tour Divide 2025",
       "short_name": "Divide",
-      "url": "/?route=tour-divide-2025",
+      "url": "./?route=tour-divide-2025",
       "description": "Open Tour Divide 2025 trail navigation"
     },
     {
       "name": "The Colorado Trail",
       "short_name": "CO Trail",
-      "url": "/?route=colorado-trail",
+      "url": "./?route=colorado-trail",
       "description": "Open The Colorado Trail navigation"
     }
   ]

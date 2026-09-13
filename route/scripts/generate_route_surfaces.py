@@ -179,7 +179,7 @@ def main():
     parser.add_argument("--osm-pbf", required=False, help="Path to corridor OSM PBF extract")
     args = parser.parse_args()
 
-    project_root = Path(__file__).resolve().parents[2] # src/private/tour-divide-27
+    project_root = Path(__file__).resolve().parents[2]  # repository root
 
     # Resolve paths depending on target route or explicit arguments
     if args.route:

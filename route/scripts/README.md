@@ -15,8 +15,8 @@ Enriches routes with town POIs and backcountry resupply points using Google Plac
 - **Usage**:
   ```bash
   # Run for any route
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/populate_places.py --route colorado-trail
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/populate_places.py --route tour-divide-2025
+  docker compose exec -T app python3 route/scripts/populate_places.py --route colorado-trail
+  docker compose exec -T app python3 route/scripts/populate_places.py --route tour-divide-2025
   ```
 
 ### 2. `find_places.py`
@@ -25,10 +25,10 @@ Interactive CLI utility to search POIs around specific GPS coordinates or along 
 - **Usage**:
   ```bash
   # Search around mile 100 on Colorado Trail:
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/find_places.py --route colorado-trail --mile 100 --mock
+  docker compose exec -T app python3 route/scripts/find_places.py --route colorado-trail --mile 100 --mock
 
   # Search at route start with live Google API:
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/find_places.py --route tour-divide-2025 --categories bike_shop,grocery
+  docker compose exec -T app python3 route/scripts/find_places.py --route tour-divide-2025 --categories bike_shop,grocery
   ```
 
 ### 3. `generate_route_surfaces.py`
@@ -36,8 +36,8 @@ Generates contiguous OSM surface intervals (`[startKm, endKm, roadClass, surface
 - Reads `route-track.json`, scans OSM ways via `osmium` if a corridor PBF is present, and falls back to an adaptive backcountry surface model.
 - **Usage**:
   ```bash
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/generate_route_surfaces.py --route colorado-trail
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/generate_route_surfaces.py --route tour-divide-2025
+  docker compose exec -T app python3 route/scripts/generate_route_surfaces.py --route colorado-trail
+  docker compose exec -T app python3 route/scripts/generate_route_surfaces.py --route tour-divide-2025
   ```
 
 ### 4. `extract_climb_surfaces.py`
@@ -45,23 +45,23 @@ Enriches elevation climb intervals with OSM highway classification, surface mate
 - Supports both JSON (`climbs.json`) and TypeScript (`climbs.data.ts`) models.
 - **Usage**:
   ```bash
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/extract_climb_surfaces.py --route colorado-trail
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/extract_climb_surfaces.py --route tour-divide-2025
+  docker compose exec -T app python3 route/scripts/extract_climb_surfaces.py --route colorado-trail
+  docker compose exec -T app python3 route/scripts/extract_climb_surfaces.py --route tour-divide-2025
   ```
 
 ### 5. `extract_osm_corridor.py`
 Generates an 18 km buffer polygon GeoJSON around any route track (GPX or JSON) and optionally clips raw OpenStreetMap PBF files using `osmium extract`.
 - **Usage**:
   ```bash
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/extract_osm_corridor.py --route colorado-trail
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/extract_osm_corridor.py --route tour-divide-2025
+  docker compose exec -T app python3 route/scripts/extract_osm_corridor.py --route colorado-trail
+  docker compose exec -T app python3 route/scripts/extract_osm_corridor.py --route tour-divide-2025
   ```
 
 ### 6. `download_terrain_dem.py`
 Downloads Copernicus 30m Digital Elevation Model (GLO-30) tiles from AWS Open Data for all 1x1 degree bounding boxes intersecting any route corridor, generating hillshades and 100m vector contours.
 - **Usage**:
   ```bash
-  docker compose exec -T app python3 src/private/tour-divide-27/route/scripts/download_terrain_dem.py --route colorado-trail --dem-only
+  docker compose exec -T app python3 route/scripts/download_terrain_dem.py --route colorado-trail --dem-only
   ```
 
 ---

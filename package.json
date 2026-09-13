@@ -1,12 +1,12 @@
 {
-  "name": "tour-divide-27",
+  "name": "bike-packing-navigator",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 4200 --poll 2000",
     "prebuild": "rm -rf dist",
     "build": "ng build",
-    "build:gh-pages": "rm -rf dist && ng build --configuration production --base-href /bike-packing-navigator/ && cp dist/tour-divide-27/browser/index.html dist/tour-divide-27/browser/404.html",
+    "build:gh-pages": "rm -rf dist && ng build --configuration production --base-href /bike-packing-navigator/ && cp dist/bike-packing-navigator/browser/index.html dist/bike-packing-navigator/browser/404.html",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

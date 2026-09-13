@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = SCRIPT_DIR.parents[3] # src/private/tour-divide-27
+PROJECT_ROOT = SCRIPT_DIR.parents[3]  # repository root
 DATA_DIR = PROJECT_ROOT / "public" / "data"
 ROUTES_JSON = DATA_DIR / "routes.json"
 
