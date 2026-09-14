@@ -57,7 +57,9 @@ export class DeadReckoningService implements OnDestroy {
 
     let calculatedSpeedKph = 0;
 
-    if (prev) {
+    if (typeof fallbackSpeedKph === 'number' && fallbackSpeedKph >= MIN_MOVING_SPEED_KPH) {
+      calculatedSpeedKph = fallbackSpeedKph;
+    } else if (prev) {
       const distMeters = haversineMeters(prev.latitude, prev.longitude, fix.latitude, fix.longitude);
       const deltaSec = Math.max(0.001, (fix.timestamp - prev.timestamp) / 1000);
 
@@ -66,8 +68,6 @@ export class DeadReckoningService implements OnDestroy {
       } else {
         calculatedSpeedKph = 0;
       }
-    } else if (typeof fallbackSpeedKph === 'number' && fallbackSpeedKph >= MIN_MOVING_SPEED_KPH) {
-      calculatedSpeedKph = fallbackSpeedKph;
     }
 
     if (calculatedSpeedKph < MIN_MOVING_SPEED_KPH) {

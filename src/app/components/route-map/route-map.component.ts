@@ -867,7 +867,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
         closeButton: false
       }).setHTML(popupContent);
 
-      this.riderMarker = new maplibregl.Marker({ element: el, anchor: 'center' })
+      this.riderMarker = new maplibregl.Marker({ element: el, anchor: 'center', subpixelPositioning: true })
         .setLngLat(lngLat)
         .setPopup(popup)
         .addTo(this.map);

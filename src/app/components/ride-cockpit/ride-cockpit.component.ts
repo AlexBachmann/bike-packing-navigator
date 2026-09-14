@@ -477,6 +477,10 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
             ? await getVectorStyleSpec(styleType, routeId, this.pmtilesStorage, true)
             : getRasterBaselineStyle(styleType);
           if (this.map && !this.isDestroyed) {
+            if (this.riderMarker) {
+              this.riderMarker.remove();
+              this.riderMarker = null;
+            }
             this.map.setStyle(newStyle);
             this.map.once('styledata', () => {
               this.drawRoute();
@@ -607,6 +611,10 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       } else if (this.map && routeId) {
         const vectorStyle = await getVectorStyleSpec(this.settings.mapStyle(), routeId, this.pmtilesStorage, true);
         if (this.map && !this.isDestroyed) {
+          if (this.riderMarker) {
+            this.riderMarker.remove();
+            this.riderMarker = null;
+          }
           this.map.setStyle(vectorStyle);
           this.map.once('styledata', () => {
             this.drawRoute();
@@ -776,10 +784,10 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     const [lat, lon] = finalCoords;
-    this.updateRiderMarker(lat, lon, pos.heading);
     if (this.autoFollow()) {
       this.easeCameraToPosition(lat, lon, pos.heading, pos.speedKph);
     }
+    this.updateRiderMarker(lat, lon, pos.heading);
   }
 
   private easeCameraToPosition(lat: number, lon: number, heading: number, speedKph: number): void {
@@ -936,7 +944,9 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.riderMarker = new maplibregl.Marker({
         element: el,
         anchor: 'center',
-        rotationAlignment: 'map'
+        rotationAlignment: 'map',
+        pitchAlignment: 'map',
+        subpixelPositioning: true
       })
         .setLngLat(lngLat)
         .setRotation(normalizedHeading)
