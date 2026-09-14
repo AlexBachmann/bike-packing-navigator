@@ -149,14 +149,36 @@ def main():
     parser.add_argument("--gpx", required=True, help="Input GPX filepath")
     parser.add_argument("--output", required=True, help="Output route-track.json filepath")
     parser.add_argument("--stats", required=False, help="Optional output telemetry stats JSON filepath")
+    parser.add_argument("--elevation-gain-m", type=float, required=False, help="Override calibrated elevation gain in meters")
+    parser.add_argument("--smooth-window", type=int, default=0, help="Window size for moving average elevation smoothing")
     args = parser.parse_args()
 
     points, stats = parse_gpx(args.gpx)
+
+    if args.elevation_gain_m:
+        stats["elevation_gain_m"] = round(args.elevation_gain_m)
+        stats["elevation_gain_ft"] = round(args.elevation_gain_m * 3.28084)
+    elif args.smooth_window and args.smooth_window > 1:
+        eles = [p[2] for p in points]
+        half = args.smooth_window // 2
+        smoothed_gain = 0.0
+        smoothed_eles = []
+        for i in range(len(eles)):
+            st = max(0, i - half)
+            en = min(len(eles), i + half + 1)
+            smoothed_eles.append(sum(eles[st:en]) / (en - st))
+        for i in range(1, len(smoothed_eles)):
+            diff = smoothed_eles[i] - smoothed_eles[i - 1]
+            if diff > 0.0:
+                smoothed_gain += diff
+        stats["elevation_gain_m"] = round(smoothed_gain)
+        stats["elevation_gain_ft"] = round(smoothed_gain * 3.28084)
 
     os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
     payload = {
         "total_km": stats["total_km"],
         "total_miles": stats["total_miles"],
+        "bounds": stats["bounds"],
         "points": points
     }
 

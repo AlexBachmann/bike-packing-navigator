@@ -1,0 +1,227 @@
+[
+  {
+    "id": "bothy_ben_alder",
+    "name": "Ben Alder Cottage Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Corrour / Rannoch",
+    "is_in_town": false,
+    "location": {
+      "lat": 56.7865,
+      "lon": -4.4715
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Historic Mountain Bothies Association stone shelter beneath Ben Alder on the remote shores of Loch Ericht. Fireplace and sleeping platforms."
+  },
+  {
+    "id": "water_loch_rannoch",
+    "name": "Loch Rannoch Water Access",
+    "category": "water",
+    "type": "water",
+    "town": "Kinloch Rannoch",
+    "is_in_town": false,
+    "location": {
+      "lat": 56.6895,
+      "lon": -4.3120
+    },
+    "province_state": "Perthshire",
+    "country": "UK",
+    "description": "Clear freshwater shoreline access along Loch Rannoch. Requires standard backcountry water filtration."
+  },
+  {
+    "id": "bothy_blackburn",
+    "name": "Blackburn Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Fort Augustus",
+    "is_in_town": false,
+    "location": {
+      "lat": 57.0988,
+      "lon": -4.6860
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "MBA shelter located along the northern descent of Corrieyairack Pass towards Fort Augustus."
+  },
+  {
+    "id": "water_river_oykel",
+    "name": "River Oykel Water Point",
+    "category": "water",
+    "type": "water",
+    "town": "Oykel Bridge",
+    "is_in_town": false,
+    "location": {
+      "lat": 57.9725,
+      "lon": -4.7170
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Perennial freshwater gravel bar access along River Oykel. Water filtration recommended."
+  },
+  {
+    "id": "water_loch_stack",
+    "name": "Loch Stack Shoreline Water",
+    "category": "water",
+    "type": "water",
+    "town": "Rhiconich",
+    "is_in_town": false,
+    "location": {
+      "lat": 58.3310,
+      "lon": -4.9650
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Clean mountain runoff lake at the base of Ben Stack. High-yield filtration source."
+  },
+  {
+    "id": "bothy_glendhu",
+    "name": "Glendhu Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Kylesku",
+    "is_in_town": false,
+    "location": {
+      "lat": 58.2604,
+      "lon": -4.9575
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Two-storey MBA bothy nestled at the head of sea loch Loch Glendhu beneath dramatic cliffs. Excellent emergency storm shelter."
+  },
+  {
+    "id": "bothy_glencoul",
+    "name": "Glencoul Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Kylesku",
+    "is_in_town": false,
+    "location": {
+      "lat": 58.2375,
+      "lon": -4.9818
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Classic stone MBA bothy on the tidal shore of Loch Glencoul opposite Britain's highest waterfall, Eas a' Chual Aluinn."
+  },
+  {
+    "id": "bothy_suileag",
+    "name": "Suileag Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Lochinver",
+    "is_in_town": false,
+    "location": {
+      "lat": 58.1362,
+      "lon": -5.1325
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Spacious MBA stone cottage in Glencanisp Forest under the sandstone monolith of Suilven. Running burn alongside for water."
+  },
+  {
+    "id": "water_loch_assynt",
+    "name": "Loch Assynt Water Access",
+    "category": "water",
+    "type": "water",
+    "town": "Lochinver",
+    "is_in_town": false,
+    "location": {
+      "lat": 58.1720,
+      "lon": -5.0950
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Pristine loch water access near Ardvreck Castle ruins. Filter before consumption."
+  },
+  {
+    "id": "bothy_shenavall",
+    "name": "Shenavall Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Dundonnell",
+    "is_in_town": false,
+    "location": {
+      "lat": 57.7766,
+      "lon": -5.2570
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "World-famous MBA whitewashed bothy in the heart of the Fisherfield Wilderness between An Teallach and Beinn Dearg Mor. Adjacent mountain river for water."
+  },
+  {
+    "id": "water_loch_na_sealga",
+    "name": "Loch na Sealga Water Access",
+    "category": "water",
+    "type": "water",
+    "town": "Dundonnell",
+    "is_in_town": false,
+    "location": {
+      "lat": 57.7850,
+      "lon": -5.2800
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Fisherfield wilderness water source flowing from high Torridonian sandstone peaks. Reliable flow year-round."
+  },
+  {
+    "id": "water_loch_maree",
+    "name": "Loch Maree Water Access",
+    "category": "water",
+    "type": "water",
+    "town": "Poolewe / Kinlochewe",
+    "is_in_town": false,
+    "location": {
+      "lat": 57.6750,
+      "lon": -5.4500
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Deep freshwater mountain loch along Beinn Eighe National Nature Reserve. Safe to filter."
+  },
+  {
+    "id": "bothy_camban",
+    "name": "Camban Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Shiel Bridge / Glen Affric",
+    "is_in_town": false,
+    "location": {
+      "lat": 57.2272,
+      "lon": -5.2917
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Remote National Trust for Scotland / MBA stone shelter at the watershed between Glen Affric and Kintail."
+  },
+  {
+    "id": "bothy_lairig_leacach",
+    "name": "Lairig Leacach Bothy (MBA)",
+    "category": "campground",
+    "type": "campground",
+    "town": "Fort William / Spean Bridge",
+    "is_in_town": false,
+    "location": {
+      "lat": 56.7972,
+      "lon": -4.8475
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "MBA mountain shelter high in the pass between the Grey Corries and Stob Ban. Emergency shelter and mountain burn."
+  },
+  {
+    "id": "water_river_fillan",
+    "name": "River Fillan Water Access",
+    "category": "water",
+    "type": "water",
+    "town": "Tyndrum",
+    "is_in_town": false,
+    "location": {
+      "lat": 56.4320,
+      "lon": -4.6850
+    },
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Gentle river access near St Fillan's Priory ruins approaching Tyndrum finish."
+  }
+]

@@ -41,7 +41,9 @@ def register_route(
     end_loc: str,
     stats_path: str,
     description: str,
-    checkpoints_str: str = ""
+    checkpoints_str: str = "",
+    highest_point: str = "",
+    iconic_pass: str = ""
 ):
     if not os.path.exists(routes_json_path):
         manifest_data = {"version": 1, "routes": []}
@@ -70,8 +72,8 @@ def register_route(
     if not checkpoints:
         checkpoints = [start_loc, "Midway Summit", end_loc]
 
-    highest_name = f"Summit Peak ({stats['highest_elevation_ft']:,} ft)"
-    highest_pass = highest_name
+    highest_name = highest_point or f"Summit Peak ({stats['highest_elevation_ft']:,} ft)"
+    highest_pass = iconic_pass or highest_name
 
     route_entry = {
         "id": route_id,
@@ -132,6 +134,8 @@ def main():
     parser.add_argument("--stats", required=True, help="Path to telemetry stats JSON")
     parser.add_argument("--description", required=True, help="Route description summary")
     parser.add_argument("--checkpoints", default="", help="Comma-separated iconic checkpoints")
+    parser.add_argument("--highest-point", default="", help="Custom highest point name")
+    parser.add_argument("--iconic-pass", default="", help="Custom iconic pass name")
     args = parser.parse_args()
 
     register_route(
@@ -144,7 +148,9 @@ def main():
         args.end_location,
         args.stats,
         args.description,
-        args.checkpoints
+        args.checkpoints,
+        args.highest_point,
+        args.iconic_pass
     )
 
 if __name__ == "__main__":

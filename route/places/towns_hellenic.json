@@ -1,0 +1,137 @@
+[
+  {
+    "id": "town_agios_athanasios",
+    "name": "Agios Athanasios",
+    "route_mile": 0.0,
+    "route_km": 0.0,
+    "elevation": 1211,
+    "location": {
+      "lat": 40.83975,
+      "lon": 21.76728
+    },
+    "province_state": "Central Macedonia",
+    "country": "Greece",
+    "description": "Start of the Hellenic Mountain Race in mountain village near Mount Voras.",
+    "search_radius": 3500
+  },
+  {
+    "id": "town_kastoria_major_town_resupply",
+    "name": "Kastoria",
+    "route_mile": 86.1,
+    "route_km": 138.6,
+    "elevation": 0,
+    "location": {
+      "lat": 40.52024,
+      "lon": 21.2629
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Lakeside city with supermarkets, bike shops, restaurants, pharmacies & hotels.",
+    "search_radius": 5000
+  },
+  {
+    "id": "town_cp1_mount_smolikas_refuge",
+    "name": "CP1",
+    "route_mile": 147.6,
+    "route_km": 237.5,
+    "elevation": 0,
+    "location": {
+      "lat": 40.03992,
+      "lon": 20.90986
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Official Checkpoint 1 at Mount Smolikas mountain refuge.",
+    "search_radius": 3000
+  },
+  {
+    "id": "town_konitsa_area_resupply",
+    "name": "Konitsa Area Resupply",
+    "route_mile": 166.6,
+    "route_km": 268.1,
+    "elevation": 0,
+    "location": {
+      "lat": 40.04592,
+      "lon": 20.74506
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Shops, restaurants, and hotels for proper resupply.",
+    "search_radius": 3000
+  },
+  {
+    "id": "town_metsovo_full_resupply_hub",
+    "name": "Metsovo",
+    "route_mile": 252.3,
+    "route_km": 406.1,
+    "elevation": 0,
+    "location": {
+      "lat": 39.77061,
+      "lon": 21.18291
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Famous mountain town with supermarkets, bakeries, pharmacies, hotels & restaurants.",
+    "search_radius": 3000
+  },
+  {
+    "id": "town_cp2_melissourgi_refuge",
+    "name": "CP2",
+    "route_mile": 300.8,
+    "route_km": 484.2,
+    "elevation": 0,
+    "location": {
+      "lat": 39.50517,
+      "lon": 21.14152
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Official Checkpoint 2 at Melissourgi mountain refuge in the Tzoumerka range.",
+    "search_radius": 3000
+  },
+  {
+    "id": "town_raptopoulo_resupply_hub_agrafa",
+    "name": "Raptopoulo",
+    "route_mile": 381.8,
+    "route_km": 614.4,
+    "elevation": 0,
+    "location": {
+      "lat": 39.14876,
+      "lon": 21.48098
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Vital resupply in the remote Agrafa mountains: shops, bakery & tavernas.",
+    "search_radius": 3000
+  },
+  {
+    "id": "town_karpenisi_major_resupply_hub",
+    "name": "Karpenisi",
+    "route_mile": 452.2,
+    "route_km": 727.8,
+    "elevation": 0,
+    "location": {
+      "lat": 38.91615,
+      "lon": 21.79072
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Capital of Evrytania with supermarkets, bike repairs, pharmacies, restaurants & hotels.",
+    "search_radius": 5000
+  },
+  {
+    "id": "town_nafpaktos_finish_line",
+    "name": "Nafpaktos",
+    "route_mile": 572.5,
+    "route_km": 921.3,
+    "elevation": 0,
+    "location": {
+      "lat": 38.39136,
+      "lon": 21.83804
+    },
+    "province_state": "Greece",
+    "country": "Greece",
+    "description": "Official Finish Line at the Venetian harbor in Nafpaktos on the Corinthian Gulf.",
+    "search_radius": 5000
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "name": "Agios Athanasios (Start)",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 1211,
+    "state": ""
+  },
+  {
+    "name": "Checkpoint Mile 45",
+    "mile": 45.0,
+    "km": 72.4,
+    "elevation": 724,
+    "state": ""
+  },
+  {
+    "name": "Kastoria",
+    "mile": 86.1,
+    "km": 138.6,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "CP1: Mount Smolikas",
+    "mile": 147.6,
+    "km": 237.5,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "Konitsa Area Resupply",
+    "mile": 166.6,
+    "km": 268.1,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "Checkpoint Mile 225",
+    "mile": 225.0,
+    "km": 362.1,
+    "elevation": 982,
+    "state": ""
+  },
+  {
+    "name": "Metsovo",
+    "mile": 252.3,
+    "km": 406.1,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "CP2: Melissourgi (Tzoumerka)",
+    "mile": 300.8,
+    "km": 484.2,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "Checkpoint Mile 360",
+    "mile": 360.0,
+    "km": 579.4,
+    "elevation": 939,
+    "state": ""
+  },
+  {
+    "name": "Raptopoulo",
+    "mile": 381.8,
+    "km": 614.4,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "Checkpoint Mile 405",
+    "mile": 405.0,
+    "km": 651.8,
+    "elevation": 310,
+    "state": ""
+  },
+  {
+    "name": "Karpenisi",
+    "mile": 452.2,
+    "km": 727.8,
+    "elevation": 0,
+    "state": "Greece"
+  },
+  {
+    "name": "Checkpoint Mile 495",
+    "mile": 495.0,
+    "km": 796.6,
+    "elevation": 1126,
+    "state": ""
+  },
+  {
+    "name": "Checkpoint Mile 540",
+    "mile": 540.0,
+    "km": 869.0,
+    "elevation": 363,
+    "state": ""
+  },
+  {
+    "name": "Nafpaktos",
+    "mile": 572.5,
+    "km": 921.3,
+    "elevation": 0,
+    "state": "Greece"
+  }
+]

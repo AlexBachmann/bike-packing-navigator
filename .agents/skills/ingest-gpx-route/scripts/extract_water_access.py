@@ -194,52 +194,69 @@ def throttle_water_access_points(
     segment_km: float = 5.0
 ) -> List[Dict[str, Any]]:
     """
-    Ensures a maximum of 1 water waypoint per 5 km segment when following along a river or lake.
-    Picks the access point closest to the trail within each 5 km segment.
+    Ensures a maximum of 1 water waypoint per 5 km segment along the route.
+    Picks the highest priority and closest access point within each 5 km segment.
     """
     if not candidates:
         return []
 
-    # Group candidates by feature name (e.g., "Gila River", "Parker Canyon Lake")
-    by_feature: Dict[str, List[Dict[str, Any]]] = {}
-    for c in candidates:
-        fname = c.get("feature_name", "Water Source").strip()
-        if fname not in by_feature:
-            by_feature[fname] = []
-        by_feature[fname].append(c)
+    # 1. Deduplicate candidates that are at the exact/near same location (< 200m along route)
+    sorted_candidates = sorted(candidates, key=lambda c: (c["route_km"], c["distance_to_trail_km"]))
+    deduped: List[Dict[str, Any]] = []
+    for c in sorted_candidates:
+        is_dup = False
+        for existing in deduped:
+            if abs(c["route_km"] - existing["route_km"]) < 0.2 and abs(c["distance_to_trail_km"] - existing["distance_to_trail_km"]) < 0.01:
+                is_dup = True
+                break
+        if not is_dup:
+            deduped.append(c)
 
-    selected: List[Dict[str, Any]] = []
+    # 2. Priority scoring function:
+    # Potable Drinking Water (0) > Natural Springs (1) > River/Creek/Lake access (2)
+    def priority_score(pt: Dict[str, Any]) -> Tuple[int, float]:
+        cls = pt.get("classification", "")
+        if cls == "Drinking Water":
+            type_rank = 0
+        elif cls == "Spring":
+            type_rank = 1
+        else:
+            type_rank = 2
+        return (type_rank, pt.get("distance_to_trail_km", 999.0))
 
-    for fname, pts in by_feature.items():
-        # Bucket by segment_km
-        buckets: Dict[int, List[Dict[str, Any]]] = {}
-        for p in pts:
-            bucket_idx = int(math.floor(p["route_km"] / segment_km))
-            if bucket_idx not in buckets:
-                buckets[bucket_idx] = []
-            buckets[bucket_idx].append(p)
+    # 3. Bucket all candidates strictly by segment_km (e.g., 5.0 km intervals)
+    buckets: Dict[int, List[Dict[str, Any]]] = {}
+    for p in deduped:
+        bucket_idx = int(math.floor(p["route_km"] / segment_km))
+        if bucket_idx not in buckets:
+            buckets[bucket_idx] = []
+        buckets[bucket_idx].append(p)
 
-        # In each 5km segment, pick the single access point closest to the trail
-        feature_selected = []
-        for b_idx in sorted(buckets.keys()):
-            bucket_pts = buckets[b_idx]
-            best_point = min(bucket_pts, key=lambda x: x["distance_to_trail_km"])
-            feature_selected.append(best_point)
+    # In each segment, pick the single best access point
+    segment_selected: List[Dict[str, Any]] = []
+    for b_idx in sorted(buckets.keys()):
+        bucket_pts = buckets[b_idx]
+        best_pt = min(bucket_pts, key=priority_score)
+        segment_selected.append(best_pt)
 
-        # Enforce minimum distance between consecutive points of the same water body
-        feature_selected.sort(key=lambda x: x["route_km"])
-        filtered_feature = []
-        last_km = -999.0
-        for p in feature_selected:
-            if (p["route_km"] - last_km) >= (segment_km * 0.75):
-                filtered_feature.append(p)
+    # 4. Enforce minimum distance between consecutive water access points (segment_km * 0.75)
+    # to avoid boundary crowding across segment borders
+    segment_selected.sort(key=lambda x: x["route_km"])
+    filtered: List[Dict[str, Any]] = []
+    last_km = -999.0
+    for p in segment_selected:
+        if (p["route_km"] - last_km) >= (segment_km * 0.75):
+            filtered.append(p)
+            last_km = p["route_km"]
+        else:
+            # If the current point has strictly higher priority (lower rank), replace previous
+            if priority_score(p) < priority_score(filtered[-1]):
+                filtered[-1] = p
                 last_km = p["route_km"]
 
-        selected.extend(filtered_feature)
-
-    # Sort all final water access points along the route
-    selected.sort(key=lambda x: x["route_mile"])
-    return selected
+    # Sort final points along route
+    filtered.sort(key=lambda x: x["route_mile"])
+    return filtered
 
 def extract_water_access(
     track_path: str,

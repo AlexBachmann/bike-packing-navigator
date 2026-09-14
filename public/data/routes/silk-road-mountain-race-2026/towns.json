@@ -1,0 +1,156 @@
+[
+  {
+    "id": "town_talas",
+    "name": "Talas",
+    "route_mile": 0.0,
+    "route_km": 0.0,
+    "elevation": 1242,
+    "location": {
+      "lat": 42.52111,
+      "lon": 72.25016
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Grand Depart of the Silk Road Mountain Race 2026. Full resupply hub with shops, hotels, and ATMs."
+  },
+  {
+    "id": "town_toktogul",
+    "name": "Toktogul",
+    "route_mile": 88.1,
+    "route_km": 141.8,
+    "elevation": 950,
+    "location": {
+      "lat": 41.8848,
+      "lon": 72.9287
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Major resupply center on the Toktogul Reservoir. Supermarkets, restaurants, guesthouses, and pharmacies."
+  },
+  {
+    "id": "town_torkent",
+    "name": "Torkent",
+    "route_mile": 106.6,
+    "route_km": 171.6,
+    "elevation": 1050,
+    "location": {
+      "lat": 41.8434,
+      "lon": 73.147
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Town along the main road with several resupply grocery shops."
+  },
+  {
+    "id": "town_kyzl_oi",
+    "name": "Kyzl-Oi",
+    "route_mile": 203.9,
+    "route_km": 328.2,
+    "elevation": 1500,
+    "location": {
+      "lat": 41.95,
+      "lon": 74.1624
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Idyllic red-rock mountain canyon village with welcoming CBT community guesthouses and a local shop."
+  },
+  {
+    "id": "town_song_kul",
+    "name": "Song-Köl (CP1)",
+    "route_mile": 349.6,
+    "route_km": 562.6,
+    "elevation": 3016,
+    "location": {
+      "lat": 41.7582,
+      "lon": 75.1226
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Race Checkpoint 1 on the high alpine plateau of Lake Song-Köl. Traditional Kyrgyz yurt camps and warm hospitality."
+  },
+  {
+    "id": "town_baetov",
+    "name": "Baetov",
+    "route_mile": 406.0,
+    "route_km": 653.4,
+    "elevation": 1580,
+    "location": {
+      "lat": 41.2677,
+      "lon": 74.9485
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Vital resupply hub before the remote southern loops. Multiple shops, small hotel, and guesthouses."
+  },
+  {
+    "id": "town_naryn",
+    "name": "Naryn",
+    "route_mile": 728.2,
+    "route_km": 1171.9,
+    "elevation": 2020,
+    "location": {
+      "lat": 41.4234,
+      "lon": 76.0165
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Largest city along the route along the Naryn River. Supermarkets, bike repairs, hotels, restaurants, and medical services."
+  },
+  {
+    "id": "town_tamga",
+    "name": "Tamga",
+    "route_mile": 883.4,
+    "route_km": 1421.7,
+    "elevation": 1685,
+    "location": {
+      "lat": 42.1512,
+      "lon": 77.5478
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Lakeside settlement on the southern shore of Lake Issyk-Kul with shops and guesthouses."
+  },
+  {
+    "id": "town_kochkor",
+    "name": "Kochkor",
+    "route_mile": 1035.9,
+    "route_km": 1667.1,
+    "elevation": 1800,
+    "location": {
+      "lat": 42.2148,
+      "lon": 75.7536
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Major resupply center before the massive Kegeti Pass. Extensive markets, bakeries, cafes, and guesthouses."
+  },
+  {
+    "id": "town_kegeti",
+    "name": "Kegeti",
+    "route_mile": 1113.1,
+    "route_km": 1791.4,
+    "elevation": 1250,
+    "location": {
+      "lat": 42.6913,
+      "lon": 75.1779
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village resupply after descending the breathtaking Kegeti Pass."
+  },
+  {
+    "id": "town_cholpon_ata",
+    "name": "Cholpon-Ata",
+    "route_mile": 1273.7,
+    "route_km": 2049.862,
+    "elevation": 1611,
+    "location": {
+      "lat": 42.6379,
+      "lon": 77.09134
+    },
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Finish line resort city on Lake Issyk-Kul. Full tourist amenities and celebration venue."
+  }
+]

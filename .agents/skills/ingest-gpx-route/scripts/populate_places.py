@@ -195,6 +195,7 @@ def main():
     parser.add_argument("--cache", required=False, help="Path to cache file")
     parser.add_argument("--towns", required=False, help="Path to towns JSON")
     parser.add_argument("--water", required=False, help="Path to water sources JSON (springs, caches, spigots)")
+    parser.add_argument("--waypoints", required=False, help="Path to custom pre-extracted waypoints JSON (comma-separated)")
     parser.add_argument("--backcountry-interval-km", type=float, default=12.0, help="Sampling interval in km for backcountry")
     parser.add_argument(
         "--api-key",
@@ -375,6 +376,23 @@ def main():
                     }
             except Exception as e:
                 print(f"[PLACES WARNING] Failed to load water sources from {w_path}: {e}", file=sys.stderr)
+
+    # 2b. Process custom pre-extracted waypoints if provided
+    if args.waypoints:
+        for wp_file in args.waypoints.split(","):
+            wp_path = Path(wp_file.strip())
+            if wp_path.exists():
+                try:
+                    with open(wp_path, "r", encoding="utf-8") as f:
+                        custom_pts = json.load(f)
+                    print(f"[PLACES] Processing {len(custom_pts)} custom waypoints from {wp_path}...")
+                    for cp in custom_pts:
+                        cpid = cp.get("id")
+                        if not cpid:
+                            continue
+                        places_by_id[cpid] = cp
+                except Exception as e:
+                    print(f"[PLACES WARNING] Failed to load custom waypoints from {wp_path}: {e}", file=sys.stderr)
 
     # 3. Backcountry sampling along the route track
     step_km = args.backcountry_interval_km

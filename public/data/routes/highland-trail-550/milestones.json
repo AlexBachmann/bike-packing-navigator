@@ -1,0 +1,184 @@
+[
+  {
+    "name": "Tyndrum (Grand Depart)",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 250,
+    "state": "Highlands"
+  },
+  {
+    "name": "Bridge of Balgie",
+    "mile": 21.7,
+    "km": 35.0,
+    "elevation": 261,
+    "state": "Perthshire"
+  },
+  {
+    "name": "Laggan Wolftrax",
+    "mile": 71.4,
+    "km": 114.9,
+    "elevation": 268,
+    "state": "Highlands"
+  },
+  {
+    "name": "Fort Augustus",
+    "mile": 94.1,
+    "km": 151.5,
+    "elevation": 21,
+    "state": "Highlands"
+  },
+  {
+    "name": "Contin",
+    "mile": 150.3,
+    "km": 241.9,
+    "elevation": 68,
+    "state": "Highlands"
+  },
+  {
+    "name": "Checkpoint Mile 175",
+    "mile": 174.9,
+    "km": 281.5,
+    "elevation": 289,
+    "state": "Highlands"
+  },
+  {
+    "name": "Oykel Bridge",
+    "mile": 195.7,
+    "km": 315.0,
+    "elevation": 76,
+    "state": "Highlands"
+  },
+  {
+    "name": "Checkpoint Mile 210",
+    "mile": 210.1,
+    "km": 338.1,
+    "elevation": 103,
+    "state": "Highlands"
+  },
+  {
+    "name": "Rhiconich",
+    "mile": 243.0,
+    "km": 391.1,
+    "elevation": 514,
+    "state": "Highlands"
+  },
+  {
+    "name": "Kylesku",
+    "mile": 257.9,
+    "km": 415.0,
+    "elevation": 15,
+    "state": "Highlands"
+  },
+  {
+    "name": "Lochinver",
+    "mile": 283.6,
+    "km": 456.4,
+    "elevation": 6,
+    "state": "Highlands"
+  },
+  {
+    "name": "Checkpoint Mile 315",
+    "mile": 315.0,
+    "km": 506.9,
+    "elevation": 189,
+    "state": "Highlands"
+  },
+  {
+    "name": "Ullapool",
+    "mile": 330.5,
+    "km": 531.8,
+    "elevation": 9,
+    "state": "Highlands"
+  },
+  {
+    "name": "Checkpoint Mile 350",
+    "mile": 350.0,
+    "km": 563.3,
+    "elevation": 115,
+    "state": "Highlands"
+  },
+  {
+    "name": "Poolewe",
+    "mile": 370.2,
+    "km": 595.8,
+    "elevation": 19,
+    "state": "Highlands"
+  },
+  {
+    "name": "Kinlochewe",
+    "mile": 388.1,
+    "km": 624.6,
+    "elevation": 32,
+    "state": "Highlands"
+  },
+  {
+    "name": "Strathcarron",
+    "mile": 407.7,
+    "km": 656.1,
+    "elevation": 9,
+    "state": "Highlands"
+  },
+  {
+    "name": "Dornie",
+    "mile": 423.3,
+    "km": 681.3,
+    "elevation": 14,
+    "state": "Highlands"
+  },
+  {
+    "name": "Shiel Bridge",
+    "mile": 428.7,
+    "km": 689.9,
+    "elevation": 16,
+    "state": "Highlands"
+  },
+  {
+    "name": "Checkpoint Mile 455",
+    "mile": 455.0,
+    "km": 732.2,
+    "elevation": 150,
+    "state": "Highlands"
+  },
+  {
+    "name": "Checkpoint Mile 490",
+    "mile": 490.3,
+    "km": 789.1,
+    "elevation": 56,
+    "state": "Highlands"
+  },
+  {
+    "name": "Fort William",
+    "mile": 506.8,
+    "km": 815.6,
+    "elevation": 13,
+    "state": "Highlands"
+  },
+  {
+    "name": "Kinlochleven",
+    "mile": 520.7,
+    "km": 838.0,
+    "elevation": 12,
+    "state": "Highlands"
+  },
+  {
+    "name": "Kingshouse (Glencoe)",
+    "mile": 529.2,
+    "km": 851.7,
+    "elevation": 246,
+    "state": "Highlands"
+  },
+  {
+    "name": "Bridge of Orchy",
+    "mile": 541.8,
+    "km": 872.0,
+    "elevation": 180,
+    "state": "Highlands"
+  },
+  {
+    "name": "Tyndrum (Finish)",
+    "mile": 548.1,
+    "km": 882.0,
+    "elevation": 249,
+    "state": "Highlands"
+  }
+]

@@ -1,0 +1,1617 @@
+[
+  {
+    "id": "water_osm_\u03c4\u03b5\u03c7\u03bd\u03b7\u03c4\u03ae_\u03bb\u03af\u03bc\u03bd\u03b7_\u03c0\u03b1\u03c0\u03c0\u03b1\u03b4\u03b9\u03ac\u03c2_35km",
+    "name": "\u03a4\u03b5\u03c7\u03bd\u03b7\u03c4\u03ae \u039b\u03af\u03bc\u03bd\u03b7 \u03a0\u03b1\u03c0\u03c0\u03b1\u03b4\u03b9\u03ac\u03c2 (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.89141,
+      "lon": 21.69533
+    },
+    "distance_to_trail_km": 0.035,
+    "route_km": 35.8,
+    "route_mile": 22.3,
+    "address": "\u03a4\u03b5\u03c7\u03bd\u03b7\u03c4\u03ae \u039b\u03af\u03bc\u03bd\u03b7 \u03a0\u03b1\u03c0\u03c0\u03b1\u03b4\u03b9\u03ac\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.89141,21.69533",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (\u03a4\u03b5\u03c7\u03bd\u03b7\u03c4\u03ae \u039b\u03af\u03bc\u03bd\u03b7 \u03a0\u03b1\u03c0\u03c0\u03b1\u03b4\u03b9\u03ac\u03c2). 35m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2_37km",
+    "name": "\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.89976,
+      "lon": 21.69099
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 37.8,
+    "route_mile": 23.5,
+    "address": "\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.89976,21.69099",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2_49km",
+    "name": "\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.85371,
+      "lon": 21.6056
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 49.3,
+    "route_mile": 30.6,
+    "address": "\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.85371,21.60560",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2_57km",
+    "name": "\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.81988,
+      "lon": 21.53541
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 57.1,
+    "route_mile": 35.5,
+    "address": "\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.81988,21.53541",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0393\u03b5\u03c1\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b5\u03bb\u03af\u03c3\u03c3\u03bf\u03b2\u03bf\u03c5\u03bd\u03bf_59km",
+    "name": "\u039c\u03b5\u03bb\u03af\u03c3\u03c3\u03bf\u03b2\u03bf\u03c5\u03bd\u03bf (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.80349,
+      "lon": 21.51707
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 59.6,
+    "route_mile": 37.1,
+    "address": "\u039c\u03b5\u03bb\u03af\u03c3\u03c3\u03bf\u03b2\u03bf\u03c5\u03bd\u03bf",
+    "google_maps_url": "https://maps.google.com/?q=40.80349,21.51707",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u039c\u03b5\u03bb\u03af\u03c3\u03c3\u03bf\u03b2\u03bf\u03c5\u03bd\u03bf). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03ad\u03bb\u03c0\u03c9_\u03c1\u03ad\u03bc\u03b1_66km",
+    "name": "\u039c\u03ad\u03bb\u03c0\u03c9 \u03c1\u03ad\u03bc\u03b1 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.75577,
+      "lon": 21.47122
+    },
+    "distance_to_trail_km": 0.185,
+    "route_km": 66.7,
+    "route_mile": 41.4,
+    "address": "\u039c\u03ad\u03bb\u03c0\u03c9 \u03c1\u03ad\u03bc\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=40.75577,21.47122",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u039c\u03ad\u03bb\u03c0\u03c9 \u03c1\u03ad\u03bc\u03b1). 185m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03c5\u03ba\u03cc\u03c1\u03b5\u03bc\u03b1_66km",
+    "name": "\u039b\u03c5\u03ba\u03cc\u03c1\u03b5\u03bc\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.75424,
+      "lon": 21.47325
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 66.8,
+    "route_mile": 41.5,
+    "address": "\u039b\u03c5\u03ba\u03cc\u03c1\u03b5\u03bc\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=40.75424,21.47325",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039b\u03c5\u03ba\u03cc\u03c1\u03b5\u03bc\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_negovani_71km",
+    "name": "Negovani (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.72172,
+      "lon": 21.46096
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 71.6,
+    "route_mile": 44.5,
+    "address": "Negovani",
+    "google_maps_url": "https://maps.google.com/?q=40.72172,21.46096",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Negovani). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c4\u03b1\u03bc\u03b9\u03b5\u03c5\u03c4\u03ae\u03c1\u03b1\u03c2_\u03c4\u03c1\u03b9\u03b1\u03bd\u03c4\u03b1\u03c6\u03c5\u03bb\u03bb\u03b9\u03ac\u03c2_74km",
+    "name": "\u03a4\u03b1\u03bc\u03b9\u03b5\u03c5\u03c4\u03ae\u03c1\u03b1\u03c2 \u03a4\u03c1\u03b9\u03b1\u03bd\u03c4\u03b1\u03c6\u03c5\u03bb\u03bb\u03b9\u03ac\u03c2 (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.71066,
+      "lon": 21.45474
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 74.2,
+    "route_mile": 46.1,
+    "address": "\u03a4\u03b1\u03bc\u03b9\u03b5\u03c5\u03c4\u03ae\u03c1\u03b1\u03c2 \u03a4\u03c1\u03b9\u03b1\u03bd\u03c4\u03b1\u03c6\u03c5\u03bb\u03bb\u03b9\u03ac\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.71066,21.45474",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (\u03a4\u03b1\u03bc\u03b9\u03b5\u03c5\u03c4\u03ae\u03c1\u03b1\u03c2 \u03a4\u03c1\u03b9\u03b1\u03bd\u03c4\u03b1\u03c6\u03c5\u03bb\u03bb\u03b9\u03ac\u03c2). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c1\u03bf\u03b4\u03cc\u03c1\u03b5\u03bc\u03b1_99km",
+    "name": "\u03a1\u03bf\u03b4\u03cc\u03c1\u03b5\u03bc\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.6425,
+      "lon": 21.30125
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 99.6,
+    "route_mile": 61.9,
+    "address": "\u03a1\u03bf\u03b4\u03cc\u03c1\u03b5\u03bc\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=40.64250,21.30125",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a1\u03bf\u03b4\u03cc\u03c1\u03b5\u03bc\u03b1). 30m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03af\u03bc\u03bd\u03b7_\u03ba\u03b1\u03c3\u03c4\u03bf\u03c1\u03b9\u03ac\u03c2_133km",
+    "name": "\u039b\u03af\u03bc\u03bd\u03b7 \u039a\u03b1\u03c3\u03c4\u03bf\u03c1\u03b9\u03ac\u03c2 (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.51201,
+      "lon": 21.29432
+    },
+    "distance_to_trail_km": 0.002,
+    "route_km": 133.9,
+    "route_mile": 83.2,
+    "address": "\u039b\u03af\u03bc\u03bd\u03b7 \u039a\u03b1\u03c3\u03c4\u03bf\u03c1\u03b9\u03ac\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.51201,21.29432",
+    "business_status": "OPERATIONAL",
+    "description": "Lake Access (\u039b\u03af\u03bc\u03bd\u03b7 \u039a\u03b1\u03c3\u03c4\u03bf\u03c1\u03b9\u03ac\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03b1\u03b4\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2_143km",
+    "name": "\u039b\u03b1\u03b4\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.49427,
+      "lon": 21.2374
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 143.2,
+    "route_mile": 89.0,
+    "address": "\u039b\u03b1\u03b4\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.49427,21.23740",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u039b\u03b1\u03b4\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b1\u03bb\u03b9\u03ac\u03ba\u03bc\u03bf\u03bd\u03b1\u03c2_144km",
+    "name": "\u0391\u03bb\u03b9\u03ac\u03ba\u03bc\u03bf\u03bd\u03b1\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.49259,
+      "lon": 21.22244
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 144.9,
+    "route_mile": 90.0,
+    "address": "\u0391\u03bb\u03b9\u03ac\u03ba\u03bc\u03bf\u03bd\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.49259,21.22244",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0391\u03bb\u03b9\u03ac\u03ba\u03bc\u03bf\u03bd\u03b1\u03c2). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9_184km",
+    "name": "\u0392\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.29291,
+      "lon": 20.99339
+    },
+    "distance_to_trail_km": 0.058,
+    "route_km": 184.7,
+    "route_mile": 114.8,
+    "address": "\u0392\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=40.29291,20.99339",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0392\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9). 58m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9_189km",
+    "name": "\u0392\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.26091,
+      "lon": 20.99344
+    },
+    "distance_to_trail_km": 0.021,
+    "route_km": 189.1,
+    "route_mile": 117.5,
+    "address": "\u0392\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=40.26091,20.99344",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0392\u03c1\u03c9\u03bc\u03bf\u03bd\u03ad\u03c1\u03b9). 21m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b6\u03ac\u03bc\u03c0\u03b9\u03b1\u03bd\u03b7_189km",
+    "name": "\u0396\u03ac\u03bc\u03c0\u03b9\u03b1\u03bd\u03b7 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.26028,
+      "lon": 20.98642
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 189.7,
+    "route_mile": 117.9,
+    "address": "\u0396\u03ac\u03bc\u03c0\u03b9\u03b1\u03bd\u03b7",
+    "google_maps_url": "https://maps.google.com/?q=40.26028,20.98642",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0396\u03ac\u03bc\u03c0\u03b9\u03b1\u03bd\u03b7). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2_189km",
+    "name": "\u03a3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.2603,
+      "lon": 20.98659
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 189.7,
+    "route_mile": 117.9,
+    "address": "\u03a3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.26030,20.98659",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u03a3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03c5\u03c8\u03b5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf_191km",
+    "name": "\u039a\u03c5\u03c8\u03b5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.25195,
+      "lon": 20.99268
+    },
+    "distance_to_trail_km": 0.181,
+    "route_km": 191.1,
+    "route_mile": 118.7,
+    "address": "\u039a\u03c5\u03c8\u03b5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf",
+    "google_maps_url": "https://maps.google.com/?q=40.25195,20.99268",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03c5\u03c8\u03b5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf). 181m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b6\u03bf\u03c5\u03b6\u03bf\u03c5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf_193km",
+    "name": "\u0396\u03bf\u03c5\u03b6\u03bf\u03c5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.22941,
+      "lon": 20.98768
+    },
+    "distance_to_trail_km": 0.103,
+    "route_km": 193.8,
+    "route_mile": 120.4,
+    "address": "\u0396\u03bf\u03c5\u03b6\u03bf\u03c5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf",
+    "google_maps_url": "https://maps.google.com/?q=40.22941,20.98768",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0396\u03bf\u03c5\u03b6\u03bf\u03c5\u03bb\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf). 103m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2_197km",
+    "name": "\u03a3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.21998,
+      "lon": 20.95249
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 197.7,
+    "route_mile": 122.8,
+    "address": "\u03a3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.21998,20.95249",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u03a3\u03b1\u03c1\u03b1\u03bd\u03c4\u03ac\u03c0\u03bf\u03c1\u03bf\u03c2). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b1\u03c1\u03b4\u03af\u03c4\u03c3\u03b1_198km",
+    "name": "\u039c\u03b1\u03c1\u03b4\u03af\u03c4\u03c3\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.21805,
+      "lon": 20.9566
+    },
+    "distance_to_trail_km": 0.037,
+    "route_km": 198.1,
+    "route_mile": 123.1,
+    "address": "\u039c\u03b1\u03c1\u03b4\u03af\u03c4\u03c3\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=40.21805,20.95660",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03b1\u03c1\u03b4\u03af\u03c4\u03c3\u03b1). 37m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03bf\u03cd\u03c4\u03c3\u03bf\u03c5\u03c1\u03b1_220km",
+    "name": "\u039a\u03bf\u03cd\u03c4\u03c3\u03bf\u03c5\u03c1\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.13507,
+      "lon": 20.91062
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 220.6,
+    "route_mile": 137.0,
+    "address": "\u039a\u03bf\u03cd\u03c4\u03c3\u03bf\u03c5\u03c1\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=40.13507,20.91062",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03bf\u03cd\u03c4\u03c3\u03bf\u03c5\u03c1\u03b1). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b5\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc_220km",
+    "name": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.13473,
+      "lon": 20.91158
+    },
+    "distance_to_trail_km": 0.025,
+    "route_km": 220.5,
+    "route_mile": 137.0,
+    "address": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc",
+    "google_maps_url": "https://maps.google.com/?q=40.13473,20.91158",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03cc). 25m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b4\u03c1\u03b1\u03ba\u03cc\u03bb\u03b9\u03bc\u03bd\u03b7_230km",
+    "name": "\u0394\u03c1\u03b1\u03ba\u03cc\u03bb\u03b9\u03bc\u03bd\u03b7 (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.08995,
+      "lon": 20.90963
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 230.0,
+    "route_mile": 142.9,
+    "address": "\u0394\u03c1\u03b1\u03ba\u03cc\u03bb\u03b9\u03bc\u03bd\u03b7",
+    "google_maps_url": "https://maps.google.com/?q=40.08995,20.90963",
+    "business_status": "OPERATIONAL",
+    "description": "Lake Access (\u0394\u03c1\u03b1\u03ba\u03cc\u03bb\u03b9\u03bc\u03bd\u03b7). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03cc\u03bd\u03b7_\u03bb\u03ac\u03ba\u03ba\u03bf\u03c2_261km",
+    "name": "\u0393\u03cc\u03bd\u03b7 \u03bb\u03ac\u03ba\u03ba\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.05535,
+      "lon": 20.78278
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 261.3,
+    "route_mile": 162.4,
+    "address": "\u0393\u03cc\u03bd\u03b7 \u03bb\u03ac\u03ba\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.05535,20.78278",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03cc\u03bd\u03b7 \u03bb\u03ac\u03ba\u03ba\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b1\u03ce\u03bf\u03c2_269km",
+    "name": "\u0391\u03ce\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.03648,
+      "lon": 20.74507
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 269.2,
+    "route_mile": 167.3,
+    "address": "\u0391\u03ce\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=40.03648,20.74507",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0391\u03ce\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c0\u03b7\u03b3\u03ad\u03c2_\u03bd\u03ad\u03bb\u03bb\u03b5\u03c2_278km",
+    "name": "\u03a0\u03b7\u03b3\u03ad\u03c2 \u039d\u03ad\u03bb\u03bb\u03b5\u03c2 (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.98309,
+      "lon": 20.66899
+    },
+    "distance_to_trail_km": 0.16,
+    "route_km": 278.9,
+    "route_mile": 173.3,
+    "address": "\u03a0\u03b7\u03b3\u03ad\u03c2 \u039d\u03ad\u03bb\u03bb\u03b5\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.98309,20.66899",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (\u03a0\u03b7\u03b3\u03ad\u03c2 \u039d\u03ad\u03bb\u03bb\u03b5\u03c2). 160m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03bf\u03ca\u03b4\u03bf\u03bc\u03ac\u03c4\u03b7\u03c2_280km",
+    "name": "\u0392\u03bf\u03ca\u03b4\u03bf\u03bc\u03ac\u03c4\u03b7\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.97313,
+      "lon": 20.65885
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 280.3,
+    "route_mile": 174.2,
+    "address": "\u0392\u03bf\u03ca\u03b4\u03bf\u03bc\u03ac\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.97313,20.65885",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0392\u03bf\u03ca\u03b4\u03bf\u03bc\u03ac\u03c4\u03b7\u03c2). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b5\u03bb\u03b1\u03c6\u03cc\u03c4\u03bf\u03c0\u03bf\u03c2_3_294km",
+    "name": "\u0395\u03bb\u03b1\u03c6\u03cc\u03c4\u03bf\u03c0\u03bf\u03c2 3 (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.90681,
+      "lon": 20.68107
+    },
+    "distance_to_trail_km": 0.007,
+    "route_km": 294.3,
+    "route_mile": 182.9,
+    "address": "\u0395\u03bb\u03b1\u03c6\u03cc\u03c4\u03bf\u03c0\u03bf\u03c2 3",
+    "google_maps_url": "https://maps.google.com/?q=39.90681,20.68107",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (\u0395\u03bb\u03b1\u03c6\u03cc\u03c4\u03bf\u03c0\u03bf\u03c2 3). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03af\u03ba\u03bf\u03c2_317km",
+    "name": "\u0392\u03af\u03ba\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.86961,
+      "lon": 20.76441
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 317.7,
+    "route_mile": 197.4,
+    "address": "\u0392\u03af\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.86961,20.76441",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0392\u03af\u03ba\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03b9\u03ba\u03ac\u03ba\u03b7\u03c2_321km",
+    "name": "\u0392\u03b9\u03ba\u03ac\u03ba\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.86299,
+      "lon": 20.78875
+    },
+    "distance_to_trail_km": 0.127,
+    "route_km": 321.5,
+    "route_mile": 199.8,
+    "address": "\u0392\u03b9\u03ba\u03ac\u03ba\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.86299,20.78875",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0392\u03b9\u03ba\u03ac\u03ba\u03b7\u03c2). 127m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b9\u03c1\u03af\u03c3\u03b9_322km",
+    "name": "\u039c\u03b9\u03c1\u03af\u03c3\u03b9 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.86067,
+      "lon": 20.79277
+    },
+    "distance_to_trail_km": 0.002,
+    "route_km": 322.0,
+    "route_mile": 200.1,
+    "address": "\u039c\u03b9\u03c1\u03af\u03c3\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=39.86067,20.79277",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03b9\u03c1\u03af\u03c3\u03b9). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03c0\u03b1\u03b3\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf_322km",
+    "name": "\u039c\u03c0\u03b1\u03b3\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.86139,
+      "lon": 20.7949
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 322.2,
+    "route_mile": 200.2,
+    "address": "\u039c\u03c0\u03b1\u03b3\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf",
+    "google_maps_url": "https://maps.google.com/?q=39.86139,20.79490",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03c0\u03b1\u03b3\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03ba\u03c1\u03b9\u03ac\u03ba\u03b1_327km",
+    "name": "\u0393\u03ba\u03c1\u03b9\u03ac\u03ba\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.87334,
+      "lon": 20.84078
+    },
+    "distance_to_trail_km": 0.076,
+    "route_km": 327.9,
+    "route_mile": 203.7,
+    "address": "\u0393\u03ba\u03c1\u03b9\u03ac\u03ba\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.87334,20.84078",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03ba\u03c1\u03b9\u03ac\u03ba\u03b1). 76m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03c1\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1_328km",
+    "name": "\u0392\u03c1\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.87472,
+      "lon": 20.8465
+    },
+    "distance_to_trail_km": 0.113,
+    "route_km": 328.5,
+    "route_mile": 204.1,
+    "address": "\u0392\u03c1\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.87472,20.84650",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0392\u03c1\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1). 113m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b5\u03c6\u03cd\u03c1\u03b9\u03c4\u03c3\u03b1_333km",
+    "name": "\u0393\u03b5\u03c6\u03cd\u03c1\u03b9\u03c4\u03c3\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.86629,
+      "lon": 20.87879
+    },
+    "distance_to_trail_km": 0.231,
+    "route_km": 333.2,
+    "route_mile": 207.1,
+    "address": "\u0393\u03b5\u03c6\u03cd\u03c1\u03b9\u03c4\u03c3\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.86629,20.87879",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03b5\u03c6\u03cd\u03c1\u03b9\u03c4\u03c3\u03b1). 231m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03c0\u03b1\u03b3\u03b4\u03ac\u03bd\u03b7_338km",
+    "name": "\u039c\u03c0\u03b1\u03b3\u03b4\u03ac\u03bd\u03b7 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.85697,
+      "lon": 20.89802
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 338.4,
+    "route_mile": 210.3,
+    "address": "\u039c\u03c0\u03b1\u03b3\u03b4\u03ac\u03bd\u03b7",
+    "google_maps_url": "https://maps.google.com/?q=39.85697,20.89802",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03c0\u03b1\u03b3\u03b4\u03ac\u03bd\u03b7). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03af\u03bd\u03bf\u03c5_342km",
+    "name": "\u039b\u03af\u03bd\u03bf\u03c5 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.8431,
+      "lon": 20.87794
+    },
+    "distance_to_trail_km": 0.048,
+    "route_km": 342.4,
+    "route_mile": 212.8,
+    "address": "\u039b\u03af\u03bd\u03bf\u03c5",
+    "google_maps_url": "https://maps.google.com/?q=39.84310,20.87794",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039b\u03af\u03bd\u03bf\u03c5). 48m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03af\u03c0\u03b1\u03c2_\u03bb\u03ac\u03ba\u03ba\u03bf\u03c2_344km",
+    "name": "\u039b\u03af\u03c0\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.83855,
+      "lon": 20.88257
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 344.5,
+    "route_mile": 214.0,
+    "address": "\u039b\u03af\u03c0\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.83855,20.88257",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039b\u03af\u03c0\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03ad\u03b3\u03b1\u03c2_\u03bb\u03ac\u03ba\u03ba\u03bf\u03c2_348km",
+    "name": "\u039c\u03ad\u03b3\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.83551,
+      "lon": 20.9117
+    },
+    "distance_to_trail_km": 0.182,
+    "route_km": 348.6,
+    "route_mile": 216.6,
+    "address": "\u039c\u03ad\u03b3\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.83551,20.91170",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03ad\u03b3\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2). 182m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03ba\u03b1\u03c1\u03ac\u03bd\u03b9\u03b1_350km",
+    "name": "\u0393\u03ba\u03b1\u03c1\u03ac\u03bd\u03b9\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.84405,
+      "lon": 20.92017
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 350.2,
+    "route_mile": 217.6,
+    "address": "\u0393\u03ba\u03b1\u03c1\u03ac\u03bd\u03b9\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.84405,20.92017",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03ba\u03b1\u03c1\u03ac\u03bd\u03b9\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03ad\u03b3\u03b1\u03c2_\u03bb\u03ac\u03ba\u03ba\u03bf\u03c2_355km",
+    "name": "\u039c\u03ad\u03b3\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.84589,
+      "lon": 20.94357
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 355.2,
+    "route_mile": 220.7,
+    "address": "\u039c\u03ad\u03b3\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.84589,20.94357",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03ad\u03b3\u03b1\u03c2 \u039b\u03ac\u03ba\u03ba\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c1\u03af\u03bd\u03c4\u03b6\u03b1\u03c2_362km",
+    "name": "\u03a1\u03af\u03bd\u03c4\u03b6\u03b1\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.82567,
+      "lon": 20.95413
+    },
+    "distance_to_trail_km": 0.148,
+    "route_km": 362.3,
+    "route_mile": 225.1,
+    "address": "\u03a1\u03af\u03bd\u03c4\u03b6\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.82567,20.95413",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a1\u03af\u03bd\u03c4\u03b6\u03b1\u03c2). 148m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03ac\u03c1\u03b4\u03b1\u03c2_365km",
+    "name": "\u0392\u03ac\u03c1\u03b4\u03b1\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.83093,
+      "lon": 20.97879
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 365.0,
+    "route_mile": 226.8,
+    "address": "\u0392\u03ac\u03c1\u03b4\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.83093,20.97879",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0392\u03ac\u03c1\u03b4\u03b1\u03c2). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c1\u03ad\u03bc\u03b1\u03c4\u03b1_383km",
+    "name": "\u03a1\u03ad\u03bc\u03b1\u03c4\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.83911,
+      "lon": 21.03835
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 383.4,
+    "route_mile": 238.2,
+    "address": "\u03a1\u03ad\u03bc\u03b1\u03c4\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.83911,21.03835",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a1\u03ad\u03bc\u03b1\u03c4\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b5\u03c4\u03c3\u03bf\u03b2\u03af\u03c4\u03b9\u03ba\u03bf\u03c2_418km",
+    "name": "\u039c\u03b5\u03c4\u03c3\u03bf\u03b2\u03af\u03c4\u03b9\u03ba\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.76267,
+      "lon": 21.11911
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 418.8,
+    "route_mile": 260.3,
+    "address": "\u039c\u03b5\u03c4\u03c3\u03bf\u03b2\u03af\u03c4\u03b9\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.76267,21.11911",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u039c\u03b5\u03c4\u03c3\u03bf\u03b2\u03af\u03c4\u03b9\u03ba\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03ba\u03bf\u03cd\u03c1\u03b1_437km",
+    "name": "\u0393\u03ba\u03bf\u03cd\u03c1\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.69471,
+      "lon": 21.1109
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 437.3,
+    "route_mile": 271.7,
+    "address": "\u0393\u03ba\u03bf\u03cd\u03c1\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.69471,21.11090",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03ba\u03bf\u03cd\u03c1\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03be\u03b5\u03c1\u03bf\u03bb\u03ac\u03b3\u03ba\u03b1\u03b4\u03bf_444km",
+    "name": "\u039e\u03b5\u03c1\u03bf\u03bb\u03ac\u03b3\u03ba\u03b1\u03b4\u03bf (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.66625,
+      "lon": 21.10155
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 444.6,
+    "route_mile": 276.2,
+    "address": "\u039e\u03b5\u03c1\u03bf\u03bb\u03ac\u03b3\u03ba\u03b1\u03b4\u03bf",
+    "google_maps_url": "https://maps.google.com/?q=39.66625,21.10155",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039e\u03b5\u03c1\u03bf\u03bb\u03ac\u03b3\u03ba\u03b1\u03b4\u03bf). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c3\u03b4\u03c1\u03ac\u03bc\u03c3\u03b9\u03b1_446km",
+    "name": "\u03a3\u03b4\u03c1\u03ac\u03bc\u03c3\u03b9\u03b1 (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.65468,
+      "lon": 21.09178
+    },
+    "distance_to_trail_km": 0.239,
+    "route_km": 446.5,
+    "route_mile": 277.5,
+    "address": "\u03a3\u03b4\u03c1\u03ac\u03bc\u03c3\u03b9\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.65468,21.09178",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (\u03a3\u03b4\u03c1\u03ac\u03bc\u03c3\u03b9\u03b1). 239m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c0\u03b7\u03b3\u03ae_\u03c4\u03bf\u03c5_\u03c3\u03b9\u03cc\u03c0\u03b1\u03c4\u03bf\u03c5_456km",
+    "name": "\u03a0\u03b7\u03b3\u03ae \u03c4\u03bf\u03c5 \u03a3\u03b9\u03cc\u03c0\u03b1\u03c4\u03bf\u03c5 (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.59681,
+      "lon": 21.10489
+    },
+    "distance_to_trail_km": 0.147,
+    "route_km": 456.9,
+    "route_mile": 283.9,
+    "address": "\u03a0\u03b7\u03b3\u03ae \u03c4\u03bf\u03c5 \u03a3\u03b9\u03cc\u03c0\u03b1\u03c4\u03bf\u03c5",
+    "google_maps_url": "https://maps.google.com/?q=39.59681,21.10489",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (\u03a0\u03b7\u03b3\u03ae \u03c4\u03bf\u03c5 \u03a3\u03b9\u03cc\u03c0\u03b1\u03c4\u03bf\u03c5). 147m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2_457km",
+    "name": "\u03a7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.59435,
+      "lon": 21.11225
+    },
+    "distance_to_trail_km": 0.225,
+    "route_km": 457.7,
+    "route_mile": 284.4,
+    "address": "\u03a7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.59435,21.11225",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2). 225m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03c1\u03cd\u03c3\u03b7_\u03bc\u03c0\u03cc\u03b6\u03b9\u03b1\u03c2_458km",
+    "name": "\u0392\u03c1\u03cd\u03c3\u03b7 \u039c\u03c0\u03cc\u03b6\u03b9\u03b1\u03c2 (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.5938,
+      "lon": 21.10581
+    },
+    "distance_to_trail_km": 0.078,
+    "route_km": 458.2,
+    "route_mile": 284.7,
+    "address": "\u0392\u03c1\u03cd\u03c3\u03b7 \u039c\u03c0\u03cc\u03b6\u03b9\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.59380,21.10581",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (\u0392\u03c1\u03cd\u03c3\u03b7 \u039c\u03c0\u03cc\u03b6\u03b9\u03b1\u03c2). 78m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03c1\u03cd\u03c3\u03b7_\u03ba\u03b1\u03bb\u03bf\u03b3\u03c1\u03ad\u03c4\u03c3\u03b9_458km",
+    "name": "\u0392\u03c1\u03cd\u03c3\u03b7 \u039a\u03b1\u03bb\u03bf\u03b3\u03c1\u03ad\u03c4\u03c3\u03b9 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.59487,
+      "lon": 21.10484
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 458.3,
+    "route_mile": 284.8,
+    "address": "\u0392\u03c1\u03cd\u03c3\u03b7 \u039a\u03b1\u03bb\u03bf\u03b3\u03c1\u03ad\u03c4\u03c3\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=39.59487,21.10484",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (\u0392\u03c1\u03cd\u03c3\u03b7 \u039a\u03b1\u03bb\u03bf\u03b3\u03c1\u03ad\u03c4\u03c3\u03b9). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b5\u03b3\u03ac\u03bb\u03bf_\u03bb\u03b1\u03b3\u03ba\u03ac\u03b4\u03b9_458km",
+    "name": "\u039c\u03b5\u03b3\u03ac\u03bb\u03bf \u039b\u03b1\u03b3\u03ba\u03ac\u03b4\u03b9 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.59514,
+      "lon": 21.10479
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 458.3,
+    "route_mile": 284.8,
+    "address": "\u039c\u03b5\u03b3\u03ac\u03bb\u03bf \u039b\u03b1\u03b3\u03ba\u03ac\u03b4\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=39.59514,21.10479",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03b5\u03b3\u03ac\u03bb\u03bf \u039b\u03b1\u03b3\u03ba\u03ac\u03b4\u03b9). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c4\u03c3\u03ac\u03c3\u03b7_458km",
+    "name": "\u03a4\u03c3\u03ac\u03c3\u03b7 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.59449,
+      "lon": 21.10401
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 458.4,
+    "route_mile": 284.9,
+    "address": "\u03a4\u03c3\u03ac\u03c3\u03b7",
+    "google_maps_url": "https://maps.google.com/?q=39.59449,21.10401",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a4\u03c3\u03ac\u03c3\u03b7). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2_463km",
+    "name": "\u03a7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.57871,
+      "lon": 21.12255
+    },
+    "distance_to_trail_km": 0.002,
+    "route_km": 463.4,
+    "route_mile": 287.9,
+    "address": "\u03a7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.57871,21.12255",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a7\u03c1\u03bf\u03cd\u03c3\u03b9\u03b1\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b2\u03c1\u03c5\u03c3\u03b7_\u03ba\u03bf\u03c5\u03ba\u03bf\u03c5\u03bb\u03b9_463km",
+    "name": "\u0392\u03c1\u03c5\u03c3\u03b7 \u039a\u03bf\u03c5\u03ba\u03bf\u03c5\u03bb\u03b9 (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.5795,
+      "lon": 21.12518
+    },
+    "distance_to_trail_km": 0.098,
+    "route_km": 463.6,
+    "route_mile": 288.0,
+    "address": "\u0392\u03c1\u03c5\u03c3\u03b7 \u039a\u03bf\u03c5\u03ba\u03bf\u03c5\u03bb\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=39.57950,21.12518",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (\u0392\u03c1\u03c5\u03c3\u03b7 \u039a\u03bf\u03c5\u03ba\u03bf\u03c5\u03bb\u03b9). 98m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03bf\u03bd\u03bf\u03b4\u03ad\u03bd\u03b4\u03c1\u03b9_464km",
+    "name": "\u039c\u03bf\u03bd\u03bf\u03b4\u03ad\u03bd\u03b4\u03c1\u03b9 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.57255,
+      "lon": 21.13505
+    },
+    "distance_to_trail_km": 0.192,
+    "route_km": 464.7,
+    "route_mile": 288.8,
+    "address": "\u039c\u03bf\u03bd\u03bf\u03b4\u03ad\u03bd\u03b4\u03c1\u03b9",
+    "google_maps_url": "https://maps.google.com/?q=39.57255,21.13505",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03bf\u03bd\u03bf\u03b4\u03ad\u03bd\u03b4\u03c1\u03b9). 192m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b1\u03c4\u03c3\u03bf\u03c5\u03ba\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf_465km",
+    "name": "\u039c\u03b1\u03c4\u03c3\u03bf\u03c5\u03ba\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.56824,
+      "lon": 21.13512
+    },
+    "distance_to_trail_km": 0.209,
+    "route_km": 465.0,
+    "route_mile": 289.0,
+    "address": "\u039c\u03b1\u03c4\u03c3\u03bf\u03c5\u03ba\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf",
+    "google_maps_url": "https://maps.google.com/?q=39.56824,21.13512",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039c\u03b1\u03c4\u03c3\u03bf\u03c5\u03ba\u03b9\u03ce\u03c4\u03b9\u03ba\u03bf). 209m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03b1\u03bb\u03b1\u03c1\u03c1\u03cd\u03c4\u03b9\u03ba\u03bf\u03c2_468km",
+    "name": "\u039a\u03b1\u03bb\u03b1\u03c1\u03c1\u03cd\u03c4\u03b9\u03ba\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.56189,
+      "lon": 21.10909
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 468.7,
+    "route_mile": 291.2,
+    "address": "\u039a\u03b1\u03bb\u03b1\u03c1\u03c1\u03cd\u03c4\u03b9\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.56189,21.10909",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u039a\u03b1\u03bb\u03b1\u03c1\u03c1\u03cd\u03c4\u03b9\u03ba\u03bf\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bc\u03b5\u03bb\u03b9\u03c3\u03c3\u03bf\u03c5\u03c1\u03b3\u03af\u03c4\u03b9\u03ba\u03bf\u03c2_469km",
+    "name": "\u039c\u03b5\u03bb\u03b9\u03c3\u03c3\u03bf\u03c5\u03c1\u03b3\u03af\u03c4\u03b9\u03ba\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.55827,
+      "lon": 21.10677
+    },
+    "distance_to_trail_km": 0.161,
+    "route_km": 469.8,
+    "route_mile": 291.9,
+    "address": "\u039c\u03b5\u03bb\u03b9\u03c3\u03c3\u03bf\u03c5\u03c1\u03b3\u03af\u03c4\u03b9\u03ba\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.55827,21.10677",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u039c\u03b5\u03bb\u03b9\u03c3\u03c3\u03bf\u03c5\u03c1\u03b3\u03af\u03c4\u03b9\u03ba\u03bf\u03c2). 161m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03bf\u03c6\u03b5\u03c1\u03af\u03c4\u03b1\u03c2_486km",
+    "name": "\u039a\u03bf\u03c6\u03b5\u03c1\u03af\u03c4\u03b1\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.49417,
+      "lon": 21.14033
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 486.1,
+    "route_mile": 302.1,
+    "address": "\u039a\u03bf\u03c6\u03b5\u03c1\u03af\u03c4\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.49417,21.14033",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03bf\u03c6\u03b5\u03c1\u03af\u03c4\u03b1\u03c2). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03c5\u03b3\u03ba\u03bf\u03c1\u03ad\u03bc\u03b1_487km",
+    "name": "\u039b\u03c5\u03b3\u03ba\u03bf\u03c1\u03ad\u03bc\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.48538,
+      "lon": 21.14742
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 487.6,
+    "route_mile": 303.0,
+    "address": "\u039b\u03c5\u03b3\u03ba\u03bf\u03c1\u03ad\u03bc\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.48538,21.14742",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039b\u03c5\u03b3\u03ba\u03bf\u03c1\u03ad\u03bc\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2_491km",
+    "name": "\u039a\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.47981,
+      "lon": 21.17212
+    },
+    "distance_to_trail_km": 0.093,
+    "route_km": 491.0,
+    "route_mile": 305.1,
+    "address": "\u039a\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.47981,21.17212",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2). 93m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2_495km",
+    "name": "\u039a\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.46666,
+      "lon": 21.16081
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 495.5,
+    "route_mile": 307.9,
+    "address": "\u039a\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.46666,21.16081",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03c1\u03b1\u03bd\u03b9\u03ac\u03c2). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ac\u03c3\u03c0\u03c1\u03b7_\u03b3\u03ba\u03bf\u03cd\u03c1\u03b1_503km",
+    "name": "\u0386\u03c3\u03c0\u03c1\u03b7 \u0393\u03ba\u03bf\u03cd\u03c1\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.43006,
+      "lon": 21.17826
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 503.3,
+    "route_mile": 312.7,
+    "address": "\u0386\u03c3\u03c0\u03c1\u03b7 \u0393\u03ba\u03bf\u03cd\u03c1\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.43006,21.17826",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0386\u03c3\u03c0\u03c1\u03b7 \u0393\u03ba\u03bf\u03cd\u03c1\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bd\u03b5\u03c1\u03ac\u03c4\u03b1_509km",
+    "name": "\u039d\u03b5\u03c1\u03ac\u03c4\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.41149,
+      "lon": 21.20607
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 509.1,
+    "route_mile": 316.4,
+    "address": "\u039d\u03b5\u03c1\u03ac\u03c4\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.41149,21.20607",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039d\u03b5\u03c1\u03ac\u03c4\u03b1). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b1\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2_522km",
+    "name": "\u0391\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.37931,
+      "lon": 21.27204
+    },
+    "distance_to_trail_km": 0.162,
+    "route_km": 522.7,
+    "route_mile": 324.8,
+    "address": "\u0391\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.37931,21.27204",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0391\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2). 162m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b1\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2_566km",
+    "name": "\u0391\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.29767,
+      "lon": 21.4256
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 566.4,
+    "route_mile": 352.0,
+    "address": "\u0391\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.29767,21.42560",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0391\u03c7\u03b5\u03bb\u03ce\u03bf\u03c2). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03af\u03bc\u03bd\u03b7_\u03c3\u03c4\u03b5\u03c6\u03b1\u03bd\u03b9\u03ac\u03b4\u03b1\u03c2_582km",
+    "name": "\u039b\u03af\u03bc\u03bd\u03b7 \u03a3\u03c4\u03b5\u03c6\u03b1\u03bd\u03b9\u03ac\u03b4\u03b1\u03c2 (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.26654,
+      "lon": 21.49575
+    },
+    "distance_to_trail_km": 0.059,
+    "route_km": 582.3,
+    "route_mile": 361.8,
+    "address": "\u039b\u03af\u03bc\u03bd\u03b7 \u03a3\u03c4\u03b5\u03c6\u03b1\u03bd\u03b9\u03ac\u03b4\u03b1\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.26654,21.49575",
+    "business_status": "OPERATIONAL",
+    "description": "Lake Access (\u039b\u03af\u03bc\u03bd\u03b7 \u03a3\u03c4\u03b5\u03c6\u03b1\u03bd\u03b9\u03ac\u03b4\u03b1\u03c2). 59m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03bb\u03b5\u03c0\u03b9\u03b1\u03bd\u03af\u03c4\u03b7\u03c2_621km",
+    "name": "\u039b\u03b5\u03c0\u03b9\u03b1\u03bd\u03af\u03c4\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.10781,
+      "lon": 21.46551
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 621.8,
+    "route_mile": 386.4,
+    "address": "\u039b\u03b5\u03c0\u03b9\u03b1\u03bd\u03af\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.10781,21.46551",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039b\u03b5\u03c0\u03b9\u03b1\u03bd\u03af\u03c4\u03b7\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b4\u03c1\u03bf\u03c3\u03bf\u03c0\u03b7\u03b3\u1f75_\u03c1\u03bf\u1f7b\u03c3\u03c4\u03b7\u03c2_639km",
+    "name": "\u0394\u03c1\u03bf\u03c3\u03bf\u03c0\u03b7\u03b3\u1f75 \u03a1\u03bf\u1f7b\u03c3\u03c4\u03b7\u03c2 (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.06035,
+      "lon": 21.5377
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 639.4,
+    "route_mile": 397.3,
+    "address": "\u0394\u03c1\u03bf\u03c3\u03bf\u03c0\u03b7\u03b3\u1f75 \u03a1\u03bf\u1f7b\u03c3\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=39.06035,21.53770",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (\u0394\u03c1\u03bf\u03c3\u03bf\u03c0\u03b7\u03b3\u1f75 \u03a1\u03bf\u1f7b\u03c3\u03c4\u03b7\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b1\u03b3\u03c1\u03b1\u03c6\u03b9\u03ce\u03c4\u03b7\u03c2_651km",
+    "name": "\u0391\u03b3\u03c1\u03b1\u03c6\u03b9\u03ce\u03c4\u03b7\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.99914,
+      "lon": 21.57176
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 651.4,
+    "route_mile": 404.8,
+    "address": "\u0391\u03b3\u03c1\u03b1\u03c6\u03b9\u03ce\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.99914,21.57176",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0391\u03b3\u03c1\u03b1\u03c6\u03b9\u03ce\u03c4\u03b7\u03c2). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c6\u03c1\u03b1\u03b3\u03ba\u03b9\u03c3\u03c4\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1_662km",
+    "name": "\u03a6\u03c1\u03b1\u03b3\u03ba\u03b9\u03c3\u03c4\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.00457,
+      "lon": 21.64414
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 662.1,
+    "route_mile": 411.4,
+    "address": "\u03a6\u03c1\u03b1\u03b3\u03ba\u03b9\u03c3\u03c4\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1",
+    "google_maps_url": "https://maps.google.com/?q=39.00457,21.64414",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a6\u03c1\u03b1\u03b3\u03ba\u03b9\u03c3\u03c4\u03b1\u03bd\u03cc\u03c1\u03b5\u03bc\u03b1). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c4\u03b1\u03c5\u03c1\u03c9\u03c0\u03cc\u03c2_672km",
+    "name": "\u03a4\u03b1\u03c5\u03c1\u03c9\u03c0\u03cc\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.97963,
+      "lon": 21.69859
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 672.8,
+    "route_mile": 418.0,
+    "address": "\u03a4\u03b1\u03c5\u03c1\u03c9\u03c0\u03cc\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.97963,21.69859",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u03a4\u03b1\u03c5\u03c1\u03c9\u03c0\u03cc\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03b1\u03c1\u03c0\u03b5\u03bd\u03b7\u03c3\u03b9\u03ce\u03c4\u03b7\u03c2_731km",
+    "name": "\u039a\u03b1\u03c1\u03c0\u03b5\u03bd\u03b7\u03c3\u03b9\u03ce\u03c4\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.89713,
+      "lon": 21.8051
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 731.0,
+    "route_mile": 454.2,
+    "address": "\u039a\u03b1\u03c1\u03c0\u03b5\u03bd\u03b7\u03c3\u03b9\u03ce\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.89713,21.80510",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03b1\u03c1\u03c0\u03b5\u03bd\u03b7\u03c3\u03b9\u03ce\u03c4\u03b7\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2_788km",
+    "name": "\u039a\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.75876,
+      "lon": 21.75897
+    },
+    "distance_to_trail_km": 0.028,
+    "route_km": 788.6,
+    "route_mile": 490.0,
+    "address": "\u039a\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.75876,21.75897",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2). 28m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03ba\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2_816km",
+    "name": "\u039a\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.76594,
+      "lon": 21.6836
+    },
+    "distance_to_trail_km": 0.033,
+    "route_km": 816.3,
+    "route_mile": 507.3,
+    "address": "\u039a\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.76594,21.68360",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u039a\u03c1\u03b9\u03ba\u03b5\u03bb\u03bb\u03bf\u03c0\u03cc\u03c4\u03b1\u03bc\u03bf\u03c2). 33m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2_843km",
+    "name": "\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.69705,
+      "lon": 21.70294
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 843.5,
+    "route_mile": 524.1,
+    "address": "\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.69705,21.70294",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c1\u03ad\u03bc\u03b1_\u03b3\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2_856km",
+    "name": "\u03a1\u03ad\u03bc\u03b1 \u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.65857,
+      "lon": 21.72501
+    },
+    "distance_to_trail_km": 0.019,
+    "route_km": 856.8,
+    "route_mile": 532.4,
+    "address": "\u03a1\u03ad\u03bc\u03b1 \u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.65857,21.72501",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a1\u03ad\u03bc\u03b1 \u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2). 19m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2_856km",
+    "name": "\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.65814,
+      "lon": 21.72469
+    },
+    "distance_to_trail_km": 0.032,
+    "route_km": 856.9,
+    "route_mile": 532.4,
+    "address": "\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.65814,21.72469",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2). 32m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b3\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2_862km",
+    "name": "\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.61671,
+      "lon": 21.71372
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 862.9,
+    "route_mile": 536.2,
+    "address": "\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.61671,21.71372",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u0393\u03b9\u03b4\u03bf\u03bc\u03b1\u03bd\u03b4\u03c1\u03af\u03c4\u03b7\u03c2). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b5\u03cd\u03b7\u03bd\u03bf\u03c2_864km",
+    "name": "\u0395\u03cd\u03b7\u03bd\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.60778,
+      "lon": 21.71824
+    },
+    "distance_to_trail_km": 0.188,
+    "route_km": 864.1,
+    "route_mile": 536.9,
+    "address": "\u0395\u03cd\u03b7\u03bd\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.60778,21.71824",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0395\u03cd\u03b7\u03bd\u03bf\u03c2). 188m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03b5\u03cd\u03b7\u03bd\u03bf\u03c2_887km",
+    "name": "\u0395\u03cd\u03b7\u03bd\u03bf\u03c2 (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.50239,
+      "lon": 21.74809
+    },
+    "distance_to_trail_km": 0.042,
+    "route_km": 887.9,
+    "route_mile": 551.7,
+    "address": "\u0395\u03cd\u03b7\u03bd\u03bf\u03c2",
+    "google_maps_url": "https://maps.google.com/?q=38.50239,21.74809",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (\u0395\u03cd\u03b7\u03bd\u03bf\u03c2). 42m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_\u03c0\u03cc\u03c1\u03b9\u03b1\u03c1\u03b7_889km",
+    "name": "\u03a0\u03cc\u03c1\u03b9\u03b1\u03c1\u03b7 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.51023,
+      "lon": 21.74805
+    },
+    "distance_to_trail_km": 0.241,
+    "route_km": 889.1,
+    "route_mile": 552.5,
+    "address": "\u03a0\u03cc\u03c1\u03b9\u03b1\u03c1\u03b7",
+    "google_maps_url": "https://maps.google.com/?q=38.51023,21.74805",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (\u03a0\u03cc\u03c1\u03b9\u03b1\u03c1\u03b7). 241m from trail. Natural water source (filtration/treatment required)."
+  }
+]

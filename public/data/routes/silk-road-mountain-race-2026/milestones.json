@@ -1,0 +1,233 @@
+[
+  {
+    "name": "Talas, KG (Grand Depart)",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 1242,
+    "state": "KG"
+  },
+  {
+    "name": "Terekti Pass Summit",
+    "mile": 31.4,
+    "km": 50.5,
+    "elevation": 3370,
+    "state": "KG"
+  },
+  {
+    "name": "Toktogul Resupply",
+    "mile": 88.1,
+    "km": 141.8,
+    "elevation": 950,
+    "state": "KG"
+  },
+  {
+    "name": "Torkent",
+    "mile": 106.6,
+    "km": 171.6,
+    "elevation": 1050,
+    "state": "KG"
+  },
+  {
+    "name": "Toluk Mountain Village",
+    "mile": 155.6,
+    "km": 250.5,
+    "elevation": 2200,
+    "state": "KG"
+  },
+  {
+    "name": "Kyzl-Oi Canyon Guesthouses",
+    "mile": 203.9,
+    "km": 328.2,
+    "elevation": 1500,
+    "state": "KG"
+  },
+  {
+    "name": "Kojomkul",
+    "mile": 219.2,
+    "km": 352.8,
+    "elevation": 1420,
+    "state": "KG"
+  },
+  {
+    "name": "Kyzyl-Bel Pass",
+    "mile": 272.8,
+    "km": 439.1,
+    "elevation": 3453,
+    "state": "KG"
+  },
+  {
+    "name": "Song-Köl Lake (CP1)",
+    "mile": 349.6,
+    "km": 562.6,
+    "elevation": 3016,
+    "state": "KG"
+  },
+  {
+    "name": "Baetov Resupply",
+    "mile": 406.0,
+    "km": 653.4,
+    "elevation": 1580,
+    "state": "KG"
+  },
+  {
+    "name": "Kosh-Dobo Village",
+    "mile": 456.4,
+    "km": 734.5,
+    "elevation": 1950,
+    "state": "KG"
+  },
+  {
+    "name": "MELS Pass Crest",
+    "mile": 495.6,
+    "km": 797.6,
+    "elevation": 3270,
+    "state": "KG"
+  },
+  {
+    "name": "Military Checkpoint (Border Zone Entry)",
+    "mile": 547.1,
+    "km": 880.4,
+    "elevation": 3420,
+    "state": "KG"
+  },
+  {
+    "name": "The Blue Caravan Resupply",
+    "mile": 580.7,
+    "km": 934.5,
+    "elevation": 3510,
+    "state": "KG"
+  },
+  {
+    "name": "The Old Soviet Road High Crest",
+    "mile": 650.1,
+    "km": 1046.3,
+    "elevation": 3668,
+    "state": "KG"
+  },
+  {
+    "name": "Military Checkpoint (Border Zone Exit)",
+    "mile": 678.6,
+    "km": 1092.0,
+    "elevation": 3100,
+    "state": "KG"
+  },
+  {
+    "name": "Naryn City Resupply",
+    "mile": 728.2,
+    "km": 1171.9,
+    "elevation": 2020,
+    "state": "KG"
+  },
+  {
+    "name": "Eki-Naryn Gorge Guesthouse",
+    "mile": 755.7,
+    "km": 1216.2,
+    "elevation": 2250,
+    "state": "KG"
+  },
+  {
+    "name": "Arabel High Alpine Pass",
+    "mile": 846.1,
+    "km": 1361.7,
+    "elevation": 3840,
+    "state": "KG"
+  },
+  {
+    "name": "Barskoon Pass Summit",
+    "mile": 855.7,
+    "km": 1377.1,
+    "elevation": 3819,
+    "state": "KG"
+  },
+  {
+    "name": "Tamga (Issyk-Kul South Shore)",
+    "mile": 883.4,
+    "km": 1421.7,
+    "elevation": 1685,
+    "state": "KG"
+  },
+  {
+    "name": "Tosor Pass Summit",
+    "mile": 914.5,
+    "km": 1471.8,
+    "elevation": 3897,
+    "state": "KG"
+  },
+  {
+    "name": "Ukok Pass (Course Summit)",
+    "mile": 1013.4,
+    "km": 1630.9,
+    "elevation": 3926,
+    "state": "KG"
+  },
+  {
+    "name": "Kok-Ulok Yurt Camp",
+    "mile": 1021.6,
+    "km": 1644.1,
+    "elevation": 3100,
+    "state": "KG"
+  },
+  {
+    "name": "Kochkor Resupply",
+    "mile": 1035.9,
+    "km": 1667.1,
+    "elevation": 1800,
+    "state": "KG"
+  },
+  {
+    "name": "Kegeti Pass Summit",
+    "mile": 1086.5,
+    "km": 1748.6,
+    "elevation": 3783,
+    "state": "KG"
+  },
+  {
+    "name": "Kegeti Valley",
+    "mile": 1113.1,
+    "km": 1791.4,
+    "elevation": 1250,
+    "state": "KG"
+  },
+  {
+    "name": "The Secret Oasis",
+    "mile": 1173.7,
+    "km": 1888.9,
+    "elevation": 1450,
+    "state": "KG"
+  },
+  {
+    "name": "Kalmak-Ashuu",
+    "mile": 1189.0,
+    "km": 1913.5,
+    "elevation": 1520,
+    "state": "KG"
+  },
+  {
+    "name": "Kaindy CBT Guesthouses",
+    "mile": 1193.2,
+    "km": 1920.2,
+    "elevation": 1600,
+    "state": "KG"
+  },
+  {
+    "name": "Kok-Ayrik Pass Summit",
+    "mile": 1242.5,
+    "km": 1999.6,
+    "elevation": 3844,
+    "state": "KG"
+  },
+  {
+    "name": "Chong Sary-Oy",
+    "mile": 1263.8,
+    "km": 2034.0,
+    "elevation": 1620,
+    "state": "KG"
+  },
+  {
+    "name": "Cholpon-Ata (Finish Line)",
+    "mile": 1273.7,
+    "km": 2049.9,
+    "elevation": 1611,
+    "state": "KG"
+  }
+]

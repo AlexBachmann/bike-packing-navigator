@@ -1,0 +1,857 @@
+[
+  {
+    "id": "water_osm_charij2_9km",
+    "name": "Charij2 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.31984,
+      "lon": -6.27592
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 9.8,
+    "route_mile": 6.1,
+    "address": "Charij2",
+    "google_maps_url": "https://maps.google.com/?q=32.31984,-6.27592",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (Charij2). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_al_abid_49km",
+    "name": "Oued Al Abid (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.19179,
+      "lon": -6.18529
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 49.0,
+    "route_mile": 30.4,
+    "address": "Oued Al Abid",
+    "google_maps_url": "https://maps.google.com/?q=32.19179,-6.18529",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Al Abid). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_dunachale_100km",
+    "name": "Assif Dunachale (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.02608,
+      "lon": -6.20402
+    },
+    "distance_to_trail_km": 0.021,
+    "route_km": 100.9,
+    "route_mile": 62.7,
+    "address": "Assif Dunachale",
+    "google_maps_url": "https://maps.google.com/?q=32.02608,-6.20402",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Dunachale). 21m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_aghbalou_ntadout_135km",
+    "name": "Aghbalou N´Tadout (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.87508,
+      "lon": -6.19783
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 135.0,
+    "route_mile": 83.9,
+    "address": "Aghbalou N´Tadout",
+    "google_maps_url": "https://maps.google.com/?q=31.87508,-6.19783",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Aghbalou N´Tadout). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_nait_hkim_172km",
+    "name": "Assif n'Ait Hkim (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.7224,
+      "lon": -6.31055
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 172.8,
+    "route_mile": 107.3,
+    "address": "Assif n'Ait Hkim",
+    "google_maps_url": "https://maps.google.com/?q=31.72240,-6.31055",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Assif n'Ait Hkim). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_akka_ntsedoune_177km",
+    "name": "Akka n'Tsedoune (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.70456,
+      "lon": -6.3481
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 177.4,
+    "route_mile": 110.2,
+    "address": "Akka n'Tsedoune",
+    "google_maps_url": "https://maps.google.com/?q=31.70456,-6.34810",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Akka n'Tsedoune). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_nait_hkim_188km",
+    "name": "Assif n'Ait Hkim (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.65951,
+      "lon": -6.4265
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 188.5,
+    "route_mile": 117.1,
+    "address": "Assif n'Ait Hkim",
+    "google_maps_url": "https://maps.google.com/?q=31.65951,-6.42650",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif n'Ait Hkim). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_rbat_193km",
+    "name": "Assif Rbat (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.6591,
+      "lon": -6.38429
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 193.0,
+    "route_mile": 119.9,
+    "address": "Assif Rbat",
+    "google_maps_url": "https://maps.google.com/?q=31.65910,-6.38429",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Rbat). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_mgoune_214km",
+    "name": "Assif Mgoune (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.59762,
+      "lon": -6.34845
+    },
+    "distance_to_trail_km": 0.151,
+    "route_km": 214.5,
+    "route_mile": 133.3,
+    "address": "Assif Mgoune",
+    "google_maps_url": "https://maps.google.com/?q=31.59762,-6.34845",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Mgoune). 151m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_akka_nait_ou_sekka_223km",
+    "name": "Akka n'Ait Ou Sekka (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.60363,
+      "lon": -6.27193
+    },
+    "distance_to_trail_km": 0.002,
+    "route_km": 223.8,
+    "route_mile": 139.1,
+    "address": "Akka n'Ait Ou Sekka",
+    "google_maps_url": "https://maps.google.com/?q=31.60363,-6.27193",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Akka n'Ait Ou Sekka). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_mgoune_231km",
+    "name": "Assif Mgoune (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.6223,
+      "lon": -6.212
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 231.4,
+    "route_mile": 143.8,
+    "address": "Assif Mgoune",
+    "google_maps_url": "https://maps.google.com/?q=31.62230,-6.21200",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Mgoune). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_mgoune_236km",
+    "name": "Assif Mgoune (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.60465,
+      "lon": -6.19347
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 236.4,
+    "route_mile": 146.9,
+    "address": "Assif Mgoune",
+    "google_maps_url": "https://maps.google.com/?q=31.60465,-6.19347",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Mgoune). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_source_243km",
+    "name": "source (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.56222,
+      "lon": -6.17135
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 243.5,
+    "route_mile": 151.3,
+    "address": "source",
+    "google_maps_url": "https://maps.google.com/?q=31.56222,-6.17135",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (source). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_mgoune_249km",
+    "name": "Assif Mgoune (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.53808,
+      "lon": -6.13733
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 249.2,
+    "route_mile": 154.9,
+    "address": "Assif Mgoune",
+    "google_maps_url": "https://maps.google.com/?q=31.53808,-6.13733",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Mgoune). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_mgoune_255km",
+    "name": "Assif Mgoune (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.49748,
+      "lon": -6.11798
+    },
+    "distance_to_trail_km": 0.15,
+    "route_km": 255.1,
+    "route_mile": 158.5,
+    "address": "Assif Mgoune",
+    "google_maps_url": "https://maps.google.com/?q=31.49748,-6.11798",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Mgoune). 150m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_znag_268km",
+    "name": "Assif Znag (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.41924,
+      "lon": -6.14648
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 268.9,
+    "route_mile": 167.1,
+    "address": "Assif Znag",
+    "google_maps_url": "https://maps.google.com/?q=31.41924,-6.14648",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Znag). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_mgoun_273km",
+    "name": "Oued M'Goun (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.38828,
+      "lon": -6.12889
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 273.9,
+    "route_mile": 170.2,
+    "address": "Oued M'Goun",
+    "google_maps_url": "https://maps.google.com/?q=31.38828,-6.12889",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued M'Goun). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_dades_304km",
+    "name": "Oued Dades (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.20243,
+      "lon": -6.13692
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 304.8,
+    "route_mile": 189.4,
+    "address": "Oued Dades",
+    "google_maps_url": "https://maps.google.com/?q=31.20243,-6.13692",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Dades). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_aqqa_isamlal_315km",
+    "name": "Aqqa Isamlal (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.13529,
+      "lon": -6.15082
+    },
+    "distance_to_trail_km": 0.026,
+    "route_km": 315.9,
+    "route_mile": 196.3,
+    "address": "Aqqa Isamlal",
+    "google_maps_url": "https://maps.google.com/?q=31.13529,-6.15082",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Aqqa Isamlal). 26m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_imi_ougni_324km",
+    "name": "Imi Ougni (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.10061,
+      "lon": -6.21241
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 324.4,
+    "route_mile": 201.6,
+    "address": "Imi Ougni",
+    "google_maps_url": "https://maps.google.com/?q=31.10061,-6.21241",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Imi Ougni). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_issil_oumsaourou_329km",
+    "name": "Issil Oumsaourou (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.07135,
+      "lon": -6.24923
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 329.6,
+    "route_mile": 204.8,
+    "address": "Issil Oumsaourou",
+    "google_maps_url": "https://maps.google.com/?q=31.07135,-6.24923",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Issil Oumsaourou). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_aqqa_oughallay_341km",
+    "name": "Aqqa Oughallay (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.99786,
+      "lon": -6.25174
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 341.2,
+    "route_mile": 212.0,
+    "address": "Aqqa Oughallay",
+    "google_maps_url": "https://maps.google.com/?q=30.99786,-6.25174",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Aqqa Oughallay). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_tanguerfa_390km",
+    "name": "Assif Tanguerfa (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.76151,
+      "lon": -6.1679
+    },
+    "distance_to_trail_km": 0.002,
+    "route_km": 390.7,
+    "route_mile": 242.8,
+    "address": "Assif Tanguerfa",
+    "google_maps_url": "https://maps.google.com/?q=30.76151,-6.16790",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Tanguerfa). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_taghya_419km",
+    "name": "Taghya (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.76009,
+      "lon": -6.36554
+    },
+    "distance_to_trail_km": 0.044,
+    "route_km": 419.1,
+    "route_mile": 260.4,
+    "address": "Taghya",
+    "google_maps_url": "https://maps.google.com/?q=30.76009,-6.36554",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Taghya). 44m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_drâa_ⴰⵙⵉⴼ_ⵏ_ⴷⵔⵄⴰ_واد_درعة_427km",
+    "name": "Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.7619,
+      "lon": -6.43222
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 427.6,
+    "route_mile": 265.7,
+    "address": "Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة",
+    "google_maps_url": "https://maps.google.com/?q=30.76190,-6.43222",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_drâa_ⴰⵙⵉⴼ_ⵏ_ⴷⵔⵄⴰ_واد_درعة_438km",
+    "name": "Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.77504,
+      "lon": -6.49616
+    },
+    "distance_to_trail_km": 0.089,
+    "route_km": 438.1,
+    "route_mile": 272.2,
+    "address": "Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة",
+    "google_maps_url": "https://maps.google.com/?q=30.77504,-6.49616",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة). 89m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_ait_douchen_521km",
+    "name": "Oued Ait Douchen (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.65154,
+      "lon": -7.10583
+    },
+    "distance_to_trail_km": 0.025,
+    "route_km": 521.2,
+    "route_mile": 323.9,
+    "address": "Oued Ait Douchen",
+    "google_maps_url": "https://maps.google.com/?q=30.65154,-7.10583",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Ait Douchen). 25m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_ait_douchen_528km",
+    "name": "Oued Ait Douchen (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.6174,
+      "lon": -7.14421
+    },
+    "distance_to_trail_km": 0.032,
+    "route_km": 528.9,
+    "route_mile": 328.6,
+    "address": "Oued Ait Douchen",
+    "google_maps_url": "https://maps.google.com/?q=30.61740,-7.14421",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Ait Douchen). 32m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_ntagdalt_534km",
+    "name": "Assif n'Tagdalt (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.57791,
+      "lon": -7.15574
+    },
+    "distance_to_trail_km": 0.091,
+    "route_km": 534.2,
+    "route_mile": 331.9,
+    "address": "Assif n'Tagdalt",
+    "google_maps_url": "https://maps.google.com/?q=30.57791,-7.15574",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif n'Tagdalt). 91m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_ntagdalt_539km",
+    "name": "Assif n'Tagdalt (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.57858,
+      "lon": -7.20657
+    },
+    "distance_to_trail_km": 0.201,
+    "route_km": 539.2,
+    "route_mile": 335.0,
+    "address": "Assif n'Tagdalt",
+    "google_maps_url": "https://maps.google.com/?q=30.57858,-7.20657",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif n'Tagdalt). 201m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_tata_730km",
+    "name": "Oued Tata (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.00741,
+      "lon": -8.1902
+    },
+    "distance_to_trail_km": 0.157,
+    "route_km": 730.6,
+    "route_mile": 454.0,
+    "address": "Oued Tata",
+    "google_maps_url": "https://maps.google.com/?q=30.00741,-8.19020",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Tata). 157m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_akka_ⴰⵙⵉⴼ_ⵏ_ⴰⵇⵇⴰ_وادي_أقا_807km",
+    "name": "Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 29.79346,
+      "lon": -8.52693
+    },
+    "distance_to_trail_km": 0.13,
+    "route_km": 807.7,
+    "route_mile": 501.9,
+    "address": "Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا",
+    "google_maps_url": "https://maps.google.com/?q=29.79346,-8.52693",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا). 130m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_akka_ⴰⵙⵉⴼ_ⵏ_ⴰⵇⵇⴰ_وادي_أقا_811km",
+    "name": "Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 29.76313,
+      "lon": -8.51934
+    },
+    "distance_to_trail_km": 0.196,
+    "route_km": 811.6,
+    "route_mile": 504.3,
+    "address": "Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا",
+    "google_maps_url": "https://maps.google.com/?q=29.76313,-8.51934",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا). 196m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_tamanart_وادي_تمنارت_883km",
+    "name": "Oued Tamanart وادي تمنارت (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 29.50894,
+      "lon": -8.80621
+    },
+    "distance_to_trail_km": 0.041,
+    "route_km": 883.1,
+    "route_mile": 548.7,
+    "address": "Oued Tamanart وادي تمنارت",
+    "google_maps_url": "https://maps.google.com/?q=29.50894,-8.80621",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Tamanart وادي تمنارت). 41m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_tizirt_918km",
+    "name": "Assif Tizirt (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 29.65924,
+      "lon": -8.95877
+    },
+    "distance_to_trail_km": 0.044,
+    "route_km": 918.6,
+    "route_mile": 570.8,
+    "address": "Assif Tizirt",
+    "google_maps_url": "https://maps.google.com/?q=29.65924,-8.95877",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif Tizirt). 44m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_massa_ⴰⵙⵙⵉⴼ_ⵏ_ⵎⴰⵙⵙⴰ_وادي_ماسة_924km",
+    "name": "Oued Massa ⴰⵙⵙⵉⴼ ⵏ ⵎⴰⵙⵙⴰ وادي ماسة (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 29.71119,
+      "lon": -8.96851
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 924.7,
+    "route_mile": 574.6,
+    "address": "Oued Massa ⴰⵙⵙⵉⴼ ⵏ ⵎⴰⵙⵙⴰ وادي ماسة",
+    "google_maps_url": "https://maps.google.com/?q=29.71119,-8.96851",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Massa ⴰⵙⵙⵉⴼ ⵏ ⵎⴰⵙⵙⴰ وادي ماسة). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_assif_nammelene_واد_أملن_932km",
+    "name": "Assif n'ammelene واد أملن (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 29.75414,
+      "lon": -8.99154
+    },
+    "distance_to_trail_km": 0.059,
+    "route_km": 932.6,
+    "route_mile": 579.5,
+    "address": "Assif n'ammelene واد أملن",
+    "google_maps_url": "https://maps.google.com/?q=29.75414,-8.99154",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Assif n'ammelene واد أملن). 59m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_asif_oussaka_1060km",
+    "name": "Asif Oussaka (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.15962,
+      "lon": -9.13213
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1060.6,
+    "route_mile": 659.0,
+    "address": "Asif Oussaka",
+    "google_maps_url": "https://maps.google.com/?q=30.15962,-9.13213",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Asif Oussaka). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_asif_oussaka_1065km",
+    "name": "Asif Oussaka (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.18628,
+      "lon": -9.16867
+    },
+    "distance_to_trail_km": 0.041,
+    "route_km": 1065.8,
+    "route_mile": 662.3,
+    "address": "Asif Oussaka",
+    "google_maps_url": "https://maps.google.com/?q=30.18628,-9.16867",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Asif Oussaka). 41m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_souss_وادي_سوس_1099km",
+    "name": "Oued Souss وادي سوس (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.38827,
+      "lon": -9.36333
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 1099.5,
+    "route_mile": 683.2,
+    "address": "Oued Souss وادي سوس",
+    "google_maps_url": "https://maps.google.com/?q=30.38827,-9.36333",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Souss وادي سوس). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_tagenza_ⴰⵙⵉⴼ_ⵏ_ⵜⴳⴰⵏⵣⴰ_واد_تگنزا_1104km",
+    "name": "Oued Tagenza ⴰⵙⵉⴼ ⵏ ⵜⴳⴰⵏⵣⴰ واد تگنزا (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.42043,
+      "lon": -9.37639
+    },
+    "distance_to_trail_km": 0.028,
+    "route_km": 1104.9,
+    "route_mile": 686.6,
+    "address": "Oued Tagenza ⴰⵙⵉⴼ ⵏ ⵜⴳⴰⵏⵣⴰ واد تگنزا",
+    "google_maps_url": "https://maps.google.com/?q=30.42043,-9.37639",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Tagenza ⴰⵙⵉⴼ ⵏ ⵜⴳⴰⵏⵣⴰ واد تگنزا). 28m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_tamraght_ⴰⵙⵉⴼ_ⵏ_ⵜⴰⵎⵔⴰⵖⵜ_وادي_تامراغت_1165km",
+    "name": "Oued Tamraght ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⴰⵖⵜ وادي تامراغت (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.55961,
+      "lon": -9.54564
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 1165.6,
+    "route_mile": 724.3,
+    "address": "Oued Tamraght ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⴰⵖⵜ وادي تامراغت",
+    "google_maps_url": "https://maps.google.com/?q=30.55961,-9.54564",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Tamraght ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⴰⵖⵜ وادي تامراغت). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_tamri_ⴰⵙⵉⴼ_ⵏ_ⵜⴰⵎⵔⵉ_واد_تامري_1207km",
+    "name": "Oued Tamri ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⵉ واد تامري (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.7221,
+      "lon": -9.59729
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 1207.0,
+    "route_mile": 750.0,
+    "address": "Oued Tamri ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⵉ واد تامري",
+    "google_maps_url": "https://maps.google.com/?q=30.72210,-9.59729",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Tamri ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⵉ واد تامري). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_ougar_ⴰⵙⵉⴼ_ⵏ_oⵓⴳⴰⵔ_واد_اوغار_1231km",
+    "name": "Oued Ougar ⴰⵙⵉⴼ ⵏ oⵓⴳⴰⵔ واد اوغار (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 30.76187,
+      "lon": -9.68422
+    },
+    "distance_to_trail_km": 0.003,
+    "route_km": 1231.1,
+    "route_mile": 765.0,
+    "address": "Oued Ougar ⴰⵙⵉⴼ ⵏ oⵓⴳⴰⵔ واد اوغار",
+    "google_maps_url": "https://maps.google.com/?q=30.76187,-9.68422",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Ougar ⴰⵙⵉⴼ ⵏ oⵓⴳⴰⵔ واد اوغار). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_oued_ksob_ⴰⵙⵉⴼ_ⵏ_ⵇⵚⵓⴱ_وادي_القصب_1348km",
+    "name": "Oued Ksob ⴰⵙⵉⴼ ⵏ ⵇⵚⵓⴱ وادي القصب (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 31.48463,
+      "lon": -9.76541
+    },
+    "distance_to_trail_km": 0.024,
+    "route_km": 1348.5,
+    "route_mile": 837.9,
+    "address": "Oued Ksob ⴰⵙⵉⴼ ⵏ ⵇⵚⵓⴱ وادي القصب",
+    "google_maps_url": "https://maps.google.com/?q=31.48463,-9.76541",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Oued Ksob ⴰⵙⵉⴼ ⵏ ⵇⵚⵓⴱ وادي القصب). 24m from trail. Natural water source (filtration/treatment required)."
+  }
+]

@@ -1,0 +1,362 @@
+[
+  {
+    "id": "town_tyndrum_start",
+    "name": "Tyndrum (Start)",
+    "category": "town",
+    "type": "town",
+    "town": "Tyndrum",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.4400,
+      "lon": -4.7121
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 0.0,
+    "route_mile": 0.0,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Grand Depart hub of the Highland Trail 550: Green Welly Stop, Real Food Cafe, Brodie's Store, bunkhouses, and outdoor gear."
+  },
+  {
+    "id": "town_bridge_of_balgie",
+    "name": "Bridge of Balgie",
+    "category": "town",
+    "type": "town",
+    "town": "Bridge of Balgie",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.5790,
+      "lon": -4.3835
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 35.0,
+    "route_mile": 21.7,
+    "province_state": "Perthshire",
+    "country": "UK",
+    "description": "Idyllic hamlet deep in Glen Lyon with post office, tearoom, and local bakery goods."
+  },
+  {
+    "id": "town_laggan",
+    "name": "Laggan Wolftrax",
+    "category": "town",
+    "type": "town",
+    "town": "Laggan",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.9940,
+      "lon": -4.2790
+    },
+    "distance_to_trail_km": 2.46,
+    "route_km": 114.9,
+    "route_mile": 71.4,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Highland mountain bike hub with Laggan Wolftrax cafe, bike wash, and Strathmashie forest trails."
+  },
+  {
+    "id": "town_fort_augustus",
+    "name": "Fort Augustus",
+    "category": "town",
+    "type": "town",
+    "town": "Fort Augustus",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.1450,
+      "lon": -4.6800
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 151.5,
+    "route_mile": 94.1,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "South end of Loch Ness along the Caledonian Canal. Supermarket, pharmacy, restaurants, hostel, and bike spares."
+  },
+  {
+    "id": "town_contin",
+    "name": "Contin",
+    "category": "town",
+    "type": "town",
+    "town": "Contin",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.5750,
+      "lon": -4.5800
+    },
+    "distance_to_trail_km": 0.28,
+    "route_km": 241.9,
+    "route_mile": 150.3,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Gateway to Strathconon with 24-hr filling station, convenience store, and Torrachilty forest trails."
+  },
+  {
+    "id": "town_oykel_bridge",
+    "name": "Oykel Bridge",
+    "category": "town",
+    "type": "town",
+    "town": "Oykel Bridge",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.9730,
+      "lon": -4.7160
+    },
+    "distance_to_trail_km": 0.51,
+    "route_km": 315.0,
+    "route_mile": 195.7,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Central Sutherland fishing hub with the Oykel Bridge Hotel serving warm meals and drinks."
+  },
+  {
+    "id": "town_rhiconich",
+    "name": "Rhiconich",
+    "category": "town",
+    "type": "town",
+    "town": "Rhiconich",
+    "is_in_town": true,
+    "location": {
+      "lat": 58.4230,
+      "lon": -4.9570
+    },
+    "distance_to_trail_km": 8.90,
+    "route_km": 391.1,
+    "route_mile": 243.0,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Remote northwest outpost near Loch Inchard and junction for Cape Wrath / Durness."
+  },
+  {
+    "id": "town_kylesku",
+    "name": "Kylesku",
+    "category": "town",
+    "type": "town",
+    "town": "Kylesku",
+    "is_in_town": true,
+    "location": {
+      "lat": 58.2570,
+      "lon": -5.0210
+    },
+    "distance_to_trail_km": 0.12,
+    "route_km": 415.0,
+    "route_mile": 257.9,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Sea loch fjord entrance at the foot of Quinag, famous for Kylesku Hotel and seafood bistro."
+  },
+  {
+    "id": "town_lochinver",
+    "name": "Lochinver",
+    "category": "town",
+    "type": "town",
+    "town": "Lochinver",
+    "is_in_town": true,
+    "location": {
+      "lat": 58.1490,
+      "lon": -5.2440
+    },
+    "distance_to_trail_km": 0.21,
+    "route_km": 456.4,
+    "route_mile": 283.6,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Thriving Assynt coastal port: famous Lochinver Larder pie shop, SPAR supermarket, fuel, pharmacy, and harbour."
+  },
+  {
+    "id": "town_ullapool",
+    "name": "Ullapool",
+    "category": "town",
+    "type": "town",
+    "town": "Ullapool",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.8950,
+      "lon": -5.1610
+    },
+    "distance_to_trail_km": 0.40,
+    "route_km": 531.8,
+    "route_mile": 330.5,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Major resupply hub on Loch Broom: large Tesco supermarket, outdoor stores, bike spares, chip shops, and ferries."
+  },
+  {
+    "id": "town_poolewe",
+    "name": "Poolewe",
+    "category": "town",
+    "type": "town",
+    "town": "Poolewe",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.7600,
+      "lon": -5.6020
+    },
+    "distance_to_trail_km": 0.16,
+    "route_km": 595.8,
+    "route_mile": 370.2,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Loch Ewe seaside village with convenience store, cafe, campsite, and gateway to Loch Maree."
+  },
+  {
+    "id": "town_kinlochewe",
+    "name": "Kinlochewe",
+    "category": "town",
+    "type": "town",
+    "town": "Kinlochewe",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.6050,
+      "lon": -5.3000
+    },
+    "distance_to_trail_km": 0.21,
+    "route_km": 624.6,
+    "route_mile": 388.1,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Beinn Eighe National Nature Reserve base: Kinlochewe Hotel, Whistle Stop cafe, bunkhouse, and fuel."
+  },
+  {
+    "id": "town_strathcarron",
+    "name": "Strathcarron",
+    "category": "town",
+    "type": "town",
+    "town": "Strathcarron",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.4200,
+      "lon": -5.4300
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 656.1,
+    "route_mile": 407.7,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Wester Ross railway stop with Strathcarron Hotel, bar food, and ScotRail links."
+  },
+  {
+    "id": "town_dornie",
+    "name": "Dornie",
+    "category": "town",
+    "type": "town",
+    "town": "Dornie",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.2790,
+      "lon": -5.5140
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 681.3,
+    "route_mile": 423.3,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Historic village facing Eilean Donan Castle with Dornie Hotel, bakery, and community store."
+  },
+  {
+    "id": "town_shiel_bridge",
+    "name": "Shiel Bridge",
+    "category": "town",
+    "type": "town",
+    "town": "Shiel Bridge",
+    "is_in_town": true,
+    "location": {
+      "lat": 57.2150,
+      "lon": -5.4190
+    },
+    "distance_to_trail_km": 2.08,
+    "route_km": 689.9,
+    "route_mile": 428.7,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Foot of the Five Sisters of Kintail: Kintail Lodge Hotel, filling station convenience shop, and campsite."
+  },
+  {
+    "id": "town_fort_william",
+    "name": "Fort William",
+    "category": "town",
+    "type": "town",
+    "town": "Fort William",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.8170,
+      "lon": -5.1170
+    },
+    "distance_to_trail_km": 1.47,
+    "route_km": 815.6,
+    "route_mile": 506.8,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Outdoor Capital of the UK below Ben Nevis: Morrisons & Marks and Spencer supermarkets, Nevis Cycles, outdoor stores, and lodging."
+  },
+  {
+    "id": "town_kinlochleven",
+    "name": "Kinlochleven",
+    "category": "town",
+    "type": "town",
+    "town": "Kinlochleven",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.7130,
+      "lon": -4.9650
+    },
+    "distance_to_trail_km": 0.16,
+    "route_km": 838.0,
+    "route_mile": 520.7,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Loch Leven fjord settlement: Co-op supermarket, Tailrace Inn, Ice Factor climbing centre, and hostels."
+  },
+  {
+    "id": "town_kingshouse",
+    "name": "Kingshouse (Glencoe)",
+    "category": "town",
+    "type": "town",
+    "town": "Kingshouse",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.6520,
+      "lon": -4.8400
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 851.7,
+    "route_mile": 529.2,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Historic 18th-century coaching inn on Rannoch Moor below Buachaille Etive Mor. Climbers' bar, restaurant, and drying room."
+  },
+  {
+    "id": "town_bridge_of_orchy",
+    "name": "Bridge of Orchy",
+    "category": "town",
+    "type": "town",
+    "town": "Bridge of Orchy",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.5167,
+      "lon": -4.7667
+    },
+    "distance_to_trail_km": 0.12,
+    "route_km": 872.0,
+    "route_mile": 541.8,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "River Orchy railway village with Bridge of Orchy Hotel and hikers' bunkhouse."
+  },
+  {
+    "id": "town_tyndrum_finish",
+    "name": "Tyndrum (Finish)",
+    "category": "town",
+    "type": "town",
+    "town": "Tyndrum",
+    "is_in_town": true,
+    "location": {
+      "lat": 56.4400,
+      "lon": -4.7121
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 882.0,
+    "route_mile": 548.1,
+    "province_state": "Highlands",
+    "country": "UK",
+    "description": "Finish line of the Highland Trail 550 loop at Tyndrum. Celebration at Real Food Cafe and Green Welly."
+  }
+]

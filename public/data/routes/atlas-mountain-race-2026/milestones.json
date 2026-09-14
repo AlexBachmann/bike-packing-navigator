@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Beni Mellal, Morocco",
+    "mile": 0.0,
+    "km": 0.0,
+    "elevation": 655,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tagleft, Morocco",
+    "mile": 22.1,
+    "km": 35.6,
+    "elevation": 1257,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tilouguite / Cathedral Rock",
+    "mile": 62.1,
+    "km": 99.9,
+    "elevation": 1146,
+    "state": "Morocco"
+  },
+  {
+    "name": "Zawyat Ahansal",
+    "mile": 82.2,
+    "km": 132.3,
+    "elevation": 2302,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tabant / Happy Valley",
+    "mile": 116.6,
+    "km": 187.6,
+    "elevation": 1872,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tizi N'Ait Imi Summit (2,913m)",
+    "mile": 128.0,
+    "km": 206.0,
+    "elevation": 2912,
+    "state": "Morocco"
+  },
+  {
+    "name": "Gorges du M'Goun Trail End",
+    "mile": 154.9,
+    "km": 249.3,
+    "elevation": 1803,
+    "state": "Morocco"
+  },
+  {
+    "name": "Kalaat M'Gouna",
+    "mile": 185.9,
+    "km": 299.2,
+    "elevation": 1431,
+    "state": "Morocco"
+  },
+  {
+    "name": "Ikniouen (Jbel Saghro)",
+    "mile": 217.5,
+    "km": 350.0,
+    "elevation": 1563,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tizi n'Tazazert Summit (2,031m)",
+    "mile": 223.1,
+    "km": 359.1,
+    "elevation": 2031,
+    "state": "Morocco"
+  },
+  {
+    "name": "Afra Oasis",
+    "mile": 248.5,
+    "km": 399.9,
+    "elevation": 887,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tansifte (Draa Valley)",
+    "mile": 310.7,
+    "km": 500.0,
+    "elevation": 1536,
+    "state": "Morocco"
+  },
+  {
+    "name": "Taznakht Carpet Capital",
+    "mile": 335.2,
+    "km": 539.5,
+    "elevation": 1402,
+    "state": "Morocco"
+  },
+  {
+    "name": "Siroua Saffron Valley (Aznaguen)",
+    "mile": 364.1,
+    "km": 586.0,
+    "elevation": 1832,
+    "state": "Morocco"
+  },
+  {
+    "name": "Aguinane Oasis",
+    "mile": 398.4,
+    "km": 641.2,
+    "elevation": 1088,
+    "state": "Morocco"
+  },
+  {
+    "name": "Igherm Anti-Atlas Hub",
+    "mile": 435.0,
+    "km": 700.1,
+    "elevation": 1429,
+    "state": "Morocco"
+  },
+  {
+    "name": "Azaghar N'Irs Plateau",
+    "mile": 447.4,
+    "km": 720.0,
+    "elevation": 1198,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tichgach",
+    "mile": 497.1,
+    "km": 800.0,
+    "elevation": 1157,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tizi n'Tarakatine Summit (1,812m)",
+    "mile": 523.8,
+    "km": 842.9,
+    "elevation": 1808,
+    "state": "Morocco"
+  },
+  {
+    "name": "Gorges d'Aït Mansour",
+    "mile": 548.7,
+    "km": 883.1,
+    "elevation": 1091,
+    "state": "Morocco"
+  },
+  {
+    "name": "Aguerd Oudad (Painted Rocks)",
+    "mile": 563.9,
+    "km": 907.5,
+    "elevation": 1682,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tafraoute Granite Citadel",
+    "mile": 575.3,
+    "km": 925.9,
+    "elevation": 999,
+    "state": "Morocco"
+  },
+  {
+    "name": "Kasbah Tizourgane",
+    "mile": 610.0,
+    "km": 981.7,
+    "elevation": 1120,
+    "state": "Morocco"
+  },
+  {
+    "name": "Ait Baha Valley",
+    "mile": 636.9,
+    "km": 1025.0,
+    "elevation": 524,
+    "state": "Morocco"
+  },
+  {
+    "name": "Amskroud Souss Basin",
+    "mile": 696.8,
+    "km": 1121.4,
+    "elevation": 446,
+    "state": "Morocco"
+  },
+  {
+    "name": "Imouzzer Ida Outanane",
+    "mile": 734.1,
+    "km": 1181.4,
+    "elevation": 1199,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tafferguent Highland Ridge",
+    "mile": 745.6,
+    "km": 1199.9,
+    "elevation": 651,
+    "state": "Morocco"
+  },
+  {
+    "name": "Tafedna Coastal Cove",
+    "mile": 797.9,
+    "km": 1284.1,
+    "elevation": 203,
+    "state": "Morocco"
+  },
+  {
+    "name": "Sidi Kaouki Dunes",
+    "mile": 826.4,
+    "km": 1330.0,
+    "elevation": 9,
+    "state": "Morocco"
+  },
+  {
+    "name": "Essaouira Finish Line",
+    "mile": 840.0,
+    "km": 1351.8,
+    "elevation": 1,
+    "state": "Morocco"
+  }
+]

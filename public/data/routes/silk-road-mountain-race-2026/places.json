@@ -1,0 +1,4808 @@
+[
+  {
+    "id": "srmr_talas_start",
+    "name": "Talas (Grand Depart)",
+    "category": "town",
+    "type": "town",
+    "town": "Talas",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.52111,
+      "lon": 72.25016
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 0.0,
+    "route_mile": 0.0,
+    "address": "Talas, Talas Region, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.52111,72.25016",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Grand Depart of the Silk Road Mountain Race 2026. Full resupply with markets, hotels, ATMs, and bike mechanics before heading into the mountains."
+  },
+  {
+    "id": "water_osm_jana_river_0km",
+    "name": "Jana River (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.51338,
+      "lon": 72.24871
+    },
+    "distance_to_trail_km": 0.029,
+    "route_km": 0.9,
+    "route_mile": 0.6,
+    "address": "Jana River",
+    "google_maps_url": "https://maps.google.com/?q=42.51338,72.24871",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Jana River). 29m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бешташ_22km",
+    "name": "Бешташ (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.34867,
+      "lon": 72.31557
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 22.5,
+    "route_mile": 14.0,
+    "address": "Бешташ",
+    "google_maps_url": "https://maps.google.com/?q=42.34867,72.31557",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Бешташ). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_terekti_pass_50km",
+    "name": "Terekti Pass",
+    "category": "pass",
+    "type": "viewpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.2010136380847,
+      "lon": 72.36335086753638
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 50.4,
+    "route_mile": 31.3,
+    "address": "Terekti Pass, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.2010136380847,72.36335086753638",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Beautiful views. Best ridden from north to south."
+  },
+  {
+    "id": "water_osm_узун_ахмат_84km",
+    "name": "Узун-Ахмат (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.02068,
+      "lon": 72.45725
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 84.4,
+    "route_mile": 52.5,
+    "address": "Узун-Ахмат",
+    "google_maps_url": "https://maps.google.com/?q=42.02068,72.45725",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Узун-Ахмат). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kara_kungei_88km",
+    "name": "Kara-Kungei",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.99638824492379,
+      "lon": 72.47878795524716
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 88.1,
+    "route_mile": 54.8,
+    "address": "Kara-Kungei, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.99638824492379,72.47878795524716",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "srmr_ak_tekir_94km",
+    "name": "Ak-Tekir",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.96255817058474,
+      "lon": 72.51448416093493
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 94.2,
+    "route_mile": 58.6,
+    "address": "Ak-Tekir, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.96255817058474,72.51448416093493",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_кара_кульджа_ала_тай_101km",
+    "name": "Кара Кульджа (Ала Тай) (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.92968,
+      "lon": 72.58405
+    },
+    "distance_to_trail_km": 0.234,
+    "route_km": 101.6,
+    "route_mile": 63.1,
+    "address": "Кара Кульджа (Ала Тай)",
+    "google_maps_url": "https://maps.google.com/?q=41.92968,72.58405",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кара Кульджа (Ала Тай)). 234m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чычкан_135km",
+    "name": "Чычкан (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.9048,
+      "lon": 72.89744
+    },
+    "distance_to_trail_km": 0.06,
+    "route_km": 135.4,
+    "route_mile": 84.1,
+    "address": "Чычкан",
+    "google_maps_url": "https://maps.google.com/?q=41.90480,72.89744",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чычкан). 60m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_main_road_136km",
+    "name": "Main Road",
+    "category": "services",
+    "type": "danger",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.90633507675486,
+      "lon": 72.90206986512865
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 136.2,
+    "route_mile": 84.6,
+    "address": "Main Road, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.90633507675486,72.90206986512865",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Silk Road Mountain Race official waypoint: Main Road."
+  },
+  {
+    "id": "water_osm_бала_чычкан_137km",
+    "name": "Бала-Чычкан (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.90898,
+      "lon": 72.91504
+    },
+    "distance_to_trail_km": 0.067,
+    "route_km": 137.7,
+    "route_mile": 85.6,
+    "address": "Бала-Чычкан",
+    "google_maps_url": "https://maps.google.com/?q=41.90898,72.91504",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Бала-Чычкан). 67m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_toktogul_141km",
+    "name": "Toktogul",
+    "category": "town",
+    "type": "town",
+    "town": "Toktogul",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.88481999999979,
+      "lon": 72.92872000000213
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 141.8,
+    "route_mile": 88.1,
+    "address": "Toktogul, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.88481999999979,72.92872000000213",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Major resupply with shops, restaurants & hotels"
+  },
+  {
+    "id": "srmr_main_road_159km",
+    "name": "Main Road",
+    "category": "services",
+    "type": "danger",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.857720431390135,
+      "lon": 73.04312410222087
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 159.1,
+    "route_mile": 98.9,
+    "address": "Main Road, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.857720431390135,73.04312410222087",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Silk Road Mountain Race official waypoint: Main Road."
+  },
+  {
+    "id": "srmr_main_road_171km",
+    "name": "Main Road",
+    "category": "services",
+    "type": "danger",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.84364146491356,
+      "lon": 73.14238116876581
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 171.2,
+    "route_mile": 106.4,
+    "address": "Main Road, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.84364146491356,73.14238116876581",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Silk Road Mountain Race official waypoint: Main Road."
+  },
+  {
+    "id": "srmr_torkent_171km",
+    "name": "Torkent",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.84343932020508,
+      "lon": 73.14700229122516
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 171.6,
+    "route_mile": 106.6,
+    "address": "Torkent, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.84343932020508,73.14700229122516",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Several shops on main road"
+  },
+  {
+    "id": "water_osm_торкент_177km",
+    "name": "Торкент (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.85347,
+      "lon": 73.21432
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 177.8,
+    "route_mile": 110.5,
+    "address": "Торкент",
+    "google_maps_url": "https://maps.google.com/?q=41.85347,73.21432",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Торкент). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бурлы_кыя_180km",
+    "name": "Бурлы-Кыя (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.87135,
+      "lon": 73.22293
+    },
+    "distance_to_trail_km": 0.039,
+    "route_km": 180.1,
+    "route_mile": 111.9,
+    "address": "Бурлы-Кыя",
+    "google_maps_url": "https://maps.google.com/?q=41.87135,73.22293",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Бурлы-Кыя). 39m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бел_алды_181km",
+    "name": "Бел-Алды (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.88541,
+      "lon": 73.21945
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 181.8,
+    "route_mile": 112.9,
+    "address": "Бел-Алды",
+    "google_maps_url": "https://maps.google.com/?q=41.88541,73.21945",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Бел-Алды). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кишен_суу_182km",
+    "name": "Кишен-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.8869,
+      "lon": 73.21727
+    },
+    "distance_to_trail_km": 0.066,
+    "route_km": 182.0,
+    "route_mile": 113.1,
+    "address": "Кишен-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.88690,73.21727",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кишен-Суу). 66m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_туздуу_суу_212km",
+    "name": "Туздуу-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.8835,
+      "lon": 73.40208
+    },
+    "distance_to_trail_km": 0.034,
+    "route_km": 212.6,
+    "route_mile": 132.1,
+    "address": "Туздуу-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.88350,73.40208",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Туздуу-Суу). 34m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_toluk_250km",
+    "name": "Toluk",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.900353246085416,
+      "lon": 73.58856200272356
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 250.5,
+    "route_mile": 155.6,
+    "address": "Toluk, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.900353246085416,73.58856200272356",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_мазар_суу_250km",
+    "name": "Мазар-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.90001,
+      "lon": 73.58869
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 250.5,
+    "route_mile": 155.6,
+    "address": "Мазар-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.90001,73.58869",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Мазар-Суу). 40m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_толук_250km",
+    "name": "Толук (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.9002,
+      "lon": 73.58757
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 250.4,
+    "route_mile": 155.6,
+    "address": "Толук",
+    "google_maps_url": "https://maps.google.com/?q=41.90020,73.58757",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Толук). 40m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кашка_суу_269km",
+    "name": "Кашка-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.87956,
+      "lon": 73.69518
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 269.1,
+    "route_mile": 167.2,
+    "address": "Кашка-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.87956,73.69518",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кашка-Суу). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_р_кебюк_суу_289km",
+    "name": "р. Кебюк-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.85347,
+      "lon": 73.86541
+    },
+    "distance_to_trail_km": 0.056,
+    "route_km": 289.2,
+    "route_mile": 179.7,
+    "address": "р. Кебюк-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.85347,73.86541",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (р. Кебюк-Суу). 56m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kyzl_oi_328km",
+    "name": "Kyzl-Oi",
+    "category": "hotel",
+    "type": "guesthouse",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.949973501121804,
+      "lon": 74.1623679073418
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 328.2,
+    "route_mile": 203.9,
+    "address": "Kyzl-Oi, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.949973501121804,74.1623679073418",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Guesthouses & village shop"
+  },
+  {
+    "id": "water_osm_көкөмерен_331km",
+    "name": "Көкөмерен (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.97709,
+      "lon": 74.1646
+    },
+    "distance_to_trail_km": 0.029,
+    "route_km": 331.4,
+    "route_mile": 205.9,
+    "address": "Көкөмерен",
+    "google_maps_url": "https://maps.google.com/?q=41.97709,74.16460",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Көкөмерен). 29m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_mostly_clear_stream_ok_for_filtering_some_small_particles_339km",
+    "name": "mostly clear stream, ok for filtering (some small particles) (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.03677,
+      "lon": 74.16213
+    },
+    "distance_to_trail_km": 0.068,
+    "route_km": 339.2,
+    "route_mile": 210.8,
+    "address": "mostly clear stream, ok for filtering (some small particles)",
+    "google_maps_url": "https://maps.google.com/?q=42.03677,74.16213",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (mostly clear stream, ok for filtering (some small particles)). 68m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_көкөмерен_340km",
+    "name": "Көкөмерен (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.04285,
+      "lon": 74.15626
+    },
+    "distance_to_trail_km": 0.022,
+    "route_km": 340.1,
+    "route_mile": 211.3,
+    "address": "Көкөмерен",
+    "google_maps_url": "https://maps.google.com/?q=42.04285,74.15626",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Көкөмерен). 22m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kojomkul_352km",
+    "name": "Kojomkul",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.12876411471004,
+      "lon": 74.08184004700036
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 352.8,
+    "route_mile": 219.2,
+    "address": "Kojomkul, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.12876411471004,74.08184004700036",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_пруд_форельный_359km",
+    "name": "Пруд форельный (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.18223,
+      "lon": 74.04828
+    },
+    "distance_to_trail_km": 0.032,
+    "route_km": 359.5,
+    "route_mile": 223.4,
+    "address": "Пруд форельный",
+    "google_maps_url": "https://maps.google.com/?q=42.18223,74.04828",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Пруд форельный). 32m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_соколук_383km",
+    "name": "Соколук (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.29934,
+      "lon": 74.2577
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 383.5,
+    "route_mile": 238.3,
+    "address": "Соколук",
+    "google_maps_url": "https://maps.google.com/?q=42.29934,74.25770",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Соколук). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ортобалыкты_390km",
+    "name": "Ортобалыкты (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.31915,
+      "lon": 74.32874
+    },
+    "distance_to_trail_km": 0.098,
+    "route_km": 390.2,
+    "route_mile": 242.5,
+    "address": "Ортобалыкты",
+    "google_maps_url": "https://maps.google.com/?q=42.31915,74.32874",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ортобалыкты). 98m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_терен_джаламыш_392km",
+    "name": "Терен-Джаламыш (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.3125,
+      "lon": 74.35391
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 392.5,
+    "route_mile": 243.9,
+    "address": "Терен-Джаламыш",
+    "google_maps_url": "https://maps.google.com/?q=42.31250,74.35391",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Терен-Джаламыш). 50m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_алаарча_411km",
+    "name": "Алаарча (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.33847,
+      "lon": 74.54082
+    },
+    "distance_to_trail_km": 0.049,
+    "route_km": 411.5,
+    "route_mile": 255.7,
+    "address": "Алаарча",
+    "google_maps_url": "https://maps.google.com/?q=42.33847,74.54082",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Алаарча). 49m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_каракол_413km",
+    "name": "Каракол (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.33935,
+      "lon": 74.55827
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 413.1,
+    "route_mile": 256.7,
+    "address": "Каракол",
+    "google_maps_url": "https://maps.google.com/?q=42.33935,74.55827",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Каракол). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_каракол_424km",
+    "name": "Каракол (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.35954,
+      "lon": 74.68683
+    },
+    "distance_to_trail_km": 0.162,
+    "route_km": 424.9,
+    "route_mile": 264.0,
+    "address": "Каракол",
+    "google_maps_url": "https://maps.google.com/?q=42.35954,74.68683",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Каракол). 162m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_иссыката_юж_434km",
+    "name": "Иссыката Юж. (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.36573,
+      "lon": 74.79658
+    },
+    "distance_to_trail_km": 0.051,
+    "route_km": 434.3,
+    "route_mile": 269.9,
+    "address": "Иссыката Юж.",
+    "google_maps_url": "https://maps.google.com/?q=42.36573,74.79658",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Иссыката Юж.). 51m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_каракол_436km",
+    "name": "Каракол (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.36096,
+      "lon": 74.81823
+    },
+    "distance_to_trail_km": 0.048,
+    "route_km": 436.4,
+    "route_mile": 271.2,
+    "address": "Каракол",
+    "google_maps_url": "https://maps.google.com/?q=42.36096,74.81823",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Каракол). 48m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чыгыш_каракол_442km",
+    "name": "Чыгыш Каракол (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.37285,
+      "lon": 74.85619
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 442.0,
+    "route_mile": 274.6,
+    "address": "Чыгыш Каракол",
+    "google_maps_url": "https://maps.google.com/?q=42.37285,74.85619",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Чыгыш Каракол). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кара_төр_442km",
+    "name": "Кара-Төр (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.37292,
+      "lon": 74.85601
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 442.0,
+    "route_mile": 274.6,
+    "address": "Кара-Төр",
+    "google_maps_url": "https://maps.google.com/?q=42.37292,74.85601",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кара-Төр). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кегеты_456km",
+    "name": "Кегеты (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.37126,
+      "lon": 75.02218
+    },
+    "distance_to_trail_km": 0.072,
+    "route_km": 456.4,
+    "route_mile": 283.6,
+    "address": "Кегеты",
+    "google_maps_url": "https://maps.google.com/?q=42.37126,75.02218",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кегеты). 72m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_каракол_472km",
+    "name": "Каракол (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.28232,
+      "lon": 75.16184
+    },
+    "distance_to_trail_km": 0.216,
+    "route_km": 472.4,
+    "route_mile": 293.6,
+    "address": "Каракол",
+    "google_maps_url": "https://maps.google.com/?q=42.28232,75.16184",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Каракол). 216m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_сөөк_486km",
+    "name": "Сөөк (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.19858,
+      "lon": 75.25743
+    },
+    "distance_to_trail_km": 0.083,
+    "route_km": 486.7,
+    "route_mile": 302.4,
+    "address": "Сөөк",
+    "google_maps_url": "https://maps.google.com/?q=42.19858,75.25743",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Сөөк). 83m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_mantysh_487km",
+    "name": "Mantysh",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.19344646787127,
+      "lon": 75.26373088225881
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 487.5,
+    "route_mile": 302.9,
+    "address": "Mantysh, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.19344646787127,75.26373088225881",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_чаарарча_517km",
+    "name": "Чаарарча (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.01789,
+      "lon": 75.13907
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 517.8,
+    "route_mile": 321.8,
+    "address": "Чаарарча",
+    "google_maps_url": "https://maps.google.com/?q=42.01789,75.13907",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Чаарарча). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_базартурук_518km",
+    "name": "Базартурук (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.01515,
+      "lon": 75.13431
+    },
+    "distance_to_trail_km": 0.101,
+    "route_km": 518.3,
+    "route_mile": 322.0,
+    "address": "Базартурук",
+    "google_maps_url": "https://maps.google.com/?q=42.01515,75.13431",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Базартурук). 101m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_келемчи_519km",
+    "name": "Келемчи (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.00518,
+      "lon": 75.14178
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 519.6,
+    "route_mile": 322.9,
+    "address": "Келемчи",
+    "google_maps_url": "https://maps.google.com/?q=42.00518,75.14178",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Келемчи). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_cp1__son_kul_562km",
+    "name": "CP1 : Son Kul",
+    "category": "services",
+    "type": "checkpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.75824400000093,
+      "lon": 75.12260600000343
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 562.6,
+    "route_mile": 349.6,
+    "address": "CP1 : Son Kul, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.75824400000093,75.12260600000343",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Silk Road Mountain Race official waypoint: CP1 : Son Kul."
+  },
+  {
+    "id": "water_osm_куртка_597km",
+    "name": "Куртка (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.57385,
+      "lon": 75.01965
+    },
+    "distance_to_trail_km": 0.054,
+    "route_km": 597.9,
+    "route_mile": 371.5,
+    "address": "Куртка",
+    "google_maps_url": "https://maps.google.com/?q=41.57385,75.01965",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Куртка). 54m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_көл_кайың_600km",
+    "name": "Көл-Кайың (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.54991,
+      "lon": 75.02968
+    },
+    "distance_to_trail_km": 0.041,
+    "route_km": 600.9,
+    "route_mile": 373.4,
+    "address": "Көл-Кайың",
+    "google_maps_url": "https://maps.google.com/?q=41.54991,75.02968",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Көл-Кайың). 41m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_жон_арык_611km",
+    "name": "Жон Арык (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.46411,
+      "lon": 75.02897
+    },
+    "distance_to_trail_km": 0.134,
+    "route_km": 611.2,
+    "route_mile": 379.8,
+    "address": "Жон Арык",
+    "google_maps_url": "https://maps.google.com/?q=41.46411,75.02897",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Жон Арык). 134m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_djangy_talap_612km",
+    "name": "Djangy-Talap",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.455826239001226,
+      "lon": 75.02746127732624
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 612.1,
+    "route_mile": 380.4,
+    "address": "Djangy-Talap, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.455826239001226,75.02746127732624",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop & guesthouses"
+  },
+  {
+    "id": "water_osm_уч_кара_суу_631km",
+    "name": "Уч-кара-суу (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.41381,
+      "lon": 74.86551
+    },
+    "distance_to_trail_km": 0.022,
+    "route_km": 631.5,
+    "route_mile": 392.4,
+    "address": "Уч-кара-суу",
+    "google_maps_url": "https://maps.google.com/?q=41.41381,74.86551",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Уч-кара-суу). 22m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_терек_647km",
+    "name": "Терек (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.31774,
+      "lon": 74.94081
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 647.6,
+    "route_mile": 402.4,
+    "address": "Терек",
+    "google_maps_url": "https://maps.google.com/?q=41.31774,74.94081",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Терек). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_baetov_653km",
+    "name": "Baetov",
+    "category": "town",
+    "type": "town",
+    "town": "Baetov",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.26773782862824,
+      "lon": 74.94851890185896
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 653.4,
+    "route_mile": 406.0,
+    "address": "Baetov, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.26773782862824,74.94851890185896",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Proper resupply, multiple shops, hotel and a couple guesthouses"
+  },
+  {
+    "id": "srmr_kara_burgon_681km",
+    "name": "Kara-Burgon",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.21977673447893,
+      "lon": 74.69984566816566
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 681.6,
+    "route_mile": 423.5,
+    "address": "Kara-Burgon, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.21977673447893,74.69984566816566",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_ак_сай_дарыясы_694km",
+    "name": "Ак-Сай дарыясы (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.28267,
+      "lon": 74.62158
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 694.9,
+    "route_mile": 431.8,
+    "address": "Ак-Сай дарыясы",
+    "google_maps_url": "https://maps.google.com/?q=41.28267,74.62158",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ак-Сай дарыясы). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kosh_dobo_734km",
+    "name": "Kosh-Dobo",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.090379220819074,
+      "lon": 74.27283089780732
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 734.5,
+    "route_mile": 456.4,
+    "address": "Kosh-Dobo, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.090379220819074,74.27283089780732",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "srmr_long_stretch_with_plenty_of_elevation_gain_but_no_resupply_740km",
+    "name": "Long stretch with plenty of elevation gain but no resupply",
+    "category": "services",
+    "type": "danger",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.07650298473038,
+      "lon": 74.21680619527095
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 740.5,
+    "route_mile": 460.1,
+    "address": "Long stretch with plenty of elevation gain but no resupply, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.07650298473038,74.21680619527095",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Silk Road Mountain Race official waypoint: Long stretch with plenty of elevation gain but no resupply."
+  },
+  {
+    "id": "water_osm_пчан_758km",
+    "name": "Пчан (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.97575,
+      "lon": 74.18064
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 758.3,
+    "route_mile": 471.2,
+    "address": "Пчан",
+    "google_maps_url": "https://maps.google.com/?q=40.97575,74.18064",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Пчан). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_биргузы_762km",
+    "name": "Биргузы (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.94615,
+      "lon": 74.16556
+    },
+    "distance_to_trail_km": 0.158,
+    "route_km": 762.5,
+    "route_mile": 473.8,
+    "address": "Биргузы",
+    "google_maps_url": "https://maps.google.com/?q=40.94615,74.16556",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Биргузы). 158m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_семиз_762km",
+    "name": "Семиз (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.94187,
+      "lon": 74.16569
+    },
+    "distance_to_trail_km": 0.155,
+    "route_km": 762.9,
+    "route_mile": 474.0,
+    "address": "Семиз",
+    "google_maps_url": "https://maps.google.com/?q=40.94187,74.16569",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Семиз). 155m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_читты_773km",
+    "name": "Читты (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.87877,
+      "lon": 74.22516
+    },
+    "distance_to_trail_km": 0.082,
+    "route_km": 773.2,
+    "route_mile": 480.4,
+    "address": "Читты",
+    "google_maps_url": "https://maps.google.com/?q=40.87877,74.22516",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Читты). 82m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_джилангач_774km",
+    "name": "Джилангач (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.87085,
+      "lon": 74.23668
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 774.6,
+    "route_mile": 481.3,
+    "address": "Джилангач",
+    "google_maps_url": "https://maps.google.com/?q=40.87085,74.23668",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Джилангач). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_агаман_775km",
+    "name": "Агаман (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.86534,
+      "lon": 74.24375
+    },
+    "distance_to_trail_km": 0.047,
+    "route_km": 775.5,
+    "route_mile": 481.9,
+    "address": "Агаман",
+    "google_maps_url": "https://maps.google.com/?q=40.86534,74.24375",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Агаман). 47m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ойтал_786km",
+    "name": "Ойтал (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.82299,
+      "lon": 74.32294
+    },
+    "distance_to_trail_km": 0.002,
+    "route_km": 786.6,
+    "route_mile": 488.8,
+    "address": "Ойтал",
+    "google_maps_url": "https://maps.google.com/?q=40.82299,74.32294",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ойтал). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ойтал_южный_787km",
+    "name": "Ойтал Южный (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.82766,
+      "lon": 74.32944
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 787.4,
+    "route_mile": 489.3,
+    "address": "Ойтал Южный",
+    "google_maps_url": "https://maps.google.com/?q=40.82766,74.32944",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ойтал Южный). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_арпа_788km",
+    "name": "Арпа (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.82887,
+      "lon": 74.33538
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 788.0,
+    "route_mile": 489.6,
+    "address": "Арпа",
+    "google_maps_url": "https://maps.google.com/?q=40.82887,74.33538",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Арпа). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кызылбелес_798km",
+    "name": "Кызылбелес (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.77366,
+      "lon": 74.36658
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 798.0,
+    "route_mile": 495.9,
+    "address": "Кызылбелес",
+    "google_maps_url": "https://maps.google.com/?q=40.77366,74.36658",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кызылбелес). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кичи_коман_803km",
+    "name": "Кичи-Коман (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.74542,
+      "lon": 74.39955
+    },
+    "distance_to_trail_km": 0.009,
+    "route_km": 803.7,
+    "route_mile": 499.4,
+    "address": "Кичи-Коман",
+    "google_maps_url": "https://maps.google.com/?q=40.74542,74.39955",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кичи-Коман). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_очи_коман_808km",
+    "name": "Очи-Коман (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.72458,
+      "lon": 74.43453
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 808.3,
+    "route_mile": 502.3,
+    "address": "Очи-Коман",
+    "google_maps_url": "https://maps.google.com/?q=40.72458,74.43453",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Очи-Коман). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чон_коман_816km",
+    "name": "Чон-Коман (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.74615,
+      "lon": 74.50293
+    },
+    "distance_to_trail_km": 0.174,
+    "route_km": 816.3,
+    "route_mile": 507.2,
+    "address": "Чон-Коман",
+    "google_maps_url": "https://maps.google.com/?q=40.74615,74.50293",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чон-Коман). 174m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_каракол_828km",
+    "name": "Каракол (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.78622,
+      "lon": 74.58672
+    },
+    "distance_to_trail_km": 0.049,
+    "route_km": 828.7,
+    "route_mile": 514.9,
+    "address": "Каракол",
+    "google_maps_url": "https://maps.google.com/?q=40.78622,74.58672",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Каракол). 49m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_суек_838km",
+    "name": "Суек (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.7634,
+      "lon": 74.69064
+    },
+    "distance_to_trail_km": 0.028,
+    "route_km": 838.8,
+    "route_mile": 521.2,
+    "address": "Суек",
+    "google_maps_url": "https://maps.google.com/?q=40.76340,74.69064",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Суек). 28m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_мустыр_862km",
+    "name": "Мустыр (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.7442,
+      "lon": 74.91189
+    },
+    "distance_to_trail_km": 0.07,
+    "route_km": 862.0,
+    "route_mile": 535.6,
+    "address": "Мустыр",
+    "google_maps_url": "https://maps.google.com/?q=40.74420,74.91189",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Мустыр). 70m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_карасу_862km",
+    "name": "Карасу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.75156,
+      "lon": 74.91865
+    },
+    "distance_to_trail_km": 0.063,
+    "route_km": 862.9,
+    "route_mile": 536.2,
+    "address": "Карасу",
+    "google_maps_url": "https://maps.google.com/?q=40.75156,74.91865",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Карасу). 63m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_джаманты_868km",
+    "name": "Джаманты (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.78852,
+      "lon": 74.95314
+    },
+    "distance_to_trail_km": 0.097,
+    "route_km": 868.0,
+    "route_mile": 539.4,
+    "address": "Джаманты",
+    "google_maps_url": "https://maps.google.com/?q=40.78852,74.95314",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Джаманты). 97m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_карганташ_869km",
+    "name": "Карганташ (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.78514,
+      "lon": 74.96997
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 869.6,
+    "route_mile": 540.3,
+    "address": "Карганташ",
+    "google_maps_url": "https://maps.google.com/?q=40.78514,74.96997",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Карганташ). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кызылкюнгей_879km",
+    "name": "Кызылкюнгей (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.76967,
+      "lon": 75.07983
+    },
+    "distance_to_trail_km": 0.184,
+    "route_km": 879.0,
+    "route_mile": 546.2,
+    "address": "Кызылкюнгей",
+    "google_maps_url": "https://maps.google.com/?q=40.76967,75.07983",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кызылкюнгей). 184m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_military_checkpoint_880km",
+    "name": "Military Checkpoint",
+    "category": "services",
+    "type": "checkpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.76232480057456,
+      "lon": 75.09404182434082
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 880.4,
+    "route_mile": 547.1,
+    "address": "Military Checkpoint, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=40.76232480057456,75.09404182434082",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Your border zone permit will be checked as you enter the border zone with China."
+  },
+  {
+    "id": "srmr_the_blue_caravan_934km",
+    "name": "The blue caravan",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 40.58848216690453,
+      "lon": 75.40908629757521
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 934.5,
+    "route_mile": 580.7,
+    "address": "The blue caravan, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=40.58848216690453,75.40908629757521",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Location and colour may vary"
+  },
+  {
+    "id": "water_osm_чингырсай_968km",
+    "name": "Чингырсай (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.72311,
+      "lon": 75.72102
+    },
+    "distance_to_trail_km": 0.022,
+    "route_km": 968.9,
+    "route_mile": 602.0,
+    "address": "Чингырсай",
+    "google_maps_url": "https://maps.google.com/?q=40.72311,75.72102",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Чингырсай). 22m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кенсу_969km",
+    "name": "Кенсу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.72185,
+      "lon": 75.73212
+    },
+    "distance_to_trail_km": 0.132,
+    "route_km": 969.7,
+    "route_mile": 602.5,
+    "address": "Кенсу",
+    "google_maps_url": "https://maps.google.com/?q=40.72185,75.73212",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кенсу). 132m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_карасай_971km",
+    "name": "Карасай (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.71872,
+      "lon": 75.74989
+    },
+    "distance_to_trail_km": 0.049,
+    "route_km": 971.5,
+    "route_mile": 603.7,
+    "address": "Карасай",
+    "google_maps_url": "https://maps.google.com/?q=40.71872,75.74989",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Карасай). 49m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ак_сай_980km",
+    "name": "Ак-Сай (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.71682,
+      "lon": 75.85492
+    },
+    "distance_to_trail_km": 0.019,
+    "route_km": 980.5,
+    "route_mile": 609.3,
+    "address": "Ак-Сай",
+    "google_maps_url": "https://maps.google.com/?q=40.71682,75.85492",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ак-Сай). 19m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ак_сай_992km",
+    "name": "Ак-Сай (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.74101,
+      "lon": 75.98298
+    },
+    "distance_to_trail_km": 0.094,
+    "route_km": 992.1,
+    "route_mile": 616.5,
+    "address": "Ак-Сай",
+    "google_maps_url": "https://maps.google.com/?q=40.74101,75.98298",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ак-Сай). 94m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_текелик_1011km",
+    "name": "Текелик (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.83478,
+      "lon": 76.1695
+    },
+    "distance_to_trail_km": 0.037,
+    "route_km": 1011.4,
+    "route_mile": 628.4,
+    "address": "Текелик",
+    "google_maps_url": "https://maps.google.com/?q=40.83478,76.16950",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Текелик). 37m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_улкен_кулджабаши_1019km",
+    "name": "Улкен Кулджабаши (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.86417,
+      "lon": 76.25443
+    },
+    "distance_to_trail_km": 0.165,
+    "route_km": 1019.9,
+    "route_mile": 633.7,
+    "address": "Улкен Кулджабаши",
+    "google_maps_url": "https://maps.google.com/?q=40.86417,76.25443",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Улкен Кулджабаши). 165m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_улкен_кулджабаши_1030km",
+    "name": "Улкен Кулджабаши (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.77591,
+      "lon": 76.28681
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 1030.3,
+    "route_mile": 640.2,
+    "address": "Улкен Кулджабаши",
+    "google_maps_url": "https://maps.google.com/?q=40.77591,76.28681",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Улкен Кулджабаши). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_the_old_soviet_road_1045km",
+    "name": "The Old Soviet Road",
+    "category": "services",
+    "type": "danger",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.77935191408153,
+      "lon": 76.38122867715941
+    },
+    "distance_to_trail_km": 0.09,
+    "route_km": 1045.3,
+    "route_mile": 649.5,
+    "address": "The Old Soviet Road, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=40.77935191408153,76.38122867715941",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "This section of the route used to be a military access road in a zone that was much more tightly controlled in soviet times because of the proximity with China. Much of this section of road follows old barbed wire fences. There is still barbed wire strewn on the floor in places."
+  },
+  {
+    "id": "water_osm_ак_сай_1063km",
+    "name": "Ак-Сай (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.88852,
+      "lon": 76.36094
+    },
+    "distance_to_trail_km": 0.007,
+    "route_km": 1063.9,
+    "route_mile": 661.1,
+    "address": "Ак-Сай",
+    "google_maps_url": "https://maps.google.com/?q=40.88852,76.36094",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ак-Сай). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_аксай_1063km",
+    "name": "Аксай (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.88852,
+      "lon": 76.36094
+    },
+    "distance_to_trail_km": 0.007,
+    "route_km": 1063.9,
+    "route_mile": 661.1,
+    "address": "Аксай",
+    "google_maps_url": "https://maps.google.com/?q=40.88852,76.36094",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Аксай). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_military_checkpoint_1092km",
+    "name": "Military Checkpoint",
+    "category": "services",
+    "type": "checkpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.06924921149329,
+      "lon": 76.44944787025452
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 1092.0,
+    "route_mile": 678.6,
+    "address": "Military Checkpoint, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.06924921149329,76.44944787025452",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Your Border Zone Permit will be checked as you leave the border zone with China."
+  },
+  {
+    "id": "water_osm_кынды_1112km",
+    "name": "Кынды (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.21928,
+      "lon": 76.4546
+    },
+    "distance_to_trail_km": 0.044,
+    "route_km": 1112.0,
+    "route_mile": 691.0,
+    "address": "Кынды",
+    "google_maps_url": "https://maps.google.com/?q=41.21928,76.45460",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кынды). 44m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_уюрме_1112km",
+    "name": "Уюрме (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.22054,
+      "lon": 76.45345
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 1112.2,
+    "route_mile": 691.1,
+    "address": "Уюрме",
+    "google_maps_url": "https://maps.google.com/?q=41.22054,76.45345",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Уюрме). 50m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ачакаманды_1115km",
+    "name": "Ачакаманды (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24042,
+      "lon": 76.44077
+    },
+    "distance_to_trail_km": 0.082,
+    "route_km": 1115.3,
+    "route_mile": 693.0,
+    "address": "Ачакаманды",
+    "google_maps_url": "https://maps.google.com/?q=41.24042,76.44077",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ачакаманды). 82m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ат_башы_дарыясы_1120km",
+    "name": "Ат башы дарыясы (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.2479,
+      "lon": 76.38274
+    },
+    "distance_to_trail_km": 0.037,
+    "route_km": 1120.4,
+    "route_mile": 696.2,
+    "address": "Ат башы дарыясы",
+    "google_maps_url": "https://maps.google.com/?q=41.24790,76.38274",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ат башы дарыясы). 37m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ичкокаманды_1120km",
+    "name": "Ичкокаманды (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24816,
+      "lon": 76.38268
+    },
+    "distance_to_trail_km": 0.045,
+    "route_km": 1120.4,
+    "route_mile": 696.2,
+    "address": "Ичкокаманды",
+    "google_maps_url": "https://maps.google.com/?q=41.24816,76.38268",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ичкокаманды). 45m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_башача_1129km",
+    "name": "Башача (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.23786,
+      "lon": 76.2755
+    },
+    "distance_to_trail_km": 0.063,
+    "route_km": 1129.6,
+    "route_mile": 701.9,
+    "address": "Башача",
+    "google_maps_url": "https://maps.google.com/?q=41.23786,76.27550",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Башача). 63m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ача_1133km",
+    "name": "Ача (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.23571,
+      "lon": 76.23618
+    },
+    "distance_to_trail_km": 0.027,
+    "route_km": 1133.0,
+    "route_mile": 704.0,
+    "address": "Ача",
+    "google_maps_url": "https://maps.google.com/?q=41.23571,76.23618",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ача). 27m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_латок_1136km",
+    "name": "Латок (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.23812,
+      "lon": 76.19957
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 1136.1,
+    "route_mile": 705.9,
+    "address": "Латок",
+    "google_maps_url": "https://maps.google.com/?q=41.23812,76.19957",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Латок). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кайырма_арык_1139km",
+    "name": "Кайырма Арык (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24374,
+      "lon": 76.1617
+    },
+    "distance_to_trail_km": 0.019,
+    "route_km": 1139.3,
+    "route_mile": 707.9,
+    "address": "Кайырма Арык",
+    "google_maps_url": "https://maps.google.com/?q=41.24374,76.16170",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кайырма Арык). 19m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка48_1141km",
+    "name": "колонка48 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24781,
+      "lon": 76.14184
+    },
+    "distance_to_trail_km": 0.005,
+    "route_km": 1141.0,
+    "route_mile": 709.0,
+    "address": "колонка48",
+    "google_maps_url": "https://maps.google.com/?q=41.24781,76.14184",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка48). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка12_1141km",
+    "name": "колонка12 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24975,
+      "lon": 76.14271
+    },
+    "distance_to_trail_km": 0.216,
+    "route_km": 1141.0,
+    "route_mile": 709.0,
+    "address": "колонка12",
+    "google_maps_url": "https://maps.google.com/?q=41.24975,76.14271",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка12). 216m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка41_1141km",
+    "name": "колонка41 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24838,
+      "lon": 76.13904
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1141.3,
+    "route_mile": 709.2,
+    "address": "колонка41",
+    "google_maps_url": "https://maps.google.com/?q=41.24838,76.13904",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка41). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка42_1141km",
+    "name": "колонка42 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24708,
+      "lon": 76.13878
+    },
+    "distance_to_trail_km": 0.161,
+    "route_km": 1141.3,
+    "route_mile": 709.2,
+    "address": "колонка42",
+    "google_maps_url": "https://maps.google.com/?q=41.24708,76.13878",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка42). 161m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка14_1141km",
+    "name": "колонка14 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25029,
+      "lon": 76.1394
+    },
+    "distance_to_trail_km": 0.201,
+    "route_km": 1141.3,
+    "route_mile": 709.2,
+    "address": "колонка14",
+    "google_maps_url": "https://maps.google.com/?q=41.25029,76.13940",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка14). 201m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка13_1141km",
+    "name": "колонка13 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25003,
+      "lon": 76.1408
+    },
+    "distance_to_trail_km": 0.217,
+    "route_km": 1141.3,
+    "route_mile": 709.2,
+    "address": "колонка13",
+    "google_maps_url": "https://maps.google.com/?q=41.25003,76.14080",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка13). 217m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка36_1141km",
+    "name": "колонка36 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24669,
+      "lon": 76.13719
+    },
+    "distance_to_trail_km": 0.234,
+    "route_km": 1141.4,
+    "route_mile": 709.2,
+    "address": "колонка36",
+    "google_maps_url": "https://maps.google.com/?q=41.24669,76.13719",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка36). 234m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_ak_muz_1141km",
+    "name": "Ak-Muz",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.249096893681696,
+      "lon": 76.13641319160388
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1141.5,
+    "route_mile": 709.3,
+    "address": "Ak-Muz, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.249096893681696,76.13641319160388",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_колонка34_1141km",
+    "name": "колонка34 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24911,
+      "lon": 76.13596
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 1141.5,
+    "route_mile": 709.3,
+    "address": "колонка34",
+    "google_maps_url": "https://maps.google.com/?q=41.24911,76.13596",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка34). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка35_1141km",
+    "name": "колонка35 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24733,
+      "lon": 76.13591
+    },
+    "distance_to_trail_km": 0.201,
+    "route_km": 1141.5,
+    "route_mile": 709.3,
+    "address": "колонка35",
+    "google_maps_url": "https://maps.google.com/?q=41.24733,76.13591",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка35). 201m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка15_1141km",
+    "name": "колонка15 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25093,
+      "lon": 76.13633
+    },
+    "distance_to_trail_km": 0.204,
+    "route_km": 1141.5,
+    "route_mile": 709.3,
+    "address": "колонка15",
+    "google_maps_url": "https://maps.google.com/?q=41.25093,76.13633",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка15). 204m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка18_1141km",
+    "name": "колонка18 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24989,
+      "lon": 76.13285
+    },
+    "distance_to_trail_km": 0.022,
+    "route_km": 1141.8,
+    "route_mile": 709.5,
+    "address": "колонка18",
+    "google_maps_url": "https://maps.google.com/?q=41.24989,76.13285",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка18). 22m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка17_1141km",
+    "name": "колонка17 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.2496,
+      "lon": 76.13404
+    },
+    "distance_to_trail_km": 0.125,
+    "route_km": 1141.8,
+    "route_mile": 709.5,
+    "address": "колонка17",
+    "google_maps_url": "https://maps.google.com/?q=41.24960,76.13404",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка17). 125m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка16_1141km",
+    "name": "колонка16 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25145,
+      "lon": 76.13293
+    },
+    "distance_to_trail_km": 0.158,
+    "route_km": 1141.8,
+    "route_mile": 709.5,
+    "address": "колонка16",
+    "google_maps_url": "https://maps.google.com/?q=41.25145,76.13293",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка16). 158m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка21_1141km",
+    "name": "колонка21 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.24785,
+      "lon": 76.13234
+    },
+    "distance_to_trail_km": 0.245,
+    "route_km": 1141.8,
+    "route_mile": 709.5,
+    "address": "колонка21",
+    "google_maps_url": "https://maps.google.com/?q=41.24785,76.13234",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка21). 245m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка19_1142km",
+    "name": "колонка19 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25035,
+      "lon": 76.13087
+    },
+    "distance_to_trail_km": 0.013,
+    "route_km": 1142.0,
+    "route_mile": 709.6,
+    "address": "колонка19",
+    "google_maps_url": "https://maps.google.com/?q=41.25035,76.13087",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка19). 13m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_вулканизация_1142km",
+    "name": "Вулканизация (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25168,
+      "lon": 76.13138
+    },
+    "distance_to_trail_km": 0.141,
+    "route_km": 1142.0,
+    "route_mile": 709.6,
+    "address": "Вулканизация",
+    "google_maps_url": "https://maps.google.com/?q=41.25168,76.13138",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (Вулканизация). 141m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка20_1142km",
+    "name": "колонка20 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.2486,
+      "lon": 76.12927
+    },
+    "distance_to_trail_km": 0.247,
+    "route_km": 1142.0,
+    "route_mile": 709.6,
+    "address": "колонка20",
+    "google_maps_url": "https://maps.google.com/?q=41.24860,76.12927",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка20). 247m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка7_1142km",
+    "name": "колонка7 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25337,
+      "lon": 76.13209
+    },
+    "distance_to_trail_km": 0.144,
+    "route_km": 1142.5,
+    "route_mile": 709.9,
+    "address": "колонка7",
+    "google_maps_url": "https://maps.google.com/?q=41.25337,76.13209",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка7). 144m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_колонка8_1142km",
+    "name": "колонка8 (Drinking Water)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.2531,
+      "lon": 76.13329
+    },
+    "distance_to_trail_km": 0.249,
+    "route_km": 1142.5,
+    "route_mile": 709.9,
+    "address": "колонка8",
+    "google_maps_url": "https://maps.google.com/?q=41.25310,76.13329",
+    "business_status": "OPERATIONAL",
+    "description": "Drinking Water (колонка8). 249m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бороонду_суусу_1142km",
+    "name": "Бороонду суусу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.25476,
+      "lon": 76.12872
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 1142.7,
+    "route_mile": 710.0,
+    "address": "Бороонду суусу",
+    "google_maps_url": "https://maps.google.com/?q=41.25476,76.12872",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Бороонду суусу). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кара_суу_1167km",
+    "name": "Кара-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.38729,
+      "lon": 76.01037
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 1167.2,
+    "route_mile": 725.3,
+    "address": "Кара-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.38729,76.01037",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кара-Суу). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_naryn_1171km",
+    "name": "Naryn",
+    "category": "town",
+    "type": "town",
+    "town": "Naryn",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.423388844425176,
+      "lon": 76.01653915590646
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1171.9,
+    "route_mile": 728.2,
+    "address": "Naryn, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.423388844425176,76.01653915590646",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Major resupply with many shops, guesthouses and hotels"
+  },
+  {
+    "id": "water_osm_шаардык_суу_каналы_1172km",
+    "name": "Шаардык суу каналы (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.42182,
+      "lon": 76.02729
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1172.8,
+    "route_mile": 728.8,
+    "address": "Шаардык суу каналы",
+    "google_maps_url": "https://maps.google.com/?q=41.42182,76.02729",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Шаардык суу каналы). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_городской_водный_канал_1172km",
+    "name": "Городской водный канал (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.42167,
+      "lon": 76.0272
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 1172.8,
+    "route_mile": 728.8,
+    "address": "Городской водный канал",
+    "google_maps_url": "https://maps.google.com/?q=41.42167,76.02720",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Городской водный канал). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_нарын_1176km",
+    "name": "Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.42959,
+      "lon": 76.06816
+    },
+    "distance_to_trail_km": 0.047,
+    "route_km": 1176.4,
+    "route_mile": 731.0,
+    "address": "Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.42959,76.06816",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Нарын). 47m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_текесекрик_1176km",
+    "name": "Текесекрик (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.42873,
+      "lon": 76.06861
+    },
+    "distance_to_trail_km": 0.017,
+    "route_km": 1176.5,
+    "route_mile": 731.1,
+    "address": "Текесекрик",
+    "google_maps_url": "https://maps.google.com/?q=41.42873,76.06861",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Текесекрик). 17m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_алыш_1186km",
+    "name": "Алыш (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.44431,
+      "lon": 76.18357
+    },
+    "distance_to_trail_km": 0.037,
+    "route_km": 1186.4,
+    "route_mile": 737.2,
+    "address": "Алыш",
+    "google_maps_url": "https://maps.google.com/?q=41.44431,76.18357",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Алыш). 37m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ченкурсай_1188km",
+    "name": "Ченкурсай (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.44478,
+      "lon": 76.21032
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 1188.6,
+    "route_mile": 738.6,
+    "address": "Ченкурсай",
+    "google_maps_url": "https://maps.google.com/?q=41.44478,76.21032",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Ченкурсай). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_дөбөлүү_1193km",
+    "name": "Дөбөлүү (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.44805,
+      "lon": 76.26273
+    },
+    "distance_to_trail_km": 0.023,
+    "route_km": 1193.1,
+    "route_mile": 741.4,
+    "address": "Дөбөлүү",
+    "google_maps_url": "https://maps.google.com/?q=41.44805,76.26273",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Дөбөлүү). 23m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_нарын_1195km",
+    "name": "Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.44798,
+      "lon": 76.28791
+    },
+    "distance_to_trail_km": 0.036,
+    "route_km": 1195.5,
+    "route_mile": 742.9,
+    "address": "Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.44798,76.28791",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Нарын). 36m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_куденгач_1198km",
+    "name": "Куденгач (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.45241,
+      "lon": 76.31829
+    },
+    "distance_to_trail_km": 0.017,
+    "route_km": 1198.1,
+    "route_mile": 744.5,
+    "address": "Куденгач",
+    "google_maps_url": "https://maps.google.com/?q=41.45241,76.31829",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Куденгач). 17m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_тѳѳ_жайлоо_1199km",
+    "name": "Тѳѳ-Жайлоо (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.45336,
+      "lon": 76.32908
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 1199.0,
+    "route_mile": 745.0,
+    "address": "Тѳѳ-Жайлоо",
+    "google_maps_url": "https://maps.google.com/?q=41.45336,76.32908",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Тѳѳ-Жайлоо). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бурган_суу_1201km",
+    "name": "Бурган-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.45625,
+      "lon": 76.35497
+    },
+    "distance_to_trail_km": 0.024,
+    "route_km": 1201.3,
+    "route_mile": 746.4,
+    "address": "Бурган-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.45625,76.35497",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Бурган-Суу). 24m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кайыңды_1203km",
+    "name": "Кайыңды (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.45984,
+      "lon": 76.38524
+    },
+    "distance_to_trail_km": 0.078,
+    "route_km": 1203.8,
+    "route_mile": 748.0,
+    "address": "Кайыңды",
+    "google_maps_url": "https://maps.google.com/?q=41.45984,76.38524",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кайыңды). 78m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_tash_bashat_1204km",
+    "name": "Tash-Bashat",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.46421682981136,
+      "lon": 76.3878838451929
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1204.5,
+    "route_mile": 748.5,
+    "address": "Tash-Bashat, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.46421682981136,76.3878838451929",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop and a couple guesthouses"
+  },
+  {
+    "id": "water_osm_нарын_1212km",
+    "name": "Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.4955,
+      "lon": 76.42478
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 1212.5,
+    "route_mile": 753.4,
+    "address": "Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.49550,76.42478",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Нарын). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_eki_naryn_1216km",
+    "name": "Eki-Naryn",
+    "category": "hotel",
+    "type": "guesthouse",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.51820519404339,
+      "lon": 76.4408293194686
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1216.2,
+    "route_mile": 755.7,
+    "address": "Eki-Naryn, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.51820519404339,76.4408293194686",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Guesthouse"
+  },
+  {
+    "id": "water_osm_калмак_ашуу_1221km",
+    "name": "Калмак-Ашуу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.56168,
+      "lon": 76.44501
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 1221.1,
+    "route_mile": 758.8,
+    "address": "Калмак-Ашуу",
+    "google_maps_url": "https://maps.google.com/?q=41.56168,76.44501",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Калмак-Ашуу). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_малый_нарын_1234km",
+    "name": "Малый Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.65027,
+      "lon": 76.42837
+    },
+    "distance_to_trail_km": 0.017,
+    "route_km": 1234.4,
+    "route_mile": 767.0,
+    "address": "Малый Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.65027,76.42837",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Малый Нарын). 17m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_малый_нарын_1238km",
+    "name": "Малый Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.66816,
+      "lon": 76.45325
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1238.9,
+    "route_mile": 769.8,
+    "address": "Малый Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.66816,76.45325",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Малый Нарын). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_тамды_суу_1252km",
+    "name": "Тамды-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.66935,
+      "lon": 76.60701
+    },
+    "distance_to_trail_km": 0.072,
+    "route_km": 1252.8,
+    "route_mile": 778.5,
+    "address": "Тамды-Суу",
+    "google_maps_url": "https://maps.google.com/?q=41.66935,76.60701",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Тамды-Суу). 72m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_малый_нарын_1258km",
+    "name": "Малый Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.68913,
+      "lon": 76.65919
+    },
+    "distance_to_trail_km": 0.024,
+    "route_km": 1258.1,
+    "route_mile": 781.7,
+    "address": "Малый Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.68913,76.65919",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Малый Нарын). 24m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_джиналач_1262km",
+    "name": "Джиналач (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.68684,
+      "lon": 76.69547
+    },
+    "distance_to_trail_km": 0.233,
+    "route_km": 1262.1,
+    "route_mile": 784.2,
+    "address": "Джиналач",
+    "google_maps_url": "https://maps.google.com/?q=41.68684,76.69547",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Джиналач). 233m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_малый_нарын_1263km",
+    "name": "Малый Нарын (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.68902,
+      "lon": 76.71237
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 1263.5,
+    "route_mile": 785.1,
+    "address": "Малый Нарын",
+    "google_maps_url": "https://maps.google.com/?q=41.68902,76.71237",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Малый Нарын). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_болгарт_1266km",
+    "name": "Болгарт (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.70721,
+      "lon": 76.73048
+    },
+    "distance_to_trail_km": 0.041,
+    "route_km": 1266.3,
+    "route_mile": 786.8,
+    "address": "Болгарт",
+    "google_maps_url": "https://maps.google.com/?q=41.70721,76.73048",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Болгарт). 41m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_карагоман_1272km",
+    "name": "Карагоман (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.72841,
+      "lon": 76.77441
+    },
+    "distance_to_trail_km": 0.028,
+    "route_km": 1272.7,
+    "route_mile": 790.8,
+    "address": "Карагоман",
+    "google_maps_url": "https://maps.google.com/?q=41.72841,76.77441",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Карагоман). 28m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бурхан_1323km",
+    "name": "Бурхан (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.75739,
+      "lon": 77.31526
+    },
+    "distance_to_trail_km": 0.112,
+    "route_km": 1323.3,
+    "route_mile": 822.3,
+    "address": "Бурхан",
+    "google_maps_url": "https://maps.google.com/?q=41.75739,77.31526",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Бурхан). 112m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_arabel_pass_1359km",
+    "name": "Arabel Pass",
+    "category": "pass",
+    "type": "viewpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.80617634927168,
+      "lon": 77.66943429119237
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1359.1,
+    "route_mile": 844.5,
+    "address": "Arabel Pass, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.80617634927168,77.66943429119237",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Beautiful high alpine pass between the Burkhan and Arabel valleys. The weather is notoriously capricious up on Arabel."
+  },
+  {
+    "id": "water_osm_арабель_1361km",
+    "name": "Арабель (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.8179,
+      "lon": 77.68317
+    },
+    "distance_to_trail_km": 0.063,
+    "route_km": 1361.1,
+    "route_mile": 845.7,
+    "address": "Арабель",
+    "google_maps_url": "https://maps.google.com/?q=41.81790,77.68317",
+    "business_status": "OPERATIONAL",
+    "description": "Lake Access (Арабель). 63m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_барскоон_1376km",
+    "name": "Барскоон (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.89288,
+      "lon": 77.69295
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 1376.9,
+    "route_mile": 855.6,
+    "address": "Барскоон",
+    "google_maps_url": "https://maps.google.com/?q=41.89288,77.69295",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Барскоон). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_barskoon_pass_1377km",
+    "name": "Barskoon Pass",
+    "category": "pass",
+    "type": "viewpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.893796137241225,
+      "lon": 77.69173643796859
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1377.1,
+    "route_mile": 855.7,
+    "address": "Barskoon Pass, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.893796137241225,77.69173643796859",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "High alpine pass. Kumtor mining road. Incredible descent when dry, mudfest when wet. Careful of the mining traffic."
+  },
+  {
+    "id": "water_osm_кереге_таш_1390km",
+    "name": "Кереге-Таш (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.92599,
+      "lon": 77.64146
+    },
+    "distance_to_trail_km": 0.095,
+    "route_km": 1390.5,
+    "route_mile": 864.0,
+    "address": "Кереге-Таш",
+    "google_maps_url": "https://maps.google.com/?q=41.92599,77.64146",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кереге-Таш). 95m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_дүңгүрөмө_1392km",
+    "name": "Дүңгүрөмө (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.93639,
+      "lon": 77.65581
+    },
+    "distance_to_trail_km": 0.021,
+    "route_km": 1392.2,
+    "route_mile": 865.1,
+    "address": "Дүңгүрөмө",
+    "google_maps_url": "https://maps.google.com/?q=41.93639,77.65581",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Дүңгүрөмө). 21m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_барскоон_1393km",
+    "name": "Барскоон (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.94604,
+      "lon": 77.65406
+    },
+    "distance_to_trail_km": 0.014,
+    "route_km": 1393.3,
+    "route_mile": 865.8,
+    "address": "Барскоон",
+    "google_maps_url": "https://maps.google.com/?q=41.94604,77.65406",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Барскоон). 14m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_шаркыратма_1401km",
+    "name": "Шаркыратма (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.0096,
+      "lon": 77.61456
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 1401.4,
+    "route_mile": 870.8,
+    "address": "Шаркыратма",
+    "google_maps_url": "https://maps.google.com/?q=42.00960,77.61456",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Шаркыратма). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_барскоон_1401km",
+    "name": "Барскоон (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.01298,
+      "lon": 77.61246
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 1401.8,
+    "route_mile": 871.0,
+    "address": "Барскоон",
+    "google_maps_url": "https://maps.google.com/?q=42.01298,77.61246",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Барскоон). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_барскоон_1408km",
+    "name": "Барскоон (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.06604,
+      "lon": 77.59388
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1408.1,
+    "route_mile": 875.0,
+    "address": "Барскоон",
+    "google_maps_url": "https://maps.google.com/?q=42.06604,77.59388",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Барскоон). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_tamga_1421km",
+    "name": "Tamga",
+    "category": "town",
+    "type": "town",
+    "town": "Tamga",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.151234805050734,
+      "lon": 77.5478499789184
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1421.7,
+    "route_mile": 883.4,
+    "address": "Tamga, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.151234805050734,77.5478499789184",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Several shops in town"
+  },
+  {
+    "id": "water_osm_тамга_1425km",
+    "name": "Тамга (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.15394,
+      "lon": 77.52755
+    },
+    "distance_to_trail_km": 0.037,
+    "route_km": 1425.3,
+    "route_mile": 885.6,
+    "address": "Тамга",
+    "google_maps_url": "https://maps.google.com/?q=42.15394,77.52755",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Тамга). 37m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_tosor_1432km",
+    "name": "Tosor",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.16465823205846,
+      "lon": 77.439187732866
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1432.9,
+    "route_mile": 890.4,
+    "address": "Tosor, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.16465823205846,77.439187732866",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "1-2 small shops in town"
+  },
+  {
+    "id": "water_osm_тоссор_1447km",
+    "name": "Тоссор (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.09168,
+      "lon": 77.37174
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1447.1,
+    "route_mile": 899.2,
+    "address": "Тоссор",
+    "google_maps_url": "https://maps.google.com/?q=42.09168,77.37174",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Тоссор). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_сарытөр_1448km",
+    "name": "Сарытөр (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.08083,
+      "lon": 77.3751
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 1448.8,
+    "route_mile": 900.2,
+    "address": "Сарытөр",
+    "google_maps_url": "https://maps.google.com/?q=42.08083,77.37510",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Сарытөр). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_tosor_pass_1471km",
+    "name": "Tosor Pass",
+    "category": "pass",
+    "type": "viewpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.94740717903798,
+      "lon": 77.36781399684855
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1471.8,
+    "route_mile": 914.5,
+    "address": "Tosor Pass, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.94740717903798,77.36781399684855",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Beautiful high altitude pass"
+  },
+  {
+    "id": "water_osm_джилусу_1484km",
+    "name": "Джилусу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.88524,
+      "lon": 77.26861
+    },
+    "distance_to_trail_km": 0.052,
+    "route_km": 1484.8,
+    "route_mile": 922.6,
+    "address": "Джилусу",
+    "google_maps_url": "https://maps.google.com/?q=41.88524,77.26861",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Джилусу). 52m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кашкасу_1505km",
+    "name": "Кашкасу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.86319,
+      "lon": 77.03604
+    },
+    "distance_to_trail_km": 0.023,
+    "route_km": 1505.5,
+    "route_mile": 935.5,
+    "address": "Кашкасу",
+    "google_maps_url": "https://maps.google.com/?q=41.86319,77.03604",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кашкасу). 23m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_арчалы_1531km",
+    "name": "Арчалы (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.72538,
+      "lon": 76.83617
+    },
+    "distance_to_trail_km": 0.118,
+    "route_km": 1531.9,
+    "route_mile": 951.9,
+    "address": "Арчалы",
+    "google_maps_url": "https://maps.google.com/?q=41.72538,76.83617",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Арчалы). 118m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кара_кужур_1588km",
+    "name": "Кара-Кужур (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.89172,
+      "lon": 76.31023
+    },
+    "distance_to_trail_km": 0.023,
+    "route_km": 1588.3,
+    "route_mile": 986.9,
+    "address": "Кара-Кужур",
+    "google_maps_url": "https://maps.google.com/?q=41.89172,76.31023",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кара-Кужур). 23m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_ak_kiya_1617km",
+    "name": "Ak-Kiya",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 41.91821675959369,
+      "lon": 75.97328676823707
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1617.7,
+    "route_mile": 1005.2,
+    "address": "Ak-Kiya, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=41.91821675959369,75.97328676823707",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop and guesthouse"
+  },
+  {
+    "id": "water_osm_кара_кужур_1618km",
+    "name": "Кара-Кужур (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.92088,
+      "lon": 75.97048
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 1618.1,
+    "route_mile": 1005.5,
+    "address": "Кара-Кужур",
+    "google_maps_url": "https://maps.google.com/?q=41.92088,75.97048",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кара-Кужур). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ашуу_төр_1629km",
+    "name": "Ашуу Төр (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.00971,
+      "lon": 75.96002
+    },
+    "distance_to_trail_km": 0.007,
+    "route_km": 1629.2,
+    "route_mile": 1012.3,
+    "address": "Ашуу Төр",
+    "google_maps_url": "https://maps.google.com/?q=42.00971,75.96002",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ашуу Төр). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_ukok_pass_1630km",
+    "name": "Ukok Pass",
+    "category": "services",
+    "type": "danger",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.0190682461874,
+      "lon": 75.97325803569967
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1630.9,
+    "route_mile": 1013.4,
+    "address": "Ukok Pass, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.0190682461874,75.97325803569967",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Long hike up to the pass. Likely one of the hardest parts of the race. Will take a considerable amount of time."
+  },
+  {
+    "id": "water_osm_каракум_1641km",
+    "name": "Каракум (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.07854,
+      "lon": 75.92128
+    },
+    "distance_to_trail_km": 0.001,
+    "route_km": 1641.6,
+    "route_mile": 1020.1,
+    "address": "Каракум",
+    "google_maps_url": "https://maps.google.com/?q=42.07854,75.92128",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Каракум). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_көл_үкөк_1642km",
+    "name": "Көл-Үкөк (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.08241,
+      "lon": 75.91744
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 1642.2,
+    "route_mile": 1020.4,
+    "address": "Көл-Үкөк",
+    "google_maps_url": "https://maps.google.com/?q=42.08241,75.91744",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Көл-Үкөк). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kok_ulok_1644km",
+    "name": "Kok-Ulok",
+    "category": "hotel",
+    "type": "shelter",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.097073255908555,
+      "lon": 75.9077820054346
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1644.1,
+    "route_mile": 1021.6,
+    "address": "Kok-Ulok, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.097073255908555,75.9077820054346",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Yurt camp"
+  },
+  {
+    "id": "water_osm_үкөк_1649km",
+    "name": "Үкөк (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.1092,
+      "lon": 75.85665
+    },
+    "distance_to_trail_km": 0.079,
+    "route_km": 1649.2,
+    "route_mile": 1024.8,
+    "address": "Үкөк",
+    "google_maps_url": "https://maps.google.com/?q=42.10920,75.85665",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Үкөк). 79m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ирригационный_водоем_1661km",
+    "name": "Ирригационный водоем (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.16823,
+      "lon": 75.7758
+    },
+    "distance_to_trail_km": 0.185,
+    "route_km": 1661.0,
+    "route_mile": 1032.1,
+    "address": "Ирригационный водоем",
+    "google_maps_url": "https://maps.google.com/?q=42.16823,75.77580",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Ирригационный водоем). 185m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_шамен_1664km",
+    "name": "Шамен (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.19371,
+      "lon": 75.76134
+    },
+    "distance_to_trail_km": 0.034,
+    "route_km": 1664.7,
+    "route_mile": 1034.4,
+    "address": "Шамен",
+    "google_maps_url": "https://maps.google.com/?q=42.19371,75.76134",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Шамен). 34m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kochkor_1667km",
+    "name": "Kochkor",
+    "category": "town",
+    "type": "town",
+    "town": "Kochkor",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.21478464257373,
+      "lon": 75.753648166483
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1667.1,
+    "route_mile": 1035.9,
+    "address": "Kochkor, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.21478464257373,75.753648166483",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Major resupply. Many shops and guesthouses"
+  },
+  {
+    "id": "water_osm_чүй_1668km",
+    "name": "Чүй (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.22582,
+      "lon": 75.74915
+    },
+    "distance_to_trail_km": 0.065,
+    "route_km": 1668.6,
+    "route_mile": 1036.8,
+    "address": "Чүй",
+    "google_maps_url": "https://maps.google.com/?q=42.22582,75.74915",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чүй). 65m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кочкор_1672km",
+    "name": "Кочкор (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.22406,
+      "lon": 75.71753
+    },
+    "distance_to_trail_km": 0.109,
+    "route_km": 1672.0,
+    "route_mile": 1038.9,
+    "address": "Кочкор",
+    "google_maps_url": "https://maps.google.com/?q=42.22406,75.71753",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кочкор). 109m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kum_dobo_1687km",
+    "name": "Kum-Dobo",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.2175203990993,
+      "lon": 75.54735430133925
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1687.1,
+    "route_mile": 1048.3,
+    "address": "Kum-Dobo, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.2175203990993,75.54735430133925",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "srmr_don_alysh_1715km",
+    "name": "Don-Alysh",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.26098396258104,
+      "lon": 75.23174568361227
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1715.2,
+    "route_mile": 1065.8,
+    "address": "Don-Alysh, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.26098396258104,75.23174568361227",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_каракол_1734km",
+    "name": "Каракол (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.35659,
+      "lon": 75.0494
+    },
+    "distance_to_trail_km": 0.017,
+    "route_km": 1734.6,
+    "route_mile": 1077.8,
+    "address": "Каракол",
+    "google_maps_url": "https://maps.google.com/?q=42.35659,75.04940",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Каракол). 17m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кегеты_1744km",
+    "name": "Кегеты (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.42265,
+      "lon": 75.02132
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1744.8,
+    "route_mile": 1084.2,
+    "address": "Кегеты",
+    "google_maps_url": "https://maps.google.com/?q=42.42265,75.02132",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кегеты). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kegeti_pass_1748km",
+    "name": "Kegeti Pass",
+    "category": "pass",
+    "type": "viewpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.42641263893415,
+      "lon": 75.03416399816925
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1748.7,
+    "route_mile": 1086.6,
+    "address": "Kegeti Pass, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.42641263893415,75.03416399816925",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Beautiful pass. Was cleared for the first time in 30 years in 2025. Epic views and descent."
+  },
+  {
+    "id": "water_osm_кегети_1753km",
+    "name": "Кегети (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.43869,
+      "lon": 75.04388
+    },
+    "distance_to_trail_km": 0.015,
+    "route_km": 1753.0,
+    "route_mile": 1089.3,
+    "address": "Кегети",
+    "google_maps_url": "https://maps.google.com/?q=42.43869,75.04388",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кегети). 15m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кегети_1765km",
+    "name": "Кегети (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.50589,
+      "lon": 75.0879
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1765.7,
+    "route_mile": 1097.2,
+    "address": "Кегети",
+    "google_maps_url": "https://maps.google.com/?q=42.50589,75.08790",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кегети). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кегети_1770km",
+    "name": "Кегети (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.54055,
+      "lon": 75.11054
+    },
+    "distance_to_trail_km": 0.006,
+    "route_km": 1770.7,
+    "route_mile": 1100.2,
+    "address": "Кегети",
+    "google_maps_url": "https://maps.google.com/?q=42.54055,75.11054",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кегети). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_коль_тор_көл_төр_1778km",
+    "name": "Коль-Тор / Көл-Төр (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.60023,
+      "lon": 75.13723
+    },
+    "distance_to_trail_km": 0.036,
+    "route_km": 1778.6,
+    "route_mile": 1105.2,
+    "address": "Коль-Тор / Көл-Төр",
+    "google_maps_url": "https://maps.google.com/?q=42.60023,75.13723",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Коль-Тор / Көл-Төр). 36m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кегети_1778km",
+    "name": "Кегети (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.60187,
+      "lon": 75.13726
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1778.8,
+    "route_mile": 1105.3,
+    "address": "Кегети",
+    "google_maps_url": "https://maps.google.com/?q=42.60187,75.13726",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кегети). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кегети_1790km",
+    "name": "Кегети (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.6918,
+      "lon": 75.16171
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 1790.0,
+    "route_mile": 1112.3,
+    "address": "Кегети",
+    "google_maps_url": "https://maps.google.com/?q=42.69180,75.16171",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кегети). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kegeti_1791km",
+    "name": "Kegeti",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.69133688251898,
+      "lon": 75.17786368506333
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1791.4,
+    "route_mile": 1113.1,
+    "address": "Kegeti, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.69133688251898,75.17786368506333",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "srmr_koshoy_1810km",
+    "name": "Koshoy",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.68715726097071,
+      "lon": 75.35359056883979
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1810.3,
+    "route_mile": 1124.9,
+    "address": "Koshoy, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.68715726097071,75.35359056883979",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village shop"
+  },
+  {
+    "id": "water_osm_шамшы_1822km",
+    "name": "Шамшы (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.61218,
+      "lon": 75.39971
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 1822.4,
+    "route_mile": 1132.4,
+    "address": "Шамшы",
+    "google_maps_url": "https://maps.google.com/?q=42.61218,75.39971",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Шамшы). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_тункжар_1842km",
+    "name": "Тункжар (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.55629,
+      "lon": 75.55045
+    },
+    "distance_to_trail_km": 0.151,
+    "route_km": 1842.8,
+    "route_mile": 1145.1,
+    "address": "Тункжар",
+    "google_maps_url": "https://maps.google.com/?q=42.55629,75.55045",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Тункжар). 151m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кызылсуу_1842km",
+    "name": "Кызылсуу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.55629,
+      "lon": 75.55045
+    },
+    "distance_to_trail_km": 0.151,
+    "route_km": 1842.8,
+    "route_mile": 1145.1,
+    "address": "Кызылсуу",
+    "google_maps_url": "https://maps.google.com/?q=42.55629,75.55045",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кызылсуу). 151m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кызыл_cуу_1845km",
+    "name": "Кызыл-Cуу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.56953,
+      "lon": 75.54532
+    },
+    "distance_to_trail_km": 0.004,
+    "route_km": 1845.0,
+    "route_mile": 1146.4,
+    "address": "Кызыл-Cуу",
+    "google_maps_url": "https://maps.google.com/?q=42.56953,75.54532",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кызыл-Cуу). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_окторкой_1853km",
+    "name": "Окторкой (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.61581,
+      "lon": 75.50062
+    },
+    "distance_to_trail_km": 0.021,
+    "route_km": 1853.3,
+    "route_mile": 1151.6,
+    "address": "Окторкой",
+    "google_maps_url": "https://maps.google.com/?q=42.61581,75.50062",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Окторкой). 21m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_родник_1869km",
+    "name": "родник (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.65391,
+      "lon": 75.66587
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1869.0,
+    "route_mile": 1161.3,
+    "address": "родник",
+    "google_maps_url": "https://maps.google.com/?q=42.65391,75.66587",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (родник). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_the_secret_oasis_1888km",
+    "name": "The Secret Oasis",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.71040891106213,
+      "lon": 75.84444053114254
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1888.9,
+    "route_mile": 1173.7,
+    "address": "The Secret Oasis, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.71040891106213,75.84444053114254",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Shops and Restaurants"
+  },
+  {
+    "id": "water_osm_холодные_воды_1889km",
+    "name": "Холодные воды (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.70684,
+      "lon": 75.84933
+    },
+    "distance_to_trail_km": 0.028,
+    "route_km": 1889.4,
+    "route_mile": 1174.0,
+    "address": "Холодные воды",
+    "google_maps_url": "https://maps.google.com/?q=42.70684,75.84933",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Холодные воды). 28m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чүй_1892km",
+    "name": "Чүй (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.69191,
+      "lon": 75.87912
+    },
+    "distance_to_trail_km": 0.017,
+    "route_km": 1892.9,
+    "route_mile": 1176.2,
+    "address": "Чүй",
+    "google_maps_url": "https://maps.google.com/?q=42.69191,75.87912",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чүй). 17m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чоң_кемин_1895km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.6897,
+      "lon": 75.89861
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 1895.1,
+    "route_mile": 1177.6,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.68970,75.89861",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_алтын_булак_1898km",
+    "name": "Алтын - Булак (Spring)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.68645,
+      "lon": 75.93104
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1898.2,
+    "route_mile": 1179.5,
+    "address": "Алтын - Булак",
+    "google_maps_url": "https://maps.google.com/?q=42.68645,75.93104",
+    "business_status": "OPERATIONAL",
+    "description": "Spring (Алтын - Булак). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_жаӊгыз_тал_1898km",
+    "name": "Жаӊгыз-тал (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.68443,
+      "lon": 75.93603
+    },
+    "distance_to_trail_km": 0.047,
+    "route_km": 1898.7,
+    "route_mile": 1179.8,
+    "address": "Жаӊгыз-тал",
+    "google_maps_url": "https://maps.google.com/?q=42.68443,75.93603",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Жаӊгыз-тал). 47m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_боожетпес_1901km",
+    "name": "Боожетпес (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.68846,
+      "lon": 75.96977
+    },
+    "distance_to_trail_km": 0.055,
+    "route_km": 1901.5,
+    "route_mile": 1181.5,
+    "address": "Боожетпес",
+    "google_maps_url": "https://maps.google.com/?q=42.68846,75.96977",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Боожетпес). 55m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чоң_кемин_1902km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.69133,
+      "lon": 75.97958
+    },
+    "distance_to_trail_km": 0.024,
+    "route_km": 1902.4,
+    "route_mile": 1182.1,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.69133,75.97958",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 24m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ак_ташкара_1904km",
+    "name": "Ак-Ташкара (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.6951,
+      "lon": 76.00183
+    },
+    "distance_to_trail_km": 0.031,
+    "route_km": 1904.6,
+    "route_mile": 1183.5,
+    "address": "Ак-Ташкара",
+    "google_maps_url": "https://maps.google.com/?q=42.69510,76.00183",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ак-Ташкара). 31m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_тар_суу_1907km",
+    "name": "Тар-Суу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.70527,
+      "lon": 76.03444
+    },
+    "distance_to_trail_km": 0.016,
+    "route_km": 1907.7,
+    "route_mile": 1185.4,
+    "address": "Тар-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.70527,76.03444",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Тар-Суу). 16m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kalmak_ashuu_1913km",
+    "name": "Kalmak-Ashuu",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.72206428978413,
+      "lon": 76.08779189437814
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1913.5,
+    "route_mile": 1189.0,
+    "address": "Kalmak-Ashuu, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.72206428978413,76.08779189437814",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "A couple shops in these villages. A bigger one off route across the river in Shabdan."
+  },
+  {
+    "id": "water_osm_шалак_кайыӊды_1917km",
+    "name": "Шалак-Кайыӊды (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.7352,
+      "lon": 76.13495
+    },
+    "distance_to_trail_km": 0.011,
+    "route_km": 1917.7,
+    "route_mile": 1191.6,
+    "address": "Шалак-Кайыӊды",
+    "google_maps_url": "https://maps.google.com/?q=42.73520,76.13495",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Шалак-Кайыӊды). 11m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kaindy_1920km",
+    "name": "Kaindy",
+    "category": "hotel",
+    "type": "guesthouse",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.743730577405444,
+      "lon": 76.16035248142487
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1920.2,
+    "route_mile": 1193.2,
+    "address": "Kaindy, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.743730577405444,76.16035248142487",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "CBT guesthouses in the area"
+  },
+  {
+    "id": "water_osm_чоң_кемин_1921km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75098,
+      "lon": 76.16202
+    },
+    "distance_to_trail_km": 0.023,
+    "route_km": 1921.2,
+    "route_mile": 1193.8,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.75098,76.16202",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 23m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_орто_кайыңды_1922km",
+    "name": "Орто-Кайыңды (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75047,
+      "lon": 76.17028
+    },
+    "distance_to_trail_km": 0.239,
+    "route_km": 1922.0,
+    "route_mile": 1194.2,
+    "address": "Орто-Кайыңды",
+    "google_maps_url": "https://maps.google.com/?q=42.75047,76.17028",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Орто-Кайыңды). 239m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_тайыз_булак_1927km",
+    "name": "Тайыз-булак (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.76293,
+      "lon": 76.23221
+    },
+    "distance_to_trail_km": 0.017,
+    "route_km": 1927.3,
+    "route_mile": 1197.6,
+    "address": "Тайыз-булак",
+    "google_maps_url": "https://maps.google.com/?q=42.76293,76.23221",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Тайыз-булак). 17m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чимбулак_1928km",
+    "name": "Чимбулак (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75972,
+      "lon": 76.24444
+    },
+    "distance_to_trail_km": 0.071,
+    "route_km": 1928.4,
+    "route_mile": 1198.3,
+    "address": "Чимбулак",
+    "google_maps_url": "https://maps.google.com/?q=42.75972,76.24444",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Чимбулак). 71m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кашка_суу_1929km",
+    "name": "Кашка-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75956,
+      "lon": 76.25693
+    },
+    "distance_to_trail_km": 0.019,
+    "route_km": 1929.8,
+    "route_mile": 1199.1,
+    "address": "Кашка-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.75956,76.25693",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Кашка-Суу). 19m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_тору_айгыр_1931km",
+    "name": "Тору-Айгыр (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.76654,
+      "lon": 76.27006
+    },
+    "distance_to_trail_km": 0.083,
+    "route_km": 1931.2,
+    "route_mile": 1200.0,
+    "address": "Тору-Айгыр",
+    "google_maps_url": "https://maps.google.com/?q=42.76654,76.27006",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Тору-Айгыр). 83m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чоң_кемин_1933km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.77029,
+      "lon": 76.29719
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1933.6,
+    "route_mile": 1201.5,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.77029,76.29719",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 40m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_четинди_1936km",
+    "name": "Четинди (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.77421,
+      "lon": 76.3284
+    },
+    "distance_to_trail_km": 0.025,
+    "route_km": 1936.3,
+    "route_mile": 1203.2,
+    "address": "Четинди",
+    "google_maps_url": "https://maps.google.com/?q=42.77421,76.32840",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Четинди). 25m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_жашыл_көл_1938km",
+    "name": "Жашыл-Көл (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.78333,
+      "lon": 76.35373
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 1938.8,
+    "route_mile": 1204.7,
+    "address": "Жашыл-Көл",
+    "google_maps_url": "https://maps.google.com/?q=42.78333,76.35373",
+    "business_status": "OPERATIONAL",
+    "description": "Lake Access (Жашыл-Көл). 20m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чоң_кемин_1942km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.79282,
+      "lon": 76.38608
+    },
+    "distance_to_trail_km": 0.037,
+    "route_km": 1942.2,
+    "route_mile": 1206.8,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.79282,76.38608",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 37m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ичке_суу_1945km",
+    "name": "Ичке-Суу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.80501,
+      "lon": 76.41136
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1945.1,
+    "route_mile": 1208.6,
+    "address": "Ичке-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.80501,76.41136",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ичке-Суу). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чоң_кемин_1946km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.8078,
+      "lon": 76.42209
+    },
+    "distance_to_trail_km": 0.012,
+    "route_km": 1946.0,
+    "route_mile": 1209.2,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.80780,76.42209",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 12m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_бузулган_сай_1951km",
+    "name": "Бузулган-Сай (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.81934,
+      "lon": 76.47796
+    },
+    "distance_to_trail_km": 0.032,
+    "route_km": 1951.9,
+    "route_mile": 1212.8,
+    "address": "Бузулган-Сай",
+    "google_maps_url": "https://maps.google.com/?q=42.81934,76.47796",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Бузулган-Сай). 32m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_таш_кыя_1956km",
+    "name": "Таш-Кыя (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.83732,
+      "lon": 76.53036
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1956.8,
+    "route_mile": 1215.9,
+    "address": "Таш-Кыя",
+    "google_maps_url": "https://maps.google.com/?q=42.83732,76.53036",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Таш-Кыя). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_дүрөө_1957km",
+    "name": "Дүрөө (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.84054,
+      "lon": 76.53417
+    },
+    "distance_to_trail_km": 0.132,
+    "route_km": 1957.3,
+    "route_mile": 1216.2,
+    "address": "Дүрөө",
+    "google_maps_url": "https://maps.google.com/?q=42.84054,76.53417",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Дүрөө). 132m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кашкелен_1960km",
+    "name": "Кашкелен (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.85214,
+      "lon": 76.57017
+    },
+    "distance_to_trail_km": 0.023,
+    "route_km": 1960.7,
+    "route_mile": 1218.3,
+    "address": "Кашкелен",
+    "google_maps_url": "https://maps.google.com/?q=42.85214,76.57017",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кашкелен). 23m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кашка_суу_1961km",
+    "name": "Кашка-Суу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.85426,
+      "lon": 76.57445
+    },
+    "distance_to_trail_km": 0.049,
+    "route_km": 1961.1,
+    "route_mile": 1218.6,
+    "address": "Кашка-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.85426,76.57445",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кашка-Суу). 49m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_кек_булак_1961km",
+    "name": "Кек-Булак (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.85502,
+      "lon": 76.57682
+    },
+    "distance_to_trail_km": 0.046,
+    "route_km": 1961.4,
+    "route_mile": 1218.7,
+    "address": "Кек-Булак",
+    "google_maps_url": "https://maps.google.com/?q=42.85502,76.57682",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Кек-Булак). 46m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_ак_булак_1962km",
+    "name": "Ак-Булак (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.85365,
+      "lon": 76.5847
+    },
+    "distance_to_trail_km": 0.099,
+    "route_km": 1962.6,
+    "route_mile": 1219.5,
+    "address": "Ак-Булак",
+    "google_maps_url": "https://maps.google.com/?q=42.85365,76.58470",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Ак-Булак). 99m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чоң_кемин_1963km",
+    "name": "Чоң-Кемин (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.85314,
+      "lon": 76.59047
+    },
+    "distance_to_trail_km": 0.018,
+    "route_km": 1963.0,
+    "route_mile": 1219.8,
+    "address": "Чоң-Кемин",
+    "google_maps_url": "https://maps.google.com/?q=42.85314,76.59047",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Чоң-Кемин). 18m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_жая_1963km",
+    "name": "Жая (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.85266,
+      "lon": 76.60027
+    },
+    "distance_to_trail_km": 0.106,
+    "route_km": 1963.9,
+    "route_mile": 1220.3,
+    "address": "Жая",
+    "google_maps_url": "https://maps.google.com/?q=42.85266,76.60027",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Жая). 106m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_жинди_суу_1969km",
+    "name": "Жинди-Суу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.86374,
+      "lon": 76.65909
+    },
+    "distance_to_trail_km": 0.025,
+    "route_km": 1969.6,
+    "route_mile": 1223.9,
+    "address": "Жинди-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.86374,76.65909",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Жинди-Суу). 25m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_северный_койсуу_1978km",
+    "name": "Северный КойСуу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.86165,
+      "lon": 76.75794
+    },
+    "distance_to_trail_km": 0.008,
+    "route_km": 1978.2,
+    "route_mile": 1229.2,
+    "address": "Северный КойСуу",
+    "google_maps_url": "https://maps.google.com/?q=42.86165,76.75794",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Северный КойСуу). Directly on trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_чон_аксай_1981km",
+    "name": "Чон-Аксай (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.86988,
+      "lon": 76.79575
+    },
+    "distance_to_trail_km": 0.152,
+    "route_km": 1981.5,
+    "route_mile": 1231.2,
+    "address": "Чон-Аксай",
+    "google_maps_url": "https://maps.google.com/?q=42.86988,76.79575",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Чон-Аксай). 152m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_орто_кой_суу_1992km",
+    "name": "Орто-Кой-Суу (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.81621,
+      "lon": 76.83526
+    },
+    "distance_to_trail_km": 0.038,
+    "route_km": 1992.1,
+    "route_mile": 1237.8,
+    "address": "Орто-Кой-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.81621,76.83526",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Орто-Кой-Суу). 38m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_kok_ayrik_1999km",
+    "name": "Kok-Ayrik",
+    "category": "pass",
+    "type": "viewpoint",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.79606991554647,
+      "lon": 76.84445569416283
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1999.5,
+    "route_mile": 1242.5,
+    "address": "Kok-Ayrik, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.79606991554647,76.84445569416283",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Massive mountain pass, epic views and final challenge. Badly damaged road. A fair bit of hiking involved."
+  },
+  {
+    "id": "water_osm_орто_кой_суу_2005km",
+    "name": "Орто-Кой-Суу (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.76894,
+      "lon": 76.84589
+    },
+    "distance_to_trail_km": 0.034,
+    "route_km": 2005.8,
+    "route_mile": 1246.3,
+    "address": "Орто-Кой-Суу",
+    "google_maps_url": "https://maps.google.com/?q=42.76894,76.84589",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Орто-Кой-Суу). 34m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_туйк_тёр_2008km",
+    "name": "Туйк-Тёр (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75405,
+      "lon": 76.85149
+    },
+    "distance_to_trail_km": 0.021,
+    "route_km": 2008.3,
+    "route_mile": 1247.9,
+    "address": "Туйк-Тёр",
+    "google_maps_url": "https://maps.google.com/?q=42.75405,76.85149",
+    "business_status": "OPERATIONAL",
+    "description": "River Access (Туйк-Тёр). 21m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_chong_sary_oy_2034km",
+    "name": "Chong Sary-Oy",
+    "category": "grocery",
+    "type": "store",
+    "town": "",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.60640474418648,
+      "lon": 76.91449378025743
+    },
+    "distance_to_trail_km": 0.09,
+    "route_km": 2034.0,
+    "route_mile": 1263.8,
+    "address": "Chong Sary-Oy, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.60640474418648,76.91449378025743",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Village Shop"
+  },
+  {
+    "id": "water_osm_поливной_ручей_2046km",
+    "name": "Поливной ручей (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.6399,
+      "lon": 77.05465
+    },
+    "distance_to_trail_km": 0.071,
+    "route_km": 2046.1,
+    "route_mile": 1271.4,
+    "address": "Поливной ручей",
+    "google_maps_url": "https://maps.google.com/?q=42.63990,77.05465",
+    "business_status": "OPERATIONAL",
+    "description": "Creek Access (Поливной ручей). 71m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "water_osm_затон_2049km",
+    "name": "Затон (Reservoir Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.63838,
+      "lon": 77.08922
+    },
+    "distance_to_trail_km": 0.048,
+    "route_km": 2049.6,
+    "route_mile": 1273.6,
+    "address": "Затон",
+    "google_maps_url": "https://maps.google.com/?q=42.63838,77.08922",
+    "business_status": "OPERATIONAL",
+    "description": "Reservoir Access (Затон). 48m from trail. Natural water source (filtration/treatment required)."
+  },
+  {
+    "id": "srmr_cholpon_ata_finish",
+    "name": "Cholpon-Ata (Finish Line)",
+    "category": "town",
+    "type": "town",
+    "town": "Cholpon-Ata",
+    "is_in_town": true,
+    "location": {
+      "lat": 42.6379,
+      "lon": 77.09134
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 2049.862,
+    "route_mile": 1273.7,
+    "address": "Cholpon-Ata, Issyk-Kul Region, Kyrgyzstan",
+    "google_maps_url": "https://maps.google.com/?q=42.6379,77.09134",
+    "business_status": "OPERATIONAL",
+    "province_state": "KG",
+    "country": "Kyrgyzstan",
+    "description": "Official Finish Line of the Silk Road Mountain Race on the shores of Lake Issyk-Kul. Celebration resort, beaches, hotels, and banquets."
+  }
+]

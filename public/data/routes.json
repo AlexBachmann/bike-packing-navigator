@@ -147,6 +147,214 @@
         ]
       ],
       "dataPath": "/data/routes/arizona-trail-300"
+    },
+    {
+      "id": "highland-trail-550",
+      "name": "Highland Trail 550 (2026)",
+      "shortName": "Highland Trail 550",
+      "badge": "HT",
+      "startLocation": "Tyndrum, Scotland",
+      "endLocation": "Tyndrum, Scotland",
+      "startPoint": "Tyndrum, Scotland",
+      "endPoint": "Tyndrum, Scotland",
+      "totalDistanceMiles": 548.1,
+      "totalDistanceKm": 882.0,
+      "distanceMiles": 548.1,
+      "distanceKm": 882.0,
+      "elevationGainFt": 53508,
+      "elevationGainM": 16309,
+      "elevationGainFeet": 53508,
+      "elevationGainMeters": 16309,
+      "highestElevationFeet": 2522,
+      "highestElevationMeters": 769,
+      "highestPoint": "Corrieyairack Pass (2,522 ft)",
+      "iconicPass": "Corrieyairack Pass (2,522 ft)",
+      "iconicCheckpoints": [
+        "Tyndrum Grand Depart",
+        "Glen Lyon",
+        "Corrieyairack Pass",
+        "Fort Augustus",
+        "Contin",
+        "Oykel Bridge",
+        "Lochinver",
+        "Ullapool",
+        "Fisherfield Wilderness",
+        "Bealach na Lice",
+        "Fort William",
+        "Devil's Staircase",
+        "Kingshouse",
+        "Tyndrum Finish"
+      ],
+      "description": "The UK's premier 550-mile self-supported bikepacking grand depart through the rugged Scottish Highlands, featuring ancient military roads, coastal sea lochs, Fisherfield wilderness, and 53,500 feet of climbing.",
+      "startCoordinates": [
+        56.44001,
+        -4.71206
+      ],
+      "bounds": [
+        [
+          56.44,
+          -5.6042
+        ],
+        [
+          58.3773,
+          -4.291
+        ]
+      ],
+      "dataPath": "/data/routes/highland-trail-550"
+    },
+    {
+      "id": "hellenic-mountain-race-2026",
+      "name": "Hellenic Mountain Race 2026",
+      "shortName": "Hellenic Mountain Race",
+      "badge": "HMR",
+      "startLocation": "Agios Athanasios, Greece",
+      "endLocation": "Nafpaktos, Greece",
+      "startPoint": "Agios Athanasios, Greece",
+      "endPoint": "Nafpaktos, Greece",
+      "totalDistanceMiles": 572.5,
+      "totalDistanceKm": 921.3,
+      "distanceMiles": 572.5,
+      "distanceKm": 921.3,
+      "elevationGainFt": 91322,
+      "elevationGainM": 27835,
+      "elevationGainFeet": 91322,
+      "elevationGainMeters": 27835,
+      "highestElevationFeet": 8226,
+      "highestElevationMeters": 2507,
+      "highestPoint": "Kaimaktsalan / Mount Voras (8,226 ft)",
+      "iconicPass": "Kaimaktsalan / Mount Voras (8,226 ft)",
+      "iconicCheckpoints": [
+        "Agios Athanasios",
+        "Kaimaktsalan",
+        "Kastoria",
+        "CP1: Smolikas",
+        "Vikos Gorge",
+        "Metsovo",
+        "CP2: Melissourgi",
+        "Raptopoulo",
+        "CP3: Karpenisi",
+        "Diaselo Kaliakoudas",
+        "Nafpaktos"
+      ],
+      "description": "The premier 922-kilometer self-supported bikepacking race traversing northern and central Greece, climbing over 27,800m through Mount Voras, Smolikas, Vikos Gorge, Tzoumerka, and Agrafa to the coastal fortress of Nafpaktos.",
+      "startCoordinates": [
+        40.83975,
+        21.76728
+      ],
+      "bounds": [
+        [
+          38.3913,
+          20.6545
+        ],
+        [
+          40.9307,
+          21.8658
+        ]
+      ],
+      "dataPath": "/data/routes/hellenic-mountain-race-2026"
+    },
+    {
+      "id": "silk-road-mountain-race-2026",
+      "name": "Silk Road Mountain Race 2026",
+      "shortName": "Silk Road Race",
+      "badge": "SRMR",
+      "startLocation": "Talas, Kyrgyzstan",
+      "endLocation": "Cholpon-Ata, Kyrgyzstan",
+      "startPoint": "Talas, Kyrgyzstan",
+      "endPoint": "Cholpon-Ata, Kyrgyzstan",
+      "totalDistanceMiles": 1273.7,
+      "totalDistanceKm": 2049.9,
+      "distanceMiles": 1273.7,
+      "distanceKm": 2049.9,
+      "elevationGainFt": 138102,
+      "elevationGainM": 42093,
+      "elevationGainFeet": 138102,
+      "elevationGainMeters": 42093,
+      "highestElevationFeet": 12879,
+      "highestElevationMeters": 3926,
+      "highestPoint": "Ukok Pass (12,879 ft)",
+      "iconicPass": "Ukok Pass (12,879 ft)",
+      "iconicCheckpoints": [
+        "Talas Grand Depart",
+        "Terekti Pass",
+        "Toktogul",
+        "Song-K\u00f6l (CP1)",
+        "Baetov",
+        "The Old Soviet Road",
+        "Naryn",
+        "Arabel Pass",
+        "Barskoon Pass",
+        "Tosor Pass",
+        "Ukok Pass (Highest Point)",
+        "Kochkor",
+        "Kegeti Pass",
+        "Kok-Ayrik Pass",
+        "Cholpon-Ata Finish"
+      ],
+      "description": "The premier unsupported bikepacking race across the wild Tian Shan mountains of Kyrgyzstan. Traversing 2,050 km (1,274 miles) with over 42,000 meters (138,000 ft) of elevation gain over extreme alpine passes up to 3,926m (12,879 ft).",
+      "startCoordinates": [
+        42.52111,
+        72.25016
+      ],
+      "bounds": [
+        [
+          40.5446,
+          72.2481
+        ],
+        [
+          42.8726,
+          77.756
+        ]
+      ],
+      "dataPath": "/data/routes/silk-road-mountain-race-2026"
+    },
+    {
+      "id": "atlas-mountain-race-2026",
+      "name": "Atlas Mountain Race 2026",
+      "shortName": "Atlas Mountain Race",
+      "badge": "AMR",
+      "startLocation": "Beni Mellal, Morocco",
+      "endLocation": "Essaouira, Morocco",
+      "startPoint": "Beni Mellal, Morocco",
+      "endPoint": "Essaouira, Morocco",
+      "totalDistanceMiles": 840.0,
+      "totalDistanceKm": 1351.9,
+      "distanceMiles": 840.0,
+      "distanceKm": 1351.9,
+      "elevationGainFt": 118016,
+      "elevationGainM": 35971,
+      "elevationGainFeet": 118016,
+      "elevationGainMeters": 35971,
+      "highestElevationFeet": 9557,
+      "highestElevationMeters": 2913,
+      "highestPoint": "Tizi N'Ait Imi (9,557 ft)",
+      "iconicPass": "Tizi N'Ait Imi (9,557 ft)",
+      "iconicCheckpoints": [
+        "Beni Mellal",
+        "Cathedral Rock",
+        "Tizi N'Ait Imi",
+        "Gorges du M'Goun",
+        "Kalaat M'Gouna",
+        "Tizi n'Tazazert",
+        "Tafraoute",
+        "Essaouira"
+      ],
+      "description": "An unforgettable 840-mile self-supported bikepacking odyssey traversing Morocco, climbing from Beni Mellal through the High Atlas summits and remote M'Goun river gorges, across the volcanic moonscape of Jbel Saghro, over the pink granite domes of Tafraoute, and concluding at the Atlantic coastal ramparts of Essaouira.",
+      "startCoordinates": [
+        32.32497,
+        -6.33664
+      ],
+      "bounds": [
+        [
+          29.4929,
+          -9.8183
+        ],
+        [
+          32.3338,
+          -6.1031
+        ]
+      ],
+      "dataPath": "/data/routes/atlas-mountain-race-2026"
     }
   ]
 }
