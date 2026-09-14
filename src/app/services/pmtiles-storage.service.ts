@@ -1,6 +1,7 @@
 import { Injectable, signal } from "@angular/core";
 import * as maplibregl from 'maplibre-gl';
 import { Protocol, PMTiles, Source, RangeResponse, Header } from "pmtiles";
+import { resolveBaseHref } from "../interceptors/base-href.interceptor";
 
 export interface RouteSectionMeta {
   sectionId: string;
@@ -317,9 +318,10 @@ export class PmtilesStorageService {
   }
 
   registerRemoteUrl(routeId: string, url: string, sectionId?: string): PMTiles {
+    const resolvedUrl = resolveBaseHref(url);
     const key = this.buildKey(routeId, sectionId);
-    this.remoteUrlMap.set(key, url);
-    const pmtiles = new PMTiles(url);
+    this.remoteUrlMap.set(key, resolvedUrl);
+    const pmtiles = new PMTiles(resolvedUrl);
     this.registerInstance(key, pmtiles);
 
     if (sectionId) {
@@ -668,7 +670,8 @@ export class PmtilesStorageService {
     onProgress?.(progress);
 
     try {
-      const res = await fetch(url);
+      const resolvedUrl = resolveBaseHref(url);
+      const res = await fetch(resolvedUrl);
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
@@ -745,28 +748,28 @@ export class PmtilesStorageService {
           name: 'Section 1: Canada & Montana',
           filename: 'section-1.pmtiles',
           estimatedSizeBytes: 28 * 1024 * 1024,
-          url: '/data/routes/tour-divide-2025/section-1.pmtiles'
+          url: resolveBaseHref('/data/routes/tour-divide-2025/section-1.pmtiles')
         },
         {
           sectionId: '2',
           name: 'Section 2: Wyoming',
           filename: 'section-2.pmtiles',
           estimatedSizeBytes: 22 * 1024 * 1024,
-          url: '/data/routes/tour-divide-2025/section-2.pmtiles'
+          url: resolveBaseHref('/data/routes/tour-divide-2025/section-2.pmtiles')
         },
         {
           sectionId: '3',
           name: 'Section 3: Colorado',
           filename: 'section-3.pmtiles',
           estimatedSizeBytes: 35 * 1024 * 1024,
-          url: '/data/routes/tour-divide-2025/section-3.pmtiles'
+          url: resolveBaseHref('/data/routes/tour-divide-2025/section-3.pmtiles')
         },
         {
           sectionId: '4',
           name: 'Section 4: New Mexico',
           filename: 'section-4.pmtiles',
           estimatedSizeBytes: 25 * 1024 * 1024,
-          url: '/data/routes/tour-divide-2025/section-4.pmtiles'
+          url: resolveBaseHref('/data/routes/tour-divide-2025/section-4.pmtiles')
         }
       ];
     }
@@ -777,7 +780,7 @@ export class PmtilesStorageService {
         name: 'Full Route Corridor',
         filename: 'corridor.pmtiles',
         estimatedSizeBytes: this.getEstimatedSizeBytes(routeId),
-        url: `/data/routes/${routeId}/corridor.pmtiles`
+        url: resolveBaseHref(`/data/routes/${routeId}/corridor.pmtiles`)
       }
     ];
   }
@@ -916,10 +919,10 @@ export class PmtilesStorageService {
     }
 
     // Single section or non-sectioned route
-    let url = `/data/routes/${routeId}/corridor.pmtiles`;
+    let url = resolveBaseHref(`/data/routes/${routeId}/corridor.pmtiles`);
     if (sectionId) {
       const sec = this.getRouteSections(routeId).find((s) => s.sectionId === sectionId);
-      url = sec ? sec.url : `/data/routes/${routeId}/section-${sectionId}.pmtiles`;
+      url = sec ? sec.url : resolveBaseHref(`/data/routes/${routeId}/section-${sectionId}.pmtiles`);
     }
 
     const progressTracker = (p: DownloadProgress) => {

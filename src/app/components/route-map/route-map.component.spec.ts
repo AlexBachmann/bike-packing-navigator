@@ -841,5 +841,31 @@ describe('RouteMapComponent', () => {
 
       expect(downloadSpy).toHaveBeenCalled();
     });
+
+    it('should resolve base href when fetching vector style spec', async () => {
+      const baseEl = document.querySelector('base') || document.createElement('base');
+      if (!baseEl.parentElement) {
+        document.head.appendChild(baseEl);
+      }
+      baseEl.setAttribute('href', '/bike-packing-navigator/');
+
+      try {
+        const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+          new Response(JSON.stringify({
+            version: 8,
+            sources: {
+              openmaptiles: { type: 'vector', url: '' }
+            },
+            layers: []
+          }), { status: 200 })
+        );
+
+        const spec = await component.getVectorStyleSpec('dark', 'colorado-trail');
+        expect(fetchSpy).toHaveBeenCalledWith('/bike-packing-navigator/assets/styles/vector-dark.json');
+        expect(spec.version).toBe(8);
+      } finally {
+        baseEl.setAttribute('href', '/');
+      }
+    });
   });
 });

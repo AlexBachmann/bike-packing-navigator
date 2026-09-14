@@ -21,6 +21,7 @@ import { PmtilesStorageService } from '../../services/pmtiles-storage.service';
 import { ToastService } from '../../services/toast.service';
 import { Place, GpsState, isSelfServiceWaschsalon } from '../../models/waypoint.model';
 import { MapStyle } from '../../models/settings.model';
+import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
 
 export function getRasterBaselineStyle(style: MapStyle): maplibregl.StyleSpecification {
   return {
@@ -455,7 +456,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   async getVectorStyleSpec(style: MapStyle, routeId: string): Promise<maplibregl.StyleSpecification> {
     const isCached = this.isVectorCached();
     const pmtilesUrl = this.pmtilesStorage.resolveTileUrl(routeId);
-    const styleUrl = `/assets/styles/vector-${style}.json`;
+    const styleUrl = resolveBaseHref(`/assets/styles/vector-${style}.json`);
     try {
       const res = await fetch(styleUrl);
       if (res.ok) {

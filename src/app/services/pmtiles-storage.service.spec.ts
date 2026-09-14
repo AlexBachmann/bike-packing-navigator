@@ -333,6 +333,34 @@ describe("PmtilesStorageService", () => {
       expect(lastProgress.errorMessage).toContain("Network disconnect");
     });
 
+    it("should resolve non-root base href when downloading relative archive URLs", async () => {
+      const baseEl = document.querySelector('base') || document.createElement('base');
+      if (!baseEl.parentElement) {
+        document.head.appendChild(baseEl);
+      }
+      baseEl.setAttribute('href', '/bike-packing-navigator/');
+
+      try {
+        const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+          new Response(new Uint8Array([1, 2, 3]), {
+            status: 200,
+            headers: { "Content-Length": "3" }
+          })
+        );
+
+        await service.downloadArchive(
+          "gh-pages-route",
+          "/data/routes/gh-pages-route/corridor.pmtiles"
+        );
+
+        expect(fetchSpy).toHaveBeenCalledWith(
+          "/bike-packing-navigator/data/routes/gh-pages-route/corridor.pmtiles"
+        );
+      } finally {
+        baseEl.setAttribute('href', '/');
+      }
+    });
+
     it("should provide route section metadata and multi-section identification", () => {
       expect(service.hasSections("tour-divide-2025")).toBe(true);
       expect(service.hasSections("arizona-trail-300")).toBe(false);
