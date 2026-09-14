@@ -161,7 +161,8 @@ def extract_corridor_from_openfreemap(
     bbox: Tuple[float, float, float, float],
     min_zoom: int,
     max_zoom: int,
-    route_id: str
+    route_id: str,
+    places_coords: Optional[List[Tuple[float, float]]] = None
 ) -> bool:
     """Fetch authentic OpenMapTiles vector tiles from OpenFreeMap for the route corridor."""
     min_lon, min_lat, max_lon, max_lat = bbox
@@ -176,17 +177,33 @@ def extract_corridor_from_openfreemap(
 
     effective_max_zoom = min(max_zoom, 14)
     tiles_by_z: Dict[int, List[Tuple[int, int]]] = {}
+    points_to_sample = list(track_coords)
+    if places_coords:
+        points_to_sample.extend(places_coords)
+
     for z in range(min_zoom, effective_max_zoom + 1):
         s = set()
-        if z <= 6:
-            # Full bounding box coverage at overview zooms
-            intersecting = get_intersecting_tiles(min_lon, min_lat, max_lon, max_lat, z)
-            for _, tx, ty in intersecting:
-                s.add((tx, ty))
+        n_tiles = 2 ** z
+        if z <= 8:
+            # Full bounding box coverage at overview zooms (with 1-tile margin)
+            min_tx, min_ty = lonlat_to_tile(min_lon, max_lat, z)
+            max_tx, max_ty = lonlat_to_tile(max_lon, min_lat, z)
+            if min_tx > max_tx: min_tx, max_tx = max_tx, min_tx
+            if min_ty > max_ty: min_ty, max_ty = max_ty, min_ty
+            for x in range(max(0, min_tx - 1), min(n_tiles, max_tx + 2)):
+                for y in range(max(0, min_ty - 1), min(n_tiles, max_ty + 2)):
+                    s.add((x, y))
         else:
-            # Route corridor coverage - sample all track points to ensure gapless tile coverage
-            for lon, lat in track_coords:
-                s.add(lonlat_to_tile(lon, lat, z))
+            # Route corridor coverage with 1-tile buffer (3x3 neighborhood)
+            # Sample all track points and POIs to guarantee adjacent tiles are available
+            for lon, lat in points_to_sample:
+                tx, ty = lonlat_to_tile(lon, lat, z)
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        nx = tx + dx
+                        ny = ty + dy
+                        if 0 <= nx < n_tiles and 0 <= ny < n_tiles:
+                            s.add((nx, ny))
         tiles_by_z[z] = list(s)
 
     all_tiles = []
@@ -211,7 +228,7 @@ def extract_corridor_from_openfreemap(
                 if attempt == 2:
                     return (z, x, y, None)
 
-    with ThreadPoolExecutor(max_workers=16) as ex:
+    with ThreadPoolExecutor(max_workers=32) as ex:
         results = list(ex.map(fetch_tile, all_tiles))
 
     tile_entries = []
@@ -287,6 +304,19 @@ def build_corridor_pmtiles(
             # Format is [lat, lon, ele, km, mi]
             track_coords = [(p[1], p[0]) for p in raw_pts if len(p) >= 2]
 
+    # 2. Load Places / POIs
+    places_path = route_dir / "places.json"
+    places = []
+    places_coords = []
+    if places_path.exists():
+        with open(places_path, "r", encoding="utf-8") as f:
+            places = json.load(f)
+        for p in places:
+            plat = p.get("lat")
+            plon = p.get("lon")
+            if plat is not None and plon is not None:
+                places_coords.append((plon, plat))
+
     # Try extracting authentic OpenMapTiles from OpenFreeMap if network available
     try:
         if extract_corridor_from_openfreemap(
@@ -295,18 +325,12 @@ def build_corridor_pmtiles(
             bbox=bbox,
             min_zoom=min_zoom,
             max_zoom=max_zoom,
-            route_id=route_id
+            route_id=route_id,
+            places_coords=places_coords
         ):
             return
     except Exception as e:
         print(f"[PMTiles Pipeline] Online vector extraction failed ({e}), falling back to local builder...")
-
-    # 2. Load Places / POIs
-    places_path = route_dir / "places.json"
-    places = []
-    if places_path.exists():
-        with open(places_path, "r", encoding="utf-8") as f:
-            places = json.load(f)
 
     # 3. Load Surfaces
     surfaces_path = route_dir / "surfaces.json"
@@ -498,12 +522,24 @@ def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
 
             tiles_needed = set()
             for z in range(header["min_zoom"], header["max_zoom"] + 1):
-                if z <= 6:
-                    for _, tx, ty in get_intersecting_tiles(min_lon, min_lat, max_lon, max_lat, z):
-                        tiles_needed.add((z, tx, ty))
+                n_tiles = 2 ** z
+                if z <= 8:
+                    min_tx, min_ty = lonlat_to_tile(min_lon, max_lat, z)
+                    max_tx, max_ty = lonlat_to_tile(max_lon, min_lat, z)
+                    if min_tx > max_tx: min_tx, max_tx = max_tx, min_tx
+                    if min_ty > max_ty: min_ty, max_ty = max_ty, min_ty
+                    for x in range(max(0, min_tx - 1), min(n_tiles, max_tx + 2)):
+                        for y in range(max(0, min_ty - 1), min(n_tiles, max_ty + 2)):
+                            tiles_needed.add((z, x, y))
                 else:
                     for lon, lat in sec_pts:
-                        tiles_needed.add((z, *lonlat_to_tile(lon, lat, z)))
+                        tx, ty = lonlat_to_tile(lon, lat, z)
+                        for dx in (-1, 0, 1):
+                            for dy in (-1, 0, 1):
+                                nx = tx + dx
+                                ny = ty + dy
+                                if 0 <= nx < n_tiles and 0 <= ny < n_tiles:
+                                    tiles_needed.add((z, nx, ny))
 
             sorted_tiles = sorted(list(tiles_needed), key=lambda c: zxy_to_tileid(c[0], c[1], c[2]))
             with open(sec_out, "wb") as out_f:
