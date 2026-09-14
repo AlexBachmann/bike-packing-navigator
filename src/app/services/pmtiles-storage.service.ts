@@ -302,6 +302,14 @@ export class PmtilesStorageService {
         this.registerInstance(routeId, composite);
       } else {
         composite.addSection(sectionId, pmtiles);
+        this.registerInstance(routeId, composite);
+      }
+    } else {
+      // If a multi-section composite exists and this is a partial/small blob (< 20 MB),
+      // ensure the CompositePMTiles remains the active registered instance for routeId
+      const composite = this.compositeInstances.get(routeId);
+      if (composite && composite.getSections().length > 0 && blob.size < 20 * 1024 * 1024) {
+        this.registerInstance(routeId, composite);
       }
     }
 
@@ -325,6 +333,7 @@ export class PmtilesStorageService {
         this.registerInstance(routeId, composite);
       } else {
         composite.addSection(sectionId, pmtiles);
+        this.registerInstance(routeId, composite);
       }
     }
 
@@ -607,7 +616,29 @@ export class PmtilesStorageService {
 
   async loadCachedArchivesIntoProtocol(): Promise<void> {
     const records = await this.listArchives();
+    const routesWithSections = new Set<string>();
     for (const r of records) {
+      if (r.sectionId) {
+        routesWithSections.add(r.routeId);
+      }
+    }
+
+    // Register section archives first to construct CompositePMTiles
+    const sectionRecords = records.filter((r) => !!r.sectionId);
+    const nonSectionRecords = records.filter((r) => !r.sectionId);
+
+    for (const r of sectionRecords) {
+      this.registerArchive(r.routeId, r.blob, r.sectionId);
+    }
+
+    for (const r of nonSectionRecords) {
+      // Auto-heal: If section archives exist and a corrupt legacy root record exists (< 20 MB),
+      // delete it from IndexedDB and don't let it clobber the CompositePMTiles.
+      if (routesWithSections.has(r.routeId) && (r.sizeBytes || 0) < 20 * 1024 * 1024) {
+        console.warn(`[PMTiles] Auto-cleaning corrupt legacy root record for ${r.routeId} (${r.sizeBytes} bytes)`);
+        await this.deleteArchive(r.routeId);
+        continue;
+      }
       this.registerArchive(r.routeId, r.blob, r.sectionId);
     }
   }
@@ -866,7 +897,11 @@ export class PmtilesStorageService {
         cumulativeLoaded += sec.estimatedSizeBytes;
       }
 
-      await this.saveArchive(routeId, lastBlob);
+      // Ensure the composite instance aggregating all sections is actively registered under routeId
+      const composite = this.compositeInstances.get(routeId);
+      if (composite) {
+        this.registerInstance(routeId, composite);
+      }
 
       const completed: DownloadProgress = {
         routeId,
