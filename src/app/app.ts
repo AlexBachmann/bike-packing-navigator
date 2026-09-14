@@ -22,6 +22,7 @@ import { BottomNavComponent } from './components/bottom-nav/bottom-nav.component
 import { WelcomeScreenComponent } from './components/welcome-screen/welcome-screen.component';
 import { WeatherForecastComponent } from './components/weather-forecast/weather-forecast.component';
 import { RouteSelectorModalComponent } from './components/route-selector/route-selector-modal.component';
+import { RideCockpitComponent } from './components/ride-cockpit/ride-cockpit.component';
 import { RouteManifestService } from './services/route-manifest.service';
 import { ToastService } from './services/toast.service';
 import { NetworkStatusService } from './services/network-status.service';
@@ -36,6 +37,7 @@ import { AnalyticsService } from './services/analytics.service';
     CommonModule,
     ElevationProfileComponent,
     RouteMapComponent,
+    RideCockpitComponent,
     TelemetryHeaderComponent,
     CategoryFilterComponent,
     WaypointsListComponent,
@@ -69,6 +71,12 @@ export class App implements OnInit, OnDestroy {
   constructor() {
     effect(() => {
       this.updateBroadLocation();
+    });
+    effect(() => {
+      const tab = this.activeTab();
+      if (this.gpsState().enabled) {
+        this.startGpsInterval();
+      }
     });
   }
 
@@ -145,6 +153,9 @@ export class App implements OnInit, OnDestroy {
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
     this.isHeaderCollapsed.set(false);
+    if (this.gpsState().enabled) {
+      this.startGpsInterval();
+    }
   }
 
   adjustPower(delta: number): void {
@@ -416,15 +427,22 @@ export class App implements OnInit, OnDestroy {
     }
   }
 
+  getGpsFrequencySeconds(): number {
+    return this.activeTab() === 'ride' ? 1 : 30;
+  }
+
   startGpsTracking(): void {
     this.gpsState.update((s) => ({ ...s, enabled: true, error: null }));
     this.requestLocation();
+    this.startGpsInterval();
+  }
 
-    // Start 30-second recurring timer
+  private startGpsInterval(): void {
     this.stopGpsInterval();
+    const intervalMs = this.getGpsFrequencySeconds() * 1000;
     this.gpsIntervalId = window.setInterval(() => {
       this.requestLocation();
-    }, 30000);
+    }, intervalMs);
   }
 
   stopGpsTracking(): void {
@@ -466,55 +484,84 @@ export class App implements OnInit, OnDestroy {
       return;
     }
 
+    if (!this.gpsState().enabled) {
+      return;
+    }
+
     this.gpsState.update((s) => ({ ...s, loading: true, error: null }));
 
+    const isRide = this.activeTab() === 'ride';
+
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const lat = pos.coords.latitude;
-        const lon = pos.coords.longitude;
-        const accuracy = pos.coords.accuracy;
-
-        const projection = this.routeService.projectOntoRoute(lat, lon);
-
-        this.gpsState.set({
-          enabled: true,
-          loading: false,
-          lastUpdated: new Date(),
-          latitude: lat,
-          longitude: lon,
-          accuracyMeters: accuracy,
-          error: null,
-          projection
-        });
-
-        // If rider is within 10 km radius, calculate orthogonal projection (vertical line)
-        // and update the slider/toggle location to the projected return mile!
-        if (projection && !projection.isOffRoute) {
-          this.setMile(projection.projectedRouteMile);
-        }
-      },
-      (err) => {
-        let msg = 'Failed to retrieve current location.';
-        if (err.code === err.PERMISSION_DENIED) {
-          msg = 'Location permission denied. Please allow location access in your browser.';
-        } else if (err.code === err.POSITION_UNAVAILABLE) {
-          msg = 'GPS signal unavailable. Please ensure GPS/location services are enabled.';
-        } else if (err.code === err.TIMEOUT) {
-          msg = 'GPS request timed out. Retrying in 30 seconds...';
-        }
-
-        this.gpsState.update((s) => ({
-          ...s,
-          loading: false,
-          error: msg
-        }));
-      },
+      (pos) => this.handleLocationSuccess(pos),
+      (err) => this.handleLocationError(err, isRide),
       {
         enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 10000
+        timeout: isRide ? 5000 : 15000,
+        maximumAge: isRide ? 1000 : 10000
       }
     );
+  }
+
+  handleLocationSuccess(pos: GeolocationPosition): void {
+    if (!this.gpsState().enabled) {
+      return;
+    }
+
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    const accuracy = pos.coords.accuracy;
+
+    let speedKph: number | null = null;
+    if (typeof pos.coords.speed === 'number' && !isNaN(pos.coords.speed) && pos.coords.speed >= 0) {
+      speedKph = pos.coords.speed * 3.6;
+    }
+
+    const heading = typeof pos.coords.heading === 'number' && !isNaN(pos.coords.heading)
+      ? pos.coords.heading
+      : null;
+
+    const projection = this.routeService.projectOntoRoute(lat, lon);
+
+    this.gpsState.set({
+      enabled: true,
+      loading: false,
+      lastUpdated: new Date(),
+      latitude: lat,
+      longitude: lon,
+      accuracyMeters: accuracy,
+      error: null,
+      projection,
+      ...(speedKph !== null ? { speedKph } : {}),
+      ...(heading !== null ? { heading } : {})
+    } as GpsState);
+
+    // If rider is within 10 km radius, calculate orthogonal projection (vertical line)
+    // and update the slider/toggle location to the projected return mile!
+    if (projection && !projection.isOffRoute) {
+      this.setMile(projection.projectedRouteMile);
+    }
+  }
+
+  handleLocationError(err: GeolocationPositionError, isRide = this.activeTab() === 'ride'): void {
+    if (!this.gpsState().enabled) {
+      return;
+    }
+
+    let msg = 'Failed to retrieve current location.';
+    if (err.code === err.PERMISSION_DENIED) {
+      msg = 'Location permission denied. Please allow location access in your browser.';
+    } else if (err.code === err.POSITION_UNAVAILABLE) {
+      msg = 'GPS signal unavailable. Please ensure GPS/location services are enabled.';
+    } else if (err.code === err.TIMEOUT) {
+      msg = isRide ? 'GPS signal weak...' : 'GPS request timed out. Retrying in 30 seconds...';
+    }
+
+    this.gpsState.update((s) => ({
+      ...s,
+      loading: false,
+      error: msg
+    }));
   }
 
   /**

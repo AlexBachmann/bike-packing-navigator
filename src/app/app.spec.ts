@@ -629,5 +629,204 @@ describe('App', () => {
       expect(app.settings.activeTab()).toBe('resupply');
     });
   });
+
+  describe('Ride Cockpit & GPS Interval Lifecycle', () => {
+    it('should return 1s GPS polling frequency in ride mode and 30s in other tabs', () => {
+      app.switchTab('waypoints');
+      expect(app.getGpsFrequencySeconds()).toBe(30);
+
+      app.switchTab('profile');
+      expect(app.getGpsFrequencySeconds()).toBe(30);
+
+      app.switchTab('map');
+      expect(app.getGpsFrequencySeconds()).toBe(30);
+
+      app.switchTab('resupply');
+      expect(app.getGpsFrequencySeconds()).toBe(30);
+
+      app.switchTab('settings');
+      expect(app.getGpsFrequencySeconds()).toBe(30);
+
+      app.switchTab('ride');
+      expect(app.getGpsFrequencySeconds()).toBe(1);
+    });
+
+    it('should re-arm GPS interval on tab changes without leaking timers', () => {
+      const setIntervalSpy = vi.spyOn(window, 'setInterval');
+      const clearIntervalSpy = vi.spyOn(window, 'clearInterval');
+
+      // Start GPS tracking in default tab
+      app.switchTab('waypoints');
+      app.startGpsTracking();
+      expect(app.gpsState().enabled).toBe(true);
+
+      const initialSetCount = setIntervalSpy.mock.calls.length;
+      const initialClearCount = clearIntervalSpy.mock.calls.length;
+
+      // Switch to 'ride' mode
+      app.switchTab('ride');
+      TestBed.flushEffects();
+
+      // ClearInterval should have been called to dispose previous interval
+      expect(clearIntervalSpy.mock.calls.length).toBeGreaterThan(initialClearCount);
+      expect(setIntervalSpy.mock.calls.length).toBeGreaterThan(initialSetCount);
+
+      // Verify the latest setInterval was invoked with 1000ms (1s)
+      const lastRideIntervalCall = setIntervalSpy.mock.calls[setIntervalSpy.mock.calls.length - 1];
+      expect(lastRideIntervalCall[1]).toBe(1000);
+
+      // Switch back to 'waypoints'
+      const midClearCount = clearIntervalSpy.mock.calls.length;
+      app.switchTab('waypoints');
+      TestBed.flushEffects();
+
+      expect(clearIntervalSpy.mock.calls.length).toBeGreaterThan(midClearCount);
+      const lastWaypointsIntervalCall = setIntervalSpy.mock.calls[setIntervalSpy.mock.calls.length - 1];
+      expect(lastWaypointsIntervalCall[1]).toBe(30000);
+
+      // Stop tracking cleans up
+      app.stopGpsTracking();
+      expect(app.gpsState().enabled).toBe(false);
+
+      setIntervalSpy.mockRestore();
+      clearIntervalSpy.mockRestore();
+    });
+
+    it('should render app-ride-cockpit and apply full-viewport edge-to-edge layout when tab is ride', () => {
+      app.switchTab('ride');
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      const rideCockpitEl = compiled.querySelector('app-ride-cockpit');
+      expect(rideCockpitEl).not.toBeNull();
+
+      const rootContainer = compiled.firstElementChild as HTMLElement;
+      expect(rootContainer.classList.contains('h-screen')).toBe(true);
+      expect(rootContainer.classList.contains('overflow-hidden')).toBe(true);
+    });
+  });
+
+  describe('GPS Geolocation In-Flight Cancellation & Robustness', () => {
+    beforeEach(() => {
+      if (!navigator.geolocation) {
+        Object.defineProperty(navigator, 'geolocation', {
+          value: {
+            getCurrentPosition: vi.fn(),
+            watchPosition: vi.fn(),
+            clearWatch: vi.fn()
+          },
+          configurable: true,
+          writable: true
+        });
+      }
+    });
+
+    it('should not resurrect GPS state when in-flight geolocation succeeds after GPS tracking was stopped', () => {
+      let capturedSuccessCallback: ((pos: GeolocationPosition) => void) | null = null;
+      vi.spyOn(navigator.geolocation, 'getCurrentPosition').mockImplementation(
+        (success) => {
+          capturedSuccessCallback = success as any;
+        }
+      );
+
+      // Start GPS tracking
+      app.startGpsTracking();
+      expect(app.gpsState().enabled).toBe(true);
+      expect(capturedSuccessCallback).not.toBeNull();
+
+      // User stops GPS tracking while request is pending
+      app.stopGpsTracking();
+      expect(app.gpsState().enabled).toBe(false);
+
+      // Mock geolocation response arrives post-cancellation
+      const mockPosition = {
+        coords: {
+          latitude: 39.4912,
+          longitude: -105.0945,
+          accuracy: 8,
+          speed: 5.5,
+          heading: 180,
+          altitude: null,
+          altitudeAccuracy: null
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition;
+
+      // Invoke captured callback
+      capturedSuccessCallback!(mockPosition);
+
+      // State must remain strictly disabled; no resurrection!
+      expect(app.gpsState().enabled).toBe(false);
+      expect(app.gpsState().latitude).toBeNull();
+      expect(app.gpsState().longitude).toBeNull();
+    });
+
+    it('should not display error banner when in-flight geolocation fails after GPS tracking was stopped', () => {
+      let capturedErrorCallback: ((err: GeolocationPositionError) => void) | null = null;
+      vi.spyOn(navigator.geolocation, 'getCurrentPosition').mockImplementation(
+        (success, error) => {
+          capturedErrorCallback = error as any;
+        }
+      );
+
+      app.startGpsTracking();
+      expect(app.gpsState().enabled).toBe(true);
+
+      // User stops GPS
+      app.stopGpsTracking();
+      expect(app.gpsState().enabled).toBe(false);
+
+      // Geolocation timeout arrives post-cancellation
+      const mockError = {
+        code: 3, // TIMEOUT
+        message: 'Timeout expired',
+        PERMISSION_DENIED: 1,
+        POSITION_UNAVAILABLE: 2,
+        TIMEOUT: 3
+      } as unknown as GeolocationPositionError;
+
+      capturedErrorCallback!(mockError);
+
+      // Error must not be populated into state
+      expect(app.gpsState().enabled).toBe(false);
+      expect(app.gpsState().error).toBeNull();
+    });
+
+    it('handleLocationSuccess should early-return if gpsState is disabled', () => {
+      expect(app.gpsState().enabled).toBe(false);
+
+      const mockPosition = {
+        coords: {
+          latitude: 40.0,
+          longitude: -105.0,
+          accuracy: 10,
+          speed: null,
+          heading: null,
+          altitude: null,
+          altitudeAccuracy: null
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition;
+
+      app.handleLocationSuccess(mockPosition);
+      expect(app.gpsState().enabled).toBe(false);
+      expect(app.gpsState().latitude).toBeNull();
+    });
+
+    it('handleLocationError should early-return if gpsState is disabled', () => {
+      expect(app.gpsState().enabled).toBe(false);
+
+      const mockError = {
+        code: 1, // PERMISSION_DENIED
+        message: 'Denied',
+        PERMISSION_DENIED: 1,
+        POSITION_UNAVAILABLE: 2,
+        TIMEOUT: 3
+      } as unknown as GeolocationPositionError;
+
+      app.handleLocationError(mockError, true);
+      expect(app.gpsState().error).toBeNull();
+    });
+  });
 });
 

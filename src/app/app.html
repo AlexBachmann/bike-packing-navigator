@@ -1,6 +1,6 @@
 <div
   class="flex flex-col bg-slate-950 text-slate-100 font-sans select-none"
-  [ngClass]="activeTab() === 'map'
+  [ngClass]="activeTab() === 'map' || activeTab() === 'ride'
     ? 'h-screen h-[100dvh] overflow-hidden'
     : 'min-h-screen pb-20'"
 >
@@ -78,7 +78,7 @@
   <!-- Main View Router Container -->
   <main
     class="max-w-2xl mx-auto w-full transition-all"
-    [ngClass]="activeTab() === 'map'
+    [ngClass]="activeTab() === 'map' || activeTab() === 'ride'
       ? 'flex-1 min-h-0 flex flex-col p-2 pb-[68px] sm:p-3 sm:pb-[68px]'
       : 'flex-1 p-4'"
   >
@@ -89,6 +89,17 @@
         (routeSelect)="selectRoute($event)"
       />
     } @else {
+      <!-- TAB 0: RIDE COCKPIT -->
+      @if (activeTab() === 'ride') {
+        <app-ride-cockpit
+          [currentMile]="currentMile()"
+          [unit]="unit()"
+          [gpsState]="gpsState()"
+          (selectMile)="selectMileFromUser($event)"
+          (enableGps)="startGpsTracking()"
+        />
+      }
+
       <!-- TAB 1: WAYPOINTS FEED -->
       @if (activeTab() === 'waypoints') {
         <app-waypoints-list

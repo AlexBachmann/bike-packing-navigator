@@ -2,6 +2,17 @@
   <div class="max-w-2xl mx-auto w-full py-2 px-3 flex justify-around items-center">
     <button
       type="button"
+      (click)="onTabClick('ride')"
+      [attr.aria-current]="activeTab() === 'ride' ? 'page' : null"
+      class="flex flex-col items-center gap-1 transition cursor-pointer"
+      [ngClass]="activeTab() === 'ride' ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'"
+    >
+      <span class="text-lg leading-none">🧭</span>
+      <span class="text-[10px] font-mono">Ride</span>
+    </button>
+
+    <button
+      type="button"
       (click)="onTabClick('waypoints')"
       [attr.aria-current]="activeTab() === 'waypoints' ? 'page' : null"
       class="flex flex-col items-center gap-1 transition cursor-pointer"

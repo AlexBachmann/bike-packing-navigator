@@ -3,12 +3,15 @@ export type DistanceUnit = 'miles' | 'km';
 export type PaceMode = 'power' | 'speed';
 export type MapStyle = 'dark' | 'topo';
 export type MapRendererMode = 'auto' | 'raster';
-export type NavigationTab = 'waypoints' | 'profile' | 'map' | 'resupply' | 'settings';
+export type NavigationTab = 'ride' | 'waypoints' | 'profile' | 'map' | 'resupply' | 'settings';
 
 /**
  * Gracefully normalizes legacy navigation tab preferences (migrates 'jump' to 'resupply').
  */
 export function migrateNavigationTab(tab: string | null | undefined): NavigationTab {
+  if (tab === 'ride') {
+    return 'ride';
+  }
   if (tab === 'jump' || tab === 'resupply') {
     return 'resupply';
   }
