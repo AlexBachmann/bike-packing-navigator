@@ -87,6 +87,79 @@ export function getRasterBaselineStyle(style: MapStyle): maplibregl.StyleSpecifi
   };
 }
 
+export async function getVectorStyleSpec(
+  style: MapStyle,
+  routeId: string,
+  pmtilesStorage: PmtilesStorageService,
+  isCached?: boolean
+): Promise<maplibregl.StyleSpecification> {
+  const cached = isCached ?? pmtilesStorage.isRouteCachedSync(routeId);
+  const pmtilesUrl = pmtilesStorage.resolveTileUrl(routeId);
+  const styleUrl = resolveBaseHref(`/assets/styles/vector-${style}.json`);
+  try {
+    const res = await fetch(styleUrl);
+    if (res.ok) {
+      const spec = await res.json();
+      if (spec && spec.sources && spec.sources.openmaptiles) {
+        spec.sources.openmaptiles.url = cached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet';
+      }
+      return spec;
+    }
+  } catch {
+    // Fallback in test/offline environment
+  }
+
+  return {
+    version: 8,
+    name: `Bikepack Vector ${style}`,
+    sources: {
+      openmaptiles: {
+        type: 'vector',
+        url: cached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet'
+      }
+    },
+    glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+    layers: [
+      {
+        id: 'background',
+        type: 'background',
+        paint: {
+          'background-color': style === 'dark' ? '#0b0f19' : '#f8fafc'
+        }
+      },
+      {
+        id: 'water',
+        type: 'fill',
+        source: 'openmaptiles',
+        'source-layer': 'water',
+        paint: {
+          'fill-color': style === 'dark' ? '#1e293b' : '#bae6fd'
+        }
+      },
+      {
+        id: 'roads',
+        type: 'line',
+        source: 'openmaptiles',
+        'source-layer': 'transportation',
+        paint: {
+          'line-color': style === 'dark' ? '#475569' : '#94a3b8',
+          'line-width': 1.5
+        }
+      },
+      {
+        id: 'corridor-boundary',
+        type: 'fill',
+        source: 'openmaptiles',
+        'source-layer': 'landcover',
+        paint: {
+          'fill-color': style === 'dark' ? '#064e3b' : '#10b981',
+          'fill-opacity': style === 'dark' ? 0.15 : 0.06
+        }
+      }
+    ]
+  };
+}
+
 @Component({
   selector: 'app-route-map',
   standalone: true,
@@ -458,71 +531,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   }
 
   async getVectorStyleSpec(style: MapStyle, routeId: string): Promise<maplibregl.StyleSpecification> {
-    const isCached = this.isVectorCached();
-    const pmtilesUrl = this.pmtilesStorage.resolveTileUrl(routeId);
-    const styleUrl = resolveBaseHref(`/assets/styles/vector-${style}.json`);
-    try {
-      const res = await fetch(styleUrl);
-      if (res.ok) {
-        const spec = await res.json();
-        if (spec && spec.sources && spec.sources.openmaptiles) {
-          spec.sources.openmaptiles.url = isCached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet';
-        }
-        return spec;
-      }
-    } catch {
-      // Fallback in test/offline environment
-    }
-
-    return {
-      version: 8,
-      name: `Bikepack Vector ${style}`,
-      sources: {
-        openmaptiles: {
-          type: 'vector',
-          url: isCached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet'
-        }
-      },
-      glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
-      layers: [
-        {
-          id: 'background',
-          type: 'background',
-          paint: {
-            'background-color': style === 'dark' ? '#0b0f19' : '#f8fafc'
-          }
-        },
-        {
-          id: 'water',
-          type: 'fill',
-          source: 'openmaptiles',
-          'source-layer': 'water',
-          paint: {
-            'fill-color': style === 'dark' ? '#1e293b' : '#bae6fd'
-          }
-        },
-        {
-          id: 'roads',
-          type: 'line',
-          source: 'openmaptiles',
-          'source-layer': 'transportation',
-          paint: {
-            'line-color': style === 'dark' ? '#475569' : '#94a3b8',
-            'line-width': 1.5
-          }
-        },
-        {
-          id: 'corridor-boundary',
-          type: 'fill',
-          source: 'openmaptiles',
-          'source-layer': 'landcover',
-          paint: {
-            'fill-color': style === 'dark' ? '#064e3b' : '#10b981',
-            'fill-opacity': style === 'dark' ? 0.15 : 0.06
-          }
-        }
-      ]
-    };
+    return getVectorStyleSpec(style, routeId, this.pmtilesStorage, this.isVectorCached());
   }
 
   async applyMapRenderer(mode: 'vector' | 'raster'): Promise<void> {

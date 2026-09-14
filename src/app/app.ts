@@ -29,6 +29,18 @@ import { NetworkStatusService } from './services/network-status.service';
 import { OfflineStorageService } from './services/offline-storage.service';
 import { WakeLockService } from './services/wake-lock.service';
 import { AnalyticsService } from './services/analytics.service';
+import { calculateBearing } from './models/weather.model';
+
+export function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371000;
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLon = (lon2 - lon1) * (Math.PI / 180);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
 @Component({
   selector: 'app-root',
@@ -453,9 +465,13 @@ export class App implements OnInit, OnDestroy {
       lastUpdated: null,
       latitude: null,
       longitude: null,
+      previousLatitude: null,
+      previousLongitude: null,
       accuracyMeters: null,
       error: null,
-      projection: null
+      projection: null,
+      speedKph: null,
+      heading: null
     });
   }
 
@@ -517,9 +533,41 @@ export class App implements OnInit, OnDestroy {
       speedKph = pos.coords.speed * 3.6;
     }
 
-    const heading = typeof pos.coords.heading === 'number' && !isNaN(pos.coords.heading)
+    const currentGps = this.gpsState();
+    const prevLat = currentGps.latitude;
+    const prevLon = currentGps.longitude;
+    const prevHeading = currentGps.heading ?? null;
+
+    const rawHeading = typeof pos.coords.heading === 'number' && !isNaN(pos.coords.heading)
       ? pos.coords.heading
       : null;
+
+    let heading: number | null = null;
+    const isStanding = speedKph === null || speedKph < 1.0;
+
+    if (isStanding) {
+      // When rider is standing (< 1 km/h), compass heading (pos.coords.heading) is considered
+      if (rawHeading !== null) {
+        heading = rawHeading;
+      } else if (prevHeading !== null) {
+        heading = prevHeading;
+      }
+    } else {
+      // When rider is moving (>= 1 km/h), heading is determined by the last two GPS positions
+      if (prevLat !== null && prevLon !== null) {
+        const distMeters = haversineMeters(prevLat, prevLon, lat, lon);
+        if (distMeters >= 2.0) {
+          heading = calculateBearing(prevLat, prevLon, lat, lon);
+        } else if (prevHeading !== null) {
+          heading = prevHeading;
+        }
+      } else if (rawHeading !== null) {
+        // Initial move before second GPS coordinate: fallback to hardware heading if reported
+        heading = rawHeading;
+      } else if (prevHeading !== null) {
+        heading = prevHeading;
+      }
+    }
 
     const projection = this.routeService.projectOntoRoute(lat, lon);
 
@@ -529,12 +577,14 @@ export class App implements OnInit, OnDestroy {
       lastUpdated: new Date(),
       latitude: lat,
       longitude: lon,
+      previousLatitude: prevLat,
+      previousLongitude: prevLon,
       accuracyMeters: accuracy,
       error: null,
       projection,
-      ...(speedKph !== null ? { speedKph } : {}),
-      ...(heading !== null ? { heading } : {})
-    } as GpsState);
+      speedKph,
+      heading
+    });
 
     // If rider is within 10 km radius, calculate orthogonal projection (vertical line)
     // and update the slider/toggle location to the projected return mile!

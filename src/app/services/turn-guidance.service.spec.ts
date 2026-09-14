@@ -245,4 +245,43 @@ describe('TurnGuidanceService', () => {
       expect(snapped[1]).toBeCloseTo(-105.00000, 5);
     });
   });
+
+  describe('getRouteTangentBearing', () => {
+    it('returns 0 for empty or single-point tracks', () => {
+      expect(service.getRouteTangentBearing([], 0)).toBe(0);
+      expect(service.getRouteTangentBearing([[40, -105, 1000, 0, 0]], 0)).toBe(0);
+    });
+
+    it('calculates forward route tangent bearing accurately using lookahead', () => {
+      // Points going directly North: lat increases, lon constant
+      const northTrack: [number, number, number, number, number][] = [
+        [40.0, -105.0, 1000, 0.0, 0.0],
+        [40.001, -105.0, 1000, 0.11, 0.068],
+        [40.002, -105.0, 1000, 0.22, 0.136]
+      ];
+      const bearing = service.getRouteTangentBearing(northTrack, 0.0, 25.0);
+      expect(bearing).toBeCloseTo(0, 1); // 0° North
+    });
+
+    it('calculates eastward route tangent bearing', () => {
+      // Points going directly East: lat constant, lon increases
+      const eastTrack: [number, number, number, number, number][] = [
+        [40.0, -105.0, 1000, 0.0, 0.0],
+        [40.0, -104.999, 1000, 0.085, 0.053],
+        [40.0, -104.998, 1000, 0.17, 0.106]
+      ];
+      const bearing = service.getRouteTangentBearing(eastTrack, 0.0, 25.0);
+      expect(bearing).toBeCloseTo(90, 1); // 90° East
+    });
+
+    it('looks backward when at or near the end of the route', () => {
+      const eastTrack: [number, number, number, number, number][] = [
+        [40.0, -105.0, 1000, 0.0, 0.0],
+        [40.0, -104.999, 1000, 0.085, 0.053],
+        [40.0, -104.998, 1000, 0.17, 0.106]
+      ];
+      const bearing = service.getRouteTangentBearing(eastTrack, 0.106, 25.0);
+      expect(bearing).toBeCloseTo(90, 1); // Still 90° East
+    });
+  });
 });

@@ -27,7 +27,7 @@ import { GpsState } from '../../models/waypoint.model';
 import { Climb } from '../../models/elevation.model';
 import { TurnCue, TurnDirection } from '../../models/ride-cockpit.model';
 import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
-import { getRasterBaselineStyle } from '../route-map/route-map.component';
+import { getRasterBaselineStyle, getVectorStyleSpec } from '../route-map/route-map.component';
 
 export const DEFAULT_3D_PITCH = 55;
 export const MIN_3D_PITCH = 50;
@@ -205,13 +205,20 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Effective Heading [0, 360)
   readonly effectiveHeading = computed<number>(() => {
+    // 1. Simulation heading takes precedence when active
     if (this.gpsSimulator.running()) {
       return this.gpsSimulator.simulatedHeading();
     }
+
+    // 2. Real GPS updates
     const gps = this.gpsState();
-    if (gps && gps.enabled && typeof (gps as any).heading === 'number' && !isNaN((gps as any).heading)) {
-      return (gps as any).heading;
+    if (gps && gps.enabled) {
+      if (typeof gps.heading === 'number' && !isNaN(gps.heading)) {
+        return ((gps.heading % 360) + 360) % 360;
+      }
     }
+
+    // 3. Fallback: If no two GPS positions exist (or GPS off), point into the direction of the route
     return this.getForwardTrackBearing(this.effectiveMile());
   });
 
@@ -428,6 +435,32 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       }
     });
+
+    // Effect 6: Reactive map style updates in Ride mode
+    effect(() => {
+      const styleType = this.settings.mapStyle();
+      const routeId = this.activeRouteId();
+      if (!this.map || !routeId) return;
+
+      untracked(async () => {
+        try {
+          const isCached = this.isVectorCached();
+          const newStyle = isCached
+            ? await getVectorStyleSpec(styleType, routeId, this.pmtilesStorage, true)
+            : getRasterBaselineStyle(styleType);
+          if (this.map && !this.isDestroyed) {
+            this.map.setStyle(newStyle);
+            this.map.once('styledata', () => {
+              this.drawRoute();
+              const currentPos = this.effectivePosition();
+              this.updateRiderMarker(currentPos.lat, currentPos.lon, currentPos.heading);
+            });
+          }
+        } catch {
+          // ignore
+        }
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -540,6 +573,16 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       const container = this.mapContainer()?.nativeElement;
       if (!this.map && container) {
         this.init3DMap(container);
+      } else if (this.map && routeId) {
+        const vectorStyle = await getVectorStyleSpec(this.settings.mapStyle(), routeId, this.pmtilesStorage, true);
+        if (this.map && !this.isDestroyed) {
+          this.map.setStyle(vectorStyle);
+          this.map.once('styledata', () => {
+            this.drawRoute();
+            const currentPos = this.effectivePosition();
+            this.updateRiderMarker(currentPos.lat, currentPos.lon, currentPos.heading);
+          });
+        }
       }
     } catch (err) {
       if (this.isDestroyed) return;
@@ -553,7 +596,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   // Map Initialization & Lifecycle
   // --------------------------------------------------------------------------
 
-  private init3DMap(container: HTMLElement): void {
+  private async init3DMap(container: HTMLElement): Promise<void> {
     if (this.isDestroyed || !container || !container.isConnected) return;
     if (typeof maplibregl !== 'undefined' && typeof maplibregl.setWorkerUrl === 'function') {
       maplibregl.setWorkerUrl(resolveBaseHref('/maplibre-gl-worker.mjs'));
@@ -573,7 +616,16 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     const initialHeading = Number.isFinite(pos.heading) ? ((pos.heading % 360) + 360) % 360 : 0;
     this.lastKnownHeading = initialHeading;
 
-    const style = getRasterBaselineStyle(this.settings.mapStyle());
+    const routeId = this.activeRouteId();
+    let style: maplibregl.StyleSpecification = getRasterBaselineStyle(this.settings.mapStyle());
+    if (routeId) {
+      try {
+        style = await getVectorStyleSpec(this.settings.mapStyle(), routeId, this.pmtilesStorage, true);
+      } catch {
+        style = getRasterBaselineStyle(this.settings.mapStyle());
+      }
+    }
+    if (this.isDestroyed || !container.isConnected) return;
 
     const map = new maplibregl.Map({
       container,
@@ -809,7 +861,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
         <div class="relative flex items-center justify-center w-10 h-10 select-none">
           <div class="absolute w-9 h-9 rounded-full bg-emerald-400/40 animate-ping"></div>
           <div class="relative w-8 h-8 rounded-full bg-slate-950 border-2 border-emerald-400 shadow-xl flex items-center justify-center shadow-emerald-950">
-            <div class="rider-arrow flex items-center justify-center transition-transform duration-200">
+            <div class="rider-arrow flex items-center justify-center">
               <svg class="w-4 h-4 text-emerald-400 drop-shadow" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/>
               </svg>
@@ -817,11 +869,6 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
           </div>
         </div>
       `;
-
-      this.riderArrowEl = el.querySelector('.rider-arrow');
-      if (this.riderArrowEl) {
-        this.riderArrowEl.style.transform = `rotate(${normalizedHeading}deg)`;
-      }
 
       this.riderMarker = new maplibregl.Marker({
         element: el,
@@ -834,9 +881,6 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.riderMarker.setLngLat(lngLat);
       this.riderMarker.setRotation(normalizedHeading);
-      if (this.riderArrowEl) {
-        this.riderArrowEl.style.transform = `rotate(${normalizedHeading}deg)`;
-      }
     }
   }
 
@@ -978,18 +1022,13 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   private getForwardTrackBearing(mile: number): number {
     const points = this.routeService.trackPoints();
     if (!points || points.length < 2) return 0;
-
-    let idx = 0;
-    for (let i = 0; i < points.length - 1; i++) {
-      if (points[i][4] >= mile) {
-        idx = i;
-        break;
-      }
+    if (typeof this.turnGuidance?.getRouteTangentBearing === 'function') {
+      return this.turnGuidance.getRouteTangentBearing(points, mile, 25.0);
     }
-
-    const nextIdx = Math.min(points.length - 1, idx + 1);
-    const p1 = points[idx];
-    const p2 = points[nextIdx];
-    return this.turnGuidance.calculateBearing(p1[0], p1[1], p2[0], p2[1]);
+    const p1 = points[0];
+    const p2 = points[1];
+    return typeof this.turnGuidance?.calculateBearing === 'function'
+      ? this.turnGuidance.calculateBearing(p1[0], p1[1], p2[0], p2[1])
+      : 0;
   }
 }

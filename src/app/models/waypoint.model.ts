@@ -59,9 +59,13 @@ export interface GpsState {
   lastUpdated: Date | null;
   latitude: number | null;
   longitude: number | null;
+  previousLatitude?: number | null;
+  previousLongitude?: number | null;
   accuracyMeters: number | null;
   error: string | null;
   projection: ProjectionResult | null;
+  speedKph?: number | null;
+  heading?: number | null;
 }
 
 const NON_WASCHSALON_TERMS = [

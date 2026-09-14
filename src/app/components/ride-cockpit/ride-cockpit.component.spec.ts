@@ -368,6 +368,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
         return null;
       }),
       calculateBearing: vi.fn(() => 135),
+      getRouteTangentBearing: vi.fn(() => 135),
       snapToTrail: vi.fn((coords: [number, number]) => coords)
     };
 

@@ -316,9 +316,36 @@ export class TurnGuidanceService {
   }
 
   /**
+   * Calculates the tangent bearing in degrees [0, 360) along the route at the given mile
+   * by looking ahead along the track by lookaheadMeters (default: 25m).
+   */
+  getRouteTangentBearing(
+    trackPoints: [number, number, number, number, number][],
+    targetMile: number,
+    lookaheadMeters = 25.0
+  ): number {
+    if (!trackPoints || trackPoints.length < 2) return 0;
+    const currentMeters = Math.max(0, targetMile * 1609.344);
+    const totalTrackMeters = trackPoints[trackPoints.length - 1][3] * 1000;
+
+    const forwardMeters = Math.min(totalTrackMeters, currentMeters + lookaheadMeters);
+    if (forwardMeters > currentMeters + 0.1) {
+      const p1 = this.interpolatePointAtDistance(trackPoints, currentMeters);
+      const p2 = this.interpolatePointAtDistance(trackPoints, forwardMeters);
+      return this.calculateBearing(p1[0], p1[1], p2[0], p2[1]);
+    } else {
+      // Near or at the finish line, look backward by lookaheadMeters
+      const backwardMeters = Math.max(0, currentMeters - lookaheadMeters);
+      const p1 = this.interpolatePointAtDistance(trackPoints, backwardMeters);
+      const p2 = this.interpolatePointAtDistance(trackPoints, currentMeters);
+      return this.calculateBearing(p1[0], p1[1], p2[0], p2[1]);
+    }
+  }
+
+  /**
    * Helper to linearly interpolate coordinate along route trackpoints
    */
-  private interpolatePointAtDistance(
+  interpolatePointAtDistance(
     trackPoints: [number, number, number, number, number][],
     targetMeters: number
   ): [number, number] {

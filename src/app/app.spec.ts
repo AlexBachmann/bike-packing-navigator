@@ -827,6 +827,95 @@ describe('App', () => {
       app.handleLocationError(mockError, true);
       expect(app.gpsState().error).toBeNull();
     });
+
+    it('calculates 2-point GPS heading when rider moves >= 1 km/h and displacement >= 2m', () => {
+      app.gpsState.update((s) => ({ ...s, enabled: true }));
+
+      // Position 1: start at (40.0, -105.0)
+      app.handleLocationSuccess({
+        coords: {
+          latitude: 40.0,
+          longitude: -105.0,
+          accuracy: 5,
+          speed: 4.0, // ~14.4 km/h (moving)
+          heading: null
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition);
+
+      expect(app.gpsState().latitude).toBe(40.0);
+      expect(app.gpsState().longitude).toBe(-105.0);
+      expect(app.gpsState().previousLatitude).toBeNull();
+      expect(app.gpsState().previousLongitude).toBeNull();
+      // First point has no previous point, so 2-point heading is null
+      expect(app.gpsState().heading).toBeNull();
+
+      // Position 2: move North to (40.001, -105.0), ~110m distance
+      app.handleLocationSuccess({
+        coords: {
+          latitude: 40.001,
+          longitude: -105.0,
+          accuracy: 5,
+          speed: 4.0, // moving
+          heading: null
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition);
+
+      expect(app.gpsState().previousLatitude).toBe(40.0);
+      expect(app.gpsState().previousLongitude).toBe(-105.0);
+      expect(app.gpsState().latitude).toBe(40.001);
+      expect(app.gpsState().heading).toBeCloseTo(0, 1); // 0° North
+    });
+
+    it('considers device compass heading only when rider is standing (< 1 km/h)', () => {
+      app.gpsState.update((s) => ({ ...s, enabled: true }));
+
+      // Stationary with compass heading 245°
+      app.handleLocationSuccess({
+        coords: {
+          latitude: 40.0,
+          longitude: -105.0,
+          accuracy: 5,
+          speed: 0.1, // 0.36 km/h (< 1 km/h, standing)
+          heading: 245
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition);
+
+      expect(app.gpsState().heading).toBe(245);
+    });
+
+    it('preserves previous heading when movement is less than 2m jitter threshold', () => {
+      app.gpsState.update((s) => ({ ...s, enabled: true, heading: 90 }));
+
+      // Position 1: (40.0, -105.0)
+      app.handleLocationSuccess({
+        coords: {
+          latitude: 40.0,
+          longitude: -105.0,
+          accuracy: 5,
+          speed: 3.0,
+          heading: null
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition);
+
+      // Position 2: tiny displacement of 0.1m (jitter while moving slowly)
+      app.handleLocationSuccess({
+        coords: {
+          latitude: 40.000001,
+          longitude: -105.0,
+          accuracy: 5,
+          speed: 3.0,
+          heading: null
+        },
+        timestamp: Date.now()
+      } as unknown as GeolocationPosition);
+
+      // Preserves 90° rather than erratic jitter calculation
+      expect(app.gpsState().heading).toBe(90);
+    });
   });
 });
 
