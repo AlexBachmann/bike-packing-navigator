@@ -1,8 +1,9 @@
 import { Injectable, signal, computed, effect, inject } from '@angular/core';
-import { UserSettings, DEFAULT_USER_SETTINGS, WeightUnit, DistanceUnit, PaceMode, MapStyle, NavigationTab } from '../models/settings.model';
+import { UserSettings, DEFAULT_USER_SETTINGS, WeightUnit, DistanceUnit, PaceMode, MapStyle, MapRendererMode, NavigationTab } from '../models/settings.model';
 import { ResupplyCatalogService } from './resupply-catalog.service';
 
 const STORAGE_KEY = 'tour_divide_user_settings';
+export const MAP_RENDERER_KEY = 'bpn_map_renderer';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class SettingsService {
   readonly riderPowerWatts = signal<number>(150);
   readonly paceMode = signal<PaceMode>('power');
   readonly mapStyle = signal<MapStyle>('dark');
+  readonly mapRenderer = signal<MapRendererMode>('auto');
   readonly mapZoomLevel = signal<number>(8);
   readonly activeTab = signal<NavigationTab>('waypoints');
   readonly selectedRouteKey = signal<string | null>(null);
@@ -138,6 +140,14 @@ export class SettingsService {
         if (parsed.routeLocations) this.routeLocations.set(parsed.routeLocations);
         if (parsed.keepScreenAwake !== undefined) this.keepScreenAwake.set(parsed.keepScreenAwake);
         if (parsed.anonymousTelemetryEnabled !== undefined) this.anonymousTelemetryEnabled.set(parsed.anonymousTelemetryEnabled);
+        if (parsed.mapRenderer === 'auto' || parsed.mapRenderer === 'raster') {
+          this.mapRenderer.set(parsed.mapRenderer);
+        }
+      }
+
+      const storedRenderer = localStorage.getItem(MAP_RENDERER_KEY);
+      if (storedRenderer === 'auto' || storedRenderer === 'raster') {
+        this.mapRenderer.set(storedRenderer);
       }
     } catch (e) {
       console.warn('Could not read settings from localStorage', e);
@@ -168,9 +178,11 @@ export class SettingsService {
         currentLocationMile: this.currentLocationMile(),
         routeLocations: this.routeLocations(),
         keepScreenAwake: this.keepScreenAwake(),
-        anonymousTelemetryEnabled: this.anonymousTelemetryEnabled()
+        anonymousTelemetryEnabled: this.anonymousTelemetryEnabled(),
+        mapRenderer: this.mapRenderer()
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(currentSettings));
+      localStorage.setItem(MAP_RENDERER_KEY, this.mapRenderer());
     } catch (e) {
       console.warn('Could not write settings to localStorage', e);
     }
@@ -309,6 +321,11 @@ export class SettingsService {
     this.persist();
   }
 
+  setMapRenderer(mode: MapRendererMode): void {
+    this.mapRenderer.set(mode);
+    this.persist();
+  }
+
   setActiveTab(tab: NavigationTab): void {
     this.activeTab.set(tab);
     this.persist();
@@ -328,6 +345,7 @@ export class SettingsService {
   clearAllLocalStorage(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.clear();
+      localStorage.removeItem(MAP_RENDERER_KEY);
     }
     this.resupplyCatalog?.resetAllToDefault();
     this.riderWeight.set(DEFAULT_USER_SETTINGS.riderWeight);
@@ -343,6 +361,7 @@ export class SettingsService {
     this.hikeBikeThresholdKmh.set(DEFAULT_USER_SETTINGS.hikeBikeThresholdKmh ?? 6.0);
     this.hikeBikeBaseSpeedKmh.set(DEFAULT_USER_SETTINGS.hikeBikeBaseSpeedKmh ?? 4.0);
     this.mapStyle.set(DEFAULT_USER_SETTINGS.mapStyle ?? 'dark');
+    this.mapRenderer.set(DEFAULT_USER_SETTINGS.mapRenderer ?? 'auto');
     this.mapZoomLevel.set(DEFAULT_USER_SETTINGS.mapZoomLevel ?? 8);
     this.activeTab.set(DEFAULT_USER_SETTINGS.activeTab ?? 'waypoints');
     this.selectedRouteKey.set(null);

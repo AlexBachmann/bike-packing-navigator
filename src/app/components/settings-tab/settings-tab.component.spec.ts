@@ -114,7 +114,7 @@ describe('SettingsTabComponent', () => {
 
     const el = fixture.nativeElement as HTMLElement;
     const buttons = el.querySelectorAll('button');
-    expect(buttons.length).toBe(9); // unit toggle, 2 pace modes, 2 map styles, telemetry toggle, clear storage, modal cancel, modal confirm
+    expect(buttons.length).toBe(12); // unit toggle, 2 pace modes, 2 map styles, 2 map renderers, wipe archives, telemetry toggle, clear storage, modal cancel, modal confirm
     buttons.forEach((btn) => {
       expect(btn.getAttribute('type')).toBe('button');
     });
@@ -189,5 +189,73 @@ describe('SettingsTabComponent', () => {
     fixture.detectChanges();
 
     expect(pwaInstall.showInstallModal()).toBe(false);
+  });
+
+  it('should switch map renderer mode between auto and raster', () => {
+    expect(component.mapRenderer()).toBe('auto');
+    settings.setMapRenderer('raster');
+    expect(component.mapRenderer()).toBe('raster');
+    settings.setMapRenderer('auto');
+    expect(component.mapRenderer()).toBe('auto');
+  });
+
+  it('should display Offline Maps & Storage card with quota and renderer options', () => {
+    component.totalUsedBytes.set(45 * 1024 * 1024);
+    component.quotaBytes.set(2 * 1024 * 1024 * 1024);
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Offline Maps & Storage');
+    expect(el.textContent).toContain('45.0 MB');
+    expect(el.textContent).toContain('2.0 GB');
+    expect(el.textContent).toContain('Auto-detect Vector');
+    expect(el.textContent).toContain('Force Raster');
+    expect(el.textContent).toContain('RECOMMENDED');
+  });
+
+  it('should open, cancel, and confirm wipe offline archives dialog', async () => {
+    expect(component.showWipeConfirm()).toBe(false);
+    component.openWipeConfirm();
+    expect(component.showWipeConfirm()).toBe(true);
+
+    component.cancelWipeConfirm();
+    expect(component.showWipeConfirm()).toBe(false);
+
+    component.openWipeConfirm();
+    fixture.detectChanges();
+
+    const clearSpy = vi.spyOn(component.pmtilesStorage, 'clearAllArchives').mockResolvedValue(undefined);
+    await component.confirmWipeAllArchives();
+
+    expect(clearSpy).toHaveBeenCalled();
+    expect(component.showWipeConfirm()).toBe(false);
+  });
+
+  it('should toggle multi-section expansion for Tour Divide', () => {
+    expect(component.isRouteExpanded('tour-divide-2025')).toBe(false);
+    component.toggleRouteSections('tour-divide-2025');
+    expect(component.isRouteExpanded('tour-divide-2025')).toBe(true);
+    component.toggleRouteSections('tour-divide-2025');
+    expect(component.isRouteExpanded('tour-divide-2025')).toBe(false);
+  });
+
+  it('should call downloadRoute and deleteRoute with toast notifications', async () => {
+    const downloadSpy = vi.spyOn(component.pmtilesStorage, 'downloadRoute').mockResolvedValue(new Blob([]));
+    const deleteSpy = vi.spyOn(component.pmtilesStorage, 'deleteRoute').mockResolvedValue(undefined);
+    const toastSuccessSpy = vi.spyOn(component.toast, 'showSuccess');
+
+    await component.downloadRoute('tour-divide-2025');
+    expect(downloadSpy).toHaveBeenCalledWith('tour-divide-2025', undefined);
+    expect(toastSuccessSpy).toHaveBeenCalledWith(expect.stringContaining('Downloaded offline vector map'));
+
+    await component.downloadRoute('tour-divide-2025', '1');
+    expect(downloadSpy).toHaveBeenCalledWith('tour-divide-2025', '1');
+
+    await component.deleteRoute('tour-divide-2025');
+    expect(deleteSpy).toHaveBeenCalledWith('tour-divide-2025', undefined);
+    expect(toastSuccessSpy).toHaveBeenCalledWith(expect.stringContaining('Deleted offline archive'));
+
+    await component.deleteRoute('tour-divide-2025', '1');
+    expect(deleteSpy).toHaveBeenCalledWith('tour-divide-2025', '1');
   });
 });

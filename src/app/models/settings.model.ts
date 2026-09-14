@@ -2,6 +2,7 @@ export type WeightUnit = 'kg' | 'lbs';
 export type DistanceUnit = 'miles' | 'km';
 export type PaceMode = 'power' | 'speed';
 export type MapStyle = 'dark' | 'topo';
+export type MapRendererMode = 'auto' | 'raster';
 export type NavigationTab = 'waypoints' | 'profile' | 'map' | 'resupply' | 'settings';
 
 /**
@@ -39,6 +40,7 @@ export interface UserSettings {
   routeLocations?: Record<string, number>; // Persisted location per route ID
   keepScreenAwake?: boolean;           // Persisted screen wake lock toggle (default true)
   anonymousTelemetryEnabled?: boolean; // Anonymous telemetry toggle (default true)
+  mapRenderer?: MapRendererMode;       // Persisted map renderer toggle ('auto' | 'raster')
 }
 
 export const DEFAULT_USER_SETTINGS: UserSettings = {
@@ -61,6 +63,7 @@ export const DEFAULT_USER_SETTINGS: UserSettings = {
   currentLocationMile: 0,
   routeLocations: {},
   keepScreenAwake: true,
-  anonymousTelemetryEnabled: true
+  anonymousTelemetryEnabled: true,
+  mapRenderer: 'auto'
 };
 

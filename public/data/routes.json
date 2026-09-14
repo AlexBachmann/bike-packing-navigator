@@ -2,101 +2,6 @@
   "version": 1,
   "routes": [
     {
-      "id": "tour-divide-2025",
-      "name": "Tour Divide 2025",
-      "shortName": "Tour Divide",
-      "badge": "TD",
-      "startLocation": "Banff, AB",
-      "endLocation": "Antelope Wells, NM",
-      "startPoint": "Banff, AB",
-      "endPoint": "Antelope Wells, NM",
-      "totalDistanceMiles": 2679.2,
-      "totalDistanceKm": 4311.8,
-      "distanceMiles": 2679.2,
-      "distanceKm": 4311.8,
-      "elevationGainFt": 149600,
-      "elevationGainM": 45600,
-      "elevationGainFeet": 149600,
-      "elevationGainMeters": 45600,
-      "highestElevationFeet": 11910,
-      "highestElevationMeters": 3630,
-      "highestPoint": "Indiana Pass (11,910 ft)",
-      "iconicPass": "Indiana Pass (11,910 ft)",
-      "iconicCheckpoints": [
-        "Banff Grand Depart",
-        "Red Meadow Pass",
-        "Richmond Peak",
-        "Fleecer Ridge",
-        "Indiana Pass",
-        "Pie Town",
-        "Antelope Wells"
-      ],
-      "description": "The premier 2,679-mile self-supported bikepacking route following the Continental Divide from the Canadian Rockies to the US-Mexico border.",
-      "startCoordinates": [
-        51.1613,
-        -115.5602
-      ],
-      "bounds": [
-        [
-          31.3323,
-          -115.5602
-        ],
-        [
-          51.1613,
-          -108.5303
-        ]
-      ],
-      "dataPath": "/data/routes/tour-divide-2025"
-    },
-    {
-      "id": "colorado-trail",
-      "name": "The Colorado Trail",
-      "shortName": "Colorado Trail",
-      "badge": "CT",
-      "startLocation": "Denver (Waterton Canyon), CO",
-      "endLocation": "Durango, CO",
-      "startPoint": "Denver (Waterton Canyon), CO",
-      "endPoint": "Durango, CO",
-      "totalDistanceMiles": 514.7,
-      "totalDistanceKm": 828.4,
-      "distanceMiles": 514.7,
-      "distanceKm": 828.4,
-      "elevationGainFt": 83143,
-      "elevationGainM": 25342,
-      "elevationGainFeet": 83143,
-      "elevationGainMeters": 25342,
-      "highestElevationFeet": 13258,
-      "highestElevationMeters": 4041,
-      "highestPoint": "Coney Summit (13,258 ft)",
-      "iconicPass": "Coney Summit (13,258 ft)",
-      "iconicCheckpoints": [
-        "Waterton Canyon Trailhead",
-        "Georgia Pass",
-        "Breckenridge",
-        "Copper Mountain",
-        "Tennessee Pass",
-        "Monarch Pass",
-        "Coney Summit",
-        "Durango Trailhead"
-      ],
-      "description": "A breathtaking 515-mile high-altitude backcountry singletrack trail traversing the Colorado Rockies from Denver to Durango through 8 mountain ranges.",
-      "startCoordinates": [
-        39.4909,
-        -105.0942
-      ],
-      "bounds": [
-        [
-          37.3314,
-          -108.0387
-        ],
-        [
-          39.5516,
-          -105.0942
-        ]
-      ],
-      "dataPath": "/data/routes/colorado-trail"
-    },
-    {
       "id": "arizona-trail-300",
       "name": "Arizona Trail Race 300 (2025)",
       "shortName": "Arizona Trail 300",
@@ -105,9 +10,9 @@
       "endLocation": "Picketpost Trailhead (Superior), AZ",
       "startPoint": "Coronado National Memorial, AZ",
       "endPoint": "Picketpost Trailhead (Superior), AZ",
-      "totalDistanceMiles": 305.0,
+      "totalDistanceMiles": 305,
       "totalDistanceKm": 490.8,
-      "distanceMiles": 305.0,
+      "distanceMiles": 305,
       "distanceKm": 490.8,
       "elevationGainFt": 40866,
       "elevationGainM": 12456,
@@ -149,58 +54,52 @@
       "dataPath": "/data/routes/arizona-trail-300"
     },
     {
-      "id": "highland-trail-550",
-      "name": "Highland Trail 550 (2026)",
-      "shortName": "Highland Trail 550",
-      "badge": "HT",
-      "startLocation": "Tyndrum, Scotland",
-      "endLocation": "Tyndrum, Scotland",
-      "startPoint": "Tyndrum, Scotland",
-      "endPoint": "Tyndrum, Scotland",
-      "totalDistanceMiles": 548.1,
-      "totalDistanceKm": 882.0,
-      "distanceMiles": 548.1,
-      "distanceKm": 882.0,
-      "elevationGainFt": 53508,
-      "elevationGainM": 16309,
-      "elevationGainFeet": 53508,
-      "elevationGainMeters": 16309,
-      "highestElevationFeet": 2522,
-      "highestElevationMeters": 769,
-      "highestPoint": "Corrieyairack Pass (2,522 ft)",
-      "iconicPass": "Corrieyairack Pass (2,522 ft)",
+      "id": "atlas-mountain-race-2026",
+      "name": "Atlas Mountain Race 2026",
+      "shortName": "Atlas Mountain Race",
+      "badge": "AMR",
+      "startLocation": "Beni Mellal, Morocco",
+      "endLocation": "Essaouira, Morocco",
+      "startPoint": "Beni Mellal, Morocco",
+      "endPoint": "Essaouira, Morocco",
+      "totalDistanceMiles": 840,
+      "totalDistanceKm": 1351.9,
+      "distanceMiles": 840,
+      "distanceKm": 1351.9,
+      "elevationGainFt": 118016,
+      "elevationGainM": 35971,
+      "elevationGainFeet": 118016,
+      "elevationGainMeters": 35971,
+      "highestElevationFeet": 9557,
+      "highestElevationMeters": 2913,
+      "highestPoint": "Tizi N'Ait Imi (9,557 ft)",
+      "iconicPass": "Tizi N'Ait Imi (9,557 ft)",
       "iconicCheckpoints": [
-        "Tyndrum Grand Depart",
-        "Glen Lyon",
-        "Corrieyairack Pass",
-        "Fort Augustus",
-        "Contin",
-        "Oykel Bridge",
-        "Lochinver",
-        "Ullapool",
-        "Fisherfield Wilderness",
-        "Bealach na Lice",
-        "Fort William",
-        "Devil's Staircase",
-        "Kingshouse",
-        "Tyndrum Finish"
+        "Beni Mellal",
+        "Cathedral Rock",
+        "Tizi N'Ait Imi",
+        "Gorges du M'Goun",
+        "Kalaat M'Gouna",
+        "Tizi n'Tazazert",
+        "Tafraoute",
+        "Essaouira"
       ],
-      "description": "The UK's premier 550-mile self-supported bikepacking grand depart through the rugged Scottish Highlands, featuring ancient military roads, coastal sea lochs, Fisherfield wilderness, and 53,500 feet of climbing.",
+      "description": "An unforgettable 840-mile self-supported bikepacking odyssey traversing Morocco, climbing from Beni Mellal through the High Atlas summits and remote M'Goun river gorges, across the volcanic moonscape of Jbel Saghro, over the pink granite domes of Tafraoute, and concluding at the Atlantic coastal ramparts of Essaouira.",
       "startCoordinates": [
-        56.44001,
-        -4.71206
+        32.32497,
+        -6.33664
       ],
       "bounds": [
         [
-          56.44,
-          -5.6042
+          29.4929,
+          -9.8183
         ],
         [
-          58.3773,
-          -4.291
+          32.3338,
+          -6.1031
         ]
       ],
-      "dataPath": "/data/routes/highland-trail-550"
+      "dataPath": "/data/routes/atlas-mountain-race-2026"
     },
     {
       "id": "hellenic-mountain-race-2026",
@@ -254,6 +153,60 @@
       "dataPath": "/data/routes/hellenic-mountain-race-2026"
     },
     {
+      "id": "highland-trail-550",
+      "name": "Highland Trail 550 (2026)",
+      "shortName": "Highland Trail 550",
+      "badge": "HT",
+      "startLocation": "Tyndrum, Scotland",
+      "endLocation": "Tyndrum, Scotland",
+      "startPoint": "Tyndrum, Scotland",
+      "endPoint": "Tyndrum, Scotland",
+      "totalDistanceMiles": 548.1,
+      "totalDistanceKm": 882,
+      "distanceMiles": 548.1,
+      "distanceKm": 882,
+      "elevationGainFt": 53508,
+      "elevationGainM": 16309,
+      "elevationGainFeet": 53508,
+      "elevationGainMeters": 16309,
+      "highestElevationFeet": 2522,
+      "highestElevationMeters": 769,
+      "highestPoint": "Corrieyairack Pass (2,522 ft)",
+      "iconicPass": "Corrieyairack Pass (2,522 ft)",
+      "iconicCheckpoints": [
+        "Tyndrum Grand Depart",
+        "Glen Lyon",
+        "Corrieyairack Pass",
+        "Fort Augustus",
+        "Contin",
+        "Oykel Bridge",
+        "Lochinver",
+        "Ullapool",
+        "Fisherfield Wilderness",
+        "Bealach na Lice",
+        "Fort William",
+        "Devil's Staircase",
+        "Kingshouse",
+        "Tyndrum Finish"
+      ],
+      "description": "The UK's premier 550-mile self-supported bikepacking grand depart through the rugged Scottish Highlands, featuring ancient military roads, coastal sea lochs, Fisherfield wilderness, and 53,500 feet of climbing.",
+      "startCoordinates": [
+        56.44001,
+        -4.71206
+      ],
+      "bounds": [
+        [
+          56.44,
+          -5.6042
+        ],
+        [
+          58.3773,
+          -4.291
+        ]
+      ],
+      "dataPath": "/data/routes/highland-trail-550"
+    },
+    {
       "id": "silk-road-mountain-race-2026",
       "name": "Silk Road Mountain Race 2026",
       "shortName": "Silk Road Race",
@@ -278,7 +231,7 @@
         "Talas Grand Depart",
         "Terekti Pass",
         "Toktogul",
-        "Song-K\u00f6l (CP1)",
+        "Song-Köl (CP1)",
         "Baetov",
         "The Old Soviet Road",
         "Naryn",
@@ -309,52 +262,99 @@
       "dataPath": "/data/routes/silk-road-mountain-race-2026"
     },
     {
-      "id": "atlas-mountain-race-2026",
-      "name": "Atlas Mountain Race 2026",
-      "shortName": "Atlas Mountain Race",
-      "badge": "AMR",
-      "startLocation": "Beni Mellal, Morocco",
-      "endLocation": "Essaouira, Morocco",
-      "startPoint": "Beni Mellal, Morocco",
-      "endPoint": "Essaouira, Morocco",
-      "totalDistanceMiles": 840.0,
-      "totalDistanceKm": 1351.9,
-      "distanceMiles": 840.0,
-      "distanceKm": 1351.9,
-      "elevationGainFt": 118016,
-      "elevationGainM": 35971,
-      "elevationGainFeet": 118016,
-      "elevationGainMeters": 35971,
-      "highestElevationFeet": 9557,
-      "highestElevationMeters": 2913,
-      "highestPoint": "Tizi N'Ait Imi (9,557 ft)",
-      "iconicPass": "Tizi N'Ait Imi (9,557 ft)",
+      "id": "colorado-trail",
+      "name": "The Colorado Trail",
+      "shortName": "Colorado Trail",
+      "badge": "CT",
+      "startLocation": "Denver (Waterton Canyon), CO",
+      "endLocation": "Durango, CO",
+      "startPoint": "Denver (Waterton Canyon), CO",
+      "endPoint": "Durango, CO",
+      "totalDistanceMiles": 514.7,
+      "totalDistanceKm": 828.4,
+      "distanceMiles": 514.7,
+      "distanceKm": 828.4,
+      "elevationGainFt": 83143,
+      "elevationGainM": 25342,
+      "elevationGainFeet": 83143,
+      "elevationGainMeters": 25342,
+      "highestElevationFeet": 13258,
+      "highestElevationMeters": 4041,
+      "highestPoint": "Coney Summit (13,258 ft)",
+      "iconicPass": "Coney Summit (13,258 ft)",
       "iconicCheckpoints": [
-        "Beni Mellal",
-        "Cathedral Rock",
-        "Tizi N'Ait Imi",
-        "Gorges du M'Goun",
-        "Kalaat M'Gouna",
-        "Tizi n'Tazazert",
-        "Tafraoute",
-        "Essaouira"
+        "Waterton Canyon Trailhead",
+        "Georgia Pass",
+        "Breckenridge",
+        "Copper Mountain",
+        "Tennessee Pass",
+        "Monarch Pass",
+        "Coney Summit",
+        "Durango Trailhead"
       ],
-      "description": "An unforgettable 840-mile self-supported bikepacking odyssey traversing Morocco, climbing from Beni Mellal through the High Atlas summits and remote M'Goun river gorges, across the volcanic moonscape of Jbel Saghro, over the pink granite domes of Tafraoute, and concluding at the Atlantic coastal ramparts of Essaouira.",
+      "description": "A breathtaking 515-mile high-altitude backcountry singletrack trail traversing the Colorado Rockies from Denver to Durango through 8 mountain ranges.",
       "startCoordinates": [
-        32.32497,
-        -6.33664
+        39.4909,
+        -105.0942
       ],
       "bounds": [
         [
-          29.4929,
-          -9.8183
+          37.3314,
+          -108.0387
         ],
         [
-          32.3338,
-          -6.1031
+          39.5516,
+          -105.0942
         ]
       ],
-      "dataPath": "/data/routes/atlas-mountain-race-2026"
+      "dataPath": "/data/routes/colorado-trail"
+    },
+    {
+      "id": "tour-divide-2025",
+      "name": "Tour Divide 2025",
+      "shortName": "Tour Divide",
+      "badge": "TD",
+      "startLocation": "Banff, AB",
+      "endLocation": "Antelope Wells, NM",
+      "startPoint": "Banff, AB",
+      "endPoint": "Antelope Wells, NM",
+      "totalDistanceMiles": 2679.2,
+      "totalDistanceKm": 4311.8,
+      "distanceMiles": 2679.2,
+      "distanceKm": 4311.8,
+      "elevationGainFt": 149600,
+      "elevationGainM": 45600,
+      "elevationGainFeet": 149600,
+      "elevationGainMeters": 45600,
+      "highestElevationFeet": 11910,
+      "highestElevationMeters": 3630,
+      "highestPoint": "Indiana Pass (11,910 ft)",
+      "iconicPass": "Indiana Pass (11,910 ft)",
+      "iconicCheckpoints": [
+        "Banff Grand Depart",
+        "Red Meadow Pass",
+        "Richmond Peak",
+        "Fleecer Ridge",
+        "Indiana Pass",
+        "Pie Town",
+        "Antelope Wells"
+      ],
+      "description": "The premier 2,679-mile self-supported bikepacking route following the Continental Divide from the Canadian Rockies to the US-Mexico border.",
+      "startCoordinates": [
+        51.1613,
+        -115.5602
+      ],
+      "bounds": [
+        [
+          31.3323,
+          -115.5602
+        ],
+        [
+          51.1613,
+          -108.5303
+        ]
+      ],
+      "dataPath": "/data/routes/tour-divide-2025"
     }
   ]
 }

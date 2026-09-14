@@ -7,46 +7,53 @@
   height: 100%;
 }
 
-/* Custom dark styling for Leaflet popups */
-::ng-deep .dark-leaflet-popup .leaflet-popup-content-wrapper {
+/* Custom dark styling for MapLibre popups */
+::ng-deep .dark-maplibre-popup .maplibregl-popup-content {
   background-color: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(51, 65, 85, 0.9);
   border-radius: 12px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   color: #f8fafc;
+  padding: 12px;
 }
 
-::ng-deep .dark-leaflet-popup .leaflet-popup-tip {
-  background-color: rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(51, 65, 85, 0.9);
+::ng-deep .dark-maplibre-popup .maplibregl-popup-tip {
+  border-top-color: rgba(15, 23, 42, 0.95) !important;
+  border-bottom-color: rgba(15, 23, 42, 0.95) !important;
 }
 
-::ng-deep .dark-leaflet-popup .leaflet-popup-close-button {
+::ng-deep .dark-maplibre-popup .maplibregl-popup-close-button {
   color: #94a3b8 !important;
   padding: 6px !important;
+  font-size: 16px;
+  right: 4px;
+  top: 4px;
 }
 
-::ng-deep .dark-leaflet-popup .leaflet-popup-close-button:hover {
+::ng-deep .dark-maplibre-popup .maplibregl-popup-close-button:hover {
   color: #ffffff !important;
 }
 
-/* Leaflet Zoom Control dark styling */
-::ng-deep .leaflet-bar {
+/* MapLibre Navigation Control dark styling */
+::ng-deep .maplibregl-ctrl-group {
   border-radius: 10px !important;
   overflow: hidden;
+  background-color: rgba(15, 23, 42, 0.9) !important;
   border: 1px solid rgba(51, 65, 85, 0.8) !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
 }
 
-::ng-deep .leaflet-bar a {
+::ng-deep .maplibregl-ctrl-group button {
   background-color: rgba(15, 23, 42, 0.9) !important;
-  color: #cbd5e1 !important;
   border-bottom: 1px solid rgba(51, 65, 85, 0.8) !important;
   backdrop-filter: blur(8px);
 }
 
-::ng-deep .leaflet-bar a:hover {
+::ng-deep .maplibregl-ctrl-group button:hover {
   background-color: rgba(30, 41, 59, 0.95) !important;
-  color: #34d399 !important;
+}
+
+::ng-deep .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1);
 }

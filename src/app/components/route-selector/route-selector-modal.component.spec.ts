@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouteSelectorModalComponent } from './route-selector-modal.component';
 import { RouteManifestService } from '../../services/route-manifest.service';
+import { PmtilesStorageService } from '../../services/pmtiles-storage.service';
 import { RouteSummary } from '../../models/route.model';
 import { signal } from '@angular/core';
 
@@ -54,11 +55,26 @@ describe('RouteSelectorModalComponent', () => {
     activeRouteSummary: signal<RouteSummary | null>(mockTdRoute)
   };
 
+  const mockPmtilesStorage = {
+    isRouteCachedSync: vi.fn((routeId: string) => routeId === 'tour-divide-2025'),
+    isDownloading: vi.fn((routeId: string) => false),
+    getDownloadProgress: vi.fn((routeId: string) => undefined as any),
+    getEstimatedSize: vi.fn((routeId: string) => routeId === 'tour-divide-2025' ? '~45 MB' : '~12 MB'),
+    downloadRoute: vi.fn(async () => {}),
+    isSupported: vi.fn(() => true)
+  };
+
   beforeEach(async () => {
+    mockPmtilesStorage.isRouteCachedSync.mockImplementation((routeId: string) => routeId === 'tour-divide-2025');
+    mockPmtilesStorage.isDownloading.mockImplementation(() => false);
+    mockPmtilesStorage.getDownloadProgress.mockImplementation(() => undefined as any);
+    mockPmtilesStorage.downloadRoute.mockClear();
+
     await TestBed.configureTestingModule({
       imports: [RouteSelectorModalComponent],
       providers: [
-        { provide: RouteManifestService, useValue: mockManifestService }
+        { provide: RouteManifestService, useValue: mockManifestService },
+        { provide: PmtilesStorageService, useValue: mockPmtilesStorage }
       ]
     }).compileComponents();
 
@@ -147,4 +163,77 @@ describe('RouteSelectorModalComponent', () => {
     expect(el.textContent).toContain('4,311.8 km');
     expect(el.textContent).toContain('828.4 km');
   });
+
+  it('should sort routes alphabetically by name', () => {
+    const routeZ: RouteSummary = { ...mockTdRoute, id: 'route-z', name: 'Z Route' };
+    const routeA: RouteSummary = { ...mockCtRoute, id: 'route-a', name: 'Alpha Trail' };
+    const routeM: RouteSummary = { ...mockTdRoute, id: 'route-m', name: 'Middle Divide' };
+
+    fixture.componentRef.setInput('availableRoutes', [routeZ, routeA, routeM]);
+    fixture.detectChanges();
+
+    expect(component.routes().map((r) => r.name)).toEqual([
+      'Alpha Trail',
+      'Middle Divide',
+      'Z Route'
+    ]);
+    expect(component.filteredRoutes().map((r) => r.name)).toEqual([
+      'Alpha Trail',
+      'Middle Divide',
+      'Z Route'
+    ]);
+
+    const renderedNames = Array.from(fixture.nativeElement.querySelectorAll('h3')).map(
+      (h3: any) => h3.textContent.trim()
+    );
+    expect(renderedNames).toEqual(['Alpha Trail', 'Middle Divide', 'Z Route']);
+  });
+
+  it('should display dynamic status badge: Vector Ready for cached route and Raster Only for uncached route', () => {
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Vector Ready');
+    expect(el.textContent).toContain('Raster Only');
+  });
+
+  it('should display download button with estimated size for uncached route and cached status for cached route', () => {
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Download Vector Map');
+    expect(el.textContent).toContain('Offline Vector Map: ~12 MB');
+    expect(el.textContent).toContain('Cached for offline vector zoom (~45 MB)');
+  });
+
+  it('should trigger downloadRoute without emitting routeSelect when download button is clicked', async () => {
+    let selectedRouteId: string | null = null;
+    component.routeSelect.subscribe((id) => {
+      selectedRouteId = id;
+    });
+
+    const downloadButtons = fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>;
+    const downloadBtn = Array.from(downloadButtons).find((btn) => btn.textContent?.includes('Download Vector Map'));
+    expect(downloadBtn).toBeTruthy();
+
+    downloadBtn?.click();
+    fixture.detectChanges();
+
+    expect(mockPmtilesStorage.downloadRoute).toHaveBeenCalledWith('colorado-trail');
+    expect(selectedRouteId).toBeNull();
+  });
+
+  it('should display live progress indicator when route download is active', () => {
+    mockPmtilesStorage.isDownloading.mockImplementation((id: string) => id === 'colorado-trail');
+    mockPmtilesStorage.getDownloadProgress.mockImplementation((id: string) =>
+      id === 'colorado-trail' ? ({ percentage: 58, bytesLoaded: 5800, totalBytes: 10000, phase: 'fetching' } as any) : undefined
+    );
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Downloading 58%');
+    expect(el.textContent).toContain('Downloading PMTiles (~12 MB)...');
+
+    const progressBar = fixture.nativeElement.querySelector('[style*="width: 58%"]');
+    expect(progressBar).toBeTruthy();
+  });
 });
+

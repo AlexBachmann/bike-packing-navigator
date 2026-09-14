@@ -120,10 +120,22 @@
               </div>
             </div>
 
-            <span class="inline-flex items-center gap-1.5 text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0 shadow-sm">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              Offline Ready
-            </span>
+            @if (isDownloading(route.id)) {
+              <span class="inline-flex items-center gap-1.5 text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/40 shrink-0 shadow-sm animate-pulse">
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                Downloading {{ getDownloadProgress(route.id) }}%
+              </span>
+            } @else if (isRouteCached(route.id)) {
+              <span class="inline-flex items-center gap-1.5 text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                Vector Ready
+              </span>
+            } @else {
+              <span class="inline-flex items-center gap-1.5 text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 shrink-0 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                Raster Only
+              </span>
+            }
           </div>
 
           <!-- Route Description -->
@@ -159,6 +171,57 @@
                 {{ route.iconicPass || route.highestPoint || 'Summit' }}
               </div>
             </div>
+          </div>
+
+          <!-- Offline Vector Download Action Strip -->
+          <div
+            class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between gap-3"
+            (click)="$event.stopPropagation()"
+          >
+            @if (isDownloading(route.id)) {
+              <div class="flex-1 space-y-1">
+                <div class="flex items-center justify-between text-[10px] font-mono text-sky-300">
+                  <span class="flex items-center gap-1.5">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping"></span>
+                    Downloading PMTiles ({{ getEstimatedSize(route.id) }})...
+                  </span>
+                  <span class="font-bold">{{ getDownloadProgress(route.id) }}%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-gradient-to-r from-sky-500 to-emerald-400 transition-all duration-200"
+                    [style.width.%]="getDownloadProgress(route.id)"
+                  ></div>
+                </div>
+              </div>
+            } @else if (isRouteCached(route.id)) {
+              <div class="flex items-center justify-between w-full text-[10px] font-mono">
+                <span class="text-emerald-400 flex items-center gap-1.5">
+                  <span>✓</span> Cached for offline vector zoom ({{ getEstimatedSize(route.id) }})
+                </span>
+                <button
+                  type="button"
+                  (click)="onDownloadVector($event, route.id)"
+                  class="px-2 py-0.5 text-[10px] font-mono rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/80 transition cursor-pointer"
+                  title="Re-download vector archive"
+                >
+                  Re-download
+                </button>
+              </div>
+            } @else {
+              <div class="flex items-center justify-between w-full text-[10px] font-mono">
+                <span class="text-slate-400">
+                  Offline Vector Map: <span class="text-slate-300 font-semibold">{{ getEstimatedSize(route.id) }}</span>
+                </span>
+                <button
+                  type="button"
+                  (click)="onDownloadVector($event, route.id)"
+                  class="px-2.5 py-1 text-[10px] font-mono font-medium rounded-md bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition flex items-center gap-1.5 cursor-pointer active:scale-95"
+                >
+                  <span>⬇</span> Download Vector Map
+                </button>
+              </div>
+            }
           </div>
         </div>
       }

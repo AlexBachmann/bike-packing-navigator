@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouteSummary } from '../../models/route.model';
 import { RouteManifestService } from '../../services/route-manifest.service';
+import { PmtilesStorageService } from '../../services/pmtiles-storage.service';
 
 @Component({
   selector: 'app-route-selector-modal',
@@ -28,6 +29,7 @@ import { RouteManifestService } from '../../services/route-manifest.service';
 })
 export class RouteSelectorModalComponent implements OnInit {
   readonly manifestService = inject(RouteManifestService);
+  readonly pmtilesStorage = inject(PmtilesStorageService);
 
   readonly searchInputRef = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
@@ -42,8 +44,8 @@ export class RouteSelectorModalComponent implements OnInit {
 
   readonly routes = computed<RouteSummary[]>(() => {
     const passed = this.availableRoutes();
-    if (passed && passed.length > 0) return passed;
-    return this.manifestService.availableRoutes();
+    const list = passed && passed.length > 0 ? passed : this.manifestService.availableRoutes();
+    return [...list].sort((a, b) => a.name.localeCompare(b.name));
   });
 
   readonly currentRouteId = computed<string | null>(() => {
@@ -89,6 +91,32 @@ export class RouteSelectorModalComponent implements OnInit {
   clearSearch(): void {
     this.searchQuery.set('');
     this.searchInputRef()?.nativeElement?.focus();
+  }
+
+  isRouteCached(routeId: string): boolean {
+    return this.pmtilesStorage.isRouteCachedSync(routeId);
+  }
+
+  isDownloading(routeId: string): boolean {
+    return this.pmtilesStorage.isDownloading(routeId);
+  }
+
+  getDownloadProgress(routeId: string): number {
+    return this.pmtilesStorage.getDownloadProgress(routeId)?.percentage ?? 0;
+  }
+
+  getEstimatedSize(routeId: string): string {
+    return this.pmtilesStorage.getEstimatedSize(routeId);
+  }
+
+  async onDownloadVector(event: Event, routeId: string): Promise<void> {
+    event.stopPropagation();
+    event.preventDefault();
+    try {
+      await this.pmtilesStorage.downloadRoute(routeId);
+    } catch (err) {
+      console.error(`Failed to download vector archive for ${routeId}:`, err);
+    }
   }
 
   onSelect(routeId: string): void {

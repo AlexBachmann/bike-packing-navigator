@@ -342,5 +342,37 @@ describe('SettingsService', () => {
     service.clearAllLocalStorage();
     expect(service.anonymousTelemetryEnabled()).toBe(true);
   });
+
+  it('should store, change, and persist mapRenderer to bpn_map_renderer and user settings', () => {
+    expect(service.mapRenderer()).toBe('auto');
+
+    service.setMapRenderer('raster');
+    expect(service.mapRenderer()).toBe('raster');
+
+    // Verify localStorage key bpn_map_renderer
+    expect(localStorage.getItem('bpn_map_renderer')).toBe('raster');
+
+    // Verify tour_divide_user_settings JSON contains mapRenderer
+    const raw = JSON.parse(localStorage.getItem('tour_divide_user_settings')!);
+    expect(raw.mapRenderer).toBe('raster');
+
+    // Toggle back to auto
+    service.setMapRenderer('auto');
+    expect(service.mapRenderer()).toBe('auto');
+    expect(localStorage.getItem('bpn_map_renderer')).toBe('auto');
+
+    // Reset via clearAllLocalStorage
+    service.setMapRenderer('raster');
+    service.clearAllLocalStorage();
+    expect(service.mapRenderer()).toBe('auto');
+    expect(localStorage.getItem('bpn_map_renderer')).toBeNull();
+  });
+
+  it('should hydrate mapRenderer from bpn_map_renderer on service initialization', () => {
+    localStorage.setItem('bpn_map_renderer', 'raster');
+    const newService = TestBed.inject(SettingsService);
+    newService.loadSettings();
+    expect(newService.mapRenderer()).toBe('raster');
+  });
 });
 

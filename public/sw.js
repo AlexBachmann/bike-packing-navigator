@@ -156,7 +156,25 @@ const PRECACHE_URLS = [
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png',
-  './data/routes.json'
+  './data/routes.json',
+  './assets/styles/vector-topo.json',
+  './assets/styles/vector-dark.json',
+  './assets/fonts/Noto Sans Regular/0-255.pbf',
+  './assets/fonts/Noto Sans Regular/256-511.pbf',
+  './assets/fonts/Noto Sans Bold/0-255.pbf',
+  './assets/fonts/Noto Sans Bold/256-511.pbf',
+  './assets/sprites/sprite.json',
+  './assets/sprites/sprite.png',
+  './assets/sprites/sprite@2x.json',
+  './assets/sprites/sprite@2x.png',
+  './assets/sprites/topo.json',
+  './assets/sprites/topo.png',
+  './assets/sprites/topo@2x.json',
+  './assets/sprites/topo@2x.png',
+  './assets/sprites/dark.json',
+  './assets/sprites/dark.png',
+  './assets/sprites/dark@2x.json',
+  './assets/sprites/dark@2x.png'
 ];
 
 self.addEventListener('install', (event) => {

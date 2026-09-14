@@ -1,10 +1,90 @@
-import { ChangeDetectionStrategy, Component, AfterViewInit, OnDestroy, input, output, effect, ElementRef, viewChild, signal, inject, untracked } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  AfterViewInit,
+  OnDestroy,
+  input,
+  output,
+  effect,
+  ElementRef,
+  viewChild,
+  signal,
+  computed,
+  inject,
+  untracked
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import * as L from 'leaflet';
+import * as maplibregl from 'maplibre-gl';
 import { RouteDataService } from '../../services/route-data.service';
 import { SettingsService } from '../../services/settings.service';
+import { PmtilesStorageService } from '../../services/pmtiles-storage.service';
+import { ToastService } from '../../services/toast.service';
 import { Place, GpsState, isSelfServiceWaschsalon } from '../../models/waypoint.model';
 import { MapStyle } from '../../models/settings.model';
+
+export function getRasterBaselineStyle(style: MapStyle): maplibregl.StyleSpecification {
+  return {
+    version: 8,
+    sources: {
+      'esri-dark-base': {
+        type: 'raster',
+        tiles: [
+          'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+        ],
+        tileSize: 256,
+        maxzoom: 16
+      },
+      'esri-dark-ref': {
+        type: 'raster',
+        tiles: [
+          'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}'
+        ],
+        tileSize: 256,
+        maxzoom: 16
+      },
+      'esri-topo': {
+        type: 'raster',
+        tiles: [
+          'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+        ],
+        tileSize: 256,
+        maxzoom: 16
+      }
+    },
+    layers: [
+      {
+        id: 'esri-dark-base-layer',
+        type: 'raster',
+        source: 'esri-dark-base',
+        minzoom: 0,
+        maxzoom: 22,
+        layout: {
+          visibility: style === 'dark' ? 'visible' : 'none'
+        }
+      },
+      {
+        id: 'esri-dark-ref-layer',
+        type: 'raster',
+        source: 'esri-dark-ref',
+        minzoom: 0,
+        maxzoom: 22,
+        layout: {
+          visibility: style === 'dark' ? 'visible' : 'none'
+        }
+      },
+      {
+        id: 'esri-topo-layer',
+        type: 'raster',
+        source: 'esri-topo',
+        minzoom: 0,
+        maxzoom: 22,
+        layout: {
+          visibility: style === 'topo' ? 'visible' : 'none'
+        }
+      }
+    ]
+  };
+}
 
 @Component({
   selector: 'app-route-map',
@@ -15,7 +95,9 @@ import { MapStyle } from '../../models/settings.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RouteMapComponent implements AfterViewInit, OnDestroy {
-  private readonly settings = inject(SettingsService);
+  readonly settings = inject(SettingsService);
+  readonly pmtilesStorage = inject(PmtilesStorageService);
+  readonly toast = inject(ToastService, { optional: true });
 
   // Inputs from shell
   readonly currentMile = input<number>(0);
@@ -24,6 +106,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
 
   // Output event to change rider position
   readonly selectMile = output<number>();
+  readonly jumpToMile = this.selectMile;
 
   // Map container reference
   readonly mapContainer = viewChild<ElementRef<HTMLDivElement>>('mapContainer');
@@ -31,22 +114,58 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   // Active map layer style ('dark' | 'topo') synced with persistent user settings
   readonly mapStyle = this.settings.mapStyle;
 
+  // Map renderer status & offline PMTiles auto-detection
+  readonly activeMapMode = signal<'vector' | 'raster'>('raster');
+  readonly isVectorCached = signal<boolean>(false);
+
+  readonly activeRouteId = computed(() => {
+    const fromService = typeof this.routeService?.activeRouteId === 'function'
+      ? this.routeService.activeRouteId()
+      : (this.routeService as any)?.activeRouteId || null;
+    return fromService || this.settings.selectedRouteKey() || null;
+  });
+
+  readonly isDownloading = computed(() => {
+    const id = this.activeRouteId();
+    return id ? this.pmtilesStorage.isDownloading(id) : false;
+  });
+
+  readonly downloadPercentage = computed(() => {
+    const id = this.activeRouteId();
+    return id ? this.pmtilesStorage.getDownloadProgress(id)?.percentage || 0 : 0;
+  });
+
+  readonly activeRouteSizeEstimate = computed(() => {
+    const id = this.activeRouteId();
+    return id ? this.pmtilesStorage.getEstimatedSize(id) : '~15 MB';
+  });
+
   // Category filter for map POIs
   readonly activePoiFilter = signal<string>('all');
+  readonly activePoiCategories = this.activePoiFilter;
 
-  private map: L.Map | null = null;
-  private tileLayer: L.TileLayer | null = null;
-  private referenceLayer: L.TileLayer | null = null;
-  private routeLineGlow: L.Polyline | null = null;
-  private routeLineMain: L.Polyline | null = null;
-  private riderMarker: L.Marker | null = null;
-  private gpsMarker: L.Marker | null = null;
-  private projectionLine: L.Polyline | null = null;
-  private poiLayerGroup: L.LayerGroup = L.layerGroup();
+  // Derived rider coordinate [lat, lon, ele]
+  readonly riderLocation = computed(() => this.getCoordsForMile(this.currentMile()));
+
+  private map: maplibregl.Map | null = null;
+  private routeLineGlow: { id: string } | null = null;
+  private routeLineMain: { id: string; getBounds: () => [[number, number], [number, number]] } | null = null;
+  private riderMarker: maplibregl.Marker | null = null;
+  private gpsMarker: maplibregl.Marker | null = null;
+  private projectionLine: { id: string; setLatLngs: (coords: any) => void; setStyle: (style: any) => void } | null = null;
+  private poiMarkers: maplibregl.Marker[] = [];
+  private poiLayerGroup = {
+    clearLayers: () => this.clearPoiMarkers(),
+    getLayers: () => this.poiMarkers,
+    addLayer: (m: maplibregl.Marker) => this.poiMarkers.push(m)
+  };
+
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(public readonly routeService: RouteDataService) {
-    // Effect to update rider marker position whenever currentMile changes
+    // Effect to update rider marker position whenever riderLocation changes
     effect(() => {
+      const loc = this.riderLocation();
       const mile = this.currentMile();
       this.updateRiderMarker(mile);
     });
@@ -64,11 +183,31 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       this.updatePoiMarkers(places, filter);
     });
 
-    // Effect to update base tile layer when mapStyle setting changes
+    // Effect to update map when mapStyle setting changes
     effect(() => {
       const style = this.settings.mapStyle();
       if (this.map) {
-        this.setBaseTileLayer(style);
+        if (this.activeMapMode() === 'vector') {
+          this.applyMapRenderer('vector');
+        } else {
+          this.setBaseTileLayer(style);
+        }
+      }
+    });
+
+    // Effect to react immediately to changes in settings.mapRenderer()
+    effect(() => {
+      const renderer = this.settings.mapRenderer();
+      if (this.map) {
+        this.checkRouteCacheAndApplyRenderer();
+      }
+    });
+
+    // Effect to detect route changes and re-verify PMTiles cache & style
+    effect(() => {
+      const routeId = this.activeRouteId();
+      if (this.map) {
+        this.checkRouteCacheAndApplyRenderer();
       }
     });
 
@@ -88,8 +227,6 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private resizeObserver: ResizeObserver | null = null;
-
   ngAfterViewInit(): void {
     if (typeof window === 'undefined') return;
 
@@ -101,6 +238,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.handleWindowResize);
       window.removeEventListener('bpn-jump-mile', this.handlePopupJump as EventListener);
       window.removeEventListener('td-jump-mile', this.handlePopupJump as EventListener);
     }
@@ -108,66 +246,110 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       this.resizeObserver.disconnect();
       this.resizeObserver = null;
     }
+    if (this.gpsMarker) {
+      this.gpsMarker.remove();
+      this.gpsMarker = null;
+    }
+    this.clearProjectionLine();
     if (this.map) {
       this.clearRouteLayers();
+      this.clearPoiMarkers();
       this.map.remove();
       this.map = null;
     }
   }
 
+  private handleWindowResize = (): void => {
+    this.map?.resize();
+  };
+
   private initMap(container: HTMLElement): void {
-    // Determine initial center and zoom from settings or rider position
     const points = this.routeService.trackPoints();
     const initialCoords = this.getCoordsForMile(this.currentMile());
-    let initialCenter: [number, number] = [51.16, -115.56];
+    // MapLibre GL center coordinates order: [longitude, latitude]
+    let initialCenter: [number, number] = [-115.56, 51.16];
     if (initialCoords) {
-      initialCenter = [initialCoords[0], initialCoords[1]];
+      initialCenter = [initialCoords[1], initialCoords[0]];
     } else if (points && points.length > 0) {
-      initialCenter = [points[0][0], points[0][1]];
+      initialCenter = [points[0][1], points[0][0]];
     }
     const initialZoom = this.settings.mapZoomLevel() || 8;
 
-    // Initialize Leaflet map
-    this.map = L.map(container, {
-      zoomControl: false,
-      attributionControl: false
-    }).setView(initialCenter, initialZoom);
+    const routeId = this.activeRouteId();
+    const isCached = routeId ? this.pmtilesStorage.isRouteCachedSync(routeId) : false;
+    this.isVectorCached.set(isCached);
 
-    // Zoom buttons in top-right
-    L.control.zoom({ position: 'topright' }).addTo(this.map);
+    const initialMode: 'vector' | 'raster' = (isCached && this.settings.mapRenderer() === 'auto') ? 'vector' : 'raster';
+    this.activeMapMode.set(initialMode);
+
+    const style = getRasterBaselineStyle(this.mapStyle());
+
+    const map = new maplibregl.Map({
+      container,
+      style,
+      center: initialCenter,
+      zoom: initialZoom,
+      attributionControl: false
+    });
+    this.map = map;
+
+    // Zoom controls in top-right
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+
+    // Adapt flyTo to support both MapLibre ({ center, zoom }) and positional calls ([lon, lat], zoom, opts)
+    const originalFlyTo = map.flyTo.bind(map);
+    map.flyTo = ((arg1: any, arg2?: any, arg3?: any) => {
+      if (Array.isArray(arg1) || (typeof arg1 === 'object' && arg1 !== null && 'lat' in arg1 && 'lng' in arg1)) {
+        const center = Array.isArray(arg1) ? arg1 : [arg1.lng, arg1.lat];
+        return originalFlyTo({
+          center,
+          zoom: typeof arg2 === 'number' ? arg2 : undefined,
+          ...arg3
+        });
+      }
+      return originalFlyTo(arg1);
+    }) as any;
 
     // Persist zoom level changes when user zooms
-    this.map.on('zoomend', () => {
-      if (this.map) {
-        this.settings.setMapZoomLevel(this.map.getZoom());
-      }
+    map.on('zoomend', () => {
+      this.settings.setMapZoomLevel(Math.round(map.getZoom()));
     });
 
-    // Set up base tile layer
-    this.setBaseTileLayer(this.mapStyle());
+    const onReady = () => {
+      if (this.activeMapMode() === 'raster') {
+        this.setBaseTileLayer(this.mapStyle());
+      }
+      this.drawRoute();
+      this.updateRiderMarker(this.currentMile());
+      this.updatePoiMarkers(this.routeService.places(), this.activePoiFilter());
+      this.updateGpsDisplay(this.gpsState());
 
-    // Add POI layer group
-    this.poiLayerGroup.addTo(this.map);
+      // Auto-detect PMTiles cache and switch seamlessly if ready
+      this.checkRouteCacheAndApplyRenderer(true);
+    };
 
-    // Render route track line
-    this.drawRoute();
+    if (map.isStyleLoaded()) {
+      onReady();
+    } else {
+      map.once('load', onReady);
+    }
 
-    // Render initial rider marker & POIs
-    this.updateRiderMarker(this.currentMile());
-    this.updatePoiMarkers(this.routeService.places(), this.activePoiFilter());
-    this.updateGpsDisplay(this.gpsState());
+    // Window resize listener
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.handleWindowResize);
+    }
 
-    // Dynamically watch container size and invalidate map size
+    // Dynamically watch container size and invalidate/resize map
     if (typeof ResizeObserver !== 'undefined') {
       this.resizeObserver = new ResizeObserver(() => {
-        this.map?.invalidateSize();
+        this.map?.resize();
       });
       this.resizeObserver.observe(container);
     }
 
-    // Trigger size invalidation to handle any flexbox layout animations
+    // Trigger size resize to handle flexbox animations
     setTimeout(() => {
-      this.map?.invalidateSize();
+      this.map?.resize();
     }, 150);
   }
 
@@ -175,184 +357,455 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     this.settings.toggleMapStyle();
   }
 
-  private createTileLayer(url: string, options: L.TileLayerOptions = {}): L.TileLayer {
-    const tileOptions: L.TileLayerOptions = {
+  createTileLayer(url: string, options: any = {}): any {
+    const tileOptions = {
       maxZoom: 16,
-      maxNativeZoom: 10,
+      maxNativeZoom: 16,
       ...options
     };
 
     if (typeof window !== 'undefined' && 'caches' in window && typeof document !== 'undefined') {
-      try {
-        const OfflineLayer = L.TileLayer.extend({
-          createTile(coords: L.Coords, done: L.DoneCallback): HTMLElement {
-            const tile = document.createElement('img');
-            const tileUrl = (this as any).getTileUrl(coords);
-
-            const setTileBlob = (blob: Blob) => {
-              const objectUrl = URL.createObjectURL(blob);
-              let revoked = false;
-              const cleanup = () => {
-                if (!revoked) {
-                  revoked = true;
-                  URL.revokeObjectURL(objectUrl);
-                }
-              };
-
-              (tile as any)._cleanup = cleanup;
-
-              tile.onload = () => {
-                cleanup();
-                done(undefined, tile);
-              };
-              tile.onerror = (err) => {
-                cleanup();
-                done(err as any, tile);
-              };
-              tile.src = objectUrl;
-            };
-
-            const setTileUrl = (src: string) => {
-              tile.onload = () => done(undefined, tile);
-              tile.onerror = (err) => done(err as any, tile);
-              tile.src = src;
-            };
-
-            window.caches.open('bikepack-map-tiles-v1').then((cache) => {
-              cache.match(tileUrl).then((cachedResponse) => {
-                if (cachedResponse) {
-                  cachedResponse.blob()
-                    .then((blob) => {
-                      setTileBlob(blob);
-                    })
-                    .catch(() => {
-                      setTileUrl(tileUrl);
-                    });
-                } else {
-                  fetch(tileUrl, { mode: 'cors' })
-                    .then((res) => {
-                      if (res.ok) {
-                        cache.put(tileUrl, res.clone()).catch(() => {});
-                        return res.blob();
-                      }
-                      throw new Error('Tile network error');
-                    })
-                    .then((blob) => {
-                      setTileBlob(blob);
-                    })
-                    .catch(() => {
-                      setTileUrl('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-                    });
-                }
-              }).catch(() => {
-                setTileUrl(tileUrl);
-              });
-            }).catch(() => {
-              setTileUrl(tileUrl);
-            });
-
-            return tile;
+      const handlers: { [event: string]: ((data?: any) => void)[] } = {};
+      const layer = {
+        url,
+        options: tileOptions,
+        on(event: string, fn: (data?: any) => void) {
+          handlers[event] = handlers[event] || [];
+          handlers[event].push(fn);
+          return this;
+        },
+        fire(event: string, data: any) {
+          if (handlers[event]) {
+            handlers[event].forEach((h) => h(data));
           }
-        });
+        },
+        createTile(coords: { x: number; y: number; z: number }, done: (err: any, tile: any) => void): HTMLElement {
+          const tile = document.createElement('img');
+          const tileUrl = url
+            .replace('{z}', String(coords.z))
+            .replace('{x}', String(coords.x))
+            .replace('{y}', String(coords.y));
 
-        const layer = new (OfflineLayer as any)(url, tileOptions);
-        layer.on('tileunload', (e: any) => {
-          if (e.tile && typeof e.tile._cleanup === 'function') {
-            e.tile._cleanup();
-          }
-        });
-        return layer;
-      } catch {
-        return L.tileLayer(url, tileOptions);
-      }
+          const setTileBlob = (blob: Blob) => {
+            const objectUrl = URL.createObjectURL(blob);
+            let revoked = false;
+            const cleanup = () => {
+              if (!revoked) {
+                revoked = true;
+                URL.revokeObjectURL(objectUrl);
+              }
+            };
+            (tile as any)._cleanup = cleanup;
+            tile.onload = () => {
+              cleanup();
+              done(undefined, tile);
+            };
+            tile.onerror = (err) => {
+              cleanup();
+              done(err, tile);
+            };
+            tile.src = objectUrl;
+          };
+
+          const setTileUrl = (src: string) => {
+            tile.onload = () => done(undefined, tile);
+            tile.onerror = (err) => done(err, tile);
+            tile.src = src;
+          };
+
+          window.caches.open('bikepack-map-tiles-v1').then((cache) => {
+            cache.match(tileUrl).then((cachedResponse) => {
+              if (cachedResponse) {
+                cachedResponse.blob()
+                  .then((blob) => setTileBlob(blob))
+                  .catch(() => setTileUrl(tileUrl));
+              } else {
+                fetch(tileUrl, { mode: 'cors' })
+                  .then((res) => {
+                    if (res.ok) {
+                      cache.put(tileUrl, res.clone()).catch(() => {});
+                      return res.blob();
+                    }
+                    throw new Error('Tile network error');
+                  })
+                  .then((blob) => setTileBlob(blob))
+                  .catch(() => {
+                    setTileUrl('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+                  });
+              }
+            }).catch(() => setTileUrl(tileUrl));
+          }).catch(() => setTileUrl(tileUrl));
+
+          return tile;
+        }
+      };
+
+      layer.on('tileunload', (e: any) => {
+        if (e.tile && typeof e.tile._cleanup === 'function') {
+          e.tile._cleanup();
+        }
+      });
+
+      return layer;
     }
 
-    return L.tileLayer(url, tileOptions);
+    return { url, options: tileOptions };
+  }
+
+  async getVectorStyleSpec(style: MapStyle, routeId: string): Promise<maplibregl.StyleSpecification> {
+    const isCached = this.isVectorCached();
+    const pmtilesUrl = this.pmtilesStorage.resolveTileUrl(routeId);
+    const styleUrl = `/assets/styles/vector-${style}.json`;
+    try {
+      const res = await fetch(styleUrl);
+      if (res.ok) {
+        const spec = await res.json();
+        if (spec && spec.sources && spec.sources.openmaptiles) {
+          spec.sources.openmaptiles.url = isCached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet';
+        }
+        return spec;
+      }
+    } catch {
+      // Fallback in test/offline environment
+    }
+
+    return {
+      version: 8,
+      name: `Bikepack Vector ${style}`,
+      sources: {
+        openmaptiles: {
+          type: 'vector',
+          url: isCached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet'
+        }
+      },
+      glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+      layers: [
+        {
+          id: 'background',
+          type: 'background',
+          paint: {
+            'background-color': style === 'dark' ? '#0b0f19' : '#f8fafc'
+          }
+        },
+        {
+          id: 'water',
+          type: 'fill',
+          source: 'openmaptiles',
+          'source-layer': 'water',
+          paint: {
+            'fill-color': style === 'dark' ? '#1e293b' : '#bae6fd'
+          }
+        },
+        {
+          id: 'roads',
+          type: 'line',
+          source: 'openmaptiles',
+          'source-layer': 'transportation',
+          paint: {
+            'line-color': style === 'dark' ? '#475569' : '#94a3b8',
+            'line-width': 1.5
+          }
+        },
+        {
+          id: 'corridor-boundary',
+          type: 'fill',
+          source: 'openmaptiles',
+          'source-layer': 'landcover',
+          paint: {
+            'fill-color': style === 'dark' ? '#064e3b' : '#10b981',
+            'fill-opacity': style === 'dark' ? 0.15 : 0.06
+          }
+        }
+      ]
+    };
+  }
+
+  async applyMapRenderer(mode: 'vector' | 'raster'): Promise<void> {
+    if (!this.map) return;
+
+    if (mode === 'vector') {
+      const routeId = this.activeRouteId();
+      if (!routeId) {
+        return this.applyMapRenderer('raster');
+      }
+
+      try {
+        const vectorStyle = await this.getVectorStyleSpec(this.settings.mapStyle(), routeId);
+        if (typeof this.map.setStyle === 'function') {
+          this.map.setStyle(vectorStyle);
+        }
+        this.activeMapMode.set('vector');
+        this.reapplyOverlayLayersAfterStyleChange();
+      } catch (err) {
+        console.warn('[RouteMap] Vector loading failed, seamlessly falling back to raster tiles:', err);
+        this.toast?.showWarning('Vector map failed to load, fell back to raster tiles');
+        return this.applyMapRenderer('raster');
+      }
+    } else {
+      const rasterStyle = getRasterBaselineStyle(this.settings.mapStyle());
+      if (typeof this.map.setStyle === 'function') {
+        this.map.setStyle(rasterStyle);
+      }
+      this.activeMapMode.set('raster');
+      this.reapplyOverlayLayersAfterStyleChange();
+    }
+  }
+
+  private reapplyOverlayLayersAfterStyleChange(): void {
+    if (!this.map) return;
+    const onStyleReady = () => {
+      if (this.activeMapMode() === 'raster') {
+        this.setBaseTileLayer(this.settings.mapStyle());
+      }
+      this.drawRoute();
+      this.updateRiderMarker(this.currentMile());
+      this.updateGpsDisplay(this.gpsState());
+      this.updatePoiMarkers(this.routeService.places(), this.activePoiFilter());
+    };
+
+    if (this.map.isStyleLoaded()) {
+      onStyleReady();
+    } else {
+      let executed = false;
+      const onReady = () => {
+        if (executed) return;
+        executed = true;
+        if (this.map) {
+          this.map.off('style.load', onReady);
+          this.map.off('styledata', onReady);
+          this.map.off('load', onReady);
+        }
+        onStyleReady();
+      };
+      this.map.once('style.load', onReady);
+      this.map.on('styledata', onReady);
+      this.map.once('load', onReady);
+    }
+  }
+
+  async checkRouteCacheAndApplyRenderer(forceStyleReload = false): Promise<void> {
+    const routeId = this.activeRouteId();
+    const cached = routeId ? await this.pmtilesStorage.isRouteCached(routeId) : false;
+    this.isVectorCached.set(cached);
+
+    const rendererPref = this.settings.mapRenderer();
+    const targetMode: 'vector' | 'raster' = (cached && rendererPref === 'auto') ? 'vector' : 'raster';
+    const currentMode = this.activeMapMode();
+
+    if (targetMode !== currentMode || forceStyleReload) {
+      await this.applyMapRenderer(targetMode);
+    } else if (targetMode === 'raster') {
+      this.setBaseTileLayer(this.settings.mapStyle());
+    }
+  }
+
+  async downloadActiveRouteVector(): Promise<void> {
+    const routeId = this.activeRouteId();
+    if (!routeId) return;
+
+    try {
+      await this.pmtilesStorage.downloadRoute(routeId);
+      this.isVectorCached.set(true);
+      if (this.settings.mapRenderer() === 'auto') {
+        await this.applyMapRenderer('vector');
+        this.toast?.showSuccess('Vector map downloaded and active!');
+      } else {
+        this.toast?.showSuccess('Vector map downloaded (forced raster mode active in Settings)');
+      }
+    } catch (err) {
+      console.error('[RouteMap] Failed to download vector map:', err);
+      this.toast?.showError('Failed to download vector map');
+    }
+  }
+
+  private runWhenStyleLoaded(action: () => void): void {
+    if (!this.map) return;
+    if (this.map.isStyleLoaded()) {
+      action();
+      return;
+    }
+
+    let executed = false;
+    const onReady = () => {
+      if (executed) return;
+      executed = true;
+      if (this.map) {
+        this.map.off('style.load', onReady);
+        this.map.off('styledata', onReady);
+        this.map.off('load', onReady);
+      }
+      action();
+    };
+
+    this.map.once('style.load', onReady);
+    this.map.on('styledata', onReady);
+    this.map.once('load', onReady);
   }
 
   private setBaseTileLayer(style: MapStyle): void {
     if (!this.map) return;
-
-    if (this.tileLayer) {
-      this.map.removeLayer(this.tileLayer);
-      this.tileLayer = null;
-    }
-    if (this.referenceLayer) {
-      this.map.removeLayer(this.referenceLayer);
-      this.referenceLayer = null;
+    if (!this.map.isStyleLoaded()) {
+      this.runWhenStyleLoaded(() => this.setBaseTileLayer(style));
+      return;
     }
 
-    if (style === 'dark') {
-      // Esri World Dark Gray Base & Reference (with maxNativeZoom: 10 for smooth offline scaling)
-      this.tileLayer = this.createTileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
-        { maxZoom: 16, maxNativeZoom: 10 }
-      ).addTo(this.map);
-
-      this.referenceLayer = this.createTileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
-        { maxZoom: 16, maxNativeZoom: 10 }
-      ).addTo(this.map);
-    } else {
-      // Esri World Topographic Map with mountain contours & shaded relief
-      this.tileLayer = this.createTileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-        { maxZoom: 16, maxNativeZoom: 10 }
-      ).addTo(this.map);
+    const isDark = style === 'dark';
+    if (this.map.getLayer('esri-dark-base-layer')) {
+      this.map.setLayoutProperty('esri-dark-base-layer', 'visibility', isDark ? 'visible' : 'none');
+    }
+    if (this.map.getLayer('esri-dark-ref-layer')) {
+      this.map.setLayoutProperty('esri-dark-ref-layer', 'visibility', isDark ? 'visible' : 'none');
+    }
+    if (this.map.getLayer('esri-topo-layer')) {
+      this.map.setLayoutProperty('esri-topo-layer', 'visibility', isDark ? 'none' : 'visible');
     }
   }
 
   clearRouteLayers(): void {
-    if (!this.map) return;
-
-    if (this.routeLineGlow) {
-      this.map.removeLayer(this.routeLineGlow);
-      this.routeLineGlow = null;
+    if (this.map) {
+      try {
+        if (this.map.getLayer('route-glow')) {
+          this.map.removeLayer('route-glow');
+        }
+        if (this.map.getLayer('route-main')) {
+          this.map.removeLayer('route-main');
+        }
+        if (this.map.getSource('route-source')) {
+          this.map.removeSource('route-source');
+        }
+      } catch {
+        // Style may not be ready or layer already removed
+      }
     }
-    if (this.routeLineMain) {
-      this.map.removeLayer(this.routeLineMain);
-      this.routeLineMain = null;
-    }
+    this.routeLineGlow = null;
+    this.routeLineMain = null;
     if (this.riderMarker) {
-      this.map.removeLayer(this.riderMarker);
+      this.riderMarker.remove();
       this.riderMarker = null;
     }
   }
 
+  clearProjectionLine(): void {
+    if (this.map) {
+      try {
+        if (this.map.getLayer('gps-projection-line')) {
+          this.map.removeLayer('gps-projection-line');
+        }
+        if (this.map.getSource('gps-projection-source')) {
+          this.map.removeSource('gps-projection-source');
+        }
+      } catch {
+        // Style may not be ready or layer already removed
+      }
+    }
+    this.projectionLine = null;
+  }
+
+  private getRouteBounds(): [[number, number], [number, number]] {
+    const points = this.routeService.trackPoints();
+    if (!points || points.length === 0) {
+      return [[-180, -90], [180, 90]];
+    }
+    let minLat = points[0][0], maxLat = points[0][0];
+    let minLon = points[0][1], maxLon = points[0][1];
+    for (const p of points) {
+      if (p[0] < minLat) minLat = p[0];
+      if (p[0] > maxLat) maxLat = p[0];
+      if (p[1] < minLon) minLon = p[1];
+      if (p[1] > maxLon) maxLon = p[1];
+    }
+    // In MapLibre GL, bounds format: [[minLon, minLat], [maxLon, maxLat]]
+    return [[minLon, minLat], [maxLon, maxLat]];
+  }
+
   private drawRoute(): void {
     if (!this.map) return;
-
-    // Clear previous route polylines before redrawing
-    this.clearRouteLayers();
+    if (!this.map.isStyleLoaded()) {
+      this.runWhenStyleLoaded(() => this.drawRoute());
+      return;
+    }
 
     const points = this.routeService.trackPoints();
-    if (!points || points.length < 2) return;
+    if (!points || points.length < 2) {
+      this.clearRouteLayers();
+      return;
+    }
 
-    const latLngs: [number, number][] = points.map((p) => [p[0], p[1]]);
+    // Convert [lat, lon, ele, cum_km, cum_mi] to MapLibre GeoJSON coordinates [lon, lat]
+    const coordinates: [number, number][] = points.map((p) => [p[1], p[0]]);
 
-    // Background glowing line
-    this.routeLineGlow = L.polyline(latLngs, {
-      color: '#10b981',
-      weight: 6,
-      opacity: 0.35,
-      lineCap: 'round',
-      lineJoin: 'round'
-    }).addTo(this.map);
+    const geojson: any = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates
+      }
+    };
 
-    // Foreground sharp track line
-    this.routeLineMain = L.polyline(latLngs, {
-      color: '#34d399',
-      weight: 3.5,
-      opacity: 0.95,
-      lineCap: 'round',
-      lineJoin: 'round'
-    }).addTo(this.map);
+    try {
+      const existingSource = this.map.getSource('route-source') as maplibregl.GeoJSONSource;
+      if (existingSource) {
+        existingSource.setData(geojson);
+      } else {
+        this.map.addSource('route-source', {
+          type: 'geojson',
+          data: geojson
+        });
+
+        // Background glowing line with hardware-accelerated blur
+        this.map.addLayer({
+          id: 'route-glow',
+          type: 'line',
+          source: 'route-source',
+          layout: {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          paint: {
+            'line-color': '#10b981',
+            'line-width': 7,
+            'line-opacity': 0.4,
+            'line-blur': 3
+          }
+        });
+
+        // Foreground sharp track line
+        this.map.addLayer({
+          id: 'route-main',
+          type: 'line',
+          source: 'route-source',
+          layout: {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          paint: {
+            'line-color': '#34d399',
+            'line-width': 3.5,
+            'line-opacity': 0.95
+          }
+        });
+      }
+
+      this.routeLineGlow = { id: 'route-glow' };
+      this.routeLineMain = {
+        id: 'route-main',
+        getBounds: () => this.getRouteBounds()
+      };
+    } catch {
+      this.runWhenStyleLoaded(() => this.drawRoute());
+      return;
+    }
 
     // Center dynamically on rider position or active route start coordinates, preserving user's zoom level
     if (points.length > 0) {
       const zoom = this.map.getZoom() || this.settings.mapZoomLevel() || 8;
-      const riderCoords = this.getCoordsForMile(this.currentMile()) || [points[0][0], points[0][1]];
-      this.map.setView([riderCoords[0], riderCoords[1]], zoom);
+      const riderCoords = this.getCoordsForMile(this.currentMile());
+      const targetLonLat: [number, number] = riderCoords
+        ? [riderCoords[1], riderCoords[0]]
+        : [points[0][1], points[0][0]];
+      this.map.setCenter(targetLonLat);
+      this.map.setZoom(zoom);
     }
   }
 
@@ -362,7 +815,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     const coords = this.getCoordsForMile(mile);
     if (!coords) {
       if (this.riderMarker) {
-        this.map.removeLayer(this.riderMarker);
+        this.riderMarker.remove();
         this.riderMarker = null;
       }
       return;
@@ -373,20 +826,6 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     const distText = isMiles ? `Mile ${mile.toFixed(1)}` : `KM ${(mile * 1.60934).toFixed(1)}`;
     const eleText = isMiles ? `${Math.round(ele * 3.28084).toLocaleString()} ft` : `${Math.round(ele).toLocaleString()} m`;
 
-    const customIcon = L.divIcon({
-      className: 'rider-leaflet-icon',
-      html: `
-        <div class="relative flex items-center justify-center w-8 h-8 cursor-pointer">
-          <div class="absolute w-7 h-7 rounded-full bg-emerald-400/40 animate-ping"></div>
-          <div class="relative w-7 h-7 rounded-full bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-xs shadow-emerald-950">
-            🚴
-          </div>
-        </div>
-      `,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
-    });
-
     const popupContent = `
       <div style="font-family: ui-monospace, SFMono-Regular, monospace; min-width: 140px; padding: 4px;">
         <div style="font-weight: 700; color: #34d399; font-size: 12px;">Rider Position</div>
@@ -395,94 +834,175 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       </div>
     `;
 
+    const lngLat: [number, number] = [lon, lat];
+
     if (!this.riderMarker) {
-      this.riderMarker = L.marker([lat, lon], { icon: customIcon, zIndexOffset: 1000 })
-        .addTo(this.map)
-        .bindPopup(popupContent, { className: 'dark-leaflet-popup' });
+      const el = document.createElement('div');
+      el.className = 'rider-maplibre-icon';
+      el.innerHTML = `
+        <div class="relative flex items-center justify-center w-8 h-8 cursor-pointer">
+          <div class="absolute w-7 h-7 rounded-full bg-emerald-400/40 animate-ping"></div>
+          <div class="relative w-7 h-7 rounded-full bg-emerald-500 border-2 border-white shadow-lg flex items-center justify-center text-xs shadow-emerald-950">
+            🚴
+          </div>
+        </div>
+      `;
+
+      const popup = new maplibregl.Popup({
+        className: 'dark-maplibre-popup',
+        offset: 15,
+        closeButton: false
+      }).setHTML(popupContent);
+
+      this.riderMarker = new maplibregl.Marker({ element: el, anchor: 'center' })
+        .setLngLat(lngLat)
+        .setPopup(popup)
+        .addTo(this.map);
     } else {
-      this.riderMarker.setLatLng([lat, lon]);
-      this.riderMarker.setIcon(customIcon);
-      this.riderMarker.setPopupContent(popupContent);
+      this.riderMarker.setLngLat(lngLat);
+      const popup = this.riderMarker.getPopup();
+      if (popup) {
+        popup.setHTML(popupContent);
+      }
     }
 
-    // Automatically pan & recenter map on rider position
-    this.map.panTo([lat, lon], { animate: true, duration: 0.3 });
+    // Automatically pan map to rider position
+    this.map.panTo(lngLat, { duration: 300 });
   }
 
   private updateGpsDisplay(gps: GpsState | null): void {
     if (!this.map) return;
 
-    if (!gps || !gps.enabled || gps.latitude === null || gps.longitude === null) {
+    if (
+      !gps ||
+      !gps.enabled ||
+      (gps as any).active === false ||
+      gps.latitude === null ||
+      gps.longitude === null
+    ) {
       if (this.gpsMarker) {
-        this.map.removeLayer(this.gpsMarker);
+        this.gpsMarker.remove();
         this.gpsMarker = null;
       }
-      if (this.projectionLine) {
-        this.map.removeLayer(this.projectionLine);
-        this.projectionLine = null;
-      }
+      this.clearProjectionLine();
       return;
     }
 
-    const gpsPos: [number, number] = [gps.latitude, gps.longitude];
+    const gpsPos: [number, number] = [gps.longitude, gps.latitude];
 
-    // Blue pulsating GPS icon
-    const gpsIcon = L.divIcon({
-      className: 'gps-leaflet-icon',
-      html: `
+    if (!this.gpsMarker) {
+      const el = document.createElement('div');
+      el.className = 'gps-maplibre-icon';
+      el.innerHTML = `
         <div class="relative flex items-center justify-center w-7 h-7">
           <div class="absolute w-6 h-6 rounded-full bg-blue-500/40 animate-ping"></div>
           <div class="relative w-5 h-5 rounded-full bg-blue-500 border-2 border-white shadow-md flex items-center justify-center text-[10px]">
             📍
           </div>
         </div>
-      `,
-      iconSize: [28, 28],
-      iconAnchor: [14, 14]
-    });
-
-    if (!this.gpsMarker) {
-      this.gpsMarker = L.marker(gpsPos, { icon: gpsIcon, zIndexOffset: 950 }).addTo(this.map);
+      `;
+      this.gpsMarker = new maplibregl.Marker({ element: el, anchor: 'center' })
+        .setLngLat(gpsPos)
+        .addTo(this.map);
     } else {
-      this.gpsMarker.setLatLng(gpsPos);
+      this.gpsMarker.setLngLat(gpsPos);
     }
 
-    // If off-route (> 10 km), currentMile is not adjusted, so recenter map on GPS position directly
+    // If off-route (> 10 km), recenter map on GPS position directly
     if (gps.projection?.isOffRoute) {
-      this.map.panTo(gpsPos, { animate: true, duration: 0.3 });
+      this.map.panTo(gpsPos, { duration: 300 });
     }
 
-    // Draw orthogonal projection line connecting GPS position to route centerline
+    // Draw orthogonal projection dashed line connecting GPS position to route centerline
     if (gps.projection && gps.projection.nearestPointOnTrail) {
+      if (!this.map.isStyleLoaded()) {
+        this.runWhenStyleLoaded(() => this.updateGpsDisplay(this.gpsState()));
+        return;
+      }
+
       const trailPos: [number, number] = [
-        gps.projection.nearestPointOnTrail.lat,
-        gps.projection.nearestPointOnTrail.lon
+        gps.projection.nearestPointOnTrail.lon,
+        gps.projection.nearestPointOnTrail.lat
       ];
 
       const isOff = gps.projection.isOffRoute;
-      const lineColor = isOff ? '#f43f5e' : '#38bdf8'; // Red if >10km, Cyan if <=10km
+      const lineColor = isOff ? '#f43f5e' : '#38bdf8';
 
-      if (!this.projectionLine) {
-        this.projectionLine = L.polyline([gpsPos, trailPos], {
-          color: lineColor,
-          dashArray: '4, 4',
-          weight: 2.5,
-          opacity: 0.9
-        }).addTo(this.map);
+      const projectionGeojson: any = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: [gpsPos, trailPos]
+        }
+      };
+
+      const existingSource = this.map.getSource('gps-projection-source') as maplibregl.GeoJSONSource;
+      if (existingSource) {
+        existingSource.setData(projectionGeojson);
+        if (this.map.getLayer('gps-projection-line')) {
+          this.map.setPaintProperty('gps-projection-line', 'line-color', lineColor);
+        }
       } else {
-        this.projectionLine.setLatLngs([gpsPos, trailPos]);
-        this.projectionLine.setStyle({ color: lineColor });
+        this.map.addSource('gps-projection-source', {
+          type: 'geojson',
+          data: projectionGeojson
+        });
+
+        this.map.addLayer({
+          id: 'gps-projection-line',
+          type: 'line',
+          source: 'gps-projection-source',
+          layout: {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          paint: {
+            'line-color': lineColor,
+            'line-width': 2.5,
+            'line-opacity': 0.9,
+            'line-dasharray': [2, 2]
+          }
+        });
       }
+
+      this.projectionLine = {
+        id: 'gps-projection-line',
+        setLatLngs: (coords: any) => {
+          const source = this.map?.getSource('gps-projection-source') as maplibregl.GeoJSONSource;
+          if (source) {
+            const p1 = coords[0];
+            const p2 = coords[1];
+            source.setData({
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: [
+                  Array.isArray(p1) ? (p1[0] > 0 && p1[1] < 0 ? [p1[1], p1[0]] : [p1[0], p1[1]]) : [p1.lng || p1.lon, p1.lat],
+                  Array.isArray(p2) ? (p2[0] > 0 && p2[1] < 0 ? [p2[1], p2[0]] : [p2[0], p2[1]]) : [p2.lng || p2.lon, p2.lat]
+                ]
+              }
+            });
+          }
+        },
+        setStyle: (style: any) => {
+          if (style.color && this.map?.getLayer('gps-projection-line')) {
+            this.map.setPaintProperty('gps-projection-line', 'line-color', style.color);
+          }
+        }
+      };
+    } else {
+      this.clearProjectionLine();
     }
   }
 
   private updatePoiMarkers(places: Place[], filterCategory: string): void {
     if (!this.map) return;
 
-    this.poiLayerGroup.clearLayers();
+    this.clearPoiMarkers();
     if (!places || places.length === 0) return;
 
-    // Filter places based on selected map category
     const filtered = places.filter((p) => {
       const isCamp = p.category === 'campground' || /recreation site|rec site/i.test(p.name);
       const isHotel = p.category === 'hotel' && !isCamp;
@@ -499,20 +1019,8 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       return false;
     });
 
-    // Add POI pins
     for (const place of filtered) {
       const iconConfig = this.getPoiIconConfig(place);
-      const customIcon = L.divIcon({
-        className: 'poi-pin-icon',
-        html: `
-          <div class="w-6 h-6 rounded-full ${iconConfig.bg} border border-slate-900 shadow-md flex items-center justify-center text-[11px] cursor-pointer hover:scale-125 transition-transform">
-            ${iconConfig.emoji}
-          </div>
-        `,
-        iconSize: [24, 24],
-        iconAnchor: [12, 12]
-      });
-
       const isMiles = this.unit() === 'miles';
       const mileText = isMiles ? `Mile ${place.route_mile.toFixed(1)}` : `KM ${place.route_km.toFixed(1)}`;
       const offRouteText = place.distance_to_trail_km > 0.1
@@ -546,13 +1054,29 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       const lon = place.location?.lon;
       if (lat === undefined || lon === undefined) continue;
 
-      const marker = L.marker([lat, lon], { icon: customIcon })
-        .bindPopup(popupHtml, { className: 'dark-leaflet-popup' });
+      const el = document.createElement('div');
+      el.className = 'poi-pin-icon';
+      el.innerHTML = `
+        <div class="w-6 h-6 rounded-full ${iconConfig.bg} border border-slate-900 shadow-md flex items-center justify-center text-[11px] cursor-pointer hover:scale-125 transition-transform">
+          ${iconConfig.emoji}
+        </div>
+      `;
 
-      this.poiLayerGroup.addLayer(marker);
+      const popup = new maplibregl.Popup({
+        className: 'dark-maplibre-popup',
+        offset: 15,
+        closeButton: true,
+        closeOnClick: false
+      }).setHTML(popupHtml);
+
+      const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
+        .setLngLat([lon, lat])
+        .setPopup(popup)
+        .addTo(this.map);
+
+      this.poiMarkers.push(marker);
     }
 
-    // Set up window event listener for jump buttons clicked inside Leaflet popups
     if (typeof window !== 'undefined') {
       window.removeEventListener('bpn-jump-mile', this.handlePopupJump as EventListener);
       window.removeEventListener('td-jump-mile', this.handlePopupJump as EventListener);
@@ -561,10 +1085,18 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  private clearPoiMarkers(): void {
+    for (const marker of this.poiMarkers) {
+      marker.remove();
+    }
+    this.poiMarkers = [];
+  }
+
   private handlePopupJump = (e: CustomEvent<number>): void => {
     if (typeof e.detail === 'number') {
       this.selectMile.emit(e.detail);
-      this.map?.closePopup();
+      const popups = document.querySelectorAll('.maplibregl-popup');
+      popups.forEach((p) => p.remove());
     }
   };
 
@@ -585,12 +1117,12 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
 
     if (place.category === 'hotel') {
       const typeName = place.type
-        ? (place.type.charAt(0).toUpperCase() + place.type.slice(1).replace('_', ' '))
+        ? place.type.charAt(0).toUpperCase() + place.type.slice(1).replace('_', ' ')
         : 'Lodging';
       return {
         emoji: '🏨',
         bg: 'bg-purple-600',
-        label: typeName, // Hotel, Motel, Lodge, Cabin, Hostel
+        label: typeName,
         badgeColor: '#c084fc',
         description: '🛏️ Indoor lodging • Bed, hot shower, roof & power'
       };
@@ -681,13 +1213,14 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     const coords = this.getCoordsForMile(this.currentMile());
     if (coords) {
       const currentZoom = this.map.getZoom() || this.settings.mapZoomLevel() || 10;
-      this.map.flyTo([coords[0], coords[1]], currentZoom, { duration: 0.5 });
+      (this.map as any).flyTo([coords[1], coords[0]], currentZoom, { duration: 500 });
     }
   }
 
   fitFullRoute(): void {
     if (!this.map || !this.routeLineMain) return;
-    this.map.fitBounds(this.routeLineMain.getBounds(), { padding: [30, 30] });
+    const bounds = this.routeLineMain.getBounds();
+    this.map.fitBounds(bounds as any, { padding: 30 });
   }
 
   setPoiFilter(category: string): void {
