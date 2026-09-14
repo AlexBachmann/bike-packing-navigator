@@ -179,11 +179,11 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Effective Mile
   readonly effectiveMile = computed<number>(() => {
-    if (this.gpsSimulator.running()) {
-      return this.gpsSimulator.simulatedMile();
-    }
     if (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) {
       return this.deadReckoning.interpolatedMile();
+    }
+    if (this.gpsSimulator.running()) {
+      return this.gpsSimulator.simulatedMile();
     }
     const gps = this.gpsState();
     if (gps && gps.enabled && gps.projection?.projectedRouteMile !== undefined) {
@@ -194,13 +194,13 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Effective Coords [lat, lon]
   readonly effectiveCoords = computed<[number, number] | null>(() => {
-    if (this.gpsSimulator.running()) {
-      const coords = this.gpsSimulator.simulatedCoords();
-      if (coords) return [coords[0], coords[1]];
-    }
     if (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) {
       const coords = this.deadReckoning.interpolatedCoords();
       if (coords) return coords;
+    }
+    if (this.gpsSimulator.running()) {
+      const coords = this.gpsSimulator.simulatedCoords();
+      if (coords) return [coords[0], coords[1]];
     }
     const gps = this.gpsState();
     if (gps && gps.enabled && gps.latitude !== null && gps.longitude !== null) {
@@ -215,14 +215,14 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Effective Heading [0, 360)
   readonly effectiveHeading = computed<number>(() => {
-    // 1. Simulation heading takes precedence when active
-    if (this.gpsSimulator.running()) {
-      return this.gpsSimulator.simulatedHeading();
-    }
-
-    // 2. Dead reckoning interpolated heading when moving
+    // 1. Dead reckoning interpolated heading when moving
     if (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) {
       return this.deadReckoning.interpolatedHeading();
+    }
+
+    // 2. Simulation static heading fallback when not moving
+    if (this.gpsSimulator.running()) {
+      return this.gpsSimulator.simulatedHeading();
     }
 
     // 3. Real GPS updates

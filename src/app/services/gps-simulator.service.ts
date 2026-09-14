@@ -1,5 +1,6 @@
 import { Injectable, signal, computed, Signal, OnDestroy, inject } from '@angular/core';
 import { RouteDataService } from './route-data.service';
+import { DeadReckoningService } from './dead-reckoning.service';
 import { calculateBearing } from '../models/weather.model';
 import { SimulatorState } from '../models/ride-cockpit.model';
 
@@ -14,6 +15,7 @@ const DEFAULT_TICK_INTERVAL_MS = 1000;
 })
 export class GpsSimulatorService implements OnDestroy {
   private readonly routeDataService = inject(RouteDataService, { optional: true });
+  private readonly deadReckoning = inject(DeadReckoningService, { optional: true });
 
   private points: [number, number, number, number, number][] = [];
   private lastIndex = 0;
@@ -98,6 +100,16 @@ export class GpsSimulatorService implements OnDestroy {
       simulatedSpeedKph: currentSpeed
     });
 
+    if (this.deadReckoning && position.coords) {
+      this.deadReckoning.updateGpsFix({
+        latitude: position.coords[0],
+        longitude: position.coords[1],
+        timestamp: Date.now(),
+        projectedMile: startMile,
+        heading: position.heading
+      }, currentSpeed);
+    }
+
     this.lastTimestamp = Date.now();
     this.intervalId = setInterval(() => {
       const now = Date.now();
@@ -117,6 +129,7 @@ export class GpsSimulatorService implements OnDestroy {
       running: false,
       simulatedSpeedKph: 0
     }));
+    this.deadReckoning?.stop();
   }
 
   /**
@@ -163,6 +176,20 @@ export class GpsSimulatorService implements OnDestroy {
       simulatedCoords: position.coords,
       simulatedHeading: position.heading
     }));
+
+    if (this.deadReckoning && position.coords) {
+      if (this._state().running) {
+        this.deadReckoning.updateGpsFix({
+          latitude: position.coords[0],
+          longitude: position.coords[1],
+          timestamp: Date.now(),
+          projectedMile: clampedMile,
+          heading: position.heading
+        }, this._state().speedKph);
+      } else {
+        this.deadReckoning.stop();
+      }
+    }
   }
 
   /**
@@ -204,6 +231,16 @@ export class GpsSimulatorService implements OnDestroy {
       simulatedHeading: position.heading,
       simulatedSpeedKph: speed
     });
+
+    if (this.deadReckoning && position.coords) {
+      this.deadReckoning.updateGpsFix({
+        latitude: position.coords[0],
+        longitude: position.coords[1],
+        timestamp: Date.now(),
+        projectedMile: targetMile,
+        heading: position.heading
+      }, speed);
+    }
   }
 
   /**

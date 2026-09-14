@@ -143,9 +143,37 @@ class OsmRoadNetwork:
                 continue
 
             try:
-                dec = mapbox_vector_tile.decode(gzip.decompress(raw))
+                dec = mapbox_vector_tile.decode(gzip.decompress(raw), default_options={'y_coord_down': True})
             except Exception:
                 continue
+
+            # Extract road names from transportation_name if present
+            names_by_coord = {}
+            if "transportation_name" in dec:
+                name_layer = dec["transportation_name"]
+                n_extent = name_layer.get("extent", 4096)
+                for feat in name_layer.get("features", []):
+                    props = feat.get("properties", {})
+                    name = props.get("name_en") or props.get("name") or props.get("name_de") or ""
+                    if not name:
+                        continue
+                    geom = feat.get("geometry", {})
+                    g_type = geom.get("type", "")
+                    if g_type == "LineString":
+                        lines = [geom.get("coordinates", [])]
+                    elif g_type == "MultiLineString":
+                        lines = geom.get("coordinates", [])
+                    else:
+                        continue
+
+                    for line in lines:
+                        if not isinstance(line, list) or len(line) < 2:
+                            continue
+                        if not all(isinstance(p, (list, tuple)) and len(p) >= 2 for p in line):
+                            continue
+                        coords = [mvt_pixel_to_lonlat(zoom, tx, ty, p[0], p[1], n_extent) for p in line]
+                        for p in coords:
+                            names_by_coord[(round(p[1], 3), round(p[0], 3))] = name
 
             if "transportation" not in dec:
                 continue
@@ -155,22 +183,29 @@ class OsmRoadNetwork:
             for feat in trans.get("features", []):
                 geom = feat.get("geometry", {})
                 props = feat.get("properties", {})
-                name = props.get("name", "")
+                name = props.get("name_en") or props.get("name") or ""
                 r_class = props.get("class", "track")
 
                 lines = []
-                if geom.get("type") == "LineString":
+                g_type = geom.get("type", "")
+                if g_type == "LineString":
                     lines = [geom.get("coordinates", [])]
-                elif geom.get("type") == "MultiLineString":
+                elif g_type == "MultiLineString":
                     lines = geom.get("coordinates", [])
+                else:
+                    continue
 
                 for line in lines:
-                    if len(line) < 2:
+                    if not isinstance(line, list) or len(line) < 2:
+                        continue
+                    if not all(isinstance(p, (list, tuple)) and len(p) >= 2 for p in line):
                         continue
                     coords = [mvt_pixel_to_lonlat(zoom, tx, ty, p[0], p[1], extent) for p in line]
                     for k in range(len(coords) - 1):
                         lonA, latA = coords[k]
                         lonB, latB = coords[k + 1]
+                        if not name:
+                            name = names_by_coord.get((round(latA, 3), round(lonA, 3))) or names_by_coord.get((round(latB, 3), round(lonB, 3))) or ""
                         seg_idx = len(self.segments)
                         self.segments.append((latA, lonA, latB, lonB, name, r_class))
                         count += 1
