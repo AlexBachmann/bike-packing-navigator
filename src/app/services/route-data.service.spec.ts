@@ -111,6 +111,26 @@ describe('RouteDataService', () => {
     expect(service.trackPoints().length).toBe(1);
   });
 
+  it('should fetch turns.json on loadTurns()', () => {
+    service.loadRoute('colorado-trail');
+    httpMock.expectOne('/data/routes/colorado-trail/places.json').flush([]);
+    httpMock.expectOne('/data/routes/colorado-trail/route-track.json').flush({ total_km: 100, total_miles: 60, points: [] });
+    httpMock.expectOne('/data/routes/colorado-trail/surfaces.json').flush([]);
+    httpMock.expectOne('/data/routes/colorado-trail/climbs.json').flush([]);
+    httpMock.expectOne('/data/routes/colorado-trail/passes.json').flush([]);
+    httpMock.expectOne('/data/routes/colorado-trail/milestones.json').flush([]);
+
+    service.loadTurns('colorado-trail');
+    const req = httpMock.expectOne('/data/routes/colorado-trail/turns.json');
+    expect(req.request.method).toBe('GET');
+    req.flush([
+      { mile: 1.5, km: 2.4, coordinates: [39.5, -105.1], direction: 'left', deflectionDeg: -90, roadName: 'Trail 1' }
+    ]);
+
+    expect(service.turns().length).toBe(1);
+    expect(service.turns()[0].roadName).toBe('Trail 1');
+  });
+
   it('should load route from IndexedDB without network requests when offline', async () => {
     const offlineStorage = TestBed.inject(OfflineStorageService);
     const networkStatus = TestBed.inject(NetworkStatusService);

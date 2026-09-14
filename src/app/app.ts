@@ -29,6 +29,7 @@ import { NetworkStatusService } from './services/network-status.service';
 import { OfflineStorageService } from './services/offline-storage.service';
 import { WakeLockService } from './services/wake-lock.service';
 import { AnalyticsService } from './services/analytics.service';
+import { DeadReckoningService } from './services/dead-reckoning.service';
 import { calculateBearing } from './models/weather.model';
 
 export function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
@@ -73,6 +74,7 @@ export class App implements OnInit, OnDestroy {
   readonly offlineStorage = inject(OfflineStorageService);
   readonly wakeLock = inject(WakeLockService);
   readonly analytics = inject(AnalyticsService);
+  readonly deadReckoning = inject(DeadReckoningService);
 
   readonly activeRouteId = this.manifestService.activeRouteId;
   readonly activeRouteSummary = this.manifestService.activeRouteSummary;
@@ -459,6 +461,7 @@ export class App implements OnInit, OnDestroy {
 
   stopGpsTracking(): void {
     this.stopGpsInterval();
+    this.deadReckoning.stop();
     this.gpsState.set({
       enabled: false,
       loading: false,
@@ -528,15 +531,30 @@ export class App implements OnInit, OnDestroy {
     const lon = pos.coords.longitude;
     const accuracy = pos.coords.accuracy;
 
-    let speedKph: number | null = null;
-    if (typeof pos.coords.speed === 'number' && !isNaN(pos.coords.speed) && pos.coords.speed >= 0) {
-      speedKph = pos.coords.speed * 3.6;
-    }
-
     const currentGps = this.gpsState();
     const prevLat = currentGps.latitude;
     const prevLon = currentGps.longitude;
     const prevHeading = currentGps.heading ?? null;
+    const prevTime = currentGps.lastUpdated ? currentGps.lastUpdated.getTime() : null;
+    const nowTime = pos.timestamp || Date.now();
+
+    // Calculate speed between the last two GPS positions
+    let speedKph: number | null = null;
+    if (prevLat !== null && prevLon !== null && prevTime !== null) {
+      const distMeters = haversineMeters(prevLat, prevLon, lat, lon);
+      const deltaSec = Math.max(0.05, (nowTime - prevTime) / 1000);
+      if (distMeters >= 1.0 && deltaSec > 0.05) {
+        speedKph = (distMeters / deltaSec) * 3.6;
+      } else {
+        speedKph = 0;
+      }
+    } else if (typeof pos.coords.speed === 'number' && !isNaN(pos.coords.speed) && pos.coords.speed >= 0) {
+      speedKph = pos.coords.speed * 3.6;
+    }
+
+    if (speedKph !== null && speedKph < 1.0) {
+      speedKph = 0;
+    }
 
     const rawHeading = typeof pos.coords.heading === 'number' && !isNaN(pos.coords.heading)
       ? pos.coords.heading
@@ -574,7 +592,7 @@ export class App implements OnInit, OnDestroy {
     this.gpsState.set({
       enabled: true,
       loading: false,
-      lastUpdated: new Date(),
+      lastUpdated: new Date(nowTime),
       latitude: lat,
       longitude: lon,
       previousLatitude: prevLat,
@@ -585,6 +603,16 @@ export class App implements OnInit, OnDestroy {
       speedKph,
       heading
     });
+
+    // Feed dead reckoning service for continuous 60fps interpolation between GPS fixes
+    this.deadReckoning.updateGpsFix({
+      latitude: lat,
+      longitude: lon,
+      timestamp: nowTime,
+      projectedMile: projection && !projection.isOffRoute ? projection.projectedRouteMile : null,
+      heading,
+      accuracyMeters: accuracy
+    }, speedKph);
 
     // If rider is within 10 km radius, calculate orthogonal projection (vertical line)
     // and update the slider/toggle location to the projected return mile!

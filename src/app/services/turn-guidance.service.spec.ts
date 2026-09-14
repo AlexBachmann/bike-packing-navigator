@@ -284,4 +284,115 @@ describe('TurnGuidanceService', () => {
       expect(bearing).toBeCloseTo(90, 1); // Still 90° East
     });
   });
+
+  describe('OSM Decision-Point Turn Guidance', () => {
+    const mockOsmTurns = [
+      {
+        mile: 1.0,
+        km: 1.609,
+        coordinates: [51.176, -115.570] as [number, number],
+        direction: 'left' as const,
+        deflectionDeg: -85.0,
+        roadName: 'Buffalo St',
+        junctionType: 'intersection',
+        branchCount: 4
+      },
+      {
+        mile: 3.5,
+        km: 5.632,
+        coordinates: [51.150, -115.540] as [number, number],
+        direction: 'slight-right' as const,
+        deflectionDeg: 35.0,
+        roadName: 'Goat Creek Trail',
+        junctionType: 'fork',
+        branchCount: 3
+      }
+    ];
+
+    it('returns null if no OSM turns exist', () => {
+      expect(service.computeTurnAheadFromJunctions(0.5, [], 'km')).toBeNull();
+    });
+
+    it('detects upcoming intersection with authentic road name', () => {
+      // Rider at mile 0.9 (approx 160 meters before mile 1.0 junction)
+      const cue = service.computeTurnAheadFromJunctions(0.9, mockOsmTurns, 'km');
+      expect(cue).not.toBeNull();
+      expect(cue!.direction).toBe('left');
+      expect(cue!.roadName).toBe('Buffalo St');
+      expect(cue!.displayText).toContain('Turn left onto Buffalo St in 161 meters');
+      expect(cue!.junctionType).toBe('intersection');
+    });
+
+    it('formats fork cues with Fork prefix and imperial yards', () => {
+      // Rider at mile 3.4 (approx 161m = 176 yards before fork)
+      const cue = service.computeTurnAheadFromJunctions(3.4, mockOsmTurns, 'miles');
+      expect(cue).not.toBeNull();
+      expect(cue!.direction).toBe('slight-right');
+      expect(cue!.displayText).toContain('Fork slight right onto Goat Creek Trail in 176 yards');
+      expect(cue!.junctionType).toBe('fork');
+    });
+
+    it('ignores junctions passed behind the rider', () => {
+      // Rider at mile 1.5, past mile 1.0 junction but far before mile 3.5 (> 1km away)
+      const cue = service.computeTurnAheadFromJunctions(1.5, mockOsmTurns, 'km');
+      expect(cue).toBeNull();
+    });
+
+    it('prioritizes OSM turns in computeTurnAhead when provided', () => {
+      const dummyTrack: [number, number, number, number, number][] = [
+        [51.17, -115.57, 1000, 0, 0],
+        [51.18, -115.57, 1000, 1.6, 1.0],
+        [51.19, -115.57, 1000, 3.2, 2.0]
+      ];
+      const cue = service.computeTurnAhead(0.9, dummyTrack, 'km', mockOsmTurns);
+      expect(cue).not.toBeNull();
+      expect(cue!.roadName).toBe('Buffalo St');
+    });
+  });
+
+  describe('hasMultipleWayOptions', () => {
+    it('returns false when no features are present', () => {
+      expect(service.hasMultipleWayOptions([40.0, -105.0], [])).toBe(false);
+    });
+
+    it('returns false for a solitary continuous road (degree 2)', () => {
+      // Single continuous road passing through [40.0, -105.0] from South to North
+      const singleRoadFeature = {
+        geometry: {
+          type: 'LineString',
+          coordinates: [
+            [-105.0, 39.999],
+            [-105.0, 40.001]
+          ]
+        }
+      };
+      expect(service.hasMultipleWayOptions([40.0, -105.0], [singleRoadFeature])).toBe(false);
+    });
+
+    it('returns true when a fork or intersection meets at the junction (degree >= 3)', () => {
+      // Road 1: South to North
+      // Road 2: East branch branching off at [40.0, -105.0]
+      const intersectionFeatures = [
+        {
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              [-105.0, 39.999],
+              [-105.0, 40.001]
+            ]
+          }
+        },
+        {
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              [-105.0, 40.0],
+              [-104.998, 40.0]
+            ]
+          }
+        }
+      ];
+      expect(service.hasMultipleWayOptions([40.0, -105.0], intersectionFeatures)).toBe(true);
+    });
+  });
 });

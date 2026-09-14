@@ -10,6 +10,17 @@ export type TurnDirection =
   | 'right'
   | 'sharp-right';
 
+export interface OsmTurnDefinition {
+  mile: number;
+  km: number;
+  coordinates: [number, number]; // [lat, lon]
+  direction: TurnDirection;
+  deflectionDeg: number;
+  roadName?: string;
+  junctionType?: 'fork' | 'intersection' | 't-junction' | 'crossroad' | string;
+  branchCount?: number;
+}
+
 export interface TurnCue {
   direction: TurnDirection;
   distanceMeters: number;
@@ -17,6 +28,9 @@ export interface TurnCue {
   turnCoords?: [number, number];
   turnMile?: number;
   deflectionDeg?: number;
+  roadName?: string;
+  junctionType?: string;
+  branchCount?: number;
 }
 
 export interface RoadSnapResult {

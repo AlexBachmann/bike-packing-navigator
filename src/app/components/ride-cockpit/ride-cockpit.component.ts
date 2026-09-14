@@ -23,6 +23,7 @@ import { PmtilesStorageService, DownloadProgress } from '../../services/pmtiles-
 import { TurnGuidanceService } from '../../services/turn-guidance.service';
 import { GpsSimulatorService } from '../../services/gps-simulator.service';
 import { AudioAlertService } from '../../services/audio-alert.service';
+import { DeadReckoningService } from '../../services/dead-reckoning.service';
 import { GpsState } from '../../models/waypoint.model';
 import { Climb } from '../../models/elevation.model';
 import { TurnCue, TurnDirection } from '../../models/ride-cockpit.model';
@@ -90,12 +91,14 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly turnGuidance = inject(TurnGuidanceService);
   readonly gpsSimulator = inject(GpsSimulatorService);
   readonly audioAlert = inject(AudioAlertService);
+  readonly deadReckoning = inject(DeadReckoningService);
 
   // Service aliases
   readonly routeDataService = this.routeService;
   readonly turnGuidanceService = this.turnGuidance;
   readonly gpsSimulatorService = this.gpsSimulator;
   readonly audioAlertService = this.audioAlert;
+  readonly deadReckoningService = this.deadReckoning;
 
   // Inputs
   readonly currentMile = input<number>(0);
@@ -179,6 +182,9 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.gpsSimulator.running()) {
       return this.gpsSimulator.simulatedMile();
     }
+    if (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) {
+      return this.deadReckoning.interpolatedMile();
+    }
     const gps = this.gpsState();
     if (gps && gps.enabled && gps.projection?.projectedRouteMile !== undefined) {
       return gps.projection.projectedRouteMile;
@@ -191,6 +197,10 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.gpsSimulator.running()) {
       const coords = this.gpsSimulator.simulatedCoords();
       if (coords) return [coords[0], coords[1]];
+    }
+    if (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) {
+      const coords = this.deadReckoning.interpolatedCoords();
+      if (coords) return coords;
     }
     const gps = this.gpsState();
     if (gps && gps.enabled && gps.latitude !== null && gps.longitude !== null) {
@@ -210,7 +220,12 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       return this.gpsSimulator.simulatedHeading();
     }
 
-    // 2. Real GPS updates
+    // 2. Dead reckoning interpolated heading when moving
+    if (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) {
+      return this.deadReckoning.interpolatedHeading();
+    }
+
+    // 3. Real GPS updates
     const gps = this.gpsState();
     if (gps && gps.enabled) {
       if (typeof gps.heading === 'number' && !isNaN(gps.heading)) {
@@ -218,7 +233,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
-    // 3. Fallback: If no two GPS positions exist (or GPS off), point into the direction of the route
+    // 4. Fallback: If no two GPS positions exist (or GPS off), point into the direction of the route
     return this.getForwardTrackBearing(this.effectiveMile());
   });
 
@@ -226,6 +241,9 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly currentSpeedKph = computed<number>(() => {
     if (this.gpsSimulator.running()) {
       return this.gpsSimulator.simulatedSpeedKph();
+    }
+    if (this.deadReckoning.isTracking()) {
+      return this.deadReckoning.speedKph();
     }
     const gps = this.gpsState();
     if (gps && gps.enabled && typeof (gps as any).speedKph === 'number') {
@@ -262,13 +280,14 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     return { lat, lon, heading, speedKph, mile };
   });
 
-  // Turn-Ahead Guidance
+  // Turn-Ahead Guidance: Based on authentic OSM Decision Points
   readonly turnCue = computed<TurnCue | null>(() => {
     const mile = this.effectiveMile();
     const pts = this.routeService.trackPoints();
+    const turns = this.routeService.turns();
     const u = this.unit();
     if (!pts || pts.length < 3) return null;
-    return this.turnGuidance.computeTurnAhead(mile, pts, u);
+    return this.turnGuidance.computeTurnAhead(mile, pts, u, turns);
   });
 
   // Active Climb Status
@@ -426,12 +445,15 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    // Effect 5: Check vector cache when route changes
+    // Effect 5: Check vector cache and load turns when route changes
     effect(() => {
       const routeId = this.activeRouteId();
       if (routeId) {
         untracked(() => {
           this.checkVectorCache(routeId);
+          if (typeof this.routeService?.loadTurns === 'function') {
+            this.routeService.loadTurns(routeId);
+          }
         });
       }
     });
@@ -467,6 +489,9 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     const routeId = this.activeRouteId();
     if (routeId) {
       this.checkVectorCache(routeId);
+      if (typeof this.routeService?.loadTurns === 'function') {
+        this.routeService.loadTurns(routeId);
+      }
     }
   }
 
@@ -708,7 +733,10 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     let finalCoords: [number, number] = [pos.lat, pos.lon];
     if (this.map.isStyleLoaded()) {
       try {
-        const availableLayers = ['transportation', 'route-main', 'route-glow'].filter(
+        const transLayers = this.map.getStyle().layers
+          ?.filter((l: any) => l['source-layer'] === 'transportation')
+          .map((l: any) => l.id) || [];
+        const availableLayers = [...transLayers, 'route-main', 'route-glow'].filter(
           (l) => this.map!.getLayer(l)
         );
         const features = availableLayers.length > 0
@@ -744,14 +772,23 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const clampedPitch = Math.max(MIN_3D_PITCH, Math.min(MAX_3D_PITCH, this.cameraPitch()));
 
-    this.map.easeTo({
-      center: [lon, lat],
-      bearing: targetBearing,
-      pitch: clampedPitch,
-      padding: { bottom: LOWER_THIRD_BOTTOM_PADDING },
-      duration: 600,
-      easing: (t) => t
-    });
+    if (speedKph > 0) {
+      this.map.jumpTo({
+        center: [lon, lat],
+        bearing: targetBearing,
+        pitch: clampedPitch,
+        padding: { bottom: LOWER_THIRD_BOTTOM_PADDING }
+      });
+    } else {
+      this.map.easeTo({
+        center: [lon, lat],
+        bearing: targetBearing,
+        pitch: clampedPitch,
+        padding: { bottom: LOWER_THIRD_BOTTOM_PADDING },
+        duration: 600,
+        easing: (t) => t
+      });
+    }
   }
 
   // --------------------------------------------------------------------------

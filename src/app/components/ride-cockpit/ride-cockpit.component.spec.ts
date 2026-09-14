@@ -322,6 +322,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       trackPoints: signal<[number, number, number, number, number][]>(mockTrackPoints),
       places: signal<any[]>([]),
       climbs: signal<Climb[]>(mockClimbs),
+      turns: signal<any[]>([]),
       projectOntoRoute: vi.fn((lat: number, lon: number) => ({
         distanceKm: 0.01,
         distanceMiles: 0.006,
@@ -357,7 +358,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
     };
 
     mockTurnGuidance = {
-      computeTurnAhead: vi.fn((mile: number, pts: any[], unit: string) => {
+      computeTurnAhead: vi.fn((mile: number, pts: any[], unit: string, turns?: any[]) => {
         if (mile < 0.5) {
           return {
             direction: 'right',
@@ -727,7 +728,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
     it('should format turn guidance in meters when unit is km', () => {
       fixture.componentRef.setInput('unit', 'km');
       fixture.detectChanges();
-      expect(mockTurnGuidance.computeTurnAhead).toHaveBeenCalledWith(0.0, expect.any(Array), 'km');
+      expect(mockTurnGuidance.computeTurnAhead).toHaveBeenCalledWith(0.0, expect.any(Array), 'km', expect.any(Array));
     });
 
     it('should map directional icons correctly', () => {

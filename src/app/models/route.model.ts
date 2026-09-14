@@ -1,6 +1,7 @@
 import { Place, Milestone } from './waypoint.model';
 import { Climb, MountainPass } from './elevation.model';
 import { SurfaceInterval } from '../services/eta-physics.service';
+import { OsmTurnDefinition } from './ride-cockpit.model';
 
 export interface RouteSummary {
   id: string; // e.g. 'tour-divide-2025', 'colorado-trail'
@@ -50,6 +51,7 @@ export interface RouteDataPackage {
   climbs: Climb[];
   passes: MountainPass[];
   milestones: Milestone[];
+  turns?: OsmTurnDefinition[];
   cachedAt: number;
 }
 

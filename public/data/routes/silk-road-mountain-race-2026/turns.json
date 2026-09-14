@@ -1,0 +1,1718 @@
+[
+  {
+    "mile": 3.447,
+    "km": 5.548,
+    "coordinates": [
+      42.47181,
+      72.24819
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -26.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 27.974,
+    "km": 45.02,
+    "coordinates": [
+      42.22039,
+      72.39178
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -37.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 30.077,
+    "km": 48.404,
+    "coordinates": [
+      42.21057,
+      72.36548
+    ],
+    "direction": "right",
+    "deflectionDeg": 66.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 31.611,
+    "km": 50.873,
+    "coordinates": [
+      42.19774,
+      72.36535
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -42.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 33.663,
+    "km": 54.175,
+    "coordinates": [
+      42.18439,
+      72.35703
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -27.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 36.491,
+    "km": 58.727,
+    "coordinates": [
+      42.15514,
+      72.34052
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 59.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 63.561,
+    "km": 102.292,
+    "coordinates": [
+      41.9269,
+      72.59323
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 28.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 83.363,
+    "km": 134.16,
+    "coordinates": [
+      41.89404,
+      72.8953
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -32.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 84.876,
+    "km": 136.595,
+    "coordinates": [
+      41.90968,
+      72.90118
+    ],
+    "direction": "right",
+    "deflectionDeg": 92.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 85.582,
+    "km": 137.73,
+    "coordinates": [
+      41.90927,
+      72.91433
+    ],
+    "direction": "right",
+    "deflectionDeg": 75.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 89.076,
+    "km": 143.354,
+    "coordinates": [
+      41.88389,
+      72.94722
+    ],
+    "direction": "left",
+    "deflectionDeg": -83.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 89.671,
+    "km": 144.312,
+    "coordinates": [
+      41.88324,
+      72.95506
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -26.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 90.464,
+    "km": 145.587,
+    "coordinates": [
+      41.88227,
+      72.96706
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -26.4,
+    "roadName": "",
+    "junctionType": "intersection",
+    "branchCount": 2
+  },
+  {
+    "mile": 113.65,
+    "km": 182.902,
+    "coordinates": [
+      41.89404,
+      73.2131
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 34.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 116.693,
+    "km": 187.799,
+    "coordinates": [
+      41.90771,
+      73.25964
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 44.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 117.114,
+    "km": 188.477,
+    "coordinates": [
+      41.91316,
+      73.25969
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 50.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 118.62,
+    "km": 190.9,
+    "coordinates": [
+      41.92661,
+      73.2805
+    ],
+    "direction": "right",
+    "deflectionDeg": 83.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 119.14,
+    "km": 191.737,
+    "coordinates": [
+      41.92786,
+      73.28412
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -38.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 123.878,
+    "km": 199.363,
+    "coordinates": [
+      41.91032,
+      73.32621
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -39.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 128.547,
+    "km": 206.877,
+    "coordinates": [
+      41.89815,
+      73.38674
+    ],
+    "direction": "right",
+    "deflectionDeg": 62.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 129.411,
+    "km": 208.266,
+    "coordinates": [
+      41.88998,
+      73.38676
+    ],
+    "direction": "left",
+    "deflectionDeg": -76.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 138.436,
+    "km": 222.792,
+    "coordinates": [
+      41.90648,
+      73.46956
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -47.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 8
+  },
+  {
+    "mile": 139.314,
+    "km": 224.204,
+    "coordinates": [
+      41.91445,
+      73.46938
+    ],
+    "direction": "right",
+    "deflectionDeg": 61.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 143.034,
+    "km": 230.191,
+    "coordinates": [
+      41.92691,
+      73.48296
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 33.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 149.855,
+    "km": 241.169,
+    "coordinates": [
+      41.92744,
+      73.54257
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 25.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 153.274,
+    "km": 246.671,
+    "coordinates": [
+      41.90944,
+      73.5525
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 52.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 153.381,
+    "km": 246.843,
+    "coordinates": [
+      41.908,
+      73.55313
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -27.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 159.803,
+    "km": 257.177,
+    "coordinates": [
+      41.91042,
+      73.64225
+    ],
+    "direction": "left",
+    "deflectionDeg": -91.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 161.534,
+    "km": 259.963,
+    "coordinates": [
+      41.91512,
+      73.64907
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -21.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 164.988,
+    "km": 265.522,
+    "coordinates": [
+      41.89533,
+      73.66754
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 36.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 165.08,
+    "km": 265.67,
+    "coordinates": [
+      41.89442,
+      73.66798
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -38.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 165.205,
+    "km": 265.872,
+    "coordinates": [
+      41.8927,
+      73.66733
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -49.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 178.816,
+    "km": 287.777,
+    "coordinates": [
+      41.84579,
+      73.85429
+    ],
+    "direction": "right",
+    "deflectionDeg": 82.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 186.039,
+    "km": 299.401,
+    "coordinates": [
+      41.89499,
+      73.94577
+    ],
+    "direction": "right",
+    "deflectionDeg": 75.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 186.159,
+    "km": 299.594,
+    "coordinates": [
+      41.89331,
+      73.94539
+    ],
+    "direction": "left",
+    "deflectionDeg": -75.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 186.411,
+    "km": 299.999,
+    "coordinates": [
+      41.89423,
+      73.94972
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 39.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 186.666,
+    "km": 300.41,
+    "coordinates": [
+      41.89412,
+      73.95426
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -36.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 197.529,
+    "km": 317.892,
+    "coordinates": [
+      41.91025,
+      74.09698
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 27.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 203.006,
+    "km": 326.707,
+    "coordinates": [
+      41.93753,
+      74.15917
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -33.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 203.15,
+    "km": 326.938,
+    "coordinates": [
+      41.93907,
+      74.16088
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -25.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 8
+  },
+  {
+    "mile": 223.2,
+    "km": 359.206,
+    "coordinates": [
+      42.18037,
+      74.04975
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 27.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 239.094,
+    "km": 384.785,
+    "coordinates": [
+      42.30609,
+      74.26923
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 23.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 245.28,
+    "km": 394.74,
+    "coordinates": [
+      42.30172,
+      74.37542
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 25.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 246.809,
+    "km": 397.2,
+    "coordinates": [
+      42.30168,
+      74.40185
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 46.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 270.156,
+    "km": 434.775,
+    "coordinates": [
+      42.36662,
+      74.80135
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 31.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 274.802,
+    "km": 442.251,
+    "coordinates": [
+      42.37214,
+      74.85936
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -21.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 299.447,
+    "km": 481.913,
+    "coordinates": [
+      42.2355,
+      75.23514
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -30.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 303.551,
+    "km": 488.519,
+    "coordinates": [
+      42.18792,
+      75.26911
+    ],
+    "direction": "left",
+    "deflectionDeg": -68.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 305.023,
+    "km": 490.887,
+    "coordinates": [
+      42.17161,
+      75.28225
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -41.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 306.152,
+    "km": 492.704,
+    "coordinates": [
+      42.15646,
+      75.28591
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -23.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 316.218,
+    "km": 508.904,
+    "coordinates": [
+      42.07374,
+      75.16953
+    ],
+    "direction": "right",
+    "deflectionDeg": 80.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 320.897,
+    "km": 516.434,
+    "coordinates": [
+      42.02659,
+      75.15007
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 55.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 334.481,
+    "km": 538.295,
+    "coordinates": [
+      41.91124,
+      75.04878
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -25.9,
+    "roadName": "",
+    "junctionType": "intersection",
+    "branchCount": 2
+  },
+  {
+    "mile": 466.317,
+    "km": 750.464,
+    "coordinates": [
+      41.021504,
+      74.168525
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -41.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 8
+  },
+  {
+    "mile": 466.909,
+    "km": 751.417,
+    "coordinates": [
+      41.013753,
+      74.169478
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -23.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 469.658,
+    "km": 755.842,
+    "coordinates": [
+      40.991859,
+      74.188833
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 27.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 469.735,
+    "km": 755.966,
+    "coordinates": [
+      40.990975,
+      74.187984
+    ],
+    "direction": "sharp-right",
+    "deflectionDeg": 176.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 469.938,
+    "km": 756.293,
+    "coordinates": [
+      40.988808,
+      74.187666
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 39.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 470.016,
+    "km": 756.417,
+    "coordinates": [
+      40.987897,
+      74.187423
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -24.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 470.178,
+    "km": 756.678,
+    "coordinates": [
+      40.98591,
+      74.187565
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -39.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 470.385,
+    "km": 757.011,
+    "coordinates": [
+      40.984527,
+      74.188484
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 28.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 476.272,
+    "km": 766.486,
+    "coordinates": [
+      40.923791,
+      74.192856
+    ],
+    "direction": "right",
+    "deflectionDeg": 113.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 476.719,
+    "km": 767.205,
+    "coordinates": [
+      40.919681,
+      74.192801
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -24.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 483.279,
+    "km": 777.762,
+    "coordinates": [
+      40.855505,
+      74.259183
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -25.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 485.223,
+    "km": 780.891,
+    "coordinates": [
+      40.838667,
+      74.268035
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -33.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 488.235,
+    "km": 785.738,
+    "coordinates": [
+      40.822175,
+      74.313162
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -22.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 493.715,
+    "km": 794.558,
+    "coordinates": [
+      40.788868,
+      74.362316
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -43.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 502.526,
+    "km": 808.737,
+    "coordinates": [
+      40.72324,
+      74.437906
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 35.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 502.61,
+    "km": 808.872,
+    "coordinates": [
+      40.722186,
+      74.438127
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 27.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 637.954,
+    "km": 1026.687,
+    "coordinates": [
+      40.80244,
+      76.26516
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -22.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 762.581,
+    "km": 1227.256,
+    "coordinates": [
+      41.60328,
+      76.43147
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 25.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 765.245,
+    "km": 1231.543,
+    "coordinates": [
+      41.63173,
+      76.43754
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -38.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 788.645,
+    "km": 1269.201,
+    "coordinates": [
+      41.72749,
+      76.74774
+    ],
+    "direction": "left",
+    "deflectionDeg": -95.9,
+    "roadName": "",
+    "junctionType": "intersection",
+    "branchCount": 2
+  },
+  {
+    "mile": 807.845,
+    "km": 1300.102,
+    "coordinates": [
+      41.79576,
+      77.05421
+    ],
+    "direction": "left",
+    "deflectionDeg": -99.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 855.848,
+    "km": 1377.354,
+    "coordinates": [
+      41.89315,
+      77.68905
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 53.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 856.064,
+    "km": 1377.701,
+    "coordinates": [
+      41.89357,
+      77.68823
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 47.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 856.18,
+    "km": 1377.889,
+    "coordinates": [
+      41.89506,
+      77.68916
+    ],
+    "direction": "left",
+    "deflectionDeg": -62.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 856.263,
+    "km": 1378.023,
+    "coordinates": [
+      41.8944,
+      77.688
+    ],
+    "direction": "right",
+    "deflectionDeg": 80.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 884.337,
+    "km": 1423.204,
+    "coordinates": [
+      42.150352,
+      77.542264
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -27.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 885.367,
+    "km": 1424.861,
+    "coordinates": [
+      42.15706,
+      77.52921
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -59.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 892.924,
+    "km": 1437.023,
+    "coordinates": [
+      42.17458,
+      77.39179
+    ],
+    "direction": "left",
+    "deflectionDeg": -115.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 8
+  },
+  {
+    "mile": 895.538,
+    "km": 1441.229,
+    "coordinates": [
+      42.13896,
+      77.39325
+    ],
+    "direction": "left",
+    "deflectionDeg": -82.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 899.292,
+    "km": 1447.27,
+    "coordinates": [
+      42.09042,
+      77.37073
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -23.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 899.36,
+    "km": 1447.38,
+    "coordinates": [
+      42.08945,
+      77.37081
+    ],
+    "direction": "sharp-left",
+    "deflectionDeg": -180.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 899.622,
+    "km": 1447.802,
+    "coordinates": [
+      42.08626,
+      77.36906
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 23.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 901.373,
+    "km": 1450.619,
+    "coordinates": [
+      42.07363,
+      77.36466
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 52.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 8
+  },
+  {
+    "mile": 901.632,
+    "km": 1451.037,
+    "coordinates": [
+      42.07016,
+      77.36299
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -21.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 902.982,
+    "km": 1453.209,
+    "coordinates": [
+      42.05712,
+      77.36428
+    ],
+    "direction": "left",
+    "deflectionDeg": -65.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 905.078,
+    "km": 1456.582,
+    "coordinates": [
+      42.04119,
+      77.36803
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -48.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 909.528,
+    "km": 1463.744,
+    "coordinates": [
+      42.00462,
+      77.35172
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -20.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 935.621,
+    "km": 1505.737,
+    "coordinates": [
+      41.86165,
+      77.03544
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -23.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1014.236,
+    "km": 1632.256,
+    "coordinates": [
+      42.02513,
+      75.98603
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 27.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1032.349,
+    "km": 1661.406,
+    "coordinates": [
+      42.17119,
+      75.77647
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 35.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1033.667,
+    "km": 1663.527,
+    "coordinates": [
+      42.18771,
+      75.77182
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -59.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1036.371,
+    "km": 1667.878,
+    "coordinates": [
+      42.21974,
+      75.7543
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 32.0,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1088.967,
+    "km": 1752.524,
+    "coordinates": [
+      42.43444,
+      75.04486
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -20.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1091.952,
+    "km": 1757.327,
+    "coordinates": [
+      42.44661,
+      75.0644
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -58.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 1092.399,
+    "km": 1758.047,
+    "coordinates": [
+      42.44905,
+      75.06447
+    ],
+    "direction": "left",
+    "deflectionDeg": -67.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1100.731,
+    "km": 1771.456,
+    "coordinates": [
+      42.54707,
+      75.11198
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -20.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1102.079,
+    "km": 1773.624,
+    "coordinates": [
+      42.56126,
+      75.11733
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -49.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1113.76,
+    "km": 1792.423,
+    "coordinates": [
+      42.6904,
+      75.18991
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -52.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 1116.453,
+    "km": 1796.758,
+    "coordinates": [
+      42.70651,
+      75.23224
+    ],
+    "direction": "right",
+    "deflectionDeg": 99.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1142.704,
+    "km": 1839.004,
+    "coordinates": [
+      42.56117,
+      75.52225
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -58.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 1169.819,
+    "km": 1882.642,
+    "coordinates": [
+      42.69063,
+      75.79011
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -36.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1172.195,
+    "km": 1886.466,
+    "coordinates": [
+      42.70202,
+      75.832654
+    ],
+    "direction": "left",
+    "deflectionDeg": -102.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1176.119,
+    "km": 1892.78,
+    "coordinates": [
+      42.69096,
+      75.88062
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -43.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1176.217,
+    "km": 1892.938,
+    "coordinates": [
+      42.69177,
+      75.87903
+    ],
+    "direction": "left",
+    "deflectionDeg": -95.8,
+    "roadName": "",
+    "junctionType": "intersection",
+    "branchCount": 2
+  },
+  {
+    "mile": 1182.451,
+    "km": 1902.971,
+    "coordinates": [
+      42.69058,
+      75.98248
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -31.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1186.883,
+    "km": 1910.104,
+    "coordinates": [
+      42.70529,
+      76.05981
+    ],
+    "direction": "sharp-left",
+    "deflectionDeg": -140.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1193.514,
+    "km": 1920.776,
+    "coordinates": [
+      42.74804,
+      76.16098
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 30.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1193.88,
+    "km": 1921.364,
+    "coordinates": [
+      42.75251,
+      76.162
+    ],
+    "direction": "right",
+    "deflectionDeg": 67.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1232.702,
+    "km": 1983.842,
+    "coordinates": [
+      42.86776,
+      76.8188
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 55.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1237.489,
+    "km": 1991.546,
+    "coordinates": [
+      42.81966,
+      76.83565
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 39.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1240.644,
+    "km": 1996.624,
+    "coordinates": [
+      42.80296,
+      76.84309
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 41.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1240.738,
+    "km": 1996.775,
+    "coordinates": [
+      42.80253,
+      76.8436
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -32.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1240.823,
+    "km": 1996.911,
+    "coordinates": [
+      42.80349,
+      76.84304
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 45.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1240.896,
+    "km": 1997.029,
+    "coordinates": [
+      42.80449,
+      76.84334
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -56.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1241.044,
+    "km": 1997.267,
+    "coordinates": [
+      42.80456,
+      76.84369
+    ],
+    "direction": "right",
+    "deflectionDeg": 75.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1241.117,
+    "km": 1997.385,
+    "coordinates": [
+      42.80354,
+      76.84349
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -48.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 1241.242,
+    "km": 1997.586,
+    "coordinates": [
+      42.80235,
+      76.84474
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 20.9,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 1243.005,
+    "km": 2000.423,
+    "coordinates": [
+      42.79138,
+      76.84017
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -47.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1243.142,
+    "km": 2000.644,
+    "coordinates": [
+      42.79003,
+      76.83852
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -25.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1243.363,
+    "km": 2000.999,
+    "coordinates": [
+      42.78719,
+      76.83987
+    ],
+    "direction": "right",
+    "deflectionDeg": 75.8,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1243.52,
+    "km": 2001.251,
+    "coordinates": [
+      42.78529,
+      76.83841
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -26.6,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1243.889,
+    "km": 2001.846,
+    "coordinates": [
+      42.783,
+      76.84008
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 34.4,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1243.968,
+    "km": 2001.973,
+    "coordinates": [
+      42.78187,
+      76.8403
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 23.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1245.863,
+    "km": 2005.022,
+    "coordinates": [
+      42.7715,
+      76.84388
+    ],
+    "direction": "right",
+    "deflectionDeg": 81.2,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1251.597,
+    "km": 2014.25,
+    "coordinates": [
+      42.70775,
+      76.86936
+    ],
+    "direction": "slight-right",
+    "deflectionDeg": 26.7,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1251.776,
+    "km": 2014.539,
+    "coordinates": [
+      42.70676,
+      76.8662
+    ],
+    "direction": "slight-left",
+    "deflectionDeg": -33.5,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  },
+  {
+    "mile": 1272.674,
+    "km": 2048.171,
+    "coordinates": [
+      42.64689,
+      77.07849
+    ],
+    "direction": "right",
+    "deflectionDeg": 88.4,
+    "roadName": "",
+    "junctionType": "intersection",
+    "branchCount": 2
+  },
+  {
+    "mile": 1272.957,
+    "km": 2048.627,
+    "coordinates": [
+      42.6434,
+      77.08142
+    ],
+    "direction": "sharp-left",
+    "deflectionDeg": -148.3,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 6
+  },
+  {
+    "mile": 1273.662,
+    "km": 2049.761,
+    "coordinates": [
+      42.637483,
+      77.090441
+    ],
+    "direction": "left",
+    "deflectionDeg": -99.1,
+    "roadName": "",
+    "junctionType": "crossroad",
+    "branchCount": 4
+  }
+]

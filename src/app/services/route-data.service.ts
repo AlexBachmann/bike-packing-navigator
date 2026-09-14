@@ -1,12 +1,14 @@
 import { Injectable, inject, signal, computed, effect, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, Subscription } from 'rxjs';
+import { forkJoin, Subscription, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Place, WaypointViewModel, ProjectionResult, isSelfServiceWaschsalon, Milestone } from '../models/waypoint.model';
 import { Climb, MountainPass } from '../models/elevation.model';
 import { EtaPhysicsService, SurfaceInterval } from './eta-physics.service';
 import { SettingsService } from './settings.service';
 import { RouteManifestService } from './route-manifest.service';
 import { RouteTrack, RouteDataPackage } from '../models/route.model';
+import { OsmTurnDefinition } from '../models/ride-cockpit.model';
 import { OfflineStorageService } from './offline-storage.service';
 import { NetworkStatusService } from './network-status.service';
 
@@ -34,6 +36,7 @@ export class RouteDataService implements OnDestroy {
   readonly climbs = signal<Climb[]>([]);
   readonly passes = signal<MountainPass[]>([]);
   readonly milestones = signal<Milestone[]>([]);
+  readonly turns = signal<OsmTurnDefinition[]>([]);
 
   readonly activeRouteId = signal<string | null>(null);
   readonly totalMilesSignal = signal<number>(0);
@@ -92,6 +95,7 @@ export class RouteDataService implements OnDestroy {
     this.climbs.set([]);
     this.passes.set([]);
     this.milestones.set([]);
+    this.turns.set([]);
     this.totalMilesSignal.set(0);
     this.totalKmSignal.set(0);
     this.etaPhysics.setTrackPoints([]);
@@ -174,6 +178,7 @@ export class RouteDataService implements OnDestroy {
           climbs: climbs || [],
           passes: passes || [],
           milestones: milestones || [],
+          turns: this.turns() || [],
           cachedAt: Date.now()
         };
         this.offlineStorage.saveRoutePackage(pkg).catch((err) => {
@@ -231,9 +236,24 @@ export class RouteDataService implements OnDestroy {
     this.climbs.set(pkg.climbs || []);
     this.passes.set(pkg.passes || []);
     this.milestones.set(pkg.milestones || []);
+    this.turns.set(pkg.turns || []);
 
     this.isLoading.set(false);
     this.isTrackLoading.set(false);
+  }
+
+  loadTurns(routeId: string): void {
+    if (!routeId) {
+      this.turns.set([]);
+      return;
+    }
+    this.http.get<OsmTurnDefinition[]>(`/data/routes/${routeId}/turns.json`)
+      .pipe(catchError(() => of([])))
+      .subscribe((turns) => {
+        if (this.activeRouteId() === routeId) {
+          this.turns.set(turns || []);
+        }
+      });
   }
 
   unloadRoute(): void {
@@ -247,6 +267,7 @@ export class RouteDataService implements OnDestroy {
     this.climbs.set([]);
     this.passes.set([]);
     this.milestones.set([]);
+    this.turns.set([]);
     this.totalMilesSignal.set(0);
     this.totalKmSignal.set(0);
     this.etaPhysics.setTrackPoints([]);

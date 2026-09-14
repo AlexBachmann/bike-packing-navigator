@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TurnCue, TurnDirection, RoadSnapResult } from '../models/ride-cockpit.model';
+import { TurnCue, TurnDirection, RoadSnapResult, OsmTurnDefinition } from '../models/ride-cockpit.model';
 
 export const CHORD_LENGTH_METERS = 25.0;
 export const LOOKAHEAD_WINDOW_METERS = 1000.0;
@@ -60,6 +60,19 @@ export class TurnGuidanceService {
    * Formats human-readable turn banner text according to user units
    */
   formatTurnText(direction: TurnDirection, distanceMeters: number, unit: 'miles' | 'km'): string {
+    return this.formatTurnTextWithRoad(direction, distanceMeters, unit);
+  }
+
+  /**
+   * Formats human-readable turn banner text with optional road name and fork context
+   */
+  formatTurnTextWithRoad(
+    direction: TurnDirection,
+    distanceMeters: number,
+    unit: 'miles' | 'km',
+    roadName?: string,
+    junctionType?: string
+  ): string {
     const directionLabels: Record<TurnDirection, string> = {
       'slight-left': 'slight left',
       'left': 'left',
@@ -70,14 +83,156 @@ export class TurnGuidanceService {
     };
 
     const dirLabel = directionLabels[direction];
+    const distFormatted = unit === 'miles'
+      ? `${Math.round(distanceMeters * 1.09361)} yards`
+      : `${Math.round(distanceMeters)} meters`;
 
-    if (unit === 'miles') {
-      const yards = Math.round(distanceMeters * 1.09361);
-      return `Turn ${dirLabel} in ${yards} yards`;
-    } else {
-      const meters = Math.round(distanceMeters);
-      return `Turn ${dirLabel} in ${meters} meters`;
+    const prefix = junctionType === 'fork' ? 'Fork' : 'Turn';
+
+    if (roadName && roadName.trim().length > 0) {
+      return `${prefix} ${dirLabel} onto ${roadName.trim()} in ${distFormatted}`;
     }
+
+    return `${prefix} ${dirLabel} in ${distFormatted}`;
+  }
+
+  /**
+   * Computes upcoming turn cue ahead of the rider based exclusively on authentic
+   * OpenStreetMap decision points where there is a genuine option between two or more ways.
+   */
+  computeTurnAheadFromJunctions(
+    currentMile: number,
+    turns: OsmTurnDefinition[],
+    unit: 'miles' | 'km'
+  ): TurnCue | null {
+    if (!turns || turns.length === 0) {
+      return null;
+    }
+
+    const currentMeters = currentMile * 1609.344;
+    const windowStart = currentMeters + 15; // ignore junctions passed or under wheels
+    const windowEnd = currentMeters + LOOKAHEAD_WINDOW_METERS;
+
+    let nextTurn: OsmTurnDefinition | null = null;
+    let minDistanceMeters = Infinity;
+
+    for (const turn of turns) {
+      const turnMeters = turn.mile * 1609.344;
+      if (turnMeters >= windowStart && turnMeters <= windowEnd) {
+        const dist = turnMeters - currentMeters;
+        if (dist < minDistanceMeters) {
+          minDistanceMeters = dist;
+          nextTurn = turn;
+        }
+      }
+    }
+
+    if (!nextTurn) {
+      return null;
+    }
+
+    const distanceMeters = Math.max(0, minDistanceMeters);
+    const displayText = this.formatTurnTextWithRoad(
+      nextTurn.direction,
+      distanceMeters,
+      unit,
+      nextTurn.roadName,
+      nextTurn.junctionType
+    );
+
+    return {
+      direction: nextTurn.direction,
+      distanceMeters: Math.round(distanceMeters),
+      displayText,
+      turnCoords: nextTurn.coordinates,
+      turnMile: nextTurn.mile,
+      deflectionDeg: nextTurn.deflectionDeg,
+      roadName: nextTurn.roadName,
+      junctionType: nextTurn.junctionType,
+      branchCount: nextTurn.branchCount
+    };
+  }
+
+  /**
+   * Evaluates OpenStreetMap vector line features in the vicinity of turnCoords (within radiusMeters).
+   * Returns true ONLY if 3 or more distinct direction branches radiate from the point,
+   * confirming a genuine decision point with options between two or more ways.
+   */
+  hasMultipleWayOptions(
+    turnCoords: [number, number],
+    renderedFeatures: any[],
+    radiusMeters: number = 25.0
+  ): boolean {
+    if (!renderedFeatures || !Array.isArray(renderedFeatures) || renderedFeatures.length === 0) {
+      return false;
+    }
+
+    const [turnLat, turnLon] = turnCoords;
+    const toRad = Math.PI / 180;
+    const cosLat = Math.cos(turnLat * toRad);
+    const kx = cosLat * 111320.0;
+    const ky = 110540.0;
+
+    const nearbyBearings: number[] = [];
+
+    for (const feature of renderedFeatures) {
+      if (!feature || !feature.geometry) continue;
+      const geom = feature.geometry;
+      let lineSegments: number[][][] = [];
+
+      if (geom.type === 'LineString' && Array.isArray(geom.coordinates)) {
+        lineSegments = [geom.coordinates];
+      } else if (geom.type === 'MultiLineString' && Array.isArray(geom.coordinates)) {
+        lineSegments = geom.coordinates;
+      }
+
+      for (const line of lineSegments) {
+        if (!line || line.length < 2) continue;
+        for (let i = 0; i < line.length - 1; i++) {
+          const ptA = line[i];     // GeoJSON: [lon, lat]
+          const ptB = line[i + 1];
+          const lonA = ptA[0];
+          const latA = ptA[1];
+          const lonB = ptB[0];
+          const latB = ptB[1];
+
+          // Project orthogonal distance
+          const xA = (lonA - turnLon) * kx;
+          const yA = (latA - turnLat) * ky;
+          const xB = (lonB - turnLon) * kx;
+          const yB = (latB - turnLat) * ky;
+
+          const dx = xB - xA;
+          const dy = yB - yA;
+          const lenSq = dx * dx + dy * dy;
+
+          let t = 0;
+          if (lenSq > 0.0000001) {
+            t = Math.max(0, Math.min(1, (-xA * dx - yA * dy) / lenSq));
+          }
+
+          const qx = xA + t * dx;
+          const qy = yA + t * dy;
+          const dist = Math.sqrt(qx * qx + qy * qy);
+
+          if (dist <= radiusMeters) {
+            const b = this.calculateBearing(latA, lonA, latB, lonB);
+            nearbyBearings.push(b);
+            nearbyBearings.push((b + 180) % 360);
+          }
+        }
+      }
+    }
+
+    // Cluster into distinct directional branches (> 30° apart)
+    const branches: number[] = [];
+    for (const b of nearbyBearings) {
+      if (!branches.some(eb => Math.abs(((b - eb + 540) % 360) - 180) < 30)) {
+        branches.push(b);
+      }
+    }
+
+    return branches.length >= 3;
   }
 
   /**
@@ -86,8 +241,13 @@ export class TurnGuidanceService {
   computeTurnAhead(
     currentMile: number,
     trackPoints: [number, number, number, number, number][],
-    unit: 'miles' | 'km'
+    unit: 'miles' | 'km',
+    osmTurns?: OsmTurnDefinition[]
   ): TurnCue | null {
+    if (osmTurns && osmTurns.length > 0) {
+      return this.computeTurnAheadFromJunctions(currentMile, osmTurns, unit);
+    }
+
     if (!trackPoints || trackPoints.length < 3) {
       return null;
     }
