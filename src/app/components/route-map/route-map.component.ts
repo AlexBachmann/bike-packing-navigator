@@ -319,7 +319,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       if (this.activeMapMode() === 'raster') {
         this.setBaseTileLayer(this.mapStyle());
       }
-      this.drawRoute();
+      this.drawRoute(true);
       this.updateRiderMarker(this.currentMile());
       this.updatePoiMarkers(this.routeService.places(), this.activePoiFilter());
       this.updateGpsDisplay(this.gpsState());
@@ -557,30 +557,27 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       if (this.activeMapMode() === 'raster') {
         this.setBaseTileLayer(this.settings.mapStyle());
       }
-      this.drawRoute();
+      this.drawRoute(true);
       this.updateRiderMarker(this.currentMile());
       this.updateGpsDisplay(this.gpsState());
       this.updatePoiMarkers(this.routeService.places(), this.activePoiFilter());
     };
 
-    if (this.map.isStyleLoaded()) {
+    let executed = false;
+    const onReady = () => {
+      if (executed) return;
+      executed = true;
+      if (this.map) {
+        this.map.off('style.load', onReady);
+        this.map.off('styledata', onReady);
+        this.map.off('load', onReady);
+      }
       onStyleReady();
-    } else {
-      let executed = false;
-      const onReady = () => {
-        if (executed) return;
-        executed = true;
-        if (this.map) {
-          this.map.off('style.load', onReady);
-          this.map.off('styledata', onReady);
-          this.map.off('load', onReady);
-        }
-        onStyleReady();
-      };
-      this.map.once('style.load', onReady);
-      this.map.on('styledata', onReady);
-      this.map.once('load', onReady);
-    }
+    };
+
+    this.map.once('style.load', onReady);
+    this.map.once('styledata', onReady);
+    this.map.once('load', onReady);
   }
 
   async checkRouteCacheAndApplyRenderer(forceStyleReload = false): Promise<void> {
@@ -718,10 +715,10 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     return [[minLon, minLat], [maxLon, maxLat]];
   }
 
-  private drawRoute(): void {
+  drawRoute(force = false): void {
     if (!this.map) return;
-    if (!this.map.isStyleLoaded()) {
-      this.runWhenStyleLoaded(() => this.drawRoute());
+    if (!force && !this.map.isStyleLoaded()) {
+      this.runWhenStyleLoaded(() => this.drawRoute(true));
       return;
     }
 
@@ -745,15 +742,16 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
 
     try {
       const existingSource = this.map.getSource('route-source') as maplibregl.GeoJSONSource;
-      if (existingSource) {
-        existingSource.setData(geojson);
-      } else {
+      if (!existingSource) {
         this.map.addSource('route-source', {
           type: 'geojson',
           data: geojson
         });
+      } else {
+        existingSource.setData(geojson);
+      }
 
-        // Background glowing line with hardware-accelerated blur
+      if (!this.map.getLayer('route-glow')) {
         this.map.addLayer({
           id: 'route-glow',
           type: 'line',
@@ -769,8 +767,9 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
             'line-blur': 3
           }
         });
+      }
 
-        // Foreground sharp track line
+      if (!this.map.getLayer('route-main')) {
         this.map.addLayer({
           id: 'route-main',
           type: 'line',
@@ -793,7 +792,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
         getBounds: () => this.getRouteBounds()
       };
     } catch {
-      this.runWhenStyleLoaded(() => this.drawRoute());
+      this.runWhenStyleLoaded(() => this.drawRoute(true));
       return;
     }
 
