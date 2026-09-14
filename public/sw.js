@@ -1,5 +1,5 @@
 // Service Worker for Full Offline PWA Support & Map Tile Caching
-const SHELL_CACHE_NAME = 'bikepack-app-shell-v2';
+const SHELL_CACHE_NAME = 'bikepack-app-shell-v3';
 const TILE_CACHE_NAME = 'bikepack-map-tiles-v1';
 const ANALYTICS_DB_NAME = 'bikepack-offline-analytics';
 const ANALYTICS_STORE_NAME = 'queued-requests';
@@ -156,6 +156,7 @@ const PRECACHE_URLS = [
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
   './icons/apple-touch-icon.png',
+  './maplibre-gl-worker.mjs',
   './data/routes.json',
   './assets/styles/vector-topo.json',
   './assets/styles/vector-dark.json',

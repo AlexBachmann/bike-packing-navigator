@@ -290,13 +290,17 @@ vi.mock('maplibre-gl', () => {
       Marker: MockMarker,
       Popup: MockPopup,
       NavigationControl: MockNavigationControl,
-      addProtocol: vi.fn()
+      addProtocol: vi.fn(),
+      setWorkerUrl: vi.fn(),
+      getWorkerUrl: vi.fn(() => '')
     },
     Map: MockMap,
     Marker: MockMarker,
     Popup: MockPopup,
     NavigationControl: MockNavigationControl,
-    addProtocol: vi.fn()
+    addProtocol: vi.fn(),
+    setWorkerUrl: vi.fn(),
+    getWorkerUrl: vi.fn(() => '')
   };
 });
 

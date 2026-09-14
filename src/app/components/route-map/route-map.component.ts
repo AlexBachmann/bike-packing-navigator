@@ -265,6 +265,10 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   };
 
   private initMap(container: HTMLElement): void {
+    if (typeof maplibregl !== 'undefined' && typeof maplibregl.setWorkerUrl === 'function') {
+      maplibregl.setWorkerUrl(resolveBaseHref('/maplibre-gl-worker.mjs'));
+    }
+
     const points = this.routeService.trackPoints();
     const initialCoords = this.getCoordsForMile(this.currentMile());
     // MapLibre GL center coordinates order: [longitude, latitude]

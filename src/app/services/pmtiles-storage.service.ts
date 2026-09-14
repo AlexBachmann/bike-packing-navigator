@@ -202,12 +202,17 @@ export class PmtilesStorageService {
   initProtocol(): Protocol {
     if (!this.protocol) {
       this.protocol = new Protocol({ metadata: true });
-      if (!protocolRegisteredGlobally && typeof maplibregl !== "undefined" && maplibregl.addProtocol) {
-        try {
-          maplibregl.addProtocol("pmtiles", this.protocol.tile);
-          protocolRegisteredGlobally = true;
-        } catch {
-          // Protocol might already be added
+      if (!protocolRegisteredGlobally && typeof maplibregl !== "undefined") {
+        if (typeof maplibregl.setWorkerUrl === "function") {
+          maplibregl.setWorkerUrl(resolveBaseHref("/maplibre-gl-worker.mjs"));
+        }
+        if (maplibregl.addProtocol) {
+          try {
+            maplibregl.addProtocol("pmtiles", this.protocol.tile);
+            protocolRegisteredGlobally = true;
+          } catch {
+            // Protocol might already be added
+          }
         }
       }
     }
