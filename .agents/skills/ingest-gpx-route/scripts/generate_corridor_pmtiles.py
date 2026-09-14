@@ -184,10 +184,8 @@ def extract_corridor_from_openfreemap(
             for _, tx, ty in intersecting:
                 s.add((tx, ty))
         else:
-            # Route corridor coverage
-            step = 15 if z >= 13 else (8 if z >= 11 else 12)
-            sample_pts = track_coords[::step] if track_coords else []
-            for lon, lat in sample_pts:
+            # Route corridor coverage - sample all track points to ensure gapless tile coverage
+            for lon, lat in track_coords:
                 s.add(lonlat_to_tile(lon, lat, z))
         tiles_by_z[z] = list(s)
 
@@ -204,14 +202,16 @@ def extract_corridor_from_openfreemap(
         z, x, y = coords
         url = tile_url_pattern.format(z=z, x=x, y=y)
         r = urllib.request.Request(url, headers={"User-Agent": "BikepackNavigator/1.0"})
-        try:
-            with urllib.request.urlopen(r, timeout=10) as res:
-                data = res.read()
-                return (z, x, y, data)
-        except Exception:
-            return (z, x, y, None)
+        for attempt in range(3):
+            try:
+                with urllib.request.urlopen(r, timeout=12) as res:
+                    data = res.read()
+                    return (z, x, y, data)
+            except Exception:
+                if attempt == 2:
+                    return (z, x, y, None)
 
-    with ThreadPoolExecutor(max_workers=10) as ex:
+    with ThreadPoolExecutor(max_workers=16) as ex:
         results = list(ex.map(fetch_tile, all_tiles))
 
     tile_entries = []
@@ -464,6 +464,80 @@ def validate_pmtiles_archive(pmtiles_path: Path):
     print("  ✓ Metadata verified successfully.")
 
 
+def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
+    """Slice Tour Divide corridor PMTiles into the 4 official sections."""
+    track_path = route_dir / "route-track.json"
+    if not track_path.exists():
+        return
+    with open(track_path, "r", encoding="utf-8") as f:
+        tdata = json.load(f)
+    raw_pts = tdata.get("points", []) or tdata.get("coordinates", [])
+    # Format is [lat, lon, ele, km, mi] -> convert to (lon, lat)
+    pts = [(p[1], p[0]) for p in raw_pts if len(p) >= 2]
+
+    sections = [
+        ("section-1.pmtiles", "Tour Divide Sec 1: Canada & Montana", [p for p in pts if p[1] >= 44.95]),
+        ("section-2.pmtiles", "Tour Divide Sec 2: Wyoming", [p for p in pts if 40.95 <= p[1] <= 45.05]),
+        ("section-3.pmtiles", "Tour Divide Sec 3: Colorado", [p for p in pts if 36.95 <= p[1] <= 41.05]),
+        ("section-4.pmtiles", "Tour Divide Sec 4: New Mexico", [p for p in pts if p[1] <= 37.05])
+    ]
+
+    print("[PMTiles Pipeline] Slicing Tour Divide into 4 section PMTiles archives...")
+    with open(corridor_pmtiles_path, "rb") as sf:
+        reader = Reader(MmapSource(sf))
+        header = reader.header()
+        meta = reader.metadata() or {}
+
+        for filename, sec_name, sec_pts in sections:
+            if not sec_pts:
+                continue
+            sec_out = route_dir / filename
+            lons = [p[0] for p in sec_pts]
+            lats = [p[1] for p in sec_pts]
+            min_lon, min_lat, max_lon, max_lat = min(lons), min(lats), max(lons), max(lats)
+
+            tiles_needed = set()
+            for z in range(header["min_zoom"], header["max_zoom"] + 1):
+                if z <= 6:
+                    for _, tx, ty in get_intersecting_tiles(min_lon, min_lat, max_lon, max_lat, z):
+                        tiles_needed.add((z, tx, ty))
+                else:
+                    for lon, lat in sec_pts:
+                        tiles_needed.add((z, *lonlat_to_tile(lon, lat, z)))
+
+            sorted_tiles = sorted(list(tiles_needed), key=lambda c: zxy_to_tileid(c[0], c[1], c[2]))
+            with open(sec_out, "wb") as out_f:
+                writer = Writer(out_f)
+                sec_tile_count = 0
+                for z, x, y in sorted_tiles:
+                    data = reader.get(z, x, y)
+                    if data:
+                        writer.write_tile(zxy_to_tileid(z, x, y), data)
+                        sec_tile_count += 1
+
+                writer.finalize(
+                    {
+                        "tile_compression": header["tile_compression"],
+                        "tile_type": header["tile_type"],
+                        "min_lon_e7": int(min_lon * 1e7),
+                        "min_lat_e7": int(min_lat * 1e7),
+                        "max_lon_e7": int(max_lon * 1e7),
+                        "max_lat_e7": int(max_lat * 1e7),
+                        "center_zoom": header["min_zoom"] if header["min_zoom"] > 0 else 7,
+                        "center_lon_e7": int(((min_lon + max_lon) / 2) * 1e7),
+                        "center_lat_e7": int(((min_lat + max_lat) / 2) * 1e7),
+                    },
+                    {
+                        **meta,
+                        "name": sec_name,
+                        "description": f"Offline PMTiles vector section for {sec_name}"
+                    }
+                )
+            sz = sec_out.stat().st_size
+            print(f"[PMTiles Pipeline] Generated {sec_out} ({sz / (1024*1024):.2f} MB, {sec_tile_count} tiles)")
+            validate_pmtiles_archive(sec_out)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate route corridor PMTiles vector basemap archive.")
     parser.add_argument("--route-id", "--route", type=str, default="arizona-trail-300", help="Route identifier")
@@ -495,9 +569,8 @@ def main():
     min_lon, min_lat, max_lon, max_lat, corridor_geom = load_corridor_bbox(corridor_path)
 
     if args.source:
-        source_path = Path(args.source)
         extract_from_source(
-            source_path=source_path,
+            source_path=Path(args.source),
             output_path=output_path,
             bbox=(min_lon, min_lat, max_lon, max_lat),
             min_zoom=args.minzoom,
@@ -517,6 +590,11 @@ def main():
 
     # Validate output
     validate_pmtiles_archive(output_path)
+
+    # If Tour Divide, also generate section archives
+    if route_id == "tour-divide-2025" and not args.output:
+        generate_tour_divide_sections(output_path, route_dir)
+
     print(f"Done! Corridor PMTiles created at: {output_path}")
     return 0
 
