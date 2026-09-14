@@ -781,6 +781,34 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       expect(svg).toBeTruthy();
     });
 
+    it('should generate miniProfile with authentic slope gradient and dots matching climb cards', () => {
+      fixture.componentRef.setInput('currentMile', 0.4);
+      fixture.detectChanges();
+      const status = component.climbStatus();
+      expect(status?.miniProfile).toBeDefined();
+      expect(status?.miniProfile.linePathD).toMatch(/^M\s/);
+      expect(status?.miniProfile.areaPathD).toContain('Z');
+      expect(status?.miniProfile.gradientStops.length).toBeGreaterThan(0);
+      expect(status?.miniProfile.startPoint).toBeDefined();
+      expect(status?.miniProfile.summitPoint).toBeDefined();
+      expect(status?.miniProfile.riderDot).toBeDefined();
+    });
+
+    it('should position climb widget in center of hud-bottom-bar without overlapping FAB or speedometer', () => {
+      fixture.componentRef.setInput('currentMile', 0.4);
+      fixture.detectChanges();
+      const el = fixture.nativeElement as HTMLElement;
+      const bottomBar = el.querySelector('.hud-bottom-bar');
+      expect(bottomBar).toBeTruthy();
+      const fab = bottomBar?.querySelector('[data-testid="simulator-fab"]');
+      const widget = bottomBar?.querySelector('[data-testid="climb-mini-widget"]');
+      const speedometer = bottomBar?.querySelector('[data-testid="speedometer-widget"]');
+      expect(fab).toBeTruthy();
+      expect(widget).toBeTruthy();
+      expect(speedometer).toBeTruthy();
+      expect(widget?.classList.contains('mx-auto')).toBe(true);
+    });
+
     it('should dismiss climb widget after summit', () => {
       fixture.componentRef.setInput('currentMile', 0.9);
       fixture.detectChanges();

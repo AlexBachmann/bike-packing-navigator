@@ -76,9 +76,32 @@ export class DeadReckoningService implements OnDestroy {
 
     this.speedKph.set(calculatedSpeedKph);
 
-    const initialMile = fix.projectedMile ?? this.interpolatedMile();
+    // Ensure monotonic progress when moving forward:
+    // If we are already smoothly moving forward and an incoming discrete fix has projectedMile
+    // that is slightly behind the current 60fps interpolatedMile (due to setInterval timer jitter),
+    // do NOT jerk the rider backward. Keep the progress strictly monotonic.
+    const currentInterp = this.interpolatedMile();
+    const isMovingForward = calculatedSpeedKph >= MIN_MOVING_SPEED_KPH;
+
+    let initialMile = fix.projectedMile ?? currentInterp;
+    if (isMovingForward && fix.projectedMile !== undefined && fix.projectedMile !== null && currentInterp > 0) {
+      initialMile = Math.max(currentInterp, fix.projectedMile);
+    }
     this.interpolatedMile.set(initialMile);
-    this.interpolatedCoords.set([fix.latitude, fix.longitude]);
+
+    // Save updated fix with reconciled projectedMile
+    this.currentFix = {
+      ...fix,
+      projectedMile: initialMile
+    };
+
+    const pts = this.routeService?.trackPoints() || [];
+    if (initialMile !== undefined && initialMile !== null && pts.length >= 2 && this.turnGuidance) {
+      const coords = this.turnGuidance.interpolatePointAtMile(pts, initialMile);
+      this.interpolatedCoords.set([coords[0], coords[1]]);
+    } else {
+      this.interpolatedCoords.set([fix.latitude, fix.longitude]);
+    }
 
     if (typeof fix.heading === 'number' && !isNaN(fix.heading)) {
       this.interpolatedHeading.set(((fix.heading % 360) + 360) % 360);
@@ -150,7 +173,7 @@ export class DeadReckoningService implements OnDestroy {
       this.interpolatedMile.set(clampedMile);
 
       if (this.turnGuidance) {
-        const coords = this.turnGuidance.interpolatePointAtDistance(pts, clampedMile * 1609.344);
+        const coords = this.turnGuidance.interpolatePointAtMile(pts, clampedMile);
         this.interpolatedCoords.set([coords[0], coords[1]]);
         const heading = this.turnGuidance.getRouteTangentBearing(pts, clampedMile, 25.0);
         this.interpolatedHeading.set(heading);

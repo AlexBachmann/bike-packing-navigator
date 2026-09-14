@@ -507,6 +507,44 @@ export class TurnGuidanceService {
   }
 
   /**
+   * Helper to linearly interpolate coordinate along route trackpoints at targetMile
+   */
+  interpolatePointAtMile(
+    trackPoints: [number, number, number, number, number][],
+    targetMile: number
+  ): [number, number] {
+    if (!trackPoints || trackPoints.length === 0) return [0, 0];
+    if (targetMile <= trackPoints[0][4]) {
+      return [trackPoints[0][0], trackPoints[0][1]];
+    }
+
+    const lastIdx = trackPoints.length - 1;
+    if (targetMile >= trackPoints[lastIdx][4]) {
+      return [trackPoints[lastIdx][0], trackPoints[lastIdx][1]];
+    }
+
+    let low = 0;
+    let high = lastIdx;
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      if (trackPoints[mid][4] <= targetMile) {
+        low = mid + 1;
+      } else {
+        high = mid - 1;
+      }
+    }
+
+    const idxA = Math.max(0, low - 1);
+    const idxB = Math.min(lastIdx, idxA + 1);
+    const span = trackPoints[idxB][4] - trackPoints[idxA][4];
+    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - trackPoints[idxA][4]) / span));
+
+    const lat = trackPoints[idxA][0] + t * (trackPoints[idxB][0] - trackPoints[idxA][0]);
+    const lon = trackPoints[idxA][1] + t * (trackPoints[idxB][1] - trackPoints[idxA][1]);
+    return [lat, lon];
+  }
+
+  /**
    * Helper to linearly interpolate coordinate along route trackpoints
    */
   interpolatePointAtDistance(

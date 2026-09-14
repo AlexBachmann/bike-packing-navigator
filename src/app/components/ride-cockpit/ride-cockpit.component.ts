@@ -25,7 +25,7 @@ import { GpsSimulatorService } from '../../services/gps-simulator.service';
 import { AudioAlertService } from '../../services/audio-alert.service';
 import { DeadReckoningService } from '../../services/dead-reckoning.service';
 import { GpsState } from '../../models/waypoint.model';
-import { Climb } from '../../models/elevation.model';
+import { Climb, ClimbMiniProfile, buildClimbMiniProfile } from '../../models/elevation.model';
 import { TurnCue, TurnDirection } from '../../models/ride-cockpit.model';
 import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
 import { getRasterBaselineStyle, getVectorStyleSpec } from '../route-map/route-map.component';
@@ -58,7 +58,8 @@ export interface ActiveClimbStatus {
   remainingFormatted: string;
   gradePercent: number;
   progressPercent: number;
-  svgPaths: {
+  miniProfile: ClimbMiniProfile;
+  svgPaths?: {
     linePath: string;
     areaPath: string;
     riderX: number;
@@ -305,6 +306,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!climb) return null;
     const mile = this.effectiveMile();
     const u = this.unit();
+    const pts = this.routeService.trackPoints() || [];
 
     const remainingMiles = Math.max(0, climb.endMile - mile);
     const remainingKm = remainingMiles * 1.609344;
@@ -317,6 +319,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       ? (remainingKm < 1 ? `${Math.round(remainingKm * 1000)} m` : `${remainingKm.toFixed(1)} km`)
       : (remainingMiles < 0.1 ? `${Math.round(remainingMiles * 5280)} ft` : `${remainingMiles.toFixed(1)} mi`);
 
+    const miniProfile = buildClimbMiniProfile(climb, pts, mile, true);
     const svgPaths = this.generateClimbSvgPath(climb, progressPercent);
 
     return {
@@ -327,6 +330,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       remainingFormatted,
       gradePercent: climb.avgGradePercent,
       progressPercent,
+      miniProfile,
       svgPaths
     };
   });
@@ -748,7 +752,11 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if (pos.lat === 0 && pos.lon === 0) return;
 
     let finalCoords: [number, number] = [pos.lat, pos.lon];
-    if (this.map.isStyleLoaded()) {
+
+    // Only query rendered features for road snapping when NOT smoothly interpolating along route track.
+    // At 60fps, queryRenderedFeatures() snaps to screen-space quantized tile vertices, causing 1-2px jitter.
+    const isSmoothTracking = (this.deadReckoning.isTracking() && this.deadReckoning.isMoving()) || this.gpsSimulator.running();
+    if (!isSmoothTracking && this.map.isStyleLoaded()) {
       try {
         const transLayers = this.map.getStyle().layers
           ?.filter((l: any) => l['source-layer'] === 'transportation')

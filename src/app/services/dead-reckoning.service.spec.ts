@@ -107,4 +107,27 @@ describe('DeadReckoningService', () => {
     expect(service.isTracking()).toBe(false);
     expect(service.speedKph()).toBe(0);
   });
+
+  it('guarantees monotonic forward progress across incoming GPS fixes without snapping backward', () => {
+    service.updateGpsFix({
+      latitude: 40.000,
+      longitude: -105.000,
+      timestamp: 1000,
+      projectedMile: 0.1
+    }, 20);
+
+    // Simulate that the interpolation loop advanced interpolatedMile to 0.125
+    service.interpolatedMile.set(0.125);
+
+    // Next fix arrives with projectedMile of 0.120 (slightly behind due to timer jitter)
+    service.updateGpsFix({
+      latitude: 40.001,
+      longitude: -105.000,
+      timestamp: 2000,
+      projectedMile: 0.120
+    });
+
+    // Must NOT snap backward to 0.120; must hold or advance monotonically
+    expect(service.interpolatedMile()).toBeGreaterThanOrEqual(0.125);
+  });
 });
