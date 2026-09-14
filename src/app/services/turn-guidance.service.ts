@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TurnCue, TurnDirection, RoadSnapResult, OsmTurnDefinition } from '../models/ride-cockpit.model';
 
 export const CHORD_LENGTH_METERS = 25.0;
-export const LOOKAHEAD_WINDOW_METERS = 1000.0;
+export const LOOKAHEAD_WINDOW_METERS = 75.0;
 export const MIN_TURN_DEFLECTION_DEG = 20.0;
 export const ROAD_SNAP_MAX_DISTANCE_METERS = 20.0;
 export const ROAD_SNAP_MAX_HEADING_DIFF_DEG = 45.0;
@@ -36,9 +36,9 @@ export class TurnGuidanceService {
 
   /**
    * Classifies turn direction based on deflection angle:
-   * slight: [20°, 60°)
-   * regular: [60°, 120°)
-   * sharp: >= 120°
+   *  [20, 60): slight-right | [-60, -20): slight-left
+   *  [60, 120): right       | [-120, -60): left
+   *  >= 120: sharp-right    | <= -120: sharp-left
    */
   classifyDirection(deflectionDeg: number): TurnDirection | null {
     const absAngle = Math.abs(deflectionDeg);
@@ -99,6 +99,8 @@ export class TurnGuidanceService {
   /**
    * Computes upcoming turn cue ahead of the rider based exclusively on authentic
    * OpenStreetMap decision points where there is a genuine option between two or more ways.
+   *
+   * Only cues within 75 meters ahead of the rider are shown (not earlier).
    */
   computeTurnAheadFromJunctions(
     currentMile: number,
@@ -110,17 +112,19 @@ export class TurnGuidanceService {
     }
 
     const currentMeters = currentMile * 1609.344;
-    const windowStart = currentMeters + 15; // ignore junctions passed or under wheels
-    const windowEnd = currentMeters + LOOKAHEAD_WINDOW_METERS;
-
     let nextTurn: OsmTurnDefinition | null = null;
     let minDistanceMeters = Infinity;
 
     for (const turn of turns) {
       const turnMeters = turn.mile * 1609.344;
-      if (turnMeters >= windowStart && turnMeters <= windowEnd) {
-        const dist = turnMeters - currentMeters;
-        if (dist < minDistanceMeters) {
+      const dist = turnMeters - currentMeters;
+      // Active window: pops up 75 meters before the turn (not earlier),
+      // and remains active until 5 meters past the junction point
+      if (dist >= -5 && dist <= LOOKAHEAD_WINDOW_METERS) {
+        if (dist >= 0 && (minDistanceMeters < 0 || dist < minDistanceMeters)) {
+          minDistanceMeters = dist;
+          nextTurn = turn;
+        } else if (dist < 0 && minDistanceMeters === Infinity) {
           minDistanceMeters = dist;
           nextTurn = turn;
         }
@@ -260,8 +264,8 @@ export class TurnGuidanceService {
       return null;
     }
 
-    // Sample along the forward 1 km window at regular 10m intervals
-    const windowStart = currentMeters + 15; // ignore turns already behind or under wheels
+    // Sample along the forward 75m lookahead window
+    const windowStart = currentMeters - 5;
     const windowEnd = Math.min(totalTrackMeters, currentMeters + LOOKAHEAD_WINDOW_METERS);
 
     if (windowStart >= windowEnd) {
@@ -280,8 +284,8 @@ export class TurnGuidanceService {
     let currentPeakDeflection = 0;
     let currentTurnCoords: [number, number] = [0, 0];
 
-    const alignedStart = Math.ceil(windowStart / stepMeters) * stepMeters;
-    for (let s = alignedStart; s <= windowEnd - CHORD_LENGTH_METERS; s += stepMeters) {
+    const alignedStart = Math.max(0, Math.ceil(windowStart / stepMeters) * stepMeters);
+    for (let s = alignedStart; s <= windowEnd; s += stepMeters) {
       const pPre = this.interpolatePointAtDistance(trackPoints, Math.max(0, s - CHORD_LENGTH_METERS));
       const pMid = this.interpolatePointAtDistance(trackPoints, s);
       const pPost = this.interpolatePointAtDistance(trackPoints, Math.min(totalTrackMeters, s + CHORD_LENGTH_METERS));

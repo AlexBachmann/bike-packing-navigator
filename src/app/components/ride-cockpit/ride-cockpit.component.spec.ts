@@ -172,6 +172,13 @@ vi.mock('maplibre-gl', () => {
       return this;
     }
 
+    getContainer(): HTMLElement {
+      const el = document.createElement('div');
+      Object.defineProperty(el, 'clientHeight', { value: 600, configurable: true });
+      Object.defineProperty(el, 'clientWidth', { value: 800, configurable: true });
+      return el;
+    }
+
     getPadding(): { top: number; bottom: number; left: number; right: number } {
       return { ...this._padding };
     }
@@ -477,10 +484,11 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       expect(map.getPitch()).toBeLessThanOrEqual(MAX_3D_PITCH);
     });
 
-    it('should enforce lower-third anchor padding with bottom 160px', () => {
+    it('should enforce lower-quarter / lower-third anchor padding with top padding', () => {
       const map = (component as any).map;
       const padding = map.getPadding();
-      expect(padding.bottom).toBe(LOWER_THIRD_BOTTOM_PADDING);
+      expect(padding.top).toBeGreaterThan(0);
+      expect(padding.bottom).toBe(0);
     });
 
     it('should clamp pitch strictly within [50, 60] range when adjusted', () => {
@@ -501,7 +509,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
           center: [-105.0980, 39.4890],
           pitch: 55,
           bearing: 135,
-          padding: { bottom: 160 }
+          padding: expect.objectContaining({ top: expect.any(Number), bottom: 0 })
         })
       );
     });

@@ -33,7 +33,9 @@ import { getRasterBaselineStyle, getVectorStyleSpec } from '../route-map/route-m
 export const DEFAULT_3D_PITCH = 55;
 export const MIN_3D_PITCH = 50;
 export const MAX_3D_PITCH = 60;
-export const LOWER_THIRD_BOTTOM_PADDING = 160;
+export const RIDER_VERTICAL_ANCHOR_RATIO = 0.72; // Lower third to lower quarter (72% from top)
+export const LOWER_THIRD_TOP_PADDING = 264; // Baseline top padding for standard 600px viewport
+export const LOWER_THIRD_BOTTOM_PADDING = 0;
 
 /**
  * Formats speed in km/h or mph according to user distance unit setting.
@@ -663,7 +665,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     this.map = map;
 
-    map.setPadding({ bottom: LOWER_THIRD_BOTTOM_PADDING });
+    map.setPadding(this.getCameraPadding());
 
     map.on('dragstart', () => {
       this.autoFollow.set(false);
@@ -686,7 +688,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.resizeObserver = new ResizeObserver(() => {
         if (this.map) {
           this.map.resize();
-          this.map.setPadding({ bottom: LOWER_THIRD_BOTTOM_PADDING });
+          this.map.setPadding(this.getCameraPadding());
         }
       });
       this.resizeObserver.observe(container);
@@ -698,16 +700,31 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
     setTimeout(() => {
       this.map?.resize();
-      this.map?.setPadding({ bottom: LOWER_THIRD_BOTTOM_PADDING });
+      this.map?.setPadding(this.getCameraPadding());
     }, 150);
   }
 
   private handleWindowResize = (): void => {
     if (this.map) {
       this.map.resize();
-      this.map.setPadding({ bottom: LOWER_THIRD_BOTTOM_PADDING });
+      this.map.setPadding(this.getCameraPadding());
     }
   };
+
+  /**
+   * Calculates camera viewport padding to place rider in the lower quarter / lower third
+   * (~72% down from the top), maximizing forward route visibility into the 3D horizon.
+   */
+  getCameraPadding(): { top: number; bottom: number; left: number; right: number } {
+    const containerHeight =
+      this.mapContainer()?.nativeElement?.clientHeight ||
+      (typeof this.map?.getContainer === 'function' ? this.map.getContainer()?.clientHeight : 0) ||
+      0;
+    const topPadding = containerHeight > 0
+      ? Math.round(containerHeight * (2 * RIDER_VERTICAL_ANCHOR_RATIO - 1))
+      : LOWER_THIRD_TOP_PADDING;
+    return { top: Math.max(0, topPadding), bottom: 0, left: 0, right: 0 };
+  }
 
   recenterCamera(): void {
     this.autoFollow.set(true);
@@ -771,20 +788,21 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     const clampedPitch = Math.max(MIN_3D_PITCH, Math.min(MAX_3D_PITCH, this.cameraPitch()));
+    const cameraPadding = this.getCameraPadding();
 
     if (speedKph > 0) {
       this.map.jumpTo({
         center: [lon, lat],
         bearing: targetBearing,
         pitch: clampedPitch,
-        padding: { bottom: LOWER_THIRD_BOTTOM_PADDING }
+        padding: cameraPadding
       });
     } else {
       this.map.easeTo({
         center: [lon, lat],
         bearing: targetBearing,
         pitch: clampedPitch,
-        padding: { bottom: LOWER_THIRD_BOTTOM_PADDING },
+        padding: cameraPadding,
         duration: 600,
         easing: (t) => t
       });

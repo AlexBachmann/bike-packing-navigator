@@ -67,42 +67,42 @@ describe('TurnGuidanceService', () => {
       expect(cue).toBeNull();
     });
 
-    it('detects a slight-right turn ahead', () => {
-      // 200m straight North, then 200m at 35° bearing
+    it('detects a slight-right turn ahead when within 75 meters', () => {
+      // 50m straight North, then 50m at 35° bearing
       const track = createTrack([
-        { lengthMeters: 200, bearingDeg: 0 },
-        { lengthMeters: 200, bearingDeg: 35 }
+        { lengthMeters: 50, bearingDeg: 0 },
+        { lengthMeters: 50, bearingDeg: 35 }
       ]);
 
       const cue = service.computeTurnAhead(0, track, 'km');
       expect(cue).not.toBeNull();
       expect(cue!.direction).toBe('slight-right');
-      expect(cue!.distanceMeters).toBeGreaterThanOrEqual(180);
-      expect(cue!.distanceMeters).toBeLessThanOrEqual(220);
+      expect(cue!.distanceMeters).toBeGreaterThanOrEqual(40);
+      expect(cue!.distanceMeters).toBeLessThanOrEqual(60);
       expect(cue!.displayText).toContain('slight right');
       expect(cue!.displayText).toContain('meters');
     });
 
-    it('detects a 90° right turn ahead', () => {
-      // 300m North, then 300m East (90°)
+    it('detects a 90° right turn ahead when within 75 meters', () => {
+      // 60m North, then 60m East (90°)
       const track = createTrack([
-        { lengthMeters: 300, bearingDeg: 0 },
-        { lengthMeters: 300, bearingDeg: 90 }
+        { lengthMeters: 60, bearingDeg: 0 },
+        { lengthMeters: 60, bearingDeg: 90 }
       ]);
 
       const cue = service.computeTurnAhead(0, track, 'km');
       expect(cue).not.toBeNull();
       expect(cue!.direction).toBe('right');
-      expect(cue!.distanceMeters).toBeGreaterThanOrEqual(280);
-      expect(cue!.distanceMeters).toBeLessThanOrEqual(320);
+      expect(cue!.distanceMeters).toBeGreaterThanOrEqual(50);
+      expect(cue!.distanceMeters).toBeLessThanOrEqual(70);
       expect(cue!.displayText).toContain('Turn right in');
     });
 
-    it('detects a sharp hairpin left turn (>= 120°)', () => {
-      // 250m North (0°), then 200m at 210° (-150° deflection)
+    it('detects a sharp hairpin left turn (>= 120°) when within 75 meters', () => {
+      // 50m North (0°), then 50m at 210° (-150° deflection)
       const track = createTrack([
-        { lengthMeters: 250, bearingDeg: 0 },
-        { lengthMeters: 200, bearingDeg: 210 }
+        { lengthMeters: 50, bearingDeg: 0 },
+        { lengthMeters: 50, bearingDeg: 210 }
       ]);
 
       const cue = service.computeTurnAhead(0, track, 'km');
@@ -113,38 +113,38 @@ describe('TurnGuidanceService', () => {
 
     it('formats countdown in yards when unit is miles', () => {
       const track = createTrack([
-        { lengthMeters: 200, bearingDeg: 0 },
-        { lengthMeters: 200, bearingDeg: 90 }
+        { lengthMeters: 50, bearingDeg: 0 },
+        { lengthMeters: 50, bearingDeg: 90 }
       ]);
 
       const cue = service.computeTurnAhead(0, track, 'miles');
       expect(cue).not.toBeNull();
       expect(cue!.displayText).toContain('yards');
-      // 200m ~ 218 yards
+      // 50m ~ 55 yards
       expect(cue!.displayText).toMatch(/\b\d+\s+yards\b/);
     });
 
     it('decreases countdown distance as rider progresses toward the turn', () => {
       const track = createTrack([
-        { lengthMeters: 400, bearingDeg: 0 },
-        { lengthMeters: 200, bearingDeg: 90 }
+        { lengthMeters: 70, bearingDeg: 0 },
+        { lengthMeters: 50, bearingDeg: 90 }
       ]);
 
       const cueAtStart = service.computeTurnAhead(0, track, 'km');
-      // Rider moves 200m forward (~0.124 miles)
-      const cueMidway = service.computeTurnAhead(0.124, track, 'km');
+      // Rider moves 35m forward (~0.0217 miles)
+      const cueMidway = service.computeTurnAhead(0.0217, track, 'km');
 
       expect(cueAtStart).not.toBeNull();
       expect(cueMidway).not.toBeNull();
       expect(cueMidway!.distanceMeters).toBeLessThan(cueAtStart!.distanceMeters);
-      expect(cueMidway!.distanceMeters).toBeCloseTo(200, -1);
+      expect(cueMidway!.distanceMeters).toBeCloseTo(35, -1);
     });
 
-    it('ignores turns beyond the 1 km lookahead window', () => {
-      // 1500m straight North, then 90° turn
+    it('ignores turns beyond the 75m lookahead window', () => {
+      // 150m straight North, then 90° turn
       const track = createTrack([
-        { lengthMeters: 1500, bearingDeg: 0 },
-        { lengthMeters: 200, bearingDeg: 90 }
+        { lengthMeters: 150, bearingDeg: 0 },
+        { lengthMeters: 50, bearingDeg: 90 }
       ]);
 
       const cue = service.computeTurnAhead(0, track, 'km');
@@ -313,22 +313,28 @@ describe('TurnGuidanceService', () => {
       expect(service.computeTurnAheadFromJunctions(0.5, [], 'km')).toBeNull();
     });
 
-    it('detects upcoming intersection with authentic road name', () => {
-      // Rider at mile 0.9 (approx 160 meters before mile 1.0 junction)
+    it('suppresses turn cues when the next junction is more than 75 meters away', () => {
+      // Rider at mile 0.9 (approx 161 meters before mile 1.0 junction)
       const cue = service.computeTurnAheadFromJunctions(0.9, mockOsmTurns, 'km');
+      expect(cue).toBeNull();
+    });
+
+    it('detects upcoming intersection with authentic road name when within 75 meters', () => {
+      // Rider at mile 0.97 (approx 48 meters before mile 1.0 junction)
+      const cue = service.computeTurnAheadFromJunctions(0.97, mockOsmTurns, 'km');
       expect(cue).not.toBeNull();
       expect(cue!.direction).toBe('left');
       expect(cue!.roadName).toBe('Buffalo St');
-      expect(cue!.displayText).toContain('Turn left onto Buffalo St in 161 meters');
+      expect(cue!.displayText).toContain('Turn left onto Buffalo St in 48 meters');
       expect(cue!.junctionType).toBe('intersection');
     });
 
-    it('formats fork cues with Fork prefix and imperial yards', () => {
-      // Rider at mile 3.4 (approx 161m = 176 yards before fork)
-      const cue = service.computeTurnAheadFromJunctions(3.4, mockOsmTurns, 'miles');
+    it('formats fork cues with Fork prefix and imperial yards when within 75 meters', () => {
+      // Rider at mile 3.47 (approx 48m = 53 yards before fork)
+      const cue = service.computeTurnAheadFromJunctions(3.47, mockOsmTurns, 'miles');
       expect(cue).not.toBeNull();
       expect(cue!.direction).toBe('slight-right');
-      expect(cue!.displayText).toContain('Fork slight right onto Goat Creek Trail in 176 yards');
+      expect(cue!.displayText).toContain('Fork slight right onto Goat Creek Trail in 53 yards');
       expect(cue!.junctionType).toBe('fork');
     });
 
@@ -338,13 +344,13 @@ describe('TurnGuidanceService', () => {
       expect(cue).toBeNull();
     });
 
-    it('prioritizes OSM turns in computeTurnAhead when provided', () => {
+    it('prioritizes OSM turns in computeTurnAhead when provided and within 75 meters', () => {
       const dummyTrack: [number, number, number, number, number][] = [
         [51.17, -115.57, 1000, 0, 0],
         [51.18, -115.57, 1000, 1.6, 1.0],
         [51.19, -115.57, 1000, 3.2, 2.0]
       ];
-      const cue = service.computeTurnAhead(0.9, dummyTrack, 'km', mockOsmTurns);
+      const cue = service.computeTurnAhead(0.97, dummyTrack, 'km', mockOsmTurns);
       expect(cue).not.toBeNull();
       expect(cue!.roadName).toBe('Buffalo St');
     });
