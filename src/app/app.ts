@@ -30,18 +30,12 @@ import { OfflineStorageService } from './services/offline-storage.service';
 import { WakeLockService } from './services/wake-lock.service';
 import { AnalyticsService } from './services/analytics.service';
 import { DeadReckoningService } from './services/dead-reckoning.service';
-import { calculateBearing } from './models/weather.model';
+import { GeolocationService } from './services/geolocation.service';
+import { haversineMeters } from './utils/geo-math.utils';
 
-export function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371000;
-  const dLat = (lat2 - lat1) * (Math.PI / 180);
-  const dLon = (lon2 - lon1) * (Math.PI / 180);
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
+// Backward compatibility re-export
+export { haversineMeters } from './utils/geo-math.utils';
+
 
 @Component({
   selector: 'app-root',
@@ -75,6 +69,7 @@ export class App implements OnInit, OnDestroy {
   readonly wakeLock = inject(WakeLockService);
   readonly analytics = inject(AnalyticsService);
   readonly deadReckoning = inject(DeadReckoningService);
+  readonly geolocation = inject(GeolocationService);
 
   readonly activeRouteId = this.manifestService.activeRouteId;
   readonly activeRouteSummary = this.manifestService.activeRouteSummary;
@@ -82,17 +77,17 @@ export class App implements OnInit, OnDestroy {
   readonly showWeatherModal = signal<boolean>(false);
   readonly showRouteModal = signal<boolean>(false);
 
+  private unsubscribeLocationUpdate: (() => void) | null = null;
+
   constructor() {
     effect(() => {
       this.updateBroadLocation();
     });
-    effect(() => {
-      const tab = this.activeTab();
-      if (this.gpsState().enabled) {
-        this.startGpsInterval();
-      }
+    this.unsubscribeLocationUpdate = this.geolocation.onLocationUpdate((mile: number) => {
+      this.setMile(mile);
     });
   }
+
 
 
   ngOnInit(): void {
@@ -184,19 +179,8 @@ export class App implements OnInit, OnDestroy {
     this.settings.togglePaceMode();
   }
 
-  // GPS Geolocation State
-  readonly gpsState = signal<GpsState>({
-    enabled: false,
-    loading: false,
-    lastUpdated: null,
-    latitude: null,
-    longitude: null,
-    accuracyMeters: null,
-    error: null,
-    projection: null
-  });
-
-  private gpsIntervalId: any = null;
+  // GPS Geolocation State (Delegated to GeolocationService)
+  readonly gpsState = this.geolocation.gpsState;
 
   // Category Long-Press / Filter state
   private longPressTimer: any = null;
@@ -207,8 +191,10 @@ export class App implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cancelCategoryPress();
-    this.stopGpsInterval();
+    this.unsubscribeLocationUpdate?.();
+    this.geolocation.stopTracking();
   }
+
 
   // Selected filter categories
   readonly availableCategories: CategoryItem[] = AVAILABLE_CATEGORIES;
@@ -432,236 +418,62 @@ export class App implements OnInit, OnDestroy {
     return { icon: '📍', label: category, badgeClass: 'bg-slate-700/50 text-slate-300 border-slate-600' };
   }
 
-  // GPS Geolocation Actions
+  // GPS Geolocation Actions (Delegated to GeolocationService facade)
   toggleGps(): void {
-    if (this.gpsState().enabled) {
-      this.stopGpsTracking();
-    } else {
-      this.startGpsTracking();
-    }
+    this.geolocation.toggleTracking();
   }
 
   getGpsFrequencySeconds(): number {
-    return this.activeTab() === 'ride' ? 1 : 30;
+    return this.geolocation.getFrequencySeconds();
   }
 
   startGpsTracking(): void {
-    this.gpsState.update((s) => ({ ...s, enabled: true, error: null }));
-    this.requestLocation();
-    this.startGpsInterval();
-  }
-
-  private startGpsInterval(): void {
-    this.stopGpsInterval();
-    const intervalMs = this.getGpsFrequencySeconds() * 1000;
-    this.gpsIntervalId = window.setInterval(() => {
-      this.requestLocation();
-    }, intervalMs);
+    this.geolocation.startTracking();
   }
 
   stopGpsTracking(): void {
-    this.stopGpsInterval();
-    this.deadReckoning.stop();
-    this.gpsState.set({
-      enabled: false,
-      loading: false,
-      lastUpdated: null,
-      latitude: null,
-      longitude: null,
-      previousLatitude: null,
-      previousLongitude: null,
-      accuracyMeters: null,
-      error: null,
-      projection: null,
-      speedKph: null,
-      heading: null
-    });
+    this.geolocation.stopTracking();
+  }
+
+  retryGps(): void {
+    this.geolocation.startTracking();
   }
 
   dismissGpsAlert(): void {
-    this.gpsState.update((s) => ({ ...s, projection: null, error: null }));
+    this.geolocation.dismissAlert();
   }
 
   clearGpsError(): void {
-    this.gpsState.update((s) => ({ ...s, error: null }));
+    this.geolocation.clearError();
   }
 
-  private stopGpsInterval(): void {
-    if (this.gpsIntervalId) {
-      clearInterval(this.gpsIntervalId);
-      this.gpsIntervalId = null;
-    }
+  startGpsInterval(): void {
+    this.geolocation.startGpsInterval();
+  }
+
+  stopGpsInterval(): void {
+    this.geolocation.stopGpsInterval();
   }
 
   requestLocation(): void {
-    if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      this.gpsState.update((s) => ({
-        ...s,
-        loading: false,
-        error: 'Geolocation is not supported by your browser.'
-      }));
-      return;
-    }
-
-    if (!this.gpsState().enabled) {
-      return;
-    }
-
-    this.gpsState.update((s) => ({ ...s, loading: true, error: null }));
-
-    const isRide = this.activeTab() === 'ride';
-
-    navigator.geolocation.getCurrentPosition(
-      (pos) => this.handleLocationSuccess(pos),
-      (err) => this.handleLocationError(err, isRide),
-      {
-        enableHighAccuracy: true,
-        timeout: isRide ? 5000 : 15000,
-        maximumAge: isRide ? 1000 : 10000
-      }
-    );
+    this.geolocation.requestLocation();
   }
 
   handleLocationSuccess(pos: GeolocationPosition): void {
-    if (!this.gpsState().enabled) {
-      return;
-    }
-
-    const lat = pos.coords.latitude;
-    const lon = pos.coords.longitude;
-    const accuracy = pos.coords.accuracy;
-
-    const currentGps = this.gpsState();
-    const prevLat = currentGps.latitude;
-    const prevLon = currentGps.longitude;
-    const prevHeading = currentGps.heading ?? null;
-    const prevTime = currentGps.lastUpdated ? currentGps.lastUpdated.getTime() : null;
-    const nowTime = pos.timestamp || Date.now();
-
-    // Calculate speed between the last two GPS positions
-    let speedKph: number | null = null;
-    if (prevLat !== null && prevLon !== null && prevTime !== null) {
-      const distMeters = haversineMeters(prevLat, prevLon, lat, lon);
-      const deltaSec = Math.max(0.05, (nowTime - prevTime) / 1000);
-      if (distMeters >= 1.0 && deltaSec > 0.05) {
-        speedKph = (distMeters / deltaSec) * 3.6;
-      } else {
-        speedKph = 0;
-      }
-    } else if (typeof pos.coords.speed === 'number' && !isNaN(pos.coords.speed) && pos.coords.speed >= 0) {
-      speedKph = pos.coords.speed * 3.6;
-    }
-
-    if (speedKph !== null && speedKph < 1.0) {
-      speedKph = 0;
-    }
-
-    const rawHeading = typeof pos.coords.heading === 'number' && !isNaN(pos.coords.heading)
-      ? pos.coords.heading
-      : null;
-
-    let heading: number | null = null;
-    const isStanding = speedKph === null || speedKph < 1.0;
-
-    if (isStanding) {
-      // When rider is standing (< 1 km/h), compass heading (pos.coords.heading) is considered
-      if (rawHeading !== null) {
-        heading = rawHeading;
-      } else if (prevHeading !== null) {
-        heading = prevHeading;
-      }
-    } else {
-      // When rider is moving (>= 1 km/h), heading is determined by the last two GPS positions
-      if (prevLat !== null && prevLon !== null) {
-        const distMeters = haversineMeters(prevLat, prevLon, lat, lon);
-        if (distMeters >= 2.0) {
-          heading = calculateBearing(prevLat, prevLon, lat, lon);
-        } else if (prevHeading !== null) {
-          heading = prevHeading;
-        }
-      } else if (rawHeading !== null) {
-        // Initial move before second GPS coordinate: fallback to hardware heading if reported
-        heading = rawHeading;
-      } else if (prevHeading !== null) {
-        heading = prevHeading;
-      }
-    }
-
-    const projection = this.routeService.projectOntoRoute(lat, lon);
-
-    this.gpsState.set({
-      enabled: true,
-      loading: false,
-      lastUpdated: new Date(nowTime),
-      latitude: lat,
-      longitude: lon,
-      previousLatitude: prevLat,
-      previousLongitude: prevLon,
-      accuracyMeters: accuracy,
-      error: null,
-      projection,
-      speedKph,
-      heading
-    });
-
-    // Feed dead reckoning service for continuous 60fps interpolation between GPS fixes
-    this.deadReckoning.updateGpsFix({
-      latitude: lat,
-      longitude: lon,
-      timestamp: nowTime,
-      projectedMile: projection && !projection.isOffRoute ? projection.projectedRouteMile : null,
-      heading,
-      accuracyMeters: accuracy
-    }, speedKph);
-
-    // If rider is within 10 km radius, calculate orthogonal projection (vertical line)
-    // and update the slider/toggle location to the projected return mile!
-    if (projection && !projection.isOffRoute) {
-      this.setMile(projection.projectedRouteMile);
-    }
+    this.geolocation.handleLocationSuccess(pos);
   }
 
   handleLocationError(err: GeolocationPositionError, isRide = this.activeTab() === 'ride'): void {
-    if (!this.gpsState().enabled) {
-      return;
-    }
-
-    let msg = 'Failed to retrieve current location.';
-    if (err.code === err.PERMISSION_DENIED) {
-      msg = 'Location permission denied. Please allow location access in your browser.';
-    } else if (err.code === err.POSITION_UNAVAILABLE) {
-      msg = 'GPS signal unavailable. Please ensure GPS/location services are enabled.';
-    } else if (err.code === err.TIMEOUT) {
-      msg = isRide ? 'GPS signal weak...' : 'GPS request timed out. Retrying in 30 seconds...';
-    }
-
-    this.gpsState.update((s) => ({
-      ...s,
-      loading: false,
-      error: msg
-    }));
+    this.geolocation.handleLocationError(err, isRide);
   }
 
   /**
    * Helper for testing/simulating GPS coordinates along the Tour Divide
    */
   simulateGpsLocation(lat: number, lon: number): void {
-    const projection = this.routeService.projectOntoRoute(lat, lon);
-    this.gpsState.set({
-      enabled: true,
-      loading: false,
-      lastUpdated: new Date(),
-      latitude: lat,
-      longitude: lon,
-      accuracyMeters: 5,
-      error: null,
-      projection
-    });
-
-    if (projection && !projection.isOffRoute) {
-      this.setMile(projection.projectedRouteMile);
-    }
+    this.geolocation.simulateGpsLocation(lat, lon);
   }
+
 
   /**
    * Updates broad location context in AnalyticsService:

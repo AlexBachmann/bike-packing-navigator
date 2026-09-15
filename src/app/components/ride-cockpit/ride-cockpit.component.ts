@@ -29,6 +29,16 @@ import { Climb, ClimbMiniProfile, buildClimbMiniProfile } from '../../models/ele
 import { TurnCue, TurnDirection } from '../../models/ride-cockpit.model';
 import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
 import { getRasterBaselineStyle, getVectorStyleSpec } from '../route-map/route-map.component';
+import { RideTurnGuidanceBannerComponent, getTurnIcon } from './ride-turn-guidance-banner.component';
+import { RideOffCourseBannerComponent, OffCourseAlertStatus } from './ride-off-course-banner.component';
+import { RideClimbMiniWidgetComponent, ActiveClimbStatus } from './ride-climb-mini-widget.component';
+import { RideSpeedometerComponent } from './ride-speedometer.component';
+import { RideSimulatorModalComponent } from './ride-simulator-modal.component';
+import { RideVectorDownloadCardComponent } from './ride-vector-download-card.component';
+
+export { getTurnIcon } from './ride-turn-guidance-banner.component';
+export type { OffCourseAlertStatus } from './ride-off-course-banner.component';
+export type { ActiveClimbStatus } from './ride-climb-mini-widget.component';
 
 export const DEFAULT_3D_PITCH = 55;
 export const MIN_3D_PITCH = 50;
@@ -50,34 +60,18 @@ export function formatSpeed(speedKph: number, unit: 'miles' | 'km'): string {
   }
 }
 
-export interface ActiveClimbStatus {
-  climbId: string;
-  name: string;
-  remainingMiles: number;
-  remainingKm: number;
-  remainingFormatted: string;
-  gradePercent: number;
-  progressPercent: number;
-  miniProfile: ClimbMiniProfile;
-  svgPaths?: {
-    linePath: string;
-    areaPath: string;
-    riderX: number;
-    riderY: number;
-  };
-}
-
-export interface OffCourseAlertStatus {
-  isOffCourse: boolean;
-  distanceMeters: number;
-  displayText: string;
-  returnBearingDeg: number;
-}
-
 @Component({
   selector: 'app-ride-cockpit',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RideTurnGuidanceBannerComponent,
+    RideOffCourseBannerComponent,
+    RideClimbMiniWidgetComponent,
+    RideSpeedometerComponent,
+    RideSimulatorModalComponent,
+    RideVectorDownloadCardComponent
+  ],
   templateUrl: './ride-cockpit.component.html',
   styleUrl: './ride-cockpit.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1018,28 +1012,24 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTurnIcon(direction: TurnDirection): string {
-    switch (direction) {
-      case 'slight-left': return '↖️';
-      case 'left': return '⬅️';
-      case 'sharp-left': return '↙️';
-      case 'slight-right': return '↗️';
-      case 'right': return '➡️';
-      case 'sharp-right': return '↘️';
-      default: return '⬆️';
-    }
+    return getTurnIcon(direction);
   }
 
   toggleSimulatorModal(): void {
     this.isSimulatorOpen.update((v) => !v);
   }
 
-  onSimSpeedInputChange(event: Event): void {
-    const val = Number((event.target as HTMLInputElement).value);
-    const clamped = Math.max(0, Math.min(120, val));
+  onSimSpeedChange(speed: number): void {
+    const clamped = Math.max(0, Math.min(120, speed));
     this.simSpeedInput.set(clamped);
     if (this.gpsSimulator.running()) {
       this.gpsSimulator.setSpeed(clamped);
     }
+  }
+
+  onSimSpeedInputChange(event: Event): void {
+    const val = Number((event.target as HTMLInputElement).value);
+    this.onSimSpeedChange(val);
   }
 
   setSimPreset(speed: number): void {

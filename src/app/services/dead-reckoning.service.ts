@@ -1,5 +1,5 @@
 import { Injectable, signal, computed, OnDestroy, inject } from '@angular/core';
-import { haversineMeters } from '../app';
+import { haversineMeters } from '../utils/geo-math.utils';
 import { calculateBearing } from '../models/weather.model';
 import { RouteDataService } from './route-data.service';
 import { TurnGuidanceService } from './turn-guidance.service';

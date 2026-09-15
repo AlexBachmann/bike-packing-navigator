@@ -34,6 +34,16 @@ import { DEFAULT_RESUPPLY_RECIPES } from '../../data/resupply-recipes.data';
 import { DistanceUnit } from '../../models/settings.model';
 import { Place } from '../../models/waypoint.model';
 
+import { ResupplyShoppingListComponent } from './resupply-shopping-list.component';
+import { ResupplyDistanceSelectorComponent } from './resupply-distance-selector.component';
+import { ResupplyNutrientDemandsComponent } from './resupply-nutrient-demands.component';
+import { ResupplyFulfillmentGaugesComponent } from './resupply-fulfillment-gauges.component';
+import { ResupplyRecipeCardComponent } from './resupply-recipe-card.component';
+import {
+  RecipeFormData,
+  ResupplyRecipeFormModalComponent
+} from './resupply-recipe-form-modal.component';
+
 export const MIN_RESUPPLY_DISTANCE_KM = 10;
 
 export interface ResupplyStopItem {
@@ -53,7 +63,16 @@ export interface ResupplyStopItem {
 @Component({
   selector: 'app-resupply-planner',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ResupplyShoppingListComponent,
+    ResupplyDistanceSelectorComponent,
+    ResupplyNutrientDemandsComponent,
+    ResupplyFulfillmentGaugesComponent,
+    ResupplyRecipeCardComponent,
+    ResupplyRecipeFormModalComponent
+  ],
   templateUrl: './resupply-planner.component.html',
   styleUrl: './resupply-planner.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -103,6 +122,11 @@ export class ResupplyPlannerComponent {
 
   // Form state for Editing / Adding recipes
   readonly editingRecipeId = signal<string | null>(null);
+  readonly currentEditingRecipe = computed<Recipe | null>(() => {
+    const id = this.editingRecipeId();
+    if (!id) return null;
+    return this.catalogService.recipes().find((r) => r.id === id) || null;
+  });
   readonly formName = signal<string>('');
   readonly formDescription = signal<string>('');
   readonly formCategory = signal<RecipeCategory>('meal');
@@ -594,6 +618,26 @@ export class ResupplyPlannerComponent {
 
     this.toastService.showSuccess(`Added "${name}" to recipe catalog`);
     this.closeAddModal();
+  }
+
+  onSaveRecipeForm(data: RecipeFormData): void {
+    this.formName.set(data.name);
+    this.formDescription.set(data.description);
+    this.formCategory.set(data.category);
+    this.formServings.set(data.servings);
+    this.formCalories.set(data.nutrients.calories);
+    this.formCarbs.set(data.nutrients.carbs);
+    this.formProtein.set(data.nutrients.protein);
+    this.formFat.set(data.nutrients.fat);
+    this.formSodium.set(data.nutrients.sodium);
+    this.formFluids.set(data.nutrients.fluids);
+    this.formIngredients.set(data.ingredients);
+
+    if (this.showEditModal()) {
+      this.saveEditedRecipe();
+    } else if (this.showAddModal()) {
+      this.saveNewCustomRecipe();
+    }
   }
 
   // Reset Selections & Quantities

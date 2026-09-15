@@ -7,6 +7,8 @@ import { WeatherService } from '../../services/weather.service';
 import { WeatherForecastComponent } from '../weather-forecast/weather-forecast.component';
 import { ProfileWindowMode, ElevationScrubData, MountainPass, Climb, UpcomingClimb, ClimbFilterMode, ClimbMiniProfile, ClimbGradientStop, buildClimbMiniProfile } from '../../models/elevation.model';
 import { ClimbWeatherForecast } from '../../models/weather.model';
+import { ClimbCardComponent } from './climb-card.component';
+import { ElevationProfileChartComponent } from './elevation-profile-chart.component';
 
 export interface SvgPoint {
   x: number;
@@ -21,7 +23,12 @@ export interface SvgPoint {
 @Component({
   selector: 'app-elevation-profile',
   standalone: true,
-  imports: [CommonModule, WeatherForecastComponent],
+  imports: [
+    CommonModule,
+    WeatherForecastComponent,
+    ElevationProfileChartComponent,
+    ClimbCardComponent
+  ],
   templateUrl: './elevation-profile.component.html',
   styleUrl: './elevation-profile.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

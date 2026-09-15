@@ -7,11 +7,20 @@ import { PwaInstallService } from '../../services/pwa-install.service';
 import { ToastService } from '../../services/toast.service';
 import { PmtilesStorageService, RouteSectionMeta } from '../../services/pmtiles-storage.service';
 import { RouteManifestService } from '../../services/route-manifest.service';
+import { SettingsRiderRigComponent } from './settings-rider-rig.component';
+import { SettingsPaceEtaComponent } from './settings-pace-eta.component';
+import { SettingsOfflineMapsComponent } from './settings-offline-maps.component';
 
 @Component({
   selector: 'app-settings-tab',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SettingsRiderRigComponent,
+    SettingsPaceEtaComponent,
+    SettingsOfflineMapsComponent
+  ],
   templateUrl: './settings-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

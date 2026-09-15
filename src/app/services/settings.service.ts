@@ -1,14 +1,26 @@
 import { Injectable, signal, computed, effect, inject } from '@angular/core';
-import { UserSettings, DEFAULT_USER_SETTINGS, WeightUnit, DistanceUnit, PaceMode, MapStyle, MapRendererMode, NavigationTab } from '../models/settings.model';
+import {
+  UserSettings,
+  DEFAULT_USER_SETTINGS,
+  WeightUnit,
+  DistanceUnit,
+  PaceMode,
+  MapStyle,
+  MapRendererMode,
+  NavigationTab
+} from '../models/settings.model';
 import { ResupplyCatalogService } from './resupply-catalog.service';
+import { UserSettingsStorageService, MAP_RENDERER_KEY } from './settings/user-settings-storage.service';
 
-const STORAGE_KEY = 'tour_divide_user_settings';
-export const MAP_RENDERER_KEY = 'bpn_map_renderer';
+export { MAP_RENDERER_KEY } from './settings/user-settings-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
+  private readonly storage = inject(UserSettingsStorageService);
+  private readonly resupplyCatalog = inject(ResupplyCatalogService, { optional: true });
+
   readonly riderWeight = signal<number | null>(null);
   readonly bikeWeight = signal<number | null>(null);
   readonly waterCapacityLiters = signal<number | null>(null);
@@ -26,7 +38,6 @@ export class SettingsService {
   readonly routeLocations = signal<Record<string, number>>({});
   readonly keepScreenAwake = signal<boolean>(DEFAULT_USER_SETTINGS.keepScreenAwake ?? true);
   readonly anonymousTelemetryEnabled = signal<boolean>(DEFAULT_USER_SETTINGS.anonymousTelemetryEnabled ?? true);
-  private readonly resupplyCatalog = inject(ResupplyCatalogService, { optional: true });
 
   // Climb Surge & Hike-a-Bike Settings
   readonly climbSurgePercent = signal<number>(10);
@@ -114,78 +125,57 @@ export class SettingsService {
   }
 
   loadSettings(): void {
-    if (typeof window === 'undefined' || !window.localStorage) return;
-
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as Partial<UserSettings>;
-        if (parsed.riderWeight !== undefined) this.riderWeight.set(parsed.riderWeight);
-        if (parsed.bikeWeight !== undefined) this.bikeWeight.set(parsed.bikeWeight);
-        if (parsed.waterCapacityLiters !== undefined) this.waterCapacityLiters.set(parsed.waterCapacityLiters);
-        if (parsed.weightUnit) this.weightUnit.set(parsed.weightUnit);
-        if (parsed.distanceUnit) this.distanceUnit.set(parsed.distanceUnit);
-        if (parsed.avgSpeedMph) this.avgSpeedMph.set(parsed.avgSpeedMph);
-        if (parsed.riderPowerWatts !== undefined) this.riderPowerWatts.set(parsed.riderPowerWatts);
-        if (parsed.paceMode) this.paceMode.set(parsed.paceMode);
-        if (parsed.climbSurgePercent !== undefined) this.climbSurgePercent.set(parsed.climbSurgePercent);
-        if (parsed.climbSurgeDurationMinutes !== undefined) this.climbSurgeDurationMinutes.set(parsed.climbSurgeDurationMinutes);
-        if (parsed.hikeBikeThresholdKmh !== undefined) this.hikeBikeThresholdKmh.set(parsed.hikeBikeThresholdKmh);
-        if (parsed.hikeBikeBaseSpeedKmh !== undefined) this.hikeBikeBaseSpeedKmh.set(parsed.hikeBikeBaseSpeedKmh);
-        if (parsed.mapStyle) this.mapStyle.set(parsed.mapStyle);
-        if (parsed.mapZoomLevel !== undefined && !isNaN(parsed.mapZoomLevel)) this.mapZoomLevel.set(parsed.mapZoomLevel);
-        if (parsed.activeTab) this.activeTab.set(parsed.activeTab);
-        if (parsed.selectedRouteKey !== undefined) this.selectedRouteKey.set(parsed.selectedRouteKey);
-        if (parsed.currentLocationMile !== undefined) this.currentLocationMile.set(parsed.currentLocationMile);
-        if (parsed.routeLocations) this.routeLocations.set(parsed.routeLocations);
-        if (parsed.keepScreenAwake !== undefined) this.keepScreenAwake.set(parsed.keepScreenAwake);
-        if (parsed.anonymousTelemetryEnabled !== undefined) this.anonymousTelemetryEnabled.set(parsed.anonymousTelemetryEnabled);
-        if (parsed.mapRenderer === 'auto' || parsed.mapRenderer === 'raster') {
-          this.mapRenderer.set(parsed.mapRenderer);
-        }
-      }
-
-      const storedRenderer = localStorage.getItem(MAP_RENDERER_KEY);
-      if (storedRenderer === 'auto' || storedRenderer === 'raster') {
-        this.mapRenderer.set(storedRenderer);
-      }
-    } catch (e) {
-      console.warn('Could not read settings from localStorage', e);
+    const loaded = this.storage.loadSettings();
+    if (loaded.riderWeight !== undefined) this.riderWeight.set(loaded.riderWeight);
+    if (loaded.bikeWeight !== undefined) this.bikeWeight.set(loaded.bikeWeight);
+    if (loaded.waterCapacityLiters !== undefined) this.waterCapacityLiters.set(loaded.waterCapacityLiters);
+    if (loaded.weightUnit) this.weightUnit.set(loaded.weightUnit);
+    if (loaded.distanceUnit) this.distanceUnit.set(loaded.distanceUnit);
+    if (loaded.avgSpeedMph !== undefined) this.avgSpeedMph.set(loaded.avgSpeedMph);
+    if (loaded.riderPowerWatts !== undefined) this.riderPowerWatts.set(loaded.riderPowerWatts);
+    if (loaded.paceMode) this.paceMode.set(loaded.paceMode);
+    if (loaded.climbSurgePercent !== undefined) this.climbSurgePercent.set(loaded.climbSurgePercent);
+    if (loaded.climbSurgeDurationMinutes !== undefined) this.climbSurgeDurationMinutes.set(loaded.climbSurgeDurationMinutes);
+    if (loaded.hikeBikeThresholdKmh !== undefined) this.hikeBikeThresholdKmh.set(loaded.hikeBikeThresholdKmh);
+    if (loaded.hikeBikeBaseSpeedKmh !== undefined) this.hikeBikeBaseSpeedKmh.set(loaded.hikeBikeBaseSpeedKmh);
+    if (loaded.mapStyle) this.mapStyle.set(loaded.mapStyle);
+    if (loaded.mapZoomLevel !== undefined) this.mapZoomLevel.set(loaded.mapZoomLevel);
+    if (loaded.activeTab) this.activeTab.set(loaded.activeTab);
+    if (loaded.selectedRouteKey !== undefined) this.selectedRouteKey.set(loaded.selectedRouteKey);
+    if (loaded.currentLocationMile !== undefined) this.currentLocationMile.set(loaded.currentLocationMile);
+    if (loaded.routeLocations) this.routeLocations.set(loaded.routeLocations);
+    if (loaded.keepScreenAwake !== undefined) this.keepScreenAwake.set(loaded.keepScreenAwake);
+    if (loaded.anonymousTelemetryEnabled !== undefined) this.anonymousTelemetryEnabled.set(loaded.anonymousTelemetryEnabled);
+    if (loaded.mapRenderer === 'auto' || loaded.mapRenderer === 'raster') {
+      this.mapRenderer.set(loaded.mapRenderer);
     }
   }
 
   persist(): void {
-    if (typeof window === 'undefined' || !window.localStorage) return;
-
-    try {
-      const currentSettings: UserSettings = {
-        riderWeight: this.riderWeight(),
-        bikeWeight: this.bikeWeight(),
-        waterCapacityLiters: this.waterCapacityLiters(),
-        weightUnit: this.weightUnit(),
-        distanceUnit: this.distanceUnit(),
-        avgSpeedMph: this.avgSpeedMph(),
-        riderPowerWatts: this.riderPowerWatts(),
-        paceMode: this.paceMode(),
-        climbSurgePercent: this.climbSurgePercent(),
-        climbSurgeDurationMinutes: this.climbSurgeDurationMinutes(),
-        hikeBikeThresholdKmh: this.hikeBikeThresholdKmh(),
-        hikeBikeBaseSpeedKmh: this.hikeBikeBaseSpeedKmh(),
-        mapStyle: this.mapStyle(),
-        mapZoomLevel: this.mapZoomLevel(),
-        activeTab: this.activeTab(),
-        selectedRouteKey: this.selectedRouteKey(),
-        currentLocationMile: this.currentLocationMile(),
-        routeLocations: this.routeLocations(),
-        keepScreenAwake: this.keepScreenAwake(),
-        anonymousTelemetryEnabled: this.anonymousTelemetryEnabled(),
-        mapRenderer: this.mapRenderer()
-      };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentSettings));
-      localStorage.setItem(MAP_RENDERER_KEY, this.mapRenderer());
-    } catch (e) {
-      console.warn('Could not write settings to localStorage', e);
-    }
+    const currentSettings: UserSettings = {
+      riderWeight: this.riderWeight(),
+      bikeWeight: this.bikeWeight(),
+      waterCapacityLiters: this.waterCapacityLiters(),
+      weightUnit: this.weightUnit(),
+      distanceUnit: this.distanceUnit(),
+      avgSpeedMph: this.avgSpeedMph(),
+      riderPowerWatts: this.riderPowerWatts(),
+      paceMode: this.paceMode(),
+      climbSurgePercent: this.climbSurgePercent(),
+      climbSurgeDurationMinutes: this.climbSurgeDurationMinutes(),
+      hikeBikeThresholdKmh: this.hikeBikeThresholdKmh(),
+      hikeBikeBaseSpeedKmh: this.hikeBikeBaseSpeedKmh(),
+      mapStyle: this.mapStyle(),
+      mapZoomLevel: this.mapZoomLevel(),
+      activeTab: this.activeTab(),
+      selectedRouteKey: this.selectedRouteKey(),
+      currentLocationMile: this.currentLocationMile(),
+      routeLocations: this.routeLocations(),
+      keepScreenAwake: this.keepScreenAwake(),
+      anonymousTelemetryEnabled: this.anonymousTelemetryEnabled(),
+      mapRenderer: this.mapRenderer()
+    };
+    this.storage.saveSettings(currentSettings);
   }
 
   setKeepScreenAwake(awake: boolean): void {
@@ -323,6 +313,7 @@ export class SettingsService {
 
   setMapRenderer(mode: MapRendererMode): void {
     this.mapRenderer.set(mode);
+    this.storage.setMapRenderer(mode);
     this.persist();
   }
 
@@ -343,10 +334,7 @@ export class SettingsService {
    * Completely clears all items in localStorage and resets settings to defaults.
    */
   clearAllLocalStorage(): void {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.clear();
-      localStorage.removeItem(MAP_RENDERER_KEY);
-    }
+    this.storage.clearStorage();
     this.resupplyCatalog?.resetAllToDefault();
     this.riderWeight.set(DEFAULT_USER_SETTINGS.riderWeight);
     this.bikeWeight.set(DEFAULT_USER_SETTINGS.bikeWeight);
@@ -409,4 +397,3 @@ export class SettingsService {
     return this.currentLocationMile() || 0;
   }
 }
-

@@ -12,43 +12,29 @@ export interface ITileCacheService {
   clearTileCache(): Promise<void>;
 }
 
-export function lat2tile(lat: number, zoom: number): number {
-  const rad = (lat * Math.PI) / 180;
-  const n = Math.pow(2, zoom);
-  const raw = Math.floor(((1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2) * n);
-  return Math.max(0, Math.min(n - 1, raw));
-}
+import {
+  lat2tile,
+  lon2tile,
+  tile2lon,
+  tile2lat,
+  getTileUrlsForCoordinate,
+  getTileBoundsForBoundingBox,
+  type TileCoordinate,
+  type TileBounds
+} from '../utils/tile-math.utils';
 
-export function lon2tile(lon: number, zoom: number): number {
-  const n = Math.pow(2, zoom);
-  const raw = Math.floor(((lon + 180) / 360) * n);
-  return Math.max(0, Math.min(n - 1, raw));
-}
+export {
+  lat2tile,
+  lon2tile,
+  tile2lon,
+  tile2lat,
+  getTileUrlsForCoordinate,
+  getTileBoundsForBoundingBox,
+  type TileCoordinate,
+  type TileBounds
+};
 
-export function tile2lon(x: number, zoom: number): number {
-  return (x / Math.pow(2, zoom)) * 360 - 180;
-}
 
-export function tile2lat(y: number, zoom: number): number {
-  const n = Math.PI - (2 * Math.PI * y) / Math.pow(2, zoom);
-  return (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
-}
-
-/**
- * Returns all candidate slippy map tile URLs for a given coordinate across supported map styles:
- * - ArcGIS World Dark Gray Base (dark mode base)
- * - ArcGIS World Dark Gray Reference (dark mode labels)
- * - ArcGIS World Topographic Map (topo mode)
- * - OpenStreetMap Standard (osm fallback)
- */
-export function getTileUrlsForCoordinate(z: number, x: number, y: number): string[] {
-  return [
-    `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/${z}/${y}/${x}`,
-    `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/${z}/${y}/${x}`,
-    `https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}`,
-    `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
-  ];
-}
 
 @Injectable({
   providedIn: 'root'
