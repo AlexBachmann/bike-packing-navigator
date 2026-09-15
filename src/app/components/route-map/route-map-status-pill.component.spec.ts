@@ -1,0 +1,98 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouteMapStatusPillComponent } from './route-map-status-pill.component';
+import { describe, it, expect, beforeEach } from 'vitest';
+
+describe('RouteMapStatusPillComponent', () => {
+  let component: RouteMapStatusPillComponent;
+  let fixture: ComponentFixture<RouteMapStatusPillComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RouteMapStatusPillComponent]
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(RouteMapStatusPillComponent);
+    component = fixture.componentInstance;
+    fixture.componentRef.setInput('currentMile', 125.4);
+    fixture.componentRef.setInput('unit', 'miles');
+    fixture.componentRef.setInput('activeMapMode', 'raster');
+    fixture.componentRef.setInput('isVectorCached', false);
+    fixture.componentRef.setInput('isDownloading', false);
+    fixture.componentRef.setInput('downloadPercentage', 0);
+    fixture.componentRef.setInput('activeRouteSizeEstimate', '~24 MB');
+    fixture.componentRef.setInput('isForcedRaster', false);
+    fixture.detectChanges();
+  });
+
+  it('1. should create the component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('2. should render position telemetry in miles and km correctly', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Mile 125.4');
+
+    fixture.componentRef.setInput('unit', 'km');
+    fixture.detectChanges();
+    expect(el.textContent).toContain('KM 201.8');
+  });
+
+  it('3. should render Raster Map indicator when in raster mode', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Raster Map');
+  });
+
+  it('4. should render Vector Map indicator when in vector mode', () => {
+    fixture.componentRef.setInput('activeMapMode', 'vector');
+    fixture.detectChanges();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Vector Map (Offline Ready)');
+  });
+
+  it('5. should render download button with file size estimate when vector is not cached', () => {
+    const el = fixture.nativeElement as HTMLElement;
+    const downloadBtn = el.querySelector('button[aria-label="Download offline vector map for active route"]');
+    expect(downloadBtn).toBeTruthy();
+    expect(downloadBtn?.textContent).toContain('Download Vector (~24 MB)');
+  });
+
+  it('6. should emit downloadVector when download button is clicked', () => {
+    let downloadClicked = false;
+    component.downloadVector.subscribe(() => (downloadClicked = true));
+
+    const downloadBtn = fixture.nativeElement.querySelector(
+      'button[aria-label="Download offline vector map for active route"]'
+    ) as HTMLButtonElement;
+    downloadBtn.click();
+
+    expect(downloadClicked).toBe(true);
+  });
+
+  it('7. should render progress bar when downloading', () => {
+    fixture.componentRef.setInput('isDownloading', true);
+    fixture.componentRef.setInput('downloadPercentage', 65);
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('65%');
+    expect(el.querySelector('.bg-emerald-500')?.getAttribute('style')).toContain('width: 65%');
+  });
+
+  it('8. should render forced raster message when settings force raster', () => {
+    fixture.componentRef.setInput('isVectorCached', true);
+    fixture.componentRef.setInput('isForcedRaster', true);
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Forced Raster (Settings)');
+  });
+
+  it('9. should render offline ready badge when cached and not forced raster', () => {
+    fixture.componentRef.setInput('isVectorCached', true);
+    fixture.componentRef.setInput('isForcedRaster', false);
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.textContent).toContain('Offline Ready');
+  });
+});
