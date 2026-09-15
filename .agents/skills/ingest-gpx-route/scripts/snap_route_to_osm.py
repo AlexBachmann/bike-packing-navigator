@@ -262,7 +262,24 @@ class OsmRoadNetwork:
                 gy = int(math.floor(pt[0] / v_size))
                 v_grid[(gx, gy)].append((w_idx, v_idx, pt))
 
-        # Check endpoints of each way against nearby vertices (discovers intersections & T-junctions)
+        # Check intersections across all multi-way cells (discovers 4-way intersections and crossings as well as endpoints)
+        for (gx, gy), items in v_grid.items():
+            if len(items) > 1:
+                for i in range(len(items)):
+                    w1, v1, pt1 = items[i]
+                    for j in range(i + 1, len(items)):
+                        w2, v2, pt2 = items[j]
+                        if w1 != w2:
+                            d = haversine_m(pt1[0], pt1[1], pt2[0], pt2[1])
+                            if d <= 25.0:
+                                self.adjacency[w1].add(w2)
+                                self.adjacency[w2].add(w1)
+                                if w2 not in self.connections[w1] or d < self.connections[w1][w2][2]:
+                                    self.connections[w1][w2] = (v1, v2, d)
+                                if w1 not in self.connections[w2] or d < self.connections[w2][w1][2]:
+                                    self.connections[w2][w1] = (v2, v1, d)
+
+        # Also check endpoints against 9 neighbor cells in case endpoint is near a grid boundary
         for w_idx, w in enumerate(self.ways):
             coords = w['coords']
             endpoints = [(0, coords[0]), (len(coords) - 1, coords[-1])]
@@ -271,6 +288,8 @@ class OsmRoadNetwork:
                 gy = int(math.floor(pt[0] / v_size))
                 for dgx in (-1, 0, 1):
                     for dgy in (-1, 0, 1):
+                        if dgx == 0 and dgy == 0:
+                            continue
                         for other_w, j2, opt in v_grid.get((gx + dgx, gy + dgy), []):
                             if other_w != w_idx:
                                 d = haversine_m(pt[0], pt[1], opt[0], opt[1])
@@ -547,8 +566,8 @@ def compute_transition_cost(
         path_len = sum(haversine_m(pts[k][0], pts[k][1], pts[k + 1][0], pts[k + 1][1]) for k in range(len(pts) - 1))
         return abs(path_len - gpx_dist_m) * 0.2 + 3.0
     else:
-        # Disconnected parallel ways: heavy penalty prevents erratic jumping
-        return 40.0 + trans_dist * 2.0
+        # Disconnected ways: apply fixed switching penalty plus progression discrepancy penalty
+        return 35.0 + abs(trans_dist - gpx_dist_m) * 0.5
 
 
 def densify_track_points(points: List[List[float]], max_step_m: float = 40.0) -> List[List[float]]:
@@ -670,58 +689,83 @@ def snap_track_to_osm(
         prev_cand = chosen_cands[i - 1]
         prev_raw = raw_points[i - 1]
 
-        # If previous point is on a road/trail, look ahead for upcoming points on the road network
+        # If previous point is on a road/trail
         if not prev_cand['is_fallback']:
-            bridged_to = None
-            bridged_path = None
-            gpx_accum_dist = 0.0
+            if not curr_cand['is_fallback']:
+                # Both on road: check if connected along road network (same way or connected ways within 4 hops)
+                gpx_dist = haversine_m(prev_raw[0], prev_raw[1], curr_raw[0], curr_raw[1])
+                w_path = network.find_way_path(prev_cand['way_idx'], curr_cand['way_idx'], max_hops=4, max_distance_m=max(800.0, gpx_dist * 2.5))
+                if w_path is not None:
+                    step_pts = network.extract_path_geometry(w_path, prev_cand, curr_cand)
+                    total_step_len = 0.0
+                    last_p = (guidance_coords[-1][0], guidance_coords[-1][1])
+                    dists = []
+                    for p in step_pts:
+                        seg_len = haversine_m(last_p[0], last_p[1], p[0], p[1])
+                        total_step_len += seg_len
+                        dists.append(total_step_len)
+                        last_p = p
 
-            for look in range(i, min(i + 12, n)):
-                cand_k = chosen_cands[look]
-                gpx_step = haversine_m(
-                    raw_points[look - 1][0], raw_points[look - 1][1],
-                    raw_points[look][0], raw_points[look][1]
-                )
-                gpx_accum_dist += gpx_step
-                if gpx_accum_dist > 1800.0:
-                    break
+                    for idx, p in enumerate(step_pts):
+                        ratio = dists[idx] / total_step_len if total_step_len > 0 else 1.0
+                        ele = prev_raw[2] + ratio * (curr_raw[2] - prev_raw[2])
+                        guidance_coords.append((p[0], p[1], ele))
 
-                if not cand_k['is_fallback']:
-                    # Look for network path connecting prev_cand's way to cand_k's way
-                    w_path = network.find_way_path(prev_cand['way_idx'], cand_k['way_idx'], max_hops=10, max_distance_m=2000.0)
-                    if w_path is not None:
-                        pts_test = network.extract_path_geometry(w_path, prev_cand, cand_k)
-                        p_len = sum(
-                            haversine_m(pts_test[m][0], pts_test[m][1], pts_test[m + 1][0], pts_test[m + 1][1])
-                            for m in range(len(pts_test) - 1)
-                        )
-                        # Ensure the road path isn't an absurd detour compared to GPX distance
-                        if look == i or p_len <= max(3.0 * gpx_accum_dist, gpx_accum_dist + 600.0):
-                            bridged_to = look
-                            bridged_path = w_path
-                            break
+                    i += 1
+                    continue
+            else:
+                # curr_cand is fallback (wilderness chord across a curve/switchback)!
+                # Look ahead across fallback points to find the first upcoming on-road point
+                bridged_to = None
+                bridged_path = None
+                gpx_accum_dist = 0.0
 
-            if bridged_to is not None and bridged_path is not None:
-                dest_cand = chosen_cands[bridged_to]
-                dest_raw = raw_points[bridged_to]
-                step_pts = network.extract_path_geometry(bridged_path, prev_cand, dest_cand)
+                for look in range(i, min(i + 12, n)):
+                    cand_k = chosen_cands[look]
+                    gpx_step = haversine_m(
+                        raw_points[look - 1][0], raw_points[look - 1][1],
+                        raw_points[look][0], raw_points[look][1]
+                    )
+                    gpx_accum_dist += gpx_step
+                    if gpx_accum_dist > 1800.0:
+                        break
 
-                total_step_len = 0.0
-                last_p = (guidance_coords[-1][0], guidance_coords[-1][1])
-                dists = []
-                for p in step_pts:
-                    seg_len = haversine_m(last_p[0], last_p[1], p[0], p[1])
-                    total_step_len += seg_len
-                    dists.append(total_step_len)
-                    last_p = p
+                    if not cand_k['is_fallback']:
+                        # First on-road point found! Check if reachable along road network
+                        w_path = network.find_way_path(prev_cand['way_idx'], cand_k['way_idx'], max_hops=10, max_distance_m=2000.0)
+                        if w_path is not None:
+                            pts_test = network.extract_path_geometry(w_path, prev_cand, cand_k)
+                            p_len = sum(
+                                haversine_m(pts_test[m][0], pts_test[m][1], pts_test[m + 1][0], pts_test[m + 1][1])
+                                for m in range(len(pts_test) - 1)
+                            )
+                            if p_len <= max(3.0 * gpx_accum_dist, gpx_accum_dist + 600.0):
+                                bridged_to = look
+                                bridged_path = w_path
+                        # Stop searching further ahead: do not skip past on-road points!
+                        break
 
-                for idx, p in enumerate(step_pts):
-                    ratio = dists[idx] / total_step_len if total_step_len > 0 else 1.0
-                    ele = prev_raw[2] + ratio * (dest_raw[2] - prev_raw[2])
-                    guidance_coords.append((p[0], p[1], ele))
+                if bridged_to is not None and bridged_path is not None:
+                    dest_cand = chosen_cands[bridged_to]
+                    dest_raw = raw_points[bridged_to]
+                    step_pts = network.extract_path_geometry(bridged_path, prev_cand, dest_cand)
 
-                i = bridged_to + 1
-                continue
+                    total_step_len = 0.0
+                    last_p = (guidance_coords[-1][0], guidance_coords[-1][1])
+                    dists = []
+                    for p in step_pts:
+                        seg_len = haversine_m(last_p[0], last_p[1], p[0], p[1])
+                        total_step_len += seg_len
+                        dists.append(total_step_len)
+                        last_p = p
+
+                    for idx, p in enumerate(step_pts):
+                        ratio = dists[idx] / total_step_len if total_step_len > 0 else 1.0
+                        ele = prev_raw[2] + ratio * (dest_raw[2] - prev_raw[2])
+                        guidance_coords.append((p[0], p[1], ele))
+
+                    i = bridged_to + 1
+                    continue
 
         # Fallback progression: direct connection to curr_cand
         guidance_coords.append((curr_cand['proj_lat'], curr_cand['proj_lon'], curr_raw[2]))
