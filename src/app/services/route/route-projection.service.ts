@@ -9,10 +9,13 @@ export class RouteProjectionService {
   private readonly loader = inject(RouteLoaderService);
 
   /**
-   * Orthogonally projects a coordinate (lat, lon) onto the active route track.
+   * Orthogonally projects a coordinate (lat, lon) onto the active route track,
+   * preferring the road-snapped guidance track when available, falling back to raw GPX track.
    */
   projectOntoRoute(lat: number, lon: number): ProjectionResult | null {
-    return this.projectOntoPoints(lat, lon, this.loader.trackPoints());
+    const guidance = typeof this.loader.guidanceTrackPoints === 'function' ? this.loader.guidanceTrackPoints() : [];
+    const points = guidance && guidance.length >= 2 ? guidance : this.loader.trackPoints();
+    return this.projectOntoPoints(lat, lon, points);
   }
 
   /**

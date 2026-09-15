@@ -46,6 +46,7 @@ export interface RouteTrack {
 export interface RouteDataPackage {
   routeId: string;
   track: RouteTrack;
+  guidanceTrack?: RouteTrack;
   places: Place[];
   surfaces: SurfaceInterval[];
   climbs: Climb[];

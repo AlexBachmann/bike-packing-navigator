@@ -203,7 +203,8 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if (gps && gps.enabled && gps.latitude !== null && gps.longitude !== null) {
       return [gps.latitude, gps.longitude];
     }
-    const pts = this.routeService.trackPoints();
+    const guidance = typeof this.routeService.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const pts = guidance && guidance.length > 0 ? guidance : this.routeService.trackPoints();
     if (pts && pts.length > 0) {
       return this.interpolatePointAtMile(pts, this.effectiveMile());
     }
@@ -280,7 +281,9 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   // Turn-Ahead Guidance: Based on authentic OSM Decision Points
   readonly turnCue = computed<TurnCue | null>(() => {
     const mile = this.effectiveMile();
-    const pts = this.routeService.trackPoints();
+    const rawPts = this.routeService.trackPoints();
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const pts = guidance && guidance.length >= 3 ? guidance : rawPts;
     const turns = this.routeService.turns();
     const u = this.unit();
     if (!pts || pts.length < 3) return null;
@@ -410,11 +413,13 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     });
 
-    // Effect 2: Reactive route line redraw when trackpoints change
+    // Effect 2: Reactive route line redraw when trackpoints or guidance change
     effect(() => {
       const points = this.routeService.trackPoints();
+      const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+      const hasGuidance = typeof this.routeService?.hasGuidanceTrack === 'function' ? this.routeService.hasGuidanceTrack() : false;
       if (!this.map) return;
-      if (points && points.length >= 2) {
+      if ((guidance && guidance.length >= 2) || (points && points.length >= 2)) {
         untracked(() => {
           this.drawRoute();
         });
@@ -830,35 +835,90 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    const points = this.routeService.trackPoints();
-    if (!points || points.length < 2) {
+    const rawPoints = this.routeService.trackPoints();
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const guidancePoints = guidance && guidance.length >= 2 ? guidance : rawPoints;
+
+    if (!rawPoints || rawPoints.length < 2) {
       this.clearRouteLayers();
       return;
     }
 
-    const coordinates: [number, number][] = points.map((p) => [p[1], p[0]]); // [lon, lat]
+    const hasGuidance = typeof this.routeService?.hasGuidanceTrack === 'function' ? this.routeService.hasGuidanceTrack() : false;
 
-    const geojson = {
+    // 1. Raw GPX track: subtle green line (#10b981, width ~2.5px, opacity ~0.6)
+    const rawCoordinates: [number, number][] = rawPoints.map((p) => [p[1], p[0]]);
+    const rawGeojson = {
       type: 'Feature' as const,
       properties: {},
       geometry: {
         type: 'LineString' as const,
-        coordinates
+        coordinates: rawCoordinates
+      }
+    };
+
+    // 2. Road-snapped guidance track: prominent blue line (#38bdf8 / #0284c7, glow ~8px, main ~4.5px)
+    const guidanceCoordinates: [number, number][] = guidancePoints.map((p) => [p[1], p[0]]);
+    const guidanceGeojson = {
+      type: 'Feature' as const,
+      properties: {},
+      geometry: {
+        type: 'LineString' as const,
+        coordinates: guidanceCoordinates
       }
     };
 
     try {
+      // Add or update raw GPX track layer
+      const existingRawSource = this.map.getSource('raw-route-source') as maplibregl.GeoJSONSource;
+      if (!existingRawSource) {
+        this.map.addSource('raw-route-source', {
+          type: 'geojson',
+          data: rawGeojson
+        });
+      } else {
+        existingRawSource.setData(rawGeojson);
+      }
+
+      if (!this.map.getLayer('raw-route-line')) {
+        const beforeLayerId = this.map.getLayer('route-glow') ? 'route-glow' : (this.map.getLayer('route-main') ? 'route-main' : undefined);
+        this.map.addLayer({
+          id: 'raw-route-line',
+          type: 'line',
+          source: 'raw-route-source',
+          layout: {
+            'line-cap': 'round',
+            'line-join': 'round',
+            'visibility': hasGuidance ? 'visible' : 'none'
+          },
+          paint: {
+            'line-color': '#10b981',
+            'line-width': 2.5,
+            'line-opacity': 0.6
+          }
+        }, beforeLayerId);
+      } else {
+        this.map.setLayoutProperty('raw-route-line', 'visibility', hasGuidance ? 'visible' : 'none');
+      }
+
+      // Add or update road-snapped guidance track layers
       const existingSource = this.map.getSource('route-source') as maplibregl.GeoJSONSource;
       if (existingSource) {
-        existingSource.setData(geojson);
+        existingSource.setData(guidanceGeojson);
       } else {
         this.map.addSource('route-source', {
           type: 'geojson',
-          data: geojson
+          data: guidanceGeojson
         });
       }
 
+      const glowColor = hasGuidance ? '#0284c7' : '#10b981';
+      const mainColor = hasGuidance ? '#38bdf8' : '#34d399';
+      const glowWidth = 8;
+      const mainWidth = hasGuidance ? 4.5 : 4;
+
       if (!this.map.getLayer('route-glow')) {
+        const beforeLayerId = this.map.getLayer('route-main') ? 'route-main' : undefined;
         this.map.addLayer({
           id: 'route-glow',
           type: 'line',
@@ -868,12 +928,14 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
             'line-join': 'round'
           },
           paint: {
-            'line-color': '#10b981',
-            'line-width': 8,
+            'line-color': glowColor,
+            'line-width': glowWidth,
             'line-opacity': 0.45,
             'line-blur': 3
           }
-        });
+        }, beforeLayerId);
+      } else {
+        this.map.setPaintProperty('route-glow', 'line-color', glowColor);
       }
 
       if (!this.map.getLayer('route-main')) {
@@ -886,11 +948,24 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
             'line-join': 'round'
           },
           paint: {
-            'line-color': '#34d399',
-            'line-width': 4,
+            'line-color': mainColor,
+            'line-width': mainWidth,
             'line-opacity': 0.95
           }
         });
+      } else {
+        this.map.setPaintProperty('route-main', 'line-color', mainColor);
+        this.map.setPaintProperty('route-main', 'line-width', mainWidth);
+      }
+
+      // Explicitly enforce stacking order
+      if (typeof this.map.moveLayer === 'function') {
+        if (this.map.getLayer('raw-route-line') && this.map.getLayer('route-glow')) {
+          this.map.moveLayer('raw-route-line', 'route-glow');
+        }
+        if (this.map.getLayer('route-glow') && this.map.getLayer('route-main')) {
+          this.map.moveLayer('route-glow', 'route-main');
+        }
       }
     } catch {
       this.map.once('styledata', () => this.drawRoute());
@@ -900,6 +975,8 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   private clearRouteLayers(): void {
     if (!this.map) return;
     try {
+      if (this.map.getLayer('raw-route-line')) this.map.removeLayer('raw-route-line');
+      if (this.map.getSource('raw-route-source')) this.map.removeSource('raw-route-source');
       if (this.map.getLayer('route-glow')) this.map.removeLayer('route-glow');
       if (this.map.getLayer('route-main')) this.map.removeLayer('route-main');
       if (this.map.getSource('route-source')) this.map.removeSource('route-source');
@@ -1043,7 +1120,9 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.gpsSimulator.running()) {
       this.gpsSimulator.stop();
     } else {
-      const pts = this.routeService.trackPoints();
+      const rawPts = this.routeService.trackPoints();
+      const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+      const pts = guidance && guidance.length >= 2 ? guidance : rawPts;
       const speed = this.simSpeedInput();
       this.gpsSimulator.start(speed, pts);
     }
@@ -1083,7 +1162,8 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private getForwardTrackBearing(mile: number): number {
-    const points = this.routeService.trackPoints();
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const points = guidance && guidance.length >= 2 ? guidance : this.routeService.trackPoints();
     if (!points || points.length < 2) return 0;
     if (typeof this.turnGuidance?.getRouteTangentBearing === 'function') {
       return this.turnGuidance.getRouteTangentBearing(points, mile, 25.0);

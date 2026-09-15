@@ -58,6 +58,7 @@ def main():
     parser.add_argument("--end-location", default="Finish Line", help="Ending City/Location")
     parser.add_argument("--description", default="", help="Route description")
     parser.add_argument("--corridor-pbf", required=False, help="Optional OSM corridor PBF extract")
+    parser.add_argument("--corridor-pmtiles", required=False, help="Optional OSM corridor PMTiles extract for road snapping")
     parser.add_argument("--water", required=False, help="Optional path to water sources JSON file to merge")
     parser.add_argument("--find-water-access", action="store_true", help="Extract river and lake access points from OSM corridor (max 1 per 5km)")
     parser.add_argument("--segment-km", type=float, default=5.0, help="Max 1 water waypoint per N km along river/lake (default: 5.0)")
@@ -100,6 +101,8 @@ def main():
     passes_out = route_out_dir / "passes.json"
     milestones_out = route_out_dir / "milestones.json"
     places_out = route_out_dir / "places.json"
+    guidance_out = route_out_dir / "guidance-track.json"
+    pmtiles_out = Path(args.corridor_pmtiles).resolve() if args.corridor_pmtiles else (route_out_dir / "corridor.pmtiles")
     cache_places = PROJECT_ROOT / "route" / "places" / f".cache_places_api_{route_id}.json"
 
     # Step 1: Parse GPX & Calculate Telemetry
@@ -182,7 +185,17 @@ def main():
         places_cmd.extend(["--api-key", args.api_key])
     run_command(places_cmd)
 
-    # Step 7: Register in routes.json
+    # Step 7: Snap Route to OSM Road & Trail Centerlines (guidance-track.json)
+    if pmtiles_out.exists():
+        print("\n--- Snapping Route to OSM Road & Trail Centerlines (guidance-track.json) ---")
+        run_command([
+            sys.executable, str(SCRIPT_DIR / "snap_route_to_osm.py"),
+            "--track", str(track_out),
+            "--pmtiles", str(pmtiles_out),
+            "--output", str(guidance_out)
+        ])
+
+    # Step 8: Register in routes.json
     print("\n--- Registering Route in Manifest (routes.json) ---")
     run_command([
         sys.executable, str(SCRIPT_DIR / "register_manifest.py"),
@@ -199,8 +212,10 @@ def main():
 
     print("\n" + "=" * 70)
     print(f"🎉 ROUTE INGESTION COMPLETE: '{route_name}' ({route_id})")
-    print(f"All 6 required static datasets created in {route_out_dir}:")
+    print(f"All required static datasets created in {route_out_dir}:")
     print(f"  ✓ route-track.json")
+    if guidance_out.exists():
+        print(f"  ✓ guidance-track.json")
     print(f"  ✓ surfaces.json")
     print(f"  ✓ climbs.json")
     print(f"  ✓ passes.json")

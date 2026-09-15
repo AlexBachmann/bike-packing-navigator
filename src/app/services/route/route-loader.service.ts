@@ -10,6 +10,7 @@ import { EtaPhysicsService, SurfaceInterval } from '../eta-physics.service';
 import { RouteManifestService } from '../route-manifest.service';
 import { OfflineStorageService } from '../offline-storage.service';
 import { NetworkStatusService } from '../network-status.service';
+import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
 
 export type RouteTrackData = RouteTrack;
 
@@ -27,6 +28,8 @@ export class RouteLoaderService implements OnDestroy {
 
   readonly places = signal<Place[]>([]);
   readonly trackPoints = signal<[number, number, number, number, number][]>([]);
+  readonly guidanceTrackPoints = signal<[number, number, number, number, number][]>([]);
+  readonly hasGuidanceTrack = signal<boolean>(false);
   readonly climbs = signal<Climb[]>([]);
   readonly passes = signal<MountainPass[]>([]);
   readonly milestones = signal<Milestone[]>([]);
@@ -87,6 +90,8 @@ export class RouteLoaderService implements OnDestroy {
     this.activeRouteId.set(routeId);
     this.places.set([]);
     this.trackPoints.set([]);
+    this.guidanceTrackPoints.set([]);
+    this.hasGuidanceTrack.set(false);
     this.climbs.set([]);
     this.passes.set([]);
     this.milestones.set([]);
@@ -149,6 +154,9 @@ export class RouteLoaderService implements OnDestroy {
 
         const pts = track?.points || [];
         this.trackPoints.set(pts);
+        this.guidanceTrackPoints.set(pts);
+        this.hasGuidanceTrack.set(false);
+
         if (track?.total_miles) {
           this.totalMilesSignal.set(track.total_miles);
         }
@@ -179,6 +187,9 @@ export class RouteLoaderService implements OnDestroy {
         this.offlineStorage.saveRoutePackage(pkg).catch((err) => {
           console.warn(`Could not save route package for ${routeId} to offline storage:`, err);
         });
+
+        // Load road-snapped guidance track alongside raw track (progressive enhancement)
+        this.loadGuidanceTrack(routeId);
       },
       error: (err) => {
         this.activeSub = undefined;
@@ -220,6 +231,10 @@ export class RouteLoaderService implements OnDestroy {
 
     const pts = pkg.track?.points || [];
     this.trackPoints.set(pts);
+    const gPts = pkg.guidanceTrack?.points && pkg.guidanceTrack.points.length > 0 ? pkg.guidanceTrack.points : pts;
+    this.guidanceTrackPoints.set(gPts);
+    this.hasGuidanceTrack.set(!!(pkg.guidanceTrack && pkg.guidanceTrack.points && pkg.guidanceTrack.points.length > 0));
+
     if (pkg.track?.total_miles) {
       this.totalMilesSignal.set(pkg.track.total_miles);
     }
@@ -235,6 +250,41 @@ export class RouteLoaderService implements OnDestroy {
 
     this.isLoading.set(false);
     this.isTrackLoading.set(false);
+
+    if ((!pkg.guidanceTrack || !pkg.guidanceTrack.points || pkg.guidanceTrack.points.length === 0) && pkg.routeId) {
+      this.loadGuidanceTrack(pkg.routeId);
+    }
+  }
+
+  async loadGuidanceTrack(routeId: string): Promise<void> {
+    if (!routeId) return;
+    try {
+      const url = resolveBaseHref(`/data/routes/${routeId}/guidance-track.json`);
+      const res = await fetch(url);
+      if (res.ok) {
+        const data: RouteTrackData = await res.json();
+        if (this.activeRouteId() === routeId && data && Array.isArray(data.points) && data.points.length > 0) {
+          this.guidanceTrackPoints.set(data.points);
+          this.hasGuidanceTrack.set(true);
+          // Update cached offline package with guidance track if stored
+          this.offlineStorage
+            .getRoutePackage(routeId)
+            .then(async (pkg) => {
+              if (!pkg) {
+                await new Promise((r) => setTimeout(r, 100));
+                pkg = await this.offlineStorage.getRoutePackage(routeId);
+              }
+              if (pkg) {
+                pkg.guidanceTrack = data;
+                this.offlineStorage.saveRoutePackage(pkg).catch(() => {});
+              }
+            })
+            .catch(() => {});
+        }
+      }
+    } catch {
+      // Graceful fallback to route-track.json already in place
+    }
   }
 
   loadTurns(routeId: string): void {
@@ -259,6 +309,8 @@ export class RouteLoaderService implements OnDestroy {
     this.activeRouteId.set(null);
     this.places.set([]);
     this.trackPoints.set([]);
+    this.guidanceTrackPoints.set([]);
+    this.hasGuidanceTrack.set(false);
     this.climbs.set([]);
     this.passes.set([]);
     this.milestones.set([]);

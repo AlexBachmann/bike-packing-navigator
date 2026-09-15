@@ -230,6 +230,10 @@ vi.mock('maplibre-gl', () => {
       return this;
     }
 
+    moveLayer(id: string, beforeId?: string) {
+      return this;
+    }
+
     setLayoutProperty(layerId: string, name: string, value: any) {
       const layer = this.layers.get(layerId);
       if (layer) {
@@ -285,6 +289,8 @@ describe('RouteMapComponent', () => {
         [51.10, -115.50, 1500, 16.0, 10.0],
         [50.60, -115.08, 1930, 80.0, 50.0]
       ]),
+      guidanceTrackPoints: signal([]),
+      hasGuidanceTrack: signal(false),
       places: signal([
         {
           id: 'place-1',
@@ -669,6 +675,102 @@ describe('RouteMapComponent', () => {
 
     // Route layer should now be added
     expect(map.getLayer('route-main')).toBeTruthy();
+  });
+
+  it('should render dual polylines with green raw GPX track and blue road-snapped guidance track', () => {
+    const map = (component as any).map;
+    (mockRouteService.trackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.18, -115.58, 1420, 2.5, 1.5]
+    ]);
+    (mockRouteService.guidanceTrackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.17, -115.57, 1410, 1.2, 0.7],
+      [51.18, -115.58, 1420, 2.5, 1.5]
+    ]);
+    (mockRouteService.hasGuidanceTrack as any).set(true);
+
+    (component as any).drawRoute();
+
+    const rawLayer = map.getLayer('raw-route-line');
+    const glowLayer = map.getLayer('route-glow');
+    const mainLayer = map.getLayer('route-main');
+
+    expect(rawLayer).toBeTruthy();
+    expect(glowLayer).toBeTruthy();
+    expect(mainLayer).toBeTruthy();
+
+    // Raw GPX track styling: subtle green line (#10b981, width ~2.5px, opacity ~0.6)
+    expect(rawLayer.paint['line-color']).toBe('#10b981');
+    expect(rawLayer.paint['line-width']).toBe(2.5);
+    expect(rawLayer.paint['line-opacity']).toBe(0.6);
+    expect(rawLayer.layout['visibility']).toBe('visible');
+
+    // Road-snapped guidance track styling: prominent blue line (#38bdf8 / #0284c7)
+    expect(glowLayer.paint['line-color']).toBe('#0284c7');
+    expect(glowLayer.paint['line-width']).toBe(8);
+    expect(glowLayer.paint['line-opacity']).toBe(0.4);
+
+    expect(mainLayer.paint['line-color']).toBe('#38bdf8');
+    expect(mainLayer.paint['line-width']).toBe(4.5);
+    expect(mainLayer.paint['line-opacity']).toBe(0.95);
+  });
+
+  it('should hide raw-route-line when hasGuidanceTrack is false', () => {
+    const map = (component as any).map;
+    (mockRouteService.trackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.18, -115.58, 1420, 2.5, 1.5]
+    ]);
+    (mockRouteService.guidanceTrackPoints as any).set([]);
+    (mockRouteService.hasGuidanceTrack as any).set(false);
+
+    (component as any).drawRoute();
+
+    const rawLayer = map.getLayer('raw-route-line');
+    expect(rawLayer).toBeTruthy();
+    expect(rawLayer.layout['visibility']).toBe('none');
+
+    // Main guidance fallback still renders cleanly
+    expect(map.getLayer('route-main')).toBeTruthy();
+  });
+
+  it('should enforce layer stacking order using moveLayer', () => {
+    const map = (component as any).map;
+    const moveLayerSpy = vi.spyOn(map, 'moveLayer');
+
+    (mockRouteService.trackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.18, -115.58, 1420, 2.5, 1.5]
+    ]);
+    (mockRouteService.guidanceTrackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.18, -115.58, 1420, 2.5, 1.5]
+    ]);
+    (mockRouteService.hasGuidanceTrack as any).set(true);
+
+    (component as any).drawRoute();
+
+    expect(moveLayerSpy).toHaveBeenCalledWith('raw-route-line', 'route-glow');
+    expect(moveLayerSpy).toHaveBeenCalledWith('route-glow', 'route-main');
+  });
+
+  it('should smoothly interpolate rider coordinates and elevation at fractional miles', () => {
+    (mockRouteService.trackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.18, -115.58, 1420, 2.0, 1.0]
+    ]);
+    (mockRouteService.guidanceTrackPoints as any).set([
+      [51.16, -115.56, 1400, 0, 0],
+      [51.18, -115.58, 1420, 2.0, 1.0]
+    ]);
+
+    // Query halfway at mile 0.5
+    const coords = (component as any).getCoordsForMile(0.5);
+    expect(coords).toBeTruthy();
+    expect(coords[0]).toBeCloseTo(51.17, 4);
+    expect(coords[1]).toBeCloseTo(-115.57, 4);
+    expect(coords[2]).toBeCloseTo(1410, 1);
   });
 
   it('should wait for style readiness before adding GPS projection line when style is not loaded', () => {

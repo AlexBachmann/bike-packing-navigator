@@ -95,7 +95,8 @@ export class DeadReckoningService implements OnDestroy {
       projectedMile: initialMile
     };
 
-    const pts = this.routeService?.trackPoints() || [];
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const pts = guidance && guidance.length >= 2 ? guidance : (this.routeService?.trackPoints() || []);
     if (initialMile !== undefined && initialMile !== null && pts.length >= 2 && this.turnGuidance) {
       const coords = this.turnGuidance.interpolatePointAtMile(pts, initialMile);
       this.interpolatedCoords.set([coords[0], coords[1]]);
@@ -162,7 +163,8 @@ export class DeadReckoningService implements OnDestroy {
     const distanceTraveledMiles = distanceTraveledMeters / 1609.344;
 
     const baseMile = this.currentFix.projectedMile;
-    const pts = this.routeService?.trackPoints() || [];
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const pts = guidance && guidance.length >= 2 ? guidance : (this.routeService?.trackPoints() || []);
 
     if (baseMile !== undefined && baseMile !== null && pts.length >= 2) {
       // Advance distance along the route track

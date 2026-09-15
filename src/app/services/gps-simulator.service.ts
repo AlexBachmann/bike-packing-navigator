@@ -66,7 +66,8 @@ export class GpsSimulatorService implements OnDestroy {
     if (trackPoints && trackPoints.length > 0) {
       this.setTrackPoints(trackPoints);
     } else if (this.points.length === 0 && this.routeDataService) {
-      const rPoints = this.routeDataService.trackPoints();
+      const guidance = typeof this.routeDataService.guidanceTrackPoints === 'function' ? this.routeDataService.guidanceTrackPoints() : [];
+      const rPoints = guidance && guidance.length >= 2 ? guidance : this.routeDataService.trackPoints();
       if (rPoints && rPoints.length > 0) {
         this.setTrackPoints(rPoints);
       }

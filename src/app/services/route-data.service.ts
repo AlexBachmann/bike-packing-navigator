@@ -31,6 +31,8 @@ export class RouteDataService implements OnDestroy {
   // Direct writable signals shared across domain
   readonly places = this.loader.places;
   readonly trackPoints = this.loader.trackPoints;
+  readonly guidanceTrackPoints = this.loader.guidanceTrackPoints;
+  readonly hasGuidanceTrack = this.loader.hasGuidanceTrack;
   readonly climbs = this.loader.climbs;
   readonly passes = this.loader.passes;
   readonly milestones = this.loader.milestones;
@@ -61,6 +63,10 @@ export class RouteDataService implements OnDestroy {
 
   loadTurns(routeId: string): void {
     this.loader.loadTurns(routeId);
+  }
+
+  loadGuidanceTrack(routeId: string): Promise<void> {
+    return this.loader.loadGuidanceTrack(routeId);
   }
 
   unloadRoute(): void {

@@ -183,12 +183,14 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       }
     });
 
-    // Effect to reactively redraw route track when route changes, or clear layers when route unloaded
+    // Effect to reactively redraw route track when route or guidance changes, or clear layers when route unloaded
     effect(() => {
       const points = this.routeService.trackPoints();
+      const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+      const hasGuidance = typeof this.routeService?.hasGuidanceTrack === 'function' ? this.routeService.hasGuidanceTrack() : false;
       if (!this.map) return;
 
-      if (points && points.length >= 2) {
+      if ((points && points.length >= 2) || (guidance && guidance.length >= 2)) {
         this.drawRoute();
       } else {
         this.clearRouteLayers();
@@ -488,8 +490,14 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
         if (this.map.getLayer('route-main')) {
           this.map.removeLayer('route-main');
         }
+        if (this.map.getLayer('raw-route-line')) {
+          this.map.removeLayer('raw-route-line');
+        }
         if (this.map.getSource('route-source')) {
           this.map.removeSource('route-source');
+        }
+        if (this.map.getSource('raw-route-source')) {
+          this.map.removeSource('raw-route-source');
         }
       } catch {
         // Style may not be ready or layer already removed
@@ -520,7 +528,8 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private getRouteBounds(): [[number, number], [number, number]] {
-    const points = this.routeService.trackPoints();
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const points = guidance && guidance.length > 0 ? guidance : this.routeService.trackPoints();
     if (!points || points.length === 0) {
       return [[-180, -90], [180, 90]];
     }
@@ -543,36 +552,85 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const points = this.routeService.trackPoints();
-    if (!points || points.length < 2) {
+    const rawPoints = this.routeService.trackPoints();
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const guidancePoints = guidance && guidance.length >= 2 ? guidance : rawPoints;
+
+    if (!rawPoints || rawPoints.length < 2) {
       this.clearRouteLayers();
       return;
     }
 
-    // Convert [lat, lon, ele, cum_km, cum_mi] to MapLibre GeoJSON coordinates [lon, lat]
-    const coordinates: [number, number][] = points.map((p) => [p[1], p[0]]);
-
-    const geojson: any = {
+    // 1. Raw GPX track: subtle green line (#10b981, width ~2.5px, opacity ~0.6)
+    const rawCoordinates: [number, number][] = rawPoints.map((p) => [p[1], p[0]]);
+    const rawGeojson: any = {
       type: 'Feature',
       properties: {},
       geometry: {
         type: 'LineString',
-        coordinates
+        coordinates: rawCoordinates
+      }
+    };
+
+    // 2. Road-snapped guidance track: prominent blue line (#38bdf8 / #0284c7, glow ~8px, main ~4.5px)
+    const guidanceCoordinates: [number, number][] = guidancePoints.map((p) => [p[1], p[0]]);
+    const guidanceGeojson: any = {
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'LineString',
+        coordinates: guidanceCoordinates
       }
     };
 
     try {
+      const hasGuidance = typeof this.routeService?.hasGuidanceTrack === 'function' ? this.routeService.hasGuidanceTrack() : false;
+
+      // Add or update raw GPX track layer
+      const existingRawSource = this.map.getSource('raw-route-source') as maplibregl.GeoJSONSource;
+      if (!existingRawSource) {
+        this.map.addSource('raw-route-source', {
+          type: 'geojson',
+          data: rawGeojson
+        });
+      } else {
+        existingRawSource.setData(rawGeojson);
+      }
+
+      if (!this.map.getLayer('raw-route-line')) {
+        const beforeLayerId = this.map.getLayer('route-glow') ? 'route-glow' : (this.map.getLayer('route-main') ? 'route-main' : undefined);
+        this.map.addLayer({
+          id: 'raw-route-line',
+          type: 'line',
+          source: 'raw-route-source',
+          layout: {
+            'line-cap': 'round',
+            'line-join': 'round',
+            'visibility': hasGuidance ? 'visible' : 'none'
+          },
+          paint: {
+            'line-color': '#10b981',
+            'line-width': 2.5,
+            'line-opacity': 0.6
+          }
+        }, beforeLayerId);
+      } else {
+        this.map.setLayoutProperty('raw-route-line', 'visibility', hasGuidance ? 'visible' : 'none');
+      }
+
+      // Add or update road-snapped guidance track layers
       const existingSource = this.map.getSource('route-source') as maplibregl.GeoJSONSource;
       if (!existingSource) {
         this.map.addSource('route-source', {
           type: 'geojson',
-          data: geojson
+          data: guidanceGeojson
         });
       } else {
-        existingSource.setData(geojson);
+        existingSource.setData(guidanceGeojson);
       }
 
       if (!this.map.getLayer('route-glow')) {
+        const beforeLayerId = this.map.getLayer('route-main') ? 'route-main' : undefined;
         this.map.addLayer({
           id: 'route-glow',
           type: 'line',
@@ -582,12 +640,12 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
             'line-join': 'round'
           },
           paint: {
-            'line-color': '#10b981',
-            'line-width': 7,
+            'line-color': '#0284c7',
+            'line-width': 8,
             'line-opacity': 0.4,
             'line-blur': 3
           }
-        });
+        }, beforeLayerId);
       }
 
       if (!this.map.getLayer('route-main')) {
@@ -600,11 +658,21 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
             'line-join': 'round'
           },
           paint: {
-            'line-color': '#34d399',
-            'line-width': 3.5,
+            'line-color': '#38bdf8',
+            'line-width': 4.5,
             'line-opacity': 0.95
           }
         });
+      }
+
+      // Explicitly enforce stacking order: raw-route-line beneath route-glow beneath route-main
+      if (typeof this.map.moveLayer === 'function') {
+        if (this.map.getLayer('raw-route-line') && this.map.getLayer('route-glow')) {
+          this.map.moveLayer('raw-route-line', 'route-glow');
+        }
+        if (this.map.getLayer('route-glow') && this.map.getLayer('route-main')) {
+          this.map.moveLayer('route-glow', 'route-main');
+        }
       }
 
       this.routeLineGlow = { id: 'route-glow' };
@@ -618,12 +686,12 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     }
 
     // Center dynamically on rider position or active route start coordinates, preserving user's zoom level
-    if (points.length > 0) {
+    if (guidancePoints.length > 0) {
       const zoom = this.map.getZoom() || this.settings.mapZoomLevel() || 8;
       const riderCoords = this.getCoordsForMile(this.currentMile());
       const targetLonLat: [number, number] = riderCoords
         ? [riderCoords[1], riderCoords[0]]
-        : [points[0][1], points[0][0]];
+        : [guidancePoints[0][1], guidancePoints[0][0]];
       this.map.setCenter(targetLonLat);
       this.map.setZoom(zoom);
     }
@@ -849,21 +917,40 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private getCoordsForMile(targetMile: number): [number, number, number] | null {
-    const points = this.routeService.trackPoints();
+    const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+    const points = guidance && guidance.length > 0 ? guidance : this.routeService.trackPoints();
     if (!points || points.length === 0) return null;
 
-    let closest = points[0];
-    let minDiff = Math.abs(points[0][4] - targetMile);
+    if (points.length === 1 || targetMile <= points[0][4]) {
+      return [points[0][0], points[0][1], points[0][2]];
+    }
+    const lastIdx = points.length - 1;
+    if (targetMile >= points[lastIdx][4]) {
+      return [points[lastIdx][0], points[lastIdx][1], points[lastIdx][2]];
+    }
 
-    for (let i = 1; i < points.length; i++) {
-      const diff = Math.abs(points[i][4] - targetMile);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closest = points[i];
+    // Binary search for the enclosing segment: O(log N)
+    let low = 0;
+    let high = lastIdx;
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2);
+      if (points[mid][4] <= targetMile) {
+        low = mid + 1;
+      } else {
+        high = mid - 1;
       }
     }
 
-    return [closest[0], closest[1], closest[2]];
+    const idxA = Math.max(0, low - 1);
+    const idxB = Math.min(lastIdx, idxA + 1);
+    const span = points[idxB][4] - points[idxA][4];
+    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - points[idxA][4]) / span));
+
+    const lat = points[idxA][0] + t * (points[idxB][0] - points[idxA][0]);
+    const lon = points[idxA][1] + t * (points[idxB][1] - points[idxA][1]);
+    const ele = points[idxA][2] + t * (points[idxB][2] - points[idxA][2]);
+
+    return [lat, lon, ele];
   }
 
   centerOnRider(): void {
