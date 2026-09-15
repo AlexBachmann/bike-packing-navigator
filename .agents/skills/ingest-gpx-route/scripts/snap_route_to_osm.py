@@ -19,6 +19,7 @@ Usage:
 
 import argparse
 from collections import defaultdict
+import heapq
 import gzip
 import json
 import math
@@ -243,38 +244,165 @@ class OsmRoadNetwork:
         print(f"[OSM Snapper] Indexed {total_segs} segments across {len(self.ways)} continuous OSM ways.")
 
     def build_adjacency(self):
-        """Builds an adjacency graph between ways based on shared or proximate endpoints and T-junctions."""
+        """Builds an adjacency graph and connection lookup between ways based on shared or proximate endpoints and T-junctions."""
         self.adjacency: Dict[int, Set[int]] = defaultdict(set)
+        self.connections: Dict[int, Dict[int, Tuple[int, int, float]]] = defaultdict(dict)
         v_grid = defaultdict(list)
         v_size = 0.0003  # ~30 meters
 
         # Index all vertices across all ways
         for w_idx, w in enumerate(self.ways):
-            for pt in w['coords']:
+            coords = w['coords']
+            w['length_m'] = sum(
+                haversine_m(coords[k][0], coords[k][1], coords[k + 1][0], coords[k + 1][1])
+                for k in range(len(coords) - 1)
+            )
+            for v_idx, pt in enumerate(coords):
                 gx = int(math.floor(pt[1] / v_size))
                 gy = int(math.floor(pt[0] / v_size))
-                v_grid[(gx, gy)].append((w_idx, pt))
+                v_grid[(gx, gy)].append((w_idx, v_idx, pt))
 
         # Check endpoints of each way against nearby vertices (discovers intersections & T-junctions)
         for w_idx, w in enumerate(self.ways):
             coords = w['coords']
-            for pt in (coords[0], coords[-1]):
+            endpoints = [(0, coords[0]), (len(coords) - 1, coords[-1])]
+            for j1, pt in endpoints:
                 gx = int(math.floor(pt[1] / v_size))
                 gy = int(math.floor(pt[0] / v_size))
                 for dgx in (-1, 0, 1):
                     for dgy in (-1, 0, 1):
-                        for other_w, opt in v_grid.get((gx + dgx, gy + dgy), []):
-                            if other_w != w_idx and haversine_m(pt[0], pt[1], opt[0], opt[1]) <= 20.0:
-                                self.adjacency[w_idx].add(other_w)
-                                self.adjacency[other_w].add(w_idx)
+                        for other_w, j2, opt in v_grid.get((gx + dgx, gy + dgy), []):
+                            if other_w != w_idx:
+                                d = haversine_m(pt[0], pt[1], opt[0], opt[1])
+                                if d <= 25.0:
+                                    self.adjacency[w_idx].add(other_w)
+                                    self.adjacency[other_w].add(w_idx)
+                                    if other_w not in self.connections[w_idx] or d < self.connections[w_idx][other_w][2]:
+                                        self.connections[w_idx][other_w] = (j1, j2, d)
+                                    if w_idx not in self.connections[other_w] or d < self.connections[other_w][w_idx][2]:
+                                        self.connections[other_w][w_idx] = (j2, j1, d)
 
     def are_ways_connected(self, w1: int, w2: int) -> bool:
-        """Returns True if w1 and w2 share an endpoint or intersection within 20m."""
+        """Returns True if w1 and w2 share an endpoint or intersection within 25m, or are reachable within 3 hops."""
         if w1 == w2:
             return True
-        if not hasattr(self, 'adjacency') or not self.adjacency:
+        if not hasattr(self, 'connections') or not self.connections:
             return False
-        return w2 in self.adjacency.get(w1, set())
+        if w2 in self.connections.get(w1, {}):
+            return True
+        return self.find_way_path(w1, w2, max_hops=3, max_distance_m=1200.0) is not None
+
+    def find_way_path(
+        self,
+        w_start: int,
+        w_end: int,
+        max_hops: int = 10,
+        max_distance_m: float = 2000.0
+    ) -> Optional[List[int]]:
+        """Finds the shortest sequence of connected ways connecting w_start to w_end using Dijkstra."""
+        if w_start == w_end:
+            return [w_start]
+        if not hasattr(self, 'connections') or not self.connections:
+            return None
+        if w_end in self.connections.get(w_start, {}):
+            return [w_start, w_end]
+        if w_start not in self.connections or w_end not in self.connections:
+            return None
+
+        # Priority queue: (cost_m, curr_way, path)
+        queue: List[Tuple[float, int, List[int]]] = [(0.0, w_start, [w_start])]
+        best_cost: Dict[int, float] = {w_start: 0.0}
+
+        while queue:
+            dist_so_far, curr, path = heapq.heappop(queue)
+            if curr == w_end:
+                return path
+            if len(path) > max_hops or dist_so_far > max_distance_m:
+                continue
+            if dist_so_far > best_cost.get(curr, float('inf')):
+                continue
+
+            for nxt, (j1, j2, d_gap) in self.connections.get(curr, {}).items():
+                if nxt == w_end:
+                    new_cost = dist_so_far + d_gap
+                    if new_cost <= max_distance_m:
+                        return path + [nxt]
+                w_len = self.ways[nxt].get('length_m', 50.0)
+                new_cost = dist_so_far + d_gap + w_len
+                if new_cost < best_cost.get(nxt, float('inf')) and new_cost <= max_distance_m:
+                    best_cost[nxt] = new_cost
+                    heapq.heappush(queue, (new_cost, nxt, path + [nxt]))
+
+        return None
+
+    def extract_path_geometry(
+        self,
+        way_path: List[int],
+        c_start: Dict[str, Any],
+        c_end: Dict[str, Any]
+    ) -> List[Tuple[float, float]]:
+        """
+        Traverses a sequence of connected ways from c_start to c_end,
+        extracting all intermediate curve vertices along the road network.
+        """
+        if not way_path:
+            return [(c_end['proj_lat'], c_end['proj_lon'])]
+
+        if len(way_path) == 1:
+            w = way_path[0]
+            coords = self.ways[w]['coords']
+            s1 = c_start['seg_idx'] + c_start['t']
+            s2 = c_end['seg_idx'] + c_end['t']
+            pts: List[Tuple[float, float]] = []
+            if s2 >= s1:
+                for v in range(c_start['seg_idx'] + 1, c_end['seg_idx'] + 1):
+                    pts.append(coords[v])
+            else:
+                for v in range(c_start['seg_idx'], c_end['seg_idx'], -1):
+                    pts.append(coords[v])
+            pts.append((c_end['proj_lat'], c_end['proj_lon']))
+            return pts
+
+        pts = []
+        # 1. First way: traverse from c_start to junction with next way
+        w0 = way_path[0]
+        coords0 = self.ways[w0]['coords']
+        j_exit, _, _ = self.connections.get(w0, {}).get(way_path[1], (len(coords0) - 1, 0, 0.0))
+        s0 = c_start['seg_idx'] + c_start['t']
+        if j_exit >= s0:
+            for v in range(c_start['seg_idx'] + 1, j_exit + 1):
+                pts.append(coords0[v])
+        else:
+            for v in range(c_start['seg_idx'], j_exit - 1, -1):
+                pts.append(coords0[v])
+
+        # 2. Intermediate ways: traverse from entry junction to exit junction
+        for i in range(1, len(way_path) - 1):
+            w_curr = way_path[i]
+            coords_curr = self.ways[w_curr]['coords']
+            _, j_entry, _ = self.connections.get(way_path[i - 1], {}).get(w_curr, (0, 0, 0.0))
+            j_exit, _, _ = self.connections.get(w_curr, {}).get(way_path[i + 1], (len(coords_curr) - 1, 0, 0.0))
+            if j_exit >= j_entry:
+                for v in range(j_entry, j_exit + 1):
+                    pts.append(coords_curr[v])
+            else:
+                for v in range(j_entry, j_exit - 1, -1):
+                    pts.append(coords_curr[v])
+
+        # 3. Final way: traverse from entry junction to c_end projection
+        w_end = way_path[-1]
+        coords_end = self.ways[w_end]['coords']
+        _, j_entry, _ = self.connections.get(way_path[-2], {}).get(w_end, (0, 0, 0.0))
+        s_end = c_end['seg_idx'] + c_end['t']
+        if s_end >= j_entry:
+            for v in range(j_entry, c_end['seg_idx'] + 1):
+                pts.append(coords_end[v])
+        else:
+            for v in range(j_entry, c_end['seg_idx'], -1):
+                pts.append(coords_end[v])
+
+        pts.append((c_end['proj_lat'], c_end['proj_lon']))
+        return pts
 
 
 def find_candidates_for_point(
@@ -284,7 +412,7 @@ def find_candidates_for_point(
     threshold_m: float = 50.0
 ) -> List[Dict[str, Any]]:
     """
-    Finds road candidate projections within threshold_m of (lat, lon).
+    Finds road candidate projections within extended search radius of (lat, lon).
     Returns list of candidate dicts sorted by effective distance.
     Always includes an off-road fallback candidate.
     """
@@ -346,13 +474,12 @@ def find_candidates_for_point(
         'proj_lat': lat,
         'proj_lon': lon,
         'dist_m': 0.0,
-        'eff_dist': threshold_m + 5.0,  # Penalty so road is preferred if within 50m
+        'eff_dist': threshold_m + 8.0,  # Penalty so nearby roads are preferred
         'class': 'off_road',
         'is_fallback': True
     }
 
     if not road_candidates:
-        # Strictly off-road: only fallback with zero penalty
         fallback_cand['eff_dist'] = 0.0
         return [fallback_cand]
 
@@ -380,11 +507,10 @@ def compute_transition_cost(
 
     if is_fb1 != is_fb2:
         jump_dist = haversine_m(c1['proj_lat'], c1['proj_lon'], c2['proj_lat'], c2['proj_lon'])
-        return abs(jump_dist - gpx_dist_m) * 0.4 + 2.0
+        return abs(jump_dist - gpx_dist_m) * 0.4 + 10.0
 
     # Both are on road
     if c1['way_idx'] == c2['way_idx']:
-        # Same continuous way: compute distance along the way regardless of vertex direction
         way = network.ways[c1['way_idx']]
         coords = way['coords']
         s1 = c1['seg_idx'] + c1['t']
@@ -411,17 +537,18 @@ def compute_transition_cost(
             if dot < 0 and trans_dist > 5.0:
                 return 25.0 + trans_dist * 2.0
 
-        return abs(along_dist - gpx_dist_m) * 0.3
+        return abs(along_dist - gpx_dist_m) * 0.2
 
-    # Different ways: evaluate connection
+    # Different ways: evaluate connection via shortest path
     trans_dist = haversine_m(c1['proj_lat'], c1['proj_lon'], c2['proj_lat'], c2['proj_lon'])
-    is_connected = network.are_ways_connected(c1['way_idx'], c2['way_idx'])
-    if is_connected:
-        # Connected intersection or nearby junction: modest way-switch penalty
-        return abs(trans_dist - gpx_dist_m) * 0.3 + 4.0
+    w_path = network.find_way_path(c1['way_idx'], c2['way_idx'], max_hops=4, max_distance_m=max(800.0, gpx_dist_m * 2.5))
+    if w_path is not None:
+        pts = network.extract_path_geometry(w_path, c1, c2)
+        path_len = sum(haversine_m(pts[k][0], pts[k][1], pts[k + 1][0], pts[k + 1][1]) for k in range(len(pts) - 1))
+        return abs(path_len - gpx_dist_m) * 0.2 + 3.0
     else:
         # Disconnected parallel ways: heavy penalty prevents erratic jumping
-        return 35.0 + trans_dist
+        return 40.0 + trans_dist * 2.0
 
 
 def densify_track_points(points: List[List[float]], max_step_m: float = 40.0) -> List[List[float]]:
@@ -466,12 +593,11 @@ def snap_track_to_osm(
             "points": input_points
         }
 
-    # Densify coarse tracks (> 40m between points) to preserve trail curvature across long chords
-    raw_points = densify_track_points(input_points, max_step_m=40.0)
+    raw_points = input_points
 
-    print(f"\n[OSM Snapper] Starting OSM road snapping for {len(raw_points)} points (densified from {len(input_points)}, threshold={threshold_m}m)...")
+    print(f"\n[OSM Snapper] Starting OSM road snapping for {len(raw_points)} points (threshold={threshold_m}m)...")
     network = OsmRoadNetwork(pmtiles_path)
-    network.load_corridor_ways(raw_points, threshold_m)
+    network.load_corridor_ways(raw_points, max(threshold_m, 60.0))
 
     # 1. Candidate Generation
     print(f"[OSM Snapper] Generating candidate projections along track...")
@@ -523,146 +649,83 @@ def snap_track_to_osm(
 
     print(f"[OSM Snapper] Optimal path solved in {time.time() - t_vit:.2f}s.")
 
-    # 3. Guidance Polyline Reconstruction & Curve Following
-    print(f"[OSM Snapper] Reconstructing curve-aligned guidance line...")
+    # 3. Guidance Polyline Reconstruction & Look-Ahead Curve Bridging
+    print(f"[OSM Snapper] Reconstructing curve-aligned guidance line with look-ahead bridging...")
     guidance_coords: List[Tuple[float, float, float]] = []
 
     snapped_count = sum(1 for c in chosen_cands if not c['is_fallback'])
     fallback_count = sum(1 for c in chosen_cands if c['is_fallback'])
     print(f"[OSM Snapper] Progression summary: {snapped_count} road-snapped points, {fallback_count} off-road fallback points.")
 
-    for i in range(n):
+    i = 0
+    while i < n:
         curr_cand = chosen_cands[i]
         curr_raw = raw_points[i]
 
         if i == 0:
             guidance_coords.append((curr_cand['proj_lat'], curr_cand['proj_lon'], curr_raw[2]))
+            i += 1
             continue
 
         prev_cand = chosen_cands[i - 1]
         prev_raw = raw_points[i - 1]
 
-        # Check if both consecutive points are snapped to the same OSM way
-        if (
-            not prev_cand['is_fallback']
-            and not curr_cand['is_fallback']
-            and prev_cand['way_idx'] == curr_cand['way_idx']
-        ):
-            way = network.ways[curr_cand['way_idx']]
-            coords = way['coords']
-            s1 = prev_cand['seg_idx'] + prev_cand['t']
-            s2 = curr_cand['seg_idx'] + curr_cand['t']
+        # If previous point is on a road/trail, look ahead for upcoming points on the road network
+        if not prev_cand['is_fallback']:
+            bridged_to = None
+            bridged_path = None
+            gpx_accum_dist = 0.0
 
-            step_pts: List[Tuple[float, float]] = []
+            for look in range(i, min(i + 12, n)):
+                cand_k = chosen_cands[look]
+                gpx_step = haversine_m(
+                    raw_points[look - 1][0], raw_points[look - 1][1],
+                    raw_points[look][0], raw_points[look][1]
+                )
+                gpx_accum_dist += gpx_step
+                if gpx_accum_dist > 1800.0:
+                    break
 
-            if s2 > s1:
-                # Forward progression: insert intermediate road vertices between s1 and s2
-                seg_start = prev_cand['seg_idx']
-                seg_end = curr_cand['seg_idx']
-                if seg_end > seg_start:
-                    for v_idx in range(seg_start + 1, seg_end + 1):
-                        step_pts.append((coords[v_idx][0], coords[v_idx][1]))
-            elif s2 < s1:
-                # Reverse progression: insert intermediate road vertices in reverse order
-                seg_start = prev_cand['seg_idx']
-                seg_end = curr_cand['seg_idx']
-                if seg_start > seg_end:
-                    for v_idx in range(seg_start, seg_end, -1):
-                        step_pts.append((coords[v_idx][0], coords[v_idx][1]))
+                if not cand_k['is_fallback']:
+                    # Look for network path connecting prev_cand's way to cand_k's way
+                    w_path = network.find_way_path(prev_cand['way_idx'], cand_k['way_idx'], max_hops=10, max_distance_m=2000.0)
+                    if w_path is not None:
+                        pts_test = network.extract_path_geometry(w_path, prev_cand, cand_k)
+                        p_len = sum(
+                            haversine_m(pts_test[m][0], pts_test[m][1], pts_test[m + 1][0], pts_test[m + 1][1])
+                            for m in range(len(pts_test) - 1)
+                        )
+                        # Ensure the road path isn't an absurd detour compared to GPX distance
+                        if look == i or p_len <= max(3.0 * gpx_accum_dist, gpx_accum_dist + 600.0):
+                            bridged_to = look
+                            bridged_path = w_path
+                            break
 
-            # Destination point
-            step_pts.append((curr_cand['proj_lat'], curr_cand['proj_lon']))
+            if bridged_to is not None and bridged_path is not None:
+                dest_cand = chosen_cands[bridged_to]
+                dest_raw = raw_points[bridged_to]
+                step_pts = network.extract_path_geometry(bridged_path, prev_cand, dest_cand)
 
-            # Linearly interpolate elevation along intermediate curve points
-            total_step_len = 0.0
-            last_p = (guidance_coords[-1][0], guidance_coords[-1][1])
-            dists = []
-            for p in step_pts:
-                seg_len = haversine_m(last_p[0], last_p[1], p[0], p[1])
-                total_step_len += seg_len
-                dists.append(total_step_len)
-                last_p = p
+                total_step_len = 0.0
+                last_p = (guidance_coords[-1][0], guidance_coords[-1][1])
+                dists = []
+                for p in step_pts:
+                    seg_len = haversine_m(last_p[0], last_p[1], p[0], p[1])
+                    total_step_len += seg_len
+                    dists.append(total_step_len)
+                    last_p = p
 
-            for idx, p in enumerate(step_pts):
-                ratio = dists[idx] / total_step_len if total_step_len > 0 else 1.0
-                ele = prev_raw[2] + ratio * (curr_raw[2] - prev_raw[2])
-                guidance_coords.append((p[0], p[1], ele))
-        elif (
-            not prev_cand['is_fallback']
-            and not curr_cand['is_fallback']
-            and network.are_ways_connected(prev_cand['way_idx'], curr_cand['way_idx'])
-        ):
-            # Connected ways: follow road geometry through shared endpoint if nearby
-            w1 = network.ways[prev_cand['way_idx']]
-            w2 = network.ways[curr_cand['way_idx']]
-            coords1 = w1['coords']
-            coords2 = w2['coords']
+                for idx, p in enumerate(step_pts):
+                    ratio = dists[idx] / total_step_len if total_step_len > 0 else 1.0
+                    ele = prev_raw[2] + ratio * (dest_raw[2] - prev_raw[2])
+                    guidance_coords.append((p[0], p[1], ele))
 
-            junction = None
-            best_dist_sum = float('inf')
-            cand_dist = haversine_m(prev_cand['proj_lat'], prev_cand['proj_lon'], curr_cand['proj_lat'], curr_cand['proj_lon'])
-            search_radius = max(200.0, cand_dist * 1.5 + 50.0)
-            cand_j1 = [
-                idx for idx in range(len(coords1))
-                if haversine_m(prev_cand['proj_lat'], prev_cand['proj_lon'], coords1[idx][0], coords1[idx][1]) <= search_radius
-            ]
-            cand_j2 = [
-                idx for idx in range(len(coords2))
-                if haversine_m(curr_cand['proj_lat'], curr_cand['proj_lon'], coords2[idx][0], coords2[idx][1]) <= search_radius
-            ]
+                i = bridged_to + 1
+                continue
 
-            for j1 in cand_j1:
-                p1_j = coords1[j1]
-                d1 = haversine_m(prev_cand['proj_lat'], prev_cand['proj_lon'], p1_j[0], p1_j[1])
-                for j2 in cand_j2:
-                    p2_j = coords2[j2]
-                    d2 = haversine_m(curr_cand['proj_lat'], curr_cand['proj_lon'], p2_j[0], p2_j[1])
-                    if haversine_m(p1_j[0], p1_j[1], p2_j[0], p2_j[1]) <= 20.0:
-                        if d1 + d2 < best_dist_sum:
-                            best_dist_sum = d1 + d2
-                            junction = (j1, j2)
-
-            step_pts = []
-            if junction:
-                j1, j2 = junction
-                seg_start1 = prev_cand['seg_idx']
-                if j1 > seg_start1:
-                    for v_idx in range(seg_start1 + 1, j1):
-                        step_pts.append((coords1[v_idx][0], coords1[v_idx][1]))
-                elif j1 < seg_start1:
-                    for v_idx in range(seg_start1, j1, -1):
-                        step_pts.append((coords1[v_idx][0], coords1[v_idx][1]))
-                step_pts.append((coords1[j1][0], coords1[j1][1]))
-
-                if haversine_m(coords1[j1][0], coords1[j1][1], coords2[j2][0], coords2[j2][1]) > 2.0:
-                    step_pts.append((coords2[j2][0], coords2[j2][1]))
-
-                seg_end2 = curr_cand['seg_idx']
-                if j2 < seg_end2:
-                    for v_idx in range(j2 + 1, seg_end2 + 1):
-                        step_pts.append((coords2[v_idx][0], coords2[v_idx][1]))
-                elif j2 > seg_end2:
-                    for v_idx in range(j2 - 1, seg_end2, -1):
-                        step_pts.append((coords2[v_idx][0], coords2[v_idx][1]))
-
-            step_pts.append((curr_cand['proj_lat'], curr_cand['proj_lon']))
-
-            total_step_len = 0.0
-            last_p = (guidance_coords[-1][0], guidance_coords[-1][1])
-            dists = []
-            for p in step_pts:
-                seg_len = haversine_m(last_p[0], last_p[1], p[0], p[1])
-                total_step_len += seg_len
-                dists.append(total_step_len)
-                last_p = p
-
-            for idx, p in enumerate(step_pts):
-                ratio = dists[idx] / total_step_len if total_step_len > 0 else 1.0
-                ele = prev_raw[2] + ratio * (curr_raw[2] - prev_raw[2])
-                guidance_coords.append((p[0], p[1], ele))
-        else:
-            # Different ways, or to/from fallback: direct connection
-            guidance_coords.append((curr_cand['proj_lat'], curr_cand['proj_lon'], curr_raw[2]))
+        # Fallback progression: direct connection to curr_cand
+        guidance_coords.append((curr_cand['proj_lat'], curr_cand['proj_lon'], curr_raw[2]))
+        i += 1
 
     # 4. Telemetry Calculation (cumulative km and miles with strict monotonicity)
     print(f"[OSM Snapper] Calculating final telemetry and cumulative distances...")

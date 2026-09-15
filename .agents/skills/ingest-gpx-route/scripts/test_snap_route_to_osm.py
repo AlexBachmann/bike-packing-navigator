@@ -463,6 +463,58 @@ class TestSnapTrackToOsmPipeline(unittest.TestCase):
             self.assertGreater(points[i][3], points[i-1][3])
             self.assertGreater(points[i][4], points[i-1][4])
 
+    def test_look_ahead_bridging_over_switchback_with_fallback_chord(self):
+        # A hairpin curve / switchback:
+        # V0=(42.000, 72.000) -> V1=(42.002, 72.000) -> V2=(42.002, 72.002) -> V3=(42.000, 72.002)
+        # Raw GPX has:
+        # P0 at V0 (on trail)
+        # P1 in the middle of the woods (42.001, 72.001), ~80m away from any road -> fallback
+        # P2 at V3 (on trail)
+        raw_track = {
+            "total_km": 0.5,
+            "total_miles": 0.31,
+            "points": [
+                [42.00000, 72.00000, 1000.0, 0.0, 0.0],
+                [42.00100, 72.00100, 1010.0, 0.25, 0.15],
+                [42.00000, 72.00200, 1020.0, 0.5, 0.31]
+            ]
+        }
+
+        def mock_load(network_self, track_points, threshold_m=50.0):
+            network_self.ways = [{
+                'class': 'track',
+                'penalty': 0.0,
+                'coords': [
+                    (42.00000, 72.00000),
+                    (42.00200, 72.00000),
+                    (42.00200, 72.00200),
+                    (42.00000, 72.00200)
+                ]
+            }]
+            for k in range(len(network_self.ways[0]['coords']) - 1):
+                lat1, lon1 = network_self.ways[0]['coords'][k]
+                lat2, lon2 = network_self.ways[0]['coords'][k + 1]
+                gx1, gy1 = int(math.floor(lon1 / network_self.grid_size)), int(math.floor(lat1 / network_self.grid_size))
+                gx2, gy2 = int(math.floor(lon2 / network_self.grid_size)), int(math.floor(lat2 / network_self.grid_size))
+                for gx in range(min(gx1, gx2), max(gx1, gx2) + 1):
+                    for gy in range(min(gy1, gy2), max(gy1, gy2) + 1):
+                        network_self.grid[(gx, gy)].append((0, k))
+            network_self.build_adjacency()
+
+        with patch.object(OsmRoadNetwork, 'load_corridor_ways', side_effect=mock_load, autospec=True):
+            result = snap_track_to_osm(raw_track, Path("/tmp/mock.pmtiles"), threshold_m=50.0)
+
+        points = result["points"]
+        # Look-ahead router must bridge over P1 and route along V1 and V2
+        has_v1 = any(abs(p[0] - 42.00200) < 0.0001 and abs(p[1] - 72.00000) < 0.0001 for p in points)
+        has_v2 = any(abs(p[0] - 42.00200) < 0.0001 and abs(p[1] - 72.00200) < 0.0001 for p in points)
+        # Should NOT contain the off-road shortcut point (42.00100, 72.00100)
+        has_p1_shortcut = any(abs(p[0] - 42.00100) < 0.0001 and abs(p[1] - 72.00100) < 0.0001 for p in points)
+
+        self.assertTrue(has_v1, "Guidance track must follow loop vertex V1")
+        self.assertTrue(has_v2, "Guidance track must follow loop vertex V2")
+        self.assertFalse(has_p1_shortcut, "Guidance track must NOT cut corners through the woods via P1")
+
 
 
 if __name__ == "__main__":
