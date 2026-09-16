@@ -1,0 +1,71 @@
+"""
+engine.tiles - Vector tile generation, math, and PMTiles v3 archive management.
+"""
+
+from engine.tiles.math import (
+    TileCoord,
+    TileRange,
+    xyz_to_tms,
+    tms_to_xyz,
+    tile_to_quadkey,
+    quadkey_to_tile,
+    tile_to_tileid,
+    tileid_to_tile,
+    ground_resolution,
+    map_scale,
+    meters_to_tile_pixels,
+    parent_tile,
+    children_tiles,
+    tile_neighbors,
+    tiles_for_bbox_pyramid,
+    tiles_for_corridor,
+)
+from engine.tiles.pmtiles import (
+    PMTilesError,
+    CorruptArchiveError,
+    TileNotFoundError,
+    ArchiveBuildError,
+    ExtractionError,
+    PMTilesHeader,
+    PMTilesMetadata,
+    SectionDefinition,
+    ArchiveStats,
+    PMTilesArchive,
+    PMTilesBuilder,
+    PMTilesCorridorExtractor,
+    PMTilesSectionSlicer,
+)
+
+__all__ = [
+    # Math & Coordinates
+    "TileCoord",
+    "TileRange",
+    "xyz_to_tms",
+    "tms_to_xyz",
+    "tile_to_quadkey",
+    "quadkey_to_tile",
+    "tile_to_tileid",
+    "tileid_to_tile",
+    "ground_resolution",
+    "map_scale",
+    "meters_to_tile_pixels",
+    "parent_tile",
+    "children_tiles",
+    "tile_neighbors",
+    "tiles_for_bbox_pyramid",
+    "tiles_for_corridor",
+    # PMTiles Archives & Builder
+    "PMTilesError",
+    "CorruptArchiveError",
+    "TileNotFoundError",
+    "ArchiveBuildError",
+    "ExtractionError",
+    "PMTilesHeader",
+    "PMTilesMetadata",
+    "SectionDefinition",
+    "ArchiveStats",
+    "PMTilesArchive",
+    "PMTilesBuilder",
+    "PMTilesCorridorExtractor",
+    "PMTilesSectionSlicer",
+]

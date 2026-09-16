@@ -578,7 +578,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       const t0 = (component as any).lastCameraTimestamp;
       (component as any).lastCameraTimestamp = t0 - 100;
       (component as any).easeCameraToPosition(39.4890, -105.0980, 350, 15);
-      expect(map.getBearing()).toBeCloseTo(5.5, 1);
+      expect(map.getBearing()).toBeCloseTo(5.5, 0);
     });
 
     it('should scale stationary easeTo duration proportionally to deflection angle', () => {

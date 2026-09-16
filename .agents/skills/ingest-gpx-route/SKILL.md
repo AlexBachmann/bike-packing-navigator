@@ -43,8 +43,13 @@ All commands MUST run inside the project's Docker container:
 docker compose exec -T app <command>
 ```
 
-The pipeline scripts are located in:
-`.agents/skills/ingest-gpx-route/scripts/`
+The unified route processing engine is located in `engine/` and executed via the unified CLI:
+- **Main CLI Entrypoint**: `python3 -m engine.cli.main <subcommand> [options]`
+- **Direct Master Ingestion**: `python3 -m engine.cli.ingest [options]`
+- **Interactive Places Utility**: `python3 -m engine.cli.places [options]`
+
+> **Backward Compatibility**:
+> Legacy entrypoints in `.agents/skills/ingest-gpx-route/scripts/*.py` are maintained as thin forwarders. Existing automated agents or scripts invoking `.agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py` or individual helper scripts will continue to work without modification.
 
 ---
 
@@ -63,10 +68,10 @@ Determine:
 
 ### Step 2: Run the Master Pipeline (One-Command Ingestion)
 
-Execute the master orchestrator inside Docker:
+Execute the unified engine master orchestrator inside Docker:
 
 ```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py \
+docker compose exec -T app python3 -m engine.cli.main ingest \
   --gpx "route/<filename>.gpx" \
   --id "<route-id>" \
   --name "<Full Route Name>" \
@@ -80,6 +85,20 @@ docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/inges
   [--water "route/places/water_<route-id>.json"]
 ```
 
+*Direct module alternative:*
+```bash
+docker compose exec -T app python3 -m engine.cli.ingest \
+  --gpx "route/<filename>.gpx" \
+  --id "<route-id>" ...
+```
+
+*Legacy forwarder alternative (backward compatible):*
+```bash
+docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py \
+  --gpx "route/<filename>.gpx" \
+  --id "<route-id>" ...
+```
+
 *Note: If the user provides a Google Places API key, pass `--api-key "<key>"` or ensure `GOOGLE_CLOUD_API_KEY` (or `GOOGLE_PLACES_API_KEY`) is set in the environment. For routes with backcountry water caches or springs, pass `--water <path_to_water.json>`. Pass `--find-water-access` to automatically extract river and lake access points from OpenStreetMap corridor data (with a strict limit of 1 point per 5km segment).*
 
 The orchestrator automatically executes all steps below in sequence.
@@ -91,84 +110,147 @@ The orchestrator automatically executes all steps below in sequence.
 If you need to customize parameters or run individual stages:
 
 #### 1. Parse GPX Track & Calculate Telemetry
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/parse_gpx.py \
-  --gpx "route/<filename>.gpx" \
-  --output "public/data/routes/<route-id>/route-track.json" \
-  --stats "public/data/routes/<route-id>/.stats.json"
-```
+- Unified CLI:
+  ```bash
+  docker compose exec -T app python3 -m engine.cli.ingest \
+    --gpx "route/<filename>.gpx" \
+    --output-dir "public/data/routes/<route-id>" \
+    --no-manifest
+  ```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/densify_route_track.py \
+    --gpx "route/<filename>.gpx" \
+    --output "public/data/routes/<route-id>/route-track.json" \
+    --stats "public/data/routes/<route-id>/.stats.json"
+  ```
+  *(Legacy alias: `parse_gpx.py`)*
 
 #### 2. Generate 18 km OSM Corridor Buffer & River/Lake Water Access
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_osm_corridor.py \
-  --track "public/data/routes/<route-id>/route-track.json" \
-  --output-geojson "public/data/routes/<route-id>/corridor.geojson" \
-  --buffer-km 18.0 \
-  [--extract-water-access] \
-  [--water-output "public/data/routes/<route-id>/water_access.json"] \
-  [--segment-km 5.0] \
-  [--max-dist-m 250.0]
-```
-*(Optionally run standalone: `python3 .agents/skills/ingest-gpx-route/scripts/extract_water_access.py --track ... --output ... --segment-km 5.0`).*
+- Unified CLI:
+  ```bash
+  docker compose exec -T app python3 -m engine.cli.main water \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --corridor-geojson "public/data/routes/<route-id>/corridor.geojson" \
+    --output "public/data/routes/<route-id>/water_access.json" \
+    --segment-km 5.0
+  ```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_18km_corridor.py \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output-geojson "public/data/routes/<route-id>/corridor.geojson" \
+    --buffer-km 18.0 \
+    [--extract-water-access] \
+    [--water-output "public/data/routes/<route-id>/water_access.json"] \
+    [--segment-km 5.0] \
+    [--max-dist-m 250.0]
+  ```
+  *(Legacy alias: `extract_osm_corridor.py`)*
 
 #### 3. Model Route Surfaces (Gravel, Dirt, Paved)
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/generate_surfaces.py \
-  --track "public/data/routes/<route-id>/route-track.json" \
-  --output "public/data/routes/<route-id>/surfaces.json"
-```
-*(Optionally pass `--osm-pbf <path_to_corridor_pbf>` if an OSM PBF extract is available).*
+- Unified CLI:
+  ```bash
+  docker compose exec -T app python3 -m engine.cli.main surfaces \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output "public/data/routes/<route-id>/surfaces.json"
+  ```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/generate_surface_intervals.py \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output "public/data/routes/<route-id>/surfaces.json"
+  ```
+  *(Legacy alias: `generate_surfaces.py`)*
 
 #### 4. Extract Climbs & Mountain Passes (with OSM Geographic Enrichment)
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_climbs_passes.py \
-  --track "public/data/routes/<route-id>/route-track.json" \
-  --output-climbs "public/data/routes/<route-id>/climbs.json" \
-  --output-passes "public/data/routes/<route-id>/passes.json" \
-  --state "<ST>" \
-  [--osm-pbf "path/to/corridor.osm.pbf"]
-```
+- Unified CLI:
+  ```bash
+  docker compose exec -T app python3 -m engine.cli.main climbs \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output-climbs "public/data/routes/<route-id>/climbs.json" \
+    --output-passes "public/data/routes/<route-id>/passes.json" \
+    --state "<ST>"
+  ```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/calculate_route_climbs.py \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output-climbs "public/data/routes/<route-id>/climbs.json" \
+    --output-passes "public/data/routes/<route-id>/passes.json" \
+    --state "<ST>"
+  ```
+  *(Legacy alias: `extract_climbs_passes.py`)*
 
 #### 5. Generate Navigation Milestones
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/extract_milestones.py \
-  --track "public/data/routes/<route-id>/route-track.json" \
-  --output "public/data/routes/<route-id>/milestones.json" \
-  --interval-miles 35.0 \
-  --start-name "<Start Location>" \
-  --end-name "<End Location>"
-```
+- Ingestion Pipeline:
+  *Milestones are automatically generated during Stage 9 of the master ingestion pipeline (`python3 -m engine.cli.main ingest` or `ingest_pipeline.py`).*
+- Unified Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/generate_milestones.py \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output "public/data/routes/<route-id>/milestones.json" \
+    --interval-miles 35.0 \
+    --start-name "<Start Location>" \
+    --end-name "<End Location>"
+  ```
+  *(Legacy alias: `extract_milestones.py`)*
 
 #### 6. Extract POIs via Google Places API & Water Sources
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/populate_places.py \
-  --track "public/data/routes/<route-id>/route-track.json" \
-  --output "public/data/routes/<route-id>/places.json" \
-  --cache "route/places/.cache_places_api_<route-id>.json" \
-  [--water "route/places/water_<route-id>.json"]
-```
+- Unified CLI:
+  ```bash
+  docker compose exec -T app python3 -m engine.cli.places \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output "public/data/routes/<route-id>/places.json" \
+    --cache "route/places/.cache_places_api_<route-id>.json" \
+    [--water "route/places/water_<route-id>.json"]
+  ```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/find_places.py \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --output "public/data/routes/<route-id>/places.json" \
+    --cache "route/places/.cache_places_api_<route-id>.json"
+  ```
+  *(Legacy alias: `populate_places.py`)*
 
 #### 7. Snap Route to OSM Road & Trail Centerlines (guidance-track.json)
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/snap_route_to_osm.py \
-  --track "public/data/routes/<route-id>/route-track.json" \
-  --pmtiles "public/data/routes/<route-id>/corridor.pmtiles" \
-  --output "public/data/routes/<route-id>/guidance-track.json"
-```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/snap_to_roads.py \
+    --track "public/data/routes/<route-id>/route-track.json" \
+    --pmtiles "public/data/routes/<route-id>/corridor.pmtiles" \
+    --output "public/data/routes/<route-id>/guidance-track.json"
+  ```
+  *(Legacy alias: `snap_route_to_osm.py`)*
 
 #### 8. Register Route in Manifest (`routes.json`)
-```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/register_manifest.py \
-  --routes-json "public/data/routes.json" \
-  --id "<route-id>" \
-  --name "<Full Route Name>" \
-  --short-name "<Short Name>" \
-  --badge "<BADGE>" \
-  --start-location "<Start Location>" \
-  --end-location "<End Location>" \
-  --stats "public/data/routes/<route-id>/.stats.json" \
-  --description "<Description>"
-```
+- Unified CLI:
+  ```bash
+  docker compose exec -T app python3 -m engine.cli.main manifest \
+    --routes-json "public/data/routes.json" \
+    --id "<route-id>" \
+    --name "<Full Route Name>" \
+    --short-name "<Short Name>" \
+    --badge "<BADGE>" \
+    --start-location "<Start Location>" \
+    --end-location "<End Location>" \
+    --stats "public/data/routes/<route-id>/.stats.json" \
+    --description "<Description>"
+  ```
+- Forwarder:
+  ```bash
+  docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/register_manifest.py \
+    --routes-json "public/data/routes.json" \
+    --id "<route-id>" \
+    --name "<Full Route Name>" \
+    --short-name "<Short Name>" \
+    --badge "<BADGE>" \
+    --start-location "<Start Location>" \
+    --end-location "<End Location>" \
+    --stats "public/data/routes/<route-id>/.stats.json" \
+    --description "<Description>"
+  ```
 
 ---
 
@@ -307,19 +389,25 @@ The Angular frontend recognizes `"water"` natively:
 
 Once the data files are generated and the route is registered in `routes.json`:
 
-1. **Run Unit Tests**:
+1. **Verify Python Engine Unit Tests**:
    ```bash
-   docker compose exec -T app npm test
+   docker compose exec -T app pytest engine/tests
    ```
-   All test suites must pass (100% green).
+   All Python domain unit tests must pass (100% green, 0 regressions).
 
-2. **Verify Production Build**:
+2. **Run Angular Unit Tests**:
+   ```bash
+   docker compose exec -T app npm test -- --watch=false
+   ```
+   All frontend test suites must pass (100% green).
+
+3. **Verify Production Build**:
    ```bash
    docker compose exec -T app npm run build
    ```
    Must compile with 0 errors.
 
-3. **Verify Route Selection in Browser**:
+4. **Verify Route Selection in Browser**:
    - Open the application with `?route=<route-id>`.
    - Verify that:
      - The top-left header dropdown displays the new route and badge.

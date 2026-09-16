@@ -11,7 +11,15 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, List, Any, Tuple
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+def _find_project_root() -> Path:
+    p = Path(__file__).resolve()
+    for parent in p.parents:
+        if (parent / "engine").is_dir():
+            return parent
+    return p.parents[4]
+
+
+PROJECT_ROOT = _find_project_root()
 ROUTE_DIR = PROJECT_ROOT / "public" / "data" / "routes" / "silk-road-mountain-race-2026"
 GPX_PATH = PROJECT_ROOT / "route" / "gpx" / "silk-road-mountain-race-2026.gpx"
 
