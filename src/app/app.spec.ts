@@ -917,5 +917,27 @@ describe('App', () => {
       expect(app.gpsState().heading).toBe(90);
     });
   });
+
+  describe('GPS Simulator Cross-View Synchronization', () => {
+    it('should synchronize simulator ticks to currentMile when simulation is running', () => {
+      const mockPoints: [number, number, number, number, number][] = [
+        [51.0, -115.0, 1400, 0, 0],
+        [51.1, -114.9, 1400, 10, 6.2]
+      ];
+      app.gpsSimulator.start(25, mockPoints);
+      expect(app.gpsSimulator.running()).toBe(true);
+
+      app.gpsSimulator.seek(3.5);
+      fixture.detectChanges();
+
+      expect(app.currentMile()).toBe(3.5);
+      app.gpsSimulator.stop();
+    });
+
+    it('should seek simulator when setMile is called', () => {
+      app.setMile(42);
+      expect(app.gpsSimulator.simulatedMile()).toBe(42);
+    });
+  });
 });
 

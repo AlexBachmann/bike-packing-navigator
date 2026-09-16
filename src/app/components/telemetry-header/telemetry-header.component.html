@@ -96,10 +96,35 @@
   <!-- Current Mile/KM Marker Selector & Route Telemetry (Only when route is active) -->
   @if (activeRouteId()) {
     <div class="bg-slate-950/80 rounded-xl p-2.5 border border-slate-800">
-    <div class="flex items-center justify-between text-xs mb-1.5 gap-2">
-      <div class="flex items-center gap-1.5 min-w-0">
-        <span class="text-slate-400 font-mono uppercase text-[10px] tracking-wider whitespace-nowrap">
-          <span class="hidden sm:inline">Current </span>Location
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs mb-2 gap-1.5 sm:gap-2">
+      <!-- Mobile Row 1 / Desktop Right: Distance & Collapse -->
+      <div class="flex items-center justify-between sm:order-2 shrink-0">
+        <div class="flex items-center gap-1.5">
+          <span class="text-slate-400 font-mono uppercase text-[10px] tracking-wider whitespace-nowrap sm:hidden">
+            Location
+          </span>
+          <div class="font-mono font-bold text-emerald-400 text-xs sm:text-sm whitespace-nowrap">
+            @if (unit() === 'miles') {
+              Mile {{ currentMile().toFixed(1) }} <span class="text-[11px] sm:text-xs text-slate-500 font-normal">/ {{ routeService.totalDistanceMiles }}</span>
+            } @else {
+              KM {{ (currentMile() * 1.60934).toFixed(1) }} <span class="text-[11px] sm:text-xs text-slate-500 font-normal">/ {{ routeService.totalDistanceKm }}</span>
+            }
+          </div>
+        </div>
+        <button
+          type="button"
+          (click)="toggleHeaderCollapse.emit()"
+          class="w-5 h-5 flex items-center justify-center rounded hover:bg-slate-800 active:bg-slate-700 text-slate-400 hover:text-slate-200 transition text-[9px] font-mono cursor-pointer shrink-0 select-none ml-2"
+          [title]="isHeaderCollapsed() ? 'Expand next resupply & bike shop' : 'Collapse next resupply & bike shop'"
+        >
+          {{ isHeaderCollapsed() ? '▼' : '▲' }}
+        </button>
+      </div>
+
+      <!-- Mobile Row 2 / Desktop Left: Action Pills (GPS, Weather, Sim) -->
+      <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap sm:order-1 min-w-0">
+        <span class="text-slate-400 font-mono uppercase text-[10px] tracking-wider whitespace-nowrap hidden sm:inline">
+          <span class="hidden md:inline">Current </span>Location
         </span>
         <button
           type="button"
@@ -144,24 +169,43 @@
             <span class="text-cyan-400 hidden sm:inline">{{ unit() === 'miles' ? weather.windSpeedMph + 'mph' : weather.windSpeedKmh + 'km/h' }} {{ weather.windCardinal }}</span>
           </button>
         }
-      </div>
 
-      <div class="flex items-center gap-1.5 shrink-0">
-        <div class="font-mono font-bold text-emerald-400 text-xs sm:text-sm whitespace-nowrap">
-          @if (unit() === 'miles') {
-            Mile {{ currentMile().toFixed(1) }} <span class="text-[11px] sm:text-xs text-slate-500 font-normal">/ {{ routeService.totalDistanceMiles }}</span>
-          } @else {
-            KM {{ (currentMile() * 1.60934).toFixed(1) }} <span class="text-[11px] sm:text-xs text-slate-500 font-normal">/ {{ routeService.totalDistanceKm }}</span>
+        <!-- GPS Simulator Control Button & Modal -->
+        <div class="relative shrink-0">
+          <button
+            type="button"
+            data-testid="telemetry-sim-btn"
+            (click)="toggleSimulatorModal()"
+            [title]="gpsSimulator.running()
+              ? 'GPS simulation running at ' + gpsSimulator.speedKph() + ' km/h. Click to control.'
+              : 'Open GPS simulation controls'"
+            class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold transition flex items-center gap-1 border cursor-pointer whitespace-nowrap"
+            [ngClass]="gpsSimulator.running()
+              ? 'bg-purple-950/80 text-purple-200 border-purple-500/80 shadow-sm shadow-purple-950 animate-pulse'
+              : 'bg-slate-800 text-slate-300 hover:text-white border-slate-700'"
+          >
+            @if (gpsSimulator.running()) {
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+              <span>🎮 {{ displaySimSpeed() }}</span>
+            } @else {
+              <span>🎮 Sim</span>
+            }
+          </button>
+
+          <!-- Simulator Dropdown Modal -->
+          @if (isSimulatorOpen()) {
+            <app-ride-simulator-modal
+              [isOpen]="isSimulatorOpen()"
+              [isRunning]="gpsSimulator.running()"
+              [speed]="simSpeedInput()"
+              position="top"
+              (toggleOpen)="toggleSimulatorModal()"
+              (speedChange)="onSimSpeedChange($event)"
+              (togglePlay)="toggleSimulation()"
+              (reset)="resetSimulation()"
+            />
           }
         </div>
-        <button
-          type="button"
-          (click)="toggleHeaderCollapse.emit()"
-          class="w-5 h-5 flex items-center justify-center rounded hover:bg-slate-800 active:bg-slate-700 text-slate-400 hover:text-slate-200 transition text-[9px] font-mono cursor-pointer shrink-0 select-none"
-          [title]="isHeaderCollapsed() ? 'Expand next resupply & bike shop' : 'Collapse next resupply & bike shop'"
-        >
-          {{ isHeaderCollapsed() ? '▼' : '▲' }}
-        </button>
       </div>
     </div>
 

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, effect, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, effect, untracked, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouteDataService } from './services/route-data.service';
 import { SettingsService } from './services/settings.service';
+import { GpsSimulatorService } from './services/gps-simulator.service';
 import {
   WaypointViewModel,
   GpsState,
@@ -70,6 +71,7 @@ export class App implements OnInit, OnDestroy {
   readonly analytics = inject(AnalyticsService);
   readonly deadReckoning = inject(DeadReckoningService);
   readonly geolocation = inject(GeolocationService);
+  readonly gpsSimulator = inject(GpsSimulatorService);
 
   readonly activeRouteId = this.manifestService.activeRouteId;
   readonly activeRouteSummary = this.manifestService.activeRouteSummary;
@@ -85,6 +87,33 @@ export class App implements OnInit, OnDestroy {
     });
     this.unsubscribeLocationUpdate = this.geolocation.onLocationUpdate((mile: number) => {
       this.setMile(mile);
+    });
+
+    // Effect: Synchronize simulation ticks to currentMile across all views
+    let previousRunning = false;
+    effect(() => {
+      const isRunning = this.gpsSimulator.running();
+      const simMile = this.gpsSimulator.simulatedMile();
+      untracked(() => {
+        if (isRunning || previousRunning) {
+          this.setMile(simMile);
+        }
+        previousRunning = isRunning;
+      });
+    });
+
+    // Effect: Keep trackpoints synced with GpsSimulatorService across all views
+    effect(() => {
+      const points = this.routeService.trackPoints();
+      const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+      const effectivePoints = guidance && guidance.length >= 2 ? guidance : points;
+      if (effectivePoints && effectivePoints.length >= 2) {
+        untracked(() => {
+          if (!this.gpsSimulator.running() && typeof this.gpsSimulator.setTrackPoints === 'function') {
+            this.gpsSimulator.setTrackPoints(effectivePoints);
+          }
+        });
+      }
     });
   }
 
@@ -213,6 +242,9 @@ export class App implements OnInit, OnDestroy {
     if (this.gpsState().enabled) {
       this.stopGpsTracking();
     }
+    if (typeof this.gpsSimulator?.stop === 'function') {
+      this.gpsSimulator.stop();
+    }
     const success = await this.manifestService.selectRoute(routeId);
     if (!success) {
       return false;
@@ -272,6 +304,18 @@ export class App implements OnInit, OnDestroy {
 
     const activeRouteId = this.manifestService.activeRouteId();
     this.settings.saveLocation(activeRouteId, clamped);
+
+    if (typeof this.gpsSimulator?.seek === 'function') {
+      if (this.gpsSimulator.running()) {
+        if (Math.abs(clamped - this.gpsSimulator.simulatedMile()) > 0.05) {
+          this.gpsSimulator.seek(clamped);
+        }
+      } else {
+        if (Math.abs(clamped - this.gpsSimulator.simulatedMile()) > 1e-4) {
+          this.gpsSimulator.seek(clamped);
+        }
+      }
+    }
   }
 
   adjustMile(delta: number): void {

@@ -1,17 +1,19 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, computed, inject, input, output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, computed, inject, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouteDataService } from '../../services/route-data.service';
 import { SettingsService } from '../../services/settings.service';
 import { RouteManifestService } from '../../services/route-manifest.service';
 import { WeatherService } from '../../services/weather.service';
+import { GpsSimulatorService } from '../../services/gps-simulator.service';
+import { RideSimulatorModalComponent } from '../ride-cockpit/ride-simulator-modal.component';
 import { GpsState, Place } from '../../models/waypoint.model';
 import { RouteSummary } from '../../models/route.model';
 
 @Component({
   selector: 'app-telemetry-header',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RideSimulatorModalComponent],
   templateUrl: './telemetry-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -27,6 +29,18 @@ export class TelemetryHeaderComponent implements AfterViewInit, OnDestroy {
   readonly manifestService = inject(RouteManifestService);
   readonly weatherService = inject(WeatherService);
   readonly twoHourOutlook = this.weatherService.twoHourOutlook;
+  readonly gpsSimulator = inject(GpsSimulatorService);
+
+  readonly isSimulatorOpen = signal<boolean>(false);
+  readonly simSpeedInput = signal<number>(15);
+
+  readonly displaySimSpeed = computed(() => {
+    const spd = this.gpsSimulator.speedKph();
+    if (this.unit() === 'km') {
+      return `${spd.toFixed(0)} km/h`;
+    }
+    return `${(spd * 0.621371).toFixed(0)} mph`;
+  });
 
   readonly currentMile = input.required<number>();
   readonly isHeaderCollapsed = input<boolean>(false);
@@ -122,6 +136,50 @@ export class TelemetryHeaderComponent implements AfterViewInit, OnDestroy {
 
   onRouteChange(newRouteId: string): void {
     this.routeChange.emit(newRouteId);
+  }
+
+  toggleSimulatorModal(): void {
+    this.isSimulatorOpen.update((v) => !v);
+  }
+
+  onSimSpeedChange(speed: number): void {
+    const valid = Math.max(0, speed);
+    this.simSpeedInput.set(valid);
+    if (this.gpsSimulator.running()) {
+      this.gpsSimulator.setSpeed(valid);
+    }
+  }
+
+  toggleSimulation(): void {
+    if (this.gpsSimulator.running()) {
+      const stopMile = typeof this.gpsSimulator.simulatedMile === 'function'
+        ? this.gpsSimulator.simulatedMile()
+        : this.currentMile();
+      this.gpsSimulator.stop();
+      const valueInUnit = this.unit() === 'miles' ? stopMile : stopMile * 1.60934;
+      this.sliderChange.emit(valueInUnit);
+    } else {
+      const rawPts = this.routeService.trackPoints();
+      const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
+      const pts = guidance && guidance.length >= 2 ? guidance : rawPts;
+      const speed = this.simSpeedInput();
+      if (pts && pts.length >= 2 && typeof this.gpsSimulator.setTrackPoints === 'function') {
+        this.gpsSimulator.setTrackPoints(pts);
+      }
+      if (typeof this.gpsSimulator.seek === 'function') {
+        this.gpsSimulator.seek(this.currentMile());
+      }
+      this.gpsSimulator.start(speed, pts);
+    }
+  }
+
+  resetSimulation(): void {
+    this.gpsSimulator.reset();
+    const resetMile = typeof this.gpsSimulator.simulatedMile === 'function'
+      ? this.gpsSimulator.simulatedMile()
+      : 0;
+    const valueInUnit = this.unit() === 'miles' ? resetMile : resetMile * 1.60934;
+    this.sliderChange.emit(valueInUnit);
   }
 
   ngAfterViewInit(): void {

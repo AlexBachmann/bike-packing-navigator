@@ -550,9 +550,6 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.isDestroyed = true;
-    if (this.gpsSimulator.running()) {
-      this.gpsSimulator.stop();
-    }
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.handleWindowResize);
     }
@@ -1200,7 +1197,11 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleSimulation(): void {
     if (this.gpsSimulator.running()) {
+      const stopMile = typeof this.gpsSimulator.simulatedMile === 'function'
+        ? this.gpsSimulator.simulatedMile()
+        : this.currentMile();
       this.gpsSimulator.stop();
+      this.selectMile.emit(stopMile);
     } else {
       const rawPts = this.routeService.trackPoints();
       const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];

@@ -1046,10 +1046,21 @@ describe('RideCockpitComponent Unit Test Suite', () => {
     });
 
     it('should stop simulation when clicking Stop button while running', () => {
+      const selectMileSpy = vi.spyOn(component.selectMile, 'emit');
       component.toggleSimulation(); // Start
       fixture.detectChanges();
       component.toggleSimulation(); // Stop
       expect(mockSimulator.stop).toHaveBeenCalled();
+      expect(selectMileSpy).toHaveBeenCalledWith(0.28);
+    });
+
+    it('should not stop simulation when component is destroyed (preserving simulation on view change)', () => {
+      component.toggleSimulation(); // Start
+      fixture.detectChanges();
+      mockSimulator.stop.mockClear();
+
+      component.ngOnDestroy();
+      expect(mockSimulator.stop).not.toHaveBeenCalled();
     });
 
     it('should prioritize simulated mile and coords over static inputs', () => {

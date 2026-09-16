@@ -45,6 +45,7 @@
         [isOpen]="isSimulatorOpen()"
         [isRunning]="gpsSimulator.running()"
         [speed]="simSpeedInput()"
+        position="bottom"
         (toggleOpen)="toggleSimulatorModal()"
         (speedChange)="onSimSpeedChange($event)"
         (togglePlay)="toggleSimulation()"

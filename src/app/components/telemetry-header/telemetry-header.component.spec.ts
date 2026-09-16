@@ -373,4 +373,86 @@ describe('TelemetryHeaderComponent', () => {
     const val = document.documentElement.style.getPropertyValue('--telemetry-header-height');
     expect(val).toBe('160px');
   });
+
+  describe('GPS Simulator Integration in Telemetry Header', () => {
+    it('should render the GPS simulator trigger button in header', () => {
+      const simBtn = fixture.nativeElement.querySelector('[data-testid="telemetry-sim-btn"]');
+      expect(simBtn).toBeTruthy();
+      expect(simBtn.textContent).toContain('Sim');
+    });
+
+    it('should toggle simulator modal when simulator button is clicked', () => {
+      expect(component.isSimulatorOpen()).toBe(false);
+      const simBtn = fixture.nativeElement.querySelector('[data-testid="telemetry-sim-btn"]') as HTMLButtonElement;
+      simBtn.click();
+      fixture.detectChanges();
+      expect(component.isSimulatorOpen()).toBe(true);
+
+      const modal = fixture.nativeElement.querySelector('[data-testid="simulator-modal"]');
+      expect(modal).toBeTruthy();
+
+      simBtn.click();
+      fixture.detectChanges();
+      expect(component.isSimulatorOpen()).toBe(false);
+    });
+
+    it('should toggle simulation on and off', () => {
+      const mockPoints: [number, number, number, number, number][] = [
+        [51.0, -115.0, 1400, 0, 0],
+        [51.1, -114.9, 1400, 10, 6.2]
+      ];
+      component.gpsSimulator.setTrackPoints(mockPoints);
+      expect(component.gpsSimulator.running()).toBe(false);
+      component.toggleSimulation();
+      expect(component.gpsSimulator.running()).toBe(true);
+
+      component.toggleSimulation();
+      expect(component.gpsSimulator.running()).toBe(false);
+    });
+
+    it('should emit sliderChange with stopMile when toggleSimulation stops simulation', () => {
+      settings.distanceUnit.set('miles');
+      const mockPoints: [number, number, number, number, number][] = [
+        [51.0, -115.0, 1400, 0, 0],
+        [51.1, -114.9, 1400, 10, 6.2]
+      ];
+      component.gpsSimulator.setTrackPoints(mockPoints);
+      component.gpsSimulator.seek(3.5);
+      component.gpsSimulator.start(15, mockPoints);
+      expect(component.gpsSimulator.running()).toBe(true);
+
+      const sliderSpy = vi.spyOn(component.sliderChange, 'emit');
+      component.toggleSimulation(); // Stop
+      expect(component.gpsSimulator.running()).toBe(false);
+      expect(sliderSpy).toHaveBeenCalledWith(3.5);
+    });
+
+    it('should emit sliderChange in km when stopping simulation in km mode', () => {
+      settings.distanceUnit.set('km');
+      const mockPoints: [number, number, number, number, number][] = [
+        [51.0, -115.0, 1400, 0, 0],
+        [51.1, -114.9, 1400, 10, 6.2]
+      ];
+      component.gpsSimulator.setTrackPoints(mockPoints);
+      component.gpsSimulator.seek(2.0);
+      component.gpsSimulator.start(15, mockPoints);
+
+      const sliderSpy = vi.spyOn(component.sliderChange, 'emit');
+      component.toggleSimulation(); // Stop
+      expect(component.gpsSimulator.running()).toBe(false);
+      expect(sliderSpy).toHaveBeenCalledWith(2.0 * 1.60934);
+    });
+
+    it('should emit sliderChange(0) when resetSimulation is called', () => {
+      const sliderSpy = vi.spyOn(component.sliderChange, 'emit');
+      component.resetSimulation();
+      expect(component.gpsSimulator.running()).toBe(false);
+      expect(sliderSpy).toHaveBeenCalledWith(0);
+    });
+
+    it('should update sim speed when onSimSpeedChange is called', () => {
+      component.onSimSpeedChange(35);
+      expect(component.simSpeedInput()).toBe(35);
+    });
+  });
 });

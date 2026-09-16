@@ -11,11 +11,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <!-- Compact Simulator Modal Dropdown (Opened by tapping speedometer) -->
+    <!-- Compact Simulator Modal Dropdown (Opened by tapping header button or speedometer) -->
     @if (isOpen()) {
+      <!-- Click-outside backdrop -->
+      <div
+        class="fixed inset-0 z-40"
+        (click)="onToggleOpenClick()"
+      ></div>
       <div
         data-testid="simulator-modal"
-        class="absolute bottom-16 right-0 w-72 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-2 duration-150 z-40 pointer-events-auto"
+        [ngClass]="position() === 'top'
+          ? 'top-full mt-2 left-0 sm:left-auto sm:right-0'
+          : 'bottom-16 right-0'"
+        class="absolute w-72 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in duration-150 z-50 pointer-events-auto"
       >
         <!-- Modal Header -->
         <div class="flex items-center justify-between">
@@ -133,6 +141,7 @@ export class RideSimulatorModalComponent {
   readonly isOpen = input<boolean>(false);
   readonly isRunning = input<boolean>(false);
   readonly speed = input<number>(15);
+  readonly position = input<'top' | 'bottom'>('top');
 
   // Outputs
   readonly toggleOpen = output<void>();

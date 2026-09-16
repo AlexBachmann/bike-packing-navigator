@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, Signal, OnDestroy, inject } from '@angular/core';
+import { Injectable, signal, computed, Signal, OnDestroy, inject, ApplicationRef } from '@angular/core';
 import { RouteDataService } from './route-data.service';
 import { DeadReckoningService } from './dead-reckoning.service';
 import { calculateBearing } from '../models/weather.model';
@@ -16,6 +16,7 @@ const DEFAULT_TICK_INTERVAL_MS = 1000;
 export class GpsSimulatorService implements OnDestroy {
   private readonly routeDataService = inject(RouteDataService, { optional: true });
   private readonly deadReckoning = inject(DeadReckoningService, { optional: true });
+  private readonly appRef = inject(ApplicationRef, { optional: true });
 
   private points: [number, number, number, number, number][] = [];
   private lastIndex = 0;
@@ -140,6 +141,7 @@ export class GpsSimulatorService implements OnDestroy {
       simulatedSpeedKph: 0
     }));
     this.deadReckoning?.stop();
+    this.notifyApp();
   }
 
   /**
@@ -238,6 +240,7 @@ export class GpsSimulatorService implements OnDestroy {
         simulatedHeading: finalHeading,
         simulatedSpeedKph: 0
       });
+      this.notifyApp();
       return;
     }
 
@@ -259,6 +262,17 @@ export class GpsSimulatorService implements OnDestroy {
         projectedMile: targetMile,
         heading: position.heading
       }, speed);
+    }
+    this.notifyApp();
+  }
+
+  private notifyApp(): void {
+    try {
+      if (this.appRef && !this.appRef.destroyed) {
+        this.appRef.tick();
+      }
+    } catch {
+      // Ignore if tick is already in progress or destroyed
     }
   }
 
