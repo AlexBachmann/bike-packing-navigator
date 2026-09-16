@@ -35,6 +35,7 @@ import { RideClimbMiniWidgetComponent, ActiveClimbStatus } from './ride-climb-mi
 import { RideSpeedometerComponent } from './ride-speedometer.component';
 import { RideSimulatorModalComponent } from './ride-simulator-modal.component';
 import { RideVectorDownloadCardComponent } from './ride-vector-download-card.component';
+import { calculateDeflectionAngle, normalizeBearing } from '../../utils/geo-math.utils';
 
 export { getTurnIcon } from './ride-turn-guidance-banner.component';
 export type { OffCourseAlertStatus } from './ride-off-course-banner.component';
@@ -43,6 +44,7 @@ export type { ActiveClimbStatus } from './ride-climb-mini-widget.component';
 export const DEFAULT_3D_PITCH = 55;
 export const MIN_3D_PITCH = 50;
 export const MAX_3D_PITCH = 60;
+export const MAX_CAMERA_ROTATION_SPEED_DEG_PER_SEC = 90; // 360 deg turn in 4.0s (90 deg in 1.0s)
 export const RIDER_VERTICAL_ANCHOR_RATIO = 0.72; // Lower third to lower quarter (72% from top)
 export const LOWER_THIRD_TOP_PADDING = 264; // Baseline top padding for standard 600px viewport
 export const LOWER_THIRD_BOTTOM_PADDING = 0;
@@ -123,6 +125,8 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly simSpeedInput = signal<number>(15);
 
   private lastKnownHeading = 0;
+  private currentCameraBearing: number | null = null;
+  private lastCameraTimestamp = 0;
   private map: maplibregl.Map | null = null;
   private riderMarker: maplibregl.Marker | null = null;
   private riderArrowEl: HTMLElement | null = null;
@@ -536,6 +540,8 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.map.remove();
       this.map = null;
     }
+    this.currentCameraBearing = null;
+    this.lastCameraTimestamp = 0;
   }
 
   // --------------------------------------------------------------------------
@@ -686,7 +692,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.drawRoute();
       const currentPos = this.effectivePosition();
       this.updateRiderMarker(currentPos.lat, currentPos.lon, currentPos.heading);
-      this.easeCameraToPosition(currentPos.lat, currentPos.lon, currentPos.heading, currentPos.speedKph);
+      this.easeCameraToPosition(currentPos.lat, currentPos.lon, currentPos.heading, currentPos.speedKph, true);
     };
 
     if (map.isStyleLoaded()) {
@@ -789,7 +795,13 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     this.updateRiderMarker(lat, lon, pos.heading);
   }
 
-  private easeCameraToPosition(lat: number, lon: number, heading: number, speedKph: number): void {
+  private easeCameraToPosition(
+    lat: number,
+    lon: number,
+    heading: number,
+    speedKph: number,
+    instant = false
+  ): void {
     if (!this.map) return;
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
     if (lat === 0 && lon === 0) return;
@@ -798,29 +810,68 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     if ((!Number.isFinite(targetBearing) || (targetBearing === 0 && speedKph === 0)) && this.lastKnownHeading !== 0) {
       targetBearing = this.lastKnownHeading;
     } else if (Number.isFinite(targetBearing)) {
-      targetBearing = ((targetBearing % 360) + 360) % 360;
+      targetBearing = normalizeBearing(targetBearing);
       this.lastKnownHeading = targetBearing;
+    }
+
+    const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
+    if (this.currentCameraBearing === null || instant || this.lastCameraTimestamp === 0) {
+      this.currentCameraBearing = targetBearing;
+      this.lastCameraTimestamp = now;
     }
 
     const clampedPitch = Math.max(MIN_3D_PITCH, Math.min(MAX_3D_PITCH, this.cameraPitch()));
     const cameraPadding = this.getCameraPadding();
+    const deflection = calculateDeflectionAngle(this.currentCameraBearing, targetBearing);
 
     if (speedKph > 0) {
+      if (instant) {
+        this.currentCameraBearing = targetBearing;
+      } else {
+        const deltaSec = Math.max(0.001, Math.min(1.0, (now - this.lastCameraTimestamp) / 1000));
+        const maxTurn = MAX_CAMERA_ROTATION_SPEED_DEG_PER_SEC * deltaSec;
+        if (Math.abs(deflection) <= maxTurn) {
+          this.currentCameraBearing = targetBearing;
+        } else {
+          this.currentCameraBearing = normalizeBearing(
+            this.currentCameraBearing + Math.sign(deflection) * maxTurn
+          );
+        }
+      }
+      this.lastCameraTimestamp = now;
+
       this.map.jumpTo({
         center: [lon, lat],
-        bearing: targetBearing,
+        bearing: this.currentCameraBearing,
         pitch: clampedPitch,
         padding: cameraPadding
       });
     } else {
-      this.map.easeTo({
-        center: [lon, lat],
-        bearing: targetBearing,
-        pitch: clampedPitch,
-        padding: cameraPadding,
-        duration: 600,
-        easing: (t) => t
-      });
+      this.lastCameraTimestamp = now;
+      if (instant) {
+        this.currentCameraBearing = targetBearing;
+        this.map.jumpTo({
+          center: [lon, lat],
+          bearing: targetBearing,
+          pitch: clampedPitch,
+          padding: cameraPadding
+        });
+      } else {
+        const maxDurationMs = (360 / MAX_CAMERA_ROTATION_SPEED_DEG_PER_SEC) * 1000;
+        const durationMs = Math.max(
+          50,
+          Math.min(maxDurationMs, (Math.abs(deflection) / MAX_CAMERA_ROTATION_SPEED_DEG_PER_SEC) * 1000)
+        );
+        this.currentCameraBearing = targetBearing;
+        this.map.easeTo({
+          center: [lon, lat],
+          bearing: targetBearing,
+          pitch: clampedPitch,
+          padding: cameraPadding,
+          duration: durationMs,
+          easing: (t) => t
+        });
+      }
     }
   }
 
@@ -1097,12 +1148,13 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSimSpeedChange(speed: number): void {
-    const clamped = Math.max(0, Math.min(120, speed));
-    this.simSpeedInput.set(clamped);
+    const validSpeed = Math.max(0, speed);
+    this.simSpeedInput.set(validSpeed);
     if (this.gpsSimulator.running()) {
-      this.gpsSimulator.setSpeed(clamped);
+      this.gpsSimulator.setSpeed(validSpeed);
     }
   }
+
 
   onSimSpeedInputChange(event: Event): void {
     const val = Number((event.target as HTMLInputElement).value);

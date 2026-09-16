@@ -54,4 +54,24 @@ describe('RideSpeedometerComponent Unit Tests', () => {
     expect(header).toBeTruthy();
     expect(header.textContent).toContain('Speed');
   });
+
+  it('4. should emit toggleSimulator when speedometer is clicked', () => {
+    let emitted = false;
+    component.toggleSimulator.subscribe(() => {
+      emitted = true;
+    });
+
+    const widget = fixture.nativeElement.querySelector('[data-testid="speedometer-widget"]') as HTMLElement;
+    widget.click();
+    expect(emitted).toBe(true);
+  });
+
+  it('5. should display active indicator when isSimulating is true', () => {
+    fixture.componentRef.setInput('isSimulating', true);
+    fixture.detectChanges();
+
+    const indicator = fixture.nativeElement.querySelector('.animate-ping');
+    expect(indicator).toBeTruthy();
+  });
 });
+

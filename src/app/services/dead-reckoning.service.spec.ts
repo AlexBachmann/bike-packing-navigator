@@ -130,4 +130,18 @@ describe('DeadReckoningService', () => {
     // Must NOT snap backward to 0.120; must hold or advance monotonically
     expect(service.interpolatedMile()).toBeGreaterThanOrEqual(0.125);
   });
+
+  it('uses route tangent bearing on incoming GPS fix instead of raw jittery fix heading when on route', () => {
+    // Route goes directly North (heading 0)
+    service.updateGpsFix({
+      latitude: 40.005,
+      longitude: -105.000,
+      timestamp: 1000,
+      projectedMile: 0.35,
+      heading: 45 // Raw fix has 45 deg jitter
+    }, 25);
+
+    // Tangent bearing along North route is 0, should ignore the 45 deg raw jitter
+    expect(service.interpolatedHeading()).toBeCloseTo(0, 1);
+  });
 });

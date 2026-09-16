@@ -11,28 +11,11 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <!-- Simulator Floating Action Button -->
-    <button
-      type="button"
-      data-testid="simulator-fab"
-      (click)="onToggleOpenClick()"
-      [ngClass]="isRunning() ? 'bg-emerald-500 text-slate-950' : 'bg-slate-900/90 text-slate-200 border-slate-700'"
-      class="w-11 h-11 rounded-2xl border shadow-xl flex items-center justify-center text-lg backdrop-blur-md transition hover:scale-105 active:scale-95 cursor-pointer"
-      aria-label="Toggle GPS Simulator"
-      [title]="isRunning() ? 'Simulator Running' : 'Open GPS Simulator'"
-    >
-      @if (isRunning()) {
-        <span class="animate-pulse">▶️</span>
-      } @else {
-        <span>🎮</span>
-      }
-    </button>
-
-    <!-- Compact Simulator Modal Dropdown -->
+    <!-- Compact Simulator Modal Dropdown (Opened by tapping speedometer) -->
     @if (isOpen()) {
       <div
         data-testid="simulator-modal"
-        class="absolute bottom-14 left-0 w-64 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-2 duration-150 z-40"
+        class="absolute bottom-16 right-0 w-72 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in slide-in-from-bottom-2 duration-150 z-40 pointer-events-auto"
       >
         <!-- Modal Header -->
         <div class="flex items-center justify-between">
@@ -49,34 +32,68 @@ import { CommonModule } from '@angular/common';
           </button>
         </div>
 
-        <!-- Speed Input & Presets -->
+        <!-- Speed Control: -25 button - 5 button | speed value | +5 button +25 button -->
         <div class="flex flex-col gap-1.5">
           <label class="text-[10px] uppercase font-mono text-slate-400">Speed (km/h)</label>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-1">
+            <!-- -25 Button -->
+            <button
+              type="button"
+              data-testid="sim-speed-minus-25"
+              (click)="onAdjustSpeed(-25)"
+              class="flex-1 py-1.5 px-1 bg-slate-800 hover:bg-slate-700 text-slate-200 active:scale-95 rounded text-[11px] font-mono font-semibold transition cursor-pointer text-center"
+              title="Decrease speed by 25 km/h"
+            >
+              -25
+            </button>
+
+            <!-- -5 Button -->
+            <button
+              type="button"
+              data-testid="sim-speed-minus-5"
+              (click)="onAdjustSpeed(-5)"
+              class="flex-1 py-1.5 px-1 bg-slate-800 hover:bg-slate-700 text-slate-200 active:scale-95 rounded text-[11px] font-mono font-semibold transition cursor-pointer text-center"
+              title="Decrease speed by 5 km/h"
+            >
+              -5
+            </button>
+
+            <!-- Speed Value Input -->
             <input
               type="number"
               data-testid="sim-speed-input"
               [value]="speed()"
               (input)="onSpeedInput($event)"
               min="0"
-              max="120"
               step="1"
-              class="w-20 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-slate-100 focus:outline-none focus:border-emerald-500"
+              class="w-16 bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-mono font-bold text-emerald-400 focus:outline-none focus:border-emerald-500 text-center shrink-0"
+              title="Current speed (km/h)"
             />
-            <div class="flex items-center gap-1">
-              @for (preset of presets(); track preset) {
-                <button
-                  type="button"
-                  (click)="onPresetClick(preset)"
-                  [ngClass]="speed() === preset ? 'bg-slate-700 text-emerald-400 font-bold' : 'bg-slate-800 text-slate-300'"
-                  class="px-1.5 py-1 rounded text-[10px] font-mono hover:bg-slate-700 transition cursor-pointer"
-                >
-                  {{ preset }}
-                </button>
-              }
-            </div>
+
+            <!-- +5 Button -->
+            <button
+              type="button"
+              data-testid="sim-speed-plus-5"
+              (click)="onAdjustSpeed(5)"
+              class="flex-1 py-1.5 px-1 bg-slate-800 hover:bg-slate-700 text-slate-200 active:scale-95 rounded text-[11px] font-mono font-semibold transition cursor-pointer text-center"
+              title="Increase speed by 5 km/h"
+            >
+              +5
+            </button>
+
+            <!-- +25 Button -->
+            <button
+              type="button"
+              data-testid="sim-speed-plus-25"
+              (click)="onAdjustSpeed(25)"
+              class="flex-1 py-1.5 px-1 bg-slate-800 hover:bg-slate-700 text-slate-200 active:scale-95 rounded text-[11px] font-mono font-semibold transition cursor-pointer text-center"
+              title="Increase speed by 25 km/h"
+            >
+              +25
+            </button>
           </div>
         </div>
+
 
         <!-- Play / Stop & Reset Actions -->
         <div class="flex items-center gap-2 pt-1 border-t border-slate-800">
@@ -108,7 +125,7 @@ import { CommonModule } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'pointer-events-auto relative shrink-0'
+    class: 'contents'
   }
 })
 export class RideSimulatorModalComponent {
@@ -116,12 +133,10 @@ export class RideSimulatorModalComponent {
   readonly isOpen = input<boolean>(false);
   readonly isRunning = input<boolean>(false);
   readonly speed = input<number>(15);
-  readonly presets = input<number[]>([10, 15, 25, 45]);
 
   // Outputs
   readonly toggleOpen = output<void>();
   readonly speedChange = output<number>();
-  readonly presetSelect = output<number>();
   readonly togglePlay = output<void>();
   readonly reset = output<void>();
 
@@ -129,14 +144,16 @@ export class RideSimulatorModalComponent {
     const target = event.target as HTMLInputElement;
     const val = Number(target.value);
     if (!isNaN(val)) {
-      const clamped = Math.max(0, Math.min(120, val));
-      this.speedChange.emit(clamped);
+      const validSpeed = Math.max(0, val);
+      this.speedChange.emit(validSpeed);
     }
   }
 
-  onPresetClick(speedPreset: number): void {
-    this.presetSelect.emit(speedPreset);
+  onAdjustSpeed(delta: number): void {
+    const nextSpeed = Math.max(0, this.speed() + delta);
+    this.speedChange.emit(nextSpeed);
   }
+
 
   onTogglePlayClick(): void {
     this.togglePlay.emit();
@@ -150,3 +167,4 @@ export class RideSimulatorModalComponent {
     this.toggleOpen.emit();
   }
 }
+

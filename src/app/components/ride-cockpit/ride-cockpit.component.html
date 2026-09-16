@@ -31,29 +31,34 @@
     </button>
   }
 
-  <!-- Bottom Floating Telemetry Bar: Speedometer (Right), Climb Mini Profile (Center) & Simulator FAB (Left) -->
+  <!-- Bottom Floating Telemetry Bar: Speedometer (Right) & Climb Mini Profile (Center) -->
   <div class="hud-bottom-bar absolute bottom-4 inset-x-3 pointer-events-none flex items-end justify-between gap-2 z-20">
-    <!-- Simulator FAB & Modal (Left) -->
-    <app-ride-simulator-modal
-      [isOpen]="isSimulatorOpen()"
-      [isRunning]="gpsSimulator.running()"
-      [speed]="simSpeedInput()"
-      (toggleOpen)="toggleSimulatorModal()"
-      (speedChange)="onSimSpeedChange($event)"
-      (presetSelect)="setSimPreset($event)"
-      (togglePlay)="toggleSimulation()"
-      (reset)="resetSimulation()"
-    />
+    <!-- Left Spacer to balance speedometer and keep climb widget centered -->
+    <div class="w-16 hidden sm:block shrink-0 pointer-events-none"></div>
 
     <!-- Climb Mini-Depiction Widget (Center) -->
     <app-ride-climb-mini-widget [climbStatus]="climbStatus()" />
 
-    <!-- Speedometer Telemetry Widget (Right) -->
-    <app-ride-speedometer
-      [speedValue]="displaySpeedValue()"
-      [speedUnit]="displaySpeedUnit()"
-      [speedText]="displaySpeedText()"
-    />
+    <!-- Speedometer Telemetry Widget & Simulator Modal (Right) -->
+    <div class="relative pointer-events-auto shrink-0 flex flex-col items-end">
+      <app-ride-simulator-modal
+        [isOpen]="isSimulatorOpen()"
+        [isRunning]="gpsSimulator.running()"
+        [speed]="simSpeedInput()"
+        (toggleOpen)="toggleSimulatorModal()"
+        (speedChange)="onSimSpeedChange($event)"
+        (togglePlay)="toggleSimulation()"
+        (reset)="resetSimulation()"
+      />
+
+      <app-ride-speedometer
+        [speedValue]="displaySpeedValue()"
+        [speedUnit]="displaySpeedUnit()"
+        [speedText]="displaySpeedText()"
+        [isSimulating]="gpsSimulator.running()"
+        (toggleSimulator)="toggleSimulatorModal()"
+      />
+    </div>
   </div>
 
   <!-- GPS Disabled Warning Card (Floating in Top Half of Cockpit) -->

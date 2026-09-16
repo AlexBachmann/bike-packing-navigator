@@ -516,16 +516,91 @@ describe('RideCockpitComponent Unit Test Suite', () => {
 
     it('should wrap bearing within [0, 360) correctly', () => {
       const map = (component as any).map;
-      (component as any).easeCameraToPosition(39.4890, -105.0980, 375, 10);
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 375, 10, true);
       expect(map.getBearing()).toBe(15);
 
-      (component as any).easeCameraToPosition(39.4890, -105.0980, -20, 10);
+      (component as any).easeCameraToPosition(39.4890, -105.0980, -20, 10, true);
       expect(map.getBearing()).toBe(340);
+    });
+
+    it('should limit camera rotation speed to 90 deg/sec while moving', () => {
+      const map = (component as any).map;
+      // Initialize camera at bearing 0 (instant)
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 0, 15, true);
+      expect(map.getBearing()).toBe(0);
+
+      // Advance timestamp by 0.5s (500ms). At 90 deg/sec, turns 45 deg.
+      const t0 = (component as any).lastCameraTimestamp;
+      (component as any).lastCameraTimestamp = t0 - 500;
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 90, 15);
+      expect(map.getBearing()).toBeCloseTo(45, 1);
+
+      // Advance another 0.5s (1.0s total at 90 deg/sec reaches 90 deg).
+      const t1 = (component as any).lastCameraTimestamp;
+      (component as any).lastCameraTimestamp = t1 - 500;
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 90, 15);
+      expect(map.getBearing()).toBeCloseTo(90, 1);
+
+      // Now request a turn from 90 deg to 260 deg (170 deg clockwise turn) with 1.0s elapsed.
+      // At 90 deg/sec, in 1.0s it should turn 90 deg clockwise (90 + 90 = 180 deg), not jump immediately to 260!
+      const t2 = (component as any).lastCameraTimestamp;
+      (component as any).lastCameraTimestamp = t2 - 1000;
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 260, 15);
+      expect(map.getBearing()).toBeCloseTo(180, 1);
+
+      // Advance another 1.0s (turns remaining 80 deg and reaches target 260 deg)
+      const t3 = (component as any).lastCameraTimestamp;
+      (component as any).lastCameraTimestamp = t3 - 1000;
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 260, 15);
+      expect(map.getBearing()).toBeCloseTo(260, 1);
+    });
+
+    it('should take the shortest angular path across 0/360 boundary', () => {
+      const map = (component as any).map;
+      // Start at 10 deg
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 10, 15, true);
+      expect(map.getBearing()).toBe(10);
+
+      // Advance by 50ms (0.05s) and turn to 350 deg (shortest path is -20 deg, not +340 deg)
+      // In 0.05s at 90 deg/sec, max step is 4.5 deg counter-clockwise: 10 - 4.5 = 5.5 deg
+      const t0 = (component as any).lastCameraTimestamp;
+      (component as any).lastCameraTimestamp = t0 - 50;
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 350, 15);
+      expect(map.getBearing()).toBeCloseTo(5.5, 1);
+    });
+
+    it('should scale stationary easeTo duration proportionally to deflection angle', () => {
+      const map = (component as any).map;
+      // Start at 0 deg (speed > 0 ensures 0 is recognized as initial heading, instant = true)
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 0, 15, true);
+      expect(map.getBearing()).toBe(0);
+
+      const easeSpy = vi.spyOn(map, 'easeTo');
+
+      // Stationary turn 180 deg -> duration should be 2000ms (2.0s for 180 deg at 90 deg/sec)
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 180, 0);
+      expect(easeSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          bearing: 180,
+          duration: 2000
+        })
+      );
+
+      easeSpy.mockClear();
+
+      // Stationary turn 90 deg (from 180 to 270) -> duration should be 1000ms (1.0s at 90 deg/sec)
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 270, 0);
+      expect(easeSpy).toHaveBeenCalledWith(
+        expect.objectContaining({
+          bearing: 270,
+          duration: 1000
+        })
+      );
     });
 
     it('should preserve last known heading when stationary and heading is zero', () => {
       const map = (component as any).map;
-      (component as any).easeCameraToPosition(39.4890, -105.0980, 180, 15);
+      (component as any).easeCameraToPosition(39.4890, -105.0980, 180, 15, true);
       expect(map.getBearing()).toBe(180);
 
       // Stopped: speed 0, heading 0 reported
@@ -794,20 +869,19 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       expect(status?.miniProfile.riderDot).toBeDefined();
     });
 
-    it('should position climb widget in center of hud-bottom-bar without overlapping FAB or speedometer', () => {
+    it('should position climb widget in center of hud-bottom-bar without overlapping speedometer', () => {
       fixture.componentRef.setInput('currentMile', 0.4);
       fixture.detectChanges();
       const el = fixture.nativeElement as HTMLElement;
       const bottomBar = el.querySelector('.hud-bottom-bar');
       expect(bottomBar).toBeTruthy();
-      const fab = bottomBar?.querySelector('[data-testid="simulator-fab"]');
       const widget = bottomBar?.querySelector('[data-testid="climb-mini-widget"]');
       const speedometer = bottomBar?.querySelector('[data-testid="speedometer-widget"]');
-      expect(fab).toBeTruthy();
       expect(widget).toBeTruthy();
       expect(speedometer).toBeTruthy();
       expect(widget?.classList.contains('mx-auto')).toBe(true);
     });
+
 
     it('should dismiss climb widget after summit', () => {
       fixture.componentRef.setInput('currentMile', 0.9);
@@ -936,16 +1010,17 @@ describe('RideCockpitComponent Unit Test Suite', () => {
   // 8. Interactive GPS Simulator Controls
   // --------------------------------------------------------------------------
   describe('8. Interactive GPS Simulator Controls', () => {
-    it('should render simulator FAB and toggle popup card on click', () => {
+    it('should toggle simulator popup card when clicking speedometer', () => {
       const el = fixture.nativeElement as HTMLElement;
-      const fab = el.querySelector('[data-testid="simulator-fab"]') as HTMLButtonElement;
-      expect(fab).toBeTruthy();
+      const speedometer = el.querySelector('[data-testid="speedometer-widget"]') as HTMLElement;
+      expect(speedometer).toBeTruthy();
 
       expect(component.isSimulatorOpen()).toBe(false);
-      fab.click();
+      speedometer.click();
       fixture.detectChanges();
       expect(component.isSimulatorOpen()).toBe(true);
     });
+
 
     it('should allow setting speed presets', () => {
       component.setSimPreset(25);

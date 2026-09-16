@@ -155,6 +155,93 @@ def extract_from_source(
             print(f"[PMTiles Pipeline] Extracted {extracted_count} tiles into {output_path}")
 
 
+def haversine_m(p1: Tuple[float, float], p2: Tuple[float, float]) -> float:
+    """Haversine distance between (lon1, lat1) and (lon2, lat2) in meters."""
+    lat1, lon1 = math.radians(p1[1]), math.radians(p1[0])
+    lat2, lon2 = math.radians(p2[1]), math.radians(p2[0])
+    dlat, dlon = lat2 - lat1, lon2 - lon1
+    a = math.sin(dlat / 2.0) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2.0) ** 2
+    return 6371000.0 * 2.0 * math.asin(math.sqrt(max(0.0, min(1.0, a))))
+
+
+def interpolate_track(pts: List[Tuple[float, float]], max_step_m: float = 120.0) -> List[Tuple[float, float]]:
+    """Densify a polyline by interpolating points so no segment exceeds max_step_m."""
+    if not pts:
+        return []
+    result = []
+    for i in range(len(pts) - 1):
+        p1 = pts[i]
+        p2 = pts[i + 1]
+        result.append(p1)
+        d = haversine_m(p1, p2)
+        if d > max_step_m:
+            steps = int(d / max_step_m)
+            for s in range(1, steps + 1):
+                frac = s / (steps + 1)
+                result.append((
+                    p1[0] + frac * (p2[0] - p1[0]),
+                    p1[1] + frac * (p2[1] - p1[1])
+                ))
+    result.append(pts[-1])
+    return result
+
+
+def get_town_bounding_boxes(route_dir: Path) -> List[Tuple[float, float, float, float]]:
+    """Extract bounding boxes for all towns and cities associated with the route.
+    Each box is buffered by ~4 km (0.036 deg lat) so the entire city and surrounding
+    roads/services are available on all zoom levels.
+    """
+    by_town: Dict[str, List[Tuple[float, float]]] = {}
+
+    places_file = route_dir / "places.json"
+    if places_file.exists():
+        with open(places_file, "r", encoding="utf-8") as f:
+            places = json.load(f)
+        for p in places:
+            tname = p.get("town")
+            loc = p.get("location") or {}
+            plat = p.get("lat") if p.get("lat") is not None else loc.get("lat")
+            plon = p.get("lon") if p.get("lon") is not None else loc.get("lon")
+            if plat is None or plon is None:
+                continue
+            if tname and tname.strip().lower() not in ("backcountry", "wilderness", "trail", "remote", "none", ""):
+                by_town.setdefault(tname.strip().lower(), []).append((plon, plat))
+            elif p.get("category") == "town" or p.get("type") in ("town", "city", "village"):
+                name = p.get("name", "").strip().lower()
+                if name not in ("backcountry", "wilderness", "trail", "remote", "none", ""):
+                    by_town.setdefault(name, []).append((plon, plat))
+
+    towns_file = route_dir / "towns.json"
+    if towns_file.exists():
+        with open(towns_file, "r", encoding="utf-8") as f:
+            towns = json.load(f)
+        for t in towns:
+            loc = t.get("location") or {}
+            plat = t.get("lat") if t.get("lat") is not None else loc.get("lat")
+            plon = t.get("lon") if t.get("lon") is not None else loc.get("lon")
+            if plat is not None and plon is not None:
+                name = t.get("name", "").strip().lower()
+                if name not in ("backcountry", "wilderness", "trail", "remote", "none", ""):
+                    by_town.setdefault(name, []).append((plon, plat))
+
+    boxes = []
+    for name, pts in by_town.items():
+        if not pts:
+            continue
+        min_lon = min(p[0] for p in pts)
+        max_lon = max(p[0] for p in pts)
+        min_lat = min(p[1] for p in pts)
+        max_lat = max(p[1] for p in pts)
+
+        mid_lat = (min_lat + max_lat) / 2.0
+        cos_lat = max(0.2, math.cos(math.radians(mid_lat)))
+        lat_buf = 0.036  # ~4 km buffer
+        lon_buf = 0.036 / cos_lat
+        boxes.append((min_lon - lon_buf, min_lat - lat_buf, max_lon + lon_buf, max_lat + lat_buf))
+
+    return boxes
+
+
 def extract_corridor_from_openfreemap(
     output_path: Path,
     track_coords: List[Tuple[float, float]],
@@ -162,9 +249,10 @@ def extract_corridor_from_openfreemap(
     min_zoom: int,
     max_zoom: int,
     route_id: str,
-    places_coords: Optional[List[Tuple[float, float]]] = None
+    places_coords: Optional[List[Tuple[float, float]]] = None,
+    town_boxes: Optional[List[Tuple[float, float, float, float]]] = None
 ) -> bool:
-    """Fetch authentic OpenMapTiles vector tiles from OpenFreeMap for the route corridor."""
+    """Fetch authentic OpenMapTiles vector tiles from OpenFreeMap for the route corridor and towns."""
     min_lon, min_lat, max_lon, max_lat = bbox
     print(f"[PMTiles Pipeline] Attempting OpenFreeMap vector corridor extraction for {route_id}...")
     req = urllib.request.Request("https://tiles.openfreemap.org/planet", headers={"User-Agent": "BikepackNavigator/1.0"})
@@ -177,9 +265,16 @@ def extract_corridor_from_openfreemap(
 
     effective_max_zoom = min(max_zoom, 14)
     tiles_by_z: Dict[int, List[Tuple[int, int]]] = {}
-    points_to_sample = list(track_coords)
+
+    # Densify track coordinates so no segment exceeds 120 meters (prevents tile edge skipping)
+    densified_track = interpolate_track(track_coords, max_step_m=120.0)
+    print(f"[PMTiles Pipeline] Densified track from {len(track_coords)} to {len(densified_track)} points")
+
+    points_to_sample = list(densified_track)
     if places_coords:
         points_to_sample.extend(places_coords)
+
+    tboxes = town_boxes or []
 
     for z in range(min_zoom, effective_max_zoom + 1):
         s = set()
@@ -194,8 +289,8 @@ def extract_corridor_from_openfreemap(
                 for y in range(max(0, min_ty - 1), min(n_tiles, max_ty + 2)):
                     s.add((x, y))
         else:
-            # Route corridor coverage with 1-tile buffer (3x3 neighborhood)
-            # Sample all track points and POIs to guarantee adjacent tiles are available
+            # Route corridor and POIs coverage with 1-tile buffer (3x3 neighborhood)
+            # Guarantees the route and at least one tile adjacent in all directions are available
             for lon, lat in points_to_sample:
                 tx, ty = lonlat_to_tile(lon, lat, z)
                 for dx in (-1, 0, 1):
@@ -204,6 +299,18 @@ def extract_corridor_from_openfreemap(
                         ny = ty + dy
                         if 0 <= nx < n_tiles and 0 <= ny < n_tiles:
                             s.add((nx, ny))
+
+            # Town / City full coverage (+1 tile margin)
+            for tbox in tboxes:
+                ttiles = get_intersecting_tiles(tbox[0], tbox[1], tbox[2], tbox[3], z)
+                for _, tx, ty in ttiles:
+                    for dx in (-1, 0, 1):
+                        for dy in (-1, 0, 1):
+                            nx = tx + dx
+                            ny = ty + dy
+                            if 0 <= nx < n_tiles and 0 <= ny < n_tiles:
+                                s.add((nx, ny))
+
         tiles_by_z[z] = list(s)
 
     all_tiles = []
@@ -214,36 +321,69 @@ def extract_corridor_from_openfreemap(
     if not all_tiles:
         return False
 
-    print(f"[PMTiles Pipeline] Downloading {len(all_tiles)} vector tiles (z{min_zoom}..z{effective_max_zoom}) from OpenFreeMap...")
-    def fetch_tile(coords):
-        z, x, y = coords
-        url = tile_url_pattern.format(z=z, x=x, y=y)
-        r = urllib.request.Request(url, headers={"User-Agent": "BikepackNavigator/1.0"})
-        for attempt in range(3):
-            try:
-                with urllib.request.urlopen(r, timeout=12) as res:
-                    data = res.read()
-                    return (z, x, y, data)
-            except Exception:
-                if attempt == 2:
-                    return (z, x, y, None)
+    print(f"[PMTiles Pipeline] Total required tiles: {len(all_tiles)} (z{min_zoom}..z{effective_max_zoom}) across route corridor and {len(tboxes)} towns")
 
-    with ThreadPoolExecutor(max_workers=32) as ex:
-        results = list(ex.map(fetch_tile, all_tiles))
+    # Incremental reuse: check existing PMTiles archive on disk
+    cached_tiles: Dict[Tuple[int, int, int], bytes] = {}
+    if output_path.exists() and output_path.stat().st_size > 0:
+        try:
+            with open(output_path, "rb") as existing_f:
+                reader = Reader(MmapSource(existing_f))
+                for z, x, y in all_tiles:
+                    data = reader.get(z, x, y)
+                    if data and len(data) > 0:
+                        cached_tiles[(z, x, y)] = data
+            print(f"[PMTiles Pipeline] Reusing {len(cached_tiles)} already existing valid tiles from {output_path.name}")
+        except Exception as ex:
+            print(f"[PMTiles Pipeline] Note: could not read existing tiles from {output_path.name}: {ex}")
+            cached_tiles = {}
 
+    tiles_to_download = [c for c in all_tiles if c not in cached_tiles]
+    downloaded_tiles: List[Tuple[int, int, int, bytes]] = []
+
+    if tiles_to_download:
+        print(f"[PMTiles Pipeline] Downloading {len(tiles_to_download)} missing vector tiles from OpenFreeMap...")
+        import time
+
+        def fetch_tile(coords):
+            z, x, y = coords
+            url = tile_url_pattern.format(z=z, x=x, y=y)
+            r = urllib.request.Request(url, headers={"User-Agent": "BikepackNavigator/1.0"})
+            for attempt in range(4):
+                try:
+                    with urllib.request.urlopen(r, timeout=12) as res:
+                        data = res.read()
+                        return (z, x, y, data)
+                except Exception:
+                    if attempt == 3:
+                        return (z, x, y, None)
+                    time.sleep(0.2 * (2 ** attempt))
+
+        with ThreadPoolExecutor(max_workers=32) as ex:
+            results = list(ex.map(fetch_tile, tiles_to_download))
+
+        for z, x, y, data in results:
+            if data and len(data) > 0:
+                downloaded_tiles.append((z, x, y, data))
+    else:
+        print(f"[PMTiles Pipeline] All {len(all_tiles)} tiles already present in archive, no downloads required.")
+
+    # Combine cached and downloaded tiles
     tile_entries = []
-    for z, x, y, data in results:
-        if data and len(data) > 0:
-            if not data.startswith(b"\x1f\x8b"):
-                data = gzip.compress(data)
-            tile_entries.append((zxy_to_tileid(z, x, y), data))
+    for (z, x, y), data in cached_tiles.items():
+        cdata = data if data.startswith(b"\x1f\x8b") else gzip.compress(data)
+        tile_entries.append((zxy_to_tileid(z, x, y), cdata))
+    for z, x, y, data in downloaded_tiles:
+        cdata = data if data.startswith(b"\x1f\x8b") else gzip.compress(data)
+        tile_entries.append((zxy_to_tileid(z, x, y), cdata))
 
     if not tile_entries:
         return False
 
     tile_entries.sort(key=lambda t: t[0])
 
-    with open(output_path, "wb") as out_f:
+    tmp_path = output_path.with_suffix(".tmp.pmtiles")
+    with open(tmp_path, "wb") as out_f:
         writer = Writer(out_f)
         for tid, cdata in tile_entries:
             writer.write_tile(tid, cdata)
@@ -271,6 +411,7 @@ def extract_corridor_from_openfreemap(
             }
         )
 
+    tmp_path.replace(output_path)
     file_size_bytes = output_path.stat().st_size
     print(f"[PMTiles Pipeline] Successfully saved {output_path} ({file_size_bytes / (1024*1024):.2f} MB, {len(tile_entries)} tiles)")
     return True
@@ -304,7 +445,17 @@ def build_corridor_pmtiles(
             # Format is [lat, lon, ele, km, mi]
             track_coords = [(p[1], p[0]) for p in raw_pts if len(p) >= 2]
 
-    # 2. Load Places / POIs
+    # Also include guidance-track.json points if present
+    guidance_path = route_dir / "guidance-track.json"
+    if guidance_path.exists():
+        with open(guidance_path, "r", encoding="utf-8") as f:
+            gdata = json.load(f)
+            gpts = gdata.get("points", []) or gdata.get("coordinates", [])
+            for p in gpts:
+                if len(p) >= 2:
+                    track_coords.append((p[1], p[0]))
+
+    # 2. Load Places / POIs (handling nested location objects)
     places_path = route_dir / "places.json"
     places = []
     places_coords = []
@@ -312,10 +463,14 @@ def build_corridor_pmtiles(
         with open(places_path, "r", encoding="utf-8") as f:
             places = json.load(f)
         for p in places:
-            plat = p.get("lat")
-            plon = p.get("lon")
+            loc = p.get("location") or {}
+            plat = p.get("lat") if p.get("lat") is not None else loc.get("lat")
+            plon = p.get("lon") if p.get("lon") is not None else loc.get("lon")
             if plat is not None and plon is not None:
                 places_coords.append((plon, plat))
+
+    # 3. Load Town / City bounding boxes (buffered by ~4 km)
+    town_boxes = get_town_bounding_boxes(route_dir)
 
     # Try extracting authentic OpenMapTiles from OpenFreeMap if network available
     try:
@@ -326,7 +481,8 @@ def build_corridor_pmtiles(
             min_zoom=min_zoom,
             max_zoom=max_zoom,
             route_id=route_id,
-            places_coords=places_coords
+            places_coords=places_coords,
+            town_boxes=town_boxes
         ):
             return
     except Exception as e:
@@ -479,8 +635,8 @@ def validate_pmtiles_archive(pmtiles_path: Path):
         header = reader.header()
         meta = reader.metadata()
 
-    assert header["version"] == 3, f"Expected PMTiles spec version 3, got {header[version]}"
-    assert header["tile_type"] == TileType.MVT, f"Expected MVT tile type, got {header[tile_type]}"
+    assert header["version"] == 3, f"Expected PMTiles spec version 3, got {header['version']}"
+    assert header["tile_type"] == TileType.MVT, f"Expected MVT tile type, got {header['tile_type']}"
     assert header["addressed_tiles_count"] > 0, "Expected >0 addressed tiles"
     print(f"  ✓ Header valid: version {header['version']}, {header['addressed_tiles_count']} tiles")
     print(f"  ✓ Zoom range: z{header['min_zoom']}..z{header['max_zoom']}")
@@ -499,11 +655,35 @@ def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
     # Format is [lat, lon, ele, km, mi] -> convert to (lon, lat)
     pts = [(p[1], p[0]) for p in raw_pts if len(p) >= 2]
 
+    # Include guidance track points as well
+    guidance_path = route_dir / "guidance-track.json"
+    if guidance_path.exists():
+        with open(guidance_path, "r", encoding="utf-8") as f:
+            gdata = json.load(f)
+            gpts = gdata.get("points", []) or gdata.get("coordinates", [])
+            for p in gpts:
+                if len(p) >= 2:
+                    pts.append((p[1], p[0]))
+
+    places_file = route_dir / "places.json"
+    places_pts = []
+    if places_file.exists():
+        with open(places_file, "r", encoding="utf-8") as f:
+            places_data = json.load(f)
+        for p in places_data:
+            loc = p.get("location") or {}
+            plat = p.get("lat") if p.get("lat") is not None else loc.get("lat")
+            plon = p.get("lon") if p.get("lon") is not None else loc.get("lon")
+            if plat is not None and plon is not None:
+                places_pts.append((plon, plat))
+
+    town_boxes = get_town_bounding_boxes(route_dir)
+
     sections = [
-        ("section-1.pmtiles", "Tour Divide Sec 1: Canada & Montana", [p for p in pts if p[1] >= 44.95]),
-        ("section-2.pmtiles", "Tour Divide Sec 2: Wyoming", [p for p in pts if 40.95 <= p[1] <= 45.05]),
-        ("section-3.pmtiles", "Tour Divide Sec 3: Colorado", [p for p in pts if 36.95 <= p[1] <= 41.05]),
-        ("section-4.pmtiles", "Tour Divide Sec 4: New Mexico", [p for p in pts if p[1] <= 37.05])
+        ("section-1.pmtiles", "Tour Divide Sec 1: Canada & Montana", lambda lat: lat >= 44.95),
+        ("section-2.pmtiles", "Tour Divide Sec 2: Wyoming", lambda lat: 40.95 <= lat <= 45.05),
+        ("section-3.pmtiles", "Tour Divide Sec 3: Colorado", lambda lat: 36.95 <= lat <= 41.05),
+        ("section-4.pmtiles", "Tour Divide Sec 4: New Mexico", lambda lat: lat <= 37.05)
     ]
 
     print("[PMTiles Pipeline] Slicing Tour Divide into 4 section PMTiles archives...")
@@ -512,10 +692,18 @@ def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
         header = reader.header()
         meta = reader.metadata() or {}
 
-        for filename, sec_name, sec_pts in sections:
+        for filename, sec_name, lat_filter in sections:
+            sec_pts = [p for p in pts if lat_filter(p[1])]
             if not sec_pts:
                 continue
             sec_out = route_dir / filename
+            sec_places = [p for p in places_pts if lat_filter(p[1])]
+            sec_town_boxes = [b for b in town_boxes if lat_filter((b[1] + b[3]) / 2.0)]
+
+            # Densify section track points so no segment skips tiles
+            densified_sec_pts = interpolate_track(sec_pts, max_step_m=120.0)
+            sample_points = list(densified_sec_pts) + sec_places
+
             lons = [p[0] for p in sec_pts]
             lats = [p[1] for p in sec_pts]
             min_lon, min_lat, max_lon, max_lat = min(lons), min(lats), max(lons), max(lats)
@@ -532,7 +720,8 @@ def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
                         for y in range(max(0, min_ty - 1), min(n_tiles, max_ty + 2)):
                             tiles_needed.add((z, x, y))
                 else:
-                    for lon, lat in sec_pts:
+                    # Route corridor and POIs (3x3 buffer)
+                    for lon, lat in sample_points:
                         tx, ty = lonlat_to_tile(lon, lat, z)
                         for dx in (-1, 0, 1):
                             for dy in (-1, 0, 1):
@@ -541,8 +730,20 @@ def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
                                 if 0 <= nx < n_tiles and 0 <= ny < n_tiles:
                                     tiles_needed.add((z, nx, ny))
 
+                    # Section towns full coverage (+1 tile margin)
+                    for tbox in sec_town_boxes:
+                        ttiles = get_intersecting_tiles(tbox[0], tbox[1], tbox[2], tbox[3], z)
+                        for _, tx, ty in ttiles:
+                            for dx in (-1, 0, 1):
+                                for dy in (-1, 0, 1):
+                                    nx = tx + dx
+                                    ny = ty + dy
+                                    if 0 <= nx < n_tiles and 0 <= ny < n_tiles:
+                                        tiles_needed.add((z, nx, ny))
+
             sorted_tiles = sorted(list(tiles_needed), key=lambda c: zxy_to_tileid(c[0], c[1], c[2]))
-            with open(sec_out, "wb") as out_f:
+            tmp_sec_out = sec_out.with_suffix(".tmp.pmtiles")
+            with open(tmp_sec_out, "wb") as out_f:
                 writer = Writer(out_f)
                 sec_tile_count = 0
                 for z, x, y in sorted_tiles:
@@ -569,6 +770,7 @@ def generate_tour_divide_sections(corridor_pmtiles_path: Path, route_dir: Path):
                         "description": f"Offline PMTiles vector section for {sec_name}"
                     }
                 )
+            tmp_sec_out.replace(sec_out)
             sz = sec_out.stat().st_size
             print(f"[PMTiles Pipeline] Generated {sec_out} ({sz / (1024*1024):.2f} MB, {sec_tile_count} tiles)")
             validate_pmtiles_archive(sec_out)

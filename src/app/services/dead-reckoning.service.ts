@@ -100,12 +100,13 @@ export class DeadReckoningService implements OnDestroy {
     if (initialMile !== undefined && initialMile !== null && pts.length >= 2 && this.turnGuidance) {
       const coords = this.turnGuidance.interpolatePointAtMile(pts, initialMile);
       this.interpolatedCoords.set([coords[0], coords[1]]);
+      const heading = this.turnGuidance.getRouteTangentBearing(pts, initialMile, 25.0);
+      this.interpolatedHeading.set(heading);
     } else {
       this.interpolatedCoords.set([fix.latitude, fix.longitude]);
-    }
-
-    if (typeof fix.heading === 'number' && !isNaN(fix.heading)) {
-      this.interpolatedHeading.set(((fix.heading % 360) + 360) % 360);
+      if (typeof fix.heading === 'number' && !isNaN(fix.heading)) {
+        this.interpolatedHeading.set(((fix.heading % 360) + 360) % 360);
+      }
     }
 
     if (!this.isRunning) {

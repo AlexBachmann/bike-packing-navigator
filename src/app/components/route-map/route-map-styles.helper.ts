@@ -91,6 +91,7 @@ export async function getVectorStyleSpec(
       const spec = await res.json();
       if (spec && spec.sources && spec.sources.openmaptiles) {
         spec.sources.openmaptiles.url = cached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet';
+        spec.sources.openmaptiles.maxzoom = 14;
       }
       return spec;
     }
@@ -104,9 +105,11 @@ export async function getVectorStyleSpec(
     sources: {
       openmaptiles: {
         type: 'vector',
-        url: cached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet'
+        url: cached ? pmtilesUrl : 'https://tiles.openfreemap.org/planet',
+        maxzoom: 14
       }
     },
+
     glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
     layers: [
       {

@@ -16,35 +16,7 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     fixture.detectChanges();
   });
 
-  it('1. should render FAB button with game controller icon in idle state', () => {
-    const fab = fixture.nativeElement.querySelector('[data-testid="simulator-fab"]') as HTMLButtonElement;
-    expect(fab).toBeTruthy();
-    expect(fab.textContent).toContain('🎮');
-    expect(fab.getAttribute('title')).toBe('Open GPS Simulator');
-    expect(fab.classList.contains('bg-slate-900/90')).toBe(true);
-  });
-
-  it('2. should render FAB button with pulsing play icon in running state', () => {
-    fixture.componentRef.setInput('isRunning', true);
-    fixture.detectChanges();
-
-    const fab = fixture.nativeElement.querySelector('[data-testid="simulator-fab"]') as HTMLButtonElement;
-    expect(fab.textContent).toContain('▶️');
-    expect(fab.getAttribute('title')).toBe('Simulator Running');
-    expect(fab.classList.contains('bg-emerald-500')).toBe(true);
-  });
-
-  it('3. should emit toggleOpen when FAB button is clicked', () => {
-    const spy = vi.fn();
-    component.toggleOpen.subscribe(spy);
-
-    const fab = fixture.nativeElement.querySelector('[data-testid="simulator-fab"]') as HTMLButtonElement;
-    fab.click();
-
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
-
-  it('4. should not render modal when isOpen is false', () => {
+  it('1. should not render modal when isOpen is false', () => {
     fixture.componentRef.setInput('isOpen', false);
     fixture.detectChanges();
 
@@ -52,7 +24,7 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     expect(modal).toBeNull();
   });
 
-  it('5. should render modal dialog when isOpen is true', () => {
+  it('2. should render modal dialog when isOpen is true', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.detectChanges();
 
@@ -61,7 +33,7 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     expect(modal.textContent).toContain('GPS Simulator');
   });
 
-  it('6. should emit toggleOpen when modal close button (✕) is clicked', () => {
+  it('3. should emit toggleOpen when modal close button (✕) is clicked', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.detectChanges();
 
@@ -75,7 +47,7 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it('7. should bind speed input value and emit clamped speedChange on user input', () => {
+  it('4. should bind speed input value and emit clamped speedChange on user input', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('speed', 25);
     fixture.detectChanges();
@@ -91,10 +63,10 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     speedInput.dispatchEvent(new Event('input'));
     expect(spy).toHaveBeenCalledWith(35);
 
-    // Clamping high (> 120)
-    speedInput.value = '150';
+    // High speed input without upper limit
+    speedInput.value = '250';
     speedInput.dispatchEvent(new Event('input'));
-    expect(spy).toHaveBeenCalledWith(120);
+    expect(spy).toHaveBeenCalledWith(250);
 
     // Clamping low (< 0)
     speedInput.value = '-10';
@@ -102,29 +74,51 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     expect(spy).toHaveBeenCalledWith(0);
   });
 
-  it('8. should render speed presets and emit presetSelect on click', () => {
+  it('5. should adjust speed by -5 and +5 when clicking +/- 5 buttons', () => {
     fixture.componentRef.setInput('isOpen', true);
-    fixture.componentRef.setInput('speed', 15);
-    fixture.componentRef.setInput('presets', [10, 15, 25, 45]);
+    fixture.componentRef.setInput('speed', 20);
     fixture.detectChanges();
 
-    const presetButtons = fixture.nativeElement.querySelectorAll('button.text-\\[10px\\]');
-    expect(presetButtons.length).toBe(4);
-
-    // Check active preset highlight
-    const activeBtn = Array.from(presetButtons).find((b: any) => b.textContent?.trim() === '15') as HTMLElement;
-    expect(activeBtn.classList.contains('text-emerald-400')).toBe(true);
-
     const spy = vi.fn();
-    component.presetSelect.subscribe(spy);
+    component.speedChange.subscribe(spy);
 
-    const preset25Btn = Array.from(presetButtons).find((b: any) => b.textContent?.trim() === '25') as HTMLElement;
-    preset25Btn.click();
+    const minus5Btn = fixture.nativeElement.querySelector('[data-testid="sim-speed-minus-5"]') as HTMLButtonElement;
+    expect(minus5Btn).toBeTruthy();
+    minus5Btn.click();
+    expect(spy).toHaveBeenCalledWith(15);
 
+    const plus5Btn = fixture.nativeElement.querySelector('[data-testid="sim-speed-plus-5"]') as HTMLButtonElement;
+    expect(plus5Btn).toBeTruthy();
+    plus5Btn.click();
     expect(spy).toHaveBeenCalledWith(25);
   });
 
-  it('9. should render Play button in idle state and emit togglePlay', () => {
+  it('6. should adjust speed by -25 and +25 without upper limit and clamped at 0', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('speed', 15);
+    fixture.detectChanges();
+
+    const spy = vi.fn();
+    component.speedChange.subscribe(spy);
+
+    // Speed is 15: clicking -25 should clamp to 0
+    const minus25Btn = fixture.nativeElement.querySelector('[data-testid="sim-speed-minus-25"]') as HTMLButtonElement;
+    expect(minus25Btn).toBeTruthy();
+    minus25Btn.click();
+    expect(spy).toHaveBeenCalledWith(0);
+
+    // Speed is 120: clicking +25 should increase to 145 without upper bound
+    fixture.componentRef.setInput('speed', 120);
+    fixture.detectChanges();
+
+    const plus25Btn = fixture.nativeElement.querySelector('[data-testid="sim-speed-plus-25"]') as HTMLButtonElement;
+    expect(plus25Btn).toBeTruthy();
+    plus25Btn.click();
+    expect(spy).toHaveBeenCalledWith(145);
+  });
+
+
+  it('7. should render Play button in idle state and emit togglePlay', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('isRunning', false);
     fixture.detectChanges();
@@ -140,7 +134,7 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it('10. should render Stop button in running state with rose color and emit togglePlay', () => {
+  it('8. should render Stop button in running state with rose color and emit togglePlay', () => {
     fixture.componentRef.setInput('isOpen', true);
     fixture.componentRef.setInput('isRunning', true);
     fixture.detectChanges();
@@ -156,8 +150,9 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  it('11. should render Reset button and emit reset on click', () => {
+  it('9. should render Reset button and emit reset on click', () => {
     fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('isRunning', false);
     fixture.detectChanges();
 
     const resetBtn = fixture.nativeElement.querySelector('[data-testid="sim-reset-btn"]') as HTMLButtonElement;
@@ -169,14 +164,5 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
-
-  it('12. should support custom presets array input', () => {
-    fixture.componentRef.setInput('isOpen', true);
-    fixture.componentRef.setInput('presets', [5, 15, 25, 40]);
-    fixture.detectChanges();
-
-    const presetButtons = fixture.nativeElement.querySelectorAll('button.text-\\[10px\\]');
-    const texts = Array.from(presetButtons).map((b: any) => b.textContent?.trim());
-    expect(texts).toEqual(['5', '15', '25', '40']);
-  });
 });
+

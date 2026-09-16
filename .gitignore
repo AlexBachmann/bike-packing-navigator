@@ -91,6 +91,9 @@ route/places/.cache*
 *.cache_overpass*.json
 *.cache.json
 
+# Tour Divide full corridor master archive (>100MB exceeds GitHub limit; sliced into section-1..4.pmtiles)
+public/data/routes/tour-divide-2025/corridor.pmtiles
+
 # ==========================================
 # Environment Variables & Secrets
 # ==========================================
