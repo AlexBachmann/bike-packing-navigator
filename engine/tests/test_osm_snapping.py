@@ -568,3 +568,19 @@ class TestSnapTrackToOsmPipeline:
         rt = track.to_route_track("Test Track")
         assert isinstance(rt, RouteTrack)
         assert rt.total_distance_km == 10.5
+
+    def test_snapped_guidance_track_matched_candidates_retention(self):
+        net = OsmRoadNetwork()
+        raw = [[42.0, 72.0, 100.0, 0.0, 0.0], [42.01, 72.01, 100.0, 1.0, 0.6]]
+        res = snap_track_to_osm(raw, net)
+        assert hasattr(res, "matched_candidates")
+        assert hasattr(res, "track_points_with_km")
+        assert len(res.matched_candidates) == len(res.track_points_with_km)
+        assert len(res.matched_candidates) >= 2
+        # Dictionary and sequence protocol access
+        assert "matched_candidates" in res
+        assert "track_points_with_km" in res
+        assert res["matched_candidates"] is res.matched_candidates
+        assert res.track_points_with_km[0][3] == 0.0
+        assert res.track_points_with_km[-1][3] == 1.0
+

@@ -427,6 +427,7 @@ def run_ingest(config: IngestConfig) -> IngestResult:
             logger.warning(f"Could not load road network from PMTiles: {exc}")
             network = None
 
+    guidance: Optional[Any] = None
     if network is not None or pmtiles_paths:
         try:
             cfg = SnappingConfig(threshold_m=config.snap_dist_m)
@@ -474,12 +475,13 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     # -------------------------------------------------------------------------
     s_t0 = time.time()
     try:
-        intervals = generate_route_surfaces(track, road_network_or_geojson=network)
+        intervals = generate_route_surfaces(track, road_network_or_geojson=network, guidance=guidance)
         atomic_write_json(target_dir / "surfaces.json", [list(iv) for iv in intervals])
         datasets_created.append("surfaces.json")
         s_dur = time.time() - s_t0
         stages.append(StageTiming("surfaces", s_dur, True, f"{len(intervals)} intervals"))
-        print(f"[Stage 5/10] Surface intervals modeled ({len(intervals)} intervals) ({s_dur:.2f}s)")
+        mode_str = "Viterbi road network" if guidance and getattr(guidance, "matched_candidates", None) else "spatial query"
+        print(f"[Stage 5/10] Surface intervals modeled from {mode_str} ({len(intervals)} intervals) ({s_dur:.2f}s)")
     except Exception as exc:
         s_dur = time.time() - s_t0
         err_msg = f"Surface modeling failed: {exc}"

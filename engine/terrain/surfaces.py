@@ -493,10 +493,13 @@ def compute_surface_stats(
 
 def generate_route_surfaces(
     track: Any,
-    road_network_or_geojson: Optional[Any] = None
+    road_network_or_geojson: Optional[Any] = None,
+    guidance: Optional[Any] = None,
 ) -> List[SurfaceInterval]:
     """
     Generate route surface intervals along a track using matched OSM ways or adaptive terrain heuristic.
+    When guidance (from Viterbi road snapping) is provided, inherits the topologically resolved
+    OSM way attributes directly while preserving canonical GPX track linear referencing (mileage).
     Guarantees contiguous, gap-free coverage from 0.0 to total_km.
     """
     pts = track.points if hasattr(track, "points") else track
@@ -507,8 +510,64 @@ def generate_route_surfaces(
 
     raw_intervals: List[SurfaceInterval] = []
 
-    # If OsmRoadNetwork or GeoJSON is provided, correlate track with OSM ways
-    if road_network_or_geojson is not None:
+    # Case 1: Guidance track with Viterbi-matched candidates is provided
+    if guidance is not None:
+        try:
+            matched_cands = getattr(guidance, "matched_candidates", None) or (
+                guidance.get("matched_candidates") if hasattr(guidance, "get") else None
+            )
+            track_pts_km = getattr(guidance, "track_points_with_km", None) or (
+                guidance.get("track_points_with_km") if hasattr(guidance, "get") else None
+            )
+            if matched_cands and track_pts_km and len(matched_cands) == len(track_pts_km):
+                if total_km == 0.0 and len(track_pts_km[-1]) >= 4:
+                    total_km = round(float(track_pts_km[-1][3]), 3)
+
+                curr_hw, curr_surf, curr_tt = "unclassified", "gravel", "grade2"
+                curr_start = 0.0
+
+                for pt, cand in zip(track_pts_km, matched_cands):
+                    km = round(float(pt[3]), 3) if len(pt) >= 4 else 0.0
+                    is_fb = getattr(cand, "is_fallback", False) if not isinstance(cand, dict) else cand.get("is_fallback", False)
+
+                    if is_fb:
+                        hw, surf, tt = "unclassified", "gravel", "grade2"
+                    else:
+                        way_idx = cand["way_idx"] if isinstance(cand, dict) else getattr(cand, "way_idx", -1)
+                        if (
+                            road_network_or_geojson is not None
+                            and hasattr(road_network_or_geojson, "ways")
+                            and 0 <= way_idx < len(road_network_or_geojson.ways)
+                        ):
+                            way = road_network_or_geojson.ways[way_idx]
+                            hw = getattr(cand, "highway_class", None) or getattr(way, "highway", "unclassified")
+                            tags = getattr(way, "tags", {}) or {}
+                            surf = getattr(way, "surface", None) or tags.get("surface", "")
+                            tt = getattr(way, "tracktype", None) or tags.get("tracktype", "")
+                        else:
+                            hw = getattr(cand, "highway_class", None) or (cand.get("highway_class") if isinstance(cand, dict) else "unclassified")
+                            tags = getattr(cand, "tags", {}) if not isinstance(cand, dict) else cand.get("tags", {})
+                            surf = tags.get("surface", "")
+                            tt = tags.get("tracktype", "")
+
+                        if not surf or not tt:
+                            d_surf, d_tt = ROAD_CLASS_DEFAULTS.get(hw, ("gravel", "grade2"))
+                            surf = surf or d_surf
+                            tt = tt or d_tt
+
+                    if hw != curr_hw or surf != curr_surf or tt != curr_tt:
+                        if km > curr_start:
+                            raw_intervals.append(SurfaceInterval(curr_start, km, curr_hw, curr_surf, curr_tt))
+                        curr_start = km
+                        curr_hw, curr_surf, curr_tt = hw, surf, tt
+
+                if total_km > curr_start:
+                    raw_intervals.append(SurfaceInterval(curr_start, total_km, curr_hw, curr_surf, curr_tt))
+        except Exception:
+            pass
+
+    # Case 2: Fallback to spatial nearest-way query if guidance was not provided or failed
+    if not raw_intervals and road_network_or_geojson is not None:
         try:
             # Check if road_network_or_geojson is OsmRoadNetwork
             if hasattr(road_network_or_geojson, "find_nearest_way"):
@@ -533,8 +592,8 @@ def generate_route_surfaces(
                         if hw != curr_hw or surf != curr_surf or tt != curr_tt:
                             if km > curr_start:
                                 raw_intervals.append(SurfaceInterval(curr_start, km, curr_hw, curr_surf, curr_tt))
-                                curr_start = km
-                                curr_hw, curr_surf, curr_tt = hw, surf, tt
+                            curr_start = km
+                            curr_hw, curr_surf, curr_tt = hw, surf, tt
 
                 if total_km > curr_start:
                     raw_intervals.append(SurfaceInterval(curr_start, total_km, curr_hw, curr_surf, curr_tt))

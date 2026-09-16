@@ -143,6 +143,8 @@ class SnappedGuidanceTrack:
     snapped_points_count: int
     fallback_points_count: int
     bbox: Optional[BoundingBox] = None
+    matched_candidates: List[CandidateProjection] = field(default_factory=list)
+    track_points_with_km: List[Tuple[float, float, float, float]] = field(default_factory=list)
 
     def __len__(self) -> int:
         return len(self.points)
@@ -159,6 +161,10 @@ class SnappedGuidanceTrack:
                 return self.snapped_points_count
             elif idx == "fallback_points_count":
                 return self.fallback_points_count
+            elif idx == "matched_candidates":
+                return self.matched_candidates
+            elif idx == "track_points_with_km":
+                return self.track_points_with_km
             raise KeyError(idx)
         return self.points[idx]
 
@@ -169,7 +175,10 @@ class SnappedGuidanceTrack:
             return default
 
     def __contains__(self, key: str) -> bool:
-        return key in ("points", "total_km", "total_miles", "snapped_points_count", "fallback_points_count")
+        return key in (
+            "points", "total_km", "total_miles", "snapped_points_count",
+            "fallback_points_count", "matched_candidates", "track_points_with_km"
+        )
 
     def __iter__(self) -> Iterator[RoutePoint]:
         return iter(self.points)
@@ -510,43 +519,58 @@ def _viterbi_snapping(
 
 def _parse_input_points(
     route: Union[RouteTrack, Sequence[Union[RoutePoint, Sequence[float]]], Dict[str, Any]]
-) -> List[Tuple[float, float, float]]:
+) -> List[Tuple[float, float, float, float]]:
     """
-    Extract (lat, lon, ele) tuples from various route formats.
+    Extract (lat, lon, ele, cum_km) tuples from various route formats.
     """
-    raw_points: List[Tuple[float, float, float]] = []
+    raw_points: List[Tuple[float, float, float, float]] = []
     if isinstance(route, RouteTrack):
         for p in route.points:
-            raw_points.append((p.lat, p.lon, p.ele))
+            raw_points.append((p.lat, p.lon, p.ele, p.cum_km))
     elif isinstance(route, dict):
         for p in route.get("points", []):
             lat = float(p[0])
             lon = float(p[1])
             ele = float(p[2]) if len(p) > 2 else 0.0
-            raw_points.append((lat, lon, ele))
+            km = float(p[3]) if len(p) > 3 else 0.0
+            raw_points.append((lat, lon, ele, km))
     elif isinstance(route, (list, tuple)):
         for p in route:
             if isinstance(p, RoutePoint):
-                raw_points.append((p.lat, p.lon, p.ele))
+                raw_points.append((p.lat, p.lon, p.ele, p.cum_km))
             elif isinstance(p, (list, tuple)):
                 lat = float(p[0])
                 lon = float(p[1])
                 ele = float(p[2]) if len(p) > 2 else 0.0
-                raw_points.append((lat, lon, ele))
+                km = float(p[3]) if len(p) > 3 else 0.0
+                raw_points.append((lat, lon, ele, km))
+
+    # If distances were not populated (e.g. all 0.0), compute monotonic cumulative km
+    if len(raw_points) > 1 and all(p[3] == 0.0 for p in raw_points[1:]):
+        cum = 0.0
+        computed = [raw_points[0]]
+        for i in range(1, len(raw_points)):
+            step_km = haversine_distance_m(raw_points[i - 1][0], raw_points[i - 1][1], raw_points[i][0], raw_points[i][1]) / 1000.0
+            cum += step_km
+            p = raw_points[i]
+            computed.append((p[0], p[1], p[2], round(cum, 4)))
+        raw_points = computed
+
     return raw_points
 
 
 def _predensify_track(
-    points: List[Tuple[float, float, float]],
+    points: List[Tuple[float, float, float, float]],
     max_step_m: float = 40.0
-) -> List[Tuple[float, float, float]]:
+) -> List[Tuple[float, float, float, float]]:
     """
     Subdivide long segments in track points exceeding max_step_m.
+    Interpolates coordinates, elevation, and cumulative distance.
     """
     if len(points) < 2:
         return list(points)
 
-    densified: List[Tuple[float, float, float]] = [points[0]]
+    densified: List[Tuple[float, float, float, float]] = [points[0]]
     for i in range(1, len(points)):
         p1 = points[i - 1]
         p2 = points[i]
@@ -558,7 +582,8 @@ def _predensify_track(
                 lat = p1[0] + frac * (p2[0] - p1[0])
                 lon = p1[1] + frac * (p2[1] - p1[1])
                 ele = p1[2] + frac * (p2[2] - p1[2])
-                densified.append((lat, lon, ele))
+                km = p1[3] + frac * (p2[3] - p1[3])
+                densified.append((lat, lon, ele, km))
         densified.append(p2)
     return densified
 
@@ -586,19 +611,23 @@ def snap_track_to_osm(
             total_miles=0.0,
             snapped_points_count=0,
             fallback_points_count=0,
-            bbox=BoundingBox(0.0, 0.0, 0.0, 0.0)
+            bbox=BoundingBox(0.0, 0.0, 0.0, 0.0),
+            matched_candidates=[],
+            track_points_with_km=[]
         )
 
     if len(raw_points) == 1:
         p0 = raw_points[0]
-        pt = RoutePoint(lat=p0[0], lon=p0[1], ele=p0[2], cum_km=0.0, cum_mi=0.0)
+        pt = RoutePoint(lat=p0[0], lon=p0[1], ele=p0[2], cum_km=p0[3], cum_mi=km_to_miles(p0[3]))
         return SnappedGuidanceTrack(
             points=[pt],
             total_km=0.0,
             total_miles=0.0,
             snapped_points_count=0,
             fallback_points_count=1,
-            bbox=BoundingBox(p0[0], p0[1], p0[0], p0[1])
+            bbox=BoundingBox(p0[0], p0[1], p0[0], p0[1]),
+            matched_candidates=[],
+            track_points_with_km=[p0]
         )
 
     # Initialize or verify network
@@ -751,5 +780,7 @@ def snap_track_to_osm(
         total_miles=total_mi,
         snapped_points_count=snapped_count,
         fallback_points_count=fallback_count,
-        bbox=bbox
+        bbox=bbox,
+        matched_candidates=chosen_cands,
+        track_points_with_km=track_pts
     )

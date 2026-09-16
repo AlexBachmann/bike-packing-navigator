@@ -234,3 +234,55 @@ class TestGenerateRouteSurfaces:
 
     def test_empty_track_returns_empty_list(self):
         assert generate_route_surfaces([]) == []
+
+    def test_viterbi_guidance_matching_preserves_canonical_km(self):
+        track_points = [
+            (38.0, -106.0, 2000.0, 0.0, 0.0),
+            (38.1, -106.1, 2100.0, 5.0, 3.1),
+            (38.2, -106.2, 2200.0, 10.0, 6.2),
+        ]
+        mock_guidance = {
+            "matched_candidates": [
+                {"way_idx": 0, "highway_class": "secondary", "tags": {"surface": "asphalt", "tracktype": "grade1"}, "is_fallback": False},
+                {"way_idx": 1, "highway_class": "track", "tags": {"surface": "gravel", "tracktype": "grade2"}, "is_fallback": False},
+                {"way_idx": 1, "highway_class": "track", "tags": {"surface": "gravel", "tracktype": "grade2"}, "is_fallback": False},
+            ],
+            "track_points_with_km": [
+                (38.0, -106.0, 2000.0, 0.0),
+                (38.1, -106.1, 2100.0, 5.0),
+                (38.2, -106.2, 2200.0, 10.0),
+            ]
+        }
+        intervals = generate_route_surfaces(track_points, guidance=mock_guidance)
+        assert len(intervals) == 2
+        assert intervals[0].start_km == 0.0
+        assert intervals[0].end_km == 5.0
+        assert intervals[0].surface == "asphalt"
+        assert intervals[0].highway == "secondary"
+        assert intervals[1].start_km == 5.0
+        assert intervals[1].end_km == 10.0
+        assert intervals[1].surface == "gravel"
+        assert intervals[1].highway == "track"
+
+    def test_guidance_fallback_candidate_defaults(self):
+        track_points = [
+            (38.0, -106.0, 2000.0, 0.0, 0.0),
+            (38.1, -106.1, 2100.0, 5.0, 3.1),
+        ]
+        mock_guidance = {
+            "matched_candidates": [
+                {"way_idx": -1, "highway_class": "unclassified", "tags": {}, "is_fallback": True},
+                {"way_idx": -1, "highway_class": "unclassified", "tags": {}, "is_fallback": True},
+            ],
+            "track_points_with_km": [
+                (38.0, -106.0, 2000.0, 0.0),
+                (38.1, -106.1, 2100.0, 5.0),
+            ]
+        }
+        intervals = generate_route_surfaces(track_points, guidance=mock_guidance)
+        assert len(intervals) == 1
+        assert intervals[0].start_km == 0.0
+        assert intervals[0].end_km == 5.0
+        assert intervals[0].surface == "gravel"
+        assert intervals[0].highway == "unclassified"
+
