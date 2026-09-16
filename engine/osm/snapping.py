@@ -376,16 +376,25 @@ def compute_transition_cost(
         along_dist = direct_dist
         if w1 < len(network.ways):
             coords = network.ways[w1].coords
-            s1 = int(c1["seg_idx"] if isinstance(c1, dict) else c1.seg_idx)
-            s2 = int(c2["seg_idx"] if isinstance(c2, dict) else c2.seg_idx)
-            t1 = float(c1["t"] if isinstance(c1, dict) else c1.t)
-            t2 = float(c2["t"] if isinstance(c2, dict) else c2.t)
+            s1 = float(c1["seg_idx"] if isinstance(c1, dict) else c1.seg_idx) + float(c1["t"] if isinstance(c1, dict) else c1.t)
+            s2 = float(c2["seg_idx"] if isinstance(c2, dict) else c2.seg_idx) + float(c2["t"] if isinstance(c2, dict) else c2.t)
 
-            # Cumulative vertex distances
-            if s1 == s2:
-                along_dist = abs(t2 - t1) * haversine_distance_m(coords[s1][0], coords[s1][1], coords[s1 + 1][0], coords[s1 + 1][1])
-            else:
-                along_dist = direct_dist
+            start_c, end_c = (c1, c2) if s2 >= s1 else (c2, c1)
+            s_start_idx = int(start_c["seg_idx"] if isinstance(start_c, dict) else start_c.seg_idx)
+            s_end_idx = int(end_c["seg_idx"] if isinstance(end_c, dict) else end_c.seg_idx)
+
+            along_dist = 0.0
+            curr_lat = float(start_c["proj_lat"] if isinstance(start_c, dict) else start_c.proj_lat)
+            curr_lon = float(start_c["proj_lon"] if isinstance(start_c, dict) else start_c.proj_lon)
+            end_lat = float(end_c["proj_lat"] if isinstance(end_c, dict) else end_c.proj_lat)
+            end_lon = float(end_c["proj_lon"] if isinstance(end_c, dict) else end_c.proj_lon)
+
+            for seg in range(s_start_idx, s_end_idx):
+                if seg + 1 < len(coords):
+                    next_lat, next_lon = coords[seg + 1]
+                    along_dist += haversine_distance_m(curr_lat, curr_lon, next_lat, next_lon)
+                    curr_lat, curr_lon = next_lat, next_lon
+            along_dist += haversine_distance_m(curr_lat, curr_lon, end_lat, end_lon)
 
         # Backtrack penalty check
         backtrack_penalty = 0.0
@@ -400,12 +409,19 @@ def compute_transition_cost(
 
         return abs(along_dist - gpx_dist_m) * 0.2 + backtrack_penalty
 
-    # 4. Ways are connected
-    if network.are_ways_connected(w1, w2):
-        return abs(direct_dist - gpx_dist_m) * 0.2 + cfg.connected_penalty_m
-
-    # 5. Ways are disconnected (parallel jump penalty)
-    return cfg.disconnected_penalty_m + abs(direct_dist - gpx_dist_m) * 0.5
+    # 4. Different ways: evaluate connection via shortest path
+    trans_dist = direct_dist
+    w_path = network.find_way_path(w1, w2, max_hops=4, max_distance_m=max(800.0, gpx_dist_m * 2.5))
+    if w_path is not None:
+        pts = network.extract_path_geometry(w_path, c1, c2, include_start=True)
+        path_len = sum(
+            haversine_distance_m(pts[k][0], pts[k][1], pts[k + 1][0], pts[k + 1][1])
+            for k in range(len(pts) - 1)
+        )
+        return abs(path_len - gpx_dist_m) * 0.2 + cfg.connected_penalty_m
+    else:
+        # Disconnected ways: apply fixed switching penalty plus progression discrepancy penalty
+        return cfg.disconnected_penalty_m + abs(trans_dist - gpx_dist_m) * 0.5
 
 
 def _viterbi_snapping(
@@ -605,14 +621,31 @@ def snap_track_to_osm(
 
     while idx < num_pts:
         curr_c = chosen_cands[idx]
+        curr_raw = track_pts[idx]
 
-        # Look-ahead switchback bridging check
-        if curr_c.is_fallback and idx > 0 and not chosen_cands[idx - 1].is_fallback:
-            prev_road_cand = chosen_cands[idx - 1]
+        if idx == 0:
+            raw_guidance_coords.append((curr_c.proj_lat, curr_c.proj_lon, curr_raw[2], curr_c.is_fallback))
+            idx += 1
+            continue
+
+        prev_c = chosen_cands[idx - 1]
+        prev_raw = track_pts[idx - 1]
+
+        # 1. Look-ahead switchback bridging check
+        if curr_c.is_fallback and not prev_c.is_fallback:
             lookahead_idx = idx
             rejoined_idx: Optional[int] = None
+            gpx_accum_dist = 0.0
 
             while lookahead_idx < min(num_pts, idx + cfg.lookahead_points):
+                gpx_step = haversine_distance_m(
+                    track_pts[lookahead_idx - 1][0], track_pts[lookahead_idx - 1][1],
+                    track_pts[lookahead_idx][0], track_pts[lookahead_idx][1]
+                )
+                gpx_accum_dist += gpx_step
+                if gpx_accum_dist > cfg.lookahead_max_dist_m:
+                    break
+
                 if not chosen_cands[lookahead_idx].is_fallback:
                     rejoined_idx = lookahead_idx
                     break
@@ -620,56 +653,49 @@ def snap_track_to_osm(
 
             if rejoined_idx is not None:
                 next_road_cand = chosen_cands[rejoined_idx]
-                w_start = prev_road_cand.way_idx
+                w_start = prev_c.way_idx
                 w_end = next_road_cand.way_idx
 
                 # Check if road network connects these points
-                path = network.find_way_path(w_start, w_end, max_hops=8, max_distance_m=cfg.lookahead_max_dist_m)
+                path = network.find_way_path(w_start, w_end, max_hops=10, max_distance_m=cfg.lookahead_max_dist_m)
                 if path:
                     road_geom = network.extract_path_geometry(
                         way_ids=path,
-                        start_point=(prev_road_cand.proj_lat, prev_road_cand.proj_lon),
-                        end_point=(next_road_cand.proj_lat, next_road_cand.proj_lon)
+                        start_point=prev_c,
+                        end_point=next_road_cand,
+                        include_start=False
                     )
-                    gpx_chord_dist = haversine_distance_m(
-                        track_pts[idx - 1][0], track_pts[idx - 1][1],
-                        track_pts[rejoined_idx][0], track_pts[rejoined_idx][1]
-                    )
-                    # Only bridge if road path is reasonable (< 3x chord or chord + 600m)
-                    if road_geom and len(road_geom) >= 2:
-                        ele_start = track_pts[idx - 1][2]
-                        ele_end = track_pts[rejoined_idx][2]
-                        total_g_steps = len(road_geom)
-                        for g_i, (g_lat, g_lon) in enumerate(road_geom[1:], start=1):
-                            g_ele = ele_start + (g_i / total_g_steps) * (ele_end - ele_start)
-                            raw_guidance_coords.append((g_lat, g_lon, g_ele, False))
-                        idx = rejoined_idx + 1
-                        continue
+                    if road_geom:
+                        p_len = sum(
+                            haversine_distance_m(road_geom[m][0], road_geom[m][1], road_geom[m + 1][0], road_geom[m + 1][1])
+                            for m in range(len(road_geom) - 1)
+                        )
+                        if p_len <= max(3.0 * gpx_accum_dist, gpx_accum_dist + 600.0):
+                            ele_start = prev_raw[2]
+                            ele_end = track_pts[rejoined_idx][2]
+                            total_g_steps = len(road_geom)
+                            for g_i, (g_lat, g_lon) in enumerate(road_geom, start=1):
+                                g_ele = ele_start + (g_i / total_g_steps) * (ele_end - ele_start)
+                                raw_guidance_coords.append((g_lat, g_lon, g_ele, False))
+                            idx = rejoined_idx + 1
+                            continue
 
-        # Standard traversal: check curve vertices along same way
-        if idx > 0 and not curr_c.is_fallback and not chosen_cands[idx - 1].is_fallback:
-            prev_c = chosen_cands[idx - 1]
-            if prev_c.way_idx == curr_c.way_idx and prev_c.way_idx < len(network.ways):
-                coords = network.ways[prev_c.way_idx].coords
-                s_start, s_end = prev_c.seg_idx, curr_c.seg_idx
-                ele_start = track_pts[idx - 1][2]
-                ele_end = track_pts[idx][2]
+        # 2. Standard on-road traversal: check curve vertices along connected ways
+        if not curr_c.is_fallback and not prev_c.is_fallback:
+            gpx_d = haversine_distance_m(prev_raw[0], prev_raw[1], curr_raw[0], curr_raw[1])
+            w_path = network.find_way_path(prev_c.way_idx, curr_c.way_idx, max_hops=4, max_distance_m=max(800.0, gpx_d * 2.5))
+            if w_path is not None:
+                step_pts = network.extract_path_geometry(w_path, prev_c, curr_c, include_start=False)
+                ele_start = prev_raw[2]
+                ele_end = curr_raw[2]
+                total_s = len(step_pts)
+                for s_i, (s_lat, s_lon) in enumerate(step_pts, start=1):
+                    s_ele = ele_start + (s_i / total_s) * (ele_end - ele_start)
+                    raw_guidance_coords.append((s_lat, s_lon, s_ele, False))
+                idx += 1
+                continue
 
-                # If moving forward through intermediate vertices
-                if s_end > s_start:
-                    num_v = s_end - s_start
-                    for step_k, v_i in enumerate(range(s_start + 1, s_end + 1), start=1):
-                        v_lat, v_lon = coords[v_i]
-                        v_ele = ele_start + (step_k / (num_v + 1)) * (ele_end - ele_start)
-                        raw_guidance_coords.append((v_lat, v_lon, v_ele, False))
-                elif s_end < s_start:
-                    num_v = s_start - s_end
-                    for step_k, v_i in enumerate(range(s_start, s_end, -1), start=1):
-                        v_lat, v_lon = coords[v_i]
-                        v_ele = ele_start + (step_k / (num_v + 1)) * (ele_end - ele_start)
-                        raw_guidance_coords.append((v_lat, v_lon, v_ele, False))
-
-        raw_guidance_coords.append((curr_c.proj_lat, curr_c.proj_lon, track_pts[idx][2], curr_c.is_fallback))
+        raw_guidance_coords.append((curr_c.proj_lat, curr_c.proj_lon, curr_raw[2], curr_c.is_fallback))
         idx += 1
 
     # Telemetry deduplication and strictly monotonic cumulative distances

@@ -521,12 +521,13 @@ def generate_route_surfaces(
                     pt = pts[i]
                     lat, lon = pt[0], pt[1]
                     km = pt[3] if len(pt) >= 4 else 0.0
-                    match = road_network_or_geojson.find_nearest_way(lat, lon, max_dist_m=100.0)
+                    match = road_network_or_geojson.find_nearest_way(lat, lon, threshold_m=100.0)
                     if match:
-                        way = match.way
-                        hw = way.highway_class or "unclassified"
-                        surf = way.surface or ""
-                        tt = way.tracktype or ""
+                        way = getattr(match, "way", match)
+                        hw = getattr(match, "highway", None) or getattr(way, "highway_class", None) or getattr(way, "highway", None) or "unclassified"
+                        tags = getattr(match, "tags", None) or getattr(way, "tags", None) or {}
+                        surf = getattr(way, "surface", None) or tags.get("surface", "")
+                        tt = getattr(way, "tracktype", None) or tags.get("tracktype", "")
                         if not surf or not tt:
                             d_surf, d_tt = ROAD_CLASS_DEFAULTS.get(hw, ("gravel", "grade2"))
                             surf = surf or d_surf

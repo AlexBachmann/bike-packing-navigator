@@ -38,6 +38,7 @@ from engine.enrichment.places import (
 )
 from engine.enrichment.water import extract_water_access
 from engine.osm.corridor import generate_corridor_polygon
+from engine.osm.network import OsmRoadNetwork
 from engine.osm.snapping import SnappingConfig, snap_track_to_osm
 from engine.osm.turns import extract_turn_cues, extract_turns_from_pmtiles, save_turns_json
 from engine.terrain.climbs import detect_climbs
@@ -409,10 +410,19 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     elif (target_dir / "corridor.pmtiles").exists():
         pmtiles_path = target_dir / "corridor.pmtiles"
 
+    network: Optional[OsmRoadNetwork] = None
     if pmtiles_path is not None:
         try:
+            network = OsmRoadNetwork(pmtiles_path=pmtiles_path)
+            network.load_from_pmtiles(track_points=[(p.lat, p.lon) for p in track.points], threshold_m=config.snap_dist_m)
+        except Exception as exc:
+            logger.warning(f"Could not load road network from PMTiles: {exc}")
+            network = None
+
+    if network is not None or pmtiles_path is not None:
+        try:
             cfg = SnappingConfig(threshold_m=config.snap_dist_m)
-            guidance = snap_track_to_osm(track, pmtiles_path, config=cfg)
+            guidance = snap_track_to_osm(track, network or pmtiles_path, config=cfg)
             atomic_write_json(target_dir / "guidance-track.json", guidance.to_dict())
             datasets_created.append("guidance-track.json")
             s_dur = time.time() - s_t0
@@ -433,7 +443,9 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     # -------------------------------------------------------------------------
     s_t0 = time.time()
     try:
-        if pmtiles_path is not None:
+        if network is not None:
+            turns = extract_turn_cues(track, network=network)
+        elif pmtiles_path is not None:
             turns = extract_turns_from_pmtiles(track, pmtiles_path)
         else:
             turns = extract_turn_cues(track, network=None)
@@ -454,7 +466,7 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     # -------------------------------------------------------------------------
     s_t0 = time.time()
     try:
-        intervals = generate_route_surfaces(track)
+        intervals = generate_route_surfaces(track, road_network_or_geojson=network)
         atomic_write_json(target_dir / "surfaces.json", [list(iv) for iv in intervals])
         datasets_created.append("surfaces.json")
         s_dur = time.time() - s_t0

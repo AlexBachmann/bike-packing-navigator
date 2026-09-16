@@ -657,45 +657,136 @@ class OsmRoadNetwork:
     def extract_path_geometry(
         self,
         way_ids: List[int],
-        start_point: Tuple[float, float],
-        end_point: Tuple[float, float]
+        start_point: Union[Tuple[float, float], Any],
+        end_point: Union[Tuple[float, float], Any],
+        include_start: bool = True
     ) -> List[Tuple[float, float]]:
         """
-        Extract ordered coordinate vertices along the traversed sequence of ways.
+        Extract ordered coordinate vertices along the traversed sequence of ways,
+        trimming intermediate curve vertices between start_point and end_point.
         """
         if not way_ids:
+            if hasattr(end_point, "proj_lat"):
+                return [(float(end_point.proj_lat), float(end_point.proj_lon))]
+            elif isinstance(end_point, (tuple, list)) and len(end_point) >= 2:
+                return [(float(end_point[0]), float(end_point[1]))]
             return []
+
+        # Extract start coordinate and position
+        if hasattr(start_point, "proj_lat"):
+            p_start_lat, p_start_lon = float(start_point.proj_lat), float(start_point.proj_lon)
+            s_start = float(start_point.seg_idx) + float(getattr(start_point, "t", 0.0))
+        elif isinstance(start_point, (tuple, list)) and len(start_point) >= 2:
+            p_start_lat, p_start_lon = float(start_point[0]), float(start_point[1])
+            w0_coords = self.ways[way_ids[0]].coords
+            s_start = 0.0
+            if len(w0_coords) >= 2:
+                best_d = float("inf")
+                for s_i in range(len(w0_coords) - 1):
+                    d_m, _, t_v, _ = dist_point_to_segment_m(
+                        p_start_lat, p_start_lon,
+                        w0_coords[s_i][0], w0_coords[s_i][1],
+                        w0_coords[s_i + 1][0], w0_coords[s_i + 1][1]
+                    )
+                    if d_m < best_d:
+                        best_d = d_m
+                        s_start = float(s_i) + t_v
+        else:
+            p_start_lat, p_start_lon = 0.0, 0.0
+            s_start = 0.0
+
+        # Extract end coordinate and position
+        if hasattr(end_point, "proj_lat"):
+            p_end_lat, p_end_lon = float(end_point.proj_lat), float(end_point.proj_lon)
+            s_end = float(end_point.seg_idx) + float(getattr(end_point, "t", 0.0))
+        elif isinstance(end_point, (tuple, list)) and len(end_point) >= 2:
+            p_end_lat, p_end_lon = float(end_point[0]), float(end_point[1])
+            w_end_coords = self.ways[way_ids[-1]].coords
+            s_end = float(len(w_end_coords) - 1)
+            if len(w_end_coords) >= 2:
+                best_d = float("inf")
+                for s_i in range(len(w_end_coords) - 1):
+                    d_m, _, t_v, _ = dist_point_to_segment_m(
+                        p_end_lat, p_end_lon,
+                        w_end_coords[s_i][0], w_end_coords[s_i][1],
+                        w_end_coords[s_i + 1][0], w_end_coords[s_i + 1][1]
+                    )
+                    if d_m < best_d:
+                        best_d = d_m
+                        s_end = float(s_i) + t_v
+        else:
+            p_end_lat, p_end_lon = 0.0, 0.0
+            s_end = 0.0
+
+        pts: List[Tuple[float, float]] = []
+
+        def add_pt(lat: float, lon: float):
+            if not pts or haversine_distance_m(pts[-1][0], pts[-1][1], lat, lon) > 0.1:
+                pts.append((lat, lon))
+
+        if include_start:
+            add_pt(p_start_lat, p_start_lon)
+
+        # Case 1: Single way traversal
         if len(way_ids) == 1:
-            way = self.ways[way_ids[0]]
-            return list(way.coords)
+            w = way_ids[0]
+            coords = self.ways[w].coords
+            if s_end >= s_start:
+                for v in range(int(math.floor(s_start)) + 1, int(math.ceil(s_end))):
+                    if 0 <= v < len(coords):
+                        add_pt(coords[v][0], coords[v][1])
+            else:
+                for v in range(int(math.ceil(s_start)) - 1, int(math.floor(s_end)), -1):
+                    if 0 <= v < len(coords):
+                        add_pt(coords[v][0], coords[v][1])
+            add_pt(p_end_lat, p_end_lon)
+            return pts
 
-        all_coords: List[Tuple[float, float]] = []
-        for i, w_idx in enumerate(way_ids):
-            coords = list(self.ways[w_idx].coords)
-            if not coords:
-                continue
+        # Case 2: Multi-way path
+        w0 = way_ids[0]
+        coords0 = self.ways[w0].coords
+        conn0 = self.connections.get(w0, {}).get(way_ids[1])
+        j_exit = conn0[0] if conn0 else len(coords0) - 1
+        if j_exit >= s_start:
+            for v in range(int(math.floor(s_start)) + 1, j_exit + 1):
+                if 0 <= v < len(coords0):
+                    add_pt(coords0[v][0], coords0[v][1])
+        else:
+            for v in range(int(math.ceil(s_start)) - 1, j_exit - 1, -1):
+                if 0 <= v < len(coords0):
+                    add_pt(coords0[v][0], coords0[v][1])
 
-            # Determine direction: align with next or previous way
-            if i < len(way_ids) - 1:
-                next_w = self.ways[way_ids[i + 1]]
-                next_coords = next_w.coords
-                if next_coords:
-                    d_normal = haversine_distance_m(coords[-1][0], coords[-1][1], next_coords[0][0], next_coords[0][1])
-                    d_reversed = haversine_distance_m(coords[0][0], coords[0][1], next_coords[0][0], next_coords[0][1])
-                    if d_reversed < d_normal:
-                        coords.reverse()
-            elif all_coords:
-                last_pt = all_coords[-1]
-                d_normal = haversine_distance_m(last_pt[0], last_pt[1], coords[0][0], coords[0][1])
-                d_reversed = haversine_distance_m(last_pt[0], last_pt[1], coords[-1][0], coords[-1][1])
-                if d_reversed < d_normal:
-                    coords.reverse()
+        for i in range(1, len(way_ids) - 1):
+            w_curr = way_ids[i]
+            coords_curr = self.ways[w_curr].coords
+            conn_prev = self.connections.get(way_ids[i - 1], {}).get(w_curr)
+            conn_next = self.connections.get(w_curr, {}).get(way_ids[i + 1])
+            j_entry = conn_prev[1] if conn_prev else 0
+            j_exit = conn_next[0] if conn_next else len(coords_curr) - 1
+            if j_exit >= j_entry:
+                for v in range(j_entry, j_exit + 1):
+                    if 0 <= v < len(coords_curr):
+                        add_pt(coords_curr[v][0], coords_curr[v][1])
+            else:
+                for v in range(j_entry, j_exit - 1, -1):
+                    if 0 <= v < len(coords_curr):
+                        add_pt(coords_curr[v][0], coords_curr[v][1])
 
-            for pt in coords:
-                if not all_coords or haversine_distance_m(all_coords[-1][0], all_coords[-1][1], pt[0], pt[1]) > 0.5:
-                    all_coords.append(pt)
+        w_end = way_ids[-1]
+        coords_end = self.ways[w_end].coords
+        conn_end = self.connections.get(way_ids[-2], {}).get(w_end)
+        j_entry = conn_end[1] if conn_end else 0
+        if s_end >= j_entry:
+            for v in range(j_entry, int(math.ceil(s_end))):
+                if 0 <= v < len(coords_end):
+                    add_pt(coords_end[v][0], coords_end[v][1])
+        else:
+            for v in range(j_entry, int(math.floor(s_end)), -1):
+                if 0 <= v < len(coords_end):
+                    add_pt(coords_end[v][0], coords_end[v][1])
 
-        return all_coords
+        add_pt(p_end_lat, p_end_lon)
+        return pts
 
     def query_nearby_segments(
         self,
@@ -849,11 +940,13 @@ class OsmRoadNetwork:
         self,
         lat: float,
         lon: float,
-        threshold_m: float = 50.0
+        threshold_m: float = 50.0,
+        max_dist_m: Optional[float] = None
     ) -> Optional[WayCandidate]:
         """
         Find the single best candidate way within threshold_m, or None if none exist.
         """
-        cands = self.find_candidates_for_point(lat, lon, threshold_m=threshold_m)
+        thresh = max_dist_m if max_dist_m is not None else threshold_m
+        cands = self.find_candidates_for_point(lat, lon, threshold_m=thresh)
         road_cands = [c for c in cands if not c.is_fallback]
         return road_cands[0] if road_cands else None
