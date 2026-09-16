@@ -612,7 +612,7 @@ def snap_track_to_osm(
             "points": input_points
         }
 
-    raw_points = input_points
+    raw_points = densify_track_points(input_points, max_step_m=40.0)
 
     print(f"\n[OSM Snapper] Starting OSM road snapping for {len(raw_points)} points (threshold={threshold_m}m)...")
     network = OsmRoadNetwork(pmtiles_path)
