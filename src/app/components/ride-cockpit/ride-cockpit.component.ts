@@ -44,7 +44,7 @@ export type { ActiveClimbStatus } from './ride-climb-mini-widget.component';
 export const DEFAULT_3D_PITCH = 55;
 export const MIN_3D_PITCH = 50;
 export const MAX_3D_PITCH = 60;
-export const MAX_CAMERA_ROTATION_SPEED_DEG_PER_SEC = 90; // 360 deg turn in 4.0s (90 deg in 1.0s)
+export const MAX_CAMERA_ROTATION_SPEED_DEG_PER_SEC = 45; // 360 deg turn in 8.0s (45 deg in 1.0s)
 export const RIDER_VERTICAL_ANCHOR_RATIO = 0.72; // Lower third to lower quarter (72% from top)
 export const LOWER_THIRD_TOP_PADDING = 264; // Baseline top padding for standard 600px viewport
 export const LOWER_THIRD_BOTTOM_PADDING = 0;
@@ -421,7 +421,14 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     effect(() => {
       const points = this.routeService.trackPoints();
       const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
-      const hasGuidance = typeof this.routeService?.hasGuidanceTrack === 'function' ? this.routeService.hasGuidanceTrack() : false;
+      const effectivePoints = guidance && guidance.length >= 2 ? guidance : points;
+      if (effectivePoints && effectivePoints.length >= 2) {
+        untracked(() => {
+          if (!this.gpsSimulator.running() && typeof this.gpsSimulator.setTrackPoints === 'function') {
+            this.gpsSimulator.setTrackPoints(effectivePoints);
+          }
+        });
+      }
       if (!this.map) return;
       if ((guidance && guidance.length >= 2) || (points && points.length >= 2)) {
         untracked(() => {
@@ -454,11 +461,34 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+    // Effect 4b: Sync external currentMile changes to gpsSimulator
+    effect(() => {
+      const mile = this.currentMile();
+      untracked(() => {
+        if (typeof this.gpsSimulator.seek !== 'function') return;
+        if (this.gpsSimulator.running()) {
+          // If simulator is running, only seek if external jump occurred (> 0.05 mile delta)
+          // to prevent echoing the simulator's continuous playback.
+          if (Math.abs(mile - this.gpsSimulator.simulatedMile()) > 0.05) {
+            this.gpsSimulator.seek(mile);
+          }
+        } else {
+          // When stopped, always keep simulator in sync with currentMile
+          if (Math.abs(mile - this.gpsSimulator.simulatedMile()) > 1e-4) {
+            this.gpsSimulator.seek(mile);
+          }
+        }
+      });
+    });
+
     // Effect 5: Check vector cache and load turns when route changes
     effect(() => {
       const routeId = this.activeRouteId();
       if (routeId) {
         untracked(() => {
+          if (this.gpsSimulator.running()) {
+            this.gpsSimulator.stop();
+          }
           this.checkVectorCache(routeId);
           if (typeof this.routeService?.loadTurns === 'function') {
             this.routeService.loadTurns(routeId);
@@ -1176,12 +1206,22 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
       const pts = guidance && guidance.length >= 2 ? guidance : rawPts;
       const speed = this.simSpeedInput();
+      if (pts && pts.length >= 2 && typeof this.gpsSimulator.setTrackPoints === 'function') {
+        this.gpsSimulator.setTrackPoints(pts);
+      }
+      if (typeof this.gpsSimulator.seek === 'function') {
+        this.gpsSimulator.seek(this.currentMile());
+      }
       this.gpsSimulator.start(speed, pts);
     }
   }
 
   resetSimulation(): void {
     this.gpsSimulator.reset();
+    const resetMile = typeof this.gpsSimulator.simulatedMile === 'function'
+      ? this.gpsSimulator.simulatedMile()
+      : 0;
+    this.selectMile.emit(resetMile);
   }
 
   private interpolatePointAtMile(

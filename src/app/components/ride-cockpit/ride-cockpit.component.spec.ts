@@ -421,6 +421,10 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       simulatedCoords: computed(() => simState().simulatedCoords),
       simulatedHeading: computed(() => simState().simulatedHeading),
       simulatedSpeedKph: computed(() => simState().simulatedSpeedKph),
+      setTrackPoints: vi.fn(),
+      seek: vi.fn((mile: number) => {
+        simState.update((s) => ({ ...s, simulatedMile: mile }));
+      }),
       start: vi.fn((spd: number) => {
         simState.set({
           running: true,
@@ -437,7 +441,15 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       setSpeed: vi.fn((spd: number) => {
         simState.update((s) => ({ ...s, speedKph: spd }));
       }),
-      reset: vi.fn()
+      reset: vi.fn(() => {
+        simState.update((s) => ({
+          ...s,
+          running: false,
+          simulatedMile: 0,
+          simulatedCoords: null,
+          simulatedSpeedKph: 0
+        }));
+      })
     };
 
     await TestBed.configureTestingModule({
@@ -523,36 +535,36 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       expect(map.getBearing()).toBe(340);
     });
 
-    it('should limit camera rotation speed to 90 deg/sec while moving', () => {
+    it('should limit camera rotation speed to 45 deg/sec while moving', () => {
       const map = (component as any).map;
       // Initialize camera at bearing 0 (instant)
       (component as any).easeCameraToPosition(39.4890, -105.0980, 0, 15, true);
       expect(map.getBearing()).toBe(0);
 
-      // Advance timestamp by 0.5s (500ms). At 90 deg/sec, turns 45 deg.
+      // Advance timestamp by 1.0s (1000ms). At 45 deg/sec, turns 45 deg.
       const t0 = (component as any).lastCameraTimestamp;
-      (component as any).lastCameraTimestamp = t0 - 500;
+      (component as any).lastCameraTimestamp = t0 - 1000;
       (component as any).easeCameraToPosition(39.4890, -105.0980, 90, 15);
       expect(map.getBearing()).toBeCloseTo(45, 1);
 
-      // Advance another 0.5s (1.0s total at 90 deg/sec reaches 90 deg).
+      // Advance another 1.0s (2.0s total at 45 deg/sec reaches 90 deg).
       const t1 = (component as any).lastCameraTimestamp;
-      (component as any).lastCameraTimestamp = t1 - 500;
+      (component as any).lastCameraTimestamp = t1 - 1000;
       (component as any).easeCameraToPosition(39.4890, -105.0980, 90, 15);
       expect(map.getBearing()).toBeCloseTo(90, 1);
 
       // Now request a turn from 90 deg to 260 deg (170 deg clockwise turn) with 1.0s elapsed.
-      // At 90 deg/sec, in 1.0s it should turn 90 deg clockwise (90 + 90 = 180 deg), not jump immediately to 260!
+      // At 45 deg/sec, in 1.0s it should turn 45 deg clockwise (90 + 45 = 135 deg), not jump immediately to 260!
       const t2 = (component as any).lastCameraTimestamp;
       (component as any).lastCameraTimestamp = t2 - 1000;
       (component as any).easeCameraToPosition(39.4890, -105.0980, 260, 15);
-      expect(map.getBearing()).toBeCloseTo(180, 1);
+      expect(map.getBearing()).toBeCloseTo(135, 1);
 
-      // Advance another 1.0s (turns remaining 80 deg and reaches target 260 deg)
+      // Advance another 1.0s (turns another 45 deg -> 180 deg)
       const t3 = (component as any).lastCameraTimestamp;
       (component as any).lastCameraTimestamp = t3 - 1000;
       (component as any).easeCameraToPosition(39.4890, -105.0980, 260, 15);
-      expect(map.getBearing()).toBeCloseTo(260, 1);
+      expect(map.getBearing()).toBeCloseTo(180, 1);
     });
 
     it('should take the shortest angular path across 0/360 boundary', () => {
@@ -561,10 +573,10 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       (component as any).easeCameraToPosition(39.4890, -105.0980, 10, 15, true);
       expect(map.getBearing()).toBe(10);
 
-      // Advance by 50ms (0.05s) and turn to 350 deg (shortest path is -20 deg, not +340 deg)
-      // In 0.05s at 90 deg/sec, max step is 4.5 deg counter-clockwise: 10 - 4.5 = 5.5 deg
+      // Advance by 100ms (0.1s) and turn to 350 deg (shortest path is -20 deg, not +340 deg)
+      // In 0.1s at 45 deg/sec, max step is 4.5 deg counter-clockwise: 10 - 4.5 = 5.5 deg
       const t0 = (component as any).lastCameraTimestamp;
-      (component as any).lastCameraTimestamp = t0 - 50;
+      (component as any).lastCameraTimestamp = t0 - 100;
       (component as any).easeCameraToPosition(39.4890, -105.0980, 350, 15);
       expect(map.getBearing()).toBeCloseTo(5.5, 1);
     });
@@ -577,23 +589,23 @@ describe('RideCockpitComponent Unit Test Suite', () => {
 
       const easeSpy = vi.spyOn(map, 'easeTo');
 
-      // Stationary turn 180 deg -> duration should be 2000ms (2.0s for 180 deg at 90 deg/sec)
+      // Stationary turn 180 deg -> duration should be 4000ms (4.0s for 180 deg at 45 deg/sec)
       (component as any).easeCameraToPosition(39.4890, -105.0980, 180, 0);
       expect(easeSpy).toHaveBeenCalledWith(
         expect.objectContaining({
           bearing: 180,
-          duration: 2000
+          duration: 4000
         })
       );
 
       easeSpy.mockClear();
 
-      // Stationary turn 90 deg (from 180 to 270) -> duration should be 1000ms (1.0s at 90 deg/sec)
+      // Stationary turn 90 deg (from 180 to 270) -> duration should be 2000ms (2.0s at 45 deg/sec)
       (component as any).easeCameraToPosition(39.4890, -105.0980, 270, 0);
       expect(easeSpy).toHaveBeenCalledWith(
         expect.objectContaining({
           bearing: 270,
-          duration: 1000
+          duration: 2000
         })
       );
     });
@@ -1045,6 +1057,42 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       fixture.detectChanges();
       expect(component.effectiveMile()).toBe(0.28);
       expect(component.effectiveCoords()).toEqual([39.4890, -105.0980]);
+    });
+
+    it('should seek simulator when currentMile input changes while stopped', () => {
+      mockSimulator.seek.mockClear();
+      fixture.componentRef.setInput('currentMile', 350);
+      fixture.detectChanges();
+      expect(mockSimulator.seek).toHaveBeenCalledWith(350);
+    });
+
+    it('should seek simulator when currentMile jumps (>0.05 miles) while running', () => {
+      component.toggleSimulation(); // Start running (simulatedMile becomes 0.28)
+      fixture.detectChanges();
+      mockSimulator.seek.mockClear();
+
+      // Jump forward by 25 miles (e.g. +25 clicked in telemetry header)
+      fixture.componentRef.setInput('currentMile', 25.28);
+      fixture.detectChanges();
+      expect(mockSimulator.seek).toHaveBeenCalledWith(25.28);
+    });
+
+    it('should seek to currentMile before starting simulation', () => {
+      fixture.componentRef.setInput('currentMile', 42.5);
+      fixture.detectChanges();
+      mockSimulator.seek.mockClear();
+      mockSimulator.start.mockClear();
+
+      component.toggleSimulation();
+      expect(mockSimulator.seek).toHaveBeenCalledWith(42.5);
+      expect(mockSimulator.start).toHaveBeenCalled();
+    });
+
+    it('should emit selectMile(0) when resetSimulation is called', () => {
+      const emitSpy = vi.spyOn(component.selectMile, 'emit');
+      component.resetSimulation();
+      expect(mockSimulator.reset).toHaveBeenCalled();
+      expect(emitSpy).toHaveBeenCalledWith(0);
     });
   });
 

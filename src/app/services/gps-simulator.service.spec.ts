@@ -211,6 +211,32 @@ describe('GpsSimulatorService', () => {
       expect(service.running()).toBe(false);
       expect(service.simulatedSpeedKph()).toBe(0);
     });
+
+    it('should retain seeked mile when called before trackpoints are set, and interpolate when trackpoints are added', () => {
+      // Simulate page load where saved location (e.g. 21.75) is seeked before trackpoints load
+      service.seek(21.75);
+      expect(service.simulatedMile()).toBe(21.75);
+      expect(service.simulatedCoords()).toBeNull();
+
+      // Now trackpoints arrive
+      service.setTrackPoints(MOCK_TRACK);
+      expect(service.simulatedMile()).toBe(21.75);
+      expect(service.simulatedCoords()![0]).toBeCloseTo(51.0, 5);
+      expect(service.simulatedCoords()![1]).toBeCloseTo(-114.5, 5);
+      expect(service.simulatedHeading()).toBeCloseTo(90, 0);
+    });
+
+    it('should start simulation from previously seeked mile instead of starting at 0', () => {
+      service.setTrackPoints(MOCK_TRACK);
+      service.seek(77.65); // Seek to mile 77.65
+      expect(service.simulatedMile()).toBe(77.65);
+
+      // Start simulation
+      service.start(25);
+      expect(service.running()).toBe(true);
+      expect(service.simulatedMile()).toBe(77.65);
+      expect(service.simulatedCoords()![0]).toBeCloseTo(50.5, 5);
+    });
   });
 
   describe('Simulation Stepping: tick()', () => {

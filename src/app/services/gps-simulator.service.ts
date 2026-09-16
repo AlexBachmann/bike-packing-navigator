@@ -49,8 +49,17 @@ export class GpsSimulatorService implements OnDestroy {
   setTrackPoints(trackPoints: [number, number, number, number, number][]): void {
     this.points = trackPoints || [];
     this.lastIndex = 0;
-    if (this.points.length > 0 && this._state().simulatedCoords === null) {
-      this.seek(this._state().simulatedMile);
+    if (this.points.length > 0 && !this._state().running) {
+      const currentSimMile = this._state().simulatedMile;
+      const totalMiles = this.points[this.points.length - 1][4];
+      const clampedMile = Math.max(this.points[0][4], Math.min(totalMiles, currentSimMile));
+      const position = this.interpolate(clampedMile);
+      this._state.update((s) => ({
+        ...s,
+        simulatedMile: clampedMile,
+        simulatedCoords: position.coords,
+        simulatedHeading: position.heading
+      }));
     }
   }
 
@@ -149,6 +158,15 @@ export class GpsSimulatorService implements OnDestroy {
    * Seeks to a specific route mile, updating coordinates and forward heading.
    */
   seek(mile: number): void {
+    if (this.points.length === 0 && this.routeDataService) {
+      const guidance = typeof this.routeDataService.guidanceTrackPoints === 'function' ? this.routeDataService.guidanceTrackPoints() : [];
+      const rPoints = guidance && guidance.length >= 2 ? guidance : this.routeDataService.trackPoints();
+      if (rPoints && rPoints.length > 0) {
+        this.points = rPoints;
+        this.lastIndex = 0;
+      }
+    }
+
     if (this.points.length === 0) {
       this._state.update((s) => ({ ...s, simulatedMile: Math.max(0, mile) }));
       return;
