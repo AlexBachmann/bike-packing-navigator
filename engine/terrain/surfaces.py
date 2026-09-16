@@ -512,15 +512,12 @@ def generate_route_surfaces(
         try:
             # Check if road_network_or_geojson is OsmRoadNetwork
             if hasattr(road_network_or_geojson, "find_nearest_way"):
-                # Sample points along route to associate highway segments
-                step = max(1, len(pts) // 100)
                 curr_hw, curr_surf, curr_tt = "unclassified", "gravel", "grade2"
                 curr_start = 0.0
 
-                for i in range(0, len(pts), step):
-                    pt = pts[i]
+                for i, pt in enumerate(pts):
                     lat, lon = pt[0], pt[1]
-                    km = pt[3] if len(pt) >= 4 else 0.0
+                    km = round(float(pt[3]), 3) if len(pt) >= 4 else 0.0
                     match = road_network_or_geojson.find_nearest_way(lat, lon, threshold_m=100.0)
                     if match:
                         way = getattr(match, "way", match)
