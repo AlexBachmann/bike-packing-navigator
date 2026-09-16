@@ -404,25 +404,33 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     # Stage 3: Road Snapping & Guidance Line
     # -------------------------------------------------------------------------
     s_t0 = time.time()
-    pmtiles_path: Optional[Path] = None
-    if config.corridor_pmtiles and config.corridor_pmtiles.exists():
-        pmtiles_path = config.corridor_pmtiles
+    pmtiles_paths: List[Path] = []
+    if config.corridor_pmtiles:
+        p_target = config.corridor_pmtiles
+        if p_target.is_dir():
+            pmtiles_paths.extend(sorted(p_target.glob("*.pmtiles")))
+        elif p_target.exists():
+            pmtiles_paths.append(p_target)
     elif (target_dir / "corridor.pmtiles").exists():
-        pmtiles_path = target_dir / "corridor.pmtiles"
+        pmtiles_paths.append(target_dir / "corridor.pmtiles")
+    else:
+        sections = sorted(target_dir.glob("section-*.pmtiles"))
+        if sections:
+            pmtiles_paths.extend(sections)
 
     network: Optional[OsmRoadNetwork] = None
-    if pmtiles_path is not None:
+    if pmtiles_paths:
         try:
-            network = OsmRoadNetwork(pmtiles_path=pmtiles_path)
-            network.load_from_pmtiles(track_points=[(p.lat, p.lon) for p in track.points], threshold_m=config.snap_dist_m)
+            network = OsmRoadNetwork()
+            network.load_from_pmtiles(pmtiles_path=pmtiles_paths, track_points=[(p.lat, p.lon) for p in track.points], threshold_m=config.snap_dist_m)
         except Exception as exc:
             logger.warning(f"Could not load road network from PMTiles: {exc}")
             network = None
 
-    if network is not None or pmtiles_path is not None:
+    if network is not None or pmtiles_paths:
         try:
             cfg = SnappingConfig(threshold_m=config.snap_dist_m)
-            guidance = snap_track_to_osm(track, network or pmtiles_path, config=cfg)
+            guidance = snap_track_to_osm(track, network or pmtiles_paths, config=cfg)
             atomic_write_json(target_dir / "guidance-track.json", guidance.to_dict())
             datasets_created.append("guidance-track.json")
             s_dur = time.time() - s_t0
@@ -435,8 +443,8 @@ def run_ingest(config: IngestConfig) -> IngestResult:
             print(f"[Stage 3/10] Warning: Road snapping failed: {exc} ({s_dur:.2f}s)")
     else:
         s_dur = time.time() - s_t0
-        stages.append(StageTiming("road_snapping", s_dur, True, "Skipped (no corridor.pmtiles)"))
-        print(f"[Stage 3/10] Road snapping skipped (no corridor.pmtiles found) ({s_dur:.2f}s)")
+        stages.append(StageTiming("road_snapping", s_dur, True, "Skipped (no corridor PMTiles found)"))
+        print(f"[Stage 3/10] Road snapping skipped (no corridor PMTiles found) ({s_dur:.2f}s)")
 
     # -------------------------------------------------------------------------
     # Stage 4: Turn Guidance Cues
@@ -445,8 +453,8 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     try:
         if network is not None:
             turns = extract_turn_cues(track, network=network)
-        elif pmtiles_path is not None:
-            turns = extract_turns_from_pmtiles(track, pmtiles_path)
+        elif pmtiles_paths:
+            turns = extract_turns_from_pmtiles(track, pmtiles_paths[0])
         else:
             turns = extract_turn_cues(track, network=None)
 

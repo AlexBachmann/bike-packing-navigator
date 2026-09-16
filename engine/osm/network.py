@@ -408,15 +408,34 @@ class OsmRoadNetwork:
 
     def load_from_pmtiles(
         self,
-        pmtiles_path: Optional[Union[Path, str]] = None,
+        pmtiles_path: Optional[Union[Path, str, Sequence[Union[Path, str]]]] = None,
         track_points: Optional[Sequence[Sequence[float]]] = None,
         threshold_m: float = 50.0
     ) -> int:
         """
         Extract transportation features from corridor PMTiles at zoom 14 along the route track.
+        Supports single PMTiles archive, directory of section archives, or list of archives.
         """
-        p_path = Path(pmtiles_path) if pmtiles_path else self.pmtiles_path
-        if not p_path or not p_path.exists():
+        target = pmtiles_path or self.pmtiles_path
+        if not target:
+            return 0
+
+        target_paths: List[Path] = []
+        if isinstance(target, (list, tuple, set)):
+            for p in target:
+                p_p = Path(p)
+                if p_p.is_dir():
+                    target_paths.extend(sorted(p_p.glob("*.pmtiles")))
+                elif p_p.exists():
+                    target_paths.append(p_p)
+        else:
+            p_p = Path(target)
+            if p_p.is_dir():
+                target_paths.extend(sorted(p_p.glob("*.pmtiles")))
+            elif p_p.exists():
+                target_paths.append(p_p)
+
+        if not target_paths:
             return 0
 
         try:
@@ -442,73 +461,74 @@ class OsmRoadNetwork:
 
         ways_by_osm_id: Dict[int, Dict[str, Any]] = defaultdict(lambda: {'class': 'track', 'props': {}, 'segments': []})
 
-        with open(p_path, "rb") as f:
-            source = MmapSource(f)
-            reader = Reader(source)
+        for p_path in target_paths:
+            with open(p_path, "rb") as f:
+                source = MmapSource(f)
+                reader = Reader(source)
 
-            for item in tiles:
-                if len(item) == 3:
-                    z, x, y = item
-                else:
-                    z, (x, y) = zoom, item
-                tile_bytes = reader.get(z, x, y)
-                if not tile_bytes:
-                    continue
-
-                try:
-                    if tile_bytes.startswith(b"\x1f\x8b"):
-                        import gzip
-                        tile_bytes = gzip.decompress(tile_bytes)
-                    tile_data = mapbox_vector_tile.decode(tile_bytes)
-                except Exception:
-                    continue
-
-                for layer_name in ("transportation", "road", "lines"):
-                    layer = tile_data.get(layer_name)
-                    if not layer:
+                for item in tiles:
+                    if len(item) == 3:
+                        z, x, y = item
+                    else:
+                        z, (x, y) = zoom, item
+                    tile_bytes = reader.get(z, x, y)
+                    if not tile_bytes:
                         continue
 
-                    extent = layer.get('extent', 4096)
-                    n = 2.0 ** z
-                    inv_extent = 1.0 / extent
-                    inv_n = 1.0 / n
-                    factor_lon = 360.0 / n
-                    offset_lon = (x / n) * 360.0 - 180.0
-                    px_to_lon = factor_lon * inv_extent
+                    try:
+                        if tile_bytes.startswith(b"\x1f\x8b"):
+                            import gzip
+                            tile_bytes = gzip.decompress(tile_bytes)
+                        tile_data = mapbox_vector_tile.decode(tile_bytes)
+                    except Exception:
+                        continue
 
-                    for feat in layer.get('features', []):
-                        props = feat.get('properties', {})
-                        h_class = props.get('highway') or props.get('class')
-                        if not h_class:
-                            continue
-                        if h_class in ('rail', 'transit', 'aerialway', 'ferry'):
+                    for layer_name in ("transportation", "road", "lines"):
+                        layer = tile_data.get(layer_name)
+                        if not layer:
                             continue
 
-                        osm_id = props.get('osm_id', feat.get('id', 0))
-                        geom = feat.get('geometry', {})
-                        g_type = geom.get('type')
-                        coords_raw = geom.get('coordinates', [])
+                        extent = layer.get('extent', 4096)
+                        n = 2.0 ** z
+                        inv_extent = 1.0 / extent
+                        inv_n = 1.0 / n
+                        factor_lon = 360.0 / n
+                        offset_lon = (x / n) * 360.0 - 180.0
+                        px_to_lon = factor_lon * inv_extent
 
-                        if g_type == 'LineString':
-                            lines = [coords_raw]
-                        elif g_type == 'MultiLineString':
-                            lines = coords_raw
-                        else:
-                            continue
-
-                        for line in lines:
-                            if len(line) < 2:
+                        for feat in layer.get('features', []):
+                            props = feat.get('properties', {})
+                            h_class = props.get('highway') or props.get('class')
+                            if not h_class:
                                 continue
-                            wgs_coords = []
-                            for px, py in line:
-                                lon = offset_lon + px * px_to_lon
-                                y_norm = y + py * inv_extent
-                                lat = math.degrees(math.atan(math.sinh(math.pi * (1.0 - 2.0 * y_norm * inv_n))))
-                                wgs_coords.append((lat, lon))
+                            if h_class in ('rail', 'transit', 'aerialway', 'ferry'):
+                                continue
 
-                            ways_by_osm_id[osm_id]['class'] = h_class
-                            ways_by_osm_id[osm_id]['props'] = props
-                            ways_by_osm_id[osm_id]['segments'].append(wgs_coords)
+                            osm_id = props.get('osm_id', feat.get('id', 0))
+                            geom = feat.get('geometry', {})
+                            g_type = geom.get('type')
+                            coords_raw = geom.get('coordinates', [])
+
+                            if g_type == 'LineString':
+                                lines = [coords_raw]
+                            elif g_type == 'MultiLineString':
+                                lines = coords_raw
+                            else:
+                                continue
+
+                            for line in lines:
+                                if len(line) < 2:
+                                    continue
+                                wgs_coords = []
+                                for px, py in line:
+                                    lon = offset_lon + px * px_to_lon
+                                    y_norm = y + py * inv_extent
+                                    lat = math.degrees(math.atan(math.sinh(math.pi * (1.0 - 2.0 * y_norm * inv_n))))
+                                    wgs_coords.append((lat, lon))
+
+                                ways_by_osm_id[osm_id]['class'] = h_class
+                                ways_by_osm_id[osm_id]['props'] = props
+                                ways_by_osm_id[osm_id]['segments'].append(wgs_coords)
 
         added = 0
         for osm_id, way_info in ways_by_osm_id.items():

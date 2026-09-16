@@ -602,9 +602,9 @@ def snap_track_to_osm(
         )
 
     # Initialize or verify network
-    if isinstance(network_or_pmtiles, (Path, str)):
-        network = OsmRoadNetwork(pmtiles_path=network_or_pmtiles, cell_size_deg=0.005)
-        network.load_from_pmtiles(track_points=raw_points, threshold_m=cfg.threshold_m)
+    if isinstance(network_or_pmtiles, (Path, str, list, tuple, set)):
+        network = OsmRoadNetwork(cell_size_deg=0.005)
+        network.load_from_pmtiles(pmtiles_path=network_or_pmtiles, track_points=raw_points, threshold_m=cfg.threshold_m)
     else:
         network = network_or_pmtiles
 
