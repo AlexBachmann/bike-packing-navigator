@@ -152,6 +152,32 @@ class TestPMTilesBuilderAndArchive:
         with pytest.raises(ArchiveBuildError, match="Cannot finalize empty"):
             builder.finalize()
 
+    def test_builder_expands_bounds_to_encompass_tiles(self, tmp_path):
+        """Builder must expand header and metadata bounds to encompass all added tiles."""
+        archive_path = tmp_path / "expanded_bounds.pmtiles"
+        builder = PMTilesBuilder(
+            archive_path,
+            header=PMTilesHeader(
+                min_zoom=14,
+                max_zoom=14,
+                min_lon=-106.0,
+                min_lat=39.0,
+                max_lon=-105.0,
+                max_lat=40.0,
+            ),
+            metadata=PMTilesMetadata(bounds=(-106.0, 39.0, -105.0, 40.0))
+        )
+        # Add tile at z=14, x=2931, y=5473 (Banff west, lon ~ -115.58, lat ~ 51.16)
+        builder.add_tile(14, 2931, 5473, b"\x1f\x8b\x08\x00dummy")
+        builder.finalize()
+
+        with PMTilesArchive(archive_path) as arch:
+            assert arch.header.min_lon <= -115.57
+            assert arch.header.max_lat >= 51.15
+            assert arch.metadata.bounds[0] <= -115.57
+            assert arch.metadata.bounds[3] >= 51.15
+
+
 
 @pytest.mark.unit
 @pytest.mark.tiles

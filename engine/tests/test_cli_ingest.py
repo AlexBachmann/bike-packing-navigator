@@ -200,6 +200,7 @@ class TestCLIIngestPipelineExecution:
             "--output-dir", str(routes_dir),
             "--routes-json", str(initial_manifest_file),
             "--skip-places",
+            "--skip-osm",
             "--id", "skip-places-route",
         ]
         exit_code = main(args)

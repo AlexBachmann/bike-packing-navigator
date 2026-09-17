@@ -10,6 +10,7 @@ from engine.osm.corridor import (
     build_overpass_query,
     compute_corridor_bbox,
     extract_osm_corridor_data,
+    extract_water_features_from_pmtiles,
     fetch_overpass_data,
     generate_corridor_polygon,
     partition_track_bboxes,
@@ -59,6 +60,7 @@ __all__ = [
     "build_overpass_query",
     "fetch_overpass_data",
     "extract_osm_corridor_data",
+    "extract_water_features_from_pmtiles",
     # network
     "CLASS_PENALTIES",
     "OsmNode",

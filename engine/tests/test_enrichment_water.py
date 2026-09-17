@@ -360,6 +360,40 @@ class TestExtractWaterAccessPipeline:
         wps = extract_water_access(distant_corridor, track, max_distance_m=500.0)
         assert len(wps) == 0
 
+    def test_extract_water_access_with_curated_water(self, track):
+        curated = [
+            {
+                "id": "cache_desert_oasis",
+                "name": "Desert Water Oasis",
+                "location": {"lat": 39.10, "lon": -105.0001},
+                "reliability": "reliable",
+                "treatment_required": False,
+                "tier": 1,
+                "description": "Critical maintained trail angel water cache box."
+            }
+        ]
+        wps = extract_water_access([], track, curated_water=curated)
+        assert len(wps) == 1
+        assert wps[0].id == "cache_desert_oasis"
+        assert wps[0].name == "Desert Water Oasis"
+        assert wps[0].tier == 1
+        assert not wps[0].treatment_required
+        d = wps[0].to_dict()
+        assert d["category"] == "water"
+        assert "location" in d
+        assert d["location"]["lat"] == 39.10
+
+    def test_track_index_fallback_exhaustive_false(self, track):
+        from engine.utils.spatial import TrackIndex
+        pts_5d = [p.to_list_5d() for p in track.points]
+        ti = TrackIndex(pts_5d)
+        # Point far away
+        dist_km, r_km, r_mi = ti.project_point(0.0, 0.0, max_dist_km=1.0, fallback_exhaustive=False)
+        assert dist_km == float("inf")
+        # Point close
+        d_close, _, _ = ti.project_point(39.0, -105.0, max_dist_km=1.0, fallback_exhaustive=False)
+        assert d_close < 1.0
+
 
 class TestWaterGapAnalysis:
     def test_detects_arid_gap_exceeding_threshold(self):
@@ -380,3 +414,5 @@ class TestWaterGapAnalysis:
         ]
         gaps = analyze_water_gaps(wps, total_km=50.0, alert_threshold_km=30.0)
         assert len(gaps) == 0
+
+

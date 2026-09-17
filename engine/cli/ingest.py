@@ -584,11 +584,53 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     water_points = []
     if config.find_water_access:
         try:
+            # 1. Discover curated water sources
+            curated_water = []
+            if config.water_file and config.water_file.exists():
+                curated_water = read_json(config.water_file)
+            elif (Path("route/places") / f"water_{route_id}.json").exists():
+                curated_water = read_json(Path("route/places") / f"water_{route_id}.json")
+            elif (Path("route/places") / "water.json").exists():
+                curated_water = read_json(Path("route/places") / "water.json")
+            if not isinstance(curated_water, list):
+                curated_water = []
+
+            # 2. Extract raw OSM water features from PMTiles, cache, or Overpass
+            raw_water_features = []
+            if pmtiles_paths:
+                try:
+                    from engine.osm.corridor import extract_water_features_from_pmtiles
+                    raw_water_features = extract_water_features_from_pmtiles(pmtiles_paths, track)
+                    if raw_water_features:
+                        logger.info(f"Extracted {len(raw_water_features)} water features from {len(pmtiles_paths)} PMTiles")
+                except Exception as exc:
+                    logger.warning(f"PMTiles water extraction failed: {exc}")
+                    raw_water_features = []
+
+            if not raw_water_features:
+                cache_p = target_dir / ".cache_overpass_water.json"
+                if cache_p.exists():
+                    try:
+                        raw_water_features = read_json(cache_p)
+                    except Exception:
+                        raw_water_features = []
+
+            if not raw_water_features and not pmtiles_paths and not config.skip_osm and not config.mock_places:
+                try:
+                    from engine.osm.corridor import extract_osm_corridor_data, FeatureType
+                    cache_p = target_dir / ".cache_overpass_water.json"
+                    res = extract_osm_corridor_data(track, feature_type=FeatureType.WATER, cache_path=cache_p)
+                    raw_water_features = res.get("elements", [])
+                except Exception as exc:
+                    logger.warning(f"Overpass water query failed: {exc}")
+                    raw_water_features = []
+
             water_points = extract_water_access(
-                corridor_poly or {},
-                track,
+                corridor_geojson_or_elements=raw_water_features,
+                track=track,
                 segment_km=config.water_segment_km,
                 max_distance_m=config.max_water_dist_m,
+                curated_water=curated_water,
             )
             atomic_write_json(target_dir / "water_access.json", [w.to_dict() for w in water_points])
             datasets_created.append("water_access.json")
@@ -631,14 +673,21 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     if not isinstance(water_sources, list):
         water_sources = []
 
-    # Merge extracted river/lake water points from Stage 7
+    # Merge extracted river/lake water points from Stage 7 without duplicating IDs
+    seen_wids = {ws.get("id") for ws in water_sources if isinstance(ws, dict) and ws.get("id")}
     for wp in water_points:
-        water_sources.append(wp.to_dict())
+        wp_dict = wp.to_dict()
+        if wp_dict["id"] not in seen_wids:
+            water_sources.append(wp_dict)
+            seen_wids.add(wp_dict["id"])
 
     if config.waypoints_file and config.waypoints_file.exists():
         custom_wpts = read_json(config.waypoints_file)
         if isinstance(custom_wpts, list):
-            water_sources.extend(custom_wpts)
+            for cw in custom_wpts:
+                if isinstance(cw, dict) and cw.get("id") and cw["id"] not in seen_wids:
+                    water_sources.append(cw)
+                    seen_wids.add(cw["id"])
 
     places: List[Place] = []
     if config.skip_places:

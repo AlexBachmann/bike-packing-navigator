@@ -5,6 +5,7 @@ import { resolveBaseHref } from '../interceptors/base-href.interceptor';
 import {
   BlobSource,
   CompositePMTiles,
+  RoutePMTiles,
   RouteSectionMeta,
   StoredPmtilesRecord,
   DownloadProgress
@@ -14,7 +15,7 @@ import { PmtilesDownloaderService } from './pmtiles/pmtiles-downloader.service';
 import { PmtilesMetadataService } from './pmtiles/pmtiles-metadata.service';
 
 export type { RouteSectionMeta, StoredPmtilesRecord, DownloadProgress };
-export { BlobSource, CompositePMTiles };
+export { BlobSource, CompositePMTiles, RoutePMTiles };
 
 let protocolRegisteredGlobally = false;
 
@@ -87,7 +88,7 @@ export class PmtilesStorageService {
   registerArchive(routeId: string, blob: Blob, sectionId?: string): PMTiles {
     const key = this.buildKey(routeId, sectionId);
     const source = new BlobSource(key, blob);
-    const pmtiles = new PMTiles(source);
+    const pmtiles = new RoutePMTiles(source);
     this.registerInstance(key, pmtiles);
 
     if (sectionId) {
@@ -117,7 +118,7 @@ export class PmtilesStorageService {
     const resolvedUrl = resolveBaseHref(url);
     const key = this.buildKey(routeId, sectionId);
     this.remoteUrlMap.set(key, resolvedUrl);
-    const pmtiles = new PMTiles(resolvedUrl);
+    const pmtiles = new RoutePMTiles(resolvedUrl);
     this.registerInstance(key, pmtiles);
 
     if (sectionId) {

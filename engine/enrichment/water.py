@@ -106,13 +106,20 @@ class WaterWaypoint:
         return {
             "id": self.id,
             "name": self.name,
+            "category": "water",
             "type": self.type,
             "km": round(self.km, 1),
             "mile": round(self.mile, 1),
+            "route_km": round(self.km, 1),
+            "route_mile": round(self.mile, 1),
             "elevation_m": self.elevation_m,
             "dist_off_route_m": self.dist_off_route_m,
             "distance_to_trail_km": self.distance_to_trail_km,
             "coordinates": [round(self.coordinates[0], 5), round(self.coordinates[1], 5)],
+            "location": {
+                "lat": round(self.coordinates[0], 5),
+                "lon": round(self.coordinates[1], 5),
+            },
             "reliability": self.reliability,
             "treatment_required": self.treatment_required,
             "source_type": self.source_type,
@@ -437,7 +444,8 @@ def extract_water_access(
     max_distance_m: float = 1000.0,
     segment_km: float = 5.0,
     min_spacing_km: Optional[float] = 3.75,
-    dedup_threshold_m: float = 200.0
+    dedup_threshold_m: float = 200.0,
+    curated_water: Optional[Sequence[Dict[str, Any]]] = None
 ) -> List[WaterWaypoint]:
     """
     Master water access pipeline:
@@ -445,6 +453,7 @@ def extract_water_access(
     2. Projects water candidates onto route track
     3. Performs 200m spatial deduplication preserving higher-priority sources
     4. Throttles to 1 source per 5km segment with anti-crowding boundary checks
+    5. Integrates and preserves curated water sources
     """
     # 1. Normalize route track points
     if isinstance(track, RouteTrack):
@@ -481,7 +490,7 @@ def extract_water_access(
         best_r_mi = 0.0
 
         for lat, lon in coords:
-            dist_km, r_km, r_mi = track_index.project_point(lat, lon, max_dist_km=max_dist_km)
+            dist_km, r_km, r_mi = track_index.project_point(lat, lon, max_dist_km=max_dist_km, fallback_exhaustive=False)
             if dist_km <= max_dist_km and dist_km < best_dist_km:
                 best_dist_km = dist_km
                 best_pt = (lat, lon)
@@ -518,6 +527,39 @@ def extract_water_access(
             )
             candidates.append(wp)
 
+    # Ingest curated water sources
+    curated_wps: List[WaterWaypoint] = []
+    if curated_water:
+        for cw in curated_water:
+            if not isinstance(cw, dict):
+                continue
+            loc = cw.get("location", {}) if isinstance(cw.get("location"), dict) else {}
+            clat = loc.get("lat") or cw.get("lat")
+            clon = loc.get("lon") or cw.get("lon")
+            if clat is not None and clon is not None:
+                dist_km, r_km, r_mi = track_index.project_point(float(clat), float(clon))
+                c_name = cw.get("name", "Water Source")
+                cid = cw.get("id") or f"water_{slugify(c_name, sep='_')}_{int(round(r_km))}km"
+                c_tier = cw.get("tier", 1 if not cw.get("treatment_required", True) else 2)
+                curated_wp = WaterWaypoint(
+                    id=cid,
+                    name=c_name,
+                    type=cw.get("type", "water"),
+                    km=cw.get("route_km", r_km),
+                    mile=cw.get("route_mile", r_mi),
+                    elevation_m=cw.get("elevation_m") or cw.get("elevation"),
+                    dist_off_route_m=round(cw.get("dist_off_route_m", dist_km * 1000.0), 1),
+                    coordinates=(float(clat), float(clon)),
+                    reliability=str(cw.get("reliability", "reliable")),
+                    treatment_required=bool(cw.get("treatment_required", False)),
+                    source_type=str(cw.get("source_type", "amenity" if c_tier == 1 else "spring")),
+                    tier=int(c_tier),
+                    description=cw.get("description", ""),
+                    extra=cw.get("extra", {})
+                )
+                curated_wps.append(curated_wp)
+                candidates.append(curated_wp)
+
     # Deduplicate within 200m
     deduped = deduplicate_water_waypoints(candidates, threshold_m=dedup_threshold_m)
 
@@ -527,6 +569,14 @@ def extract_water_access(
         segment_km=segment_km,
         min_spacing_km=min_spacing_km
     )
+
+    # Guarantee all curated water points are preserved even if close to another source
+    if curated_wps:
+        throttled_ids = {w.id for w in throttled}
+        for cwp in curated_wps:
+            if cwp.id not in throttled_ids:
+                throttled.append(cwp)
+        throttled.sort(key=lambda w: (w.km, w.mile))
 
     return throttled
 

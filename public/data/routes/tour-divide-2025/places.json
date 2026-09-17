@@ -1746,6 +1746,23 @@
     "province_state": "AB"
   },
   {
+    "id": "water_osm_smith_dorrien_creek_60km",
+    "name": "Smith-Dorrien Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 50.76015,
+      "lon": -115.26456
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 60.3,
+    "route_mile": 37.4,
+    "google_maps_url": "https://maps.google.com/?q=50.76015,-115.26456",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJefYaZ8b0cFMR2fV3yIqPnQw",
     "name": "Canyon Campground",
     "category": "campground",
@@ -1763,6 +1780,23 @@
     "google_maps_url": "https://maps.google.com/?cid=909040526030271961&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "AB"
+  },
+  {
+    "id": "water_osm_kananaskis_river_76km",
+    "name": "Kananaskis River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 50.70162,
+      "lon": -115.11867
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 76.4,
+    "route_mile": 47.5,
+    "google_maps_url": "https://maps.google.com/?q=50.70162,-115.11867",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJl5QJvp_1cFMRg1AzHWYr6ow",
@@ -1944,6 +1978,57 @@
     "google_maps_url": "https://maps.google.com/?cid=17665847921866749860&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "BC"
+  },
+  {
+    "id": "water_osm_elk_river_105km",
+    "name": "Elk River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 50.49967,
+      "lon": -114.98446
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 105.0,
+    "route_mile": 65.2,
+    "google_maps_url": "https://maps.google.com/?q=50.49967,-114.98446",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_elk_river_126km",
+    "name": "Elk River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 50.32508,
+      "lon": -114.91753
+    },
+    "distance_to_trail_km": 0.14,
+    "route_km": 126.2,
+    "route_mile": 78.4,
+    "google_maps_url": "https://maps.google.com/?q=50.32508,-114.91753",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_forsyth_creek_138km",
+    "name": "Forsyth Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 50.23138,
+      "lon": -114.96847
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 138.1,
+    "route_mile": 85.8,
+    "google_maps_url": "https://maps.google.com/?q=50.23138,-114.96847",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJHf1TTgADcFMRYcpDWiGcrdo",
@@ -4635,6 +4720,74 @@
     "province_state": "BC"
   },
   {
+    "id": "water_osm_morrissey_creek_269km",
+    "name": "Morrissey Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.36646,
+      "lon": -114.98188
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 269.0,
+    "route_mile": 167.2,
+    "google_maps_url": "https://maps.google.com/?q=49.36646,-114.98188",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_north_fork_flathead_river_315km",
+    "name": "North Fork Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.2049,
+      "lon": -114.52397
+    },
+    "distance_to_trail_km": 0.11,
+    "route_km": 315.1,
+    "route_mile": 195.8,
+    "google_maps_url": "https://maps.google.com/?q=49.20490,-114.52397",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_north_fork_flathead_river_322km",
+    "name": "North Fork Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.15213,
+      "lon": -114.49108
+    },
+    "distance_to_trail_km": 0.18,
+    "route_km": 321.6,
+    "route_mile": 199.8,
+    "google_maps_url": "https://maps.google.com/?q=49.15213,-114.49108",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_north_fork_flathead_river_328km",
+    "name": "North Fork Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.09978,
+      "lon": -114.51299
+    },
+    "distance_to_trail_km": 0.13,
+    "route_km": 328.2,
+    "route_mile": 203.9,
+    "google_maps_url": "https://maps.google.com/?q=49.09978,-114.51299",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJe9uI9QSZZVMRkjHp4sWWw-g",
     "name": "Ram/Cabin Pass Recreation Site",
     "category": "campground",
@@ -4652,6 +4805,57 @@
     "google_maps_url": "https://maps.google.com/?cid=16772415213917516178&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "BC"
+  },
+  {
+    "id": "water_osm_wigwam_river_372km",
+    "name": "Wigwam River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.17664,
+      "lon": -114.95956
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 371.8,
+    "route_mile": 231.0,
+    "google_maps_url": "https://maps.google.com/?q=49.17664,-114.95956",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_wigwam_river_386km",
+    "name": "Wigwam River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.08764,
+      "lon": -114.88255
+    },
+    "distance_to_trail_km": 0.24,
+    "route_km": 385.7,
+    "route_mile": 239.6,
+    "google_maps_url": "https://maps.google.com/?q=49.08764,-114.88255",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_wigwam_river_394km",
+    "name": "Wigwam River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 49.03723,
+      "lon": -114.80797
+    },
+    "distance_to_trail_km": 0.25,
+    "route_km": 394.0,
+    "route_mile": 244.8,
+    "google_maps_url": "https://maps.google.com/?q=49.03723,-114.80797",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJ4x_TmlyoZVMRhw1bwPxO1Qw",
@@ -6098,6 +6302,40 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_tobacco_river_443km",
+    "name": "Tobacco River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 48.85586,
+      "lon": -115.02816
+    },
+    "distance_to_trail_km": 0.17,
+    "route_km": 443.2,
+    "route_mile": 275.4,
+    "google_maps_url": "https://maps.google.com/?q=48.85586,-115.02816",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_grave_creek_452km",
+    "name": "Grave Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 48.79843,
+      "lon": -114.95296
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 452.0,
+    "route_mile": 280.9,
+    "google_maps_url": "https://maps.google.com/?q=48.79843,-114.95296",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJjyzCCPXPZVMRCZoK1rl3Om4",
     "name": "The Bicycle Station",
     "category": "bike_shop",
@@ -6917,6 +7155,23 @@
     "google_maps_url": "https://maps.google.com/?cid=1640237118387219573&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "MT"
+  },
+  {
+    "id": "water_osm_red_meadow_creek_537km",
+    "name": "Red Meadow Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 48.75402,
+      "lon": -114.56335
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 537.1,
+    "route_mile": 333.8,
+    "google_maps_url": "https://maps.google.com/?q=48.75402,-114.56335",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJ6af5-5HYZVMRC5AtQYbkq5Q",
@@ -9949,6 +10204,23 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_flathead_river_602km",
+    "name": "Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 48.36569,
+      "lon": -114.16913
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 602.2,
+    "route_mile": 374.2,
+    "google_maps_url": "https://maps.google.com/?q=48.36569,-114.16913",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJBZFPhuhAZlMRW_nNO8egiwg",
     "name": "Glacier's Edge Cabins",
     "category": "hotel",
@@ -11209,6 +11481,23 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_swan_river_649km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 48.05577,
+      "lon": -114.02929
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 649.2,
+    "route_mile": 403.4,
+    "google_maps_url": "https://maps.google.com/?q=48.05577,-114.02929",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJUaSGszhBZlMRZob9-R0miDM",
     "name": "Over the Mountain Bikes",
     "category": "grocery",
@@ -11507,6 +11796,23 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_swan_river_676km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 47.92661,
+      "lon": -113.88217
+    },
+    "distance_to_trail_km": 0.18,
+    "route_km": 676.5,
+    "route_mile": 420.3,
+    "google_maps_url": "https://maps.google.com/?q=47.92661,-113.88217",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJiVXEque7Z1MRXSWU4pADK1g",
     "name": "Summertime with the family! Minutes to Bigfork & an hour to Glacier.",
     "category": "hotel",
@@ -11629,6 +11935,23 @@
     "google_maps_url": "https://maps.google.com/?cid=2857791193496001827&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "MT"
+  },
+  {
+    "id": "water_osm_swan_river_681km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 47.8973,
+      "lon": -113.86741
+    },
+    "distance_to_trail_km": 0.09,
+    "route_km": 680.6,
+    "route_mile": 422.9,
+    "google_maps_url": "https://maps.google.com/?q=47.89730,-113.86741",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJmS4VVyWbZ1MRfwr38z6NSyE",
@@ -11992,6 +12315,23 @@
     "province_state": "MT",
     "country": "USA",
     "description": "Swan Valley center with general store, fuel, and Mission Mountain views."
+  },
+  {
+    "id": "water_osm_swan_river_754km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 47.45806,
+      "lon": -113.67543
+    },
+    "distance_to_trail_km": 0.24,
+    "route_km": 754.5,
+    "route_mile": 468.8,
+    "google_maps_url": "https://maps.google.com/?q=47.45806,-113.67543",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJ2_KMrn17XVMRCX3iTCeCaOU",
@@ -13387,6 +13727,23 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_north_fork_blackfoot_river_867km",
+    "name": "North Fork Blackfoot River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 47.02107,
+      "lon": -113.02597
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 867.1,
+    "route_mile": 538.8,
+    "google_maps_url": "https://maps.google.com/?q=47.02107,-113.02597",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJhbIwmdPbXFMR0jjISG0VuOk",
     "name": "Stonewall Creek Retreat",
     "category": "hotel",
@@ -14144,6 +14501,23 @@
     "google_maps_url": "https://maps.google.com/?cid=5064639135147571958&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "MT"
+  },
+  {
+    "id": "water_osm_blackfoot_river_915km",
+    "name": "Blackfoot River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 46.94701,
+      "lon": -112.67664
+    },
+    "distance_to_trail_km": 0.18,
+    "route_km": 915.4,
+    "route_mile": 568.8,
+    "google_maps_url": "https://maps.google.com/?q=46.94701,-112.67664",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJi-cJQcTbXFMRuOqkOKXmrvU",
@@ -16517,6 +16891,23 @@
     "description": "Historic mining town with small cafe, post office, and camping."
   },
   {
+    "id": "water_osm_boulder_river_1089km",
+    "name": "Boulder River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 46.24773,
+      "lon": -112.42024
+    },
+    "distance_to_trail_km": 0.17,
+    "route_km": 1088.7,
+    "route_mile": 676.5,
+    "google_maps_url": "https://maps.google.com/?q=46.24773,-112.42024",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJdSFXgrpyW1MRHLFyBfJBJZs",
     "name": "Sheepshead",
     "category": "campground",
@@ -17393,6 +17784,23 @@
     "google_maps_url": "https://maps.google.com/?cid=4933437351295129343&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "MT"
+  },
+  {
+    "id": "water_osm_silver_bow_creek_1131km",
+    "name": "Silver Bow Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 45.99575,
+      "lon": -112.53922
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1131.4,
+    "route_mile": 703.0,
+    "google_maps_url": "https://maps.google.com/?q=45.99575,-112.53922",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJnSwYfk4JW1MRFnYTxGTTe8Q",
@@ -19052,6 +19460,23 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_wise_river_1229km",
+    "name": "Wise River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 45.70637,
+      "lon": -113.02756
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 1229.0,
+    "route_mile": 763.7,
+    "google_maps_url": "https://maps.google.com/?q=45.70637,-113.02756",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJxQYZSKoyWlMRCb7S764H-AU",
     "name": "Big Hole Lodge",
     "category": "hotel",
@@ -19983,6 +20408,57 @@
     "province_state": "MT"
   },
   {
+    "id": "water_osm_red_rock_river_1437km",
+    "name": "Red Rock River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.64142,
+      "lon": -112.57085
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 1436.7,
+    "route_mile": 892.7,
+    "google_maps_url": "https://maps.google.com/?q=44.64142,-112.57085",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_red_rock_river_1444km",
+    "name": "Red Rock River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.66406,
+      "lon": -112.50227
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 1444.0,
+    "route_mile": 897.3,
+    "google_maps_url": "https://maps.google.com/?q=44.66406,-112.50227",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_red_rock_river_1455km",
+    "name": "Red Rock River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.65254,
+      "lon": -112.38312
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 1455.0,
+    "route_mile": 904.1,
+    "google_maps_url": "https://maps.google.com/?q=44.65254,-112.38312",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJiZ2BMjsZUVMRJ0Qy4pIswtU",
     "name": "Red Hawk Lodge",
     "category": "hotel",
@@ -20039,6 +20515,23 @@
     "google_maps_url": "https://maps.google.com/?cid=11053187400167129768&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "MT"
+  },
+  {
+    "id": "water_osm_red_rock_creek_1537km",
+    "name": "Red Rock Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.61181,
+      "lon": -111.61032
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1536.6,
+    "route_mile": 954.8,
+    "google_maps_url": "https://maps.google.com/?q=44.61181,-111.61032",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJLc-BXPgHUVMRvdNI37i8m6M",
@@ -21220,6 +21713,23 @@
     "province_state": "ID"
   },
   {
+    "id": "water_osm_buffalo_river_1592km",
+    "name": "Buffalo River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.42209,
+      "lon": -111.3718
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1592.4,
+    "route_mile": 989.4,
+    "google_maps_url": "https://maps.google.com/?q=44.42209,-111.37180",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJE0azxkJ2UVMRnq78wRg7h6s",
     "name": "Dome | Sleeps 40 | Pickleball!",
     "category": "hotel",
@@ -21237,6 +21747,23 @@
     "google_maps_url": "https://maps.google.com/?cid=12359912679861431966&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "ID"
+  },
+  {
+    "id": "water_osm_warm_river_1612km",
+    "name": "Warm River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.27706,
+      "lon": -111.30431
+    },
+    "distance_to_trail_km": 0.06,
+    "route_km": 1612.5,
+    "route_mile": 1002.0,
+    "google_maps_url": "https://maps.google.com/?q=44.27706,-111.30431",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJl5WCzPh7UVMRiG-pdVr4py4",
@@ -21754,6 +22281,23 @@
     "province_state": "ID"
   },
   {
+    "id": "water_osm_maryville_canal_1647km",
+    "name": "Maryville Canal (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.07148,
+      "lon": -111.24876
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1647.4,
+    "route_mile": 1023.7,
+    "google_maps_url": "https://maps.google.com/?q=44.07148,-111.24876",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJfSAhZH3cU1MRlxLrCTR0MFs",
     "name": "Squirrel Creek Elk Ranch",
     "category": "campground",
@@ -21857,6 +22401,23 @@
     "google_maps_url": "https://maps.google.com/?cid=16380946283058414231&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_yampapah_1703km",
+    "name": "Yampapah (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 44.08803,
+      "lon": -110.6965
+    },
+    "distance_to_trail_km": 0.11,
+    "route_km": 1702.7,
+    "route_mile": 1058.0,
+    "google_maps_url": "https://maps.google.com/?q=44.08803,-110.69650",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "town_flagg_ranch",
@@ -22407,6 +22968,23 @@
     "province_state": "WY"
   },
   {
+    "id": "water_osm_pacific_creek_1746km",
+    "name": "Pacific Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.85054,
+      "lon": -110.51763
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 1746.0,
+    "route_mile": 1084.9,
+    "google_maps_url": "https://maps.google.com/?q=43.85054,-110.51763",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "town_moran",
     "name": "Moran",
     "category": "town",
@@ -22454,6 +23032,23 @@
     "google_maps_url": "https://maps.google.com/?cid=13420525446292121194&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_buffalo_fork_1756km",
+    "name": "Buffalo Fork (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.84699,
+      "lon": -110.41682
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1755.7,
+    "route_mile": 1091.0,
+    "google_maps_url": "https://maps.google.com/?q=43.84699,-110.41682",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJg-dvgb9mUlMR95znO097t6s",
@@ -22589,6 +23184,23 @@
     "province_state": "WY"
   },
   {
+    "id": "water_osm_buffalo_fork_1768km",
+    "name": "Buffalo Fork (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.85658,
+      "lon": -110.27085
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 1768.5,
+    "route_mile": 1098.9,
+    "google_maps_url": "https://maps.google.com/?q=43.85658,-110.27085",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJJ7Q236NmUlMRrgpjRE7le6Y",
     "name": "Turpin Meadow Ranch and Trails End Restaurant",
     "category": "hotel",
@@ -22625,6 +23237,23 @@
     "google_maps_url": "https://maps.google.com/?cid=12405630686827375502&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_blackrock_creek_1780km",
+    "name": "Blackrock Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.81388,
+      "lon": -110.21347
+    },
+    "distance_to_trail_km": 0.24,
+    "route_km": 1779.7,
+    "route_mile": 1105.8,
+    "google_maps_url": "https://maps.google.com/?q=43.81388,-110.21347",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJAaUkvytjUlMR-vwKsGc9CYo",
@@ -22790,6 +23419,23 @@
     "province_state": "WY"
   },
   {
+    "id": "water_osm_brooks_lake_creek_1812km",
+    "name": "Brooks Lake Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.7005,
+      "lon": -109.96651
+    },
+    "distance_to_trail_km": 0.23,
+    "route_km": 1812.2,
+    "route_mile": 1126.0,
+    "google_maps_url": "https://maps.google.com/?q=43.70050,-109.96651",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJTYc0IFibUlMRzM1hNQZQZK0",
     "name": "Lava Mountain Lodge",
     "category": "hotel",
@@ -22857,6 +23503,23 @@
     "province_state": "WY"
   },
   {
+    "id": "water_osm_wind_river_1816km",
+    "name": "Wind River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.66505,
+      "lon": -109.94568
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 1816.4,
+    "route_mile": 1128.7,
+    "google_maps_url": "https://maps.google.com/?q=43.66505,-109.94568",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJycC80WCbUlMRYe1d2ON-n3s",
     "name": "Exclusive Lake-front Cabin at Lava Creek Ranch.",
     "category": "hotel",
@@ -22912,6 +23575,23 @@
     "google_maps_url": "https://maps.google.com/?cid=631129828912363306&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_green_river_1895km",
+    "name": "Green River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.26175,
+      "lon": -110.01782
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1894.7,
+    "route_mile": 1177.3,
+    "google_maps_url": "https://maps.google.com/?q=43.26175,-110.01782",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJB0XdX6vLUlMRxJ7-e-YkHDI",
@@ -23046,6 +23726,23 @@
     "google_maps_url": "https://maps.google.com/?cid=4018545482161350099&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_new_fork_river_1921km",
+    "name": "New Fork River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 43.0457,
+      "lon": -110.01539
+    },
+    "distance_to_trail_km": 0.23,
+    "route_km": 1920.9,
+    "route_mile": 1193.6,
+    "google_maps_url": "https://maps.google.com/?q=43.04570,-110.01539",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJP-BN22XBV4cRJksnGx2J9RE",
@@ -23507,6 +24204,23 @@
     "google_maps_url": "https://maps.google.com/?cid=3273676430012608520&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_pine_creek_1950km",
+    "name": "Pine Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.86659,
+      "lon": -109.86804
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 1950.5,
+    "route_mile": 1212.0,
+    "google_maps_url": "https://maps.google.com/?q=42.86659,-109.86804",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJFRD-hKyWV4cRj_CLT3C90q0",
@@ -24387,6 +25101,23 @@
     "province_state": "WY"
   },
   {
+    "id": "water_osm_pole_creek_1962km",
+    "name": "Pole Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.79309,
+      "lon": -109.7891
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1962.1,
+    "route_mile": 1219.2,
+    "google_maps_url": "https://maps.google.com/?q=42.79309,-109.78910",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJE-66AMGEV4cR02dnG-lS3as",
     "name": "Log cabin in the National Forest, full restaurant / bar on site, near ski lift.\\n",
     "category": "hotel",
@@ -24452,6 +25183,23 @@
     "google_maps_url": "https://maps.google.com/?cid=17937805577290015375&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_boulder_creek_1969km",
+    "name": "Boulder Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75042,
+      "lon": -109.72657
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 1969.2,
+    "route_mile": 1223.6,
+    "google_maps_url": "https://maps.google.com/?q=42.75042,-109.72657",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJGYfBrIOEV4cRnkgrTN0W9nI",
@@ -24715,6 +25463,40 @@
     "province_state": "WY"
   },
   {
+    "id": "water_osm_east_fork_river_1980km",
+    "name": "East Fork River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.75382,
+      "lon": -109.60787
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 1979.7,
+    "route_mile": 1230.1,
+    "google_maps_url": "https://maps.google.com/?q=42.75382,-109.60787",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_east_fork_river_1993km",
+    "name": "East Fork River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.68004,
+      "lon": -109.50938
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 1993.0,
+    "route_mile": 1238.4,
+    "google_maps_url": "https://maps.google.com/?q=42.68004,-109.50938",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJq7y_RzTHWYcRhzlWx5rRkGE",
     "name": "Beautiful Tipis and Horseback Riding at Scenic Ranch in Wyoming",
     "category": "hotel",
@@ -24732,6 +25514,40 @@
     "google_maps_url": "https://maps.google.com/?cid=7030349481024829831&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_lander_creek_2037km",
+    "name": "Lander Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.50825,
+      "lon": -109.16404
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 2036.8,
+    "route_mile": 1265.6,
+    "google_maps_url": "https://maps.google.com/?q=42.50825,-109.16404",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_sweetwater_river_2066km",
+    "name": "Sweetwater River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.37983,
+      "lon": -108.89786
+    },
+    "distance_to_trail_km": 0.07,
+    "route_km": 2065.7,
+    "route_mile": 1283.6,
+    "google_maps_url": "https://maps.google.com/?q=42.37983,-108.89786",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "town_south_pass",
@@ -25072,6 +25888,23 @@
     "province_state": "WY",
     "country": "USA",
     "description": "Natural spring and historic pioneer waypoint beneath Oregon Buttes. Filter required."
+  },
+  {
+    "id": "water_osm_west_alkali_creek_2145km",
+    "name": "West Alkali Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 42.32573,
+      "lon": -108.24833
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 2145.2,
+    "route_mile": 1332.9,
+    "google_maps_url": "https://maps.google.com/?q=42.32573,-108.24833",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "td_dianthus_well",
@@ -25482,6 +26315,40 @@
     "google_maps_url": "https://maps.google.com/?cid=4479616687883728475&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "WY"
+  },
+  {
+    "id": "water_osm_savery_creek_2346km",
+    "name": "Savery Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 41.02346,
+      "lon": -107.44511
+    },
+    "distance_to_trail_km": 0.17,
+    "route_km": 2345.9,
+    "route_mile": 1457.7,
+    "google_maps_url": "https://maps.google.com/?q=41.02346,-107.44511",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_little_snake_river_2353km",
+    "name": "Little Snake River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.99702,
+      "lon": -107.37861
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 2353.3,
+    "route_mile": 1462.3,
+    "google_maps_url": "https://maps.google.com/?q=40.99702,-107.37861",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJBTSJKvfhQocRb3aBkJwh4-M",
@@ -25989,6 +26856,23 @@
     "google_maps_url": "https://maps.google.com/?cid=17110318103338209000&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_elk_river_2461km",
+    "name": "Elk River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.54591,
+      "lon": -106.9086
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 2460.6,
+    "route_mile": 1528.9,
+    "google_maps_url": "https://maps.google.com/?q=40.54591,-106.90860",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJXeBRTQ9pQocRWb5jKqkc0gA",
@@ -27662,6 +28546,23 @@
     "province_state": "CO"
   },
   {
+    "id": "water_osm_yampa_river_2473km",
+    "name": "Yampa River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.46878,
+      "lon": -106.8297
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 2473.4,
+    "route_mile": 1536.9,
+    "google_maps_url": "https://maps.google.com/?q=40.46878,-106.82970",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJtQ7yzc9pQocRn7ypRo6Leg8",
     "name": "Dusky Grouse Coffee",
     "category": "food",
@@ -28643,6 +29544,23 @@
     "google_maps_url": "https://maps.google.com/?cid=12052529799754883766&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_yampa_river_2501km",
+    "name": "Yampa River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.28542,
+      "lon": -106.83213
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 2500.7,
+    "route_mile": 1553.8,
+    "google_maps_url": "https://maps.google.com/?q=40.28542,-106.83213",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJn8qMPZgWQocRbiQwOMdCbYs",
@@ -29790,6 +30708,40 @@
     "description": "Colorado River hot springs, campground, and BLM recreation area."
   },
   {
+    "id": "water_osm_colorado_river_2572km",
+    "name": "Colorado River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.96826,
+      "lon": -106.5196
+    },
+    "distance_to_trail_km": 0.18,
+    "route_km": 2571.8,
+    "route_mile": 1598.0,
+    "google_maps_url": "https://maps.google.com/?q=39.96826,-106.51960",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_blue_river_2590km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.02932,
+      "lon": -106.38675
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 2589.8,
+    "route_mile": 1609.2,
+    "google_maps_url": "https://maps.google.com/?q=40.02932,-106.38675",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJX1df9i0DaocRCuy5lXXeexc",
     "name": "River Ranch Mobile Home Park",
     "category": "campground",
@@ -30761,6 +31713,40 @@
     "province_state": "CO"
   },
   {
+    "id": "water_osm_barger_ditch_2595km",
+    "name": "Barger Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.04302,
+      "lon": -106.33476
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 2595.1,
+    "route_mile": 1612.5,
+    "google_maps_url": "https://maps.google.com/?q=40.04302,-106.33476",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_big_lake_ditch_2610km",
+    "name": "Big Lake Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 40.0026,
+      "lon": -106.22691
+    },
+    "distance_to_trail_km": 0.18,
+    "route_km": 2610.3,
+    "route_mile": 1622.0,
+    "google_maps_url": "https://maps.google.com/?q=40.00260,-106.22691",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJly84agAZaocRHaOigxYTPYk",
     "name": "Williams Fork Reservoir West Campground",
     "category": "campground",
@@ -31017,6 +32003,23 @@
     "google_maps_url": "https://maps.google.com/?cid=5454210722574887164&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_blue_river_2670km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.63977,
+      "lon": -106.07484
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 2670.4,
+    "route_mile": 1659.3,
+    "google_maps_url": "https://maps.google.com/?q=39.63977,-106.07484",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJe6FMFi5daocR2k0m76oe_C4",
@@ -32714,6 +33717,23 @@
     "google_maps_url": "https://maps.google.com/?cid=17891519049772943257&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_blue_river_2676km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.61795,
+      "lon": -106.06557
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 2675.7,
+    "route_mile": 1662.6,
+    "google_maps_url": "https://maps.google.com/?q=39.61795,-106.06557",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJY5O-SelbaocRI441jK63xrU",
@@ -34499,6 +35519,23 @@
     "province_state": "CO"
   },
   {
+    "id": "water_osm_dillon_reservoir_2689km",
+    "name": "Dillon Reservoir (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.57233,
+      "lon": -106.05399
+    },
+    "distance_to_trail_km": 0.17,
+    "route_km": 2688.9,
+    "route_mile": 1670.8,
+    "google_maps_url": "https://maps.google.com/?q=39.57233,-106.05399",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJA35gfjBZaocRsMDflkrfP4o",
     "name": "Sinclair Gas Station",
     "category": "grocery",
@@ -34555,6 +35592,23 @@
     "google_maps_url": "https://maps.google.com/?cid=965807990142631014&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_blue_river_2693km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.53938,
+      "lon": -106.04274
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 2693.4,
+    "route_mile": 1673.6,
+    "google_maps_url": "https://maps.google.com/?q=39.53938,-106.04274",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJFVvchRT2aocRw5GhDiQyYyc",
@@ -34699,6 +35753,23 @@
     "google_maps_url": "https://maps.google.com/?cid=10649451658955823086&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_blue_river_2699km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.49,
+      "lon": -106.04603
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 2699.1,
+    "route_mile": 1677.2,
+    "google_maps_url": "https://maps.google.com/?q=39.49000,-106.04603",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJv4fsCmT2aocR1sjB3NCtzyo",
@@ -36493,6 +37564,23 @@
     "province_state": "CO"
   },
   {
+    "id": "water_osm_boreas_ditch_number_2_2717km",
+    "name": "Boreas Ditch Number 2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.41135,
+      "lon": -105.96843
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 2716.9,
+    "route_mile": 1688.2,
+    "google_maps_url": "https://maps.google.com/?q=39.41135,-105.96843",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJee2aV3j6aocRnyUDdoakk10",
     "name": "Section House - Summit Hut Assoc.",
     "category": "hotel",
@@ -36673,6 +37761,23 @@
     "google_maps_url": "https://maps.google.com/?cid=6481444176463646965&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_harrington_rikard_ditch_2780km",
+    "name": "Harrington-Rikard Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 39.01957,
+      "lon": -105.75489
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 2779.5,
+    "route_mile": 1727.1,
+    "google_maps_url": "https://maps.google.com/?q=39.01957,-105.75489",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJ0fMgC3nXaocR56MRk-UJVaA",
@@ -36933,6 +38038,23 @@
     "google_maps_url": "https://maps.google.com/?cid=5254590149180848553&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_arkansas_river_2856km",
+    "name": "Arkansas River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.54457,
+      "lon": -106.00616
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 2856.3,
+    "route_mile": 1774.8,
+    "google_maps_url": "https://maps.google.com/?q=38.54457,-106.00616",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJLSp3yU49FYcR_H-FTLNeg2s",
@@ -38843,6 +39965,23 @@
     "province_state": "CO"
   },
   {
+    "id": "water_osm_murry_ditch_2862km",
+    "name": "Murry Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.52307,
+      "lon": -106.0398
+    },
+    "distance_to_trail_km": 0.0,
+    "route_km": 2861.9,
+    "route_mile": 1778.3,
+    "google_maps_url": "https://maps.google.com/?q=38.52307,-106.03980",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJaR9iitQXFYcR-nwNsqkgp1E",
     "name": "The Great Salida Getaway",
     "category": "hotel",
@@ -39498,6 +40637,23 @@
     "province_state": "CO"
   },
   {
+    "id": "water_osm_del_monte_ditch_2867km",
+    "name": "Del Monte Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.50481,
+      "lon": -106.07937
+    },
+    "distance_to_trail_km": 0.1,
+    "route_km": 2866.9,
+    "route_mile": 1781.4,
+    "google_maps_url": "https://maps.google.com/?q=38.50481,-106.07937",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJPQ_xyyATFYcR9OODRfQXb1M",
     "name": "Don Grusin Studio",
     "category": "grocery",
@@ -39563,6 +40719,23 @@
     "google_maps_url": "https://maps.google.com/?cid=8218776105968248736&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_larkspur_ditch_2897km",
+    "name": "Larkspur Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.39351,
+      "lon": -106.24818
+    },
+    "distance_to_trail_km": 0.05,
+    "route_km": 2897.2,
+    "route_mile": 1800.2,
+    "google_maps_url": "https://maps.google.com/?q=38.39351,-106.24818",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJifQpNp5mFYcRCpLT7uSg5fQ",
@@ -39681,6 +40854,40 @@
     "description": "Base of Marshall Pass: Sargents Country Store, gas, cabins."
   },
   {
+    "id": "water_osm_arch_irrigation_ditch_2949km",
+    "name": "Arch Irrigation Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.41796,
+      "lon": -106.62268
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 2948.6,
+    "route_mile": 1832.2,
+    "google_maps_url": "https://maps.google.com/?q=38.41796,-106.62268",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_arch_irrigation_ditch_2953km",
+    "name": "Arch Irrigation Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.40822,
+      "lon": -106.66265
+    },
+    "distance_to_trail_km": 0.19,
+    "route_km": 2952.7,
+    "route_mile": 1834.7,
+    "google_maps_url": "https://maps.google.com/?q=38.40822,-106.66265",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJpavhevLdP4cRasutoiAQy8o",
     "name": "Herbstar Farm",
     "category": "grocery",
@@ -39717,6 +40924,23 @@
     "google_maps_url": "https://maps.google.com/?cid=16590522150376465830&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_smith_ford_ditch_2978km",
+    "name": "Smith Ford Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 38.23317,
+      "lon": -106.74769
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 2978.5,
+    "route_mile": 1850.7,
+    "google_maps_url": "https://maps.google.com/?q=38.23317,-106.74769",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJRa4CX1PUP4cRajFDLHF47mo",
@@ -39994,6 +41218,23 @@
     "google_maps_url": "https://maps.google.com/?cid=12642998470736436047&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_rio_grande_3100km",
+    "name": "Rio Grande (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 37.68504,
+      "lon": -106.35057
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 3100.5,
+    "route_mile": 1926.5,
+    "google_maps_url": "https://maps.google.com/?q=37.68504,-106.35057",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJsTu9_xnwFYcR6d-XiwI03LA",
@@ -41235,6 +42476,40 @@
     "description": "Highest village on the Divide (~9,800 ft): cabins, general store, cafe."
   },
   {
+    "id": "water_osm_conejos_river_3179km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 37.35409,
+      "lon": -106.52048
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 3178.6,
+    "route_mile": 1975.1,
+    "google_maps_url": "https://maps.google.com/?q=37.35409,-106.52048",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_conejos_river_3184km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 37.33319,
+      "lon": -106.47282
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 3183.7,
+    "route_mile": 1978.2,
+    "google_maps_url": "https://maps.google.com/?q=37.33319,-106.47282",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJcW_qzUsdFocRDUE980sk8E4",
     "name": "Lake Fork Campground",
     "category": "campground",
@@ -41328,6 +42603,57 @@
     "google_maps_url": "https://maps.google.com/?cid=9018404406872071728&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "CO"
+  },
+  {
+    "id": "water_osm_conejos_river_3204km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 37.17321,
+      "lon": -106.44398
+    },
+    "distance_to_trail_km": 0.06,
+    "route_km": 3203.6,
+    "route_mile": 1990.6,
+    "google_maps_url": "https://maps.google.com/?q=37.17321,-106.44398",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_conejos_river_3208km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 37.14776,
+      "lon": -106.41441
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 3207.8,
+    "route_mile": 1993.2,
+    "google_maps_url": "https://maps.google.com/?q=37.14776,-106.41441",
+    "business_status": "OPERATIONAL"
+  },
+  {
+    "id": "water_osm_conejos_river_3212km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 37.13184,
+      "lon": -106.36881
+    },
+    "distance_to_trail_km": 0.03,
+    "route_km": 3212.5,
+    "route_mile": 1996.2,
+    "google_maps_url": "https://maps.google.com/?q=37.13184,-106.36881",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "town_horca",
@@ -41605,6 +42931,23 @@
     "google_maps_url": "https://maps.google.com/?cid=9849797214446037510&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "NM"
+  },
+  {
+    "id": "water_osm_rio_chama_3376km",
+    "name": "Rio Chama (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 36.21059,
+      "lon": -106.28749
+    },
+    "distance_to_trail_km": 0.04,
+    "route_km": 3375.8,
+    "route_mile": 2097.6,
+    "google_maps_url": "https://maps.google.com/?q=36.21059,-106.28749",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJz2B3xHj3F4cRppvgM3YW3iI",
@@ -42688,6 +44031,23 @@
     "province_state": "NM"
   },
   {
+    "id": "water_osm_rio_puerco_3509km",
+    "name": "Rio Puerco (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 35.9786,
+      "lon": -106.98954
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 3508.6,
+    "route_mile": 2180.1,
+    "google_maps_url": "https://maps.google.com/?q=35.97860,-106.98954",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJ2_Xo6xbOIocRqcxLvIBa2z4",
     "name": "Clara's Trading Post",
     "category": "grocery",
@@ -42794,6 +44154,23 @@
     "province_state": "NM"
   },
   {
+    "id": "water_osm_burning_bridge_wash_3585km",
+    "name": "Burning Bridge Wash (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 35.94516,
+      "lon": -107.61355
+    },
+    "distance_to_trail_km": 0.02,
+    "route_km": 3584.9,
+    "route_mile": 2227.6,
+    "google_maps_url": "https://maps.google.com/?q=35.94516,-107.61355",
+    "business_status": "OPERATIONAL"
+  },
+  {
     "id": "ChIJA3S4XgA1I4cRCqeQAqkSvRo",
     "name": "Pueblo Pintado Store",
     "category": "grocery",
@@ -42850,6 +44227,23 @@
     "google_maps_url": "https://maps.google.com/?cid=10056867100168653151&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "NM"
+  },
+  {
+    "id": "water_osm_fajada_wash_3605km",
+    "name": "Fajada Wash (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 35.84201,
+      "lon": -107.72453
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 3604.8,
+    "route_mile": 2239.9,
+    "google_maps_url": "https://maps.google.com/?q=35.84201,-107.72453",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "td_san_mateo_spring",
@@ -45052,6 +46446,23 @@
     "province_state": "NM",
     "country": "USA",
     "description": "USFS Beaverhead Ranger Station in central Gila National Forest. Potable water spigot outside."
+  },
+  {
+    "id": "water_osm_taylor_creek_3978km",
+    "name": "Taylor Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 33.35057,
+      "lon": -108.07948
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 3977.8,
+    "route_mile": 2471.7,
+    "google_maps_url": "https://maps.google.com/?q=33.35057,-108.07948",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJ-X-nYF9NJ4cR0cJKbsexCOA",
@@ -47431,6 +48842,23 @@
     "google_maps_url": "https://maps.google.com/?cid=842191322630090513&g_mp=Cilnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaE5lYXJieRACGAQgAA",
     "business_status": "OPERATIONAL",
     "province_state": "NM"
+  },
+  {
+    "id": "water_osm_cherry_creek_4130km",
+    "name": "Cherry Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "town": "",
+    "is_in_town": false,
+    "location": {
+      "lat": 32.60026,
+      "lon": -108.34324
+    },
+    "distance_to_trail_km": 0.01,
+    "route_km": 4129.6,
+    "route_mile": 2566.0,
+    "google_maps_url": "https://maps.google.com/?q=32.60026,-108.34324",
+    "business_status": "OPERATIONAL"
   },
   {
     "id": "ChIJX3mYH-3c2IYRXVebKNvEf8w",

@@ -17,6 +17,7 @@ from engine.osm.corridor import (
     build_overpass_query,
     compute_corridor_bbox,
     extract_osm_corridor_data,
+    extract_water_features_from_pmtiles,
     fetch_overpass_data,
     generate_corridor_polygon,
     partition_track_bboxes,
@@ -232,3 +233,29 @@ class TestOverpassFetchingAndResilience:
         )
         assert len(res["elements"]) == 2
         assert (tmp_path / "aggregated.json").exists()
+
+
+class TestPMTilesWaterExtraction:
+    def test_handles_empty_or_nonexistent_paths(self):
+        pts = [(40.0, -105.0), (40.05, -105.0)]
+        res = extract_water_features_from_pmtiles([], pts)
+        assert res == []
+        res = extract_water_features_from_pmtiles("nonexistent.pmtiles", pts)
+        assert res == []
+
+    def test_extract_water_from_tour_divide_section1_if_exists(self):
+        p1 = Path("public/data/routes/tour-divide-2025/section-1.pmtiles")
+        if not p1.exists():
+            pytest.skip("section-1.pmtiles not present")
+
+        # Sample points around Banff / Canmore (first ~50km of Tour Divide)
+        sample_pts = [
+            (51.1784, -115.5708),  # Banff
+            (51.1500, -115.5000),  # Spray River
+            (51.0500, -115.4000),  # Goat Pond
+        ]
+        feats = extract_water_features_from_pmtiles(p1, sample_pts, zoom=12)
+        assert len(feats) > 0
+        names = [f["tags"].get("name") for f in feats if f.get("tags")]
+        assert any("Spray River" in n or "Bow River" in n or "Goat Pond" in n for n in names if n)
+

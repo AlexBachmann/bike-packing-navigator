@@ -510,3 +510,200 @@ def extract_osm_corridor_data(
         atomic_write_json(Path(cache_path), result)
 
     return result
+
+
+def extract_water_features_from_pmtiles(
+    pmtiles_paths: Union[Path, str, Sequence[Union[Path, str]]],
+    track: Union[RouteTrack, Sequence[Any]],
+    zoom: int = 12
+) -> List[Dict[str, Any]]:
+    """
+    Extract OpenStreetMap water features (rivers, streams, lakes, drinking water)
+    directly from local PMTiles vector tile archives along the route corridor.
+
+    Args:
+        pmtiles_paths: Single PMTiles path or sequence of PMTiles paths.
+        track: RouteTrack or sequence of RoutePoint/[lat, lon, ...].
+        zoom: Tile zoom level to query (default: 12).
+
+    Returns:
+        List of standardized OSM feature dictionaries with 'tags', 'coords' (lat, lon), and 'osm_id'.
+    """
+    try:
+        import gzip
+        import mapbox_vector_tile
+        from pmtiles.reader import MmapSource, Reader
+        from engine.utils.tiles import latlon_to_tile, mvt_pixel_to_lonlat
+    except ImportError as e:
+        logger.warning(f"PMTiles / mapbox_vector_tile not available for water extraction: {e}")
+        return []
+
+    if isinstance(pmtiles_paths, (str, Path)):
+        paths = [Path(pmtiles_paths)]
+    else:
+        paths = [Path(p) for p in pmtiles_paths]
+
+    valid_paths = [p for p in paths if p.exists() and p.is_file() and p.stat().st_size > 0]
+    if not valid_paths:
+        return []
+
+    # Extract track points
+    if isinstance(track, RouteTrack):
+        track_points = track.points
+    else:
+        track_points = track
+
+    if not track_points:
+        return []
+
+    # Identify corridor tiles along track points
+    tiles: set = set()
+    for pt in track_points:
+        lat = pt.lat if hasattr(pt, "lat") else pt[0]
+        lon = pt.lon if hasattr(pt, "lon") else pt[1]
+        tx, ty = latlon_to_tile(lat, lon, zoom)
+        tiles.add((zoom, tx, ty))
+
+    if not tiles:
+        return []
+
+    features: List[Dict[str, Any]] = []
+    seen_features: set = set()
+
+    for p_path in valid_paths:
+        try:
+            with open(p_path, "rb") as f:
+                reader = Reader(MmapSource(f))
+                for tz, tx, ty in tiles:
+                    t_bytes = reader.get(tz, tx, ty)
+                    if not t_bytes:
+                        continue
+                    try:
+                        if t_bytes.startswith(b"\x1f\x8b"):
+                            t_bytes = gzip.decompress(t_bytes)
+                        tile_data = mapbox_vector_tile.decode(t_bytes, default_options={"y_coord_down": True})
+                    except Exception:
+                        continue
+
+                    # 1. waterway layer (rivers, streams, canals)
+                    if "waterway" in tile_data:
+                        ext = tile_data["waterway"].get("extent", 4096)
+                        for feat in tile_data["waterway"].get("features", []):
+                            props = feat.get("properties", {})
+                            name = props.get("name") or props.get("name_en")
+                            if not name:
+                                continue
+                            w_class = props.get("class", "stream")
+                            feat_id = feat.get("id") or f"{name}_{w_class}"
+                            key = ("waterway", feat_id)
+                            if key in seen_features:
+                                continue
+                            seen_features.add(key)
+
+                            geom = feat.get("geometry", {})
+                            g_type = geom.get("type")
+                            c_raw = geom.get("coordinates", [])
+                            lines = [c_raw] if g_type == "LineString" else (c_raw if g_type == "MultiLineString" else [])
+                            coords = []
+                            for line in lines:
+                                for px, py in line:
+                                    lon, lat = mvt_pixel_to_lonlat(tz, tx, ty, px, py, ext)
+                                    coords.append((lat, lon))
+                            if coords:
+                                tags = {
+                                    "waterway": w_class,
+                                    "name": name,
+                                    "intermittent": "yes" if props.get("intermittent") == 1 else "no"
+                                }
+                                features.append({
+                                    "osm_id": feat.get("id"),
+                                    "tags": tags,
+                                    "coords": coords,
+                                })
+
+                    # 2. water_name layer (lakes, reservoirs, ponds)
+                    if "water_name" in tile_data:
+                        ext = tile_data["water_name"].get("extent", 4096)
+                        for feat in tile_data["water_name"].get("features", []):
+                            props = feat.get("properties", {})
+                            name = props.get("name") or props.get("name_en")
+                            if not name:
+                                continue
+                            w_class = props.get("class", "lake")
+                            feat_id = feat.get("id") or f"{name}_{w_class}"
+                            key = ("water_name", feat_id)
+                            if key in seen_features:
+                                continue
+                            seen_features.add(key)
+
+                            geom = feat.get("geometry", {})
+                            g_type = geom.get("type")
+                            c_raw = geom.get("coordinates", [])
+                            coords = []
+                            if g_type == "Point" and len(c_raw) >= 2:
+                                lon, lat = mvt_pixel_to_lonlat(tz, tx, ty, c_raw[0], c_raw[1], ext)
+                                coords.append((lat, lon))
+                            elif g_type in ("LineString", "MultiPoint"):
+                                for pt in c_raw:
+                                    if len(pt) >= 2:
+                                        lon, lat = mvt_pixel_to_lonlat(tz, tx, ty, pt[0], pt[1], ext)
+                                        coords.append((lat, lon))
+                            elif g_type == "Polygon":
+                                for ring in c_raw:
+                                    for pt in ring:
+                                        if len(pt) >= 2:
+                                            lon, lat = mvt_pixel_to_lonlat(tz, tx, ty, pt[0], pt[1], ext)
+                                            coords.append((lat, lon))
+                            if coords:
+                                tags = {
+                                    "natural": "water",
+                                    "water": w_class,
+                                    "name": name,
+                                    "intermittent": "yes" if props.get("intermittent") == 1 else "no"
+                                }
+                                features.append({
+                                    "osm_id": feat.get("id"),
+                                    "tags": tags,
+                                    "coords": coords,
+                                })
+
+                    # 3. poi layer (potable water amenities)
+                    if "poi" in tile_data:
+                        ext = tile_data["poi"].get("extent", 4096)
+                        for feat in tile_data["poi"].get("features", []):
+                            props = feat.get("properties", {})
+                            subclass = props.get("subclass") or ""
+                            p_class = props.get("class") or ""
+                            if subclass in ("drinking_water", "water_point") or p_class in ("drinking_water", "water_point"):
+                                feat_id = feat.get("id") or f"poi_{tz}_{tx}_{ty}_{len(features)}"
+                                key = ("poi_water", feat_id)
+                                if key in seen_features:
+                                    continue
+                                seen_features.add(key)
+
+                                geom = feat.get("geometry", {})
+                                g_type = geom.get("type")
+                                c_raw = geom.get("coordinates", [])
+                                coords = []
+                                if g_type == "Point" and len(c_raw) >= 2:
+                                    lon, lat = mvt_pixel_to_lonlat(tz, tx, ty, c_raw[0], c_raw[1], ext)
+                                    coords.append((lat, lon))
+                                if coords:
+                                    p_name = props.get("name") or "Drinking Water Tap"
+                                    tags = {
+                                        "amenity": "drinking_water",
+                                        "name": p_name,
+                                        "drinking_water": "yes"
+                                    }
+                                    features.append({
+                                        "osm_id": feat.get("id"),
+                                        "tags": tags,
+                                        "coords": coords,
+                                    })
+        except Exception as exc:
+            logger.warning(f"Error extracting water from PMTiles {p_path}: {exc}")
+            continue
+
+    logger.info(f"Extracted {len(features)} raw water features from {len(valid_paths)} PMTiles archives.")
+    return features
+

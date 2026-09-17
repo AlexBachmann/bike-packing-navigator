@@ -81,6 +81,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_water.add_argument("--track", required=True, help="Path to route-track.json or GPX file")
     p_water.add_argument("--corridor-geojson", "--corridor", help="Path to corridor.geojson")
+    p_water.add_argument("--pmtiles", help="Path or directory of PMTiles files")
+    p_water.add_argument("--water", help="Path to curated water JSON file")
     p_water.add_argument("--output", "-o", default="water_access.json", help="Destination path for water_access.json")
     p_water.add_argument("--segment-km", type=float, default=5.0, help="Max 1 water point per N km segment (default: 5.0)")
     p_water.add_argument("--max-dist-m", type=float, default=250.0, help="Maximum distance to trail in meters (default: 250.0)")
@@ -177,17 +179,45 @@ def _load_track(track_path_str: str) -> Any:
 def execute_water(args: argparse.Namespace) -> int:
     """Execute water access extraction."""
     from engine.enrichment.water import extract_water_access
+    from engine.osm.corridor import extract_water_features_from_pmtiles
 
     track = _load_track(args.track)
-    corridor_data = {}
-    if args.corridor_geojson and Path(args.corridor_geojson).exists():
+    corridor_data = []
+
+    # 1. PMTiles extraction
+    pmtiles_target = getattr(args, "pmtiles", None)
+    pmtiles_paths = []
+    if pmtiles_target:
+        p_path = Path(pmtiles_target)
+        if p_path.is_dir():
+            pmtiles_paths.extend(sorted(p_path.glob("*.pmtiles")))
+        elif p_path.exists():
+            pmtiles_paths.append(p_path)
+    else:
+        # Check track directory for PMTiles
+        track_dir = Path(args.track).parent
+        if (track_dir / "corridor.pmtiles").exists():
+            pmtiles_paths.append(track_dir / "corridor.pmtiles")
+        else:
+            pmtiles_paths.extend(sorted(track_dir.glob("section-*.pmtiles")))
+
+    if pmtiles_paths:
+        corridor_data = extract_water_features_from_pmtiles(pmtiles_paths, track)
+
+    if not corridor_data and args.corridor_geojson and Path(args.corridor_geojson).exists():
         corridor_data = read_json(Path(args.corridor_geojson))
+
+    curated = []
+    water_arg = getattr(args, "water", None)
+    if water_arg and Path(water_arg).exists():
+        curated = read_json(Path(water_arg))
 
     water_points = extract_water_access(
         corridor_geojson_or_elements=corridor_data,
         track=track,
         max_distance_m=args.max_dist_m,
         segment_km=args.segment_km,
+        curated_water=curated,
     )
     out_p = Path(args.output)
     atomic_write_json(out_p, [wp.to_dict() for wp in water_points])

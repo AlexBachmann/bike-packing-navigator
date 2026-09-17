@@ -56,6 +56,22 @@ export class BlobSource implements Source {
 }
 
 /**
+ * RoutePMTiles: Wrapper around PMTiles that ensures TileJSON returns
+ * unconstrained global bounds [-180, -85.051129, 180, 85.051129].
+ * This prevents MapLibre GL from culling viewport tile requests for
+ * neighboring corridor tiles, POIs, and overzoomed parent tiles.
+ */
+export class RoutePMTiles extends PMTiles {
+  override async getTileJson(baseTilesUrl: string): Promise<unknown> {
+    const raw = (await super.getTileJson(baseTilesUrl)) as Record<string, unknown>;
+    return {
+      ...raw,
+      bounds: [-180, -85.051129, 180, 85.051129]
+    };
+  }
+}
+
+/**
  * CompositePMTiles: Virtual PMTiles instance aggregating multiple sections
  * of a long route (e.g. Tour Divide 2025 sections 1..N) under a single
  * pmtiles://<route-id> URL.
@@ -163,7 +179,7 @@ export class CompositePMTiles extends PMTiles {
       vector_layers: meta?.['vector_layers'] || [],
       attribution: meta?.['attribution'] || 'Bikepack Navigator',
       name: this.compositeKey,
-      bounds: [header.minLon, header.minLat, header.maxLon, header.maxLat],
+      bounds: [-180, -85.051129, 180, 85.051129],
       center: [header.centerLon, header.centerLat, header.centerZoom],
       minzoom: header.minZoom,
       maxzoom: header.maxZoom

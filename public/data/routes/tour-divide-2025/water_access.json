@@ -1,1 +1,3223 @@
-[]
+[
+  {
+    "id": "water_osm_smith_dorrien_creek_60km",
+    "name": "Smith-Dorrien Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 60.3,
+    "mile": 37.4,
+    "route_km": 60.3,
+    "route_mile": 37.4,
+    "elevation_m": null,
+    "dist_off_route_m": 18.0,
+    "distance_to_trail_km": 0.018,
+    "coordinates": [
+      50.76015,
+      -115.26456
+    ],
+    "location": {
+      "lat": 50.76015,
+      "lon": -115.26456
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 2725116162,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Smith-Dorrien Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_kananaskis_river_76km",
+    "name": "Kananaskis River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 76.4,
+    "mile": 47.5,
+    "route_km": 76.4,
+    "route_mile": 47.5,
+    "elevation_m": null,
+    "dist_off_route_m": 33.0,
+    "distance_to_trail_km": 0.033,
+    "coordinates": [
+      50.70162,
+      -115.11867
+    ],
+    "location": {
+      "lat": 50.70162,
+      "lon": -115.11867
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 11171945462,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Kananaskis River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_elk_river_105km",
+    "name": "Elk River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 105.0,
+    "mile": 65.2,
+    "route_km": 105.0,
+    "route_mile": 65.2,
+    "elevation_m": null,
+    "dist_off_route_m": 38.0,
+    "distance_to_trail_km": 0.038,
+    "coordinates": [
+      50.49967,
+      -114.98446
+    ],
+    "location": {
+      "lat": 50.49967,
+      "lon": -114.98446
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1191237012,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Elk River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_elk_river_126km",
+    "name": "Elk River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 126.2,
+    "mile": 78.4,
+    "route_km": 126.2,
+    "route_mile": 78.4,
+    "elevation_m": null,
+    "dist_off_route_m": 137.0,
+    "distance_to_trail_km": 0.137,
+    "coordinates": [
+      50.32508,
+      -114.91753
+    ],
+    "location": {
+      "lat": 50.32508,
+      "lon": -114.91753
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1014370892,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Elk River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_forsyth_creek_138km",
+    "name": "Forsyth Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 138.1,
+    "mile": 85.8,
+    "route_km": 138.1,
+    "route_mile": 85.8,
+    "elevation_m": null,
+    "dist_off_route_m": 22.0,
+    "distance_to_trail_km": 0.022,
+    "coordinates": [
+      50.23138,
+      -114.96847
+    ],
+    "location": {
+      "lat": 50.23138,
+      "lon": -114.96847
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3031828992,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Forsyth Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_morrissey_creek_269km",
+    "name": "Morrissey Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 269.0,
+    "mile": 167.2,
+    "route_km": 269.0,
+    "route_mile": 167.2,
+    "elevation_m": null,
+    "dist_off_route_m": 7.0,
+    "distance_to_trail_km": 0.007,
+    "coordinates": [
+      49.36646,
+      -114.98188
+    ],
+    "location": {
+      "lat": 49.36646,
+      "lon": -114.98188
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 12266957062,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Morrissey Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_north_fork_flathead_river_315km",
+    "name": "North Fork Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 315.1,
+    "mile": 195.8,
+    "route_km": 315.1,
+    "route_mile": 195.8,
+    "elevation_m": null,
+    "dist_off_route_m": 112.0,
+    "distance_to_trail_km": 0.112,
+    "coordinates": [
+      49.2049,
+      -114.52397
+    ],
+    "location": {
+      "lat": 49.2049,
+      "lon": -114.52397
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 4675044102,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "North Fork Flathead River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_north_fork_flathead_river_322km",
+    "name": "North Fork Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 321.6,
+    "mile": 199.8,
+    "route_km": 321.6,
+    "route_mile": 199.8,
+    "elevation_m": null,
+    "dist_off_route_m": 183.0,
+    "distance_to_trail_km": 0.183,
+    "coordinates": [
+      49.15213,
+      -114.49108
+    ],
+    "location": {
+      "lat": 49.15213,
+      "lon": -114.49108
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 5888637172,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "North Fork Flathead River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_north_fork_flathead_river_328km",
+    "name": "North Fork Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 328.2,
+    "mile": 203.9,
+    "route_km": 328.2,
+    "route_mile": 203.9,
+    "elevation_m": null,
+    "dist_off_route_m": 132.0,
+    "distance_to_trail_km": 0.132,
+    "coordinates": [
+      49.09978,
+      -114.51299
+    ],
+    "location": {
+      "lat": 49.09978,
+      "lon": -114.51299
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 4675044142,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "North Fork Flathead River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_wigwam_river_372km",
+    "name": "Wigwam River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 371.8,
+    "mile": 231.0,
+    "route_km": 371.8,
+    "route_mile": 231.0,
+    "elevation_m": null,
+    "dist_off_route_m": 32.0,
+    "distance_to_trail_km": 0.032,
+    "coordinates": [
+      49.17664,
+      -114.95956
+    ],
+    "location": {
+      "lat": 49.17664,
+      "lon": -114.95956
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 5895431772,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Wigwam River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_wigwam_river_386km",
+    "name": "Wigwam River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 385.7,
+    "mile": 239.6,
+    "route_km": 385.7,
+    "route_mile": 239.6,
+    "elevation_m": null,
+    "dist_off_route_m": 241.0,
+    "distance_to_trail_km": 0.241,
+    "coordinates": [
+      49.08764,
+      -114.88255
+    ],
+    "location": {
+      "lat": 49.08764,
+      "lon": -114.88255
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 5911085842,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Wigwam River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_wigwam_river_394km",
+    "name": "Wigwam River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 394.0,
+    "mile": 244.8,
+    "route_km": 394.0,
+    "route_mile": 244.8,
+    "elevation_m": null,
+    "dist_off_route_m": 246.0,
+    "distance_to_trail_km": 0.246,
+    "coordinates": [
+      49.03723,
+      -114.80797
+    ],
+    "location": {
+      "lat": 49.03723,
+      "lon": -114.80797
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 5895043392,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Wigwam River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_tobacco_river_443km",
+    "name": "Tobacco River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 443.2,
+    "mile": 275.4,
+    "route_km": 443.2,
+    "route_mile": 275.4,
+    "elevation_m": null,
+    "dist_off_route_m": 165.0,
+    "distance_to_trail_km": 0.165,
+    "coordinates": [
+      48.85586,
+      -115.02816
+    ],
+    "location": {
+      "lat": 48.85586,
+      "lon": -115.02816
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1850075352,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Tobacco River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_grave_creek_452km",
+    "name": "Grave Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 452.0,
+    "mile": 280.9,
+    "route_km": 452.0,
+    "route_mile": 280.9,
+    "elevation_m": null,
+    "dist_off_route_m": 34.0,
+    "distance_to_trail_km": 0.034,
+    "coordinates": [
+      48.79843,
+      -114.95296
+    ],
+    "location": {
+      "lat": 48.79843,
+      "lon": -114.95296
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1852045542,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Grave Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_red_meadow_creek_537km",
+    "name": "Red Meadow Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 537.1,
+    "mile": 333.8,
+    "route_km": 537.1,
+    "route_mile": 333.8,
+    "elevation_m": null,
+    "dist_off_route_m": 39.0,
+    "distance_to_trail_km": 0.039,
+    "coordinates": [
+      48.75402,
+      -114.56335
+    ],
+    "location": {
+      "lat": 48.75402,
+      "lon": -114.56335
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 828690602,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Red Meadow Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_flathead_river_602km",
+    "name": "Flathead River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 602.2,
+    "mile": 374.2,
+    "route_km": 602.2,
+    "route_mile": 374.2,
+    "elevation_m": null,
+    "dist_off_route_m": 33.0,
+    "distance_to_trail_km": 0.033,
+    "coordinates": [
+      48.36569,
+      -114.16913
+    ],
+    "location": {
+      "lat": 48.36569,
+      "lon": -114.16913
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13487232712,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Flathead River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_swan_river_649km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 649.2,
+    "mile": 403.4,
+    "route_km": 649.2,
+    "route_mile": 403.4,
+    "elevation_m": null,
+    "dist_off_route_m": 39.0,
+    "distance_to_trail_km": 0.039,
+    "coordinates": [
+      48.05577,
+      -114.02929
+    ],
+    "location": {
+      "lat": 48.05577,
+      "lon": -114.02929
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 2954311632,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Swan River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_swan_river_676km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 676.5,
+    "mile": 420.3,
+    "route_km": 676.5,
+    "route_mile": 420.3,
+    "elevation_m": null,
+    "dist_off_route_m": 184.0,
+    "distance_to_trail_km": 0.184,
+    "coordinates": [
+      47.92661,
+      -113.88217
+    ],
+    "location": {
+      "lat": 47.92661,
+      "lon": -113.88217
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13578475602,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Swan River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_swan_river_681km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 680.6,
+    "mile": 422.9,
+    "route_km": 680.6,
+    "route_mile": 422.9,
+    "elevation_m": null,
+    "dist_off_route_m": 89.0,
+    "distance_to_trail_km": 0.089,
+    "coordinates": [
+      47.8973,
+      -113.86741
+    ],
+    "location": {
+      "lat": 47.8973,
+      "lon": -113.86741
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13578475552,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Swan River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_swan_river_754km",
+    "name": "Swan River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 754.5,
+    "mile": 468.8,
+    "route_km": 754.5,
+    "route_mile": 468.8,
+    "elevation_m": null,
+    "dist_off_route_m": 238.0,
+    "distance_to_trail_km": 0.238,
+    "coordinates": [
+      47.45806,
+      -113.67543
+    ],
+    "location": {
+      "lat": 47.45806,
+      "lon": -113.67543
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 2957560872,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Swan River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_north_fork_blackfoot_river_867km",
+    "name": "North Fork Blackfoot River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 867.1,
+    "mile": 538.8,
+    "route_km": 867.1,
+    "route_mile": 538.8,
+    "elevation_m": null,
+    "dist_off_route_m": 51.0,
+    "distance_to_trail_km": 0.051,
+    "coordinates": [
+      47.02107,
+      -113.02597
+    ],
+    "location": {
+      "lat": 47.02107,
+      "lon": -113.02597
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 2063871052,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "North Fork Blackfoot River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blackfoot_river_915km",
+    "name": "Blackfoot River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 915.4,
+    "mile": 568.8,
+    "route_km": 915.4,
+    "route_mile": 568.8,
+    "elevation_m": null,
+    "dist_off_route_m": 177.0,
+    "distance_to_trail_km": 0.177,
+    "coordinates": [
+      46.94701,
+      -112.67664
+    ],
+    "location": {
+      "lat": 46.94701,
+      "lon": -112.67664
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3587312932,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blackfoot River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_boulder_river_1089km",
+    "name": "Boulder River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1088.7,
+    "mile": 676.5,
+    "route_km": 1088.7,
+    "route_mile": 676.5,
+    "elevation_m": null,
+    "dist_off_route_m": 174.0,
+    "distance_to_trail_km": 0.174,
+    "coordinates": [
+      46.24773,
+      -112.42024
+    ],
+    "location": {
+      "lat": 46.24773,
+      "lon": -112.42024
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 2921295092,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Boulder River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_silver_bow_creek_1131km",
+    "name": "Silver Bow Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1131.4,
+    "mile": 703.0,
+    "route_km": 1131.4,
+    "route_mile": 703.0,
+    "elevation_m": null,
+    "dist_off_route_m": 8.0,
+    "distance_to_trail_km": 0.008,
+    "coordinates": [
+      45.99575,
+      -112.53922
+    ],
+    "location": {
+      "lat": 45.99575,
+      "lon": -112.53922
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1118718232,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Silver Bow Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_wise_river_1229km",
+    "name": "Wise River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1229.0,
+    "mile": 763.7,
+    "route_km": 1229.0,
+    "route_mile": 763.7,
+    "elevation_m": null,
+    "dist_off_route_m": 22.0,
+    "distance_to_trail_km": 0.022,
+    "coordinates": [
+      45.70637,
+      -113.02756
+    ],
+    "location": {
+      "lat": 45.70637,
+      "lon": -113.02756
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 14417188802,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Wise River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_red_rock_river_1437km",
+    "name": "Red Rock River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1436.7,
+    "mile": 892.7,
+    "route_km": 1436.7,
+    "route_mile": 892.7,
+    "elevation_m": null,
+    "dist_off_route_m": 33.0,
+    "distance_to_trail_km": 0.033,
+    "coordinates": [
+      44.64142,
+      -112.57085
+    ],
+    "location": {
+      "lat": 44.64142,
+      "lon": -112.57085
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 5032664622,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Red Rock River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_red_rock_river_1444km",
+    "name": "Red Rock River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1444.0,
+    "mile": 897.3,
+    "route_km": 1444.0,
+    "route_mile": 897.3,
+    "elevation_m": null,
+    "dist_off_route_m": 49.0,
+    "distance_to_trail_km": 0.049,
+    "coordinates": [
+      44.66406,
+      -112.50227
+    ],
+    "location": {
+      "lat": 44.66406,
+      "lon": -112.50227
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 6478201562,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Red Rock River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_red_rock_river_1455km",
+    "name": "Red Rock River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1455.0,
+    "mile": 904.1,
+    "route_km": 1455.0,
+    "route_mile": 904.1,
+    "elevation_m": null,
+    "dist_off_route_m": 53.0,
+    "distance_to_trail_km": 0.053,
+    "coordinates": [
+      44.65254,
+      -112.38312
+    ],
+    "location": {
+      "lat": 44.65254,
+      "lon": -112.38312
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 842687332,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Red Rock River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_red_rock_creek_1537km",
+    "name": "Red Rock Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1536.6,
+    "mile": 954.8,
+    "route_km": 1536.6,
+    "route_mile": 954.8,
+    "elevation_m": null,
+    "dist_off_route_m": 13.0,
+    "distance_to_trail_km": 0.013,
+    "coordinates": [
+      44.61181,
+      -111.61032
+    ],
+    "location": {
+      "lat": 44.61181,
+      "lon": -111.61032
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 12176049252,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Red Rock Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_buffalo_river_1592km",
+    "name": "Buffalo River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1592.4,
+    "mile": 989.4,
+    "route_km": 1592.4,
+    "route_mile": 989.4,
+    "elevation_m": null,
+    "dist_off_route_m": 41.0,
+    "distance_to_trail_km": 0.041,
+    "coordinates": [
+      44.42209,
+      -111.3718
+    ],
+    "location": {
+      "lat": 44.42209,
+      "lon": -111.3718
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3456348682,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Buffalo River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_warm_river_1612km",
+    "name": "Warm River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1612.5,
+    "mile": 1002.0,
+    "route_km": 1612.5,
+    "route_mile": 1002.0,
+    "elevation_m": null,
+    "dist_off_route_m": 58.0,
+    "distance_to_trail_km": 0.058,
+    "coordinates": [
+      44.27706,
+      -111.30431
+    ],
+    "location": {
+      "lat": 44.27706,
+      "lon": -111.30431
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1383504932,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Warm River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_maryville_canal_1647km",
+    "name": "Maryville Canal (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1647.4,
+    "mile": 1023.7,
+    "route_km": 1647.4,
+    "route_mile": 1023.7,
+    "elevation_m": null,
+    "dist_off_route_m": 35.0,
+    "distance_to_trail_km": 0.035,
+    "coordinates": [
+      44.07148,
+      -111.24876
+    ],
+    "location": {
+      "lat": 44.07148,
+      "lon": -111.24876
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 1923386782,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Maryville Canal",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_yampapah_1703km",
+    "name": "Yampapah (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1702.7,
+    "mile": 1058.0,
+    "route_km": 1702.7,
+    "route_mile": 1058.0,
+    "elevation_m": null,
+    "dist_off_route_m": 111.0,
+    "distance_to_trail_km": 0.111,
+    "coordinates": [
+      44.08803,
+      -110.6965
+    ],
+    "location": {
+      "lat": 44.08803,
+      "lon": -110.6965
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1845001982,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Yampapah",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_pacific_creek_1746km",
+    "name": "Pacific Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1746.0,
+    "mile": 1084.9,
+    "route_km": 1746.0,
+    "route_mile": 1084.9,
+    "elevation_m": null,
+    "dist_off_route_m": 26.0,
+    "distance_to_trail_km": 0.026,
+    "coordinates": [
+      43.85054,
+      -110.51763
+    ],
+    "location": {
+      "lat": 43.85054,
+      "lon": -110.51763
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13826113662,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Pacific Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_buffalo_fork_1756km",
+    "name": "Buffalo Fork (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1755.7,
+    "mile": 1091.0,
+    "route_km": 1755.7,
+    "route_mile": 1091.0,
+    "elevation_m": null,
+    "dist_off_route_m": 45.0,
+    "distance_to_trail_km": 0.045,
+    "coordinates": [
+      43.84699,
+      -110.41682
+    ],
+    "location": {
+      "lat": 43.84699,
+      "lon": -110.41682
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1431187162,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Buffalo Fork",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_buffalo_fork_1768km",
+    "name": "Buffalo Fork (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1768.5,
+    "mile": 1098.9,
+    "route_km": 1768.5,
+    "route_mile": 1098.9,
+    "elevation_m": null,
+    "dist_off_route_m": 34.0,
+    "distance_to_trail_km": 0.034,
+    "coordinates": [
+      43.85658,
+      -110.27085
+    ],
+    "location": {
+      "lat": 43.85658,
+      "lon": -110.27085
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 7461900782,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Buffalo Fork",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blackrock_creek_1780km",
+    "name": "Blackrock Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1779.7,
+    "mile": 1105.8,
+    "route_km": 1779.7,
+    "route_mile": 1105.8,
+    "elevation_m": null,
+    "dist_off_route_m": 241.0,
+    "distance_to_trail_km": 0.241,
+    "coordinates": [
+      43.81388,
+      -110.21347
+    ],
+    "location": {
+      "lat": 43.81388,
+      "lon": -110.21347
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 9011599252,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blackrock Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_brooks_lake_creek_1812km",
+    "name": "Brooks Lake Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1812.2,
+    "mile": 1126.0,
+    "route_km": 1812.2,
+    "route_mile": 1126.0,
+    "elevation_m": null,
+    "dist_off_route_m": 227.0,
+    "distance_to_trail_km": 0.227,
+    "coordinates": [
+      43.7005,
+      -109.96651
+    ],
+    "location": {
+      "lat": 43.7005,
+      "lon": -109.96651
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 11346295022,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Brooks Lake Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_wind_river_1816km",
+    "name": "Wind River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1816.4,
+    "mile": 1128.7,
+    "route_km": 1816.4,
+    "route_mile": 1128.7,
+    "elevation_m": null,
+    "dist_off_route_m": 54.0,
+    "distance_to_trail_km": 0.054,
+    "coordinates": [
+      43.66505,
+      -109.94568
+    ],
+    "location": {
+      "lat": 43.66505,
+      "lon": -109.94568
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1930445252,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Wind River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_green_river_1895km",
+    "name": "Green River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1894.7,
+    "mile": 1177.3,
+    "route_km": 1894.7,
+    "route_mile": 1177.3,
+    "elevation_m": null,
+    "dist_off_route_m": 35.0,
+    "distance_to_trail_km": 0.035,
+    "coordinates": [
+      43.26175,
+      -110.01782
+    ],
+    "location": {
+      "lat": 43.26175,
+      "lon": -110.01782
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3621911812,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Green River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_new_fork_river_1921km",
+    "name": "New Fork River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1920.9,
+    "mile": 1193.6,
+    "route_km": 1920.9,
+    "route_mile": 1193.6,
+    "elevation_m": null,
+    "dist_off_route_m": 229.0,
+    "distance_to_trail_km": 0.229,
+    "coordinates": [
+      43.0457,
+      -110.01539
+    ],
+    "location": {
+      "lat": 43.0457,
+      "lon": -110.01539
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 7697942312,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "New Fork River",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "water_osm_pine_creek_1950km",
+    "name": "Pine Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1950.5,
+    "mile": 1212.0,
+    "route_km": 1950.5,
+    "route_mile": 1212.0,
+    "elevation_m": null,
+    "dist_off_route_m": 3.0,
+    "distance_to_trail_km": 0.003,
+    "coordinates": [
+      42.86659,
+      -109.86804
+    ],
+    "location": {
+      "lat": 42.86659,
+      "lon": -109.86804
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1612859552,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Pine Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_pole_creek_1962km",
+    "name": "Pole Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1962.1,
+    "mile": 1219.2,
+    "route_km": 1962.1,
+    "route_mile": 1219.2,
+    "elevation_m": null,
+    "dist_off_route_m": 35.0,
+    "distance_to_trail_km": 0.035,
+    "coordinates": [
+      42.79309,
+      -109.7891
+    ],
+    "location": {
+      "lat": 42.79309,
+      "lon": -109.7891
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13230837262,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Pole Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_boulder_creek_1969km",
+    "name": "Boulder Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1969.2,
+    "mile": 1223.6,
+    "route_km": 1969.2,
+    "route_mile": 1223.6,
+    "elevation_m": null,
+    "dist_off_route_m": 8.0,
+    "distance_to_trail_km": 0.008,
+    "coordinates": [
+      42.75042,
+      -109.72657
+    ],
+    "location": {
+      "lat": 42.75042,
+      "lon": -109.72657
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13325128712,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Boulder Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_east_fork_river_1980km",
+    "name": "East Fork River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1979.7,
+    "mile": 1230.1,
+    "route_km": 1979.7,
+    "route_mile": 1230.1,
+    "elevation_m": null,
+    "dist_off_route_m": 45.0,
+    "distance_to_trail_km": 0.045,
+    "coordinates": [
+      42.75382,
+      -109.60787
+    ],
+    "location": {
+      "lat": 42.75382,
+      "lon": -109.60787
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13325006722,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "East Fork River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_east_fork_river_1993km",
+    "name": "East Fork River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 1993.0,
+    "mile": 1238.4,
+    "route_km": 1993.0,
+    "route_mile": 1238.4,
+    "elevation_m": null,
+    "dist_off_route_m": 18.0,
+    "distance_to_trail_km": 0.018,
+    "coordinates": [
+      42.68004,
+      -109.50938
+    ],
+    "location": {
+      "lat": 42.68004,
+      "lon": -109.50938
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13325006752,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "East Fork River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_lander_creek_2037km",
+    "name": "Lander Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2036.8,
+    "mile": 1265.6,
+    "route_km": 2036.8,
+    "route_mile": 1265.6,
+    "elevation_m": null,
+    "dist_off_route_m": 44.0,
+    "distance_to_trail_km": 0.044,
+    "coordinates": [
+      42.50825,
+      -109.16404
+    ],
+    "location": {
+      "lat": 42.50825,
+      "lon": -109.16404
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1258921992,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Lander Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_sweetwater_river_2066km",
+    "name": "Sweetwater River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2065.7,
+    "mile": 1283.6,
+    "route_km": 2065.7,
+    "route_mile": 1283.6,
+    "elevation_m": null,
+    "dist_off_route_m": 67.0,
+    "distance_to_trail_km": 0.067,
+    "coordinates": [
+      42.37983,
+      -108.89786
+    ],
+    "location": {
+      "lat": 42.37983,
+      "lon": -108.89786
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1258922552,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Sweetwater River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "td_sweetwater_river",
+    "name": "Sweetwater River Crossing",
+    "category": "water",
+    "type": "water",
+    "km": 2104.5,
+    "mile": 1307.7,
+    "route_km": 2104.5,
+    "route_mile": 1307.7,
+    "elevation_m": null,
+    "dist_off_route_m": 2.0,
+    "distance_to_trail_km": 0.002,
+    "coordinates": [
+      42.3961,
+      -108.6277
+    ],
+    "location": {
+      "lat": 42.3961,
+      "lon": -108.6277
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Flowing river in northern Great Divide Basin. Reliable filterable water source before long arid stretches.",
+    "extra": {}
+  },
+  {
+    "id": "td_oregon_buttes_spring",
+    "name": "Oregon Buttes Spring & Historic Monument",
+    "category": "water",
+    "type": "spring",
+    "km": 2125.3,
+    "mile": 1320.6,
+    "route_km": 2125.3,
+    "route_mile": 1320.6,
+    "elevation_m": null,
+    "dist_off_route_m": 2.0,
+    "distance_to_trail_km": 0.002,
+    "coordinates": [
+      42.3007,
+      -108.454
+    ],
+    "location": {
+      "lat": 42.3007,
+      "lon": -108.454
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Natural spring and historic pioneer waypoint beneath Oregon Buttes. Filter required.",
+    "extra": {}
+  },
+  {
+    "id": "water_osm_west_alkali_creek_2145km",
+    "name": "West Alkali Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2145.2,
+    "mile": 1332.9,
+    "route_km": 2145.2,
+    "route_mile": 1332.9,
+    "elevation_m": null,
+    "dist_off_route_m": 22.0,
+    "distance_to_trail_km": 0.022,
+    "coordinates": [
+      42.32573,
+      -108.24833
+    ],
+    "location": {
+      "lat": 42.32573,
+      "lon": -108.24833
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 12568782882,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "West Alkali Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "td_dianthus_well",
+    "name": "Dianthus Well & Solar Stock Pump",
+    "category": "water",
+    "type": "cache",
+    "km": 2162.0,
+    "mile": 1343.4,
+    "route_km": 2162.0,
+    "route_mile": 1343.4,
+    "elevation_m": null,
+    "dist_off_route_m": 7.0,
+    "distance_to_trail_km": 0.007,
+    "coordinates": [
+      42.2722,
+      -108.1017
+    ],
+    "location": {
+      "lat": 42.2722,
+      "lon": -108.1017
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "BLM solar-powered deep well and stock tank in central Great Divide Basin. Critical lifeline water source.",
+    "extra": {}
+  },
+  {
+    "id": "td_am_reservoir",
+    "name": "A&M Reservoir & Spillway Creek",
+    "category": "water",
+    "type": "water",
+    "km": 2193.0,
+    "mile": 1362.7,
+    "route_km": 2193.0,
+    "route_mile": 1362.7,
+    "elevation_m": null,
+    "dist_off_route_m": 2.0,
+    "distance_to_trail_km": 0.002,
+    "coordinates": [
+      42.0535,
+      -108.0244
+    ],
+    "location": {
+      "lat": 42.0535,
+      "lon": -108.0244
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Critical Great Divide Basin reservoir. Filter water from the spillway overflow creek rather than the stagnant main body.",
+    "extra": {}
+  },
+  {
+    "id": "td_battle_spring",
+    "name": "Battle Spring Drainage",
+    "category": "water",
+    "type": "spring",
+    "km": 2214.3,
+    "mile": 1375.9,
+    "route_km": 2214.3,
+    "route_mile": 1375.9,
+    "elevation_m": null,
+    "dist_off_route_m": 2.0,
+    "distance_to_trail_km": 0.002,
+    "coordinates": [
+      41.9098,
+      -108.004
+    ],
+    "location": {
+      "lat": 41.9098,
+      "lon": -108.004
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Seasonal spring drainage in southern Great Divide Basin, ~19 miles north of Wamsutter resupply.",
+    "extra": {}
+  },
+  {
+    "id": "water_osm_savery_creek_2346km",
+    "name": "Savery Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2345.9,
+    "mile": 1457.7,
+    "route_km": 2345.9,
+    "route_mile": 1457.7,
+    "elevation_m": null,
+    "dist_off_route_m": 175.0,
+    "distance_to_trail_km": 0.175,
+    "coordinates": [
+      41.02346,
+      -107.44511
+    ],
+    "location": {
+      "lat": 41.02346,
+      "lon": -107.44511
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3470137302,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Savery Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_little_snake_river_2353km",
+    "name": "Little Snake River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2353.3,
+    "mile": 1462.3,
+    "route_km": 2353.3,
+    "route_mile": 1462.3,
+    "elevation_m": null,
+    "dist_off_route_m": 47.0,
+    "distance_to_trail_km": 0.047,
+    "coordinates": [
+      40.99702,
+      -107.37861
+    ],
+    "location": {
+      "lat": 40.99702,
+      "lon": -107.37861
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3470137332,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Little Snake River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_elk_river_2461km",
+    "name": "Elk River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2460.6,
+    "mile": 1528.9,
+    "route_km": 2460.6,
+    "route_mile": 1528.9,
+    "elevation_m": null,
+    "dist_off_route_m": 33.0,
+    "distance_to_trail_km": 0.033,
+    "coordinates": [
+      40.54591,
+      -106.9086
+    ],
+    "location": {
+      "lat": 40.54591,
+      "lon": -106.9086
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 4201651852,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Elk River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_yampa_river_2473km",
+    "name": "Yampa River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2473.4,
+    "mile": 1536.9,
+    "route_km": 2473.4,
+    "route_mile": 1536.9,
+    "elevation_m": null,
+    "dist_off_route_m": 13.0,
+    "distance_to_trail_km": 0.013,
+    "coordinates": [
+      40.46878,
+      -106.8297
+    ],
+    "location": {
+      "lat": 40.46878,
+      "lon": -106.8297
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1164818072,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Yampa River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_yampa_river_2501km",
+    "name": "Yampa River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2500.7,
+    "mile": 1553.8,
+    "route_km": 2500.7,
+    "route_mile": 1553.8,
+    "elevation_m": null,
+    "dist_off_route_m": 8.0,
+    "distance_to_trail_km": 0.008,
+    "coordinates": [
+      40.28542,
+      -106.83213
+    ],
+    "location": {
+      "lat": 40.28542,
+      "lon": -106.83213
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 14122959892,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Yampa River",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "water_osm_colorado_river_2572km",
+    "name": "Colorado River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2571.8,
+    "mile": 1598.0,
+    "route_km": 2571.8,
+    "route_mile": 1598.0,
+    "elevation_m": null,
+    "dist_off_route_m": 179.0,
+    "distance_to_trail_km": 0.179,
+    "coordinates": [
+      39.96826,
+      -106.5196
+    ],
+    "location": {
+      "lat": 39.96826,
+      "lon": -106.5196
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13532742832,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Colorado River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blue_river_2590km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2589.8,
+    "mile": 1609.2,
+    "route_km": 2589.8,
+    "route_mile": 1609.2,
+    "elevation_m": null,
+    "dist_off_route_m": 31.0,
+    "distance_to_trail_km": 0.031,
+    "coordinates": [
+      40.02932,
+      -106.38675
+    ],
+    "location": {
+      "lat": 40.02932,
+      "lon": -106.38675
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 13532742932,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blue River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_barger_ditch_2595km",
+    "name": "Barger Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2595.1,
+    "mile": 1612.5,
+    "route_km": 2595.1,
+    "route_mile": 1612.5,
+    "elevation_m": null,
+    "dist_off_route_m": 2.0,
+    "distance_to_trail_km": 0.002,
+    "coordinates": [
+      40.04302,
+      -106.33476
+    ],
+    "location": {
+      "lat": 40.04302,
+      "lon": -106.33476
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 403114712,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Barger Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_big_lake_ditch_2610km",
+    "name": "Big Lake Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2610.3,
+    "mile": 1622.0,
+    "route_km": 2610.3,
+    "route_mile": 1622.0,
+    "elevation_m": null,
+    "dist_off_route_m": 180.0,
+    "distance_to_trail_km": 0.18,
+    "coordinates": [
+      40.0026,
+      -106.22691
+    ],
+    "location": {
+      "lat": 40.0026,
+      "lon": -106.22691
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 402986642,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Big Lake Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blue_river_2670km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2670.4,
+    "mile": 1659.3,
+    "route_km": 2670.4,
+    "route_mile": 1659.3,
+    "elevation_m": null,
+    "dist_off_route_m": 15.0,
+    "distance_to_trail_km": 0.015,
+    "coordinates": [
+      39.63977,
+      -106.07484
+    ],
+    "location": {
+      "lat": 39.63977,
+      "lon": -106.07484
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1443740812,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blue River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blue_river_2676km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2675.7,
+    "mile": 1662.6,
+    "route_km": 2675.7,
+    "route_mile": 1662.6,
+    "elevation_m": null,
+    "dist_off_route_m": 36.0,
+    "distance_to_trail_km": 0.036,
+    "coordinates": [
+      39.61795,
+      -106.06557
+    ],
+    "location": {
+      "lat": 39.61795,
+      "lon": -106.06557
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 393846062,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blue River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_dillon_reservoir_2689km",
+    "name": "Dillon Reservoir (Lake Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2688.9,
+    "mile": 1670.8,
+    "route_km": 2688.9,
+    "route_mile": 1670.8,
+    "elevation_m": null,
+    "dist_off_route_m": 167.0,
+    "distance_to_trail_km": 0.167,
+    "coordinates": [
+      39.57233,
+      -106.05399
+    ],
+    "location": {
+      "lat": 39.57233,
+      "lon": -106.05399
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "lake",
+    "tier": 4,
+    "osm_id": 19547083,
+    "description": "",
+    "extra": {
+      "tags": {
+        "natural": "water",
+        "water": "lake",
+        "name": "Dillon Reservoir",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blue_river_2693km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2693.4,
+    "mile": 1673.6,
+    "route_km": 2693.4,
+    "route_mile": 1673.6,
+    "elevation_m": null,
+    "dist_off_route_m": 34.0,
+    "distance_to_trail_km": 0.034,
+    "coordinates": [
+      39.53938,
+      -106.04274
+    ],
+    "location": {
+      "lat": 39.53938,
+      "lon": -106.04274
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 393858112,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blue River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_blue_river_2699km",
+    "name": "Blue River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2699.1,
+    "mile": 1677.2,
+    "route_km": 2699.1,
+    "route_mile": 1677.2,
+    "elevation_m": null,
+    "dist_off_route_m": 4.0,
+    "distance_to_trail_km": 0.004,
+    "coordinates": [
+      39.49,
+      -106.04603
+    ],
+    "location": {
+      "lat": 39.49,
+      "lon": -106.04603
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 393964492,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Blue River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_boreas_ditch_number_2_2717km",
+    "name": "Boreas Ditch Number 2 (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2716.9,
+    "mile": 1688.2,
+    "route_km": 2716.9,
+    "route_mile": 1688.2,
+    "elevation_m": null,
+    "dist_off_route_m": 47.0,
+    "distance_to_trail_km": 0.047,
+    "coordinates": [
+      39.41135,
+      -105.96843
+    ],
+    "location": {
+      "lat": 39.41135,
+      "lon": -105.96843
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 393838372,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Boreas Ditch Number 2",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_harrington_rikard_ditch_2780km",
+    "name": "Harrington-Rikard Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2779.5,
+    "mile": 1727.1,
+    "route_km": 2779.5,
+    "route_mile": 1727.1,
+    "elevation_m": null,
+    "dist_off_route_m": 7.0,
+    "distance_to_trail_km": 0.007,
+    "coordinates": [
+      39.01957,
+      -105.75489
+    ],
+    "location": {
+      "lat": 39.01957,
+      "lon": -105.75489
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 3718456932,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Harrington-Rikard Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_arkansas_river_2856km",
+    "name": "Arkansas River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2856.3,
+    "mile": 1774.8,
+    "route_km": 2856.3,
+    "route_mile": 1774.8,
+    "elevation_m": null,
+    "dist_off_route_m": 34.0,
+    "distance_to_trail_km": 0.034,
+    "coordinates": [
+      38.54457,
+      -106.00616
+    ],
+    "location": {
+      "lat": 38.54457,
+      "lon": -106.00616
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 11080905412,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Arkansas River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_murry_ditch_2862km",
+    "name": "Murry Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2861.9,
+    "mile": 1778.3,
+    "route_km": 2861.9,
+    "route_mile": 1778.3,
+    "elevation_m": null,
+    "dist_off_route_m": 3.0,
+    "distance_to_trail_km": 0.003,
+    "coordinates": [
+      38.52307,
+      -106.0398
+    ],
+    "location": {
+      "lat": 38.52307,
+      "lon": -106.0398
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 464449732,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Murry Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_del_monte_ditch_2867km",
+    "name": "Del Monte Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2866.9,
+    "mile": 1781.4,
+    "route_km": 2866.9,
+    "route_mile": 1781.4,
+    "elevation_m": null,
+    "dist_off_route_m": 101.0,
+    "distance_to_trail_km": 0.101,
+    "coordinates": [
+      38.50481,
+      -106.07937
+    ],
+    "location": {
+      "lat": 38.50481,
+      "lon": -106.07937
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 464447172,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Del Monte Ditch",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "water_osm_larkspur_ditch_2897km",
+    "name": "Larkspur Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2897.2,
+    "mile": 1800.2,
+    "route_km": 2897.2,
+    "route_mile": 1800.2,
+    "elevation_m": null,
+    "dist_off_route_m": 53.0,
+    "distance_to_trail_km": 0.053,
+    "coordinates": [
+      38.39351,
+      -106.24818
+    ],
+    "location": {
+      "lat": 38.39351,
+      "lon": -106.24818
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 465280492,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Larkspur Ditch",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "water_osm_arch_irrigation_ditch_2949km",
+    "name": "Arch Irrigation Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2948.6,
+    "mile": 1832.2,
+    "route_km": 2948.6,
+    "route_mile": 1832.2,
+    "elevation_m": null,
+    "dist_off_route_m": 36.0,
+    "distance_to_trail_km": 0.036,
+    "coordinates": [
+      38.41796,
+      -106.62268
+    ],
+    "location": {
+      "lat": 38.41796,
+      "lon": -106.62268
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 3084177402,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Arch Irrigation Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_arch_irrigation_ditch_2953km",
+    "name": "Arch Irrigation Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2952.7,
+    "mile": 1834.7,
+    "route_km": 2952.7,
+    "route_mile": 1834.7,
+    "elevation_m": null,
+    "dist_off_route_m": 193.0,
+    "distance_to_trail_km": 0.193,
+    "coordinates": [
+      38.40822,
+      -106.66265
+    ],
+    "location": {
+      "lat": 38.40822,
+      "lon": -106.66265
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 463919622,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Arch Irrigation Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_smith_ford_ditch_2978km",
+    "name": "Smith Ford Ditch (Creek Access)",
+    "category": "water",
+    "type": "water",
+    "km": 2978.5,
+    "mile": 1850.7,
+    "route_km": 2978.5,
+    "route_mile": 1850.7,
+    "elevation_m": null,
+    "dist_off_route_m": 6.0,
+    "distance_to_trail_km": 0.006,
+    "coordinates": [
+      38.23317,
+      -106.74769
+    ],
+    "location": {
+      "lat": 38.23317,
+      "lon": -106.74769
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "stream",
+    "tier": 3,
+    "osm_id": 463919752,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "canal",
+        "name": "Smith Ford Ditch",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_rio_grande_3100km",
+    "name": "Rio Grande (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3100.5,
+    "mile": 1926.5,
+    "route_km": 3100.5,
+    "route_mile": 1926.5,
+    "elevation_m": null,
+    "dist_off_route_m": 24.0,
+    "distance_to_trail_km": 0.024,
+    "coordinates": [
+      37.68504,
+      -106.35057
+    ],
+    "location": {
+      "lat": 37.68504,
+      "lon": -106.35057
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 448353572,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Rio Grande",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_conejos_river_3179km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3178.6,
+    "mile": 1975.1,
+    "route_km": 3178.6,
+    "route_mile": 1975.1,
+    "elevation_m": null,
+    "dist_off_route_m": 21.0,
+    "distance_to_trail_km": 0.021,
+    "coordinates": [
+      37.35409,
+      -106.52048
+    ],
+    "location": {
+      "lat": 37.35409,
+      "lon": -106.52048
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 12730917902,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Conejos River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_conejos_river_3184km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3183.7,
+    "mile": 1978.2,
+    "route_km": 3183.7,
+    "route_mile": 1978.2,
+    "elevation_m": null,
+    "dist_off_route_m": 25.0,
+    "distance_to_trail_km": 0.025,
+    "coordinates": [
+      37.33319,
+      -106.47282
+    ],
+    "location": {
+      "lat": 37.33319,
+      "lon": -106.47282
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 12715004622,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Conejos River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_conejos_river_3204km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3203.6,
+    "mile": 1990.6,
+    "route_km": 3203.6,
+    "route_mile": 1990.6,
+    "elevation_m": null,
+    "dist_off_route_m": 56.0,
+    "distance_to_trail_km": 0.056,
+    "coordinates": [
+      37.17321,
+      -106.44398
+    ],
+    "location": {
+      "lat": 37.17321,
+      "lon": -106.44398
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3594135852,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Conejos River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_conejos_river_3208km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3207.8,
+    "mile": 1993.2,
+    "route_km": 3207.8,
+    "route_mile": 1993.2,
+    "elevation_m": null,
+    "dist_off_route_m": 28.0,
+    "distance_to_trail_km": 0.028,
+    "coordinates": [
+      37.14776,
+      -106.41441
+    ],
+    "location": {
+      "lat": 37.14776,
+      "lon": -106.41441
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 3594135952,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Conejos River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_conejos_river_3212km",
+    "name": "Conejos River (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3212.5,
+    "mile": 1996.2,
+    "route_km": 3212.5,
+    "route_mile": 1996.2,
+    "elevation_m": null,
+    "dist_off_route_m": 25.0,
+    "distance_to_trail_km": 0.025,
+    "coordinates": [
+      37.13184,
+      -106.36881
+    ],
+    "location": {
+      "lat": 37.13184,
+      "lon": -106.36881
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 463250752,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Conejos River",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "water_osm_rio_chama_3376km",
+    "name": "Rio Chama (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3375.8,
+    "mile": 2097.6,
+    "route_km": 3375.8,
+    "route_mile": 2097.6,
+    "elevation_m": null,
+    "dist_off_route_m": 38.0,
+    "distance_to_trail_km": 0.038,
+    "coordinates": [
+      36.21059,
+      -106.28749
+    ],
+    "location": {
+      "lat": 36.21059,
+      "lon": -106.28749
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 443838432,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Rio Chama",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "td_mesa_alta_tank",
+    "name": "Mesa Alta Spring & Water Catchment",
+    "category": "water",
+    "type": "water",
+    "km": 3452.0,
+    "mile": 2145.0,
+    "route_km": 3452.0,
+    "route_mile": 2145.0,
+    "elevation_m": null,
+    "dist_off_route_m": 0.0,
+    "distance_to_trail_km": 0.0,
+    "coordinates": [
+      36.03055,
+      -106.6697
+    ],
+    "location": {
+      "lat": 36.03055,
+      "lon": -106.6697
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Spring catchment in Santa Fe National Forest high badlands between Abiquiu and Cuba. Must filter.",
+    "extra": {}
+  },
+  {
+    "id": "water_osm_rio_puerco_3509km",
+    "name": "Rio Puerco (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3508.6,
+    "mile": 2180.1,
+    "route_km": 3508.6,
+    "route_mile": 2180.1,
+    "elevation_m": null,
+    "dist_off_route_m": 20.0,
+    "distance_to_trail_km": 0.02,
+    "coordinates": [
+      35.9786,
+      -106.98954
+    ],
+    "location": {
+      "lat": 35.9786,
+      "lon": -106.98954
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 1516218512,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Rio Puerco",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "water_osm_burning_bridge_wash_3585km",
+    "name": "Burning Bridge Wash (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3584.9,
+    "mile": 2227.6,
+    "route_km": 3584.9,
+    "route_mile": 2227.6,
+    "elevation_m": null,
+    "dist_off_route_m": 19.0,
+    "distance_to_trail_km": 0.019,
+    "coordinates": [
+      35.94516,
+      -107.61355
+    ],
+    "location": {
+      "lat": 35.94516,
+      "lon": -107.61355
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 6117561132,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Burning Bridge Wash",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "water_osm_fajada_wash_3605km",
+    "name": "Fajada Wash (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3604.8,
+    "mile": 2239.9,
+    "route_km": 3604.8,
+    "route_mile": 2239.9,
+    "elevation_m": null,
+    "dist_off_route_m": 14.0,
+    "distance_to_trail_km": 0.014,
+    "coordinates": [
+      35.84201,
+      -107.72453
+    ],
+    "location": {
+      "lat": 35.84201,
+      "lon": -107.72453
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 6117537702,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Fajada Wash",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "td_san_mateo_spring",
+    "name": "San Mateo Basin Spring",
+    "category": "water",
+    "type": "spring",
+    "km": 3637.1,
+    "mile": 2260.0,
+    "route_km": 3637.1,
+    "route_mile": 2260.0,
+    "elevation_m": null,
+    "dist_off_route_m": 0.0,
+    "distance_to_trail_km": 0.0,
+    "coordinates": [
+      35.59509,
+      -107.83886
+    ],
+    "location": {
+      "lat": 35.59509,
+      "lon": -107.83886
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Natural spring in northern Mount Taylor volcanic foothills. Filter required.",
+    "extra": {}
+  },
+  {
+    "id": "td_pie_town_toaster",
+    "name": "Pie Town Toaster House Water Spigot",
+    "category": "water",
+    "type": "drinking_water",
+    "km": 3809.0,
+    "mile": 2366.8,
+    "route_km": 3809.0,
+    "route_mile": 2366.8,
+    "elevation_m": null,
+    "dist_off_route_m": 290.0,
+    "distance_to_trail_km": 0.29,
+    "coordinates": [
+      34.2981,
+      -108.1342
+    ],
+    "location": {
+      "lat": 34.2981,
+      "lon": -108.1342
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Legendary hiker/biker sanctuary in Pie Town. Reliable outdoor potable water spigot.",
+    "extra": {}
+  },
+  {
+    "id": "td_beaverhead_spigot",
+    "name": "Beaverhead Work Center Spigot",
+    "category": "water",
+    "type": "drinking_water",
+    "km": 3933.3,
+    "mile": 2444.0,
+    "route_km": 3933.3,
+    "route_mile": 2444.0,
+    "elevation_m": null,
+    "dist_off_route_m": 3.0,
+    "distance_to_trail_km": 0.003,
+    "coordinates": [
+      33.5552,
+      -108.3284
+    ],
+    "location": {
+      "lat": 33.5552,
+      "lon": -108.3284
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "USFS Beaverhead Ranger Station in central Gila National Forest. Potable water spigot outside.",
+    "extra": {}
+  },
+  {
+    "id": "water_osm_taylor_creek_3978km",
+    "name": "Taylor Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 3977.8,
+    "mile": 2471.7,
+    "route_km": 3977.8,
+    "route_mile": 2471.7,
+    "elevation_m": null,
+    "dist_off_route_m": 9.0,
+    "distance_to_trail_km": 0.009,
+    "coordinates": [
+      33.35057,
+      -108.07948
+    ],
+    "location": {
+      "lat": 33.35057,
+      "lon": -108.07948
+    },
+    "reliability": "treatment_required",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 2796683912,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Taylor Creek",
+        "intermittent": "no"
+      }
+    }
+  },
+  {
+    "id": "td_sapillo_creek",
+    "name": "Sapillo Creek / Highway 35 Crossing",
+    "category": "water",
+    "type": "water",
+    "km": 4047.9,
+    "mile": 2515.2,
+    "route_km": 4047.9,
+    "route_mile": 2515.2,
+    "elevation_m": null,
+    "dist_off_route_m": 4.0,
+    "distance_to_trail_km": 0.004,
+    "coordinates": [
+      33.0093,
+      -108.1135
+    ],
+    "location": {
+      "lat": 33.0093,
+      "lon": -108.1135
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Perennial mountain stream crossing in southern Gila near Lake Roberts. Filter required.",
+    "extra": {}
+  },
+  {
+    "id": "water_osm_cherry_creek_4130km",
+    "name": "Cherry Creek (River Access)",
+    "category": "water",
+    "type": "water",
+    "km": 4129.6,
+    "mile": 2566.0,
+    "route_km": 4129.6,
+    "route_mile": 2566.0,
+    "elevation_m": null,
+    "dist_off_route_m": 13.0,
+    "distance_to_trail_km": 0.013,
+    "coordinates": [
+      32.60026,
+      -108.34324
+    ],
+    "location": {
+      "lat": 32.60026,
+      "lon": -108.34324
+    },
+    "reliability": "seasonal",
+    "treatment_required": true,
+    "source_type": "river",
+    "tier": 3,
+    "osm_id": 7698279872,
+    "description": "",
+    "extra": {
+      "tags": {
+        "waterway": "river",
+        "name": "Cherry Creek",
+        "intermittent": "yes"
+      }
+    }
+  },
+  {
+    "id": "td_separ_oasis",
+    "name": "Separ Continental Divide Water Oasis",
+    "category": "water",
+    "type": "drinking_water",
+    "km": 4175.1,
+    "mile": 2594.3,
+    "route_km": 4175.1,
+    "route_mile": 2594.3,
+    "elevation_m": null,
+    "dist_off_route_m": 2.0,
+    "distance_to_trail_km": 0.002,
+    "coordinates": [
+      32.2897,
+      -108.3349
+    ],
+    "location": {
+      "lat": 32.2897,
+      "lon": -108.3349
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Critical desert water stop at I-10 crossing between Silver City and Hachita.",
+    "extra": {}
+  },
+  {
+    "id": "td_hachita_spigot",
+    "name": "Hachita Community Water Spigot",
+    "category": "water",
+    "type": "drinking_water",
+    "km": 4231.5,
+    "mile": 2629.3,
+    "route_km": 4231.5,
+    "route_mile": 2629.3,
+    "elevation_m": null,
+    "dist_off_route_m": 363.0,
+    "distance_to_trail_km": 0.363,
+    "coordinates": [
+      31.9167,
+      -108.3228
+    ],
+    "location": {
+      "lat": 31.9167,
+      "lon": -108.3228
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Community water spigot in Hachita. Last potable water source before 45-mile desert run to the Mexican border.",
+    "extra": {}
+  },
+  {
+    "id": "td_antelope_wells",
+    "name": "Antelope Wells Border Station Water",
+    "category": "water",
+    "type": "drinking_water",
+    "km": 4311.7,
+    "mile": 2679.2,
+    "route_km": 4311.7,
+    "route_mile": 2679.2,
+    "elevation_m": null,
+    "dist_off_route_m": 3.0,
+    "distance_to_trail_km": 0.003,
+    "coordinates": [
+      31.3339,
+      -108.5304
+    ],
+    "location": {
+      "lat": 31.3339,
+      "lon": -108.5304
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spring",
+    "tier": 2,
+    "osm_id": null,
+    "description": "Finish terminus of the Tour Divide at Mexico border. Potable water available at US Port of Entry building.",
+    "extra": {}
+  }
+]

@@ -96,5 +96,51 @@ describe('pmtiles-composite.model', () => {
       expect(tile).toBeTruthy();
       expect(new Uint8Array(tile!.data)).toEqual(new Uint8Array([1, 2, 3]));
     });
+
+    it('should return unconstrained global bounds in getTileJson() to prevent tile cut-offs', async () => {
+      const composite = new CompositePMTiles('comp-route');
+      const mock = {
+        getHeader: vi.fn().mockResolvedValue({
+          minLon: -115.56,
+          minLat: 44.95,
+          maxLon: -112.04,
+          maxLat: 51.16,
+          minZoom: 0,
+          maxZoom: 14,
+          centerLon: -113.8,
+          centerLat: 48.05,
+          centerZoom: 7
+        }),
+        getMetadata: vi.fn().mockResolvedValue({ vector_layers: [] })
+      } as unknown as PMTiles;
+
+      composite.addSection('1', mock);
+
+      const tileJson = (await composite.getTileJson('pmtiles://comp-route')) as any;
+      expect(tileJson.bounds).toEqual([-180, -85.051129, 180, 85.051129]);
+      expect(tileJson.minzoom).toBe(0);
+      expect(tileJson.maxzoom).toBe(14);
+    });
+  });
+
+  describe('RoutePMTiles', () => {
+    it('should unclamp bounds to [-180, -85.051129, 180, 85.051129] in getTileJson()', async () => {
+      const { RoutePMTiles } = await import('./pmtiles-composite.model');
+      const routePmtiles = new RoutePMTiles({
+        getKey: () => 'test-key',
+        getBytes: vi.fn()
+      } as any);
+
+      vi.spyOn(PMTiles.prototype, 'getTileJson').mockResolvedValue({
+        tilejson: '3.0.0',
+        bounds: [-108.24, 37.16, -104.88, 39.71],
+        minzoom: 0,
+        maxzoom: 14
+      } as any);
+
+      const tileJson = (await routePmtiles.getTileJson('pmtiles://test-key')) as any;
+      expect(tileJson.bounds).toEqual([-180, -85.051129, 180, 85.051129]);
+    });
   });
 });
+

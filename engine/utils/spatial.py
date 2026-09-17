@@ -279,7 +279,7 @@ class TrackIndex:
             self.grid.insert(pt[0], pt[1], idx)
 
     def project_point(
-        self, lat: float, lon: float, max_dist_km: float = 5.0
+        self, lat: float, lon: float, max_dist_km: float = 5.0, fallback_exhaustive: bool = True
     ) -> Tuple[float, float, float]:
         """
         Project point (lat, lon) onto the route track.
@@ -290,6 +290,8 @@ class TrackIndex:
         """
         matches = self.grid.query_radius(lat, lon, max_dist_km * 1000.0)
         if not matches:
+            if not fallback_exhaustive:
+                return float("inf"), 0.0, 0.0
             # Fall back to exhaustive search if beyond max_dist_km
             best_d = float("inf")
             best_idx = 0

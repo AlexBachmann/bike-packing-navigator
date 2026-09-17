@@ -397,6 +397,39 @@ class PMTilesBuilder:
         self.header.tile_entries_count = len(sorted_tile_ids)
         self.header.tile_contents_count = len(sorted_tile_ids)
 
+        # Compute bounding box encompassing all contained tiles
+        detail_tids = [tid for tid in sorted_tile_ids if tileid_to_zxy(tid)[0] >= 7]
+        sample_tids = detail_tids if detail_tids else sorted_tile_ids
+        if sample_tids:
+            tile_min_lon = 180.0
+            tile_min_lat = 90.0
+            tile_max_lon = -180.0
+            tile_max_lat = -90.0
+            for tid in sample_tids:
+                tz, tx, ty = tileid_to_zxy(tid)
+                w, s, e, n = tile_to_bounds(tz, tx, ty)
+                tile_min_lon = min(tile_min_lon, w)
+                tile_min_lat = min(tile_min_lat, s)
+                tile_max_lon = max(tile_max_lon, e)
+                tile_max_lat = max(tile_max_lat, n)
+
+            # Ensure header bounds encompass all tiles in the archive
+            if self.header.min_lon <= -180.0 and self.header.max_lon >= 180.0:
+                self.header.min_lon = tile_min_lon
+                self.header.min_lat = tile_min_lat
+                self.header.max_lon = tile_max_lon
+                self.header.max_lat = tile_max_lat
+            else:
+                self.header.min_lon = min(self.header.min_lon, tile_min_lon)
+                self.header.min_lat = min(self.header.min_lat, tile_min_lat)
+                self.header.max_lon = max(self.header.max_lon, tile_max_lon)
+                self.header.max_lat = max(self.header.max_lat, tile_max_lat)
+
+            self.header.center_lon = (self.header.min_lon + self.header.max_lon) / 2.0
+            self.header.center_lat = (self.header.min_lat + self.header.max_lat) / 2.0
+            self.metadata.bounds = (self.header.min_lon, self.header.min_lat, self.header.max_lon, self.header.max_lat)
+            self.metadata.center = (self.header.center_lon, self.header.center_lat, self.header.center_zoom)
+
         try:
             with open(self._tmp_path, "wb") as f:
                 writer = Writer(f)
@@ -820,16 +853,31 @@ class PMTilesSectionSlicer:
                     continue
 
                 sec_output = route_dir / sec.filename
-                sec_lons = [p[1] for p in sec_pts]
-                sec_lats = [p[0] for p in sec_pts]
-                sec_bbox = (min(sec_lons), min(sec_lats), max(sec_lons), max(sec_lats))
-
                 sec_tiles = tiles_for_corridor(
                     sec_pts,
                     master.header.min_zoom,
                     master.header.max_zoom,
                     town_boxes=town_boxes
                 )
+
+                if sec_tiles:
+                    tile_min_lon = 180.0
+                    tile_min_lat = 90.0
+                    tile_max_lon = -180.0
+                    tile_max_lat = -90.0
+                    detail_tiles = [tc for tc in sec_tiles if tc.z >= 7]
+                    tiles_to_bound = detail_tiles if detail_tiles else sec_tiles
+                    for tc in tiles_to_bound:
+                        w, s_lat, e, n = tile_to_bounds(tc.z, tc.x, tc.y)
+                        tile_min_lon = min(tile_min_lon, w)
+                        tile_min_lat = min(tile_min_lat, s_lat)
+                        tile_max_lon = max(tile_max_lon, e)
+                        tile_max_lat = max(tile_max_lat, n)
+                    sec_bbox = (tile_min_lon, tile_min_lat, tile_max_lon, tile_max_lat)
+                else:
+                    sec_lons = [p[1] for p in sec_pts]
+                    sec_lats = [p[0] for p in sec_pts]
+                    sec_bbox = (min(sec_lons), min(sec_lats), max(sec_lons), max(sec_lats))
 
                 sec_header = PMTilesHeader(
                     min_zoom=master.header.min_zoom,
