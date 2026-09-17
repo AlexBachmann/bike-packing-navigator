@@ -444,6 +444,8 @@ def extract_mountain_passes(
                         p.climb_id = c.id
                         if p.is_iconic:
                             c.is_iconic = True
+                        if c.is_iconic:
+                            p.is_iconic = True
                         break
         return curated_passes
 
@@ -489,6 +491,8 @@ def extract_mountain_passes(
                     p.climb_id = c.id
                     if p.is_iconic:
                         c.is_iconic = True
+                    if c.is_iconic:
+                        p.is_iconic = True
                     # Evocatively enrich generic summit name if climb has an authentic name
                     if not c.name.startswith("Climb "):
                         if p.name.startswith("Summit (Mile "):

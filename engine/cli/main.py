@@ -94,7 +94,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_climbs.add_argument("--output-climbs", default="climbs.json", help="Output path for climbs.json")
     p_climbs.add_argument("--output-passes", default="passes.json", help="Output path for passes.json")
     p_climbs.add_argument("--passes", help="Path to curated passes JSON file to preserve or merge")
+    p_climbs.add_argument("--climbs", help="Path to curated climbs JSON file to preserve or merge")
     p_climbs.add_argument("--corridor-geojson", help="Optional corridor GeoJSON for pass matching")
+    p_climbs.add_argument("--corridor-pmtiles", help="Optional corridor PMTiles archive for road network matching")
     p_climbs.add_argument("--state", default="", help="State/province code for landmark enrichment")
 
     # 5. Surfaces Subcommand
@@ -193,7 +195,7 @@ def execute_water(args: argparse.Namespace) -> int:
 
 def execute_climbs(args: argparse.Namespace) -> int:
     """Execute climb and pass detection."""
-    from engine.terrain.climbs import detect_climbs
+    from engine.terrain.climbs import detect_climbs, load_curated_climbs
     from engine.terrain.passes import extract_mountain_passes, load_curated_passes
 
     track = _load_track(args.track)
@@ -201,11 +203,35 @@ def execute_climbs(args: argparse.Namespace) -> int:
     if args.corridor_geojson and Path(args.corridor_geojson).exists():
         corridor_data = read_json(Path(args.corridor_geojson))
 
+    network = None
+    if getattr(args, "corridor_pmtiles", None) and Path(args.corridor_pmtiles).exists():
+        try:
+            from engine.osm.network import OsmRoadNetwork
+            network = OsmRoadNetwork()
+            network.load_from_pmtiles(
+                pmtiles_path=Path(args.corridor_pmtiles),
+                track_points=[(p.lat, p.lon) for p in track.points],
+                threshold_m=50.0,
+            )
+        except Exception as exc:
+            print(f"Warning: Could not load road network from {args.corridor_pmtiles}: {exc}")
+            network = None
+
+    curated_climbs = None
+    if getattr(args, "climbs", None) and Path(args.climbs).exists():
+        curated_climbs = load_curated_climbs(Path(args.climbs))
+
     curated = None
     if getattr(args, "passes", None) and Path(args.passes).exists():
         curated = load_curated_passes(Path(args.passes))
 
-    climbs = detect_climbs(track)
+    climbs = detect_climbs(
+        track,
+        road_network=network,
+        corridor_data=corridor_data,
+        default_state=args.state,
+        curated_climbs=curated_climbs,
+    )
     passes = extract_mountain_passes(
         track_or_points=track,
         corridor_geojson=corridor_data,
@@ -220,8 +246,9 @@ def execute_climbs(args: argparse.Namespace) -> int:
     out_passes = Path(args.output_passes)
     atomic_write_json(out_climbs, [c.to_dict() for c in climbs])
     atomic_write_json(out_passes, [p.to_dict() for p in passes])
-    curated_tag = f" ({len(curated)} curated)" if curated else ""
-    print(f"[Climbs] Extracted {len(climbs)} climbs to {out_climbs}")
+    curated_tag = f" ({len(curated)} curated passes)" if curated else ""
+    curated_climb_tag = f" ({len(curated_climbs)} curated climbs)" if curated_climbs else ""
+    print(f"[Climbs] Extracted {len(climbs)} climbs to {out_climbs}{curated_climb_tag}")
     print(f"[Passes] Extracted {len(passes)} passes to {out_passes}{curated_tag}")
     return 0
 

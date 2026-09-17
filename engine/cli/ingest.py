@@ -41,7 +41,7 @@ from engine.osm.corridor import generate_corridor_polygon
 from engine.osm.network import OsmRoadNetwork
 from engine.osm.snapping import SnappingConfig, snap_track_to_osm
 from engine.osm.turns import extract_turn_cues, extract_turns_from_pmtiles, save_turns_json
-from engine.terrain.climbs import detect_climbs
+from engine.terrain.climbs import detect_climbs, is_curated_climb_list, load_curated_climbs
 from engine.terrain.passes import extract_mountain_passes, is_curated_pass_list, load_curated_passes
 from engine.terrain.surfaces import generate_route_surfaces
 from engine.utils.io import atomic_write_json, atomic_write_text, ensure_directory, read_json
@@ -83,6 +83,7 @@ class IngestConfig:
     towns_file: Optional[Path] = None
     waypoints_file: Optional[Path] = None
     passes_file: Optional[Path] = None
+    climbs_file: Optional[Path] = None
     api_key: Optional[str] = None
 
     # Control flags
@@ -173,6 +174,7 @@ def _add_ingest_arguments(parser: argparse.ArgumentParser) -> None:
     aux_group.add_argument("--towns", help="Path to towns JSON file")
     aux_group.add_argument("--waypoints", help="Path to custom waypoints JSON file")
     aux_group.add_argument("--passes", help="Path to curated mountain passes JSON file")
+    aux_group.add_argument("--climbs", help="Path to curated climbs JSON file")
 
     flags_group = parser.add_argument_group("Flags & Offline Controls")
     flags_group.add_argument("--api-key", help="Google Places API key")
@@ -211,6 +213,7 @@ def build_ingest_config(args: argparse.Namespace) -> IngestConfig:
     towns_p = Path(args.towns) if args.towns else None
     waypoints_p = Path(args.waypoints) if args.waypoints else None
     passes_p = Path(args.passes) if getattr(args, "passes", None) else None
+    climbs_p = Path(args.climbs) if getattr(args, "climbs", None) else None
 
     api_k = (
         args.api_key
@@ -249,6 +252,7 @@ def build_ingest_config(args: argparse.Namespace) -> IngestConfig:
         towns_file=towns_p,
         waypoints_file=waypoints_p,
         passes_file=passes_p,
+        climbs_file=climbs_p,
         api_key=api_k,
         skip_places=args.skip_places,
         mock_places=mock_p,
@@ -505,7 +509,23 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     # -------------------------------------------------------------------------
     s_t0 = time.time()
     try:
-        climbs = detect_climbs(track)
+        # Check for curated climbs in config or existing target_dir / "climbs.json"
+        curated_climbs = None
+        if config.climbs_file and config.climbs_file.exists():
+            curated_climbs = load_curated_climbs(config.climbs_file)
+            logger.info(f"Loaded {len(curated_climbs)} curated climbs from {config.climbs_file}")
+        elif (target_dir / "climbs.json").exists() and not config.force:
+            existing_c = load_curated_climbs(target_dir / "climbs.json")
+            if is_curated_climb_list(existing_c):
+                curated_climbs = existing_c
+                logger.info(f"Preserving {len(curated_climbs)} curated climbs from {target_dir / 'climbs.json'}")
+
+        climbs = detect_climbs(
+            track,
+            road_network=network,
+            corridor_data=corridor_poly,
+            curated_climbs=curated_climbs,
+        )
 
         # Check for curated passes in config or existing target_dir / "passes.json"
         curated = None
@@ -534,7 +554,13 @@ def run_ingest(config: IngestConfig) -> IngestResult:
         datasets_created.append("passes.json")
 
         s_dur = time.time() - s_t0
-        curated_tag = " (curated)" if curated else ""
+        curated_tag = ""
+        if curated_climbs and curated:
+            curated_tag = " (curated climbs & passes)"
+        elif curated_climbs:
+            curated_tag = " (curated climbs)"
+        elif curated:
+            curated_tag = " (curated passes)"
         stages.append(StageTiming("climbs_passes", s_dur, True, f"{len(climbs)} climbs, {len(passes)} passes{curated_tag}"))
         print(f"[Stage 6/10] Climbs & Passes detected ({len(climbs)} climbs, {len(passes)} passes{curated_tag}) ({s_dur:.2f}s)")
     except Exception as exc:
