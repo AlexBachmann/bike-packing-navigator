@@ -920,10 +920,17 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
     if not curated_climbs or not climbs:
         return climbs
 
+    # When curated climb research is provided, reset default heuristic iconic flags
+    for c in climbs:
+        c.is_iconic = False
+
+    used_cur_ids = set()
     for c in climbs:
         best_match = None
         min_dist_km = 3.5
         for cur in curated_climbs:
+            if cur.id in used_cur_ids:
+                continue
             dist_km = min(abs(c.end_km - cur.end_km), abs(c.start_km - cur.start_km))
             if c.id == cur.id and dist_km <= 5.0:
                 best_match = cur
@@ -942,6 +949,9 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
                         best_match = cur
 
         if best_match:
+            used_cur_ids.add(best_match.id)
+            if best_match.is_iconic and not best_match.id.startswith("climb-"):
+                c.id = best_match.id
             if best_match.name and not best_match.name.startswith("Climb "):
                 c.name = best_match.name
             if best_match.trail_name:
@@ -967,6 +977,14 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
             if best_match.difficulty:
                 c.difficulty = best_match.difficulty
 
+    # Include iconic passes from curation that did not meet the physical climb threshold (e.g. flat continental divide saddles)
+    matched_ids = {c.id for c in climbs}
+    for cur in curated_climbs:
+        if cur.is_iconic and cur.id not in matched_ids:
+            climbs.append(cur)
+            matched_ids.add(cur.id)
+
+    climbs.sort(key=lambda c: c.start_km)
     return climbs
 
 
