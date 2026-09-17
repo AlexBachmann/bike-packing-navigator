@@ -90,7 +90,8 @@ def build_parser() -> argparse.ArgumentParser:
         "climbs",
         help="Detect and categorize mountain climbs (UCI Cat 1-4/HC) and passes",
     )
-    p_climbs.add_argument("--track", required=True, help="Path to route-track.json or GPX file")
+    p_climbs.add_argument("--track", help="Path to route-track.json or GPX file")
+    p_climbs.add_argument("--audit", help="Path to climbs.json to audit (verifies 100%% of climbs have researched: true)")
     p_climbs.add_argument("--output-climbs", default="climbs.json", help="Output path for climbs.json")
     p_climbs.add_argument("--output-passes", default="passes.json", help="Output path for passes.json")
     p_climbs.add_argument("--passes", help="Path to curated passes JSON file to preserve or merge")
@@ -195,7 +196,40 @@ def execute_water(args: argparse.Namespace) -> int:
 
 
 def execute_climbs(args: argparse.Namespace) -> int:
-    """Execute climb and pass detection."""
+    """Execute climb and pass detection or climb curation audit."""
+    if getattr(args, "audit", None):
+        target_p = Path(args.audit)
+        if not target_p.exists():
+            print(f"❌ [Climb Audit FAILED] File not found: {target_p}", file=sys.stderr)
+            return 1
+        climbs_list = read_json(target_p)
+        if not isinstance(climbs_list, list):
+            print(f"❌ [Climb Audit FAILED] {target_p} does not contain a JSON array of climbs", file=sys.stderr)
+            return 1
+        if not climbs_list:
+            print(f"⚠️  [Climb Audit WARNING] {target_p} contains 0 climbs", file=sys.stderr)
+            return 0
+        unresearched = [c for c in climbs_list if not (isinstance(c, dict) and c.get("researched") is True)]
+        if unresearched:
+            print(
+                f"❌ [Climb Audit FAILED] Found {len(unresearched)}/{len(climbs_list)} climbs NOT researched "
+                f"(researched: true required for 100% of climbs in {target_p})",
+                file=sys.stderr,
+            )
+            for c in unresearched[:5]:
+                cid = c.get("id") if isinstance(c, dict) else "unknown"
+                cname = c.get("name") if isinstance(c, dict) else "unknown"
+                print(f"   - Climb '{cid}' ({cname}): researched={c.get('researched') if isinstance(c, dict) else None}", file=sys.stderr)
+            if len(unresearched) > 5:
+                print(f"   ... and {len(unresearched) - 5} more unresearched climbs", file=sys.stderr)
+            return 1
+        print(f"✅ [Climb Audit PASSED] All {len(climbs_list)} climbs verified as researched in {target_p}.")
+        return 0
+
+    if not getattr(args, "track", None):
+        print("Error: --track is required when not running --audit", file=sys.stderr)
+        return 1
+
     from engine.terrain.climbs import detect_climbs, load_curated_climbs
     from engine.terrain.passes import extract_mountain_passes, load_curated_passes
 

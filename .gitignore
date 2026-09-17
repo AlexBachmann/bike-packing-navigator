@@ -86,6 +86,8 @@ route/terrain/
 *.pbf
 
 # Google Places API & Overpass persistent request caches
+.cache/
+*.bak
 route/places/.cache*
 *.cache_places_api*.json
 *.cache_overpass*.json

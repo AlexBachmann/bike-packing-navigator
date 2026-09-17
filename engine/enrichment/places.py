@@ -303,13 +303,27 @@ class GooglePlacesClient:
             logger.warning("Requests library not available for Google Places API.")
             return []
 
+        # Sanitize included_types for Google Places API (New) Table A compliance
+        sanitized_types: List[str] = []
+        for t in included_types:
+            if t == "laundromat":
+                if "laundry" not in sanitized_types:
+                    sanitized_types.append("laundry")
+            elif t in ("drinking_water", "water_point", "spring", "town", "locality"):
+                continue
+            elif t not in sanitized_types:
+                sanitized_types.append(t)
+
+        if not sanitized_types:
+            return []
+
         headers = {
             "Content-Type": "application/json",
             "X-Goog-Api-Key": self.api_key,
             "X-Goog-FieldMask": self.PRO_FIELD_MASK,
         }
         body = {
-            "includedTypes": list(included_types),
+            "includedTypes": sanitized_types,
             "maxResultCount": max_results,
             "locationRestriction": {
                 "circle": {
@@ -382,6 +396,7 @@ class MockPlacesClient:
             "gas_station": ("Highway Junction Gas & Mart", "gas_station", 0.0022, -0.0018, "200 State Route 4"),
             "pharmacy": ("Civic Center Pharmacy", "pharmacy", -0.0005, 0.0011, "210 Main St"),
             "laundromat": ("Suds & Showers Laundromat", "laundromat", -0.0008, -0.0012, "85 Depot St"),
+            "laundry": ("Suds & Showers Laundromat", "laundromat", -0.0008, -0.0012, "85 Depot St"),
             "drinking_water": ("Town Park Potable Spigot", "drinking_water", 0.0002, 0.0004, "Town Memorial Park"),
         }
 
@@ -450,7 +465,7 @@ def fetch_places_along_route(
     types_to_query = [
         "supermarket", "grocery_store", "convenience_store",
         "bicycle_store", "lodging", "campground", "restaurant",
-        "gas_station", "pharmacy", "laundromat", "drinking_water"
+        "gas_station", "pharmacy", "laundry"
     ]
 
     raw_places: List[Dict[str, Any]] = []

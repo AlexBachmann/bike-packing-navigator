@@ -76,26 +76,106 @@ Determine:
 ### Step 2: Agent Route Research & Curation (The Guidebook Investigation)
 
 > [!IMPORTANT]
-> **The Agent's Role as Trail Curator**: Do NOT simply run the ingestion command blindly without research. Bikepack Navigator is an authoritative digital guidebook and race companion. The agent is expected to actively investigate the route using web search and document reading tools before or alongside ingestion.
+> **The Agent's Role as Trail Curator**: Do NOT run the ingestion command blindly without research. Bikepack Navigator is an authoritative digital guidebook and race companion. The agent is strictly expected to actively investigate the route using web search and document reading tools before running master ingestion.
+>
+> **100% Climb Research Requirement**: Climb research is NOT optional and CANNOT be limited to just HC, Cat 1, or Cat 2 climbs. **Every single climb along the route (100% of climbs)** must undergo micro-geographic investigation and be explicitly marked `"researched": true`.
 
-#### 1. What to Research
-Use `search_web` and `read_url_content` to find:
-1. **Official Route & Race Manuals**: Search `"<route-name> bikepacking guide"`, `bikepacking.com/routes/<slug>`, `dotwatcher.cc`, race handbooks (e.g., Tour Divide, Silk Road Mountain Race, Hellenic Mountain Race, Atlas Mountain Race, Arizona Trail, Colorado Trail).
-2. **Iconic Mountain Passes & Checkpoints**: Identify official race checkpoints (e.g., `CP1 Smolikas`, `CP2 Metsovo`), notorious summits, high points, and iconic passes that riders talk about.
-3. **Critical Water Carries & Drought Hazards**: Search for trail association water reports (e.g., ATA Water Report, FarOut / Guthook updates), trail angel water caches (e.g., Freeman Road cache), and 30–60+ mile dry stretches.
-4. **Terrain Cruxes & Hike-a-Bike Sectors**: Note brutal elevation profiles, scree fields, river fords, and lightning-exposed ridgelines.
+> [!TIP]
+> **Web & Wikipedia Research is Free & Unrestricted**: Searching the web (`search_web`), reading Wikipedia articles on mountain passes and geography, inspecting race manuals, and reviewing trail association water reports (`read_url_content`) is completely free and does NOT consume API quotas or incur billing costs. API limits apply *strictly* to commercial Google Places API queries. Conduct thorough, in-depth research with zero hesitation. Never search `dist/` or reuse leftover build artifacts to bypass authentic research.
 
-#### 2. Synthesizing Curated Files
-When research reveals route-specific checkpoints, iconic passes, or water caches, save them in the repository:
-- **`route/curation/passes_<route-id>.json`**: List of authentic mountain passes and checkpoints with names, elevations, coordinates, and tactical notes.
-- **`route/curation/climbs_<route-id>.json`**: Specific climb naming, landmark overrides, and tactical notes.
-- **`route/places/water_<route-id>.json`**: Coordinates and descriptions of reliable backcountry water caches, springs, and wells.
+---
+
+### The Three-Phase Climb Curation Protocol
+
+To guarantee that no route is published with generic, unresearched climb cards (e.g. `Climb 13 (Mile 98.4)`), climb curation follows a strict 3-phase protocol enforced by an automated quality gate.
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ PHASE 1: BASELINE CLIMB DETECTION                                           │
+│ Run: python3 -m engine.cli.main climbs --track route/<gpx>                  │
+│      --output-climbs route/curation/climbs_raw_<id>.json                    │
+│      --dossier route/curation/climb_dossier_<id>.json                       │
+│ ➔ Extracts physical geometry (gain, grade, coordinates, mile markers)       │
+│ ➔ ALL climbs are initialized with "researched": false                       │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ PHASE 2: MICRO-GEOGRAPHIC INVESTIGATION (100% OF CLIMBS)                    │
+│ Agent investigates EVERY SINGLE CLIMB via search_web & read_url_content:   │
+│  - Match coordinates (lat, lon) to topographic maps & mountain ranges       │
+│  - Identify named summits, saddles, passes, canyons, drainages, or valleys  │
+│  - Populate authentic: name, trailName, parkName, landmark, notes           │
+│  - Set "researched": true on each verified climb                            │
+│ ➔ Save curated output to route/curation/climbs_<id>.json                    │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ PHASE 3: MASTER ROUTE INGESTION & QUALITY GATE                              │
+│ Run master ingest with mandatory --climbs and --passes flags:               │
+│  docker compose exec -T app python3 -m engine.cli.main ingest \             │
+│    --gpx ... --climbs route/curation/climbs_<id>.json \                     │
+│    --passes route/curation/passes_<id>.json                                 │
+│                                                                             │
+│ QUALITY AUDIT GATE:                                                         │
+│  docker compose exec -T app python3 -m engine.cli.main climbs \             │
+│    --audit public/data/routes/<id>/climbs.json                              │
+│ ➔ Exits with code 1 if ANY climb has researched != true                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Phase 1: Baseline Climb Detection & Dossier Generation
+Extract raw climb intervals and export a research dossier:
+```bash
+docker compose exec -T app python3 -m engine.cli.main climbs \
+  --track "route/<filename>.gpx" \
+  --output-climbs "route/curation/climbs_raw_<route-id>.json" \
+  --dossier "route/curation/climb_dossier_<route-id>.json"
+```
+The resulting `climbs_raw_<route-id>.json` contains all detected climbs with physical metrics (start/end mile, elevation gain, average/max grade, UCI category) and default `"researched": false`. The dossier provides coordinates, nearest OSM way names, and geographic context.
+
+#### Phase 2: Micro-Geographic Investigation of ALL Climbs (100% of Climbs)
+The agent opens the dossier and inspects **every single climb**:
+1. **Coordinate & Mile Proximity**: Look up `summit_coords` `(lat, lon)` and route mile marker against regional topography, mountain massifs, passes, saddles, valleys, creeks, provincial/state parks, and national forests.
+2. **Authentic Naming**:
+   - If a formal or colloquial pass/summit name exists (e.g. *Crossing Creek Pass*, *Fleecer Ridge*, *Richmond Gap*, *Boreas Pass*), use it.
+   - If no formal summit name exists, assign an authentic geographic descriptor based on the massif, valley, or drainage (e.g. *Upper Crossing Creek Valley Ascent*, *Elk Valley Rim*, *Red Canyon Summit*).
+   - **NEVER** leave a generic placeholder like `Climb 13 (Mile 98.4)`.
+3. **The 5 Core Enrichment Attributes**:
+   - `name`: Authentic summit, pass, or geographic ridge name.
+   - `trailName`: Verified trail or Forest Service Road (FSR), e.g. `Elk Valley FSR` or `High Rockies Trail`.
+   - `parkName`: Verified public land, provincial park, or national forest jurisdiction, e.g. `Elk Valley / Crossing Creek` or `White River National Forest`.
+   - `landmark`: Prominent topographic peak, massif, or water body, e.g. `Crossing Creek Valley` or `Mt. Lawrence Grassi`.
+   - `notes`: Tactical narrative advice describing the ascent, road/trail surface character, gradient ramps, tree cover/exposure, and water sources.
+4. **The Quality Flag**:
+   - Set `"researched": true` on that climb in `route/curation/climbs_<route-id>.json`.
+   - **100% of climbs in `route/curation/climbs_<route-id>.json` must have `"researched": true`**.
+
+#### Phase 3: Research Mountain Passes & Water Waypoints
+Alongside climbs, synthesize:
+- `route/curation/passes_<route-id>.json`: Authentic named summits, passes, and iconic race checkpoints with coordinates, elevations, and notes.
+- `route/places/water_<route-id>.json`: Dedicated backcountry water sources (springs, caches, spigots).
+
+---
+
+### Visual Quality Benchmark: ACCEPTED vs REJECTED
+
+Compare the visual rendering in the application UI:
+
+| Attribute | ❌ REJECTED (Formulaic / Unresearched) | ✅ ACCEPTED (Authentic Guidebook Standard) |
+| :--- | :--- | :--- |
+| **Title** | `Climb 13 (Mile 98.4)` | `Crossing Creek Pass` |
+| **Context Strip** | `🌲 Elk Valley FSR` *(park & landmark missing)* | `🌲 Elk Valley FSR • 🏞️ Elk Valley / Crossing Creek • ⛰️ Crossing Creek Valley` |
+| **Guidebook Notes** | *"Sustained climb gaining 1150 ft over 3.2 mi with an average grade of 6.8% and pitches up to 11.2%."*<br>*(Lazy repetition of numbers already shown on the card)* | *"Gravel forest service road climbing out of the Elk Valley into the Crossing Creek drainage. Steady moderate gradients through pine forest with occasional views of the Continental Divide."* |
+| **Research Flag** | `"researched": false` | `"researched": true` |
+| **Quality Audit** | ❌ **FAILS QUALITY GATE** (exits code 1) | ✅ **PASSES QUALITY GATE** |
 
 ---
 
 ### Step 3: Run the Master Pipeline (One-Command Ingestion)
 
-Execute the unified engine master orchestrator inside Docker, passing any curated files discovered in Step 2:
+Execute the unified engine master orchestrator inside Docker, passing the curated climbs and passes:
 
 ```bash
 docker compose exec -T app python3 -m engine.cli.main ingest \
@@ -107,21 +187,14 @@ docker compose exec -T app python3 -m engine.cli.main ingest \
   --start-location "<Start City, ST>" \
   --end-location "<End City, ST>" \
   --description "<Engaging route summary description>" \
-  [--find-water-access] \
-  [--segment-km 5.0] \
+  --climbs "route/curation/climbs_<route-id>.json" \
+  --passes "route/curation/passes_<route-id>.json" \
   [--water "route/places/water_<route-id>.json"] \
-  [--passes "route/curation/passes_<route-id>.json"] \
-  [--climbs "route/curation/climbs_<route-id>.json"]
+  [--find-water-access] \
+  [--segment-km 5.0]
 ```
 
-*Direct module alternative:*
-```bash
-docker compose exec -T app python3 -m engine.cli.ingest \
-  --gpx "route/<filename>.gpx" \
-  --id "<route-id>" ...
-```
-
-*Note: If the user provides a Google Places API key, pass `--api-key "<key>"` or ensure `GOOGLE_CLOUD_API_KEY` (or `GOOGLE_PLACES_API_KEY`) is set in the environment. For routes with backcountry water caches or springs, pass `--water <path_to_water.json>`. Pass `--find-water-access` to automatically extract river and lake access points from OpenStreetMap corridor data (with a strict limit of 1 point per 5km segment).*
+*Note: Passing `--climbs` and `--passes` is **mandatory**. Do NOT skip them. The pipeline applies curated climb names, landmarks, and guidebook notes directly to the detected physical telemetry.*
 
 The orchestrator automatically executes all 10 pipeline stages in sequence:
 1. **GPX Parsing & Densification**: Parses coordinates, elevations, and cumulative distances into `route-track.json` and `.stats.json`.
@@ -129,7 +202,7 @@ The orchestrator automatically executes all 10 pipeline stages in sequence:
 3. **Viterbi Road Snapping**: Aligns raw GPS trackpoints with true OSM way centerlines within 50m using a Hidden Markov Model, producing `guidance-track.json`.
 4. **Vector Tile Generation**: Generates offline vector tile corridor via Tippecanoe (`corridor.pmtiles`).
 5. **Surface Modeling**: Maps Viterbi-matched guidance track ways directly onto canonical GPX race odometer mileage to produce contiguous surface intervals (`surfaces.json`).
-6. **Climb & Pass Intelligence**: Analyzes elevation profiles to categorize climbs, detect mountain passes, and enrich them with authentic geographic names, parks, and landmarks (`climbs.json`, `passes.json`). Preserves any curated passes/climbs provided in Step 2.
+6. **Climb & Pass Intelligence**: Merges curated climb research (`--climbs`) and pass intelligence (`--passes`) with detected elevation profiles (`climbs.json`, `passes.json`).
 7. **POI & Water Resupply Enrichment**: Searches Google Places API (within free-tier bounds) and projects custom backcountry water caches into `places.json`.
 8. **Town & Resupply Service Intervals**: Identifies resupply hubs, calculates hydration/food intervals, and classifies town stops.
 9. **Navigation Milestones**: Generates checkpoints at regular intervals (e.g., every ~35 miles) and major junction towns (`milestones.json`).
@@ -149,18 +222,20 @@ Route enrichment combines automated geospatial algorithms with agent research:
 │  - National park / protected area polygon containment -> parkName     │
 │  - Fiets index calculation -> UCI Category (HC / Cat 1-4)             │
 │  - Rolling-window maximum grade calculation & elevation gain          │
-│  - Algorithmic pass detection (prominence >= 150m, 15km deduplication)│
+│  - Baseline generation with researched: false                         │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
 │               TIER 2: AGENT RESEARCH & HUMAN CONTEXT                  │
+│  - Micro-geographic investigation of 100% of climbs (search_web)      │
 │  - Search official race manuals, dotwatcher.cc, bikepacking.com       │
 │  - Official Checkpoint names (CP1, CP2, CP3) & finish cutoffs         │
 │  - Iconic passes & summits known to racers (e.g., Fleecer Ridge)      │
 │  - Tactical advice notes: hike-a-bike shale, water drought carries     │
 │  - Verified water cache boxes (ATA caches, trail angels)              │
-│  - Applied via --passes, --climbs, --water or in route/curation/       │
+│  - Mark researched: true on every investigated climb                  │
+│  - Applied via --climbs, --passes, --water                            │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -171,6 +246,7 @@ In `climbs.json`, enrich each climb with:
 3. **`parkName`**: Public lands, provincial park, national park, or national forest jurisdiction (`boundary=protected_area`, `national_park`), e.g. `Spray Valley Provincial Park` or `White River National Forest`.
 4. **`landmark`**: Prominent mountain peaks, massifs, or water bodies (`natural=peak`, `water=lake|pond|reservoir`), e.g. `Mt. Lawrence Grassi / Goat Pond`.
 5. **`notes`**: Tactical narrative advice describing the ascent, surroundings, surface difficulty, water warnings, and summit views.
+6. **`researched`**: Boolean flag set to `true` once authentic research has been completed.
 
 ### 2. Application UI Rendering
 The Angular frontend (`ElevationProfileComponent`) automatically detects these fields:
@@ -295,19 +371,26 @@ Once the data files are generated and the route is registered in `routes.json`:
    ```
    All Python domain unit tests must pass (100% green, 0 regressions).
 
-2. **Run Angular Unit Tests**:
+2. **Run Climb Quality Audit (Mandatory Quality Gate)**:
+   ```bash
+   docker compose exec -T app python3 -m engine.cli.main climbs \
+     --audit "public/data/routes/<route-id>/climbs.json"
+   ```
+   **Strict Quality Gate**: This automated audit scans `climbs.json` and verifies that **100% of climbs** have `"researched": true`. If any climb has `"researched": false` or missing, the command exits with code 1 and prints the unresearched climb IDs and names. The route ingestion is strictly considered **FAILED / INCOMPLETE** until this audit command exits with code 0 (`All N climbs verified as researched`).
+
+3. **Run Angular Unit Tests**:
    ```bash
    docker compose exec -T app npm test -- --watch=false
    ```
    All frontend test suites must pass (100% green).
 
-3. **Verify Production Build**:
+4. **Verify Production Build**:
    ```bash
    docker compose exec -T app npm run build
    ```
    Must compile with 0 errors.
 
-4. **Verify Route Selection in Browser**:
+5. **Verify Route Selection in Browser**:
    - Open the application with `?route=<route-id>`.
    - Verify that:
      - The top-left header dropdown displays the new route and badge.
@@ -322,6 +405,7 @@ Once the data files are generated and the route is registered in `routes.json`:
 
 ## Key Design & Cost Constraints
 
-- **Strict Pro Tier Masking**: Never include fields from Enterprise (phone/web) or Atmosphere (ratings/reviews) in Places API queries. Keep requests within the 5,000 free monthly requests.
+- **Web & Wikipedia Research Has Zero Cost**: Tool-based research via `search_web` and `read_url_content` (Wikipedia, bikepacking.com, dotwatcher.cc, race manuals, water reports) is completely unrestricted and has zero API cost. Exhaustive research is expected for every route. Never search `dist/` or reuse leftover build artifacts to bypass research.
+- **Strict Pro Tier Masking (Google Places Only)**: Cost and quota constraints apply strictly to commercial Google Places API queries. Never include fields from Enterprise (phone/web) or Atmosphere (ratings/reviews) in Places API queries. Keep requests within the 5,000 free monthly requests.
 - **Persistent Caching**: Always write and commit `.cache_places_api_<route-id>.json` so future rebuilds or adjustments cost 0 API calls.
 - **Pure Static Architecture**: No backend server or dynamic database. All route telemetry must resolve strictly from `public/data/routes/<route-id>/`.

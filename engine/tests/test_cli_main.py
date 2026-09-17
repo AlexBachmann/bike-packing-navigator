@@ -280,6 +280,46 @@ class TestPlacesCLIInteractive:
         assert len(results) > 0
         assert all(p["category"] in ("bike_shop", "hotel") for p in results)
 
+    def test_climbs_audit_success(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+        """--audit returns 0 when 100% of climbs have researched: true."""
+        climbs_file = tmp_path / "climbs.json"
+        climbs_file.write_text(json.dumps([
+            {"id": "climb-1", "name": "Crossing Creek Pass", "researched": True},
+            {"id": "climb-2", "name": "Red Canyon Summit", "researched": True},
+        ]), encoding="utf-8")
+        exit_code = main(["climbs", "--audit", str(climbs_file)])
+        assert exit_code == 0
+        captured = capsys.readouterr()
+        assert "All 2 climbs verified as researched" in captured.out
+
+    def test_climbs_audit_failure_unresearched(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+        """--audit returns 1 when any climb has researched: false or missing."""
+        climbs_file = tmp_path / "climbs.json"
+        climbs_file.write_text(json.dumps([
+            {"id": "climb-1", "name": "Crossing Creek Pass", "researched": True},
+            {"id": "climb-2", "name": "Climb 2 (Mile 14.5)", "researched": False},
+        ]), encoding="utf-8")
+        exit_code = main(["climbs", "--audit", str(climbs_file)])
+        assert exit_code == 1
+        captured = capsys.readouterr()
+        assert "Found 1/2 climbs NOT researched" in captured.err
+        assert "Climb 'climb-2'" in captured.err
+
+    def test_climbs_audit_missing_file(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+        """--audit returns 1 if file does not exist."""
+        nonexistent = tmp_path / "missing.json"
+        exit_code = main(["climbs", "--audit", str(nonexistent)])
+        assert exit_code == 1
+        captured = capsys.readouterr()
+        assert "File not found" in captured.err
+
+    def test_climbs_missing_track_without_audit(self, capsys: pytest.CaptureFixture) -> None:
+        """climbs requires --track when --audit is omitted."""
+        exit_code = main(["climbs"])
+        assert exit_code == 1
+        captured = capsys.readouterr()
+        assert "--track is required" in captured.err
+
 
 class TestCLIMainErrorHandling:
     """Verifies error conditions and exit code contracts."""

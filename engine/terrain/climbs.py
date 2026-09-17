@@ -78,6 +78,7 @@ class Climb:
     fiets_score: float = 0.0
     difficulty: str = "moderate"
     is_iconic: bool = False
+    researched: bool = False
     pass_id: Optional[str] = None
     trail_name: Optional[str] = None
     park_name: Optional[str] = None
@@ -137,6 +138,7 @@ class Climb:
             "park_name": self.park_name,
             "landmark": self.landmark,
             "is_iconic": self.is_iconic,
+            "researched": self.researched,
 
             # Frontend camelCase keys
             "state": self.state,
@@ -216,6 +218,7 @@ class Climb:
         surface_summary = str(data.get("surface_summary", data.get("surfaceSummary", data.get("surface", "Unpaved Gravel"))))
         difficulty = str(data.get("difficulty", "moderate"))
         is_iconic = bool(data.get("is_iconic", data.get("isIconic", False)))
+        researched = bool(data.get("researched", False))
         pass_id = data.get("pass_id", data.get("passId"))
         trail_name = data.get("trail_name", data.get("trailName"))
         park_name = data.get("park_name", data.get("parkName"))
@@ -261,6 +264,7 @@ class Climb:
             fiets_score=fiets_score,
             difficulty=difficulty,
             is_iconic=is_iconic,
+            researched=researched,
             pass_id=str(pass_id) if pass_id is not None else None,
             trail_name=str(trail_name) if trail_name is not None else None,
             park_name=str(park_name) if park_name is not None else None,
@@ -899,6 +903,8 @@ def is_curated_climb_list(climbs: Sequence[Climb]) -> bool:
     if not climbs:
         return False
     for c in climbs:
+        if getattr(c, "researched", False):
+            return True
         if not c.name.startswith("Climb "):
             return True
         if c.trail_name or c.park_name or c.landmark:
@@ -976,6 +982,7 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
                 c.tracktype = best_match.tracktype
             if best_match.difficulty:
                 c.difficulty = best_match.difficulty
+            c.researched = best_match.researched
 
     # Include iconic passes from curation that did not meet the physical climb threshold (e.g. flat continental divide saddles)
     matched_ids = {c.id for c in climbs}
@@ -1156,6 +1163,7 @@ def generate_climb_research_dossier(
 
         item = {
             "climb_id": c.id,
+            "researched": c.researched,
             "route_km": f"{c.start_km:.1f} -> {c.end_km:.1f}",
             "route_mile": f"{c.start_mile:.1f} -> {c.end_mile:.1f}",
             "length_km": c.length_km,

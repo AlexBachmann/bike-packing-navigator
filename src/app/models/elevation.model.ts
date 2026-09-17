@@ -55,6 +55,7 @@ export interface Climb {
   surface?: string;
   firmness?: string;
   tracktype?: string;
+  researched?: boolean;
 }
 
 
