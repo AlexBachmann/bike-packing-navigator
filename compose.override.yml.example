@@ -6,6 +6,6 @@ services:
   app:
     environment:
       # Google Places API (New) key used by route enrichment and POI scripts
-      # (e.g. populate_places.py, find_places.py, ingest_pipeline.py)
+      # (e.g. python3 -m engine.cli.places, python3 -m engine.cli.ingest)
       - GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
       - GOOGLE_MAPS_API_KEY=your_google_places_api_key_here

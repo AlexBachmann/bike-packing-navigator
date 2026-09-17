@@ -229,7 +229,7 @@ Docker runs the Angular development server and packages all GIS tools (GDAL, Osm
 To ingest and enrich any new GPX bikepacking route, use the built-in ingestion skill:
 
 ```bash
-docker compose exec -T app python3 .agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py \
+docker compose exec -T app python3 -m engine.cli.main ingest \
   --gpx "route/<your-route>.gpx" \
   --id "<route-id>" \
   --name "<Full Route Name>" \

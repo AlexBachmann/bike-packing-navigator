@@ -42,7 +42,7 @@ The application features a dual-tier map rendering engine powered by **MapLibre 
   - Provided responsive OpenMapTiles / Protomaps compatible outdoor topo and dark stylesheets in `public/assets/styles/`.
   - Bundled authentic Noto Sans font glyphs in `public/assets/fonts/` (Regular & Bold, 0-255 & 256-511 ranges) and sprites in `public/assets/sprites/`.
   - Configured Service Worker `public/sw.js` app shell precache (`bikepack-app-shell-v2`) for font glyphs, stylesheets, and sprites.
-  - Built ingestion pipeline CLI tool `.agents/skills/ingest-gpx-route/scripts/generate_corridor_pmtiles.py` with bounding box validation and MVT encoding.
+  - Built ingestion pipeline CLI tool `engine.tiles.pmtiles` (`python3 -m engine.cli.main tiles`) with bounding box validation and MVT encoding.
   - Generated authentic sample corridor `.pmtiles` archives in `public/data/routes/`.
   - 100% green unit tests (44 test files, 726 passed tests) and clean production build.
 

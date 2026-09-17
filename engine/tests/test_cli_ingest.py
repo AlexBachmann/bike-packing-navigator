@@ -232,85 +232,45 @@ class TestCLIIngestPipelineExecution:
         assert "milestones" in stage_names
 
 
-class TestForwarderScriptsSubprocess:
-    """Verifies that legacy forwarder scripts in .agents/skills/.../scripts run via subprocess."""
+class TestEngineCliSubprocess:
+    """Verifies that engine.cli CLI entrypoints run via subprocess."""
 
-    def test_ingest_pipeline_forwarder_help(self) -> None:
-        """Invoking ingest_pipeline.py --help must succeed with exit code 0."""
-        script_path = Path(".agents/skills/ingest-gpx-route/scripts/ingest_pipeline.py")
-        if not script_path.exists():
-            pytest.skip("Forwarder script not yet created")
-
+    def test_engine_cli_ingest_help(self) -> None:
+        """Invoking python3 -m engine.cli.ingest --help must succeed with exit code 0."""
         res = subprocess.run(
-            [sys.executable, str(script_path), "--help"],
+            [sys.executable, "-m", "engine.cli.ingest", "--help"],
             capture_output=True,
             text=True,
         )
         assert res.returncode == 0
         assert "usage:" in res.stdout.lower()
 
-    @pytest.mark.parametrize("script_name", [
-        "parse_gpx.py",
-        "densify_route_track.py",
-        "extract_osm_corridor.py",
-        "extract_18km_corridor.py",
-        "extract_water_access.py",
-        "generate_surfaces.py",
-        "generate_surface_intervals.py",
-        "extract_climbs_passes.py",
-        "calculate_route_climbs.py",
-        "extract_mountain_passes.py",
-        "extract_milestones.py",
-        "generate_milestones.py",
-        "populate_places.py",
-        "find_places.py",
-        "mock_places.py",
-        "snap_route_to_osm.py",
-        "snap_to_roads.py",
-        "register_manifest.py",
-        "generate_corridor_pmtiles.py",
-        "build_route_pmtiles.py",
-        "pmtiles_corridor_clip.py",
-        "slice_pmtiles_sections.py",
-        "generate_turn_cues.py",
-        "extract_osm_turns.py",
-        "analyze_route_surfaces.py",
-        "fetch_dem_cogs.py",
-        "extract_gpx_waypoints.py",
+    def test_engine_cli_main_help(self) -> None:
+        """Invoking python3 -m engine.cli.main --help must succeed with exit code 0."""
+        res = subprocess.run(
+            [sys.executable, "-m", "engine.cli.main", "--help"],
+            capture_output=True,
+            text=True,
+        )
+        assert res.returncode == 0
+        assert "usage:" in res.stdout.lower()
+
+    @pytest.mark.parametrize("subcmd", [
+        "ingest",
+        "places",
+        "water",
+        "climbs",
+        "surfaces",
+        "tiles",
+        "manifest",
+        "info",
     ])
-    def test_all_individual_forwarders_help(self, script_name: str) -> None:
-        """Every individual forwarder must accept --help and exit with code 0."""
-        script_path = Path(".agents/skills/ingest-gpx-route/scripts") / script_name
-        if not script_path.exists():
-            pytest.skip(f"Forwarder {script_name} not yet created")
-
+    def test_all_main_subcommands_help(self, subcmd: str) -> None:
+        """Every subcommand in engine.cli.main must accept --help and exit with code 0."""
         res = subprocess.run(
-            [sys.executable, str(script_path), "--help"],
+            [sys.executable, "-m", "engine.cli.main", subcmd, "--help"],
             capture_output=True,
             text=True,
         )
         assert res.returncode == 0
         assert "usage:" in res.stdout.lower()
-
-    def test_forwarder_functional_execution(self, sample_gpx_file: Path, tmp_path: Path) -> None:
-        """Test executing densify_route_track.py functional run."""
-        script_path = Path(".agents/skills/ingest-gpx-route/scripts/densify_route_track.py")
-        out_track = tmp_path / "track.json"
-        out_stats = tmp_path / ".stats.json"
-
-        res = subprocess.run(
-            [
-                sys.executable, str(script_path),
-                "--gpx", str(sample_gpx_file),
-                "--output", str(out_track),
-                "--stats", str(out_stats),
-            ],
-            capture_output=True,
-            text=True,
-        )
-        assert res.returncode == 0
-        assert out_track.exists()
-        assert out_stats.exists()
-        track_data = json.loads(out_track.read_text(encoding="utf-8"))
-        assert "points" in track_data
-        assert len(track_data["points"]) > 0
