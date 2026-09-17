@@ -20,22 +20,57 @@ import { TurnGuidanceService } from '../../services/turn-guidance.service';
 import { GpsSimulatorService } from '../../services/gps-simulator.service';
 import { AudioAlertService } from '../../services/audio-alert.service';
 import { Climb } from '../../models/elevation.model';
+import { Place } from '../../models/waypoint.model';
 
 // ============================================================================
 // Comprehensive Mock of MapLibre GL for JSDOM
 // ============================================================================
 
 vi.mock('maplibre-gl', () => {
+  class MockPopup {
+    private html = '';
+    options: any;
+
+    constructor(options?: any) {
+      this.options = options;
+    }
+
+    setHTML(html: string) {
+      this.html = html;
+      return this;
+    }
+
+    getHTML() {
+      return this.html;
+    }
+  }
+
   class MockMarker {
     private lngLat: [number, number] = [0, 0];
     private rotation = 0;
     private rotationAlignment = 'map';
+    private pitchAlignment = 'map';
+    private popup: any = null;
     element: HTMLElement;
     removeCount = 0;
 
-    constructor(options?: { element?: HTMLElement; anchor?: string; rotationAlignment?: string }) {
+    constructor(options?: { element?: HTMLElement; anchor?: string; rotationAlignment?: string; pitchAlignment?: string }) {
       this.element = options?.element || document.createElement('div');
       if (options?.rotationAlignment) this.rotationAlignment = options.rotationAlignment;
+      if (options?.pitchAlignment) this.pitchAlignment = options.pitchAlignment;
+    }
+
+    setPopup(popup: any) {
+      this.popup = popup;
+      return this;
+    }
+
+    getPopup() {
+      return this.popup;
+    }
+
+    getPitchAlignment() {
+      return this.pitchAlignment;
     }
 
     setLngLat(lngLat: [number, number]) {
@@ -269,12 +304,14 @@ vi.mock('maplibre-gl', () => {
     default: {
       Map: MockMap,
       Marker: MockMarker,
+      Popup: MockPopup,
       addProtocol: vi.fn(),
       setWorkerUrl: vi.fn(),
       getWorkerUrl: vi.fn(() => '')
     },
     Map: MockMap,
     Marker: MockMarker,
+    Popup: MockPopup,
     addProtocol: vi.fn(),
     setWorkerUrl: vi.fn(),
     getWorkerUrl: vi.fn(() => '')
@@ -754,6 +791,32 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       const card = fixture.nativeElement.querySelector('[data-testid="gps-disabled-warning-card"]');
       expect(card).toBeNull();
     });
+
+    it('should position the warning card in the top-right corner as a compact pill', () => {
+      component.isVectorCached.set(true);
+      fixture.componentRef.setInput('gpsState', { enabled: false, loading: false });
+      fixture.detectChanges();
+
+      const card = fixture.nativeElement.querySelector('[data-testid="gps-disabled-warning-card"]');
+      expect(card).toBeTruthy();
+      expect(card.classList.contains('top-3')).toBe(true);
+      expect(card.classList.contains('right-3')).toBe(true);
+      expect(card.classList.contains('absolute')).toBe(true);
+    });
+
+    it('should display compact error message when gpsState has an error', () => {
+      component.isVectorCached.set(true);
+      fixture.componentRef.setInput('gpsState', {
+        enabled: false,
+        loading: false,
+        error: 'Location permission denied by user.'
+      });
+      fixture.detectChanges();
+
+      const card = fixture.nativeElement.querySelector('[data-testid="gps-disabled-warning-card"]');
+      expect(card).toBeTruthy();
+      expect(card.textContent).toContain('Location permission denied by user.');
+    });
   });
 
   // --------------------------------------------------------------------------
@@ -1168,6 +1231,234 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       const connectedEl = fixture.nativeElement.querySelector('div') || document.body;
       (component as any).init3DMap(connectedEl);
       expect((component as any).map).toBeNull();
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // 10. Route Waypoint Markers on 3D Map (R2)
+  // --------------------------------------------------------------------------
+  describe('10. Route Waypoint Markers on 3D Map (R2)', () => {
+    const samplePlaces: Place[] = [
+      {
+        id: 'place-water-1',
+        name: 'Waterton Spring',
+        category: 'water',
+        type: 'spring',
+        is_in_town: false,
+        location: { lat: 39.49, lon: -105.09 },
+        distance_to_trail_km: 0,
+        route_km: 1.6,
+        route_mile: 1.0
+      },
+      {
+        id: 'place-camp-1',
+        name: 'Indian Creek Campground',
+        category: 'campground',
+        type: 'campground',
+        is_in_town: false,
+        location: { lat: 39.48, lon: -105.10 },
+        distance_to_trail_km: 0.1,
+        route_km: 3.2,
+        route_mile: 2.0
+      },
+      {
+        id: 'place-town-1',
+        name: 'Sedalia Resupply',
+        category: 'town',
+        type: 'town',
+        is_in_town: true,
+        location: { lat: 39.47, lon: -105.11 },
+        distance_to_trail_km: 0.5,
+        route_km: 8.0,
+        route_mile: 5.0
+      }
+    ];
+
+    it('should create and render MapLibre markers for route waypoints', () => {
+      component.isVectorCached.set(true);
+      mockRouteService.places.set(samplePlaces);
+      fixture.detectChanges();
+
+      const markers = component.getPoiMarkers();
+      expect(markers.length).toBe(3);
+    });
+
+    it('should set billboard upright alignments on waypoint markers', () => {
+      component.isVectorCached.set(true);
+      mockRouteService.places.set(samplePlaces);
+      fixture.detectChanges();
+
+      const markers = component.getPoiMarkers();
+      expect(markers.length).toBeGreaterThan(0);
+      const firstMarker: any = markers[0];
+      expect(firstMarker.getPitchAlignment()).toBe('viewport');
+      expect(firstMarker.getRotationAlignment()).toBe('viewport');
+    });
+
+    it('should attach dark popups to route waypoint markers', () => {
+      component.isVectorCached.set(true);
+      mockRouteService.places.set(samplePlaces);
+      fixture.detectChanges();
+
+      const markers = component.getPoiMarkers();
+      const firstMarker: any = markers[0];
+      const popup = firstMarker.getPopup();
+      expect(popup).toBeTruthy();
+      expect(popup.options?.className).toBe('dark-maplibre-popup');
+      expect(popup.getHTML()).toContain('Waterton Spring');
+      expect(popup.getHTML()).toContain('Jump Rider Here');
+    });
+
+    it('should update markers when places signal updates', () => {
+      component.isVectorCached.set(true);
+      mockRouteService.places.set(samplePlaces);
+      fixture.detectChanges();
+      expect(component.getPoiMarkers().length).toBe(3);
+
+      mockRouteService.places.set([samplePlaces[0]]);
+      fixture.detectChanges();
+      expect(component.getPoiMarkers().length).toBe(1);
+
+      mockRouteService.places.set([]);
+      fixture.detectChanges();
+      expect(component.getPoiMarkers().length).toBe(0);
+    });
+
+    it('should clear all markers on component destroy', () => {
+      component.isVectorCached.set(true);
+      mockRouteService.places.set(samplePlaces);
+      fixture.detectChanges();
+      expect(component.getPoiMarkers().length).toBe(3);
+
+      fixture.destroy();
+      expect(component.getPoiMarkers().length).toBe(0);
+    });
+
+    it('should handle bpn-jump-mile custom event to seek simulator and emit selectMile', () => {
+      component.isVectorCached.set(true);
+      mockRouteService.places.set(samplePlaces);
+      fixture.detectChanges();
+
+      const selectSpy = vi.spyOn(component.selectMile, 'emit');
+      const seekSpy = vi.spyOn(mockSimulator, 'seek');
+
+      window.dispatchEvent(new CustomEvent('bpn-jump-mile', { detail: 12.5 }));
+
+      expect(selectSpy).toHaveBeenCalledWith(12.5);
+      expect(seekSpy).toHaveBeenCalledWith(12.5);
+    });
+  });
+
+  // --------------------------------------------------------------------------
+  // 11. Proximity Heads-Up Notifications HUD (R3)
+  // --------------------------------------------------------------------------
+  describe('11. Proximity Heads-Up Notifications HUD (R3)', () => {
+    const proximityPlaces: Place[] = [
+      {
+        id: 'w1',
+        name: 'Roxborough Spring',
+        category: 'water',
+        type: 'spring',
+        is_in_town: false,
+        location: { lat: 39.49, lon: -105.09 },
+        distance_to_trail_km: 0,
+        route_km: 0.32,
+        route_mile: 0.2 // Approaching (delta = 0.2 mi = ~322m)
+      },
+      {
+        id: 'c1',
+        name: 'Bear Creek Camp',
+        category: 'campground',
+        type: 'campground',
+        is_in_town: false,
+        location: { lat: 39.48, lon: -105.10 },
+        distance_to_trail_km: 0,
+        route_km: 0.45,
+        route_mile: 0.28 // Approaching (delta = 0.28 mi = ~450m)
+      },
+      {
+        id: 't1',
+        name: 'Deckers Resupply',
+        category: 'town',
+        type: 'town',
+        is_in_town: true,
+        location: { lat: 39.47, lon: -105.11 },
+        distance_to_trail_km: 0,
+        route_km: 25.0,
+        route_mile: 15.5 // Lookahead resupply candidate (> 1 mi ahead)
+      }
+    ];
+
+    it('should suppress proximity HUD when rider is at position 0 to 50m', () => {
+      mockRouteService.places.set(proximityPlaces);
+      fixture.componentRef.setInput('currentMile', 0.0);
+      fixture.detectChanges();
+
+      const hud = fixture.nativeElement.querySelector('[data-testid="proximity-alerts-hud"]');
+      expect(hud).toBeNull();
+      expect(component.proximityAlerts().length).toBe(0);
+    });
+
+    it('should not render proximity HUD when no waypoints are in range', () => {
+      mockRouteService.places.set(proximityPlaces);
+      fixture.componentRef.setInput('currentMile', 5.0); // No waypoints within [-25m, 500m] of mile 5.0
+      fixture.detectChanges();
+
+      const hud = fixture.nativeElement.querySelector('[data-testid="proximity-alerts-hud"]');
+      expect(hud).toBeNull();
+      expect(component.proximityAlerts().length).toBe(0);
+    });
+
+    it('should render top-left HUD with active alerts when rider approaches waypoints past 50m', () => {
+      mockRouteService.places.set(proximityPlaces);
+      fixture.componentRef.setInput('currentMile', 0.1); // ~161m > 50m, within 500m of mile 0.2 & 0.28
+      fixture.detectChanges();
+
+      const alerts = component.proximityAlerts();
+      expect(alerts.length).toBe(2);
+
+      const hud = fixture.nativeElement.querySelector('[data-testid="proximity-alerts-hud"]');
+      expect(hud).toBeTruthy();
+      const topLeftHud = fixture.nativeElement.querySelector('[data-testid="hud-top-left"]');
+      expect(topLeftHud).toBeTruthy();
+      expect(topLeftHud.classList.contains('top-3')).toBe(true);
+      expect(topLeftHud.classList.contains('left-3')).toBe(true);
+
+      const cards = fixture.nativeElement.querySelectorAll('[data-testid="proximity-alert-card"]');
+      expect(cards.length).toBe(2);
+    });
+
+    it('should display category badge, icon, and formatted proximity text without name in each alert card', () => {
+      mockRouteService.places.set(proximityPlaces);
+      fixture.componentRef.setInput('currentMile', 0.1);
+      fixture.componentRef.setInput('unit', 'miles');
+      fixture.detectChanges();
+
+      const textElements = fixture.nativeElement.querySelectorAll('[data-testid="proximity-alert-text"]');
+      expect(textElements.length).toBe(2);
+
+      const waterCard = fixture.nativeElement.querySelector('[data-alert-category="water"]');
+      expect(waterCard).toBeTruthy();
+      expect(waterCard.textContent).toContain('💧');
+      expect(waterCard.textContent).not.toContain('Roxborough Spring');
+      expect(waterCard.textContent).toContain('in');
+      expect(waterCard.textContent).toContain('yd');
+      expect(waterCard.textContent).toContain('mi');
+
+      const titleAttr = textElements[0].getAttribute('title');
+      expect(titleAttr).toContain('Roxborough Spring');
+    });
+
+    it('should update HUD formatting reactively when distance unit changes to km', () => {
+      mockRouteService.places.set(proximityPlaces);
+      fixture.componentRef.setInput('currentMile', 0.1);
+      fixture.componentRef.setInput('unit', 'km');
+      fixture.detectChanges();
+
+      const textElements = fixture.nativeElement.querySelectorAll('[data-testid="proximity-alert-text"]');
+      expect(textElements.length).toBeGreaterThan(0);
+      const text = textElements[0].textContent;
+      expect(text).toContain('m');
     });
   });
 });

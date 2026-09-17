@@ -24,7 +24,7 @@ export function getTurnIcon(direction: TurnDirection): string {
         data-testid="turn-ahead-chip"
         role="status"
         aria-live="polite"
-        class="pointer-events-auto max-w-[90%] bg-slate-900/95 backdrop-blur-md border border-emerald-500/40 text-slate-100 px-4 py-2 rounded-full shadow-2xl flex items-center gap-2.5 text-xs font-semibold tracking-wide animate-in fade-in slide-in-from-top-2 duration-200"
+        class="pointer-events-auto max-w-full bg-slate-900/95 backdrop-blur-md border border-emerald-500/40 text-slate-100 px-3.5 py-1.5 rounded-full shadow-2xl flex items-center gap-2.5 text-xs font-semibold tracking-wide animate-in fade-in slide-in-from-top-2 duration-200"
       >
         <span class="text-base text-emerald-400 font-bold shrink-0">
           {{ getTurnIcon(cue.direction) }}

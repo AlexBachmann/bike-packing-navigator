@@ -9,9 +9,49 @@
     ></div>
   </div>
 
-  <!-- Top HUD: Turn-Ahead Guidance & Off-Course Alerts -->
-  <div class="hud-top-bar absolute top-3 inset-x-3 pointer-events-none flex flex-col items-center gap-2 z-20">
+  <!-- Top-Left HUD: Turn Guidance & Proximity Alerts (R3) -->
+  <div
+    data-testid="hud-top-left"
+    class="hud-top-left absolute top-3 left-3 z-30 pointer-events-none flex flex-col items-start gap-1.5 max-w-[280px] sm:max-w-xs"
+  >
+    <!-- Turn-Ahead Guidance Chip (Top-Left) -->
     <app-ride-turn-guidance-banner [turnCue]="turnCue()" />
+
+    <!-- Proximity Alerts (R3) -->
+    @if (proximityAlerts().length > 0) {
+      <div
+        data-testid="proximity-alerts-hud"
+        class="w-full pointer-events-auto flex flex-col gap-1.5 animate-fade-in"
+      >
+        @for (alert of proximityAlerts(); track alert.id) {
+          <div
+            data-testid="proximity-alert-card"
+            [attr.data-alert-category]="alert.category"
+            class="flex items-center gap-2 p-2 rounded-xl bg-slate-900/90 border border-slate-700/80 shadow-2xl backdrop-blur-md text-slate-100 transition"
+          >
+            <span
+              class="px-1.5 py-0.5 rounded text-xs border shrink-0 flex items-center gap-1 font-semibold"
+              [class]="alert.badgeClass"
+            >
+              <span>{{ alert.icon }}</span>
+            </span>
+            <div class="min-w-0 flex-1">
+              <div
+                data-testid="proximity-alert-text"
+                class="text-xs font-semibold text-slate-100 leading-tight truncate"
+                [title]="alert.name ? alert.name + ': ' + alert.displayText : alert.displayText"
+              >
+                {{ alert.displayText }}
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Top Center: Off-Course Alerts (Only active when rider deviates off track) -->
+  <div class="hud-top-bar absolute top-3 inset-x-3 pointer-events-none flex flex-col items-center gap-2 z-20">
     <app-ride-off-course-banner
       [offCourseStatus]="offCourseStatus()"
       [relativeReturnAngle]="relativeReturnAngle()"
@@ -62,29 +102,33 @@
     </div>
   </div>
 
-  <!-- GPS Disabled Warning Card (Floating in Top Half of Cockpit) -->
+  <!-- GPS Disabled Warning Pill (Compact, Anchored to Top-Right) -->
   @if (isGpsOff() && isVectorCached()) {
     <div
       data-testid="gps-disabled-warning-card"
-      class="absolute top-4 left-4 right-4 z-30 max-w-md mx-auto bg-amber-950/90 border border-amber-500/80 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md flex items-center justify-between gap-3 text-amber-100 animate-fade-in"
+      class="absolute top-3 right-3 z-30 max-w-[220px] sm:max-w-xs bg-amber-950/90 border border-amber-500/80 rounded-xl p-2 sm:px-2.5 sm:py-2 shadow-2xl backdrop-blur-md flex flex-col gap-1 text-amber-100 animate-fade-in pointer-events-auto"
+      [title]="gpsState()?.error || 'Ride mode requires active GPS for live navigation.'"
     >
-      <div class="flex items-center gap-3 min-w-0">
-        <span class="text-2xl shrink-0">📡</span>
-        <div class="min-w-0">
-          <div class="font-bold text-xs uppercase tracking-wider text-amber-400">GPS Disabled</div>
-          <div class="text-xs text-amber-200/90 truncate">
-            {{ gpsState()?.error || 'Ride mode requires active GPS for live navigation.' }}
-          </div>
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span class="text-sm shrink-0 leading-none">📡</span>
+          <span class="font-bold text-[11px] uppercase tracking-wider text-amber-400 truncate">GPS Disabled</span>
         </div>
+        <button
+          type="button"
+          data-testid="enable-gps-btn"
+          (click)="enableGps.emit()"
+          class="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-slate-950 font-bold text-[10px] shadow transition shrink-0 cursor-pointer active:scale-95 leading-none"
+          aria-label="Enable GPS tracking"
+        >
+          Enable GPS
+        </button>
       </div>
-      <button
-        type="button"
-        data-testid="enable-gps-btn"
-        (click)="enableGps.emit()"
-        class="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md transition shrink-0 cursor-pointer active:scale-95"
-      >
-        Enable GPS
-      </button>
+      @if (gpsState()?.error) {
+        <div class="text-[10px] text-amber-200/90 truncate max-w-full leading-tight">
+          {{ gpsState()?.error }}
+        </div>
+      }
     </div>
   }
 

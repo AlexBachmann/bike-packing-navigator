@@ -24,7 +24,13 @@ import { TurnGuidanceService } from '../../services/turn-guidance.service';
 import { GpsSimulatorService } from '../../services/gps-simulator.service';
 import { AudioAlertService } from '../../services/audio-alert.service';
 import { DeadReckoningService } from '../../services/dead-reckoning.service';
-import { GpsState } from '../../models/waypoint.model';
+import { GpsState, Place } from '../../models/waypoint.model';
+import {
+  getPoiIconConfig,
+  createPoiMarkerElement,
+  createPoiPopupHtml
+} from '../route-map/route-map-poi.helper';
+import { computeProximityAlerts, ProximityAlert } from '../../services/proximity-alert.service';
 import { Climb, ClimbMiniProfile, buildClimbMiniProfile } from '../../models/elevation.model';
 import { TurnCue, TurnDirection } from '../../models/ride-cockpit.model';
 import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
@@ -40,6 +46,7 @@ import { calculateDeflectionAngle, normalizeBearing } from '../../utils/geo-math
 export { getTurnIcon } from './ride-turn-guidance-banner.component';
 export type { OffCourseAlertStatus } from './ride-off-course-banner.component';
 export type { ActiveClimbStatus } from './ride-climb-mini-widget.component';
+export type { ProximityAlert } from '../../services/proximity-alert.service';
 
 export const DEFAULT_3D_PITCH = 55;
 export const MIN_3D_PITCH = 50;
@@ -130,8 +137,13 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   private map: maplibregl.Map | null = null;
   private riderMarker: maplibregl.Marker | null = null;
   private riderArrowEl: HTMLElement | null = null;
+  private poiMarkers: maplibregl.Marker[] = [];
   private resizeObserver: ResizeObserver | null = null;
   private isDestroyed = false;
+
+  getPoiMarkers(): readonly maplibregl.Marker[] {
+    return this.poiMarkers;
+  }
 
   // Active route signals
   readonly activeRouteId = computed<string | null>(() => {
@@ -399,6 +411,15 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     return ((returnDeg - heading + 540) % 360) - 180;
   });
 
+  // Proximity Heads-Up Alerts (R3)
+  readonly proximityAlerts = computed<ProximityAlert[]>(() => {
+    return computeProximityAlerts(
+      this.effectiveMile(),
+      this.routeService.places(),
+      this.unit()
+    );
+  });
+
   constructor() {
     // Synchronous initial cache check if route active
     const initialRoute = this.activeRouteId();
@@ -519,11 +540,21 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
               this.drawRoute();
               const currentPos = this.effectivePosition();
               this.updateRiderMarker(currentPos.lat, currentPos.lon, currentPos.heading);
+              this.updatePoiMarkers(this.routeService.places());
             });
           }
         } catch {
           // ignore
         }
+      });
+    });
+
+    // Effect 7: Reactive route waypoint markers on 3D canvas (R2)
+    effect(() => {
+      const places = this.routeService.places();
+      if (!this.map) return;
+      untracked(() => {
+        this.updatePoiMarkers(places);
       });
     });
   }
@@ -566,6 +597,11 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.clearRouteLayers();
       this.map.remove();
       this.map = null;
+    }
+    this.clearPoiMarkers();
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('bpn-jump-mile', this.handlePopupJump as EventListener);
+      window.removeEventListener('td-jump-mile', this.handlePopupJump as EventListener);
     }
     this.currentCameraBearing = null;
     this.lastCameraTimestamp = 0;
@@ -652,6 +688,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
             this.drawRoute();
             const currentPos = this.effectivePosition();
             this.updateRiderMarker(currentPos.lat, currentPos.lon, currentPos.heading);
+            this.updatePoiMarkers(this.routeService.places());
           });
         }
       }
@@ -719,6 +756,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.drawRoute();
       const currentPos = this.effectivePosition();
       this.updateRiderMarker(currentPos.lat, currentPos.lon, currentPos.heading);
+      this.updatePoiMarkers(this.routeService.places());
       this.easeCameraToPosition(currentPos.lat, currentPos.lon, currentPos.heading, currentPos.speedKph, true);
     };
 
@@ -1105,6 +1143,76 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
       this.riderMarker.setRotation(normalizedHeading);
     }
   }
+
+  // --------------------------------------------------------------------------
+  // Waypoint / POI Markers (R2)
+  // --------------------------------------------------------------------------
+
+  private updatePoiMarkers(places: Place[]): void {
+    if (!this.map) return;
+
+    this.clearPoiMarkers();
+    if (!places || places.length === 0) return;
+
+    for (const place of places) {
+      const lat = place.location?.lat;
+      const lon = place.location?.lon;
+      if (lat === undefined || lon === undefined || isNaN(lat) || isNaN(lon)) continue;
+
+      const iconConfig = getPoiIconConfig(place);
+      const el = createPoiMarkerElement(iconConfig);
+
+      const marker = new maplibregl.Marker({
+        element: el,
+        anchor: 'center',
+        pitchAlignment: 'viewport',
+        rotationAlignment: 'viewport',
+        subpixelPositioning: true
+      }).setLngLat([lon, lat]);
+
+      if (typeof maplibregl.Popup === 'function' && typeof (marker as any).setPopup === 'function') {
+        const popupHtml = createPoiPopupHtml(place, iconConfig, this.unit());
+        const popup = new maplibregl.Popup({
+          className: 'dark-maplibre-popup',
+          offset: 15,
+          closeButton: true,
+          closeOnClick: false
+        }).setHTML(popupHtml);
+        marker.setPopup(popup);
+      }
+
+      marker.addTo(this.map);
+      this.poiMarkers.push(marker);
+    }
+
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('bpn-jump-mile', this.handlePopupJump as EventListener);
+      window.removeEventListener('td-jump-mile', this.handlePopupJump as EventListener);
+      window.addEventListener('bpn-jump-mile', this.handlePopupJump as EventListener);
+      window.addEventListener('td-jump-mile', this.handlePopupJump as EventListener);
+    }
+  }
+
+  private clearPoiMarkers(): void {
+    for (const marker of this.poiMarkers) {
+      marker.remove();
+    }
+    this.poiMarkers = [];
+  }
+
+  private handlePopupJump = (e: Event): void => {
+    const customEvent = e as CustomEvent<number>;
+    if (typeof customEvent?.detail === 'number') {
+      this.selectMile.emit(customEvent.detail);
+      if (this.gpsSimulator.running() || typeof this.gpsSimulator.seek === 'function') {
+        this.gpsSimulator.seek(customEvent.detail);
+      }
+      if (typeof document !== 'undefined') {
+        const popups = document.querySelectorAll('.maplibregl-popup');
+        popups.forEach((p) => p.remove());
+      }
+    }
+  };
 
   // --------------------------------------------------------------------------
   // Helpers: Geometry, Climb SVG, Turns, Simulator
