@@ -912,8 +912,10 @@ def is_curated_climb_list(climbs: Sequence[Climb]) -> bool:
 
 def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> List[Climb]:
     """
-    Apply curated climb overrides to detected climbs by matching ID or route distance.
-    Preserves hand-curated names, trail names, park names, landmarks, notes, and iconic flags.
+    Apply curated / researched climb overrides to detected climbs by matching ID,
+    route kilometer proximity, or coordinate proximity.
+    Preserves researched names, trail names, park names, landmarks, notes, and iconic flags
+    while keeping the detected physical telemetry (grade, length, gain, elevation).
     """
     if not curated_climbs or not climbs:
         return climbs
@@ -931,6 +933,14 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
                 min_dist_km = dist_km
                 best_match = cur
 
+            if c.summit_coords and cur.summit_coords:
+                geo_dist_m = haversine_distance_m(c.summit_coords[0], c.summit_coords[1], cur.summit_coords[0], cur.summit_coords[1])
+                if geo_dist_m <= 2000.0:
+                    geo_dist_km = geo_dist_m / 1000.0
+                    if geo_dist_km < min_dist_km:
+                        min_dist_km = geo_dist_km
+                        best_match = cur
+
         if best_match:
             if best_match.name and not best_match.name.startswith("Climb "):
                 c.name = best_match.name
@@ -940,19 +950,19 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
                 c.park_name = best_match.park_name
             if best_match.landmark:
                 c.landmark = best_match.landmark
-            if best_match.notes:
+            if best_match.notes and not best_match.notes.startswith("Sustained climb gaining "):
                 c.notes = best_match.notes
             if best_match.is_iconic:
                 c.is_iconic = True
             if best_match.pass_id:
                 c.pass_id = best_match.pass_id
-            if best_match.road_class:
+            if best_match.road_class and not c.road_class:
                 c.road_class = best_match.road_class
-            if best_match.surface:
+            if best_match.surface and not c.surface:
                 c.surface = best_match.surface
-            if best_match.firmness:
+            if best_match.firmness and not c.firmness:
                 c.firmness = best_match.firmness
-            if best_match.tracktype:
+            if best_match.tracktype and not c.tracktype:
                 c.tracktype = best_match.tracktype
             if best_match.difficulty:
                 c.difficulty = best_match.difficulty
@@ -981,17 +991,23 @@ def detect_climbs(
       - min_len_km: minimum climb distance (default >= 0.5 km / 500m)
       - min_gain_m: minimum elevation gain (default >= 50.0m)
       - min_grade: minimum average slope (default >= 3.0%)
+
+    Segmentation Algorithm:
+      Scans the elevation profile for continuous ascents. Evaluates candidate climbs against:
+        1. Short & steep: length >= 0.5km and avg_grade >= 5.0%
+        2. Long & gradual: length >= 2.0km and avg_grade >= 4.0%
+        3. Mountain passes / rises: gain >= min_gain_m and avg_grade >= min_grade
+
+      Enriches detected climbs with OSM way data, nearby landmarks, national parks,
+      and correlates with any existing researched climb metadata (curated_climbs).
+      Climbs that no longer exist or no longer qualify are automatically removed.
+      Newly detected climbs are added with physical stats and procedural/OSM naming.
     """
     pts = track_or_points.points if hasattr(track_or_points, "points") else track_or_points
     if not pts or len(pts) < 2:
         return []
 
-    # 1. Curated climb override: if full curated dataset is provided, preserve directly
-    if curated_climbs and is_curated_climb_list(curated_climbs):
-        annotate_climb_surfaces(curated_climbs, road_network)
-        return list(curated_climbs)
-
-    # Apply 3-point moving average smoothing to elevations to suppress single-point GPS glitches
+    # 3-point moving average smoothing to elevations to suppress single-point GPS glitches
     smoothed_eles: List[float] = []
     n = len(pts)
     for i in range(n):
@@ -1005,83 +1021,31 @@ def detect_climbs(
     climbs: List[Climb] = []
     climb_counter = 1
 
-    in_climb = False
-    start_idx = 0
-    max_ele_seen = smoothed_eles[0]
-    max_ele_idx = 0
+    i = 0
+    while i < n - 1:
+        if smoothed_eles[i + 1] <= smoothed_eles[i]:
+            i += 1
+            continue
 
-    for i in range(1, n):
-        ele = smoothed_eles[i]
+        start_idx = i
+        max_ele_seen = smoothed_eles[i + 1]
+        max_ele_idx = i + 1
 
-        if not in_climb:
-            if ele > smoothed_eles[i - 1]:
-                # Onset of potential ascent
-                in_climb = True
-                start_idx = i - 1
-                max_ele_seen = ele
-                max_ele_idx = i
-        else:
+        j = i + 1
+        while j < n:
+            ele = smoothed_eles[j]
             if ele > max_ele_seen:
                 max_ele_seen = ele
-                max_ele_idx = i
+                max_ele_idx = j
             else:
                 gain_so_far = max_ele_seen - smoothed_eles[start_idx]
-                tol = max(20.0, min(45.0, 0.20 * gain_so_far))
+                tol = max(15.0, min(40.0, 0.20 * gain_so_far))
                 drop_from_peak = max_ele_seen - ele
-                dist_from_peak_km = float(pts[i][3]) - float(pts[max_ele_idx][3])
+                dist_from_peak_km = float(pts[j][3]) - float(pts[max_ele_idx][3])
+                if drop_from_peak > tol or dist_from_peak_km > 1.0:
+                    break
+            j += 1
 
-                # Climb termination conditions
-                if drop_from_peak > tol or dist_from_peak_km > 1.5:
-                    # Evaluate candidate climb bounded by [start_idx, max_ele_idx]
-                    length_km = float(pts[max_ele_idx][3]) - float(pts[start_idx][3])
-                    gain_m = max_ele_seen - smoothed_eles[start_idx]
-
-                    if length_km >= min_len_km:
-                        avg_grade = (gain_m / (length_km * 1000.0)) * 100.0
-                        is_valid = (
-                            (length_km >= 0.5 and avg_grade >= 5.0)
-                            or (length_km >= 2.0 and avg_grade >= 4.0)
-                            or (gain_m >= min_gain_m and avg_grade >= min_grade)
-                        )
-                        if is_valid:
-                            # Valid climb detected!
-                            fiets = calculate_fiets_index(gain_m, length_km * 1000.0, max_ele_seen)
-                            cat = classify_climb_category(fiets, gain_m, length_km * 1000.0, avg_grade)
-                            max_g = compute_rolling_max_grade(pts, start_idx, max_ele_idx)
-                            max_g = max(max_g, round(avg_grade, 1))
-
-                            start_pt = pts[start_idx]
-                            summit_pt = pts[max_ele_idx]
-                            c_id = f"climb-{climb_counter}"
-                            c_name = f"Climb {climb_counter} (Mile {round(km_to_miles(start_pt[3]), 1)})"
-
-                            climb_obj = Climb(
-                                id=c_id,
-                                name=c_name,
-                                start_km=start_pt[3],
-                                end_km=summit_pt[3],
-                                length_km=length_km,
-                                elevation_gain_m=gain_m,
-                                avg_grade=round(avg_grade, 1),
-                                max_grade=max_g,
-                                category=cat,
-                                fiets_score=fiets,
-                                start_ele_m=smoothed_eles[start_idx],
-                                summit_ele_m=max_ele_seen,
-                                difficulty=ClimbCategory(cat).difficulty if cat in ClimbCategory._value2member_map_ else "moderate",
-                                state=default_state,
-                                start_coords=(float(start_pt[0]), float(start_pt[1])),
-                                summit_coords=(float(summit_pt[0]), float(summit_pt[1])),
-                            )
-                            climbs.append(climb_obj)
-                            climb_counter += 1
-
-                    # Reset to look for next climb
-                    in_climb = False
-                    start_idx = i
-
-    # Terminal point check
-    if in_climb and max_ele_idx > start_idx:
         length_km = float(pts[max_ele_idx][3]) - float(pts[start_idx][3])
         gain_m = max_ele_seen - smoothed_eles[start_idx]
         if length_km >= min_len_km:
@@ -1121,6 +1085,11 @@ def detect_climbs(
                     summit_coords=(float(summit_pt[0]), float(summit_pt[1])),
                 )
                 climbs.append(climb_obj)
+                climb_counter += 1
+                i = max_ele_idx
+                continue
+
+        i = start_idx + 1
 
     # Annotate surface info
     annotate_climb_surfaces(climbs, road_network)
@@ -1134,7 +1103,7 @@ def detect_climbs(
         default_state=default_state,
     )
 
-    # Apply curated climb overrides if provided
+    # Apply curated climb overrides if provided (transfer researched names and notes)
     if curated_climbs:
         apply_curated_climbs(climbs, curated_climbs)
 

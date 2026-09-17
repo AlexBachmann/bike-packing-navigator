@@ -518,7 +518,7 @@ def run_ingest(config: IngestConfig) -> IngestResult:
             existing_c = load_curated_climbs(target_dir / "climbs.json")
             if is_curated_climb_list(existing_c):
                 curated_climbs = existing_c
-                logger.info(f"Preserving {len(curated_climbs)} curated climbs from {target_dir / 'climbs.json'}")
+                logger.info(f"Mapping previous climb research from {target_dir / 'climbs.json'}")
 
         climbs = detect_climbs(
             track,
