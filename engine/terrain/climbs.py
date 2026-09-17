@@ -986,6 +986,11 @@ def detect_climbs(
     if not pts or len(pts) < 2:
         return []
 
+    # 1. Curated climb override: if full curated dataset is provided, preserve directly
+    if curated_climbs and is_curated_climb_list(curated_climbs):
+        annotate_climb_surfaces(curated_climbs, road_network)
+        return list(curated_climbs)
+
     # Apply 3-point moving average smoothing to elevations to suppress single-point GPS glitches
     smoothed_eles: List[float] = []
     n = len(pts)
@@ -1031,9 +1036,14 @@ def detect_climbs(
                     length_km = float(pts[max_ele_idx][3]) - float(pts[start_idx][3])
                     gain_m = max_ele_seen - smoothed_eles[start_idx]
 
-                    if length_km >= min_len_km and gain_m >= min_gain_m:
+                    if length_km >= min_len_km:
                         avg_grade = (gain_m / (length_km * 1000.0)) * 100.0
-                        if avg_grade >= min_grade:
+                        is_valid = (
+                            (length_km >= 0.5 and avg_grade >= 5.0)
+                            or (length_km >= 2.0 and avg_grade >= 4.0)
+                            or (gain_m >= min_gain_m and avg_grade >= min_grade)
+                        )
+                        if is_valid:
                             # Valid climb detected!
                             fiets = calculate_fiets_index(gain_m, length_km * 1000.0, max_ele_seen)
                             cat = classify_climb_category(fiets, gain_m, length_km * 1000.0, avg_grade)
@@ -1074,9 +1084,14 @@ def detect_climbs(
     if in_climb and max_ele_idx > start_idx:
         length_km = float(pts[max_ele_idx][3]) - float(pts[start_idx][3])
         gain_m = max_ele_seen - smoothed_eles[start_idx]
-        if length_km >= min_len_km and gain_m >= min_gain_m:
+        if length_km >= min_len_km:
             avg_grade = (gain_m / (length_km * 1000.0)) * 100.0
-            if avg_grade >= min_grade:
+            is_valid = (
+                (length_km >= 0.5 and avg_grade >= 5.0)
+                or (length_km >= 2.0 and avg_grade >= 4.0)
+                or (gain_m >= min_gain_m and avg_grade >= min_grade)
+            )
+            if is_valid:
                 fiets = calculate_fiets_index(gain_m, length_km * 1000.0, max_ele_seen)
                 cat = classify_climb_category(fiets, gain_m, length_km * 1000.0, avg_grade)
                 max_g = compute_rolling_max_grade(pts, start_idx, max_ele_idx)
@@ -1124,3 +1139,59 @@ def detect_climbs(
         apply_curated_climbs(climbs, curated_climbs)
 
     return climbs
+
+
+def generate_climb_research_dossier(
+    climbs: List[Climb],
+    route_name: str = "",
+    towns: Optional[List[Dict[str, Any]]] = None,
+) -> List[Dict[str, Any]]:
+    """
+    Generate a structured research dossier for every candidate climb to guide
+    agent investigation via web search, Wikipedia, and route guidebooks.
+    """
+    dossier: List[Dict[str, Any]] = []
+    for c in climbs:
+        nearby_town_str = ""
+        if towns:
+            closest_t = min(towns, key=lambda t: abs(float(t.get("routeKm", t.get("km", 0.0))) - c.start_km))
+            dist_t = c.start_km - float(closest_t.get("routeKm", closest_t.get("km", 0.0)))
+            dir_str = "ahead" if dist_t < 0 else "behind"
+            nearby_town_str = f"{closest_t.get('name', '')} ({abs(dist_t):.1f}km {dir_str})"
+
+        queries = [
+            f'"{route_name}" "mile {round(c.start_mile, 1)}"',
+            f'"{route_name}" "km {round(c.start_km, 1)}"',
+        ]
+        if nearby_town_str:
+            t_name = nearby_town_str.split(" (")[0]
+            queries.append(f'"{route_name}" "{t_name}" climb OR pass')
+
+        item = {
+            "climb_id": c.id,
+            "route_km": f"{c.start_km:.1f} -> {c.end_km:.1f}",
+            "route_mile": f"{c.start_mile:.1f} -> {c.end_mile:.1f}",
+            "length_km": c.length_km,
+            "elevation_gain_m": c.elevation_gain_m,
+            "avg_grade_pct": c.avg_grade,
+            "max_grade_pct": c.max_grade,
+            "category": c.category,
+            "summit_elevation_m": c.summit_ele_m,
+            "start_coords": list(c.start_coords) if c.start_coords else None,
+            "summit_coords": list(c.summit_coords) if c.summit_coords else None,
+            "state_province": c.state,
+            "nearby_town": nearby_town_str or None,
+            "road_class": c.road_class,
+            "surface": c.surface,
+            "current_name": c.name,
+            "suggested_queries": queries,
+            "curation_target_fields": {
+                "name": "Authentic pass, ridge, or divide name",
+                "trailName": "Official trail name or Forest Service Road (FSR)",
+                "parkName": "National Forest, Provincial Park, or Wilderness area",
+                "landmark": "Prominent mountain peak(s) or river canyon",
+                "notes": "Rich 3-5 sentence tactical narrative for bikepackers",
+            }
+        }
+        dossier.append(item)
+    return dossier

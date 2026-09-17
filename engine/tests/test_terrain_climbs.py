@@ -167,6 +167,17 @@ class TestClimbDetection:
         climbs = detect_climbs(pts, min_len_km=0.5, min_gain_m=50.0, min_grade=3.0)
         assert len(climbs) == 0
 
+    def test_canonical_user_rule_short_steep_climb(self):
+        # 600m climb gaining 36m (6.0% grade) -> qualifies because length >= 0.5km and grade >= 5.0%
+        pts = [
+            (38.0, -106.0, 1000.0 + i * 6.0, i * 0.1, i * 0.062)
+            for i in range(7)
+        ]
+        climbs = detect_climbs(pts)
+        assert len(climbs) == 1
+        assert climbs[0].length_km == pytest.approx(0.6, abs=0.05)
+        assert climbs[0].avg_grade == pytest.approx(6.0, abs=0.2)
+
     def test_multi_climb_segmentation(self):
         # Climb 1: 0.0 to 4.0 km (+240m)
         # Valley: 4.0 to 10.0 km (-240m then flat)

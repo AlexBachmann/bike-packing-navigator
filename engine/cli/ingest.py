@@ -514,7 +514,7 @@ def run_ingest(config: IngestConfig) -> IngestResult:
         if config.climbs_file and config.climbs_file.exists():
             curated_climbs = load_curated_climbs(config.climbs_file)
             logger.info(f"Loaded {len(curated_climbs)} curated climbs from {config.climbs_file}")
-        elif (target_dir / "climbs.json").exists() and not config.force:
+        elif (target_dir / "climbs.json").exists():
             existing_c = load_curated_climbs(target_dir / "climbs.json")
             if is_curated_climb_list(existing_c):
                 curated_climbs = existing_c
@@ -532,7 +532,7 @@ def run_ingest(config: IngestConfig) -> IngestResult:
         if config.passes_file and config.passes_file.exists():
             curated = load_curated_passes(config.passes_file)
             logger.info(f"Loaded {len(curated)} curated passes from {config.passes_file}")
-        elif (target_dir / "passes.json").exists() and not config.force:
+        elif (target_dir / "passes.json").exists():
             existing = load_curated_passes(target_dir / "passes.json")
             if is_curated_pass_list(existing):
                 curated = existing

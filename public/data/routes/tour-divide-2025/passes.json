@@ -2,6 +2,18 @@
   {
     "id": "elk-pass",
     "name": "Elk Pass",
+    "km": 77.2,
+    "route_km": 77.2,
+    "elevation_m": 1930.0,
+    "elevation_ft": 6332.0,
+    "coordinates": [
+      50.598,
+      -115.086
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "climb-14",
     "state": "BC/AB",
     "routeMile": 48.0,
     "routeKm": 77.2,
@@ -15,6 +27,18 @@
   {
     "id": "red-meadow-pass",
     "name": "Red Meadow Pass",
+    "km": 532.5,
+    "route_km": 532.5,
+    "elevation_m": 1461.0,
+    "elevation_ft": 4793.0,
+    "coordinates": [
+      48.785,
+      -114.531
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": null,
     "state": "MT",
     "routeMile": 330.9,
     "routeKm": 532.5,
@@ -28,6 +52,18 @@
   {
     "id": "whitefish-divide",
     "name": "Whitefish Divide",
+    "km": 557.1,
+    "route_km": 557.1,
+    "elevation_m": 1253.0,
+    "elevation_ft": 4111.0,
+    "coordinates": [
+      48.65,
+      -114.45
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "whitefish-divide",
     "state": "MT",
     "routeMile": 346.2,
     "routeKm": 557.1,
@@ -41,6 +77,18 @@
   {
     "id": "richmond-peak",
     "name": "Richmond Peak Summit",
+    "km": 815.4,
+    "route_km": 815.4,
+    "elevation_m": 1322.0,
+    "elevation_ft": 4337.0,
+    "coordinates": [
+      47.16,
+      -113.43
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "richmond-peak",
     "state": "MT",
     "routeMile": 506.7,
     "routeKm": 815.4,
@@ -54,6 +102,18 @@
   {
     "id": "stemple-pass",
     "name": "Stemple Pass",
+    "km": 944.0,
+    "route_km": 944.0,
+    "elevation_m": 1666.0,
+    "elevation_ft": 5466.0,
+    "coordinates": [
+      46.85,
+      -112.44
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "stemple-pass",
     "state": "MT",
     "routeMile": 586.6,
     "routeKm": 944.0,
@@ -67,6 +127,18 @@
   {
     "id": "fleecer-ridge",
     "name": "Fleecer Ridge Summit",
+    "km": 1189.4,
+    "route_km": 1189.4,
+    "elevation_m": 1880.0,
+    "elevation_ft": 6168.0,
+    "coordinates": [
+      45.83,
+      -112.78
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": null,
     "state": "MT",
     "routeMile": 739.1,
     "routeKm": 1189.4,
@@ -80,6 +152,18 @@
   {
     "id": "medicine-lodge-pass",
     "name": "Medicine Lodge Pass",
+    "km": 1379.5,
+    "route_km": 1379.5,
+    "elevation_m": 2347.0,
+    "elevation_ft": 7700.0,
+    "coordinates": [
+      44.57,
+      -113.06
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "medicine-lodge-pass",
     "state": "MT/ID",
     "routeMile": 857.2,
     "routeKm": 1379.5,
@@ -93,6 +177,18 @@
   {
     "id": "red-rock-pass",
     "name": "Red Rock Pass",
+    "km": 1545.1,
+    "route_km": 1545.1,
+    "elevation_m": 2147.0,
+    "elevation_ft": 7044.0,
+    "coordinates": [
+      44.59,
+      -111.52
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "red-rock-pass",
     "state": "ID/MT",
     "routeMile": 960.1,
     "routeKm": 1545.1,
@@ -106,6 +202,18 @@
   {
     "id": "union-pass",
     "name": "Union Pass",
+    "km": 1851.0,
+    "route_km": 1851.0,
+    "elevation_m": 2771.0,
+    "elevation_ft": 9091.0,
+    "coordinates": [
+      43.48,
+      -109.91
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "union-pass",
     "state": "WY",
     "routeMile": 1150.2,
     "routeKm": 1851.0,
@@ -119,6 +227,18 @@
   {
     "id": "south-pass",
     "name": "South Pass",
+    "km": 2064.4,
+    "route_km": 2064.4,
+    "elevation_m": 2298.0,
+    "elevation_ft": 7539.0,
+    "coordinates": [
+      42.34,
+      -108.92
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "south-pass",
     "state": "WY",
     "routeMile": 1282.8,
     "routeKm": 2064.4,
@@ -132,6 +252,18 @@
   {
     "id": "boreas-pass",
     "name": "Boreas Pass",
+    "km": 2717.0,
+    "route_km": 2717.0,
+    "elevation_m": 3495.0,
+    "elevation_ft": 11467.0,
+    "coordinates": [
+      39.41,
+      -105.97
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "boreas-pass",
     "state": "CO",
     "routeMile": 1688.3,
     "routeKm": 2717.0,
@@ -145,6 +277,18 @@
   {
     "id": "marshall-pass",
     "name": "Marshall Pass",
+    "km": 2897.3,
+    "route_km": 2897.3,
+    "elevation_m": 3308.0,
+    "elevation_ft": 10853.0,
+    "coordinates": [
+      38.39,
+      -106.25
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "marshall-pass",
     "state": "CO",
     "routeMile": 1800.3,
     "routeKm": 2897.3,
@@ -158,6 +302,18 @@
   {
     "id": "carnero-pass",
     "name": "Carnero Pass",
+    "km": 3051.0,
+    "route_km": 3051.0,
+    "elevation_m": 2750.0,
+    "elevation_ft": 9022.0,
+    "coordinates": [
+      37.95,
+      -106.41
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "carnero-pass",
     "state": "CO",
     "routeMile": 1895.8,
     "routeKm": 3051.0,
@@ -171,6 +327,18 @@
   {
     "id": "indiana-pass",
     "name": "Indiana Pass (Course High Point)",
+    "km": 3134.8,
+    "route_km": 3134.8,
+    "elevation_m": 3537.0,
+    "elevation_ft": 11604.0,
+    "coordinates": [
+      37.47,
+      -106.5
+    ],
+    "osm_id": null,
+    "is_high_point": true,
+    "is_iconic": true,
+    "climb_id": "indiana-pass",
     "state": "CO",
     "routeMile": 1947.9,
     "routeKm": 3134.8,
@@ -184,6 +352,18 @@
   {
     "id": "brazos-ridge",
     "name": "Brazos Ridge Overlook",
+    "km": 3254.7,
+    "route_km": 3254.7,
+    "elevation_m": 3297.0,
+    "elevation_ft": 10817.0,
+    "coordinates": [
+      36.92,
+      -106.33
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": "brazos-ridge",
     "state": "NM",
     "routeMile": 2022.4,
     "routeKm": 3254.7,
@@ -197,6 +377,18 @@
   {
     "id": "polvadera-mesa",
     "name": "Polvadera Mesa",
+    "km": 3404.2,
+    "route_km": 3404.2,
+    "elevation_m": 2434.0,
+    "elevation_ft": 7986.0,
+    "coordinates": [
+      36.2,
+      -106.47
+    ],
+    "osm_id": null,
+    "is_high_point": false,
+    "is_iconic": true,
+    "climb_id": null,
     "state": "NM",
     "routeMile": 2115.3,
     "routeKm": 3404.2,

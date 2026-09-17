@@ -98,6 +98,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_climbs.add_argument("--corridor-geojson", help="Optional corridor GeoJSON for pass matching")
     p_climbs.add_argument("--corridor-pmtiles", help="Optional corridor PMTiles archive for road network matching")
     p_climbs.add_argument("--state", default="", help="State/province code for landmark enrichment")
+    p_climbs.add_argument("--dossier", help="Output path to export structured climb research dossier for agent investigation")
 
     # 5. Surfaces Subcommand
     p_surfaces = subparsers.add_parser(
@@ -250,6 +251,14 @@ def execute_climbs(args: argparse.Namespace) -> int:
     curated_climb_tag = f" ({len(curated_climbs)} curated climbs)" if curated_climbs else ""
     print(f"[Climbs] Extracted {len(climbs)} climbs to {out_climbs}{curated_climb_tag}")
     print(f"[Passes] Extracted {len(passes)} passes to {out_passes}{curated_tag}")
+
+    if getattr(args, "dossier", None):
+        from engine.terrain.climbs import generate_climb_research_dossier
+        dossier = generate_climb_research_dossier(climbs, route_name=args.state or "")
+        dossier_path = Path(args.dossier)
+        atomic_write_json(dossier_path, dossier)
+        print(f"[Climbs] Exported research dossier for {len(dossier)} climbs to {dossier_path}")
+
     return 0
 
 
