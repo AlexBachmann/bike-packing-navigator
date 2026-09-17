@@ -609,7 +609,12 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     # Stage 8: Google Places POIs
     # -------------------------------------------------------------------------
     s_t0 = time.time()
-    towns = read_json(config.towns_file) if config.towns_file and config.towns_file.exists() else None
+    towns = None
+    if config.towns_file and config.towns_file.exists():
+        towns = read_json(config.towns_file)
+    elif (target_dir / "towns.json").exists():
+        towns = read_json(target_dir / "towns.json")
+
     water_sources = read_json(config.water_file) if config.water_file and config.water_file.exists() else []
     if not isinstance(water_sources, list):
         water_sources = []
