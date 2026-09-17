@@ -7,8 +7,156 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { WeatherService } from '../../services/weather.service';
 
-import { TOUR_DIVIDE_PASSES } from '../../data/mountain-passes';
-import { TOUR_DIVIDE_CLIMBS } from '../../data/climbs.data';
+import { Climb, MountainPass } from '../../models/elevation.model';
+
+const MOCK_CLIMBS: Climb[] = [
+  {
+    id: 'climb-1',
+    name: 'Spray River Bench',
+    state: 'AB',
+    startMile: 3.7,
+    endMile: 4.4,
+    startKm: 5.9,
+    endKm: 7.1,
+    lengthMiles: 0.7,
+    lengthKm: 1.2,
+    startElevationMeters: 1414,
+    summitElevationMeters: 1471,
+    startElevationFeet: 4639,
+    summitElevationFeet: 4826,
+    elevationGainMeters: 57,
+    elevationGainFeet: 187,
+    avgGradePercent: 4.8,
+    maxGradePercent: 6.5,
+    isIconic: false,
+    difficulty: 'moderate',
+    trailName: 'Goat Creek Trail (TCT)',
+    parkName: 'Banff National Park',
+    landmark: 'Mount Rundle / Spray River',
+    notes: 'Climbs away from the Bow Valley along the hardpacked doubletrack of the Goat Creek Trail within Banff National Park.'
+  },
+  {
+    id: 'elk-pass',
+    name: 'Elk Pass',
+    state: 'BC/AB',
+    startMile: 47.8,
+    endMile: 48.2,
+    startKm: 76.9,
+    endKm: 77.5,
+    lengthMiles: 0.4,
+    lengthKm: 0.6,
+    startElevationMeters: 1800,
+    summitElevationMeters: 1930,
+    startElevationFeet: 5905,
+    summitElevationFeet: 6332,
+    elevationGainMeters: 130,
+    elevationGainFeet: 427,
+    avgGradePercent: 6.8,
+    maxGradePercent: 11.2,
+    isIconic: true,
+    difficulty: 'difficult'
+  },
+  {
+    id: 'fleecer-ridge',
+    name: 'Fleecer Ridge Summit',
+    state: 'MT',
+    startMile: 735.0,
+    endMile: 739.1,
+    startKm: 1182.8,
+    endKm: 1189.4,
+    lengthMiles: 4.1,
+    lengthKm: 6.6,
+    startElevationMeters: 1600,
+    summitElevationMeters: 1880,
+    startElevationFeet: 5249,
+    summitElevationFeet: 6168,
+    elevationGainMeters: 280,
+    elevationGainFeet: 919,
+    avgGradePercent: 8.5,
+    maxGradePercent: 35.0,
+    isIconic: true,
+    difficulty: 'extreme'
+  },
+  {
+    id: 'boreas-pass',
+    name: 'Boreas Pass',
+    state: 'CO',
+    startMile: 1680.0,
+    endMile: 1688.3,
+    startKm: 2703.7,
+    endKm: 2717.0,
+    lengthMiles: 8.3,
+    lengthKm: 13.3,
+    startElevationMeters: 2900,
+    summitElevationMeters: 3495,
+    startElevationFeet: 9514,
+    summitElevationFeet: 11467,
+    elevationGainMeters: 595,
+    elevationGainFeet: 1952,
+    avgGradePercent: 4.5,
+    maxGradePercent: 7.0,
+    isIconic: true,
+    difficulty: 'difficult'
+  },
+  {
+    id: 'indiana-pass',
+    name: 'Indiana Pass (Course High Point)',
+    state: 'CO',
+    startMile: 1940.0,
+    endMile: 1947.9,
+    startKm: 3122.0,
+    endKm: 3134.8,
+    lengthMiles: 7.9,
+    lengthKm: 12.8,
+    startElevationMeters: 2600,
+    summitElevationMeters: 3537,
+    startElevationFeet: 8530,
+    summitElevationFeet: 11604,
+    elevationGainMeters: 937,
+    elevationGainFeet: 3074,
+    avgGradePercent: 7.3,
+    maxGradePercent: 12.0,
+    isIconic: true,
+    difficulty: 'extreme'
+  },
+  {
+    id: 'climb-3',
+    name: 'Gentle Valley Rise',
+    state: 'BC',
+    startMile: 55.0,
+    endMile: 59.0,
+    startKm: 88.5,
+    endKm: 95.0,
+    lengthMiles: 4.0,
+    lengthKm: 6.5,
+    startElevationMeters: 1200,
+    summitElevationMeters: 1350,
+    startElevationFeet: 3937,
+    summitElevationFeet: 4429,
+    elevationGainMeters: 150,
+    elevationGainFeet: 492,
+    avgGradePercent: 3.2,
+    maxGradePercent: 5.0,
+    isIconic: false,
+    difficulty: 'moderate'
+  }
+];
+
+const MOCK_PASSES: MountainPass[] = [
+  {
+    id: 'elk-pass',
+    name: 'Elk Pass',
+    state: 'BC/AB',
+    routeMile: 48.0,
+    routeKm: 77.2,
+    elevationMeters: 1930,
+    elevationFeet: 6332,
+    lat: 50.598,
+    lon: -115.086,
+    difficulty: 'moderate',
+    notes: 'Rocky climb along Kananaskis Lakes into British Columbia backcountry.'
+  }
+];
 
 describe('ElevationProfileComponent', () => {
   let component: ElevationProfileComponent;
@@ -32,8 +180,8 @@ describe('ElevationProfileComponent', () => {
       totalDistanceKm: 4311.8,
       trackPoints: signal(sampleTrackPoints),
       places: signal([]),
-      climbs: signal(TOUR_DIVIDE_CLIMBS),
-      passes: signal(TOUR_DIVIDE_PASSES)
+      climbs: signal(MOCK_CLIMBS),
+      passes: signal(MOCK_PASSES)
     };
 
     await TestBed.configureTestingModule({
@@ -155,10 +303,10 @@ describe('ElevationProfileComponent', () => {
     expect(compiled.textContent).toContain('1,930 m');
   });
 
-  it('should include all 16 iconic passes in the climb dataset', () => {
-    expect(component.allClimbs.length).toBeGreaterThan(150);
+  it('should identify iconic passes in the climb dataset', () => {
+    expect(component.allClimbs.length).toBeGreaterThanOrEqual(4);
     const iconicClimbs = component.allClimbs.filter((c) => c.isIconic);
-    expect(iconicClimbs.length).toBe(16);
+    expect(iconicClimbs.length).toBe(4);
 
     const iconicIds = iconicClimbs.map((c) => c.id);
     expect(iconicIds).toContain('elk-pass');

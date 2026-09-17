@@ -639,6 +639,17 @@ def run_ingest(config: IngestConfig) -> IngestResult:
             except Exception:
                 places = []
 
+        if places and water_sources:
+            existing_ids = {p.id for p in places}
+            added = 0
+            for ws in water_sources:
+                if ws.get("id") and ws.get("id") not in existing_ids:
+                    places.append(Place.from_dict(ws))
+                    existing_ids.add(ws["id"])
+                    added += 1
+            if added:
+                places.sort(key=lambda p: p.route_mile)
+
         if not places:
             # Wrap water sources as Places directly
             if water_sources:
@@ -725,8 +736,22 @@ def run_ingest(config: IngestConfig) -> IngestResult:
     s_t0 = time.time()
     if not config.no_manifest:
         try:
-            # Build list of iconic checkpoints from towns/passes
-            ckpt_names = [m.name for m in milestones if m.name not in (config.start_location, config.end_location)][:5]
+            # Build list of iconic checkpoints from passes and towns
+            iconic_pass_names = [
+                p.name for p in passes
+                if getattr(p, "is_iconic", False) or getattr(p, "is_high_point", False) or getattr(p, "difficulty", "") in ("difficult", "extreme")
+            ]
+            real_milestones = [
+                m.name for m in milestones
+                if m.name not in (config.start_location, config.end_location)
+                and not m.name.startswith("Checkpoint Km")
+            ]
+            if iconic_pass_names:
+                ckpt_names = iconic_pass_names[:12]
+            elif real_milestones:
+                ckpt_names = real_milestones[:10]
+            else:
+                ckpt_names = [m.name for m in milestones if m.name not in (config.start_location, config.end_location)][:5]
             highest_pt = ""
             for p in passes:
                 if p.is_high_point:

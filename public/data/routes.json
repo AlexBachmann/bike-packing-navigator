@@ -331,11 +331,18 @@
       "highestPoint": "Indiana Pass (Course High Point)",
       "iconicPass": "Indiana Pass (Course High Point)",
       "iconicCheckpoints": [
-        "Checkpoint Km 50",
-        "Checkpoint Km 100",
-        "Checkpoint Km 150",
-        "Elkford",
-        "Checkpoint Km 210"
+        "Elk Pass",
+        "Red Meadow Pass",
+        "Whitefish Divide",
+        "Richmond Peak Summit",
+        "Stemple Pass",
+        "Fleecer Ridge Summit",
+        "Medicine Lodge Pass",
+        "Red Rock Pass",
+        "Union Pass",
+        "South Pass",
+        "Boreas Pass",
+        "Marshall Pass"
       ],
       "description": "The premier self-supported ultra-distance bikepacking race across the Continental Divide from Banff, Alberta, Canada to the Mexican border in Antelope Wells, New Mexico.",
       "startCoordinates": [
