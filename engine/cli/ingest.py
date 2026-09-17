@@ -625,23 +625,34 @@ def run_ingest(config: IngestConfig) -> IngestResult:
 
     places: List[Place] = []
     if config.skip_places:
-        # Wrap water sources as Places directly
-        if water_sources:
-            places = fetch_places_along_route(
-                track=track,
-                api_key=config.api_key,
-                towns=towns,
-                water_sources=water_sources,
-                search_radius_m=config.search_radius_m,
-                mock_mode=True,
-            )
-            # Retain only water items
-            places = [p for p in places if p.category == "water"]
+        if (target_dir / "places.json").exists() and (target_dir / "places.json").stat().st_size > 1000:
+            try:
+                raw_existing = read_json(target_dir / "places.json", default=[])
+                if isinstance(raw_existing, list) and len(raw_existing) > len(water_sources):
+                    places = [Place.from_dict(p) for p in raw_existing]
+                    logger.info(f"Preserving {len(places)} existing POIs from {target_dir / 'places.json'}")
+            except Exception:
+                places = []
+
+        if not places:
+            # Wrap water sources as Places directly
+            if water_sources:
+                places = fetch_places_along_route(
+                    track=track,
+                    api_key=config.api_key,
+                    towns=towns,
+                    water_sources=water_sources,
+                    search_radius_m=config.search_radius_m,
+                    mock_mode=True,
+                )
+                # Retain only water items
+                places = [p for p in places if p.category == "water"]
+
         atomic_write_json(target_dir / "places.json", [p.to_dict() for p in places])
         datasets_created.append("places.json")
         s_dur = time.time() - s_t0
-        stages.append(StageTiming("places", s_dur, True, f"Skipped API ({len(places)} water POIs written)"))
-        print(f"[Stage 8/10] Places API skipped ({len(places)} water waypoints saved) ({s_dur:.2f}s)")
+        stages.append(StageTiming("places", s_dur, True, f"Preserved/Skipped API ({len(places)} POIs written)"))
+        print(f"[Stage 8/10] Places API skipped ({len(places)} POIs written) ({s_dur:.2f}s)")
     else:
         try:
             places = fetch_places_along_route(

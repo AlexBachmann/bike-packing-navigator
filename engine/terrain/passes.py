@@ -104,9 +104,12 @@ def load_curated_passes(passes_file: Union[str, Path]) -> List[MountainPass]:
         ele_m = item.get("elevation_m", item.get("elevationMeters", 0.0))
         ele_ft = item.get("elevation_ft", item.get("elevationFeet", meters_to_feet(ele_m)))
         km_val = item.get("km", item.get("routeKm", 0.0))
+        name_val = item.get("name", "")
+        is_hp = bool(item.get("is_high_point", False)) or ("high point" in name_val.lower())
+        is_iconic = bool(item.get("is_iconic", True))
         p = MountainPass(
             id=item.get("id", ""),
-            name=item.get("name", ""),
+            name=name_val,
             km=km_val,
             elevation_m=ele_m,
             elevation_ft=ele_ft,
@@ -114,8 +117,8 @@ def load_curated_passes(passes_file: Union[str, Path]) -> List[MountainPass]:
             state=item.get("state", ""),
             difficulty=item.get("difficulty", "moderate"),
             notes=item.get("notes", ""),
-            is_high_point=bool(item.get("is_high_point", False)),
-            is_iconic=bool(item.get("is_iconic", False)),
+            is_high_point=is_hp,
+            is_iconic=is_iconic,
             climb_id=item.get("climb_id"),
         )
         passes.append(p)
@@ -436,10 +439,15 @@ def extract_mountain_passes(
 
     # 1. Curated pass override: preserve authentic hand-crafted passes
     if curated_passes:
+        if not any(p.is_high_point for p in curated_passes) and curated_passes:
+            highest = max(curated_passes, key=lambda p: p.elevation_m)
+            highest.is_high_point = True
+            highest.is_iconic = True
+
         if climbs:
             for c in climbs:
                 for p in curated_passes:
-                    if abs(p.km - c.end_km) <= 1.5:
+                    if abs(p.km - c.end_km) <= 3.5:
                         c.pass_id = p.id
                         p.climb_id = c.id
                         if p.is_iconic:

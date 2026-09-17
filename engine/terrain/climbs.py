@@ -399,9 +399,16 @@ def annotate_climb_surfaces(
                         c.start_coords[0], c.start_coords[1], max_dist_m=100.0
                     )
                     if match:
-                        matched_hw = match.way.highway_class
-                        matched_surf = match.way.surface
-                        matched_tt = match.way.tracktype
+                        way = getattr(match, "way", None)
+                        if way is None and hasattr(road_network_or_corridor, "ways"):
+                            if isinstance(road_network_or_corridor.ways, list) and 0 <= match.way_id < len(road_network_or_corridor.ways):
+                                way = road_network_or_corridor.ways[match.way_id]
+                            elif isinstance(road_network_or_corridor.ways, dict) and match.way_id in road_network_or_corridor.ways:
+                                way = road_network_or_corridor.ways[match.way_id]
+                        tags = getattr(way, "tags", {}) if way else (getattr(match, "tags", {}) or {})
+                        matched_hw = getattr(way, "highway", None) or getattr(match, "highway", None)
+                        matched_surf = getattr(way, "surface", None) or tags.get("surface")
+                        matched_tt = getattr(way, "tracktype", None) or tags.get("tracktype")
             except Exception:
                 pass
 
@@ -685,12 +692,18 @@ def extract_dominant_trail_name(
     for lat, lon in sampled:
         try:
             match = road_network.find_nearest_way(lat, lon, threshold_m=100.0)
-            if match and hasattr(road_network, "ways") and match.way_id in road_network.ways:
-                way = road_network.ways[match.way_id]
-                w_name = way.name or way.tags.get("tiger:name_base") or way.tags.get("ref") or ""
-                w_name = w_name.strip()
-                if w_name and w_name.lower() not in ("unnamed", "track", "path", "trail"):
-                    name_counts[w_name] += 1
+            if match and hasattr(road_network, "ways"):
+                way = None
+                if isinstance(road_network.ways, list) and 0 <= match.way_id < len(road_network.ways):
+                    way = road_network.ways[match.way_id]
+                elif isinstance(road_network.ways, dict) and match.way_id in road_network.ways:
+                    way = road_network.ways[match.way_id]
+                if way:
+                    tags = getattr(way, "tags", {}) or {}
+                    w_name = getattr(way, "name", "") or tags.get("tiger:name_base") or tags.get("ref") or ""
+                    w_name = w_name.strip()
+                    if w_name and w_name.lower() not in ("unnamed", "track", "path", "trail"):
+                        name_counts[w_name] += 1
         except Exception:
             continue
 
@@ -907,12 +920,13 @@ def apply_curated_climbs(climbs: List[Climb], curated_climbs: List[Climb]) -> Li
 
     for c in climbs:
         best_match = None
-        min_dist_km = 2.5
+        min_dist_km = 3.5
         for cur in curated_climbs:
-            if c.id == cur.id:
-                best_match = cur
-                break
             dist_km = min(abs(c.end_km - cur.end_km), abs(c.start_km - cur.start_km))
+            if c.id == cur.id and dist_km <= 5.0:
+                best_match = cur
+                min_dist_km = dist_km
+                break
             if dist_km < min_dist_km:
                 min_dist_km = dist_km
                 best_match = cur
