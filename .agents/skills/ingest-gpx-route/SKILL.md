@@ -135,20 +135,34 @@ docker compose exec -T app python3 -m engine.cli.main climbs \
 ```
 The resulting `climbs_raw_<route-id>.json` contains all detected climbs with physical metrics (start/end mile, elevation gain, average/max grade, UCI category) and default `"researched": false`. The dossier provides coordinates, nearest OSM way names, and geographic context.
 
-#### Phase 2: Micro-Geographic Investigation of ALL Climbs (100% of Climbs)
+#### Phase 2: Micro-Geographic & Folklore Investigation of ALL Climbs (100% of Climbs)
 The agent opens the dossier and inspects **every single climb**:
 1. **Coordinate & Mile Proximity**: Look up `summit_coords` `(lat, lon)` and route mile marker against regional topography, mountain massifs, passes, saddles, valleys, creeks, provincial/state parks, and national forests.
-2. **Authentic Naming**:
-   - If a formal or colloquial pass/summit name exists (e.g. *Crossing Creek Pass*, *Fleecer Ridge*, *Richmond Gap*, *Boreas Pass*), use it.
-   - If no formal summit name exists, assign an authentic geographic descriptor based on the massif, valley, or drainage (e.g. *Upper Crossing Creek Valley Ascent*, *Elk Valley Rim*, *Red Canyon Summit*).
+2. **Route Folklore & Community Vernacular Mining (The DotWatcher & Trail Lore Protocol)**:
+   Bikepacking routes are living cultural events with rich race history and dotwatcher lore. Topographic maps often list a mundane creek or saddle name (e.g. *Crossing Creek*), while the bikepacking community universally knows the ascent by an infamous moniker (e.g. *Koko Claims hike-a-bike*).
+   - **Mandatory Folklore Discovery Queries**: For every Cat HC, Cat 1, Cat 2 climb, and major pass/gap along the route, run targeted web searches before finalizing names:
+     - `"<Route Name>" "<nearest town, creek, or drainage>" ("hike-a-bike" OR "notorious" OR "climb" OR "pass" OR "lore")`
+     - `"<Route Name>" site:dotwatcher.cc "<mile marker, valley, or checkpoint>"`
+     - `"<Route Name>" site:bikepacking.com "<climb or valley or pass>"`
+     - `"<Route Name>" "hike a bike" OR "steepest" OR "rocky" OR "claims"`
+   - Check official cue sheets, race manuals, DotWatcher commentary, and bikepacking.com route guides for racer colloquialisms (e.g., *Koko Claims*, *Fleecer Ridge*, *The Wall*, *Blowout Mountain*, *Richmond Ridge*, *Brazos Ridge*, *Separation Creek*).
+3. **Authentic Naming & Dual-Naming Standard**:
+   - **Dual-Naming Format**: When both a formal geographic name and a legendary race/community moniker exist, use the dual-naming standard: `Geographic Feature (Folklore Alias)` or `Folklore Alias (Geographic Feature)`.
+     - *Examples*: `Crossing Creek Pass (Koko Claims)`, `Fleecer Mountain Ascent (Fleecer Ridge)`, `Round Prairie Ascent (The Wall)`, `Richmond Peak / Gap (Richmond Ridge)`.
+   - **Single Formal Name**: If no separate race moniker exists, use the verified pass or summit name (e.g. *Boreas Pass*, *Union Pass*, *Indiana Pass*, *Marshall Pass*).
+   - **Geographic Descriptor**: If no formal summit name exists, assign an authentic geographic descriptor based on the massif, valley, or drainage (e.g. *Upper Crossing Creek Valley Ascent*, *Elk Valley Rim*, *Red Canyon Summit*).
    - **NEVER** leave a generic placeholder like `Climb 13 (Mile 98.4)`.
-3. **The 5 Core Enrichment Attributes**:
-   - `name`: Authentic summit, pass, or geographic ridge name.
-   - `trailName`: Verified trail or Forest Service Road (FSR), e.g. `Elk Valley FSR` or `High Rockies Trail`.
+4. **The 5 Core Enrichment Attributes**:
+   - `name`: Authentic summit, pass, or dual name combining geography + race folklore.
+   - `trailName`: Verified trail, Forest Service Road (FSR), or singletrack, e.g. `Elk Valley FSR / Koko Claims` or `High Rockies Trail`.
    - `parkName`: Verified public land, provincial park, or national forest jurisdiction, e.g. `Elk Valley / Crossing Creek` or `White River National Forest`.
-   - `landmark`: Prominent topographic peak, massif, or water body, e.g. `Crossing Creek Valley` or `Mt. Lawrence Grassi`.
-   - `notes`: Tactical narrative advice describing the ascent, road/trail surface character, gradient ramps, tree cover/exposure, and water sources.
-4. **The Quality Flag**:
+   - `landmark`: Prominent topographic peak, massif, or water body, e.g. `Crossing Creek Pass` or `Mt. Lawrence Grassi`.
+   - `notes`: **Four-Dimensional Tactical Guidebook Narrative**:
+     1. *Lore & Race Reputation*: Historical nicknames, race stories, dotwatcher notoriety, or route creator commentary.
+     2. *Surface & Rideability Reality*: Rideable spin vs. mandatory hike-a-bike; loose baby-head boulders, washouts, shale, or impassable peanut-butter mud when wet.
+     3. *Tactical Strategy*: Pacing, daylight/night-riding advisories, gearing, water availability before/after the ridge.
+     4. *Wilderness Hazards*: Exposure above treeline, lightning risk, grizzly corridors, or dry water carries.
+5. **The Quality Flag**:
    - Set `"researched": true` on that climb in `route/curation/climbs_<route-id>.json`.
    - **100% of climbs in `route/curation/climbs_<route-id>.json` must have `"researched": true`**.
 
@@ -163,13 +177,13 @@ Alongside climbs, synthesize:
 
 Compare the visual rendering in the application UI:
 
-| Attribute | ❌ REJECTED (Formulaic / Unresearched) | ✅ ACCEPTED (Authentic Guidebook Standard) |
-| :--- | :--- | :--- |
-| **Title** | `Climb 13 (Mile 98.4)` | `Crossing Creek Pass` |
-| **Context Strip** | `🌲 Elk Valley FSR` *(park & landmark missing)* | `🌲 Elk Valley FSR • 🏞️ Elk Valley / Crossing Creek • ⛰️ Crossing Creek Valley` |
-| **Guidebook Notes** | *"Sustained climb gaining 1150 ft over 3.2 mi with an average grade of 6.8% and pitches up to 11.2%."*<br>*(Lazy repetition of numbers already shown on the card)* | *"Gravel forest service road climbing out of the Elk Valley into the Crossing Creek drainage. Steady moderate gradients through pine forest with occasional views of the Continental Divide."* |
-| **Research Flag** | `"researched": false` | `"researched": true` |
-| **Quality Audit** | ❌ **FAILS QUALITY GATE** (exits code 1) | ✅ **PASSES QUALITY GATE** |
+| Attribute | ❌ REJECTED (Formulaic / Unresearched) | ⚠️ MEDIOCRE (Geographic Only - Lacks Lore) | ✅ ACCEPTED (Authentic Guidebook & Lore Standard) |
+| :--- | :--- | :--- | :--- |
+| **Title** | `Climb 13 (Mile 98.4)` | `Crossing Creek Pass` | `Crossing Creek Pass (Koko Claims)` |
+| **Context Strip** | `🌲 Elk Valley FSR` *(park & landmark missing)* | `🌲 Elk Valley FSR • 🏞️ Elk Valley • ⛰️ Crossing Creek` | `🌲 Elk Valley FSR / Koko Claims • 🏞️ Elk Valley / Crossing Creek • ⛰️ Crossing Creek Pass` |
+| **Guidebook Notes** | *"Sustained climb gaining 2494 ft over 8.2 mi with an average grade of 5.8% and pitches up to 11.2%."*<br>*(Lazy repetition of numbers already shown on the card)* | *"Gravel forest service road climbing out of the Elk Valley into the Crossing Creek drainage. Steady moderate gradients through pine forest."*<br>*(Sterile GIS report; completely misses the notorious hike-a-bike)* | *"Infamous in Tour Divide folklore as the brutal 'Koko Claims' hike-a-bike. While the initial lower climb on Elk Valley FSR is rideable, the upper 2 miles turn into a steep, washed-out boulder field of loose baby-head rocks forcing loaded riders to push. Dense grizzly bear habitat—carry bear spray accessible."* |
+| **Research Flag** | `"researched": false` | `"researched": true` | `"researched": true` |
+| **Quality Audit** | ❌ **FAILS QUALITY GATE** (exits code 1) | ⚠️ Pass audit, but poor human experience | ✅ **PASSES QUALITY GATE & DELIGHTS RIDERS** |
 
 ---
 
@@ -241,11 +255,15 @@ Route enrichment combines automated geospatial algorithms with agent research:
 
 ### 1. The 5 Core Enrichment Attributes
 In `climbs.json`, enrich each climb with:
-1. **`name`**: An authentic, evocative summit/ridge/pass name (e.g. `Mount Smolikas Summit Ridge (CP1)`, `Boreas Pass Ascent`, `Marshall Pass Summit`) instead of generic numbered placeholders.
-2. **`trailName`**: The verified trail name or highway classification from OSM (`highway=path|track`, `name`, `network=ncn`, `ref`), e.g. `High Rockies Trail (TCT)` or `Colorado Trail Segment 4`.
+1. **`name`**: An authentic, evocative summit/ridge/pass name adhering to the dual-naming standard when a race moniker exists (e.g. `Crossing Creek Pass (Koko Claims)`, `Fleecer Mountain Ascent (Fleecer Ridge)`, `Mount Smolikas Summit Ridge (CP1)`, `Boreas Pass Ascent`, `Marshall Pass Summit`) instead of generic numbered placeholders.
+2. **`trailName`**: The verified trail name, FSR, or highway classification from OSM (`highway=path|track`, `name`, `network=ncn`, `ref`), e.g. `Elk Valley FSR / Koko Claims`, `High Rockies Trail (TCT)`, or `Colorado Trail Segment 4`.
 3. **`parkName`**: Public lands, provincial park, national park, or national forest jurisdiction (`boundary=protected_area`, `national_park`), e.g. `Spray Valley Provincial Park` or `White River National Forest`.
-4. **`landmark`**: Prominent mountain peaks, massifs, or water bodies (`natural=peak`, `water=lake|pond|reservoir`), e.g. `Mt. Lawrence Grassi / Goat Pond`.
-5. **`notes`**: Tactical narrative advice describing the ascent, surroundings, surface difficulty, water warnings, and summit views.
+4. **`landmark`**: Prominent mountain peaks, massifs, or water bodies (`natural=peak`, `water=lake|pond|reservoir`), e.g. `Mt. Lawrence Grassi / Goat Pond` or `Crossing Creek Pass`.
+5. **`notes`**: Four-dimensional tactical narrative advice synthesizing:
+   - *Lore & Reputation*: Infamous race nicknames, dotwatcher legends, or historical route context.
+   - *Surface Reality*: Rideability, rock size (baby-heads), washouts, or peanut butter mud warnings.
+   - *Tactical Strategy*: Pacing, gearing, daylight timing, and water carrying advice.
+   - *Wilderness Hazards*: Lightning risk, grizzly corridor presence, exposure above treeline.
 6. **`researched`**: Boolean flag set to `true` once authentic research has been completed.
 
 ### 2. Application UI Rendering

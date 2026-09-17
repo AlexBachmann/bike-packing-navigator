@@ -739,8 +739,13 @@ def run_ingest(config: IngestConfig) -> IngestResult:
             # Build list of iconic checkpoints from passes and towns
             iconic_pass_names = [
                 p.name for p in passes
-                if getattr(p, "is_iconic", False) or getattr(p, "is_high_point", False) or getattr(p, "difficulty", "") in ("difficult", "extreme")
+                if getattr(p, "is_iconic", False) or getattr(p, "is_high_point", False)
             ]
+            if not iconic_pass_names:
+                iconic_pass_names = [
+                    p.name for p in passes
+                    if getattr(p, "difficulty", "") in ("difficult", "extreme")
+                ]
             real_milestones = [
                 m.name for m in milestones
                 if m.name not in (config.start_location, config.end_location)
