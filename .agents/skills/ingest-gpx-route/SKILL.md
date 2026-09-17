@@ -65,17 +65,37 @@ Available subcommands for `engine.cli.main`:
 ### Step 1: Place the GPX File & Determine Metadata
 Place or locate the user's GPX file in the workspace (e.g., `route/<filename>.gpx`).
 Determine:
-- **Route ID Slug**: Lowercase, hyphenated (e.g., `colorado-trail`, `arizona-trail`, `timber-trail`).
+- **Route ID Slug**: Lowercase, hyphenated (e.g., `colorado-trail`, `arizona-trail`, `timber-trail`, `hellenic-mountain-race-2026`).
 - **Full Name**: e.g., `The Colorado Trail`.
 - **Short Name**: e.g., `Colorado Trail`.
-- **Badge**: 2–3 letter uppercase abbreviation (e.g., `CT`, `AZT`, `TT`).
+- **Badge**: 2–3 letter uppercase abbreviation (e.g., `CT`, `AZT`, `TT`, `HMR`).
 - **Start / End Locations**: e.g., `Denver (Waterton Canyon), CO` to `Durango, CO`.
 
 ---
 
-### Step 2: Run the Master Pipeline (One-Command Ingestion)
+### Step 2: Agent Route Research & Curation (The Guidebook Investigation)
 
-Execute the unified engine master orchestrator inside Docker:
+> [!IMPORTANT]
+> **The Agent's Role as Trail Curator**: Do NOT simply run the ingestion command blindly without research. Bikepack Navigator is an authoritative digital guidebook and race companion. The agent is expected to actively investigate the route using web search and document reading tools before or alongside ingestion.
+
+#### 1. What to Research
+Use `search_web` and `read_url_content` to find:
+1. **Official Route & Race Manuals**: Search `"<route-name> bikepacking guide"`, `bikepacking.com/routes/<slug>`, `dotwatcher.cc`, race handbooks (e.g., Tour Divide, Silk Road Mountain Race, Hellenic Mountain Race, Atlas Mountain Race, Arizona Trail, Colorado Trail).
+2. **Iconic Mountain Passes & Checkpoints**: Identify official race checkpoints (e.g., `CP1 Smolikas`, `CP2 Metsovo`), notorious summits, high points, and iconic passes that riders talk about.
+3. **Critical Water Carries & Drought Hazards**: Search for trail association water reports (e.g., ATA Water Report, FarOut / Guthook updates), trail angel water caches (e.g., Freeman Road cache), and 30–60+ mile dry stretches.
+4. **Terrain Cruxes & Hike-a-Bike Sectors**: Note brutal elevation profiles, scree fields, river fords, and lightning-exposed ridgelines.
+
+#### 2. Synthesizing Curated Files
+When research reveals route-specific checkpoints, iconic passes, or water caches, save them in the repository:
+- **`route/curation/passes_<route-id>.json`**: List of authentic mountain passes and checkpoints with names, elevations, coordinates, and tactical notes.
+- **`route/curation/climbs_<route-id>.json`**: Specific climb naming, landmark overrides, and tactical notes.
+- **`route/places/water_<route-id>.json`**: Coordinates and descriptions of reliable backcountry water caches, springs, and wells.
+
+---
+
+### Step 3: Run the Master Pipeline (One-Command Ingestion)
+
+Execute the unified engine master orchestrator inside Docker, passing any curated files discovered in Step 2:
 
 ```bash
 docker compose exec -T app python3 -m engine.cli.main ingest \
@@ -89,7 +109,9 @@ docker compose exec -T app python3 -m engine.cli.main ingest \
   --description "<Engaging route summary description>" \
   [--find-water-access] \
   [--segment-km 5.0] \
-  [--water "route/places/water_<route-id>.json"]
+  [--water "route/places/water_<route-id>.json"] \
+  [--passes "route/curation/passes_<route-id>.json"] \
+  [--climbs "route/curation/climbs_<route-id>.json"]
 ```
 
 *Direct module alternative:*
@@ -107,7 +129,7 @@ The orchestrator automatically executes all 10 pipeline stages in sequence:
 3. **Viterbi Road Snapping**: Aligns raw GPS trackpoints with true OSM way centerlines within 50m using a Hidden Markov Model, producing `guidance-track.json`.
 4. **Vector Tile Generation**: Generates offline vector tile corridor via Tippecanoe (`corridor.pmtiles`).
 5. **Surface Modeling**: Maps Viterbi-matched guidance track ways directly onto canonical GPX race odometer mileage to produce contiguous surface intervals (`surfaces.json`).
-6. **Climb & Pass Intelligence**: Analyzes elevation profiles to categorize climbs, detect mountain passes, and enrich them with authentic geographic names, parks, and landmarks (`climbs.json`, `passes.json`).
+6. **Climb & Pass Intelligence**: Analyzes elevation profiles to categorize climbs, detect mountain passes, and enrich them with authentic geographic names, parks, and landmarks (`climbs.json`, `passes.json`). Preserves any curated passes/climbs provided in Step 2.
 7. **POI & Water Resupply Enrichment**: Searches Google Places API (within free-tier bounds) and projects custom backcountry water caches into `places.json`.
 8. **Town & Resupply Service Intervals**: Identifies resupply hubs, calculates hydration/food intervals, and classifies town stops.
 9. **Navigation Milestones**: Generates checkpoints at regular intervals (e.g., every ~35 miles) and major junction towns (`milestones.json`).
@@ -115,27 +137,42 @@ The orchestrator automatically executes all 10 pipeline stages in sequence:
 
 ---
 
-## Climb Intelligence & Geographic Enrichment (The Trail Guidebook Pattern)
+## The Two-Tier Curation Architecture
 
-Raw GPX elevation segmentation often produces generic auto-generated names (e.g. *"Climb south of Banff"*, *"Climb to Summit at Mile 14.2"*). To turn the app into an immersive trail companion, enrich climbs with authentic geographic identity using OpenStreetMap and regional knowledge:
+Route enrichment combines automated geospatial algorithms with agent research:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│               TIER 1: AUTOMATED ENGINE HARVESTING                     │
+│  - Underlying OSM way query -> dominant trailName / roadClass         │
+│  - Overpass / GeoJSON peak extraction within 3.5km -> landmark        │
+│  - National park / protected area polygon containment -> parkName     │
+│  - Fiets index calculation -> UCI Category (HC / Cat 1-4)             │
+│  - Rolling-window maximum grade calculation & elevation gain          │
+│  - Algorithmic pass detection (prominence >= 150m, 15km deduplication)│
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│               TIER 2: AGENT RESEARCH & HUMAN CONTEXT                  │
+│  - Search official race manuals, dotwatcher.cc, bikepacking.com       │
+│  - Official Checkpoint names (CP1, CP2, CP3) & finish cutoffs         │
+│  - Iconic passes & summits known to racers (e.g., Fleecer Ridge)      │
+│  - Tactical advice notes: hike-a-bike shale, water drought carries     │
+│  - Verified water cache boxes (ATA caches, trail angels)              │
+│  - Applied via --passes, --climbs, --water or in route/curation/       │
+└────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 1. The 5 Core Enrichment Attributes
 In `climbs.json`, enrich each climb with:
-1. **`name`**: An authentic, evocative summit/ridge/pass name (e.g. `Goat Pond Overlook`, `Boreas Pass Ascent`, `Marshall Pass Summit`) instead of generic numbered placeholders.
+1. **`name`**: An authentic, evocative summit/ridge/pass name (e.g. `Mount Smolikas Summit Ridge (CP1)`, `Boreas Pass Ascent`, `Marshall Pass Summit`) instead of generic numbered placeholders.
 2. **`trailName`**: The verified trail name or highway classification from OSM (`highway=path|track`, `name`, `network=ncn`, `ref`), e.g. `High Rockies Trail (TCT)` or `Colorado Trail Segment 4`.
 3. **`parkName`**: Public lands, provincial park, national park, or national forest jurisdiction (`boundary=protected_area`, `national_park`), e.g. `Spray Valley Provincial Park` or `White River National Forest`.
 4. **`landmark`**: Prominent mountain peaks, massifs, or water bodies (`natural=peak`, `water=lake|pond|reservoir`), e.g. `Mt. Lawrence Grassi / Goat Pond`.
-5. **`notes`**: A concise 1–2 sentence narrative describing the ascent, surroundings, surface difficulty, and summit views.
+5. **`notes`**: Tactical narrative advice describing the ascent, surroundings, surface difficulty, water warnings, and summit views.
 
-### 2. OSM Discovery Workflow
-To extract these details for any climb:
-1. **Query Trail Ways**: Match the route track coordinates against OSM ways within 35 meters (`highway in ['path', 'track', 'unclassified']`). Extract `name`, `ref`, and relation membership (`route=bicycle|mtb|hiking`).
-2. **Query Regional Parks**: Query overlapping or containing boundaries (`boundary=protected_area`, `national_park`, `nature_reserve`).
-3. **Query Peaks & Lakes**: Search nodes/ways within 3.5 km of the summit coordinate for `natural=peak`, `mountain_pass=yes`, or `natural=water`.
-4. **Automated Pipeline**: When running the ingestion pipeline (`python3 -m engine.cli.main ingest` or standalone `python3 -m engine.cli.main climbs`), pass `--osm-pbf path/to/corridor.osm.pbf` to run spatial matching automatically.
-5. **Wikipedia / Regional Ingestion**: For major iconic climbs or passes, consult Wikipedia or local trail guides (e.g., via `read_url_content`) to discover cultural history, peak names, and trail context.
-
-### 3. Application UI Rendering
+### 2. Application UI Rendering
 The Angular frontend (`ElevationProfileComponent`) automatically detects these fields:
 - **Title & Header**: Displays `climb.name` alongside summit elevation and distance span.
 - **Context Strip**: Renders `🌲 {climb.trailName} • 🏞️ {climb.parkName} • ⛰️ {climb.landmark}` immediately below the title.
@@ -248,7 +285,7 @@ The Angular frontend recognizes `"water"` natively:
 
 ---
 
-## Step 3: Verification & Integrity Testing
+### Step 4: Verification & Integrity Testing
 
 Once the data files are generated and the route is registered in `routes.json`:
 
