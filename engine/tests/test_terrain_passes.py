@@ -189,3 +189,90 @@ class TestUnifiedPassPipelineAndClimbLinking:
         p = passes[0]
         assert p.climb_id == "test-climb-1"
         assert climb.pass_id == p.id
+
+    def test_summit_spacing_and_deduplication(self):
+        # 3 local peaks close together (e.g. within 2 km of each other on a high ridge)
+        # Peak 1 at 10km (2200m, prom 200m)
+        # Peak 2 at 11km (2250m, prom 250m) - dominant peak!
+        # Peak 3 at 12km (2190m, prom 190m)
+        pts = [
+            (38.0, -106.0, 2000.0, 0.0, 0.0),
+            (38.0, -106.0, 2200.0, 10.0, 6.2), # Peak 1
+            (38.0, -106.0, 2180.0, 10.5, 6.5),
+            (38.0, -106.0, 2250.0, 11.0, 6.8), # Peak 2 (dominant)
+            (38.0, -106.0, 2170.0, 11.5, 7.1),
+            (38.0, -106.0, 2190.0, 12.0, 7.5), # Peak 3
+            (38.0, -106.0, 2000.0, 25.0, 15.5),
+        ]
+        passes = detect_saddles_and_high_points(
+            pts,
+            min_prominence_m=150.0,
+            min_spacing_km=15.0
+        )
+        # The 3 peaks should be coalesced into 1 pass (the dominant peak at 11km, 2250m)
+        assert len(passes) == 1
+        assert passes[0].km == 11.0
+        assert passes[0].elevation_m == 2250.0
+
+    def test_curated_passes_preservation(self, tmp_path):
+        from engine.terrain.passes import is_curated_pass_list, load_curated_passes
+        curated_file = tmp_path / "passes.json"
+        sample_data = [
+            {
+                "id": "indiana-pass",
+                "name": "Indiana Pass (Course High Point)",
+                "routeMile": 1947.9,
+                "routeKm": 3134.8,
+                "elevationMeters": 3537,
+                "elevationFeet": 11604,
+                "lat": 37.47,
+                "lon": -106.50,
+                "difficulty": "extreme",
+                "notes": "The highest elevation on the entire 2,679-mile route."
+            }
+        ]
+        import json
+        curated_file.write_text(json.dumps(sample_data), encoding="utf-8")
+
+        loaded = load_curated_passes(curated_file)
+        assert len(loaded) == 1
+        assert loaded[0].name == "Indiana Pass (Course High Point)"
+        assert loaded[0].km == 3134.8
+        assert is_curated_pass_list(loaded) is True
+
+        # Pipeline with curated passes returns them directly
+        pts = [(37.47, -106.50, 3537.0, 3134.8, 1947.9), (37.48, -106.51, 3500.0, 3140.0, 1951.1)]
+        passes = extract_mountain_passes(pts, curated_passes=loaded)
+        assert len(passes) == 1
+        assert passes[0].id == "indiana-pass"
+
+    def test_evocative_climb_naming_enrichment(self):
+        # Generic summit should inherit climb name if climb has an authentic name
+        track_points = [
+            (38.00, -106.0, 2000.0, 0.0, 0.0),
+            (38.05, -106.0, 2400.0, 5.0, 3.1),
+            (38.10, -106.0, 2800.0, 10.0, 6.2), # summit of climb
+            (38.15, -106.0, 2200.0, 20.0, 12.4),
+            (38.20, -106.0, 3200.0, 40.0, 24.8), # separate higher peak
+            (38.25, -106.0, 2000.0, 60.0, 37.2),
+        ]
+        climb = Climb(
+            id="marshall-pass-climb",
+            name="Marshall Pass Ascent",
+            start_km=0.0,
+            end_km=10.0,
+            length_km=10.0,
+            elevation_gain_m=800.0,
+            avg_grade=8.0,
+            max_grade=12.0,
+        )
+        passes = extract_mountain_passes(
+            track_points,
+            climbs=[climb],
+            prominence_m=150.0,
+            min_spacing_km=15.0
+        )
+        assert len(passes) >= 1
+        pass_at_summit = next(p for p in passes if abs(p.km - 10.0) < 1.0)
+        assert pass_at_summit.name == "Marshall Pass Ascent Summit"
+

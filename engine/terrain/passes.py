@@ -4,7 +4,9 @@ OSM saddle node matching, route high-point detection, and climb linking.
 """
 
 from dataclasses import dataclass, field
+import json
 import math
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 from engine.terrain.climbs import Climb
@@ -65,6 +67,7 @@ class MountainPass:
             "coordinates": [round(self.coordinates[0], 5), round(self.coordinates[1], 5)],
             "osm_id": self.osm_id,
             "is_high_point": self.is_high_point,
+            "is_iconic": self.is_iconic,
             "climb_id": self.climb_id,
 
             # Frontend camelCase keys
@@ -78,6 +81,63 @@ class MountainPass:
             "difficulty": self.difficulty,
             "notes": self.notes or f"Mountain pass and elevation checkpoint at {round(self.elevation_m)}m."
         }
+
+
+# -----------------------------------------------------------------------------
+# Curated Pass Helpers
+# -----------------------------------------------------------------------------
+
+def load_curated_passes(passes_file: Union[str, Path]) -> List[MountainPass]:
+    """
+    Load MountainPass domain objects from an existing curated JSON file.
+    """
+    path = Path(passes_file)
+    if not path.exists():
+        return []
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    passes: List[MountainPass] = []
+    for item in data:
+        coords = item.get("coordinates")
+        if not coords:
+            coords = [item.get("lat", 0.0), item.get("lon", 0.0)]
+        ele_m = item.get("elevation_m", item.get("elevationMeters", 0.0))
+        ele_ft = item.get("elevation_ft", item.get("elevationFeet", meters_to_feet(ele_m)))
+        km_val = item.get("km", item.get("routeKm", 0.0))
+        p = MountainPass(
+            id=item.get("id", ""),
+            name=item.get("name", ""),
+            km=km_val,
+            elevation_m=ele_m,
+            elevation_ft=ele_ft,
+            coordinates=(float(coords[0]), float(coords[1])),
+            state=item.get("state", ""),
+            difficulty=item.get("difficulty", "moderate"),
+            notes=item.get("notes", ""),
+            is_high_point=bool(item.get("is_high_point", False)),
+            is_iconic=bool(item.get("is_iconic", False)),
+            climb_id=item.get("climb_id"),
+        )
+        passes.append(p)
+    return passes
+
+
+def is_curated_pass_list(passes: Sequence[Any]) -> bool:
+    """
+    Check whether a list of passes contains human-curated landmarks.
+    Returns True if any pass has authentic, non-generic naming or custom notes.
+    """
+    if not passes:
+        return False
+    for p in passes:
+        name = getattr(p, "name", "") if hasattr(p, "name") else p.get("name", "")
+        notes = getattr(p, "notes", "") if hasattr(p, "notes") else p.get("notes", "")
+        # A curated pass has an authentic named identity, not auto-generated "Summit (Mile X.X)"
+        if name and not name.startswith("Summit (Mile ") and not name.startswith("Route High Point (Mile "):
+            return True
+        if notes and not notes.startswith("Mountain pass verified by OpenStreetMap") and not notes.startswith("Topographic summit gaining"):
+            return True
+    return False
 
 
 # -----------------------------------------------------------------------------
@@ -220,19 +280,20 @@ def match_pass_nodes_to_track(
 
 def detect_saddles_and_high_points(
     track_points: Sequence[Any],
-    min_prominence_m: float = 50.0,
-    search_window_km: float = 5.0,
+    min_prominence_m: float = 150.0,
+    search_window_km: float = 10.0,
+    min_spacing_km: float = 15.0,
     default_state: str = ""
 ) -> List[MountainPass]:
     """
-    Identify topographic saddles and local summits from 1D elevation profile
-    having at least min_prominence_m (50m) ascent and descent within search_window_km (5km).
-    Also detects the route's global maximum elevation coordinate.
+    Identify topographic saddles and landmark summits from 1D elevation profile
+    having at least min_prominence_m (default 150m) ascent and descent within search_window_km (10km).
+    Clusters and deduplicates candidate summits within min_spacing_km (15km) to prevent label pileup.
+    Also detects and flags the route's global maximum elevation coordinate.
     """
     if len(track_points) < 3:
         return []
 
-    saddles: List[MountainPass] = []
     n = len(track_points)
 
     # Global high point tracking
@@ -245,7 +306,9 @@ def detect_saddles_and_high_points(
             global_max_ele = ele
             global_max_idx = i
 
-    # Topographic saddle detection
+    # Topographic saddle detection with prominence
+    raw_saddles: List[Tuple[float, MountainPass]] = []
+
     for i in range(1, n - 1):
         curr_ele = float(track_points[i][2])
         curr_km = float(track_points[i][3])
@@ -272,8 +335,9 @@ def detect_saddles_and_high_points(
 
         prominence_before = curr_ele - min_ele_before
         prominence_after = curr_ele - min_ele_after
+        prominence = min(prominence_before, prominence_after)
 
-        if prominence_before >= min_prominence_m and prominence_after >= min_prominence_m:
+        if prominence >= min_prominence_m:
             pt = track_points[i]
             s_name = f"Summit (Mile {round(km_to_miles(curr_km), 1)})"
             saddle = MountainPass(
@@ -287,7 +351,24 @@ def detect_saddles_and_high_points(
                 difficulty="moderate" if curr_ele < 2500.0 else ("difficult" if curr_ele < 3500.0 else "extreme"),
                 notes=f"Topographic summit gaining {round(prominence_before)}m with {round(prominence_after)}m descent.",
             )
-            saddles.append(saddle)
+            raw_saddles.append((prominence, saddle))
+
+    # Cluster and deduplicate saddles within min_spacing_km
+    raw_saddles.sort(key=lambda item: item[1].km)
+    saddles: List[MountainPass] = []
+    if raw_saddles:
+        clusters: List[List[Tuple[float, MountainPass]]] = []
+        for item in raw_saddles:
+            if not clusters:
+                clusters.append([item])
+            else:
+                if item[1].km - clusters[-1][-1][1].km < min_spacing_km:
+                    clusters[-1].append(item)
+                else:
+                    clusters.append([item])
+        for cluster in clusters:
+            best = max(cluster, key=lambda x: (x[0], x[1].elevation_m))[1]
+            saddles.append(best)
 
     # Flag global route high point
     high_pt = track_points[global_max_idx]
@@ -306,12 +387,13 @@ def detect_saddles_and_high_points(
         is_iconic=True,
     )
 
-    # Check if high point is already represented by an existing saddle
     matched_existing = False
     for s in saddles:
-        if abs(s.km - high_km) < 0.5:
+        if abs(s.km - high_km) < max(1.0, min_spacing_km / 2):
             s.is_high_point = True
             s.is_iconic = True
+            if s.name.startswith("Summit (Mile "):
+                s.name = f"Route High Point (Mile {round(km_to_miles(s.km), 1)})"
             matched_existing = True
             break
 
@@ -330,23 +412,42 @@ def extract_mountain_passes(
     track_or_points: Any,
     road_network: Optional[Any] = None,
     corridor_geojson: Optional[Any] = None,
-    prominence_m: float = 50.0,
+    prominence_m: float = 150.0,
     climbs: Optional[List[Climb]] = None,
     max_distance_m: float = 500.0,
-    default_state: str = ""
+    min_spacing_km: float = 15.0,
+    default_state: str = "",
+    curated_passes: Optional[List[MountainPass]] = None,
 ) -> List[MountainPass]:
     """
     Unified pass identification pipeline:
-    1. Extracts OSM pass nodes from corridor GeoJSON / road network and projects onto track (<= 500m).
-    2. Identifies topographic saddles (>= prominence_m) and flags global route high point.
-    3. Merges spatial duplicates, preferring named OSM passes over generic summits within 1.0 km.
-    4. Bidirectionally links pass summits to corresponding climbs (pass_id <-> climb_id).
+    1. If curated_passes are provided (or loaded from human-curated datasets), preserves
+       them as authoritative and links them bidirectionally to detected climbs.
+    2. Extracts OSM pass nodes from corridor GeoJSON / road network and projects onto track (<= 500m).
+    3. Identifies landmark topographic saddles (>= prominence_m, default 150m, spaced >= min_spacing_km)
+       and flags the global route high point.
+    4. Merges spatial duplicates, preferring named OSM passes over generic summits within min_spacing_km.
+    5. Bidirectionally links pass summits to corresponding climbs (pass_id <-> climb_id) and
+       enriches generic summit names using authentic climb names when available.
     """
     pts = track_or_points.points if hasattr(track_or_points, "points") else track_or_points
     if not pts or len(pts) < 2:
         return []
 
-    # 1. Match OSM pass nodes
+    # 1. Curated pass override: preserve authentic hand-crafted passes
+    if curated_passes:
+        if climbs:
+            for c in climbs:
+                for p in curated_passes:
+                    if abs(p.km - c.end_km) <= 1.5:
+                        c.pass_id = p.id
+                        p.climb_id = c.id
+                        if p.is_iconic:
+                            c.is_iconic = True
+                        break
+        return curated_passes
+
+    # 2. Match OSM pass nodes
     osm_nodes: List[Dict[str, Any]] = []
     if corridor_geojson:
         osm_nodes = extract_osm_pass_nodes(corridor_geojson)
@@ -355,39 +456,46 @@ def extract_mountain_passes(
         osm_nodes, pts, max_distance_m=max_distance_m, default_state=default_state
     )
 
-    # 2. Detect topographic saddles and high point
+    # 3. Detect topographic saddles and high point with strict prominence and spacing
     topo_passes = detect_saddles_and_high_points(
-        pts, min_prominence_m=prominence_m, default_state=default_state
+        pts,
+        min_prominence_m=prominence_m,
+        min_spacing_km=min_spacing_km,
+        default_state=default_state
     )
 
-    # 3. Merge: prefer named OSM pass over generic saddle within 1.0 km
+    # 4. Merge: prefer named OSM pass over generic saddle within min_spacing_km
     final_passes: List[MountainPass] = list(matched_osm_passes)
 
     for tp in topo_passes:
-        # Check if any OSM pass already covers this summit
-        covered_by_osm = any(abs(op.km - tp.km) <= 1.0 for op in matched_osm_passes)
-        if not covered_by_osm:
+        nearby_osm = [op for op in matched_osm_passes if abs(op.km - tp.km) <= min_spacing_km]
+        if not nearby_osm:
             final_passes.append(tp)
         elif tp.is_high_point:
-            # Transfer high point flag to the nearby OSM pass
-            for op in matched_osm_passes:
-                if abs(op.km - tp.km) <= 1.0:
-                    op.is_high_point = True
-                    op.is_iconic = True
+            closest_osm = min(nearby_osm, key=lambda op: abs(op.km - tp.km))
+            closest_osm.is_high_point = True
+            closest_osm.is_iconic = True
+            if not closest_osm.name.endswith("(Route High Point)"):
+                closest_osm.name = f"{closest_osm.name} (Route High Point)"
 
     final_passes.sort(key=lambda p: p.km)
 
-    # 4. Bidirectional linking with climbs
+    # 5. Bidirectional linking with climbs & evocative naming
     if climbs:
         for c in climbs:
-            # Climb summit is at climb.end_km
             for p in final_passes:
-                if abs(p.km - c.end_km) <= 0.5:
+                if abs(p.km - c.end_km) <= 1.5:
                     c.pass_id = p.id
                     p.climb_id = c.id
-                    # Also inherit iconic status if pass is iconic
                     if p.is_iconic:
                         c.is_iconic = True
+                    # Evocatively enrich generic summit name if climb has an authentic name
+                    if not c.name.startswith("Climb "):
+                        if p.name.startswith("Summit (Mile "):
+                            p.name = f"{c.name} Summit"
+                        elif p.name.startswith("Route High Point (Mile "):
+                            p.name = f"{c.name} Summit (Route High Point)"
                     break
 
     return final_passes
+

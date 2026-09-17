@@ -93,6 +93,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_climbs.add_argument("--track", required=True, help="Path to route-track.json or GPX file")
     p_climbs.add_argument("--output-climbs", default="climbs.json", help="Output path for climbs.json")
     p_climbs.add_argument("--output-passes", default="passes.json", help="Output path for passes.json")
+    p_climbs.add_argument("--passes", help="Path to curated passes JSON file to preserve or merge")
     p_climbs.add_argument("--corridor-geojson", help="Optional corridor GeoJSON for pass matching")
     p_climbs.add_argument("--state", default="", help="State/province code for landmark enrichment")
 
@@ -193,27 +194,35 @@ def execute_water(args: argparse.Namespace) -> int:
 def execute_climbs(args: argparse.Namespace) -> int:
     """Execute climb and pass detection."""
     from engine.terrain.climbs import detect_climbs
-    from engine.terrain.passes import extract_mountain_passes
+    from engine.terrain.passes import extract_mountain_passes, load_curated_passes
 
     track = _load_track(args.track)
     corridor_data = None
     if args.corridor_geojson and Path(args.corridor_geojson).exists():
         corridor_data = read_json(Path(args.corridor_geojson))
 
+    curated = None
+    if getattr(args, "passes", None) and Path(args.passes).exists():
+        curated = load_curated_passes(Path(args.passes))
+
     climbs = detect_climbs(track)
     passes = extract_mountain_passes(
         track_or_points=track,
         corridor_geojson=corridor_data,
         climbs=climbs,
+        prominence_m=150.0,
+        min_spacing_km=15.0,
         default_state=args.state,
+        curated_passes=curated,
     )
 
     out_climbs = Path(args.output_climbs)
     out_passes = Path(args.output_passes)
     atomic_write_json(out_climbs, [c.to_dict() for c in climbs])
     atomic_write_json(out_passes, [p.to_dict() for p in passes])
+    curated_tag = f" ({len(curated)} curated)" if curated else ""
     print(f"[Climbs] Extracted {len(climbs)} climbs to {out_climbs}")
-    print(f"[Passes] Extracted {len(passes)} passes to {out_passes}")
+    print(f"[Passes] Extracted {len(passes)} passes to {out_passes}{curated_tag}")
     return 0
 
 

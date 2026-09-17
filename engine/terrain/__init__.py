@@ -17,6 +17,8 @@ from engine.terrain.passes import (
     extract_osm_pass_nodes,
     match_pass_nodes_to_track,
     detect_saddles_and_high_points,
+    load_curated_passes,
+    is_curated_pass_list,
 )
 from engine.terrain.surfaces import (
     SurfaceType,
@@ -63,6 +65,8 @@ __all__ = [
     "extract_osm_pass_nodes",
     "match_pass_nodes_to_track",
     "detect_saddles_and_high_points",
+    "load_curated_passes",
+    "is_curated_pass_list",
     # Surfaces
     "SurfaceType",
     "SurfaceInterval",
