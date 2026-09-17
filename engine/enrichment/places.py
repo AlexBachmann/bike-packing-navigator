@@ -590,6 +590,34 @@ def fetch_places_along_route(
         if pid:
             seen_ids.add(pid)
 
+    # Ingest towns as Place entities
+    if towns:
+        for t in towns:
+            t_loc = t.get("location", {}) if isinstance(t.get("location"), dict) else {}
+            tlat = t_loc.get("lat") or t.get("lat")
+            tlon = t_loc.get("lon") or t.get("lon")
+            tname = t.get("name", "Town")
+            if tlat is not None and tlon is not None:
+                dist_km, r_km, r_mi = track_index.project_point(float(tlat), float(tlon), max_dist_km=max_off_route_m / 1000.0)
+                tid = t.get("id") or f"town_{slugify(tname, sep='_')}"
+                tp = Place(
+                    id=tid,
+                    name=tname,
+                    category="town",
+                    type=t.get("type", "town"),
+                    location=PlaceLocation(lat=float(tlat), lon=float(tlon)),
+                    distance_to_trail_km=round(t.get("distance_to_trail_km", dist_km), 3),
+                    route_km=round(t.get("route_km", r_km), 3),
+                    route_mile=round(t.get("route_mile", r_mi), 3),
+                    is_in_town=True,
+                    town=tname,
+                    address=t.get("address", ""),
+                    description=t.get("description", f"Town resupply hub: {tname}."),
+                    province_state=t.get("province_state") or t.get("state", ""),
+                    country=t.get("country", ""),
+                )
+                candidate_places.append(tp)
+
     # Ingest external water sources if provided
     if water_sources:
         for ws in water_sources:

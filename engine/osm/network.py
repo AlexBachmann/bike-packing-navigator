@@ -479,7 +479,7 @@ class OsmRoadNetwork:
                         if tile_bytes.startswith(b"\x1f\x8b"):
                             import gzip
                             tile_bytes = gzip.decompress(tile_bytes)
-                        tile_data = mapbox_vector_tile.decode(tile_bytes)
+                        tile_data = mapbox_vector_tile.decode(tile_bytes, default_options={"y_coord_down": True})
                     except Exception:
                         continue
 

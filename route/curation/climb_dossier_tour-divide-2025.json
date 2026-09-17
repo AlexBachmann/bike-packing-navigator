@@ -1,0 +1,5834 @@
+[
+  {
+    "climb_id": "climb-1",
+    "researched": false,
+    "route_km": "10.0 -> 10.6",
+    "route_mile": "6.2 -> 6.6",
+    "length_km": 0.631,
+    "elevation_gain_m": 44.3,
+    "avg_grade_pct": 7.0,
+    "max_grade_pct": 12.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 1499.8,
+    "start_coords": [
+      51.093567,
+      -115.508692
+    ],
+    "summit_coords": [
+      51.093385,
+      -115.505033
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 1 (Mile 6.2)",
+    "suggested_queries": [
+      "\"\" \"mile 6.2\"",
+      "\"\" \"km 10.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-2",
+    "researched": false,
+    "route_km": "18.5 -> 19.2",
+    "route_mile": "11.5 -> 11.9",
+    "length_km": 0.641,
+    "elevation_gain_m": 44.0,
+    "avg_grade_pct": 6.9,
+    "max_grade_pct": 25.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1659.0,
+    "start_coords": [
+      51.059509,
+      -115.431038
+    ],
+    "summit_coords": [
+      51.055302,
+      -115.432073
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 2 (Mile 11.5)",
+    "suggested_queries": [
+      "\"\" \"mile 11.5\"",
+      "\"\" \"km 18.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-3",
+    "researched": false,
+    "route_km": "19.9 -> 21.8",
+    "route_mile": "12.4 -> 13.5",
+    "length_km": 1.855,
+    "elevation_gain_m": 100.0,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 18.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1720.0,
+    "start_coords": [
+      51.050498,
+      -115.430598
+    ],
+    "summit_coords": [
+      51.035194,
+      -115.425249
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 3 (Mile 12.4)",
+    "suggested_queries": [
+      "\"\" \"mile 12.4\"",
+      "\"\" \"km 19.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-4",
+    "researched": false,
+    "route_km": "23.0 -> 23.7",
+    "route_mile": "14.3 -> 14.7",
+    "length_km": 0.744,
+    "elevation_gain_m": 60.7,
+    "avg_grade_pct": 8.2,
+    "max_grade_pct": 31.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 1726.7,
+    "start_coords": [
+      51.025856,
+      -115.418077
+    ],
+    "summit_coords": [
+      51.019498,
+      -115.416243
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Singletrack Trail",
+    "surface": "Natural Dirt / Ground",
+    "current_name": "Climb 4 (Mile 14.3)",
+    "suggested_queries": [
+      "\"\" \"mile 14.3\"",
+      "\"\" \"km 23.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-5",
+    "researched": false,
+    "route_km": "24.8 -> 26.4",
+    "route_mile": "15.4 -> 16.4",
+    "length_km": 1.609,
+    "elevation_gain_m": 71.7,
+    "avg_grade_pct": 4.5,
+    "max_grade_pct": 23.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 1760.0,
+    "start_coords": [
+      51.012391,
+      -115.40818
+    ],
+    "summit_coords": [
+      51.001468,
+      -115.393277
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 5 (Mile 15.4)",
+    "suggested_queries": [
+      "\"\" \"mile 15.4\"",
+      "\"\" \"km 24.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-6",
+    "researched": false,
+    "route_km": "62.1 -> 64.3",
+    "route_mile": "38.6 -> 40.0",
+    "length_km": 2.178,
+    "elevation_gain_m": 133.5,
+    "avg_grade_pct": 6.1,
+    "max_grade_pct": 14.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 1939.4,
+    "start_coords": [
+      50.747293,
+      -115.248259
+    ],
+    "summit_coords": [
+      50.738605,
+      -115.224582
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 6 (Mile 38.6)",
+    "suggested_queries": [
+      "\"\" \"mile 38.6\"",
+      "\"\" \"km 62.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-7",
+    "researched": false,
+    "route_km": "76.4 -> 79.1",
+    "route_mile": "47.5 -> 49.1",
+    "length_km": 2.713,
+    "elevation_gain_m": 84.0,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 13.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 1708.7,
+    "start_coords": [
+      50.701506,
+      -115.119099
+    ],
+    "summit_coords": [
+      50.67922,
+      -115.117659
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 7 (Mile 47.5)",
+    "suggested_queries": [
+      "\"\" \"mile 47.5\"",
+      "\"\" \"km 76.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-8",
+    "researched": false,
+    "route_km": "80.1 -> 80.8",
+    "route_mile": "49.8 -> 50.2",
+    "length_km": 0.749,
+    "elevation_gain_m": 47.0,
+    "avg_grade_pct": 6.3,
+    "max_grade_pct": 23.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1703.3,
+    "start_coords": [
+      50.670313,
+      -115.117761
+    ],
+    "summit_coords": [
+      50.663788,
+      -115.118941
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 8 (Mile 49.8)",
+    "suggested_queries": [
+      "\"\" \"mile 49.8\"",
+      "\"\" \"km 80.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-9",
+    "researched": false,
+    "route_km": "83.5 -> 88.0",
+    "route_mile": "51.9 -> 54.7",
+    "length_km": 4.477,
+    "elevation_gain_m": 134.4,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 16.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1820.0,
+    "start_coords": [
+      50.642776,
+      -115.114462
+    ],
+    "summit_coords": [
+      50.608796,
+      -115.100788
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 9 (Mile 51.9)",
+    "suggested_queries": [
+      "\"\" \"mile 51.9\"",
+      "\"\" \"km 83.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-10",
+    "researched": false,
+    "route_km": "88.2 -> 92.3",
+    "route_mile": "54.8 -> 57.3",
+    "length_km": 4.042,
+    "elevation_gain_m": 163.0,
+    "avg_grade_pct": 4.0,
+    "max_grade_pct": 18.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 1954.1,
+    "start_coords": [
+      50.606923,
+      -115.101938
+    ],
+    "summit_coords": [
+      50.584313,
+      -115.068437
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 10 (Mile 54.8)",
+    "suggested_queries": [
+      "\"\" \"mile 54.8\"",
+      "\"\" \"km 88.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-11",
+    "researched": false,
+    "route_km": "128.8 -> 129.4",
+    "route_mile": "80.0 -> 80.4",
+    "length_km": 0.614,
+    "elevation_gain_m": 33.1,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 8.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 1541.1,
+    "start_coords": [
+      50.308304,
+      -114.931858
+    ],
+    "summit_coords": [
+      50.304085,
+      -114.936954
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 11 (Mile 80.0)",
+    "suggested_queries": [
+      "\"\" \"mile 80.0\"",
+      "\"\" \"km 128.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-12",
+    "researched": false,
+    "route_km": "154.0 -> 154.5",
+    "route_mile": "95.7 -> 96.0",
+    "length_km": 0.516,
+    "elevation_gain_m": 36.7,
+    "avg_grade_pct": 7.1,
+    "max_grade_pct": 9.3,
+    "category": "Cat 4",
+    "summit_elevation_m": 1350.1,
+    "start_coords": [
+      50.101952,
+      -114.941576
+    ],
+    "summit_coords": [
+      50.097428,
+      -114.942943
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 12 (Mile 95.7)",
+    "suggested_queries": [
+      "\"\" \"mile 95.7\"",
+      "\"\" \"km 154.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-13",
+    "researched": false,
+    "route_km": "158.4 -> 167.3",
+    "route_mile": "98.4 -> 104.0",
+    "length_km": 8.919,
+    "elevation_gain_m": 760.2,
+    "avg_grade_pct": 8.5,
+    "max_grade_pct": 30.8,
+    "category": "HC",
+    "summit_elevation_m": 2046.0,
+    "start_coords": [
+      50.06743,
+      -114.921989
+    ],
+    "summit_coords": [
+      50.085475,
+      -115.025359
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Singletrack Trail",
+    "surface": "Natural Dirt / Ground",
+    "current_name": "Climb 13 (Mile 98.4)",
+    "suggested_queries": [
+      "\"\" \"mile 98.4\"",
+      "\"\" \"km 158.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-14",
+    "researched": false,
+    "route_km": "179.0 -> 180.7",
+    "route_mile": "111.2 -> 112.3",
+    "length_km": 1.652,
+    "elevation_gain_m": 66.0,
+    "avg_grade_pct": 4.0,
+    "max_grade_pct": 9.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 1561.6,
+    "start_coords": [
+      50.050188,
+      -115.10406
+    ],
+    "summit_coords": [
+      50.036784,
+      -115.113569
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 14 (Mile 111.2)",
+    "suggested_queries": [
+      "\"\" \"mile 111.2\"",
+      "\"\" \"km 179.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-15",
+    "researched": false,
+    "route_km": "186.8 -> 187.3",
+    "route_mile": "116.1 -> 116.4",
+    "length_km": 0.533,
+    "elevation_gain_m": 49.4,
+    "avg_grade_pct": 9.3,
+    "max_grade_pct": 13.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 1464.0,
+    "start_coords": [
+      49.9844,
+      -115.133894
+    ],
+    "summit_coords": [
+      49.980123,
+      -115.137223
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Singletrack Trail",
+    "surface": "Natural Dirt / Ground",
+    "current_name": "Climb 15 (Mile 116.1)",
+    "suggested_queries": [
+      "\"\" \"mile 116.1\"",
+      "\"\" \"km 186.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-16",
+    "researched": false,
+    "route_km": "201.0 -> 202.2",
+    "route_mile": "124.9 -> 125.6",
+    "length_km": 1.167,
+    "elevation_gain_m": 52.0,
+    "avg_grade_pct": 4.5,
+    "max_grade_pct": 5.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 1308.2,
+    "start_coords": [
+      49.861002,
+      -115.143875
+    ],
+    "summit_coords": [
+      49.851137,
+      -115.139758
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 16 (Mile 124.9)",
+    "suggested_queries": [
+      "\"\" \"mile 124.9\"",
+      "\"\" \"km 201.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-17",
+    "researched": false,
+    "route_km": "205.8 -> 206.4",
+    "route_mile": "127.9 -> 128.3",
+    "length_km": 0.633,
+    "elevation_gain_m": 43.3,
+    "avg_grade_pct": 6.8,
+    "max_grade_pct": 9.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1239.7,
+    "start_coords": [
+      49.822151,
+      -115.141365
+    ],
+    "summit_coords": [
+      49.816489,
+      -115.14071
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 17 (Mile 127.9)",
+    "suggested_queries": [
+      "\"\" \"mile 127.9\"",
+      "\"\" \"km 205.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-18",
+    "researched": false,
+    "route_km": "222.4 -> 234.7",
+    "route_mile": "138.2 -> 145.8",
+    "length_km": 12.298,
+    "elevation_gain_m": 442.0,
+    "avg_grade_pct": 3.6,
+    "max_grade_pct": 23.4,
+    "category": "Cat 3",
+    "summit_elevation_m": 1534.3,
+    "start_coords": [
+      49.685598,
+      -115.164177
+    ],
+    "summit_coords": [
+      49.610324,
+      -115.060875
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 18 (Mile 138.2)",
+    "suggested_queries": [
+      "\"\" \"mile 138.2\"",
+      "\"\" \"km 222.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-19",
+    "researched": false,
+    "route_km": "258.0 -> 261.1",
+    "route_mile": "160.3 -> 162.2",
+    "length_km": 3.067,
+    "elevation_gain_m": 93.2,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 18.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1068.6,
+    "start_coords": [
+      49.441893,
+      -115.046235
+    ],
+    "summit_coords": [
+      49.424737,
+      -115.025836
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 19 (Mile 160.3)",
+    "suggested_queries": [
+      "\"\" \"mile 160.3\"",
+      "\"\" \"km 258.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-20",
+    "researched": false,
+    "route_km": "269.2 -> 274.4",
+    "route_mile": "167.3 -> 170.5",
+    "length_km": 5.169,
+    "elevation_gain_m": 204.1,
+    "avg_grade_pct": 3.9,
+    "max_grade_pct": 9.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1201.1,
+    "start_coords": [
+      49.36538,
+      -114.979858
+    ],
+    "summit_coords": [
+      49.331925,
+      -114.944297
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 20 (Mile 167.3)",
+    "suggested_queries": [
+      "\"\" \"mile 167.3\"",
+      "\"\" \"km 269.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-21",
+    "researched": false,
+    "route_km": "279.3 -> 296.2",
+    "route_mile": "173.6 -> 184.0",
+    "length_km": 16.811,
+    "elevation_gain_m": 587.5,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 13.8,
+    "category": "Cat 3",
+    "summit_elevation_m": 1705.8,
+    "start_coords": [
+      49.30295,
+      -114.91078
+    ],
+    "summit_coords": [
+      49.284729,
+      -114.713316
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 21 (Mile 173.6)",
+    "suggested_queries": [
+      "\"\" \"mile 173.6\"",
+      "\"\" \"km 279.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-22",
+    "researched": false,
+    "route_km": "330.1 -> 332.0",
+    "route_mile": "205.1 -> 206.3",
+    "length_km": 1.918,
+    "elevation_gain_m": 60.3,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 14.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1347.0,
+    "start_coords": [
+      49.09486,
+      -114.535303
+    ],
+    "summit_coords": [
+      49.096883,
+      -114.556389
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 22 (Mile 205.1)",
+    "suggested_queries": [
+      "\"\" \"mile 205.1\"",
+      "\"\" \"km 330.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-23",
+    "researched": false,
+    "route_km": "333.6 -> 336.0",
+    "route_mile": "207.3 -> 208.8",
+    "length_km": 2.392,
+    "elevation_gain_m": 72.1,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 12.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 1426.3,
+    "start_coords": [
+      49.102524,
+      -114.576336
+    ],
+    "summit_coords": [
+      49.101426,
+      -114.607522
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 23 (Mile 207.3)",
+    "suggested_queries": [
+      "\"\" \"mile 207.3\"",
+      "\"\" \"km 333.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-24",
+    "researched": false,
+    "route_km": "371.1 -> 375.8",
+    "route_mile": "230.6 -> 233.5",
+    "length_km": 4.686,
+    "elevation_gain_m": 146.7,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 9.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 1272.3,
+    "start_coords": [
+      49.181143,
+      -114.955571
+    ],
+    "summit_coords": [
+      49.149239,
+      -114.938701
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 24 (Mile 230.6)",
+    "suggested_queries": [
+      "\"\" \"mile 230.6\"",
+      "\"\" \"km 371.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-25",
+    "researched": false,
+    "route_km": "378.3 -> 380.7",
+    "route_mile": "235.1 -> 236.6",
+    "length_km": 2.377,
+    "elevation_gain_m": 72.1,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 8.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 1301.9,
+    "start_coords": [
+      49.132834,
+      -114.92328
+    ],
+    "summit_coords": [
+      49.119781,
+      -114.909715
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 25 (Mile 235.1)",
+    "suggested_queries": [
+      "\"\" \"mile 235.1\"",
+      "\"\" \"km 378.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-26",
+    "researched": false,
+    "route_km": "390.8 -> 405.0",
+    "route_mile": "242.8 -> 251.6",
+    "length_km": 14.17,
+    "elevation_gain_m": 602.2,
+    "avg_grade_pct": 4.2,
+    "max_grade_pct": 30.4,
+    "category": "Cat 3",
+    "summit_elevation_m": 1882.3,
+    "start_coords": [
+      49.053522,
+      -114.837321
+    ],
+    "summit_coords": [
+      49.013668,
+      -114.907782
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 26 (Mile 242.8)",
+    "suggested_queries": [
+      "\"\" \"mile 242.8\"",
+      "\"\" \"km 390.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-27",
+    "researched": false,
+    "route_km": "439.5 -> 441.4",
+    "route_mile": "273.1 -> 274.3",
+    "length_km": 1.9,
+    "elevation_gain_m": 57.7,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 844.3,
+    "start_coords": [
+      48.87798,
+      -115.052153
+    ],
+    "summit_coords": [
+      48.86418,
+      -115.046623
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 27 (Mile 273.1)",
+    "suggested_queries": [
+      "\"\" \"mile 273.1\"",
+      "\"\" \"km 439.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-28",
+    "researched": false,
+    "route_km": "456.3 -> 460.7",
+    "route_mile": "283.6 -> 286.3",
+    "length_km": 4.363,
+    "elevation_gain_m": 131.2,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 9.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 1018.7,
+    "start_coords": [
+      48.805109,
+      -114.910818
+    ],
+    "summit_coords": [
+      48.82533,
+      -114.867081
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 28 (Mile 283.6)",
+    "suggested_queries": [
+      "\"\" \"mile 283.6\"",
+      "\"\" \"km 456.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-29",
+    "researched": false,
+    "route_km": "461.9 -> 479.9",
+    "route_mile": "287.0 -> 298.2",
+    "length_km": 17.977,
+    "elevation_gain_m": 607.5,
+    "avg_grade_pct": 3.4,
+    "max_grade_pct": 14.4,
+    "category": "Cat 3",
+    "summit_elevation_m": 1601.8,
+    "start_coords": [
+      48.827054,
+      -114.851876
+    ],
+    "summit_coords": [
+      48.924615,
+      -114.707143
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 29 (Mile 287.0)",
+    "suggested_queries": [
+      "\"\" \"mile 287.0\"",
+      "\"\" \"km 461.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-30",
+    "researched": false,
+    "route_km": "515.1 -> 517.0",
+    "route_mile": "320.1 -> 321.2",
+    "length_km": 1.901,
+    "elevation_gain_m": 63.6,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 7.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1186.0,
+    "start_coords": [
+      48.843499,
+      -114.355357
+    ],
+    "summit_coords": [
+      48.829256,
+      -114.361259
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 30 (Mile 320.1)",
+    "suggested_queries": [
+      "\"\" \"mile 320.1\"",
+      "\"\" \"km 515.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-31",
+    "researched": false,
+    "route_km": "526.2 -> 537.8",
+    "route_mile": "327.0 -> 334.2",
+    "length_km": 11.627,
+    "elevation_gain_m": 349.3,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 11.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 1710.3,
+    "start_coords": [
+      48.800442,
+      -114.45607
+    ],
+    "summit_coords": [
+      48.751166,
+      -114.571326
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 31 (Mile 327.0)",
+    "suggested_queries": [
+      "\"\" \"mile 327.0\"",
+      "\"\" \"km 526.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-32",
+    "researched": false,
+    "route_km": "648.5 -> 665.6",
+    "route_mile": "403.0 -> 413.6",
+    "length_km": 17.144,
+    "elevation_gain_m": 558.1,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 11.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 1481.4,
+    "start_coords": [
+      48.057839,
+      -114.021955
+    ],
+    "summit_coords": [
+      47.951693,
+      -113.951343
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 32 (Mile 403.0)",
+    "suggested_queries": [
+      "\"\" \"mile 403.0\"",
+      "\"\" \"km 648.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-33",
+    "researched": false,
+    "route_km": "666.1 -> 667.3",
+    "route_mile": "413.9 -> 414.6",
+    "length_km": 1.251,
+    "elevation_gain_m": 50.3,
+    "avg_grade_pct": 4.0,
+    "max_grade_pct": 7.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1504.8,
+    "start_coords": [
+      47.952822,
+      -113.946503
+    ],
+    "summit_coords": [
+      47.944586,
+      -113.94308
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 33 (Mile 413.9)",
+    "suggested_queries": [
+      "\"\" \"mile 413.9\"",
+      "\"\" \"km 666.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-34",
+    "researched": false,
+    "route_km": "681.9 -> 683.8",
+    "route_mile": "423.7 -> 424.9",
+    "length_km": 1.939,
+    "elevation_gain_m": 80.5,
+    "avg_grade_pct": 4.1,
+    "max_grade_pct": 7.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 1042.5,
+    "start_coords": [
+      47.88616,
+      -113.867148
+    ],
+    "summit_coords": [
+      47.87383,
+      -113.880236
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 34 (Mile 423.7)",
+    "suggested_queries": [
+      "\"\" \"mile 423.7\"",
+      "\"\" \"km 681.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-35",
+    "researched": false,
+    "route_km": "694.1 -> 694.7",
+    "route_mile": "431.3 -> 431.7",
+    "length_km": 0.559,
+    "elevation_gain_m": 29.6,
+    "avg_grade_pct": 5.3,
+    "max_grade_pct": 6.3,
+    "category": "Uncategorized",
+    "summit_elevation_m": 1004.6,
+    "start_coords": [
+      47.80133,
+      -113.856003
+    ],
+    "summit_coords": [
+      47.796822,
+      -113.859315
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 35 (Mile 431.3)",
+    "suggested_queries": [
+      "\"\" \"mile 431.3\"",
+      "\"\" \"km 694.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-36",
+    "researched": false,
+    "route_km": "701.2 -> 708.7",
+    "route_mile": "435.7 -> 440.4",
+    "length_km": 7.529,
+    "elevation_gain_m": 280.3,
+    "avg_grade_pct": 3.7,
+    "max_grade_pct": 11.1,
+    "category": "Cat 4",
+    "summit_elevation_m": 1300.5,
+    "start_coords": [
+      47.748041,
+      -113.848726
+    ],
+    "summit_coords": [
+      47.695747,
+      -113.878293
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 36 (Mile 435.7)",
+    "suggested_queries": [
+      "\"\" \"mile 435.7\"",
+      "\"\" \"km 701.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-37",
+    "researched": false,
+    "route_km": "718.5 -> 720.1",
+    "route_mile": "446.5 -> 447.5",
+    "length_km": 1.591,
+    "elevation_gain_m": 79.1,
+    "avg_grade_pct": 5.0,
+    "max_grade_pct": 6.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 1136.0,
+    "start_coords": [
+      47.662435,
+      -113.823812
+    ],
+    "summit_coords": [
+      47.650553,
+      -113.829874
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 37 (Mile 446.5)",
+    "suggested_queries": [
+      "\"\" \"mile 446.5\"",
+      "\"\" \"km 718.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-38",
+    "researched": false,
+    "route_km": "735.7 -> 739.8",
+    "route_mile": "457.2 -> 459.7",
+    "length_km": 4.083,
+    "elevation_gain_m": 130.4,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 10.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 1276.7,
+    "start_coords": [
+      47.539512,
+      -113.794859
+    ],
+    "summit_coords": [
+      47.509984,
+      -113.801396
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 38 (Mile 457.2)",
+    "suggested_queries": [
+      "\"\" \"mile 457.2\"",
+      "\"\" \"km 735.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-39",
+    "researched": false,
+    "route_km": "766.9 -> 774.0",
+    "route_mile": "476.5 -> 480.9",
+    "length_km": 7.081,
+    "elevation_gain_m": 214.8,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 9.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 1534.8,
+    "start_coords": [
+      47.422181,
+      -113.619065
+    ],
+    "summit_coords": [
+      47.397392,
+      -113.55242
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 39 (Mile 476.5)",
+    "suggested_queries": [
+      "\"\" \"mile 476.5\"",
+      "\"\" \"km 766.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-40",
+    "researched": false,
+    "route_km": "779.2 -> 789.8",
+    "route_mile": "484.2 -> 490.8",
+    "length_km": 10.581,
+    "elevation_gain_m": 565.0,
+    "avg_grade_pct": 5.3,
+    "max_grade_pct": 19.2,
+    "category": "Cat 2",
+    "summit_elevation_m": 2027.2,
+    "start_coords": [
+      47.363598,
+      -113.539766
+    ],
+    "summit_coords": [
+      47.336822,
+      -113.494921
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 40 (Mile 484.2)",
+    "suggested_queries": [
+      "\"\" \"mile 484.2\"",
+      "\"\" \"km 779.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-41",
+    "researched": false,
+    "route_km": "814.1 -> 820.7",
+    "route_mile": "505.9 -> 509.9",
+    "length_km": 6.561,
+    "elevation_gain_m": 213.2,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 11.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1502.8,
+    "start_coords": [
+      47.190893,
+      -113.433537
+    ],
+    "summit_coords": [
+      47.171024,
+      -113.36356
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 41 (Mile 505.9)",
+    "suggested_queries": [
+      "\"\" \"mile 505.9\"",
+      "\"\" \"km 814.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-42",
+    "researched": false,
+    "route_km": "829.1 -> 831.7",
+    "route_mile": "515.2 -> 516.8",
+    "length_km": 2.551,
+    "elevation_gain_m": 87.0,
+    "avg_grade_pct": 3.4,
+    "max_grade_pct": 6.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1505.3,
+    "start_coords": [
+      47.128151,
+      -113.282659
+    ],
+    "summit_coords": [
+      47.12297,
+      -113.251824
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 42 (Mile 515.2)",
+    "suggested_queries": [
+      "\"\" \"mile 515.2\"",
+      "\"\" \"km 829.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-43",
+    "researched": false,
+    "route_km": "861.6 -> 863.3",
+    "route_mile": "535.4 -> 536.5",
+    "length_km": 1.737,
+    "elevation_gain_m": 52.6,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 4.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1339.4,
+    "start_coords": [
+      47.002628,
+      -113.082868
+    ],
+    "summit_coords": [
+      47.013412,
+      -113.067221
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 43 (Mile 535.4)",
+    "suggested_queries": [
+      "\"\" \"mile 535.4\"",
+      "\"\" \"km 861.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-44",
+    "researched": false,
+    "route_km": "877.9 -> 889.7",
+    "route_mile": "545.5 -> 552.9",
+    "length_km": 11.81,
+    "elevation_gain_m": 483.9,
+    "avg_grade_pct": 4.1,
+    "max_grade_pct": 14.1,
+    "category": "Cat 3",
+    "summit_elevation_m": 1820.0,
+    "start_coords": [
+      47.049486,
+      -112.912835
+    ],
+    "summit_coords": [
+      47.04171,
+      -112.837731
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 44 (Mile 545.5)",
+    "suggested_queries": [
+      "\"\" \"mile 545.5\"",
+      "\"\" \"km 877.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-45",
+    "researched": false,
+    "route_km": "895.0 -> 896.8",
+    "route_mile": "556.1 -> 557.2",
+    "length_km": 1.812,
+    "elevation_gain_m": 64.2,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 14.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 1680.2,
+    "start_coords": [
+      47.041241,
+      -112.812962
+    ],
+    "summit_coords": [
+      47.030435,
+      -112.810783
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 45 (Mile 556.1)",
+    "suggested_queries": [
+      "\"\" \"mile 556.1\"",
+      "\"\" \"km 895.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-46",
+    "researched": false,
+    "route_km": "916.1 -> 939.2",
+    "route_mile": "569.2 -> 583.6",
+    "length_km": 23.106,
+    "elevation_gain_m": 695.5,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 14.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 2083.0,
+    "start_coords": [
+      46.944429,
+      -112.669858
+    ],
+    "summit_coords": [
+      46.857425,
+      -112.474331
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 46 (Mile 569.2)",
+    "suggested_queries": [
+      "\"\" \"mile 569.2\"",
+      "\"\" \"km 916.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-47",
+    "researched": false,
+    "route_km": "951.7 -> 969.7",
+    "route_mile": "591.4 -> 602.6",
+    "length_km": 18.015,
+    "elevation_gain_m": 575.3,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 13.5,
+    "category": "Cat 3",
+    "summit_elevation_m": 1990.2,
+    "start_coords": [
+      46.799203,
+      -112.369114
+    ],
+    "summit_coords": [
+      46.72796,
+      -112.357569
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 47 (Mile 591.4)",
+    "suggested_queries": [
+      "\"\" \"mile 591.4\"",
+      "\"\" \"km 951.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-48",
+    "researched": false,
+    "route_km": "975.0 -> 977.8",
+    "route_mile": "605.8 -> 607.6",
+    "length_km": 2.818,
+    "elevation_gain_m": 85.9,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 1867.2,
+    "start_coords": [
+      46.684952,
+      -112.35771
+    ],
+    "summit_coords": [
+      46.671935,
+      -112.329346
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 48 (Mile 605.8)",
+    "suggested_queries": [
+      "\"\" \"mile 605.8\"",
+      "\"\" \"km 975.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-49",
+    "researched": false,
+    "route_km": "984.9 -> 990.2",
+    "route_mile": "612.0 -> 615.3",
+    "length_km": 5.259,
+    "elevation_gain_m": 171.8,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 5.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 1841.2,
+    "start_coords": [
+      46.617319,
+      -112.336618
+    ],
+    "summit_coords": [
+      46.616162,
+      -112.279657
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 49 (Mile 612.0)",
+    "suggested_queries": [
+      "\"\" \"mile 612.0\"",
+      "\"\" \"km 984.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-50",
+    "researched": false,
+    "route_km": "1010.0 -> 1025.5",
+    "route_mile": "627.6 -> 637.2",
+    "length_km": 15.505,
+    "elevation_gain_m": 513.0,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 18.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 1720.4,
+    "start_coords": [
+      46.60737,
+      -112.075854
+    ],
+    "summit_coords": [
+      46.51717,
+      -112.123585
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 50 (Mile 627.6)",
+    "suggested_queries": [
+      "\"\" \"mile 627.6\"",
+      "\"\" \"km 1010.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-51",
+    "researched": false,
+    "route_km": "1033.3 -> 1046.0",
+    "route_mile": "642.1 -> 650.0",
+    "length_km": 12.733,
+    "elevation_gain_m": 596.8,
+    "avg_grade_pct": 4.7,
+    "max_grade_pct": 13.2,
+    "category": "Cat 2",
+    "summit_elevation_m": 2009.5,
+    "start_coords": [
+      46.47807,
+      -112.075072
+    ],
+    "summit_coords": [
+      46.447514,
+      -112.180795
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 51 (Mile 642.1)",
+    "suggested_queries": [
+      "\"\" \"mile 642.1\"",
+      "\"\" \"km 1033.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-52",
+    "researched": false,
+    "route_km": "1047.8 -> 1052.9",
+    "route_mile": "651.1 -> 654.3",
+    "length_km": 5.11,
+    "elevation_gain_m": 277.0,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 14.0,
+    "category": "Cat 3",
+    "summit_elevation_m": 2254.5,
+    "start_coords": [
+      46.437464,
+      -112.187739
+    ],
+    "summit_coords": [
+      46.412394,
+      -112.204313
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 52 (Mile 651.1)",
+    "suggested_queries": [
+      "\"\" \"mile 651.1\"",
+      "\"\" \"km 1047.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-53",
+    "researched": false,
+    "route_km": "1099.6 -> 1101.5",
+    "route_mile": "683.2 -> 684.5",
+    "length_km": 1.944,
+    "elevation_gain_m": 59.1,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 8.3,
+    "category": "Cat 4",
+    "summit_elevation_m": 1971.0,
+    "start_coords": [
+      46.162441,
+      -112.453712
+    ],
+    "summit_coords": [
+      46.152794,
+      -112.469523
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 53 (Mile 683.2)",
+    "suggested_queries": [
+      "\"\" \"mile 683.2\"",
+      "\"\" \"km 1099.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-54",
+    "researched": false,
+    "route_km": "1104.7 -> 1107.1",
+    "route_mile": "686.4 -> 688.0",
+    "length_km": 2.465,
+    "elevation_gain_m": 74.0,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 2052.5,
+    "start_coords": [
+      46.143154,
+      -112.49295
+    ],
+    "summit_coords": [
+      46.129852,
+      -112.515099
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 54 (Mile 686.4)",
+    "suggested_queries": [
+      "\"\" \"mile 686.4\"",
+      "\"\" \"km 1104.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-55",
+    "researched": false,
+    "route_km": "1123.7 -> 1126.8",
+    "route_mile": "698.2 -> 700.2",
+    "length_km": 3.17,
+    "elevation_gain_m": 115.7,
+    "avg_grade_pct": 3.6,
+    "max_grade_pct": 16.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 1873.0,
+    "start_coords": [
+      46.033572,
+      -112.586456
+    ],
+    "summit_coords": [
+      46.020131,
+      -112.557622
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 55 (Mile 698.2)",
+    "suggested_queries": [
+      "\"\" \"mile 698.2\"",
+      "\"\" \"km 1123.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-56",
+    "researched": false,
+    "route_km": "1144.0 -> 1153.9",
+    "route_mile": "710.8 -> 717.0",
+    "length_km": 9.922,
+    "elevation_gain_m": 298.2,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 13.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 2003.5,
+    "start_coords": [
+      45.915975,
+      -112.465128
+    ],
+    "summit_coords": [
+      45.850854,
+      -112.496251
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 56 (Mile 710.8)",
+    "suggested_queries": [
+      "\"\" \"mile 710.8\"",
+      "\"\" \"km 1144.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-57",
+    "researched": false,
+    "route_km": "1155.1 -> 1156.7",
+    "route_mile": "717.7 -> 718.8",
+    "length_km": 1.649,
+    "elevation_gain_m": 59.0,
+    "avg_grade_pct": 3.6,
+    "max_grade_pct": 6.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 2050.0,
+    "start_coords": [
+      45.842037,
+      -112.496937
+    ],
+    "summit_coords": [
+      45.833269,
+      -112.510036
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 57 (Mile 717.7)",
+    "suggested_queries": [
+      "\"\" \"mile 717.7\"",
+      "\"\" \"km 1155.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-58",
+    "researched": false,
+    "route_km": "1157.2 -> 1162.5",
+    "route_mile": "719.0 -> 722.3",
+    "length_km": 5.306,
+    "elevation_gain_m": 190.6,
+    "avg_grade_pct": 3.6,
+    "max_grade_pct": 14.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 2227.9,
+    "start_coords": [
+      45.832649,
+      -112.514929
+    ],
+    "summit_coords": [
+      45.792471,
+      -112.521426
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 58 (Mile 719.0)",
+    "suggested_queries": [
+      "\"\" \"mile 719.0\"",
+      "\"\" \"km 1157.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-59",
+    "researched": false,
+    "route_km": "1171.5 -> 1172.0",
+    "route_mile": "728.0 -> 728.3",
+    "length_km": 0.511,
+    "elevation_gain_m": 27.7,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 12.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 2160.8,
+    "start_coords": [
+      45.818022,
+      -112.595307
+    ],
+    "summit_coords": [
+      45.820506,
+      -112.600645
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 59 (Mile 728.0)",
+    "suggested_queries": [
+      "\"\" \"mile 728.0\"",
+      "\"\" \"km 1171.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-60",
+    "researched": false,
+    "route_km": "1180.1 -> 1199.1",
+    "route_mile": "733.3 -> 745.1",
+    "length_km": 18.964,
+    "elevation_gain_m": 576.5,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 15.9,
+    "category": "Cat 3",
+    "summit_elevation_m": 2310.5,
+    "start_coords": [
+      45.852995,
+      -112.675909
+    ],
+    "summit_coords": [
+      45.875342,
+      -112.824536
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 60 (Mile 733.3)",
+    "suggested_queries": [
+      "\"\" \"mile 733.3\"",
+      "\"\" \"km 1180.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-61",
+    "researched": false,
+    "route_km": "1200.2 -> 1201.2",
+    "route_mile": "745.8 -> 746.4",
+    "length_km": 1.011,
+    "elevation_gain_m": 95.5,
+    "avg_grade_pct": 9.4,
+    "max_grade_pct": 11.5,
+    "category": "Cat 3",
+    "summit_elevation_m": 2376.0,
+    "start_coords": [
+      45.867064,
+      -112.826292
+    ],
+    "summit_coords": [
+      45.859869,
+      -112.82016
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Singletrack Trail",
+    "surface": "Natural Dirt / Ground",
+    "current_name": "Climb 61 (Mile 745.8)",
+    "suggested_queries": [
+      "\"\" \"mile 745.8\"",
+      "\"\" \"km 1200.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-62",
+    "researched": false,
+    "route_km": "1366.3 -> 1373.6",
+    "route_mile": "849.0 -> 853.5",
+    "length_km": 7.324,
+    "elevation_gain_m": 220.7,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 14.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 2402.4,
+    "start_coords": [
+      44.706276,
+      -113.022438
+    ],
+    "summit_coords": [
+      44.649469,
+      -112.980102
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 62 (Mile 849.0)",
+    "suggested_queries": [
+      "\"\" \"mile 849.0\"",
+      "\"\" \"km 1366.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-63",
+    "researched": false,
+    "route_km": "1375.7 -> 1377.4",
+    "route_mile": "854.8 -> 855.9",
+    "length_km": 1.683,
+    "elevation_gain_m": 59.1,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 5.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 2329.6,
+    "start_coords": [
+      44.632948,
+      -112.972705
+    ],
+    "summit_coords": [
+      44.627469,
+      -112.990367
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 63 (Mile 854.8)",
+    "suggested_queries": [
+      "\"\" \"mile 854.8\"",
+      "\"\" \"km 1375.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-64",
+    "researched": false,
+    "route_km": "1541.1 -> 1544.1",
+    "route_mile": "957.6 -> 959.5",
+    "length_km": 2.992,
+    "elevation_gain_m": 90.6,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 8.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 2176.4,
+    "start_coords": [
+      44.599883,
+      -111.56222
+    ],
+    "summit_coords": [
+      44.598966,
+      -111.526511
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 64 (Mile 957.6)",
+    "suggested_queries": [
+      "\"\" \"mile 957.6\"",
+      "\"\" \"km 1541.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-65",
+    "researched": false,
+    "route_km": "1642.2 -> 1643.9",
+    "route_mile": "1020.4 -> 1021.5",
+    "length_km": 1.711,
+    "elevation_gain_m": 75.6,
+    "avg_grade_pct": 4.4,
+    "max_grade_pct": 11.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 1736.4,
+    "start_coords": [
+      44.111946,
+      -111.251779
+    ],
+    "summit_coords": [
+      44.101587,
+      -111.253869
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 65 (Mile 1020.4)",
+    "suggested_queries": [
+      "\"\" \"mile 1020.4\"",
+      "\"\" \"km 1642.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-66",
+    "researched": false,
+    "route_km": "1675.6 -> 1682.0",
+    "route_mile": "1041.2 -> 1045.1",
+    "length_km": 6.393,
+    "elevation_gain_m": 243.1,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 10.8,
+    "category": "Cat 3",
+    "summit_elevation_m": 2212.8,
+    "start_coords": [
+      44.098289,
+      -110.957381
+    ],
+    "summit_coords": [
+      44.118654,
+      -110.89076
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 66 (Mile 1041.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1041.2\"",
+      "\"\" \"km 1675.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-67",
+    "researched": false,
+    "route_km": "1689.5 -> 1691.1",
+    "route_mile": "1049.8 -> 1050.8",
+    "length_km": 1.628,
+    "elevation_gain_m": 51.5,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 9.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2253.0,
+    "start_coords": [
+      44.130267,
+      -110.81928
+    ],
+    "summit_coords": [
+      44.131708,
+      -110.800105
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 67 (Mile 1049.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1049.8\"",
+      "\"\" \"km 1689.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-68",
+    "researched": false,
+    "route_km": "1710.1 -> 1715.0",
+    "route_mile": "1062.6 -> 1065.7",
+    "length_km": 4.923,
+    "elevation_gain_m": 162.0,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 7.1,
+    "category": "Cat 4",
+    "summit_elevation_m": 2242.0,
+    "start_coords": [
+      44.083247,
+      -110.680279
+    ],
+    "summit_coords": [
+      44.041524,
+      -110.693833
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 68 (Mile 1062.6)",
+    "suggested_queries": [
+      "\"\" \"mile 1062.6\"",
+      "\"\" \"km 1710.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-69",
+    "researched": false,
+    "route_km": "1768.4 -> 1782.1",
+    "route_mile": "1098.9 -> 1107.3",
+    "length_km": 13.625,
+    "elevation_gain_m": 532.7,
+    "avg_grade_pct": 3.9,
+    "max_grade_pct": 11.9,
+    "category": "Cat 2",
+    "summit_elevation_m": 2638.5,
+    "start_coords": [
+      43.857308,
+      -110.271285
+    ],
+    "summit_coords": [
+      43.819347,
+      -110.191586
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 69 (Mile 1098.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1098.9\"",
+      "\"\" \"km 1768.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-70",
+    "researched": false,
+    "route_km": "1787.7 -> 1790.6",
+    "route_mile": "1110.8 -> 1112.6",
+    "length_km": 2.874,
+    "elevation_gain_m": 86.6,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 5.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 2765.0,
+    "start_coords": [
+      43.785923,
+      -110.140879
+    ],
+    "summit_coords": [
+      43.771589,
+      -110.111355
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 70 (Mile 1110.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1110.8\"",
+      "\"\" \"km 1787.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-71",
+    "researched": false,
+    "route_km": "1791.3 -> 1796.3",
+    "route_mile": "1113.0 -> 1116.1",
+    "length_km": 4.986,
+    "elevation_gain_m": 155.3,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 10.1,
+    "category": "Cat 3",
+    "summit_elevation_m": 2913.8,
+    "start_coords": [
+      43.768222,
+      -110.104403
+    ],
+    "summit_coords": [
+      43.749414,
+      -110.062335
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 71 (Mile 1113.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1113.0\"",
+      "\"\" \"km 1791.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-72",
+    "researched": false,
+    "route_km": "1820.1 -> 1828.7",
+    "route_mile": "1131.0 -> 1136.3",
+    "length_km": 8.579,
+    "elevation_gain_m": 423.0,
+    "avg_grade_pct": 4.9,
+    "max_grade_pct": 29.8,
+    "category": "Cat 2",
+    "summit_elevation_m": 2769.3,
+    "start_coords": [
+      43.64144,
+      -109.916523
+    ],
+    "summit_coords": [
+      43.611083,
+      -109.953288
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 72 (Mile 1131.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1131.0\"",
+      "\"\" \"km 1820.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-73",
+    "researched": false,
+    "route_km": "1832.7 -> 1840.1",
+    "route_mile": "1138.8 -> 1143.4",
+    "length_km": 7.444,
+    "elevation_gain_m": 328.0,
+    "avg_grade_pct": 4.4,
+    "max_grade_pct": 22.4,
+    "category": "Cat 3",
+    "summit_elevation_m": 2972.0,
+    "start_coords": [
+      43.585561,
+      -109.930881
+    ],
+    "summit_coords": [
+      43.546155,
+      -109.956485
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 73 (Mile 1138.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1138.8\"",
+      "\"\" \"km 1832.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-74",
+    "researched": false,
+    "route_km": "1842.8 -> 1844.1",
+    "route_mile": "1145.0 -> 1145.9",
+    "length_km": 1.37,
+    "elevation_gain_m": 55.0,
+    "avg_grade_pct": 4.0,
+    "max_grade_pct": 12.5,
+    "category": "Cat 3",
+    "summit_elevation_m": 2943.0,
+    "start_coords": [
+      43.52609,
+      -109.939754
+    ],
+    "summit_coords": [
+      43.514429,
+      -109.943334
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 74 (Mile 1145.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1145.0\"",
+      "\"\" \"km 1842.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-75",
+    "researched": false,
+    "route_km": "1864.0 -> 1865.5",
+    "route_mile": "1158.2 -> 1159.1",
+    "length_km": 1.455,
+    "elevation_gain_m": 71.2,
+    "avg_grade_pct": 4.9,
+    "max_grade_pct": 8.0,
+    "category": "Cat 3",
+    "summit_elevation_m": 2751.7,
+    "start_coords": [
+      43.459804,
+      -110.02493
+    ],
+    "summit_coords": [
+      43.463716,
+      -110.032905
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 75 (Mile 1158.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1158.2\"",
+      "\"\" \"km 1864.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-76",
+    "researched": false,
+    "route_km": "2012.1 -> 2016.9",
+    "route_mile": "1250.2 -> 1253.2",
+    "length_km": 4.79,
+    "elevation_gain_m": 152.2,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 6.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 2342.7,
+    "start_coords": [
+      42.558502,
+      -109.363657
+    ],
+    "summit_coords": [
+      42.552824,
+      -109.327117
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 76 (Mile 1250.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1250.2\"",
+      "\"\" \"km 2012.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-77",
+    "researched": false,
+    "route_km": "2018.0 -> 2021.6",
+    "route_mile": "1253.9 -> 1256.2",
+    "length_km": 3.576,
+    "elevation_gain_m": 108.7,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 2451.5,
+    "start_coords": [
+      42.549857,
+      -109.31407
+    ],
+    "summit_coords": [
+      42.566192,
+      -109.283441
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 77 (Mile 1253.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1253.9\"",
+      "\"\" \"km 2018.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-78",
+    "researched": false,
+    "route_km": "2024.7 -> 2026.0",
+    "route_mile": "1258.1 -> 1258.9",
+    "length_km": 1.286,
+    "elevation_gain_m": 56.4,
+    "avg_grade_pct": 4.4,
+    "max_grade_pct": 7.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2476.4,
+    "start_coords": [
+      42.564143,
+      -109.248652
+    ],
+    "summit_coords": [
+      42.555893,
+      -109.239541
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 78 (Mile 1258.1)",
+    "suggested_queries": [
+      "\"\" \"mile 1258.1\"",
+      "\"\" \"km 2024.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-79",
+    "researched": false,
+    "route_km": "2081.4 -> 2083.9",
+    "route_mile": "1293.3 -> 1294.9",
+    "length_km": 2.5,
+    "elevation_gain_m": 96.8,
+    "avg_grade_pct": 3.9,
+    "max_grade_pct": 11.3,
+    "category": "Cat 4",
+    "summit_elevation_m": 2473.0,
+    "start_coords": [
+      42.468605,
+      -108.802854
+    ],
+    "summit_coords": [
+      42.482843,
+      -108.780945
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 79 (Mile 1293.3)",
+    "suggested_queries": [
+      "\"\" \"mile 1293.3\"",
+      "\"\" \"km 2081.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-80",
+    "researched": false,
+    "route_km": "2084.5 -> 2085.2",
+    "route_mile": "1295.2 -> 1295.7",
+    "length_km": 0.698,
+    "elevation_gain_m": 37.1,
+    "avg_grade_pct": 5.3,
+    "max_grade_pct": 6.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 2487.6,
+    "start_coords": [
+      42.482511,
+      -108.773888
+    ],
+    "summit_coords": [
+      42.486069,
+      -108.76698
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 80 (Mile 1295.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1295.2\"",
+      "\"\" \"km 2084.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-81",
+    "researched": false,
+    "route_km": "2088.3 -> 2090.2",
+    "route_mile": "1297.6 -> 1298.8",
+    "length_km": 1.852,
+    "elevation_gain_m": 109.5,
+    "avg_grade_pct": 5.9,
+    "max_grade_pct": 13.2,
+    "category": "Cat 3",
+    "summit_elevation_m": 2443.0,
+    "start_coords": [
+      42.494819,
+      -108.732287
+    ],
+    "summit_coords": [
+      42.485195,
+      -108.733066
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 81 (Mile 1297.6)",
+    "suggested_queries": [
+      "\"\" \"mile 1297.6\"",
+      "\"\" \"km 2088.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-82",
+    "researched": false,
+    "route_km": "2104.9 -> 2105.6",
+    "route_mile": "1307.9 -> 1308.4",
+    "length_km": 0.7,
+    "elevation_gain_m": 35.9,
+    "avg_grade_pct": 5.1,
+    "max_grade_pct": 9.3,
+    "category": "Cat 4",
+    "summit_elevation_m": 2245.2,
+    "start_coords": [
+      42.392644,
+      -108.626612
+    ],
+    "summit_coords": [
+      42.386958,
+      -108.623369
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 82 (Mile 1307.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1307.9\"",
+      "\"\" \"km 2104.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-83",
+    "researched": false,
+    "route_km": "2156.0 -> 2156.6",
+    "route_mile": "1339.7 -> 1340.1",
+    "length_km": 0.61,
+    "elevation_gain_m": 40.3,
+    "avg_grade_pct": 6.6,
+    "max_grade_pct": 16.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2249.0,
+    "start_coords": [
+      42.28164,
+      -108.169152
+    ],
+    "summit_coords": [
+      42.28315,
+      -108.162819
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 83 (Mile 1339.7)",
+    "suggested_queries": [
+      "\"\" \"mile 1339.7\"",
+      "\"\" \"km 2156.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-84",
+    "researched": false,
+    "route_km": "2312.7 -> 2323.7",
+    "route_mile": "1437.0 -> 1443.9",
+    "length_km": 11.013,
+    "elevation_gain_m": 351.7,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 13.1,
+    "category": "Cat 3",
+    "summit_elevation_m": 2373.7,
+    "start_coords": [
+      41.24431,
+      -107.577154
+    ],
+    "summit_coords": [
+      41.20235,
+      -107.481062
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 84 (Mile 1437.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1437.0\"",
+      "\"\" \"km 2312.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-85",
+    "researched": false,
+    "route_km": "2361.7 -> 2365.0",
+    "route_mile": "1467.5 -> 1469.6",
+    "length_km": 3.331,
+    "elevation_gain_m": 125.7,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 6.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 2186.8,
+    "start_coords": [
+      40.927125,
+      -107.375577
+    ],
+    "summit_coords": [
+      40.909197,
+      -107.346344
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 85 (Mile 1467.5)",
+    "suggested_queries": [
+      "\"\" \"mile 1467.5\"",
+      "\"\" \"km 2361.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-86",
+    "researched": false,
+    "route_km": "2367.1 -> 2367.8",
+    "route_mile": "1470.8 -> 1471.3",
+    "length_km": 0.687,
+    "elevation_gain_m": 45.9,
+    "avg_grade_pct": 6.7,
+    "max_grade_pct": 10.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 2225.0,
+    "start_coords": [
+      40.895635,
+      -107.330856
+    ],
+    "summit_coords": [
+      40.891661,
+      -107.325489
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 86 (Mile 1470.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1470.8\"",
+      "\"\" \"km 2367.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-87",
+    "researched": false,
+    "route_km": "2373.9 -> 2376.6",
+    "route_mile": "1475.1 -> 1476.8",
+    "length_km": 2.71,
+    "elevation_gain_m": 130.2,
+    "avg_grade_pct": 4.8,
+    "max_grade_pct": 12.1,
+    "category": "Cat 3",
+    "summit_elevation_m": 2455.7,
+    "start_coords": [
+      40.853924,
+      -107.290316
+    ],
+    "summit_coords": [
+      40.851879,
+      -107.266092
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 87 (Mile 1475.1)",
+    "suggested_queries": [
+      "\"\" \"mile 1475.1\"",
+      "\"\" \"km 2373.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-88",
+    "researched": false,
+    "route_km": "2404.1 -> 2407.8",
+    "route_mile": "1493.8 -> 1496.1",
+    "length_km": 3.686,
+    "elevation_gain_m": 191.5,
+    "avg_grade_pct": 5.2,
+    "max_grade_pct": 9.1,
+    "category": "Cat 3",
+    "summit_elevation_m": 2623.5,
+    "start_coords": [
+      40.72583,
+      -107.12412
+    ],
+    "summit_coords": [
+      40.70084,
+      -107.1235
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 88 (Mile 1493.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1493.8\"",
+      "\"\" \"km 2404.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-89",
+    "researched": false,
+    "route_km": "2417.1 -> 2418.4",
+    "route_mile": "1502.0 -> 1502.7",
+    "length_km": 1.247,
+    "elevation_gain_m": 78.7,
+    "avg_grade_pct": 6.3,
+    "max_grade_pct": 12.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2272.0,
+    "start_coords": [
+      40.63381,
+      -107.16945
+    ],
+    "summit_coords": [
+      40.624675,
+      -107.16567
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 89 (Mile 1501.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1502.0\"",
+      "\"\" \"km 2417.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-90",
+    "researched": false,
+    "route_km": "2420.5 -> 2425.6",
+    "route_mile": "1504.0 -> 1507.2",
+    "length_km": 5.101,
+    "elevation_gain_m": 330.2,
+    "avg_grade_pct": 6.5,
+    "max_grade_pct": 17.9,
+    "category": "Cat 2",
+    "summit_elevation_m": 2508.8,
+    "start_coords": [
+      40.61222,
+      -107.16851
+    ],
+    "summit_coords": [
+      40.60382,
+      -107.12681
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 90 (Mile 1504.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1504.0\"",
+      "\"\" \"km 2420.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-91",
+    "researched": false,
+    "route_km": "2450.1 -> 2450.7",
+    "route_mile": "1522.4 -> 1522.8",
+    "length_km": 0.612,
+    "elevation_gain_m": 39.8,
+    "avg_grade_pct": 6.5,
+    "max_grade_pct": 10.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 2097.3,
+    "start_coords": [
+      40.54386,
+      -106.99235
+    ],
+    "summit_coords": [
+      40.53926,
+      -106.99102
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 91 (Mile 1522.4)",
+    "suggested_queries": [
+      "\"\" \"mile 1522.4\"",
+      "\"\" \"km 2450.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-92",
+    "researched": false,
+    "route_km": "2491.9 -> 2492.5",
+    "route_mile": "1548.4 -> 1548.8",
+    "length_km": 0.554,
+    "elevation_gain_m": 28.4,
+    "avg_grade_pct": 5.1,
+    "max_grade_pct": 7.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2150.1,
+    "start_coords": [
+      40.339305,
+      -106.81768
+    ],
+    "summit_coords": [
+      40.33819,
+      -106.824008
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 92 (Mile 1548.4)",
+    "suggested_queries": [
+      "\"\" \"mile 1548.4\"",
+      "\"\" \"km 2491.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-93",
+    "researched": false,
+    "route_km": "2499.2 -> 2501.2",
+    "route_mile": "1552.9 -> 1554.2",
+    "length_km": 1.954,
+    "elevation_gain_m": 74.9,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 14.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 2222.6,
+    "start_coords": [
+      40.289921,
+      -106.819804
+    ],
+    "summit_coords": [
+      40.282916,
+      -106.83599
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 93 (Mile 1552.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1552.9\"",
+      "\"\" \"km 2499.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-94",
+    "researched": false,
+    "route_km": "2505.5 -> 2511.9",
+    "route_mile": "1556.8 -> 1560.8",
+    "length_km": 6.446,
+    "elevation_gain_m": 203.9,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 8.5,
+    "category": "Cat 3",
+    "summit_elevation_m": 2441.5,
+    "start_coords": [
+      40.261415,
+      -106.843019
+    ],
+    "summit_coords": [
+      40.224278,
+      -106.796493
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 94 (Mile 1556.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1556.8\"",
+      "\"\" \"km 2505.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-95",
+    "researched": false,
+    "route_km": "2521.8 -> 2530.5",
+    "route_mile": "1567.0 -> 1572.4",
+    "length_km": 8.69,
+    "elevation_gain_m": 261.2,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 10.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 2748.0,
+    "start_coords": [
+      40.166666,
+      -106.735522
+    ],
+    "summit_coords": [
+      40.108441,
+      -106.686456
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 95 (Mile 1567.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1567.0\"",
+      "\"\" \"km 2521.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-96",
+    "researched": false,
+    "route_km": "2541.4 -> 2543.3",
+    "route_mile": "1579.2 -> 1580.3",
+    "length_km": 1.886,
+    "elevation_gain_m": 80.0,
+    "avg_grade_pct": 4.2,
+    "max_grade_pct": 9.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 2770.0,
+    "start_coords": [
+      40.057804,
+      -106.606772
+    ],
+    "summit_coords": [
+      40.05653,
+      -106.590118
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 96 (Mile 1579.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1579.2\"",
+      "\"\" \"km 2541.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-97",
+    "researched": false,
+    "route_km": "2548.9 -> 2549.7",
+    "route_mile": "1583.8 -> 1584.3",
+    "length_km": 0.721,
+    "elevation_gain_m": 45.7,
+    "avg_grade_pct": 6.3,
+    "max_grade_pct": 10.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 2690.0,
+    "start_coords": [
+      40.032181,
+      -106.575249
+    ],
+    "summit_coords": [
+      40.030617,
+      -106.567249
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 97 (Mile 1583.8)",
+    "suggested_queries": [
+      "\"\" \"mile 1583.8\"",
+      "\"\" \"km 2548.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-98",
+    "researched": false,
+    "route_km": "2551.3 -> 2551.9",
+    "route_mile": "1585.3 -> 1585.7",
+    "length_km": 0.596,
+    "elevation_gain_m": 31.1,
+    "avg_grade_pct": 5.2,
+    "max_grade_pct": 9.1,
+    "category": "Cat 4",
+    "summit_elevation_m": 2638.3,
+    "start_coords": [
+      40.020042,
+      -106.558301
+    ],
+    "summit_coords": [
+      40.018747,
+      -106.552406
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 98 (Mile 1585.3)",
+    "suggested_queries": [
+      "\"\" \"mile 1585.3\"",
+      "\"\" \"km 2551.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-99",
+    "researched": false,
+    "route_km": "2552.5 -> 2553.1",
+    "route_mile": "1586.0 -> 1586.4",
+    "length_km": 0.625,
+    "elevation_gain_m": 33.7,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 8.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 2630.7,
+    "start_coords": [
+      40.014157,
+      -106.552327
+    ],
+    "summit_coords": [
+      40.011605,
+      -106.546814
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 99 (Mile 1586.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1586.0\"",
+      "\"\" \"km 2552.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-100",
+    "researched": false,
+    "route_km": "2554.3 -> 2554.9",
+    "route_mile": "1587.2 -> 1587.6",
+    "length_km": 0.641,
+    "elevation_gain_m": 45.9,
+    "avg_grade_pct": 7.2,
+    "max_grade_pct": 10.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2604.5,
+    "start_coords": [
+      40.001068,
+      -106.545892
+    ],
+    "summit_coords": [
+      39.998615,
+      -106.541048
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 100 (Mile 1587.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1587.2\"",
+      "\"\" \"km 2554.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-101",
+    "researched": false,
+    "route_km": "2561.1 -> 2562.0",
+    "route_mile": "1591.4 -> 1592.0",
+    "length_km": 0.891,
+    "elevation_gain_m": 49.2,
+    "avg_grade_pct": 5.5,
+    "max_grade_pct": 13.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2194.7,
+    "start_coords": [
+      39.967958,
+      -106.548046
+    ],
+    "summit_coords": [
+      39.963486,
+      -106.555382
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 101 (Mile 1591.4)",
+    "suggested_queries": [
+      "\"\" \"mile 1591.4\"",
+      "\"\" \"km 2561.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-102",
+    "researched": false,
+    "route_km": "2564.1 -> 2570.4",
+    "route_mile": "1593.2 -> 1597.2",
+    "length_km": 6.307,
+    "elevation_gain_m": 240.0,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 9.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 2334.0,
+    "start_coords": [
+      39.952094,
+      -106.556917
+    ],
+    "summit_coords": [
+      39.954638,
+      -106.520298
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 102 (Mile 1593.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1593.2\"",
+      "\"\" \"km 2564.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-103",
+    "researched": false,
+    "route_km": "2574.0 -> 2581.5",
+    "route_mile": "1599.4 -> 1604.0",
+    "length_km": 7.49,
+    "elevation_gain_m": 346.1,
+    "avg_grade_pct": 4.6,
+    "max_grade_pct": 9.9,
+    "category": "Cat 3",
+    "summit_elevation_m": 2535.9,
+    "start_coords": [
+      39.97253,
+      -106.503971
+    ],
+    "summit_coords": [
+      39.990947,
+      -106.446319
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 103 (Mile 1599.4)",
+    "suggested_queries": [
+      "\"\" \"mile 1599.4\"",
+      "\"\" \"km 2574.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-104",
+    "researched": false,
+    "route_km": "2631.2 -> 2638.5",
+    "route_mile": "1634.9 -> 1639.5",
+    "length_km": 7.324,
+    "elevation_gain_m": 220.3,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 9.9,
+    "category": "Cat 3",
+    "summit_elevation_m": 2772.8,
+    "start_coords": [
+      39.90806,
+      -106.103184
+    ],
+    "summit_coords": [
+      39.848924,
+      -106.081469
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 104 (Mile 1634.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1634.9\"",
+      "\"\" \"km 2631.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-105",
+    "researched": false,
+    "route_km": "2639.2 -> 2642.9",
+    "route_mile": "1639.9 -> 1642.2",
+    "length_km": 3.651,
+    "elevation_gain_m": 165.5,
+    "avg_grade_pct": 4.5,
+    "max_grade_pct": 7.9,
+    "category": "Cat 3",
+    "summit_elevation_m": 2920.2,
+    "start_coords": [
+      39.843283,
+      -106.082111
+    ],
+    "summit_coords": [
+      39.821256,
+      -106.105372
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 105 (Mile 1639.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1639.9\"",
+      "\"\" \"km 2639.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-106",
+    "researched": false,
+    "route_km": "2694.2 -> 2716.9",
+    "route_mile": "1674.1 -> 1688.2",
+    "length_km": 22.605,
+    "elevation_gain_m": 678.8,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 13.0,
+    "category": "Cat 2",
+    "summit_elevation_m": 3496.5,
+    "start_coords": [
+      39.531642,
+      -106.044502
+    ],
+    "summit_coords": [
+      39.411668,
+      -105.969166
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 106 (Mile 1674.1)",
+    "suggested_queries": [
+      "\"\" \"mile 1674.1\"",
+      "\"\" \"km 2694.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-107",
+    "researched": false,
+    "route_km": "2750.4 -> 2752.3",
+    "route_mile": "1709.0 -> 1710.2",
+    "length_km": 1.846,
+    "elevation_gain_m": 71.0,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 4.8,
+    "category": "Cat 3",
+    "summit_elevation_m": 2942.6,
+    "start_coords": [
+      39.191996,
+      -105.806218
+    ],
+    "summit_coords": [
+      39.184896,
+      -105.789074
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 107 (Mile 1709.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1709.0\"",
+      "\"\" \"km 2750.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-108",
+    "researched": false,
+    "route_km": "2769.0 -> 2770.4",
+    "route_mile": "1720.5 -> 1721.5",
+    "length_km": 1.461,
+    "elevation_gain_m": 68.9,
+    "avg_grade_pct": 4.7,
+    "max_grade_pct": 8.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 2833.3,
+    "start_coords": [
+      39.06361,
+      -105.71658
+    ],
+    "summit_coords": [
+      39.06369,
+      -105.73349
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 108 (Mile 1720.6)",
+    "suggested_queries": [
+      "\"\" \"mile 1720.5\"",
+      "\"\" \"km 2769.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-109",
+    "researched": false,
+    "route_km": "2828.4 -> 2837.9",
+    "route_mile": "1757.5 -> 1763.4",
+    "length_km": 9.479,
+    "elevation_gain_m": 292.0,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 17.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 3027.0,
+    "start_coords": [
+      38.686322,
+      -105.837508
+    ],
+    "summit_coords": [
+      38.647384,
+      -105.911196
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 109 (Mile 1757.5)",
+    "suggested_queries": [
+      "\"\" \"mile 1757.5\"",
+      "\"\" \"km 2828.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-110",
+    "researched": false,
+    "route_km": "2866.3 -> 2891.6",
+    "route_mile": "1781.0 -> 1796.8",
+    "length_km": 25.314,
+    "elevation_gain_m": 829.3,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 21.3,
+    "category": "Cat 2",
+    "summit_elevation_m": 3103.3,
+    "start_coords": [
+      38.510359,
+      -106.076733
+    ],
+    "summit_coords": [
+      38.405095,
+      -106.198962
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 110 (Mile 1781.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1781.0\"",
+      "\"\" \"km 2866.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-111",
+    "researched": false,
+    "route_km": "2891.9 -> 2897.4",
+    "route_mile": "1796.9 -> 1800.4",
+    "length_km": 5.544,
+    "elevation_gain_m": 246.3,
+    "avg_grade_pct": 4.4,
+    "max_grade_pct": 17.2,
+    "category": "Cat 3",
+    "summit_elevation_m": 3307.5,
+    "start_coords": [
+      38.403298,
+      -106.198814
+    ],
+    "summit_coords": [
+      38.391936,
+      -106.247683
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 111 (Mile 1796.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1796.9\"",
+      "\"\" \"km 2891.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-112",
+    "researched": false,
+    "route_km": "2956.4 -> 2963.2",
+    "route_mile": "1837.0 -> 1841.2",
+    "length_km": 6.745,
+    "elevation_gain_m": 202.7,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 5.4,
+    "category": "Cat 3",
+    "summit_elevation_m": 2772.5,
+    "start_coords": [
+      38.376726,
+      -106.676997
+    ],
+    "summit_coords": [
+      38.346425,
+      -106.732471
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 112 (Mile 1837.0)",
+    "suggested_queries": [
+      "\"\" \"mile 1837.0\"",
+      "\"\" \"km 2956.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-113",
+    "researched": false,
+    "route_km": "2992.1 -> 2998.0",
+    "route_mile": "1859.2 -> 1862.9",
+    "length_km": 5.92,
+    "elevation_gain_m": 178.8,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 10.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 3063.2,
+    "start_coords": [
+      38.180742,
+      -106.640554
+    ],
+    "summit_coords": [
+      38.16287,
+      -106.600574
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 113 (Mile 1859.2)",
+    "suggested_queries": [
+      "\"\" \"mile 1859.2\"",
+      "\"\" \"km 2992.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-114",
+    "researched": false,
+    "route_km": "3024.4 -> 3042.1",
+    "route_mile": "1879.2 -> 1890.2",
+    "length_km": 17.705,
+    "elevation_gain_m": 598.6,
+    "avg_grade_pct": 3.4,
+    "max_grade_pct": 9.8,
+    "category": "Cat 2",
+    "summit_elevation_m": 3095.1,
+    "start_coords": [
+      38.123241,
+      -106.356488
+    ],
+    "summit_coords": [
+      38.004462,
+      -106.430988
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 114 (Mile 1879.3)",
+    "suggested_queries": [
+      "\"\" \"mile 1879.2\"",
+      "\"\" \"km 3024.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-115",
+    "researched": false,
+    "route_km": "3090.5 -> 3091.0",
+    "route_mile": "1920.3 -> 1920.7",
+    "length_km": 0.571,
+    "elevation_gain_m": 30.0,
+    "avg_grade_pct": 5.3,
+    "max_grade_pct": 11.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 2521.7,
+    "start_coords": [
+      37.747271,
+      -106.355418
+    ],
+    "summit_coords": [
+      37.742375,
+      -106.35478
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 115 (Mile 1920.3)",
+    "suggested_queries": [
+      "\"\" \"mile 1920.3\"",
+      "\"\" \"km 3090.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-116",
+    "researched": false,
+    "route_km": "3101.8 -> 3102.3",
+    "route_mile": "1927.3 -> 1927.7",
+    "length_km": 0.518,
+    "elevation_gain_m": 29.3,
+    "avg_grade_pct": 5.7,
+    "max_grade_pct": 18.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 2438.0,
+    "start_coords": [
+      37.679101,
+      -106.358217
+    ],
+    "summit_coords": [
+      37.677374,
+      -106.362253
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 116 (Mile 1927.3)",
+    "suggested_queries": [
+      "\"\" \"mile 1927.3\"",
+      "\"\" \"km 3101.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-117",
+    "researched": false,
+    "route_km": "3109.2 -> 3138.0",
+    "route_mile": "1931.9 -> 1949.9",
+    "length_km": 28.898,
+    "elevation_gain_m": 1149.2,
+    "avg_grade_pct": 4.0,
+    "max_grade_pct": 16.5,
+    "category": "HC",
+    "summit_elevation_m": 3629.9,
+    "start_coords": [
+      37.640054,
+      -106.418857
+    ],
+    "summit_coords": [
+      37.456461,
+      -106.548763
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 117 (Mile 1931.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1931.9\"",
+      "\"\" \"km 3109.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-118",
+    "researched": false,
+    "route_km": "3168.4 -> 3173.4",
+    "route_mile": "1968.8 -> 1971.9",
+    "length_km": 5.032,
+    "elevation_gain_m": 246.2,
+    "avg_grade_pct": 4.9,
+    "max_grade_pct": 21.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 3219.5,
+    "start_coords": [
+      37.384072,
+      -106.566949
+    ],
+    "summit_coords": [
+      37.362519,
+      -106.558136
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 118 (Mile 1968.7)",
+    "suggested_queries": [
+      "\"\" \"mile 1968.8\"",
+      "\"\" \"km 3168.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-119",
+    "researched": false,
+    "route_km": "3191.2 -> 3193.3",
+    "route_mile": "1983.0 -> 1984.2",
+    "length_km": 2.02,
+    "elevation_gain_m": 61.7,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 7.8,
+    "category": "Cat 3",
+    "summit_elevation_m": 2910.3,
+    "start_coords": [
+      37.270273,
+      -106.473447
+    ],
+    "summit_coords": [
+      37.254461,
+      -106.467274
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 119 (Mile 1982.9)",
+    "suggested_queries": [
+      "\"\" \"mile 1983.0\"",
+      "\"\" \"km 3191.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-120",
+    "researched": false,
+    "route_km": "3214.5 -> 3224.1",
+    "route_mile": "1997.4 -> 2003.3",
+    "length_km": 9.586,
+    "elevation_gain_m": 482.8,
+    "avg_grade_pct": 5.0,
+    "max_grade_pct": 19.2,
+    "category": "Cat 2",
+    "summit_elevation_m": 3119.0,
+    "start_coords": [
+      37.132023,
+      -106.352973
+    ],
+    "summit_coords": [
+      37.076433,
+      -106.388679
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 120 (Mile 1997.4)",
+    "suggested_queries": [
+      "\"\" \"mile 1997.4\"",
+      "\"\" \"km 3214.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-121",
+    "researched": false,
+    "route_km": "3229.3 -> 3232.0",
+    "route_mile": "2006.6 -> 2008.3",
+    "length_km": 2.752,
+    "elevation_gain_m": 83.4,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 3045.8,
+    "start_coords": [
+      37.042002,
+      -106.410723
+    ],
+    "summit_coords": [
+      37.018107,
+      -106.416668
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 121 (Mile 2006.6)",
+    "suggested_queries": [
+      "\"\" \"mile 2006.6\"",
+      "\"\" \"km 3229.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-122",
+    "researched": false,
+    "route_km": "3234.9 -> 3237.2",
+    "route_mile": "2010.1 -> 2011.5",
+    "length_km": 2.3,
+    "elevation_gain_m": 109.5,
+    "avg_grade_pct": 4.8,
+    "max_grade_pct": 10.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 3052.0,
+    "start_coords": [
+      37.006248,
+      -106.408731
+    ],
+    "summit_coords": [
+      36.993711,
+      -106.412166
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 122 (Mile 2010.1)",
+    "suggested_queries": [
+      "\"\" \"mile 2010.1\"",
+      "\"\" \"km 3234.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-123",
+    "researched": false,
+    "route_km": "3238.2 -> 3243.1",
+    "route_mile": "2012.2 -> 2015.2",
+    "length_km": 4.892,
+    "elevation_gain_m": 211.0,
+    "avg_grade_pct": 4.3,
+    "max_grade_pct": 11.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 3243.7,
+    "start_coords": [
+      36.985216,
+      -106.413458
+    ],
+    "summit_coords": [
+      36.977663,
+      -106.387467
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 123 (Mile 2012.2)",
+    "suggested_queries": [
+      "\"\" \"mile 2012.2\"",
+      "\"\" \"km 3238.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-124",
+    "researched": false,
+    "route_km": "3247.6 -> 3252.6",
+    "route_mile": "2017.9 -> 2021.1",
+    "length_km": 5.056,
+    "elevation_gain_m": 222.7,
+    "avg_grade_pct": 4.4,
+    "max_grade_pct": 12.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 3332.7,
+    "start_coords": [
+      36.949495,
+      -106.371128
+    ],
+    "summit_coords": [
+      36.914765,
+      -106.358587
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 124 (Mile 2017.9)",
+    "suggested_queries": [
+      "\"\" \"mile 2017.9\"",
+      "\"\" \"km 3247.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-125",
+    "researched": false,
+    "route_km": "3268.1 -> 3271.4",
+    "route_mile": "2030.7 -> 2032.8",
+    "length_km": 3.326,
+    "elevation_gain_m": 244.8,
+    "avg_grade_pct": 7.4,
+    "max_grade_pct": 19.4,
+    "category": "Cat 2",
+    "summit_elevation_m": 3129.4,
+    "start_coords": [
+      36.848731,
+      -106.258892
+    ],
+    "summit_coords": [
+      36.827601,
+      -106.261126
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 125 (Mile 2030.7)",
+    "suggested_queries": [
+      "\"\" \"mile 2030.7\"",
+      "\"\" \"km 3268.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-126",
+    "researched": false,
+    "route_km": "3276.5 -> 3279.4",
+    "route_mile": "2036.0 -> 2037.7",
+    "length_km": 2.835,
+    "elevation_gain_m": 107.6,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 11.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 3143.9,
+    "start_coords": [
+      36.797028,
+      -106.274855
+    ],
+    "summit_coords": [
+      36.774367,
+      -106.28229
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 126 (Mile 2035.9)",
+    "suggested_queries": [
+      "\"\" \"mile 2036.0\"",
+      "\"\" \"km 3276.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-127",
+    "researched": false,
+    "route_km": "3279.9 -> 3281.6",
+    "route_mile": "2038.0 -> 2039.1",
+    "length_km": 1.724,
+    "elevation_gain_m": 92.3,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 14.2,
+    "category": "Cat 3",
+    "summit_elevation_m": 3204.2,
+    "start_coords": [
+      36.771952,
+      -106.278618
+    ],
+    "summit_coords": [
+      36.759274,
+      -106.274177
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 127 (Mile 2038.0)",
+    "suggested_queries": [
+      "\"\" \"mile 2038.0\"",
+      "\"\" \"km 3279.9\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-128",
+    "researched": false,
+    "route_km": "3289.5 -> 3291.4",
+    "route_mile": "2044.0 -> 2045.2",
+    "length_km": 1.983,
+    "elevation_gain_m": 66.9,
+    "avg_grade_pct": 3.4,
+    "max_grade_pct": 9.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 3047.0,
+    "start_coords": [
+      36.709557,
+      -106.229598
+    ],
+    "summit_coords": [
+      36.695921,
+      -106.23475
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 128 (Mile 2044.0)",
+    "suggested_queries": [
+      "\"\" \"mile 2044.0\"",
+      "\"\" \"km 3289.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-129",
+    "researched": false,
+    "route_km": "3293.7 -> 3295.6",
+    "route_mile": "2046.6 -> 2047.8",
+    "length_km": 1.884,
+    "elevation_gain_m": 83.7,
+    "avg_grade_pct": 4.4,
+    "max_grade_pct": 9.1,
+    "category": "Cat 3",
+    "summit_elevation_m": 3030.4,
+    "start_coords": [
+      36.681234,
+      -106.221733
+    ],
+    "summit_coords": [
+      36.680677,
+      -106.205554
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 129 (Mile 2046.6)",
+    "suggested_queries": [
+      "\"\" \"mile 2046.6\"",
+      "\"\" \"km 3293.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-130",
+    "researched": false,
+    "route_km": "3309.7 -> 3311.9",
+    "route_mile": "2056.6 -> 2057.9",
+    "length_km": 2.208,
+    "elevation_gain_m": 80.4,
+    "avg_grade_pct": 3.6,
+    "max_grade_pct": 8.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2683.0,
+    "start_coords": [
+      36.612983,
+      -106.112472
+    ],
+    "summit_coords": [
+      36.608932,
+      -106.13496
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 130 (Mile 2056.6)",
+    "suggested_queries": [
+      "\"\" \"mile 2056.6\"",
+      "\"\" \"km 3309.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-131",
+    "researched": false,
+    "route_km": "3328.1 -> 3332.0",
+    "route_mile": "2068.0 -> 2070.4",
+    "length_km": 3.926,
+    "elevation_gain_m": 139.2,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 6.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2387.2,
+    "start_coords": [
+      36.494785,
+      -106.113212
+    ],
+    "summit_coords": [
+      36.481082,
+      -106.143082
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 131 (Mile 2068.0)",
+    "suggested_queries": [
+      "\"\" \"mile 2068.0\"",
+      "\"\" \"km 3328.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-132",
+    "researched": false,
+    "route_km": "3333.7 -> 3338.9",
+    "route_mile": "2071.4 -> 2074.7",
+    "length_km": 5.242,
+    "elevation_gain_m": 196.7,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 8.0,
+    "category": "Cat 3",
+    "summit_elevation_m": 2523.2,
+    "start_coords": [
+      36.470168,
+      -106.144654
+    ],
+    "summit_coords": [
+      36.453184,
+      -106.171878
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 132 (Mile 2071.4)",
+    "suggested_queries": [
+      "\"\" \"mile 2071.4\"",
+      "\"\" \"km 3333.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-133",
+    "researched": false,
+    "route_km": "3374.0 -> 3391.5",
+    "route_mile": "2096.5 -> 2107.4",
+    "length_km": 17.458,
+    "elevation_gain_m": 540.3,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 15.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 2344.5,
+    "start_coords": [
+      36.214608,
+      -106.268691
+    ],
+    "summit_coords": [
+      36.127492,
+      -106.344133
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 133 (Mile 2096.5)",
+    "suggested_queries": [
+      "\"\" \"mile 2096.5\"",
+      "\"\" \"km 3374.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-134",
+    "researched": false,
+    "route_km": "3393.2 -> 3398.0",
+    "route_mile": "2108.4 -> 2111.4",
+    "length_km": 4.794,
+    "elevation_gain_m": 185.3,
+    "avg_grade_pct": 3.9,
+    "max_grade_pct": 14.2,
+    "category": "Cat 3",
+    "summit_elevation_m": 2521.7,
+    "start_coords": [
+      36.122758,
+      -106.362289
+    ],
+    "summit_coords": [
+      36.114246,
+      -106.408335
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 134 (Mile 2108.4)",
+    "suggested_queries": [
+      "\"\" \"mile 2108.4\"",
+      "\"\" \"km 3393.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-135",
+    "researched": false,
+    "route_km": "3402.6 -> 3422.8",
+    "route_mile": "2114.3 -> 2126.8",
+    "length_km": 20.166,
+    "elevation_gain_m": 775.7,
+    "avg_grade_pct": 3.8,
+    "max_grade_pct": 18.8,
+    "category": "Cat 1",
+    "summit_elevation_m": 3143.7,
+    "start_coords": [
+      36.143252,
+      -106.423323
+    ],
+    "summit_coords": [
+      36.017378,
+      -106.457558
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 135 (Mile 2114.3)",
+    "suggested_queries": [
+      "\"\" \"mile 2114.3\"",
+      "\"\" \"km 3402.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-136",
+    "researched": false,
+    "route_km": "3428.1 -> 3429.0",
+    "route_mile": "2130.1 -> 2130.7",
+    "length_km": 0.824,
+    "elevation_gain_m": 53.1,
+    "avg_grade_pct": 6.4,
+    "max_grade_pct": 8.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 3048.8,
+    "start_coords": [
+      36.01217,
+      -106.48728
+    ],
+    "summit_coords": [
+      36.00894,
+      -106.488355
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 136 (Mile 2130.1)",
+    "suggested_queries": [
+      "\"\" \"mile 2130.1\"",
+      "\"\" \"km 3428.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-137",
+    "researched": false,
+    "route_km": "3429.3 -> 3430.8",
+    "route_mile": "2130.9 -> 2131.8",
+    "length_km": 1.477,
+    "elevation_gain_m": 55.2,
+    "avg_grade_pct": 3.7,
+    "max_grade_pct": 5.3,
+    "category": "Cat 3",
+    "summit_elevation_m": 3088.7,
+    "start_coords": [
+      36.006494,
+      -106.491382
+    ],
+    "summit_coords": [
+      36.006239,
+      -106.503557
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 137 (Mile 2130.9)",
+    "suggested_queries": [
+      "\"\" \"mile 2130.9\"",
+      "\"\" \"km 3429.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-138",
+    "researched": false,
+    "route_km": "3434.0 -> 3436.9",
+    "route_mile": "2133.8 -> 2135.6",
+    "length_km": 2.874,
+    "elevation_gain_m": 93.0,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 11.6,
+    "category": "Cat 3",
+    "summit_elevation_m": 3114.7,
+    "start_coords": [
+      36.017921,
+      -106.520339
+    ],
+    "summit_coords": [
+      36.011065,
+      -106.536053
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 138 (Mile 2133.8)",
+    "suggested_queries": [
+      "\"\" \"mile 2133.8\"",
+      "\"\" \"km 3434.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-139",
+    "researched": false,
+    "route_km": "3458.3 -> 3464.0",
+    "route_mile": "2148.9 -> 2152.4",
+    "length_km": 5.708,
+    "elevation_gain_m": 239.8,
+    "avg_grade_pct": 4.2,
+    "max_grade_pct": 12.0,
+    "category": "Cat 3",
+    "summit_elevation_m": 2875.8,
+    "start_coords": [
+      36.016148,
+      -106.709897
+    ],
+    "summit_coords": [
+      36.040558,
+      -106.739682
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 139 (Mile 2148.9)",
+    "suggested_queries": [
+      "\"\" \"mile 2148.9\"",
+      "\"\" \"km 3458.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-140",
+    "researched": false,
+    "route_km": "3472.5 -> 3474.1",
+    "route_mile": "2157.7 -> 2158.7",
+    "length_km": 1.588,
+    "elevation_gain_m": 51.8,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 7.0,
+    "category": "Cat 3",
+    "summit_elevation_m": 2862.6,
+    "start_coords": [
+      36.032864,
+      -106.792875
+    ],
+    "summit_coords": [
+      36.019486,
+      -106.794988
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 140 (Mile 2157.7)",
+    "suggested_queries": [
+      "\"\" \"mile 2157.7\"",
+      "\"\" \"km 3472.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-141",
+    "researched": false,
+    "route_km": "3478.6 -> 3481.3",
+    "route_mile": "2161.5 -> 2163.2",
+    "length_km": 2.684,
+    "elevation_gain_m": 89.9,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 15.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 2817.2,
+    "start_coords": [
+      36.016698,
+      -106.824203
+    ],
+    "summit_coords": [
+      36.026015,
+      -106.842894
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 141 (Mile 2161.5)",
+    "suggested_queries": [
+      "\"\" \"mile 2161.5\"",
+      "\"\" \"km 3478.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-142",
+    "researched": false,
+    "route_km": "3486.0 -> 3486.6",
+    "route_mile": "2166.1 -> 2166.4",
+    "length_km": 0.574,
+    "elevation_gain_m": 31.5,
+    "avg_grade_pct": 5.5,
+    "max_grade_pct": 8.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 2661.8,
+    "start_coords": [
+      35.998865,
+      -106.840027
+    ],
+    "summit_coords": [
+      35.994949,
+      -106.843383
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 142 (Mile 2166.1)",
+    "suggested_queries": [
+      "\"\" \"mile 2166.1\"",
+      "\"\" \"km 3486.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-143",
+    "researched": false,
+    "route_km": "3613.3 -> 3615.5",
+    "route_mile": "2245.2 -> 2246.6",
+    "length_km": 2.172,
+    "elevation_gain_m": 66.9,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 4.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 2150.4,
+    "start_coords": [
+      35.777864,
+      -107.75788
+    ],
+    "summit_coords": [
+      35.762194,
+      -107.747873
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 143 (Mile 2245.2)",
+    "suggested_queries": [
+      "\"\" \"mile 2245.2\"",
+      "\"\" \"km 3613.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-144",
+    "researched": false,
+    "route_km": "3641.6 -> 3645.3",
+    "route_mile": "2262.8 -> 2265.1",
+    "length_km": 3.681,
+    "elevation_gain_m": 110.5,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2276.0,
+    "start_coords": [
+      35.556497,
+      -107.83971
+    ],
+    "summit_coords": [
+      35.525779,
+      -107.837391
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 144 (Mile 2262.8)",
+    "suggested_queries": [
+      "\"\" \"mile 2262.8\"",
+      "\"\" \"km 3641.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-145",
+    "researched": false,
+    "route_km": "3849.4 -> 3854.4",
+    "route_mile": "2391.9 -> 2395.0",
+    "length_km": 5.043,
+    "elevation_gain_m": 151.4,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 6.9,
+    "category": "Cat 4",
+    "summit_elevation_m": 2520.2,
+    "start_coords": [
+      34.083203,
+      -108.361544
+    ],
+    "summit_coords": [
+      34.040886,
+      -108.35186
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 145 (Mile 2391.9)",
+    "suggested_queries": [
+      "\"\" \"mile 2391.9\"",
+      "\"\" \"km 3849.4\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-146",
+    "researched": false,
+    "route_km": "3910.2 -> 3912.0",
+    "route_mile": "2429.7 -> 2430.8",
+    "length_km": 1.802,
+    "elevation_gain_m": 54.5,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 5.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 2303.7,
+    "start_coords": [
+      33.668083,
+      -108.414508
+    ],
+    "summit_coords": [
+      33.660896,
+      -108.431327
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 146 (Mile 2429.7)",
+    "suggested_queries": [
+      "\"\" \"mile 2429.7\"",
+      "\"\" \"km 3910.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-147",
+    "researched": false,
+    "route_km": "3966.2 -> 3968.1",
+    "route_mile": "2464.5 -> 2465.7",
+    "length_km": 1.888,
+    "elevation_gain_m": 60.4,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 12.7,
+    "category": "Cat 4",
+    "summit_elevation_m": 2103.8,
+    "start_coords": [
+      33.419167,
+      -108.107209
+    ],
+    "summit_coords": [
+      33.404652,
+      -108.109762
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 147 (Mile 2464.5)",
+    "suggested_queries": [
+      "\"\" \"mile 2464.5\"",
+      "\"\" \"km 3966.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-148",
+    "researched": false,
+    "route_km": "3969.8 -> 3973.4",
+    "route_mile": "2466.7 -> 2469.0",
+    "length_km": 3.588,
+    "elevation_gain_m": 118.6,
+    "avg_grade_pct": 3.3,
+    "max_grade_pct": 8.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2156.8,
+    "start_coords": [
+      33.396617,
+      -108.099371
+    ],
+    "summit_coords": [
+      33.374266,
+      -108.082366
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 148 (Mile 2466.7)",
+    "suggested_queries": [
+      "\"\" \"mile 2466.7\"",
+      "\"\" \"km 3969.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-149",
+    "researched": false,
+    "route_km": "3977.6 -> 3983.4",
+    "route_mile": "2471.6 -> 2475.2",
+    "length_km": 5.762,
+    "elevation_gain_m": 203.0,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 7.6,
+    "category": "Cat 4",
+    "summit_elevation_m": 2153.0,
+    "start_coords": [
+      33.351355,
+      -108.078667
+    ],
+    "summit_coords": [
+      33.30999,
+      -108.067653
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 149 (Mile 2471.6)",
+    "suggested_queries": [
+      "\"\" \"mile 2471.6\"",
+      "\"\" \"km 3977.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-150",
+    "researched": false,
+    "route_km": "3988.0 -> 3998.4",
+    "route_mile": "2478.0 -> 2484.5",
+    "length_km": 10.424,
+    "elevation_gain_m": 312.7,
+    "avg_grade_pct": 3.0,
+    "max_grade_pct": 9.7,
+    "category": "Cat 3",
+    "summit_elevation_m": 2295.7,
+    "start_coords": [
+      33.276319,
+      -108.062568
+    ],
+    "summit_coords": [
+      33.209057,
+      -108.024375
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 150 (Mile 2478.0)",
+    "suggested_queries": [
+      "\"\" \"mile 2478.0\"",
+      "\"\" \"km 3988.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-151",
+    "researched": false,
+    "route_km": "4000.0 -> 4001.2",
+    "route_mile": "2485.5 -> 2486.2",
+    "length_km": 1.197,
+    "elevation_gain_m": 73.5,
+    "avg_grade_pct": 6.1,
+    "max_grade_pct": 9.4,
+    "category": "Cat 4",
+    "summit_elevation_m": 2296.7,
+    "start_coords": [
+      33.202982,
+      -108.027244
+    ],
+    "summit_coords": [
+      33.196291,
+      -108.027907
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 151 (Mile 2485.5)",
+    "suggested_queries": [
+      "\"\" \"mile 2485.5\"",
+      "\"\" \"km 4000.0\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-152",
+    "researched": false,
+    "route_km": "4005.3 -> 4010.3",
+    "route_mile": "2488.8 -> 2491.9",
+    "length_km": 4.957,
+    "elevation_gain_m": 285.6,
+    "avg_grade_pct": 5.8,
+    "max_grade_pct": 14.8,
+    "category": "Cat 3",
+    "summit_elevation_m": 2355.2,
+    "start_coords": [
+      33.185176,
+      -108.027848
+    ],
+    "summit_coords": [
+      33.160238,
+      -108.01375
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 152 (Mile 2488.8)",
+    "suggested_queries": [
+      "\"\" \"mile 2488.8\"",
+      "\"\" \"km 4005.3\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-153",
+    "researched": false,
+    "route_km": "4010.8 -> 4013.1",
+    "route_mile": "2492.2 -> 2493.6",
+    "length_km": 2.374,
+    "elevation_gain_m": 83.5,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 11.0,
+    "category": "Cat 4",
+    "summit_elevation_m": 2424.5,
+    "start_coords": [
+      33.157296,
+      -108.00993
+    ],
+    "summit_coords": [
+      33.142847,
+      -108.001448
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 153 (Mile 2492.2)",
+    "suggested_queries": [
+      "\"\" \"mile 2492.2\"",
+      "\"\" \"km 4010.8\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-154",
+    "researched": false,
+    "route_km": "4019.1 -> 4021.1",
+    "route_mile": "2497.4 -> 2498.6",
+    "length_km": 2.008,
+    "elevation_gain_m": 116.3,
+    "avg_grade_pct": 5.8,
+    "max_grade_pct": 16.2,
+    "category": "Cat 3",
+    "summit_elevation_m": 2371.0,
+    "start_coords": [
+      33.100189,
+      -108.012791
+    ],
+    "summit_coords": [
+      33.088457,
+      -108.010007
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 154 (Mile 2497.4)",
+    "suggested_queries": [
+      "\"\" \"mile 2497.4\"",
+      "\"\" \"km 4019.1\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-155",
+    "researched": false,
+    "route_km": "4024.7 -> 4025.7",
+    "route_mile": "2500.8 -> 2501.4",
+    "length_km": 1.028,
+    "elevation_gain_m": 63.8,
+    "avg_grade_pct": 6.2,
+    "max_grade_pct": 9.5,
+    "category": "Cat 4",
+    "summit_elevation_m": 2270.2,
+    "start_coords": [
+      33.068123,
+      -108.002428
+    ],
+    "summit_coords": [
+      33.062892,
+      -107.996244
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 155 (Mile 2500.8)",
+    "suggested_queries": [
+      "\"\" \"mile 2500.8\"",
+      "\"\" \"km 4024.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-156",
+    "researched": false,
+    "route_km": "4046.7 -> 4058.4",
+    "route_mile": "2514.5 -> 2521.8",
+    "length_km": 11.732,
+    "elevation_gain_m": 422.7,
+    "avg_grade_pct": 3.6,
+    "max_grade_pct": 21.9,
+    "category": "Cat 3",
+    "summit_elevation_m": 2312.0,
+    "start_coords": [
+      33.015591,
+      -108.11123
+    ],
+    "summit_coords": [
+      32.953021,
+      -108.154773
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 156 (Mile 2514.5)",
+    "suggested_queries": [
+      "\"\" \"mile 2514.5\"",
+      "\"\" \"km 4046.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-157",
+    "researched": false,
+    "route_km": "4060.7 -> 4063.5",
+    "route_mile": "2523.2 -> 2524.9",
+    "length_km": 2.74,
+    "elevation_gain_m": 127.7,
+    "avg_grade_pct": 4.7,
+    "max_grade_pct": 13.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2312.7,
+    "start_coords": [
+      32.954411,
+      -108.171012
+    ],
+    "summit_coords": [
+      32.946545,
+      -108.178924
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 157 (Mile 2523.2)",
+    "suggested_queries": [
+      "\"\" \"mile 2523.2\"",
+      "\"\" \"km 4060.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-158",
+    "researched": false,
+    "route_km": "4070.5 -> 4071.1",
+    "route_mile": "2529.3 -> 2529.6",
+    "length_km": 0.56,
+    "elevation_gain_m": 29.0,
+    "avg_grade_pct": 5.2,
+    "max_grade_pct": 11.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 2091.7,
+    "start_coords": [
+      32.907694,
+      -108.230921
+    ],
+    "summit_coords": [
+      32.904815,
+      -108.235755
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 158 (Mile 2529.3)",
+    "suggested_queries": [
+      "\"\" \"mile 2529.3\"",
+      "\"\" \"km 4070.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-159",
+    "researched": false,
+    "route_km": "4073.5 -> 4078.4",
+    "route_mile": "2531.2 -> 2534.2",
+    "length_km": 4.902,
+    "elevation_gain_m": 158.0,
+    "avg_grade_pct": 3.2,
+    "max_grade_pct": 11.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 2156.0,
+    "start_coords": [
+      32.893191,
+      -108.236081
+    ],
+    "summit_coords": [
+      32.858947,
+      -108.223181
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 159 (Mile 2531.1)",
+    "suggested_queries": [
+      "\"\" \"mile 2531.2\"",
+      "\"\" \"km 4073.5\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-160",
+    "researched": false,
+    "route_km": "4098.7 -> 4100.6",
+    "route_mile": "2546.8 -> 2548.0",
+    "length_km": 1.868,
+    "elevation_gain_m": 65.7,
+    "avg_grade_pct": 3.5,
+    "max_grade_pct": 11.2,
+    "category": "Cat 4",
+    "summit_elevation_m": 1784.0,
+    "start_coords": [
+      32.720644,
+      -108.250388
+    ],
+    "summit_coords": [
+      32.714762,
+      -108.261945
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 160 (Mile 2546.8)",
+    "suggested_queries": [
+      "\"\" \"mile 2546.8\"",
+      "\"\" \"km 4098.7\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-161",
+    "researched": false,
+    "route_km": "4143.6 -> 4144.1",
+    "route_mile": "2574.7 -> 2575.0",
+    "length_km": 0.516,
+    "elevation_gain_m": 27.7,
+    "avg_grade_pct": 5.4,
+    "max_grade_pct": 6.8,
+    "category": "Cat 4",
+    "summit_elevation_m": 1821.7,
+    "start_coords": [
+      32.499716,
+      -108.381924
+    ],
+    "summit_coords": [
+      32.495871,
+      -108.384687
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Forest Road (Doubletrack)",
+    "surface": "Gravel",
+    "current_name": "Climb 161 (Mile 2574.7)",
+    "suggested_queries": [
+      "\"\" \"mile 2574.7\"",
+      "\"\" \"km 4143.6\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  },
+  {
+    "climb_id": "climb-162",
+    "researched": false,
+    "route_km": "4246.2 -> 4249.1",
+    "route_mile": "2638.4 -> 2640.2",
+    "length_km": 2.895,
+    "elevation_gain_m": 89.8,
+    "avg_grade_pct": 3.1,
+    "max_grade_pct": 13.3,
+    "category": "Cat 4",
+    "summit_elevation_m": 1541.5,
+    "start_coords": [
+      31.850141,
+      -108.417894
+    ],
+    "summit_coords": [
+      31.832825,
+      -108.431784
+    ],
+    "state_province": "",
+    "nearby_town": null,
+    "road_class": "Unclassified Gravel Road",
+    "surface": "Compacted Hardpack",
+    "current_name": "Climb 162 (Mile 2638.4)",
+    "suggested_queries": [
+      "\"\" \"mile 2638.4\"",
+      "\"\" \"km 4246.2\""
+    ],
+    "curation_target_fields": {
+      "name": "Authentic pass, ridge, or divide name",
+      "trailName": "Official trail name or Forest Service Road (FSR)",
+      "parkName": "National Forest, Provincial Park, or Wilderness area",
+      "landmark": "Prominent mountain peak(s) or river canyon",
+      "notes": "Rich 3-5 sentence tactical narrative for bikepackers"
+    }
+  }
+]

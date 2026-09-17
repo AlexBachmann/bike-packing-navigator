@@ -614,8 +614,20 @@ def run_ingest(config: IngestConfig) -> IngestResult:
         towns = read_json(config.towns_file)
     elif (target_dir / "towns.json").exists():
         towns = read_json(target_dir / "towns.json")
+    elif (Path("route/places") / f"towns_{route_id}.json").exists():
+        towns = read_json(Path("route/places") / f"towns_{route_id}.json")
+    elif (Path("route/places") / "towns.json").exists():
+        towns = read_json(Path("route/places") / "towns.json")
 
-    water_sources = read_json(config.water_file) if config.water_file and config.water_file.exists() else []
+    water_sources = []
+    if config.water_file and config.water_file.exists():
+        water_sources = read_json(config.water_file)
+    elif (Path("route/places") / f"water_{route_id}.json").exists():
+        water_sources = read_json(Path("route/places") / f"water_{route_id}.json")
+    elif (Path("route/places") / "water.json").exists():
+        water_sources = read_json(Path("route/places") / "water.json")
+    elif (target_dir / "water_access.json").exists() and (target_dir / "water_access.json").stat().st_size > 100:
+        water_sources = read_json(target_dir / "water_access.json")
     if not isinstance(water_sources, list):
         water_sources = []
 
@@ -639,16 +651,44 @@ def run_ingest(config: IngestConfig) -> IngestResult:
             except Exception:
                 places = []
 
-        if places and water_sources:
+        if places and (water_sources or towns):
             existing_ids = {p.id for p in places}
             added = 0
+            if towns:
+                for t in towns:
+                    tid = t.get("id") or f"town_{slugify(t.get('name', 'Town'), sep='_')}"
+                    if tid not in existing_ids:
+                        t_loc = t.get("location", {}) if isinstance(t.get("location"), dict) else {}
+                        tlat = t_loc.get("lat") or t.get("lat")
+                        tlon = t_loc.get("lon") or t.get("lon")
+                        tname = t.get("name", "Town")
+                        if tlat is not None and tlon is not None:
+                            dist_km, r_km, r_mi = track_index.project_point(float(tlat), float(tlon))
+                            places.append(Place(
+                                id=tid,
+                                name=tname,
+                                category="town",
+                                type=t.get("type", "town"),
+                                location=PlaceLocation(lat=float(tlat), lon=float(tlon)),
+                                distance_to_trail_km=round(t.get("distance_to_trail_km", dist_km), 3),
+                                route_km=round(t.get("route_km", r_km), 3),
+                                route_mile=round(t.get("route_mile", r_mi), 3),
+                                is_in_town=True,
+                                town=tname,
+                                address=t.get("address", ""),
+                                description=t.get("description", f"Town resupply hub: {tname}."),
+                                province_state=t.get("province_state") or t.get("state", ""),
+                                country=t.get("country", "")
+                            ))
+                            existing_ids.add(tid)
+                            added += 1
             for ws in water_sources:
                 if ws.get("id") and ws.get("id") not in existing_ids:
                     places.append(Place.from_dict(ws))
                     existing_ids.add(ws["id"])
                     added += 1
             if added:
-                places.sort(key=lambda p: p.route_mile)
+                places.sort(key=lambda p: (p.route_mile, p.route_km))
 
         if not places:
             # Wrap water sources as Places directly
