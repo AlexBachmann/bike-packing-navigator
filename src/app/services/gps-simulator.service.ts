@@ -121,6 +121,9 @@ export class GpsSimulatorService implements OnDestroy {
     });
 
     if (this.deadReckoning && position.coords) {
+      if (typeof this.deadReckoning.reset === 'function') {
+        this.deadReckoning.reset(startMile, position.coords, motionHeading);
+      }
       this.deadReckoning.updateGpsFix({
         latitude: position.coords[0],
         longitude: position.coords[1],
@@ -144,12 +147,19 @@ export class GpsSimulatorService implements OnDestroy {
    */
   stop(): void {
     this.clearTimer();
+    const current = this._state();
     this._state.update((s) => ({
       ...s,
       running: false,
       simulatedSpeedKph: 0
     }));
-    this.deadReckoning?.stop();
+    if (this.deadReckoning) {
+      if (typeof this.deadReckoning.reset === 'function') {
+        this.deadReckoning.reset(current.simulatedMile, current.simulatedCoords, current.simulatedHeading);
+      } else {
+        this.deadReckoning.stop();
+      }
+    }
     this.notifyApp();
   }
 
@@ -217,7 +227,11 @@ export class GpsSimulatorService implements OnDestroy {
           heading: position.heading
         }, this._state().speedKph);
       } else {
-        this.deadReckoning.stop();
+        if (typeof this.deadReckoning.reset === 'function') {
+          this.deadReckoning.reset(clampedMile, position.coords, position.heading);
+        } else {
+          this.deadReckoning.stop();
+        }
       }
     }
   }
@@ -347,6 +361,13 @@ export class GpsSimulatorService implements OnDestroy {
       simulatedHeading: position.heading,
       simulatedSpeedKph: 0
     });
+    if (this.deadReckoning) {
+      if (typeof this.deadReckoning.reset === 'function') {
+        this.deadReckoning.reset(startMile, position.coords, position.heading);
+      } else {
+        this.deadReckoning.stop();
+      }
+    }
   }
 
   private clearTimer(): void {

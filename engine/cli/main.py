@@ -79,7 +79,8 @@ def build_parser() -> argparse.ArgumentParser:
         "water",
         help="Extract backcountry water access waypoints with 200m dedup & 5km throttling",
     )
-    p_water.add_argument("--track", required=True, help="Path to route-track.json or GPX file")
+    p_water.add_argument("--track", help="Path to route-track.json or GPX file")
+    p_water.add_argument("--audit", help="Path to water JSON file to audit (verifies coordinates and provenance)")
     p_water.add_argument("--corridor-geojson", "--corridor", help="Path to corridor.geojson")
     p_water.add_argument("--pmtiles", help="Path or directory of PMTiles files")
     p_water.add_argument("--water", help="Path to curated water JSON file")
@@ -177,7 +178,41 @@ def _load_track(track_path_str: str) -> Any:
 
 
 def execute_water(args: argparse.Namespace) -> int:
-    """Execute water access extraction."""
+    """Execute water access extraction or water curation audit."""
+    if getattr(args, "audit", None):
+        target_p = Path(args.audit)
+        if not target_p.exists():
+            print(f"❌ [Water Audit FAILED] File not found: {target_p}", file=sys.stderr)
+            return 1
+        sources_list = read_json(target_p)
+        if not isinstance(sources_list, list):
+            print(f"❌ [Water Audit FAILED] {target_p} does not contain a JSON array", file=sys.stderr)
+            return 1
+        if not sources_list:
+            print(f"⚠️  [Water Audit WARNING] {target_p} contains 0 water sources", file=sys.stderr)
+            return 0
+
+        track_index = None
+        if getattr(args, "track", None) and Path(args.track).exists():
+            track = _load_track(args.track)
+            from engine.utils.spatial import TrackIndex
+            pts = [[p.lat, p.lon, getattr(p, 'ele', 0.0) or 0.0, getattr(p, 'cum_km', 0.0) or 0.0, getattr(p, 'cum_mi', 0.0) or 0.0] for p in track.points]
+            track_index = TrackIndex(pts)
+
+        from engine.enrichment.water import audit_water_sources
+        passed, errors = audit_water_sources(sources_list, track_index=track_index)
+        if not passed:
+            print(f"❌ [Water Audit FAILED] Found {len(errors)} issues in {target_p}:", file=sys.stderr)
+            for err in errors:
+                print(f"   - {err}", file=sys.stderr)
+            return 1
+        print(f"✅ [Water Audit PASSED] All {len(sources_list)} water sources verified with authentic provenance in {target_p}.")
+        return 0
+
+    if not getattr(args, "track", None):
+        print("Error: --track is required when not running --audit", file=sys.stderr)
+        return 1
+
     from engine.enrichment.water import extract_water_access
     from engine.osm.corridor import extract_water_features_from_pmtiles
 

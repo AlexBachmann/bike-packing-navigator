@@ -212,6 +212,8 @@ class Place:
             res["rating"] = round(self.rating, 1)
         if self.user_ratings_total is not None:
             res["user_ratings_total"] = self.user_ratings_total
+        if self.extra and "provenance" in self.extra:
+            res["provenance"] = self.extra["provenance"]
         return res
 
     @classmethod
@@ -222,6 +224,9 @@ class Place:
             lat=float(loc_data.get("lat", 0.0)),
             lon=float(loc_data.get("lon", 0.0)),
         )
+        extra = dict(d.get("extra", {}))
+        if "provenance" in d:
+            extra["provenance"] = d["provenance"]
         return cls(
             id=str(d.get("id", "")),
             name=str(d.get("name", "Waypoint")),
@@ -621,11 +626,21 @@ def fetch_places_along_route(
     # Ingest external water sources if provided
     if water_sources:
         for ws in water_sources:
-            w_loc = ws.get("location", {})
+            w_loc = ws.get("location", {}) if isinstance(ws.get("location"), dict) else {}
             wlat = w_loc.get("lat") or ws.get("lat")
             wlon = w_loc.get("lon") or ws.get("lon")
             if wlat is not None and wlon is not None:
                 dist_km, r_km, r_mi = track_index.project_point(float(wlat), float(wlon), max_dist_km=max_off_route_m / 1000.0)
+                prov = ws.get("provenance")
+                if not prov and ws.get("osm_id"):
+                    prov = {"source": "osm", "id": ws.get("osm_id"), "verified": True}
+                elif not prov and ws.get("source") and ws.get("source") != "manual":
+                    prov = {"source": str(ws.get("source")), "verified": True}
+
+                extra = dict(ws.get("extra", {})) if isinstance(ws.get("extra"), dict) else {}
+                if prov:
+                    extra["provenance"] = prov
+
                 wp = Place(
                     id=ws.get("id", f"water_{int(r_km)}km"),
                     name=ws.get("name", "Water Source"),
@@ -639,6 +654,7 @@ def fetch_places_along_route(
                     town=ws.get("town", ""),
                     address=ws.get("address", ""),
                     description=ws.get("description", ""),
+                    extra=extra,
                 )
                 candidate_places.append(wp)
 

@@ -76,16 +76,26 @@ export class DeadReckoningService implements OnDestroy {
 
     this.speedKph.set(calculatedSpeedKph);
 
-    // Ensure monotonic progress when moving forward or backward:
+    // Ensure monotonic progress when moving forward or backward during continuous tracking:
     const currentInterp = this.interpolatedMile();
     const isMovingForward = calculatedSpeedKph >= MIN_MOVING_SPEED_KPH;
     const isMovingBackward = calculatedSpeedKph <= -MIN_MOVING_SPEED_KPH;
 
     let initialMile = fix.projectedMile ?? currentInterp;
-    if (isMovingForward && fix.projectedMile !== undefined && fix.projectedMile !== null && currentInterp > 0) {
-      initialMile = Math.max(currentInterp, fix.projectedMile);
-    } else if (isMovingBackward && fix.projectedMile !== undefined && fix.projectedMile !== null) {
-      initialMile = Math.min(currentInterp, fix.projectedMile);
+    // Jitter suppression only applies to continuous tracking fixes within ~80m (0.05 miles).
+    // Intentional jumps, seeks, or first fixes after start/stop must be adopted immediately.
+    const hasContinuousFix = prev !== null && currentInterp > 0;
+    const MAX_JITTER_WINDOW_MILES = 0.05;
+
+    if (hasContinuousFix && fix.projectedMile !== undefined && fix.projectedMile !== null) {
+      const delta = fix.projectedMile - currentInterp;
+      if (Math.abs(delta) <= MAX_JITTER_WINDOW_MILES) {
+        if (isMovingForward) {
+          initialMile = Math.max(currentInterp, fix.projectedMile);
+        } else if (isMovingBackward) {
+          initialMile = Math.min(currentInterp, fix.projectedMile);
+        }
+      }
     }
     this.interpolatedMile.set(initialMile);
 
@@ -216,5 +226,15 @@ export class DeadReckoningService implements OnDestroy {
     this.previousFix = null;
     this.currentFix = null;
     this.speedKph.set(0);
+  }
+
+  /**
+   * Resets dead-reckoning state and initializes to an explicit route mile, coordinates, and heading.
+   */
+  reset(mile = 0, coords: [number, number] | null = null, heading = 0): void {
+    this.stop();
+    this.interpolatedMile.set(mile);
+    this.interpolatedCoords.set(coords);
+    this.interpolatedHeading.set(heading);
   }
 }

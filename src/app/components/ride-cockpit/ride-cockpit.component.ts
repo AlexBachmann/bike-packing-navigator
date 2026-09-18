@@ -1337,16 +1337,28 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     pts: [number, number, number, number, number][],
     targetMile: number
   ): [number, number] {
+    const rawPts = this.routeService?.trackPoints() || [];
+    const rawTotal = rawPts.length > 0 ? rawPts[rawPts.length - 1][4] : this.routeService?.totalDistanceMiles;
+
+    if (typeof this.turnGuidance?.interpolatePointAtMile === 'function') {
+      return this.turnGuidance.interpolatePointAtMile(pts, targetMile, rawTotal);
+    }
     if (!pts || pts.length === 0) return [0, 0];
-    if (targetMile <= pts[0][4]) return [pts[0][0], pts[0][1]];
+
+    let effectiveTarget = targetMile;
     const last = pts.length - 1;
-    if (targetMile >= pts[last][4]) return [pts[last][0], pts[last][1]];
+    if (typeof rawTotal === 'number' && rawTotal > 0 && pts[last][4] > 0 && Math.abs(pts[last][4] - rawTotal) > 0.1) {
+      effectiveTarget = (targetMile / rawTotal) * pts[last][4];
+    }
+
+    if (effectiveTarget <= pts[0][4]) return [pts[0][0], pts[0][1]];
+    if (effectiveTarget >= pts[last][4]) return [pts[last][0], pts[last][1]];
 
     let low = 0;
     let high = last;
     while (low <= high) {
       const mid = Math.floor((low + high) / 2);
-      if (pts[mid][4] <= targetMile) {
+      if (pts[mid][4] <= effectiveTarget) {
         low = mid + 1;
       } else {
         high = mid - 1;
@@ -1355,7 +1367,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     const idxA = Math.max(0, low - 1);
     const idxB = Math.min(last, idxA + 1);
     const span = pts[idxB][4] - pts[idxA][4];
-    const t = span <= 0 ? 0 : Math.max(0, Math.min(1, (targetMile - pts[idxA][4]) / span));
+    const t = span <= 0 ? 0 : Math.max(0, Math.min(1, (effectiveTarget - pts[idxA][4]) / span));
 
     const lat = pts[idxA][0] + t * (pts[idxB][0] - pts[idxA][0]);
     const lon = pts[idxA][1] + t * (pts[idxB][1] - pts[idxA][1]);

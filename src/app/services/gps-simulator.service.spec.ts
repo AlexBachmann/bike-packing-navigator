@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { GpsSimulatorService } from './gps-simulator.service';
+import { DeadReckoningService } from './dead-reckoning.service';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('GpsSimulatorService', () => {
@@ -335,6 +336,49 @@ describe('GpsSimulatorService', () => {
 
       service.ngOnDestroy();
       expect(service.running()).toBe(false);
+    });
+  });
+
+  describe('DeadReckoningService Synchronization', () => {
+    let deadReckoning: any;
+
+    beforeEach(() => {
+      deadReckoning = {
+        reset: vi.fn(),
+        updateGpsFix: vi.fn(),
+        stop: vi.fn()
+      };
+      TestBed.resetTestingModule();
+      TestBed.configureTestingModule({
+        providers: [
+          GpsSimulatorService,
+          { provide: DeadReckoningService, useValue: deadReckoning }
+        ]
+      });
+      service = TestBed.inject(GpsSimulatorService);
+      service.setTrackPoints(MOCK_TRACK);
+    });
+
+    it('should reset deadReckoning to seeked mile and coordinates when seek() is called while stopped', () => {
+      service.seek(43.5);
+      expect(deadReckoning.reset).toHaveBeenCalledWith(43.5, [51.0, -114.0], expect.any(Number));
+    });
+
+    it('should reset deadReckoning before starting and pass correct startMile to updateGpsFix', () => {
+      service.seek(43.5);
+      service.start(25);
+      expect(deadReckoning.reset).toHaveBeenCalledWith(43.5, [51.0, -114.0], expect.any(Number));
+      expect(deadReckoning.updateGpsFix).toHaveBeenCalledWith(
+        expect.objectContaining({ projectedMile: 43.5 }),
+        25
+      );
+    });
+
+    it('should reset deadReckoning to final simulatedMile on stop()', () => {
+      service.start(25);
+      service.seek(10.0);
+      service.stop();
+      expect(deadReckoning.reset).toHaveBeenCalledWith(10.0, expect.any(Array), expect.any(Number));
     });
   });
 });

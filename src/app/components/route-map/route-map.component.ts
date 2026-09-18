@@ -917,15 +917,22 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private getCoordsForMile(targetMile: number): [number, number, number] | null {
+    const rawPoints = this.routeService.trackPoints();
     const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
-    const points = guidance && guidance.length > 0 ? guidance : this.routeService.trackPoints();
+    const points = guidance && guidance.length > 0 ? guidance : rawPoints;
     if (!points || points.length === 0) return null;
 
-    if (points.length === 1 || targetMile <= points[0][4]) {
+    let effectiveTarget = targetMile;
+    const lastIdx = points.length - 1;
+    const rawTotal = rawPoints && rawPoints.length > 0 ? rawPoints[rawPoints.length - 1][4] : undefined;
+    if (typeof rawTotal === 'number' && rawTotal > 0 && points[lastIdx][4] > 0 && Math.abs(points[lastIdx][4] - rawTotal) > 0.1) {
+      effectiveTarget = (targetMile / rawTotal) * points[lastIdx][4];
+    }
+
+    if (points.length === 1 || effectiveTarget <= points[0][4]) {
       return [points[0][0], points[0][1], points[0][2]];
     }
-    const lastIdx = points.length - 1;
-    if (targetMile >= points[lastIdx][4]) {
+    if (effectiveTarget >= points[lastIdx][4]) {
       return [points[lastIdx][0], points[lastIdx][1], points[lastIdx][2]];
     }
 
@@ -934,7 +941,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     let high = lastIdx;
     while (low <= high) {
       const mid = Math.floor((low + high) / 2);
-      if (points[mid][4] <= targetMile) {
+      if (points[mid][4] <= effectiveTarget) {
         low = mid + 1;
       } else {
         high = mid - 1;
@@ -944,7 +951,7 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     const idxA = Math.max(0, low - 1);
     const idxB = Math.min(lastIdx, idxA + 1);
     const span = points[idxB][4] - points[idxA][4];
-    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - points[idxA][4]) / span));
+    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (effectiveTarget - points[idxA][4]) / span));
 
     const lat = points[idxA][0] + t * (points[idxB][0] - points[idxA][0]);
     const lon = points[idxA][1] + t * (points[idxB][1] - points[idxA][1]);

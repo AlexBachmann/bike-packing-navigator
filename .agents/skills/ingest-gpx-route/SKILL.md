@@ -286,52 +286,85 @@ Google Places API queries exclusively return registered commercial establishment
 
 Therefore, the route ingestion pipeline **must explicitly integrate water waypoints** into `places.json` using regional trail data, water reports, and geospatial track projection.
 
-### 2. Discovery Sources for Water Intelligence
-When ingesting an arid or backcountry route, gather water sources from:
-1. **Official Trail Association Water Reports & Data Books**:
-   - Arizona Trail Association (ATA) Water Report & Data Book (Passages 1–18).
-   - Continental Divide Trail Coalition (CDTC) Water Report & FarOut Data Book.
-   - Pacific Crest Trail Association (PCTA) / PCT Water Report.
-2. **Crowdsourced Guides**: FarOut (Guthook) waypoint feeds, bikepacking.com route guides, and race manuals.
-3. **OpenStreetMap (OSM) Extraction**:
-   - Nodes and tags along the corridor: `amenity=drinking_water`, `natural=spring`, `man_made=water_tap`, `waterway=stream`, `pump=manual`, `water=tank`.
-4. **Public Land Agency Alerts**: USFS and BLM Ranger District current condition bulletins for trailhead water status.
+### 2. The Strict Coordinate Provenance Requirement (The Zero-Guessing Rule)
 
-### 3. Standard Water Waypoint Schema
-In `public/data/routes/<route-id>/places.json`, every water waypoint must adhere to this standardized schema:
+> [!CAUTION]
+> **STRICT BAN ON TRACK INTERPOLATION & GEOMETRIC GUESSING**:
+> It is strictly forbidden to sample arbitrary trackpoints or geometric track deciles (e.g. `track.points[i]`) and assign water names to them based on articles. Physical facilities (ranger stations, spigots, springs, wells) have fixed ground coordinates.
+> 
+> In water-critical wilderness corridors (such as the Great Divide Basin or Gila National Forest), guessing coordinates can place water waypoints 10–20+ miles away from their actual physical location, creating life-threatening navigational hazards for riders.
+
+Every single curated water waypoint in `route/places/water_<route-id>.json` MUST have verified real-world provenance from one of these authoritative sources:
+1. **OpenStreetMap Node or Way ID (`osm`)**:
+   - Query Overpass or OSM for the exact feature: `office=ranger_station`, `amenity=drinking_water`, `natural=spring`, `man_made=water_tap|water_well|water_tank|pump`.
+   - Record the exact OSM ID (e.g., `1091155176` for Beaverhead Work Center).
+2. **Public Land Agency Facility Records (`agency`)**:
+   - Official USFS Ranger District, BLM Field Office, or National Park Service headquarters coordinates.
+   - USGS Geographic Names Information System (GNIS) feature ID.
+3. **Official Trail Association Water Reports (`trail_report`)**:
+   - Arizona Trail Association (ATA) Water Report / Data Book passages.
+   - Continental Divide Trail Coalition (CDTC) Water Report / FarOut waypoint feeds.
+   - Pacific Crest Trail Association (PCTA) / PCT Water Report.
+
+### 3. Standard Water Waypoint Schema with Provenance
+In `route/places/water_<route-id>.json` and `public/data/routes/<route-id>/places.json`, every water waypoint must adhere to this standardized schema:
 
 ```json
 {
-  "id": "azt_freeman_road_cache",
-  "name": "Freeman Road Trailhead & Water Cache",
+  "id": "td_beaverhead_spigot",
+  "name": "USFS Beaverhead Work Center Spigot",
   "category": "water",
-  "type": "water",
-  "town": "Florence Junction",
+  "type": "drinking_water",
+  "town": "Gila National Forest",
   "is_in_town": false,
   "location": {
-    "lat": 32.8555,
-    "lon": -110.8645
+    "lat": 33.423588,
+    "lon": -108.111457
   },
-  "distance_to_trail_km": 0.0,
-  "route_km": 392.0,
-  "route_mile": 243.6,
-  "address": "Freeman Rd, Pinal County, AZ",
-  "google_maps_url": "https://maps.google.com/?q=32.8555,-110.8645",
+  "provenance": {
+    "source": "osm",
+    "id": 1091155176,
+    "url": "https://www.openstreetmap.org/way/1091155176",
+    "verified": true
+  },
+  "reliability": "reliable",
+  "treatment_required": false,
+  "source_type": "spigot",
+  "address": "USFS Beaverhead Work Center, Catron County, NM",
+  "google_maps_url": "https://maps.google.com/?q=33.42359,-108.11146",
   "business_status": "OPERATIONAL",
-  "province_state": "AZ",
+  "province_state": "NM",
   "country": "USA",
-  "description": "Vital lifeline water cache maintained by the Arizona Trail Association in the Tortilla Mountains. Unfiltered cache containers."
+  "description": "USFS Beaverhead Ranger Station in central Gila National Forest. Potable water spigot outside compound. Crucial water between Pie Town and Silver City."
 }
 ```
 
 **Core Attributes:**
 - `category`: Must be `"water"`.
-- `type`: `"water"`, `"spring"`, `"drinking_water"`, or `"cache"`.
-- `description`: Must indicate reliability, source type (e.g., potable spigot, natural spring, trail angel metal cache box), and whether water filtration/treatment is required.
-- `route_mile` / `route_km`: Monotonically sorted position calculated by projecting `(lat, lon)` onto the route track coordinates.
-- `distance_to_trail_km`: Perpendicular distance to the track. Keep within reasonable detour range (typically < 3.0 km unless an off-trail town source).
+- `type`: `"drinking_water"`, `"spring"`, `"water"`, or `"cache"`.
+- `location`: Exact verified physical latitude and longitude `{"lat": float, "lon": float}`.
+- `provenance`: Object documenting source verification:
+  - `source`: `"osm"`, `"agency"`, `"gnis"`, `"trail_report"`, or `"survey"`.
+  - `id`: Feature ID (e.g. OSM Node/Way ID, GNIS ID, or agency facility code).
+  - `verified`: Boolean, must be `true`.
+- `source_type`: `"spigot"`, `"spring"`, `"well"`, `"tank"`, `"stream"`, `"cache"`.
+- `reliability`: `"reliable"`, `"seasonal"`, or `"treatment_required"`.
+- `treatment_required`: `true` for natural streams/springs/tanks; `false` for treated municipal/agency potable spigots.
+- `description`: Must indicate reliability, source type, and whether water filtration/treatment is required.
 
-### 4. River & Lake Access Points from OSM Corridor (The 5 km Throttling Rule)
+### 4. Mandatory Water Quality Audit Gate
+Before running master ingestion, the agent must run the automated water audit:
+```bash
+docker compose exec -T app python3 -m engine.cli.main water \
+  --audit "route/places/water_<route-id>.json" \
+  --track "route/<filename>.gpx"
+```
+**Strict Quality Gate**:
+- Verifies that **100% of curated water entries** have valid coordinates and documented provenance (`verified: true`).
+- Checks that physical facilities have realistic lateral distance to the route.
+- If any point lacks provenance or is unverified, the command exits with code 1 and prints the failing entries. Route ingestion is strictly considered **FAILED / INCOMPLETE** until this audit passes with code 0.
+
+### 5. River & Lake Access Points from OSM Corridor (The 5 km Throttling Rule)
 When a bikepacking route follows along a river or lake, riders need to know where they can access natural water for filtration. However, if a route follows a major river (such as the Gila River or Colorado River) for 30–50 km, naive spatial queries produce hundreds of redundant points every few hundred meters, severely cluttering the map and UI.
 
 To prevent this:
@@ -362,15 +395,16 @@ To prevent this:
      --segment-km 5.0
    ```
 
-### 5. Track Projection & Merge Workflow
+### 6. Track Projection & Merge Workflow
 When adding water waypoints:
-1. Extract or list the water sources with their GPS coordinates `(lat, lon)`.
-2. Save to a temporary JSON file (e.g. `route/places/water_<route-id>.json`).
-3. Pass `--water route/places/water_<route-id>.json` (or multiple comma-separated files) to `python3 -m engine.cli.main ingest` (or `python3 -m engine.cli.places`).
-4. The tool projects each coordinate onto `route-track.json` via Haversine nearest-point calculation to compute `route_km`, `route_mile`, and `distance_to_trail_km`.
-5. The combined places list is strictly sorted ascending by `route_mile`.
+1. Research and verify authentic GPS coordinates `(lat, lon)` and provenance for each water source.
+2. Save to `route/places/water_<route-id>.json` conforming to the provenance schema.
+3. Audit via `python3 -m engine.cli.main water --audit route/places/water_<route-id>.json --track route/<filename>.gpx`.
+4. Pass `--water route/places/water_<route-id>.json` to `python3 -m engine.cli.main ingest`.
+5. The tool projects each coordinate onto `route-track.json` via Haversine nearest-point calculation to compute `route_km`, `route_mile`, and `distance_to_trail_km`.
+6. The combined places list is strictly sorted ascending by `route_mile`.
 
-### 6. Application UI & Runtime Integration
+### 7. Application UI & Runtime Integration
 The Angular frontend recognizes `"water"` natively:
 - **Category Badge (`waypoint.model.ts`)**: Renders with cyan pill `{ icon: "💧", label: "Water", badgeClass: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" }`.
 - **Map Marker Pin (`route-map.component.ts`)**: Displays a dedicated cyan droplet pin (`💧 Water`, color `#06b6d4`, background `bg-cyan-600`).
@@ -396,13 +430,21 @@ Once the data files are generated and the route is registered in `routes.json`:
    ```
    **Strict Quality Gate**: This automated audit scans `climbs.json` and verifies that **100% of climbs** have `"researched": true`. If any climb has `"researched": false` or missing, the command exits with code 1 and prints the unresearched climb IDs and names. The route ingestion is strictly considered **FAILED / INCOMPLETE** until this audit command exits with code 0 (`All N climbs verified as researched`).
 
-3. **Run Angular Unit Tests**:
+3. **Run Water Quality Audit (Mandatory Quality Gate)**:
+   ```bash
+   docker compose exec -T app python3 -m engine.cli.main water \
+     --audit "route/places/water_<route-id>.json" \
+     --track "public/data/routes/<route-id>/route-track.json"
+   ```
+   **Strict Quality Gate**: This automated audit scans `water_<route-id>.json` and verifies that **100% of water waypoints** have valid coordinates, verified provenance (`verified: true`), realistic trail offsets, and zero interpolated/unverified entries. The route ingestion is strictly considered **FAILED / INCOMPLETE** until this audit command exits with code 0.
+
+4. **Run Angular Unit Tests**:
    ```bash
    docker compose exec -T app npm test -- --watch=false
    ```
    All frontend test suites must pass (100% green).
 
-4. **Verify Production Build**:
+5. **Verify Production Build**:
    ```bash
    docker compose exec -T app npm run build
    ```

@@ -7,144 +7,51 @@
     "town": "Sweetwater Station",
     "is_in_town": false,
     "location": {
-      "lat": 42.3961,
-      "lon": -108.6277
+      "lat": 42.392995,
+      "lon": -108.626636
     },
-    "distance_to_trail_km": 0.0,
-    "route_km": 2104.5,
-    "route_mile": 1307.7,
+    "provenance": {
+      "source": "osm",
+      "id": 14471391,
+      "url": "https://www.openstreetmap.org/way/14471391",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": true,
+    "source_type": "stream",
     "address": "Sweetwater River, Fremont County, WY",
-    "google_maps_url": "https://maps.google.com/?q=42.3961,-108.6277",
+    "google_maps_url": "https://maps.google.com/?q=42.39300,-108.62664",
     "business_status": "OPERATIONAL",
     "province_state": "WY",
     "country": "USA",
-    "description": "Flowing river in northern Great Divide Basin. Reliable filterable water source before long arid stretches."
+    "description": "Flowing river crossing in northern Great Divide Basin. Perennial filterable water source before entering the arid basin interior."
   },
   {
     "id": "td_oregon_buttes_spring",
-    "name": "Oregon Buttes Spring & Historic Monument",
+    "name": "Oregon Buttes Spring",
     "category": "water",
     "type": "spring",
     "town": "Great Divide Basin",
     "is_in_town": false,
     "location": {
-      "lat": 42.3007,
-      "lon": -108.454
+      "lat": 42.309222,
+      "lon": -108.47739
     },
-    "distance_to_trail_km": 0.0,
-    "route_km": 2125.3,
-    "route_mile": 1320.6,
+    "provenance": {
+      "source": "osm",
+      "id": 3838770033,
+      "url": "https://www.openstreetmap.org/node/3838770033",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": true,
+    "source_type": "spring",
     "address": "Oregon Buttes Rd, Sweetwater County, WY",
-    "google_maps_url": "https://maps.google.com/?q=42.3007,-108.4540",
+    "google_maps_url": "https://maps.google.com/?q=42.30922,-108.47739",
     "business_status": "OPERATIONAL",
     "province_state": "WY",
     "country": "USA",
-    "description": "Natural spring and historic pioneer waypoint beneath Oregon Buttes. Filter required."
-  },
-  {
-    "id": "td_dianthus_well",
-    "name": "Dianthus Well & Solar Stock Pump",
-    "category": "water",
-    "type": "cache",
-    "town": "Great Divide Basin",
-    "is_in_town": false,
-    "location": {
-      "lat": 42.2722,
-      "lon": -108.1017
-    },
-    "distance_to_trail_km": 0.01,
-    "route_km": 2162.0,
-    "route_mile": 1343.4,
-    "address": "Great Divide Basin, Sweetwater County, WY",
-    "google_maps_url": "https://maps.google.com/?q=42.2722,-108.1017",
-    "business_status": "OPERATIONAL",
-    "province_state": "WY",
-    "country": "USA",
-    "description": "BLM solar-powered deep well and stock tank in central Great Divide Basin. Critical lifeline water source."
-  },
-  {
-    "id": "td_am_reservoir",
-    "name": "A&M Reservoir & Spillway Creek",
-    "category": "water",
-    "type": "water",
-    "town": "Great Divide Basin",
-    "is_in_town": false,
-    "location": {
-      "lat": 42.0535,
-      "lon": -108.0244
-    },
-    "distance_to_trail_km": 0.0,
-    "route_km": 2193.0,
-    "route_mile": 1362.7,
-    "address": "A&M Reservoir Rd, Sweetwater County, WY",
-    "google_maps_url": "https://maps.google.com/?q=42.0535,-108.0244",
-    "business_status": "OPERATIONAL",
-    "province_state": "WY",
-    "country": "USA",
-    "description": "Critical Great Divide Basin reservoir. Filter water from the spillway overflow creek rather than the stagnant main body."
-  },
-  {
-    "id": "td_battle_spring",
-    "name": "Battle Spring Drainage",
-    "category": "water",
-    "type": "spring",
-    "town": "Great Divide Basin",
-    "is_in_town": false,
-    "location": {
-      "lat": 41.9098,
-      "lon": -108.004
-    },
-    "distance_to_trail_km": 0.0,
-    "route_km": 2214.3,
-    "route_mile": 1375.9,
-    "address": "Battle Spring Draw, Sweetwater County, WY",
-    "google_maps_url": "https://maps.google.com/?q=41.9098,-108.0040",
-    "business_status": "OPERATIONAL",
-    "province_state": "WY",
-    "country": "USA",
-    "description": "Seasonal spring drainage in southern Great Divide Basin, ~19 miles north of Wamsutter resupply."
-  },
-  {
-    "id": "td_mesa_alta_tank",
-    "name": "Mesa Alta Spring & Water Catchment",
-    "category": "water",
-    "type": "water",
-    "town": "Mesa Alta",
-    "is_in_town": false,
-    "location": {
-      "lat": 36.03055,
-      "lon": -106.6697
-    },
-    "distance_to_trail_km": 0.0,
-    "route_km": 3452.0,
-    "route_mile": 2145.0,
-    "address": "Santa Fe National Forest, Rio Arriba County, NM",
-    "google_maps_url": "https://maps.google.com/?q=36.03055,-106.66970",
-    "business_status": "OPERATIONAL",
-    "province_state": "NM",
-    "country": "USA",
-    "description": "Spring catchment in Santa Fe National Forest high badlands between Abiquiu and Cuba. Must filter."
-  },
-  {
-    "id": "td_san_mateo_spring",
-    "name": "San Mateo Basin Spring",
-    "category": "water",
-    "type": "spring",
-    "town": "Cibola National Forest",
-    "is_in_town": false,
-    "location": {
-      "lat": 35.59509,
-      "lon": -107.83886
-    },
-    "distance_to_trail_km": 0.0,
-    "route_km": 3637.1,
-    "route_mile": 2260.0,
-    "address": "Cibola National Forest, McKinley County, NM",
-    "google_maps_url": "https://maps.google.com/?q=35.59509,-107.83886",
-    "business_status": "OPERATIONAL",
-    "province_state": "NM",
-    "country": "USA",
-    "description": "Natural spring in northern Mount Taylor volcanic foothills. Filter required."
+    "description": "Natural spring beneath Oregon Buttes near Continental Divide historic monument in northern Great Divide Basin. Filter required."
   },
   {
     "id": "td_pie_town_toaster",
@@ -154,14 +61,21 @@
     "town": "Pie Town",
     "is_in_town": true,
     "location": {
-      "lat": 34.2981,
-      "lon": -108.1342
+      "lat": 34.29909,
+      "lon": -108.13862
     },
-    "distance_to_trail_km": 0.29,
-    "route_km": 3809.0,
-    "route_mile": 2366.8,
-    "address": "Pie Town, Catron County, NM",
-    "google_maps_url": "https://maps.google.com/?q=34.2981,-108.1342",
+    "provenance": {
+      "source": "survey",
+      "id": "19_S_Pie_Town_Rd",
+      "url": "https://maps.google.com/?q=34.29909,-108.13862",
+      "notes": "19 S Pie Town Rd, Pie Town, Catron County, NM",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spigot",
+    "address": "19 S Pie Town Rd, Pie Town, Catron County, NM",
+    "google_maps_url": "https://maps.google.com/?q=34.29909,-108.13862",
     "business_status": "OPERATIONAL",
     "province_state": "NM",
     "country": "USA",
@@ -169,87 +83,143 @@
   },
   {
     "id": "td_beaverhead_spigot",
-    "name": "Beaverhead Work Center Spigot",
+    "name": "USFS Beaverhead Work Center Spigot",
     "category": "water",
     "type": "drinking_water",
     "town": "Gila National Forest",
     "is_in_town": false,
     "location": {
-      "lat": 33.5552,
-      "lon": -108.3284
+      "lat": 33.423588,
+      "lon": -108.111457
     },
-    "distance_to_trail_km": 0.0,
-    "route_km": 3933.3,
-    "route_mile": 2444.0,
+    "provenance": {
+      "source": "osm",
+      "id": 1091155176,
+      "url": "https://www.openstreetmap.org/way/1091155176",
+      "notes": "USFS Beaverhead Work Center, Black Range Ranger District, Gila National Forest",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spigot",
     "address": "USFS Beaverhead Work Center, Catron County, NM",
-    "google_maps_url": "https://maps.google.com/?q=33.5552,-108.3284",
+    "google_maps_url": "https://maps.google.com/?q=33.42359,-108.11146",
     "business_status": "OPERATIONAL",
     "province_state": "NM",
     "country": "USA",
-    "description": "USFS Beaverhead Ranger Station in central Gila National Forest. Potable water spigot outside."
+    "description": "USFS Beaverhead Ranger Station / Work Center compound in central Gila National Forest. Potable water spigot outside. Crucial water lifeline between Pie Town and Silver City."
   },
   {
     "id": "td_sapillo_creek",
-    "name": "Sapillo Creek / Highway 35 Crossing",
+    "name": "Sapillo Campground / Creek Crossing",
     "category": "water",
     "type": "water",
     "town": "Gila National Forest",
     "is_in_town": false,
     "location": {
-      "lat": 33.0093,
-      "lon": -108.1135
+      "lat": 33.008056,
+      "lon": -108.115238
     },
-    "distance_to_trail_km": 0.0,
-    "route_km": 4047.9,
-    "route_mile": 2515.2,
+    "provenance": {
+      "source": "osm",
+      "id": 2332493803,
+      "url": "https://www.openstreetmap.org/node/2332493803",
+      "notes": "Sapillo Group Area Campground / NM-35 bridge near Lake Roberts",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": true,
+    "source_type": "stream",
     "address": "NM-35, Grant County, NM",
-    "google_maps_url": "https://maps.google.com/?q=33.0093,-108.1135",
+    "google_maps_url": "https://maps.google.com/?q=33.00806,-108.11524",
     "business_status": "OPERATIONAL",
     "province_state": "NM",
     "country": "USA",
-    "description": "Perennial mountain stream crossing in southern Gila near Lake Roberts. Filter required."
+    "description": "Perennial mountain stream and campground crossing in southern Gila National Forest near Lake Roberts. Filter required."
   },
   {
-    "id": "td_separ_oasis",
-    "name": "Separ Continental Divide Water Oasis",
+    "id": "td_separ_trading_post",
+    "name": "Separ Continental Divide Trading Post",
     "category": "water",
     "type": "drinking_water",
     "town": "Separ",
     "is_in_town": false,
     "location": {
-      "lat": 32.2897,
-      "lon": -108.3349
+      "lat": 32.20102,
+      "lon": -108.42323
     },
-    "distance_to_trail_km": 0.0,
-    "route_km": 4175.1,
-    "route_mile": 2594.3,
-    "address": "I-10 Frontage Rd, Grant County, NM",
-    "google_maps_url": "https://maps.google.com/?q=32.2897,-108.3349",
+    "provenance": {
+      "source": "agency",
+      "id": "I10_Exit42_Separ",
+      "url": "https://maps.google.com/?q=32.20102,-108.42323",
+      "notes": "Bowlin Continental Divide Travel Center at I-10 Exit 42, Separ, NM",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spigot",
+    "address": "I-10 Exit 42 Frontage Rd, Grant County, NM",
+    "google_maps_url": "https://maps.google.com/?q=32.20102,-108.42323",
     "business_status": "OPERATIONAL",
     "province_state": "NM",
     "country": "USA",
-    "description": "Critical desert water stop at I-10 crossing between Silver City and Hachita."
+    "description": "Bowlin Continental Divide Travel Center at I-10 Exit 42. Critical desert water and food resupply stop between Silver City and Hachita."
   },
   {
-    "id": "td_hachita_spigot",
-    "name": "Hachita Community Water Spigot",
+    "id": "td_hachita_community_center",
+    "name": "Hachita Community Center Water Spigot",
     "category": "water",
     "type": "drinking_water",
     "town": "Hachita",
     "is_in_town": true,
     "location": {
-      "lat": 31.9167,
-      "lon": -108.3228
+      "lat": 31.918007,
+      "lon": -108.321939
     },
-    "distance_to_trail_km": 0.36,
-    "route_km": 4231.5,
-    "route_mile": 2629.3,
-    "address": "Hachita, Grant County, NM",
-    "google_maps_url": "https://maps.google.com/?q=31.9167,-108.3228",
+    "provenance": {
+      "source": "osm",
+      "id": 244248877,
+      "url": "https://www.openstreetmap.org/way/244248877",
+      "notes": "Hachita Community Center, 4420 NM-9, Hachita, NM",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spigot",
+    "address": "4420 NM-9, Hachita, Grant County, NM",
+    "google_maps_url": "https://maps.google.com/?q=31.91801,-108.32194",
     "business_status": "OPERATIONAL",
     "province_state": "NM",
     "country": "USA",
-    "description": "Community water spigot in Hachita. Last potable water source before 45-mile desert run to the Mexican border."
+    "description": "Community center in Hachita with outdoor potable water tap. Last town water source before 45-mile desert run to the Mexican border."
+  },
+  {
+    "id": "td_hachita_bike_ranch",
+    "name": "Hachita Bike Ranch",
+    "category": "water",
+    "type": "drinking_water",
+    "town": "Hachita",
+    "is_in_town": true,
+    "location": {
+      "lat": 31.928122,
+      "lon": -108.338338
+    },
+    "provenance": {
+      "source": "osm",
+      "id": 12180211860,
+      "url": "https://www.openstreetmap.org/node/12180211860",
+      "notes": "Hachita Bike Ranch campsite, 4311 NM-9, Hachita, NM",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spigot",
+    "address": "4311 NM-9, Hachita, Grant County, NM",
+    "google_maps_url": "https://maps.google.com/?q=31.92812,-108.33834",
+    "business_status": "OPERATIONAL",
+    "province_state": "NM",
+    "country": "USA",
+    "description": "Dedicated bikepacker ranch and sanctuary in Hachita. Potable water spigots, camping, and rider services."
   },
   {
     "id": "td_antelope_wells",
@@ -259,14 +229,21 @@
     "town": "Antelope Wells",
     "is_in_town": true,
     "location": {
-      "lat": 31.3339,
+      "lat": 31.3323,
       "lon": -108.5304
     },
-    "distance_to_trail_km": 0.0,
-    "route_km": 4311.7,
-    "route_mile": 2679.2,
+    "provenance": {
+      "source": "agency",
+      "id": "CBP_Antelope_Wells",
+      "url": "https://maps.google.com/?q=31.33230,-108.53040",
+      "notes": "US Customs and Border Protection Port of Entry, NM-81 at Mexico border",
+      "verified": true
+    },
+    "reliability": "reliable",
+    "treatment_required": false,
+    "source_type": "spigot",
     "address": "Antelope Wells Port of Entry, Hidalgo County, NM",
-    "google_maps_url": "https://maps.google.com/?q=31.3339,-108.5304",
+    "google_maps_url": "https://maps.google.com/?q=31.33230,-108.53040",
     "business_status": "OPERATIONAL",
     "province_state": "NM",
     "country": "USA",

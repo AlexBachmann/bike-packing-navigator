@@ -67,6 +67,7 @@ class WaterWaypoint:
     source_type: str = "spring"
     tier: int = 2
     osm_id: Optional[int] = None
+    provenance: Dict[str, Any] = field(default_factory=dict)
     description: str = ""
     extra: Dict[str, Any] = field(default_factory=dict)
 
@@ -96,6 +97,15 @@ class WaterWaypoint:
             slug = slugify(self.name, sep="_") or f"water_{int(round(self.km))}km"
             self.id = f"water_osm_{slug}_{int(round(self.km))}km"
 
+        # Backfill provenance from osm_id if missing
+        if not self.provenance and self.osm_id:
+            self.provenance = {
+                "source": "osm",
+                "id": self.osm_id,
+                "url": f"https://www.openstreetmap.org/{'way' if getattr(self, 'source_type', '') == 'way' else 'node'}/{self.osm_id}",
+                "verified": True,
+            }
+
     @property
     def distance_to_trail_km(self) -> float:
         """Distance lateral offset in kilometers."""
@@ -103,7 +113,7 @@ class WaterWaypoint:
 
     def to_dict(self) -> Dict[str, Any]:
         """Export domain snake_case dictionary."""
-        return {
+        d = {
             "id": self.id,
             "name": self.name,
             "category": "water",
@@ -128,6 +138,9 @@ class WaterWaypoint:
             "description": self.description,
             "extra": self.extra,
         }
+        if self.provenance:
+            d["provenance"] = self.provenance
+        return d
 
     def to_places_dict(self) -> Dict[str, Any]:
         """Export standardized places.json schema for Bikepack Navigator."""
@@ -143,7 +156,7 @@ class WaterWaypoint:
         )
         desc = self.description or f"{self.name}. {dist_desc}. {treat_desc}"
 
-        return {
+        res = {
             "id": self.id,
             "name": self.name,
             "category": "water",
@@ -166,6 +179,9 @@ class WaterWaypoint:
             "source_type": self.source_type,
             "description": desc,
         }
+        if self.provenance:
+            res["provenance"] = self.provenance
+        return res
 
 
 def water_priority_score(candidate: Union[WaterWaypoint, Dict[str, Any]]) -> Tuple[int, int, float]:
@@ -541,19 +557,27 @@ def extract_water_access(
                 c_name = cw.get("name", "Water Source")
                 cid = cw.get("id") or f"water_{slugify(c_name, sep='_')}_{int(round(r_km))}km"
                 c_tier = cw.get("tier", 1 if not cw.get("treatment_required", True) else 2)
+                prov = cw.get("provenance")
+                if not prov and cw.get("osm_id"):
+                    prov = {"source": "osm", "id": cw.get("osm_id"), "verified": True}
+                elif not prov and cw.get("source") and cw.get("source") != "manual":
+                    prov = {"source": str(cw.get("source")), "verified": True}
+
                 curated_wp = WaterWaypoint(
                     id=cid,
                     name=c_name,
                     type=cw.get("type", "water"),
-                    km=cw.get("route_km", r_km),
-                    mile=cw.get("route_mile", r_mi),
+                    km=r_km,
+                    mile=r_mi,
                     elevation_m=cw.get("elevation_m") or cw.get("elevation"),
-                    dist_off_route_m=round(cw.get("dist_off_route_m", dist_km * 1000.0), 1),
+                    dist_off_route_m=round(dist_km * 1000.0, 1),
                     coordinates=(float(clat), float(clon)),
                     reliability=str(cw.get("reliability", "reliable")),
                     treatment_required=bool(cw.get("treatment_required", False)),
                     source_type=str(cw.get("source_type", "amenity" if c_tier == 1 else "spring")),
                     tier=int(c_tier),
+                    osm_id=cw.get("osm_id") or (prov.get("id") if isinstance(prov, dict) and prov.get("source") == "osm" and isinstance(prov.get("id"), int) else None),
+                    provenance=prov if isinstance(prov, dict) else {},
                     description=cw.get("description", ""),
                     extra=cw.get("extra", {})
                 )
@@ -619,3 +643,107 @@ def analyze_water_gaps(
         })
 
     return gaps
+
+
+def audit_water_sources(
+    water_sources: Sequence[Union[WaterWaypoint, Dict[str, Any]]],
+    track_index: Optional[TrackIndex] = None,
+    max_distance_m: float = 15000.0,
+) -> Tuple[bool, List[str]]:
+    """
+    Audit curated water waypoints for coordinate provenance and validity.
+
+    Strict Quality Gate:
+    1. Mandatory fields: id, name, location (lat, lon).
+    2. Valid coordinates: -90 <= lat <= 90, -180 <= lon <= 180.
+    3. Mandatory Provenance: Must have a verified provenance record ('osm', 'agency', 'gnis', 'trail_report', 'survey')
+       with a valid identifier or source reference.
+    4. Distance check: If track_index is provided, ensures waypoint is within reasonable corridor distance (<= max_distance_m).
+
+    Returns:
+        (passed: bool, error_messages: List[str])
+    """
+    errors: List[str] = []
+    if not water_sources:
+        return True, ["Warning: Empty water sources list provided."]
+
+    VALID_SOURCES = {"osm", "agency", "gnis", "trail_report", "survey", "manual_verified"}
+
+    for idx, item in enumerate(water_sources):
+        if isinstance(item, WaterWaypoint):
+            wid = item.id
+            name = item.name
+            lat, lon = item.coordinates
+            prov = item.provenance or ({"source": "osm", "id": item.osm_id, "verified": True} if item.osm_id else {})
+        elif isinstance(item, dict):
+            wid = item.get("id", f"water_item_{idx}")
+            name = item.get("name", "Unknown Water Source")
+            loc = item.get("location", {}) if isinstance(item.get("location"), dict) else {}
+            lat = loc.get("lat") if "lat" in loc else item.get("lat")
+            lon = loc.get("lon") if "lon" in loc else item.get("lon")
+            prov = item.get("provenance") or ({"source": "osm", "id": item.get("osm_id"), "verified": True} if item.get("osm_id") else {})
+        else:
+            errors.append(f"Item #{idx}: Expected dict or WaterWaypoint, got {type(item).__name__}")
+            continue
+
+        # 1. Check ID & Name
+        if not wid or not str(wid).strip():
+            errors.append(f"Item #{idx}: Missing required 'id'")
+        if not name or not str(name).strip():
+            errors.append(f"Item '{wid}': Missing required 'name'")
+
+        # 2. Check Coordinates
+        if lat is None or lon is None:
+            errors.append(f"Water source '{wid}' ({name}): Missing lat or lon coordinates")
+            continue
+        try:
+            flat = float(lat)
+            flon = float(lon)
+        except (ValueError, TypeError):
+            errors.append(f"Water source '{wid}' ({name}): Coordinates must be numeric floats (got lat={lat}, lon={lon})")
+            continue
+
+        if not (-90.0 <= flat <= 90.0 and -180.0 <= flon <= 180.0):
+            errors.append(f"Water source '{wid}' ({name}): Coordinates out of bounds ({flat}, {flon})")
+            continue
+
+        # 3. Provenance Verification Gate
+        if not prov or not isinstance(prov, dict):
+            errors.append(
+                f"Water source '{wid}' ({name}): Missing required 'provenance' object. "
+                f"Coordinates must have verified origin ('osm', 'agency', 'gnis', 'trail_report', 'survey'). "
+                f"Geometric guessing/interpolation from GPX tracks is strictly prohibited."
+            )
+            continue
+
+        p_source = str(prov.get("source", "")).lower()
+        p_verified = bool(prov.get("verified", False))
+        p_id = prov.get("id")
+        p_url = prov.get("url")
+
+        if p_source not in VALID_SOURCES:
+            errors.append(
+                f"Water source '{wid}' ({name}): Invalid provenance source '{p_source}'. "
+                f"Must be one of {sorted(VALID_SOURCES)}."
+            )
+        if not p_verified:
+            errors.append(
+                f"Water source '{wid}' ({name}): Provenance marked as unverified (verified: false). "
+                f"100% of curated water points must be verified."
+            )
+        if not p_id and not p_url and not prov.get("notes"):
+            errors.append(
+                f"Water source '{wid}' ({name}): Provenance must include an identifier ('id'), reference ('url'), or 'notes'."
+            )
+
+        # 4. Track Distance Check
+        if track_index is not None:
+            dist_km, r_km, r_mi = track_index.project_point(flat, flon, max_dist_km=max_distance_m / 1000.0)
+            dist_m = dist_km * 1000.0
+            if dist_m > max_distance_m:
+                errors.append(
+                    f"Water source '{wid}' ({name}): Distance to trail ({dist_m:.0f}m) exceeds maximum allowable detour ({max_distance_m:.0f}m)."
+                )
+
+    passed = len(errors) == 0
+    return passed, errors

@@ -525,15 +525,28 @@ export class TurnGuidanceService {
    */
   interpolatePointAtMile(
     trackPoints: [number, number, number, number, number][],
-    targetMile: number
+    targetMile: number,
+    canonicalTotalMiles?: number
   ): [number, number] {
     if (!trackPoints || trackPoints.length === 0) return [0, 0];
-    if (targetMile <= trackPoints[0][4]) {
+
+    let effectiveTarget = targetMile;
+    const lastIdx = trackPoints.length - 1;
+    const trackTotalMiles = trackPoints[lastIdx][4];
+    if (
+      typeof canonicalTotalMiles === 'number' &&
+      canonicalTotalMiles > 0 &&
+      trackTotalMiles > 0 &&
+      Math.abs(trackTotalMiles - canonicalTotalMiles) > 0.1
+    ) {
+      effectiveTarget = (targetMile / canonicalTotalMiles) * trackTotalMiles;
+    }
+
+    if (effectiveTarget <= trackPoints[0][4]) {
       return [trackPoints[0][0], trackPoints[0][1]];
     }
 
-    const lastIdx = trackPoints.length - 1;
-    if (targetMile >= trackPoints[lastIdx][4]) {
+    if (effectiveTarget >= trackPoints[lastIdx][4]) {
       return [trackPoints[lastIdx][0], trackPoints[lastIdx][1]];
     }
 
@@ -541,7 +554,7 @@ export class TurnGuidanceService {
     let high = lastIdx;
     while (low <= high) {
       const mid = Math.floor((low + high) / 2);
-      if (trackPoints[mid][4] <= targetMile) {
+      if (trackPoints[mid][4] <= effectiveTarget) {
         low = mid + 1;
       } else {
         high = mid - 1;
@@ -551,7 +564,7 @@ export class TurnGuidanceService {
     const idxA = Math.max(0, low - 1);
     const idxB = Math.min(lastIdx, idxA + 1);
     const span = trackPoints[idxB][4] - trackPoints[idxA][4];
-    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - trackPoints[idxA][4]) / span));
+    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (effectiveTarget - trackPoints[idxA][4]) / span));
 
     const lat = trackPoints[idxA][0] + t * (trackPoints[idxB][0] - trackPoints[idxA][0]);
     const lon = trackPoints[idxA][1] + t * (trackPoints[idxB][1] - trackPoints[idxA][1]);

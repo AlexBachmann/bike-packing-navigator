@@ -144,4 +144,66 @@ describe('DeadReckoningService', () => {
     // Tangent bearing along North route is 0, should ignore the 45 deg raw jitter
     expect(service.interpolatedHeading()).toBeCloseTo(0, 1);
   });
+
+  it('resets position when a new tracking session starts with a projectedMile behind the previous session', () => {
+    // Session 1: Tracking at mile 20.0
+    service.updateGpsFix({
+      latitude: 40.030,
+      longitude: -105.000,
+      timestamp: 1000,
+      projectedMile: 20.0
+    }, 25);
+    expect(service.interpolatedMile()).toBe(20.0);
+
+    // Stop session 1
+    service.stop();
+
+    // Session 2: Start tracking at mile 5.0 (e.g. user moved slider / seeked)
+    service.updateGpsFix({
+      latitude: 40.010,
+      longitude: -105.000,
+      timestamp: 5000,
+      projectedMile: 5.0
+    }, 25);
+
+    // Must adopt 5.0, NOT clamp to 20.0!
+    expect(service.interpolatedMile()).toBe(5.0);
+  });
+
+  it('adopts new projectedMile when user seeks or teleports to an earlier mile during active tracking', () => {
+    service.updateGpsFix({
+      latitude: 40.030,
+      longitude: -105.000,
+      timestamp: 1000,
+      projectedMile: 20.0
+    }, 25);
+    expect(service.interpolatedMile()).toBe(20.0);
+
+    // Teleport/seek backward to mile 5.0 (delta > 0.05 miles)
+    service.updateGpsFix({
+      latitude: 40.010,
+      longitude: -105.000,
+      timestamp: 2000,
+      projectedMile: 5.0
+    }, 25);
+
+    expect(service.interpolatedMile()).toBe(5.0);
+  });
+
+  it('resets interpolatedMile, coords, and heading when reset() is called', () => {
+    service.updateGpsFix({
+      latitude: 40.030,
+      longitude: -105.000,
+      timestamp: 1000,
+      projectedMile: 20.0
+    }, 25);
+
+    service.reset(5.0, [40.010, -105.000], 90);
+
+    expect(service.interpolatedMile()).toBe(5.0);
+    expect(service.interpolatedCoords()).toEqual([40.010, -105.000]);
+    expect(service.interpolatedHeading()).toBe(90);
+    expect(service.isTracking()).toBe(false);
+    expect(service.isMoving()).toBe(false);
+  });
 });

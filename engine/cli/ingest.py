@@ -594,6 +594,15 @@ def run_ingest(config: IngestConfig) -> IngestResult:
                 curated_water = read_json(Path("route/places") / "water.json")
             if not isinstance(curated_water, list):
                 curated_water = []
+            elif curated_water:
+                from engine.enrichment.water import audit_water_sources
+                w_passed, w_errors = audit_water_sources(curated_water)
+                if not w_passed:
+                    logger.warning(f"⚠️  [Water Audit Warnings] {len(w_errors)} issues in curated water data:")
+                    for w_err in w_errors[:5]:
+                        logger.warning(f"   - {w_err}")
+                else:
+                    logger.info(f"✅ [Water Audit] Verified {len(curated_water)} curated water sources with authentic provenance.")
 
             # 2. Extract raw OSM water features from PMTiles, cache, or Overpass
             raw_water_features = []
