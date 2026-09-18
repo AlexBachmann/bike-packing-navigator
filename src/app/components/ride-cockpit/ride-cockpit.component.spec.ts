@@ -1306,7 +1306,7 @@ describe('RideCockpitComponent Unit Test Suite', () => {
       expect(popup).toBeTruthy();
       expect(popup.options?.className).toBe('dark-maplibre-popup');
       expect(popup.getHTML()).toContain('Waterton Spring');
-      expect(popup.getHTML()).toContain('Jump Rider Here');
+      expect(popup.getHTML()).toContain('View on Google Maps');
     });
 
     it('should update markers when places signal updates', () => {

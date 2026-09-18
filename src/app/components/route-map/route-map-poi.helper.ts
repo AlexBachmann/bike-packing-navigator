@@ -135,6 +135,11 @@ export function createPoiPopupHtml(place: Place, iconConfig: PoiIconConfig, unit
     ? (isMiles ? `${(place.distance_to_trail_km * 0.621371).toFixed(1)} mi off route` : `${place.distance_to_trail_km.toFixed(1)} km off route`)
     : 'On Route';
 
+  const mapsUrl = place.google_maps_url
+    || (place.location?.lat != null && place.location?.lon != null
+      ? `https://maps.google.com/?q=${place.location.lat},${place.location.lon}`
+      : `https://maps.google.com/?q=${encodeURIComponent(place.name + (place.town ? ' ' + place.town : ''))}`);
+
   return `
     <div style="font-family: ui-monospace, SFMono-Regular, monospace; min-width: 180px; padding: 4px;">
       <div style="font-size: 10px; text-transform: uppercase; color: ${iconConfig.badgeColor}; font-weight: 700; letter-spacing: 0.05em;">
@@ -149,12 +154,14 @@ export function createPoiPopupHtml(place: Place, iconConfig: PoiIconConfig, unit
         <span style="color: #34d399; font-weight: 600;">${mileText}</span>
         <span style="color: #94a3b8;">${offRouteText}</span>
       </div>
-      <button
-        onclick="window.dispatchEvent(new CustomEvent('bpn-jump-mile', { detail: ${place.route_mile} }))"
-        style="width: 100%; margin-top: 8px; padding: 4px 8px; background: #10b981; color: #022c22; font-weight: 700; font-size: 11px; border: none; border-radius: 6px; cursor: pointer;"
+      <a
+        href="${mapsUrl}"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="display: block; width: 100%; margin-top: 8px; padding: 5px 8px; background: #10b981; color: #022c22; font-weight: 700; font-size: 11px; border: none; border-radius: 6px; text-align: center; text-decoration: none; box-sizing: border-box; cursor: pointer;"
       >
-        Jump Rider Here ↳
-      </button>
+        View on Google Maps ↗
+      </a>
     </div>
   `;
 }
