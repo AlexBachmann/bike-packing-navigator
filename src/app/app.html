@@ -1,8 +1,8 @@
 <div
   class="flex flex-col bg-slate-950 text-slate-100 font-sans select-none"
   [ngClass]="activeTab() === 'map' || activeTab() === 'ride'
-    ? 'h-screen h-[100dvh] overflow-hidden'
-    : 'min-h-screen pb-20'"
+    ? 'h-screen cockpit-root-container overflow-hidden'
+    : 'min-h-screen scrolling-tab-layout'"
 >
 
   <!-- Floating Toast Notification Container -->
@@ -79,7 +79,7 @@
   <main
     class="max-w-2xl mx-auto w-full transition-all"
     [ngClass]="activeTab() === 'map' || activeTab() === 'ride'
-      ? 'flex-1 min-h-0 flex flex-col p-2 pb-[68px] sm:p-3 sm:pb-[68px]'
+      ? 'flex-1 min-h-0 flex flex-col p-2 sm:p-3 cockpit-main-layout'
       : 'flex-1 p-4'"
   >
     <!-- Welcome Screen when no route is active -->

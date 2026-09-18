@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { TurnGuidanceService } from './turn-guidance.service';
+import { TurnGuidanceService, chunkTurnDistance } from './turn-guidance.service';
 
 describe('TurnGuidanceService', () => {
   let service: TurnGuidanceService;
@@ -137,7 +137,7 @@ describe('TurnGuidanceService', () => {
       expect(cueAtStart).not.toBeNull();
       expect(cueMidway).not.toBeNull();
       expect(cueMidway!.distanceMeters).toBeLessThan(cueAtStart!.distanceMeters);
-      expect(cueMidway!.distanceMeters).toBeCloseTo(35, -1);
+      expect(cueMidway!.distanceMeters).toBe(25);
     });
 
     it('ignores turns beyond the 75m lookahead window', () => {
@@ -325,7 +325,7 @@ describe('TurnGuidanceService', () => {
       expect(cue).not.toBeNull();
       expect(cue!.direction).toBe('left');
       expect(cue!.roadName).toBe('Buffalo St');
-      expect(cue!.displayText).toContain('Turn left onto Buffalo St in 48 meters');
+      expect(cue!.displayText).toContain('Turn left onto Buffalo St in 50 meters');
       expect(cue!.junctionType).toBe('intersection');
     });
 
@@ -334,7 +334,7 @@ describe('TurnGuidanceService', () => {
       const cue = service.computeTurnAheadFromJunctions(3.47, mockOsmTurns, 'miles');
       expect(cue).not.toBeNull();
       expect(cue!.direction).toBe('slight-right');
-      expect(cue!.displayText).toContain('Fork slight right onto Goat Creek Trail in 53 yards');
+      expect(cue!.displayText).toContain('Fork slight right onto Goat Creek Trail in 50 yards');
       expect(cue!.junctionType).toBe('fork');
     });
 
@@ -399,6 +399,30 @@ describe('TurnGuidanceService', () => {
         }
       ];
       expect(service.hasMultipleWayOptions([40.0, -105.0], intersectionFeatures)).toBe(true);
+    });
+  });
+
+  describe('chunkTurnDistance [100, 75, 50, 25, 10, 5]', () => {
+    it('quantizes distances accurately to defined countdown chunks', () => {
+      expect(chunkTurnDistance(120)).toBe(100);
+      expect(chunkTurnDistance(100)).toBe(100);
+      expect(chunkTurnDistance(88)).toBe(100);
+      expect(chunkTurnDistance(87)).toBe(75);
+      expect(chunkTurnDistance(75)).toBe(75);
+      expect(chunkTurnDistance(63)).toBe(75);
+      expect(chunkTurnDistance(62)).toBe(50);
+      expect(chunkTurnDistance(50)).toBe(50);
+      expect(chunkTurnDistance(38)).toBe(50);
+      expect(chunkTurnDistance(37)).toBe(25);
+      expect(chunkTurnDistance(25)).toBe(25);
+      expect(chunkTurnDistance(18)).toBe(25);
+      expect(chunkTurnDistance(17)).toBe(10);
+      expect(chunkTurnDistance(10)).toBe(10);
+      expect(chunkTurnDistance(8)).toBe(10);
+      expect(chunkTurnDistance(7)).toBe(5);
+      expect(chunkTurnDistance(5)).toBe(5);
+      expect(chunkTurnDistance(2)).toBe(5);
+      expect(chunkTurnDistance(0)).toBe(5);
     });
   });
 });

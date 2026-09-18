@@ -498,7 +498,7 @@ export class ContractGpsSimulatorService implements IGpsSimulatorService {
   }
 
   setSpeed(speedKph: number): void {
-    const clamped = Math.max(0, speedKph);
+    const clamped = Math.max(-150, Math.min(150, speedKph));
     this._state.update((s) => ({
       ...s,
       speedKph: clamped,
@@ -1677,9 +1677,9 @@ describe('E2E Ride Navigation Cockpit: 4-Tier Opaque-Box Specification Suite', (
         expect(state.running).toBe(false);
       });
 
-      it('2.11.2 should clamp negative simulator speed to 0', () => {
+      it('2.11.2 should allow negative simulator speed to drive backward', () => {
         harness.simulator.setSpeed(-15);
-        expect(harness.simulator.state().speedKph).toBe(0);
+        expect(harness.simulator.state().speedKph).toBe(-15);
       });
 
       it('2.11.3 should step smoothly when set to extreme speed (120 km/h)', () => {

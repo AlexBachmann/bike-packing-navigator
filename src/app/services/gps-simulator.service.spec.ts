@@ -165,9 +165,12 @@ describe('GpsSimulatorService', () => {
       expect(service.running()).toBe(false);
     });
 
-    it('should clamp negative speed inputs to 0', () => {
+    it('should allow negative speed inputs and update speedKph', () => {
       service.setSpeed(-15);
-      expect(service.speedKph()).toBe(0);
+      expect(service.speedKph()).toBe(-15);
+
+      service.setSpeed(-200);
+      expect(service.speedKph()).toBe(-200);
     });
   });
 
@@ -267,6 +270,30 @@ describe('GpsSimulatorService', () => {
       service.setTrackPoints(MOCK_TRACK);
       service.tick(5.0);
       expect(service.simulatedMile()).toBe(0);
+    });
+
+    it('should step backwards when speed is negative', () => {
+      service.start(36, MOCK_TRACK);
+      service.seek(10.0);
+      service.setSpeed(-36); // -36 km/h = -0.0062137 mi/s
+
+      service.tick(1.0);
+      expect(service.simulatedMile()).toBeCloseTo(10.0 - 0.0062137, 5);
+      // Heading should face backwards (opposite of ~90 deg East -> ~270 deg West)
+      expect(service.simulatedHeading()).toBeCloseTo(270, 0);
+    });
+
+    it('should stop automatically at position 0 when driving backwards', () => {
+      service.start(36, MOCK_TRACK);
+      service.seek(0.01);
+      service.setSpeed(-36); // in 5 seconds advances -0.031 mi
+
+      service.tick(5.0);
+
+      expect(service.running()).toBe(false);
+      expect(service.simulatedMile()).toBe(0);
+      expect(service.simulatedSpeedKph()).toBe(0);
+      expect(service.simulatedCoords()).toEqual([51.0, -115.0]);
     });
   });
 

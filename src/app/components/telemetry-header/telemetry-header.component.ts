@@ -143,7 +143,7 @@ export class TelemetryHeaderComponent implements AfterViewInit, OnDestroy {
   }
 
   onSimSpeedChange(speed: number): void {
-    const valid = Math.max(0, speed);
+    const valid = isNaN(speed) ? 0 : speed;
     this.simSpeedInput.set(valid);
     if (this.gpsSimulator.running()) {
       this.gpsSimulator.setSpeed(valid);

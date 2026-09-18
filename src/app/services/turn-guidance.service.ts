@@ -2,7 +2,20 @@ import { Injectable } from '@angular/core';
 import { TurnCue, TurnDirection, RoadSnapResult, OsmTurnDefinition } from '../models/ride-cockpit.model';
 
 export const CHORD_LENGTH_METERS = 25.0;
-export const LOOKAHEAD_WINDOW_METERS = 75.0;
+export const LOOKAHEAD_WINDOW_METERS = 100.0;
+export const TURN_DISTANCE_CHUNKS = [100, 75, 50, 25, 10, 5] as const;
+
+/**
+ * Quantizes countdown distance to [100, 75, 50, 25, 10, 5] chunks based on closest interval midpoint.
+ */
+export function chunkTurnDistance(distance: number): number {
+  if (distance >= 87.5) return 100;
+  if (distance >= 62.5) return 75;
+  if (distance >= 37.5) return 50;
+  if (distance >= 17.5) return 25;
+  if (distance >= 7.5) return 10;
+  return 5;
+}
 export const MIN_TURN_DEFLECTION_DEG = 20.0;
 export const ROAD_SNAP_MAX_DISTANCE_METERS = 20.0;
 export const ROAD_SNAP_MAX_HEADING_DIFF_DEG = 45.0;
@@ -83,9 +96,10 @@ export class TurnGuidanceService {
     };
 
     const dirLabel = directionLabels[direction];
-    const distFormatted = unit === 'miles'
-      ? `${Math.round(distanceMeters * 1.09361)} yards`
-      : `${Math.round(distanceMeters)} meters`;
+    const rawDist = unit === 'miles' ? distanceMeters * 1.09361 : distanceMeters;
+    const chunkVal = chunkTurnDistance(rawDist);
+    const unitLabel = unit === 'miles' ? 'yards' : 'meters';
+    const distFormatted = `${chunkVal} ${unitLabel}`;
 
     const prefix = junctionType === 'fork' ? 'Fork' : 'Turn';
 
@@ -100,7 +114,7 @@ export class TurnGuidanceService {
    * Computes upcoming turn cue ahead of the rider based exclusively on authentic
    * OpenStreetMap decision points where there is a genuine option between two or more ways.
    *
-   * Only cues within 75 meters ahead of the rider are shown (not earlier).
+   * Cues within LOOKAHEAD_WINDOW_METERS (100m) ahead of the rider are shown with chunked countdown.
    */
   computeTurnAheadFromJunctions(
     currentMile: number,
@@ -118,7 +132,7 @@ export class TurnGuidanceService {
     for (const turn of turns) {
       const turnMeters = turn.mile * 1609.344;
       const dist = turnMeters - currentMeters;
-      // Active window: pops up 75 meters before the turn (not earlier),
+      // Active window: pops up 100 meters before the turn (chunked countdown),
       // and remains active until 5 meters past the junction point
       if (dist >= -5 && dist <= LOOKAHEAD_WINDOW_METERS) {
         if (dist >= 0 && (minDistanceMeters < 0 || dist < minDistanceMeters)) {
@@ -146,7 +160,7 @@ export class TurnGuidanceService {
 
     return {
       direction: nextTurn.direction,
-      distanceMeters: Math.round(distanceMeters),
+      distanceMeters: chunkTurnDistance(distanceMeters),
       displayText,
       turnCoords: nextTurn.coordinates,
       turnMile: nextTurn.mile,
@@ -340,7 +354,7 @@ export class TurnGuidanceService {
 
     return {
       direction,
-      distanceMeters: Math.round(distanceMeters),
+      distanceMeters: chunkTurnDistance(distanceMeters),
       displayText,
       turnCoords: candidateTurn.turnCoords,
       turnMile: candidateTurn.apexMeters / 1609.344,

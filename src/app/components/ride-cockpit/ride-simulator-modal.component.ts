@@ -21,9 +21,9 @@ import { CommonModule } from '@angular/common';
       <div
         data-testid="simulator-modal"
         [ngClass]="position() === 'top'
-          ? 'top-full mt-2 left-0 sm:left-auto sm:right-0'
+          ? 'top-full mt-2 right-0'
           : 'bottom-16 right-0'"
-        class="absolute w-72 bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in duration-150 z-50 pointer-events-auto"
+        class="absolute w-72 max-w-[calc(100vw-2rem)] bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in duration-150 z-50 pointer-events-auto"
       >
         <!-- Modal Header -->
         <div class="flex items-center justify-between">
@@ -72,7 +72,6 @@ import { CommonModule } from '@angular/common';
               data-testid="sim-speed-input"
               [value]="speed()"
               (input)="onSpeedInput($event)"
-              min="0"
               step="1"
               class="w-16 bg-slate-950 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-mono font-bold text-emerald-400 focus:outline-none focus:border-emerald-500 text-center shrink-0"
               title="Current speed (km/h)"
@@ -153,13 +152,12 @@ export class RideSimulatorModalComponent {
     const target = event.target as HTMLInputElement;
     const val = Number(target.value);
     if (!isNaN(val)) {
-      const validSpeed = Math.max(0, val);
-      this.speedChange.emit(validSpeed);
+      this.speedChange.emit(val);
     }
   }
 
   onAdjustSpeed(delta: number): void {
-    const nextSpeed = Math.max(0, this.speed() + delta);
+    const nextSpeed = this.speed() + delta;
     this.speedChange.emit(nextSpeed);
   }
 

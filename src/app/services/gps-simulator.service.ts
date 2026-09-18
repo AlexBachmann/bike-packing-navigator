@@ -87,13 +87,19 @@ export class GpsSimulatorService implements OnDestroy {
       return;
     }
 
-    const currentSpeed = typeof speedKph === 'number' && speedKph >= 0 ? speedKph : this._state().speedKph;
+    const currentSpeed = typeof speedKph === 'number'
+      ? (isNaN(speedKph) ? 0 : speedKph)
+      : this._state().speedKph;
     const totalMiles = this.points[this.points.length - 1][4];
+    const minMile = this.points[0][4];
 
-    // If at or past route end, loop or restart from 0
+    // If at or past route end when moving forward, loop or restart from 0
     let startMile = this._state().simulatedMile;
-    if (startMile >= totalMiles) {
-      startMile = 0;
+    if (currentSpeed >= 0 && startMile >= totalMiles) {
+      startMile = minMile;
+      this.lastIndex = 0;
+    } else if (currentSpeed < 0 && startMile <= minMile) {
+      startMile = minMile;
       this.lastIndex = 0;
     }
 
@@ -101,13 +107,16 @@ export class GpsSimulatorService implements OnDestroy {
     this.clearTimer();
 
     const position = this.interpolate(startMile);
+    const motionHeading = currentSpeed < 0
+      ? ((position.heading + 180) % 360)
+      : position.heading;
 
     this._state.set({
       running: true,
       speedKph: currentSpeed,
       simulatedMile: startMile,
       simulatedCoords: position.coords,
-      simulatedHeading: position.heading,
+      simulatedHeading: motionHeading,
       simulatedSpeedKph: currentSpeed
     });
 
@@ -117,7 +126,7 @@ export class GpsSimulatorService implements OnDestroy {
         longitude: position.coords[1],
         timestamp: Date.now(),
         projectedMile: startMile,
-        heading: position.heading
+        heading: motionHeading
       }, currentSpeed);
     }
 
@@ -148,7 +157,7 @@ export class GpsSimulatorService implements OnDestroy {
    * Updates target simulation speed in km/h.
    */
   setSpeed(speedKph: number): void {
-    const validSpeed = Math.max(0, speedKph);
+    const validSpeed = isNaN(speedKph) ? 0 : speedKph;
     this._state.update((s) => ({
       ...s,
       speedKph: validSpeed,
@@ -225,8 +234,10 @@ export class GpsSimulatorService implements OnDestroy {
     const deltaMiles = (speed * deltaSeconds) / (3600 * KM_PER_MILE);
     const targetMile = this._state().simulatedMile + deltaMiles;
     const totalMiles = this.points[this.points.length - 1][4];
+    const minMile = this.points[0][4];
 
-    if (targetMile >= totalMiles) {
+    // Forward termination at end of route
+    if (speed >= 0 && targetMile >= totalMiles) {
       this.stop();
       const lastPoint = this.points[this.points.length - 1];
       const prevPoint = this.points[this.points.length - 2];
@@ -240,17 +251,60 @@ export class GpsSimulatorService implements OnDestroy {
         simulatedHeading: finalHeading,
         simulatedSpeedKph: 0
       });
+      if (this.deadReckoning) {
+        this.deadReckoning.updateGpsFix({
+          latitude: lastPoint[0],
+          longitude: lastPoint[1],
+          timestamp: Date.now(),
+          projectedMile: totalMiles,
+          heading: finalHeading
+        }, 0);
+        this.deadReckoning.stop();
+      }
+      this.notifyApp();
+      return;
+    }
+
+    // Backward termination at start of route (position 0)
+    if (speed < 0 && targetMile <= minMile) {
+      this.stop();
+      const firstPoint = this.points[0];
+      const nextPoint = this.points[1];
+      const startHeading = calculateBearing(firstPoint[0], firstPoint[1], nextPoint[0], nextPoint[1]);
+
+      this._state.set({
+        running: false,
+        speedKph: speed,
+        simulatedMile: minMile,
+        simulatedCoords: [firstPoint[0], firstPoint[1]],
+        simulatedHeading: startHeading,
+        simulatedSpeedKph: 0
+      });
+      if (this.deadReckoning) {
+        this.deadReckoning.updateGpsFix({
+          latitude: firstPoint[0],
+          longitude: firstPoint[1],
+          timestamp: Date.now(),
+          projectedMile: minMile,
+          heading: startHeading
+        }, 0);
+        this.deadReckoning.stop();
+      }
       this.notifyApp();
       return;
     }
 
     const position = this.interpolate(targetMile);
+    const motionHeading = speed < 0
+      ? ((position.heading + 180) % 360)
+      : position.heading;
+
     this._state.set({
       running: true,
       speedKph: speed,
       simulatedMile: targetMile,
       simulatedCoords: position.coords,
-      simulatedHeading: position.heading,
+      simulatedHeading: motionHeading,
       simulatedSpeedKph: speed
     });
 
@@ -260,7 +314,7 @@ export class GpsSimulatorService implements OnDestroy {
         longitude: position.coords[1],
         timestamp: Date.now(),
         projectedMile: targetMile,
-        heading: position.heading
+        heading: motionHeading
       }, speed);
     }
     this.notifyApp();

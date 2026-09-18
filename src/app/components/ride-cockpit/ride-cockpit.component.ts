@@ -267,7 +267,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   });
 
   readonly displaySpeedValue = computed<string>(() => {
-    const cleanSpeed = Math.max(0, isNaN(this.currentSpeedKph()) ? 0 : this.currentSpeedKph());
+    const cleanSpeed = isNaN(this.currentSpeedKph()) ? 0 : this.currentSpeedKph();
     return this.unit() === 'km'
       ? cleanSpeed.toFixed(0)
       : (cleanSpeed * 0.621371).toFixed(1);
@@ -1283,7 +1283,7 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSimSpeedChange(speed: number): void {
-    const validSpeed = Math.max(0, speed);
+    const validSpeed = isNaN(speed) ? 0 : speed;
     this.simSpeedInput.set(validSpeed);
     if (this.gpsSimulator.running()) {
       this.gpsSimulator.setSpeed(validSpeed);

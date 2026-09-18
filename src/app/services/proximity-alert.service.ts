@@ -1,11 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Place, PlaceCategory, getCategoryBadge } from '../models/waypoint.model';
 
-export const PROXIMITY_TRIGGER_METERS = 500;
+export const PROXIMITY_TRIGGER_METERS = 1000;
 export const PROXIMITY_DISMISSAL_METERS = -25;
 export const LOOKAHEAD_MIN_DISTANCE_MILES = 1.0;
 export const METERS_PER_MILE = 1609.344;
 export const START_PROXIMITY_SUPPRESSION_METERS = 50;
+
+export const PROXIMITY_DISTANCE_CHUNKS = [
+  '1k',
+  '750m',
+  '500m',
+  '250m',
+  '100m',
+  '50m',
+  '25m',
+  'here'
+] as const;
+
+export type ProximityDistanceChunk = typeof PROXIMITY_DISTANCE_CHUNKS[number];
+
+/**
+ * Quantizes proximity countdown distance to [1k, 750m, 500m, 250m, 100m, 50m, 25m, here].
+ * In imperial mode, chunking uses yards: [1k yd, 750 yd, 500 yd, 250 yd, 100 yd, 50 yd, 25 yd, here].
+ */
+export function chunkProximityDistance(
+  distanceMeters: number,
+  unit: 'miles' | 'km'
+): string {
+  if (unit === 'miles') {
+    const y = distanceMeters * 1.09361;
+    if (y >= 875) return '1k yd';
+    if (y >= 625) return '750 yd';
+    if (y >= 375) return '500 yd';
+    if (y >= 175) return '250 yd';
+    if (y >= 75) return '100 yd';
+    if (y >= 37.5) return '50 yd';
+    if (y >= 12.5) return '25 yd';
+    return 'here';
+  } else {
+    if (distanceMeters >= 875) return '1k';
+    if (distanceMeters >= 625) return '750m';
+    if (distanceMeters >= 375) return '500m';
+    if (distanceMeters >= 175) return '250m';
+    if (distanceMeters >= 75) return '100m';
+    if (distanceMeters >= 37.5) return '50m';
+    if (distanceMeters >= 12.5) return '25m';
+    return 'here';
+  }
+}
 
 export const WATER_RESUPPLY_CATEGORIES = new Set<string>([
   'water',
@@ -22,6 +65,7 @@ export interface ProximityAlert {
   type: string;
   distanceMeters: number; // Signed distance: positive = ahead, negative = past
   displayDistanceMeters: number; // Clamped: Math.max(0, Math.round(distanceMeters))
+  chunk: string; // The active countdown chunk: '1k', '750m', '500m', '250m', '100m', '50m', '25m', 'here'
   lookaheadDistanceMiles: number | null;
   lookaheadDistanceKm: number | null;
   nextPlace: Place | null;
@@ -93,10 +137,9 @@ export function findNextLookahead(
 
 /**
  * Formats user-facing alert text:
- * Metric: `in [X] m (next in [Y] km)`
- * Imperial: `in [X] yd (next in [Y] mi)`
+ * Metric countdown chunks: [1k, 750m, 500m, 250m, 100m, 50m, 25m, here]
+ * Format: `in 500m (next in 15 km)` or `here (next in 15 km)`
  * The waypoint name is omitted to conserve space in the HUD card.
- * Clamps negative imminent distance to 0.
  * Omits parenthetical lookahead when lookahead is null.
  */
 export function formatAlertText(
@@ -105,29 +148,26 @@ export function formatAlertText(
   lookahead: { distanceMiles: number; distanceKm: number; place: Place } | null,
   unit: 'miles' | 'km'
 ): string {
-  const distClamped = Math.max(0, Math.round(distanceMeters));
+  const chunk = chunkProximityDistance(distanceMeters, unit);
 
-  let imminentStr: string;
   let nextStr = '';
-
-  if (unit === 'km') {
-    imminentStr = `${distClamped} m`;
-    if (lookahead) {
+  if (lookahead) {
+    if (unit === 'km') {
       const km = lookahead.distanceKm;
       const kmFormatted = km < 10 ? km.toFixed(1) : Math.round(km).toString();
       nextStr = ` (next in ${kmFormatted} km)`;
-    }
-  } else {
-    const yards = Math.round(distClamped * 1.09361);
-    imminentStr = `${yards} yd`;
-    if (lookahead) {
+    } else {
       const mi = lookahead.distanceMiles;
       const miFormatted = mi < 10 ? mi.toFixed(1) : Math.round(mi).toString();
       nextStr = ` (next in ${miFormatted} mi)`;
     }
   }
 
-  return `in ${imminentStr}${nextStr}`;
+  if (chunk === 'here') {
+    return `here${nextStr}`;
+  }
+
+  return `in ${chunk}${nextStr}`;
 }
 
 /**
@@ -209,6 +249,7 @@ export function computeProximityAlerts(
       type: item.place.type,
       distanceMeters: item.distanceMeters,
       displayDistanceMeters: Math.max(0, Math.round(item.distanceMeters)),
+      chunk: chunkProximityDistance(item.distanceMeters, unit),
       lookaheadDistanceMiles: nextResult ? nextResult.distanceMiles : null,
       lookaheadDistanceKm: nextResult ? nextResult.distanceKm : null,
       nextPlace: nextResult ? nextResult.place : null,

@@ -702,7 +702,11 @@ describe('App', () => {
 
       const rootContainer = compiled.firstElementChild as HTMLElement;
       expect(rootContainer.classList.contains('h-screen')).toBe(true);
+      expect(rootContainer.classList.contains('cockpit-root-container')).toBe(true);
       expect(rootContainer.classList.contains('overflow-hidden')).toBe(true);
+
+      const mainEl = compiled.querySelector('main');
+      expect(mainEl?.classList.contains('cockpit-main-layout')).toBe(true);
     });
   });
 

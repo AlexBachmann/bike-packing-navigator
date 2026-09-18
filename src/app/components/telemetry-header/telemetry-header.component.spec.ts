@@ -453,6 +453,9 @@ describe('TelemetryHeaderComponent', () => {
     it('should update sim speed when onSimSpeedChange is called', () => {
       component.onSimSpeedChange(35);
       expect(component.simSpeedInput()).toBe(35);
+
+      component.onSimSpeedChange(-25);
+      expect(component.simSpeedInput()).toBe(-25);
     });
   });
 });

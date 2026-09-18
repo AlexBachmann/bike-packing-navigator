@@ -4,6 +4,8 @@ import {
   findNextLookahead,
   formatAlertText,
   normalizeCategory,
+  chunkProximityDistance,
+  PROXIMITY_DISTANCE_CHUNKS,
   ProximityAlertService,
   METERS_PER_MILE
 } from './proximity-alert.service';
@@ -77,38 +79,41 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
     });
   });
 
-  describe('Tier 1: Proximity Trigger Window & Distance Thresholds ([-25m, +500m])', () => {
-    it('should trigger alert at exactly 500 meters before waypoint', () => {
+  describe('Tier 1: Proximity Trigger Window & Distance Thresholds ([-25m, +1000m])', () => {
+    it('should trigger alert at 1000 meters before waypoint with chunk 1k', () => {
       const riderMile = 10.0;
-      const targetMile = riderMile + 500 / METERS_PER_MILE;
+      const targetMile = riderMile + 1000 / METERS_PER_MILE;
       const places: Place[] = [createPlace({ id: 'w1', name: 'Spring A', route_mile: targetMile })];
 
-      const alerts = computeProximityAlerts(riderMile, places, 'miles');
+      const alerts = computeProximityAlerts(riderMile, places, 'km');
       expect(alerts.length).toBe(1);
       expect(alerts[0].id).toBe('w1');
-      expect(alerts[0].distanceMeters).toBeCloseTo(500, 1);
+      expect(alerts[0].distanceMeters).toBeCloseTo(1000, 1);
+      expect(alerts[0].chunk).toBe('1k');
+      expect(alerts[0].displayText).toContain('in 1k');
     });
 
-    it('should not trigger alert when rider is outside 500 meters ahead (e.g. 505m)', () => {
+    it('should not trigger alert when rider is outside 1000 meters ahead (e.g. 1005m)', () => {
       const riderMile = 10.0;
-      const targetMile = riderMile + 505 / METERS_PER_MILE;
+      const targetMile = riderMile + 1005 / METERS_PER_MILE;
       const places: Place[] = [createPlace({ id: 'w1', route_mile: targetMile })];
 
       const alerts = computeProximityAlerts(riderMile, places, 'miles');
       expect(alerts.length).toBe(0);
     });
 
-    it('should trigger alert when rider is directly at the waypoint (0m)', () => {
+    it('should trigger alert when rider is directly at the waypoint (0m) with chunk here', () => {
       const riderMile = 10.0;
       const places: Place[] = [createPlace({ id: 'w1', name: 'Trailhead', route_mile: riderMile })];
 
       const alerts = computeProximityAlerts(riderMile, places, 'km');
       expect(alerts.length).toBe(1);
       expect(alerts[0].displayDistanceMeters).toBe(0);
-      expect(alerts[0].displayText).toContain('in 0 m');
+      expect(alerts[0].chunk).toBe('here');
+      expect(alerts[0].displayText).toBe('here');
     });
 
-    it('should trigger alert when rider is 15 meters past waypoint and clamp displayed distance to 0', () => {
+    it('should trigger alert when rider is 15 meters past waypoint and show here', () => {
       const riderMile = 10.0;
       const targetMile = riderMile - 15 / METERS_PER_MILE;
       const places: Place[] = [createPlace({ id: 'w1', name: 'Creek', route_mile: targetMile })];
@@ -117,7 +122,8 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
       expect(alerts.length).toBe(1);
       expect(alerts[0].distanceMeters).toBeCloseTo(-15, 1);
       expect(alerts[0].displayDistanceMeters).toBe(0);
-      expect(alerts[0].displayText).toContain('in 0 yd');
+      expect(alerts[0].chunk).toBe('here');
+      expect(alerts[0].displayText).toBe('here');
     });
 
     it('should trigger alert at exact dismissal boundary (-25 meters)', () => {
@@ -311,7 +317,7 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
   });
 
   describe('Tier 5: Unit Formatting & Integration', () => {
-    it('should format metric text with meters and kilometers (without name)', () => {
+    it('should format metric text with chunked countdown (without name)', () => {
       const place = createPlace({ id: 'w1', name: 'Twin Springs', category: 'water' });
       const lookahead = {
         distanceMiles: 4.0,
@@ -320,10 +326,10 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
       };
 
       const text = formatAlertText(place, 300, lookahead, 'km');
-      expect(text).toBe('in 300 m (next in 6.4 km)');
+      expect(text).toBe('in 250m (next in 6.4 km)');
     });
 
-    it('should format imperial text with yards and miles (without name)', () => {
+    it('should format imperial text with chunked yards (without name)', () => {
       const place = createPlace({ id: 'c1', name: 'High Pass Camp', category: 'campground' });
       const lookahead = {
         distanceMiles: 8.2,
@@ -331,16 +337,28 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
         place: createPlace({ id: 'c2', name: 'Valley Camp' })
       };
 
-      // 250 meters * 1.09361 = 273 yards
+      // 250 meters * 1.09361 = 273 yards -> chunks to 250 yd
       const text = formatAlertText(place, 250, lookahead, 'miles');
-      expect(text).toBe('in 273 yd (next in 8.2 mi)');
+      expect(text).toBe('in 250 yd (next in 8.2 mi)');
     });
 
     it('should omit parenthetical lookahead text when next instance is null (without name)', () => {
       const place = createPlace({ id: 'p1', name: 'Summit Vista', category: 'pass' });
       const text = formatAlertText(place, 150, null, 'km');
-      expect(text).toBe('in 150 m');
+      expect(text).toBe('in 100m');
       expect(text).not.toContain('next in');
+    });
+
+    it('should format as here when within here threshold (with and without lookahead)', () => {
+      const place = createPlace({ id: 'w1', name: 'Spring', category: 'water' });
+      const lookahead = {
+        distanceMiles: 4.0,
+        distanceKm: 6.437376,
+        place: createPlace({ id: 'w2', name: 'Next Springs' })
+      };
+      expect(formatAlertText(place, 5, lookahead, 'km')).toBe('here (next in 6.4 km)');
+      expect(formatAlertText(place, 5, null, 'km')).toBe('here');
+      expect(formatAlertText(place, -15, null, 'km')).toBe('here');
     });
 
     it('should gracefully return empty alerts for empty places list', () => {
@@ -355,6 +373,42 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
       const direct = computeProximityAlerts(10.0, places, 'miles');
       const viaService = service.computeAlerts(10.0, places, 'miles');
       expect(viaService).toEqual(direct);
+    });
+  });
+
+  describe('chunkProximityDistance [1k, 750m, 500m, 250m, 100m, 50m, 25m, here]', () => {
+    it('quantizes metric distances into exact specification chunks', () => {
+      expect(chunkProximityDistance(1000, 'km')).toBe('1k');
+      expect(chunkProximityDistance(880, 'km')).toBe('1k');
+      expect(chunkProximityDistance(870, 'km')).toBe('750m');
+      expect(chunkProximityDistance(750, 'km')).toBe('750m');
+      expect(chunkProximityDistance(630, 'km')).toBe('750m');
+      expect(chunkProximityDistance(620, 'km')).toBe('500m');
+      expect(chunkProximityDistance(500, 'km')).toBe('500m');
+      expect(chunkProximityDistance(380, 'km')).toBe('500m');
+      expect(chunkProximityDistance(370, 'km')).toBe('250m');
+      expect(chunkProximityDistance(250, 'km')).toBe('250m');
+      expect(chunkProximityDistance(180, 'km')).toBe('250m');
+      expect(chunkProximityDistance(170, 'km')).toBe('100m');
+      expect(chunkProximityDistance(100, 'km')).toBe('100m');
+      expect(chunkProximityDistance(80, 'km')).toBe('100m');
+      expect(chunkProximityDistance(70, 'km')).toBe('50m');
+      expect(chunkProximityDistance(50, 'km')).toBe('50m');
+      expect(chunkProximityDistance(40, 'km')).toBe('50m');
+      expect(chunkProximityDistance(35, 'km')).toBe('25m');
+      expect(chunkProximityDistance(25, 'km')).toBe('25m');
+      expect(chunkProximityDistance(15, 'km')).toBe('25m');
+      expect(chunkProximityDistance(12, 'km')).toBe('here');
+      expect(chunkProximityDistance(5, 'km')).toBe('here');
+      expect(chunkProximityDistance(0, 'km')).toBe('here');
+      expect(chunkProximityDistance(-15, 'km')).toBe('here');
+    });
+
+    it('quantizes imperial distances into yard chunks and here', () => {
+      expect(chunkProximityDistance(1000, 'miles')).toBe('1k yd');
+      expect(chunkProximityDistance(500, 'miles')).toBe('500 yd');
+      expect(chunkProximityDistance(25, 'miles')).toBe('25 yd');
+      expect(chunkProximityDistance(5, 'miles')).toBe('here');
     });
   });
 });

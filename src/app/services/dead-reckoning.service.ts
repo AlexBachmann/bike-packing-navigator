@@ -37,7 +37,7 @@ export class DeadReckoningService implements OnDestroy {
   readonly interpolatedCoords = signal<[number, number] | null>(null);
   readonly interpolatedHeading = signal<number>(0);
 
-  readonly isMoving = computed(() => this.speedKph() >= MIN_MOVING_SPEED_KPH);
+  readonly isMoving = computed(() => Math.abs(this.speedKph()) >= MIN_MOVING_SPEED_KPH);
 
   ngOnDestroy(): void {
     this.stop();
@@ -57,7 +57,7 @@ export class DeadReckoningService implements OnDestroy {
 
     let calculatedSpeedKph = 0;
 
-    if (typeof fallbackSpeedKph === 'number' && fallbackSpeedKph >= MIN_MOVING_SPEED_KPH) {
+    if (typeof fallbackSpeedKph === 'number' && Math.abs(fallbackSpeedKph) >= MIN_MOVING_SPEED_KPH) {
       calculatedSpeedKph = fallbackSpeedKph;
     } else if (prev) {
       const distMeters = haversineMeters(prev.latitude, prev.longitude, fix.latitude, fix.longitude);
@@ -70,22 +70,22 @@ export class DeadReckoningService implements OnDestroy {
       }
     }
 
-    if (calculatedSpeedKph < MIN_MOVING_SPEED_KPH) {
+    if (Math.abs(calculatedSpeedKph) < MIN_MOVING_SPEED_KPH) {
       calculatedSpeedKph = 0;
     }
 
     this.speedKph.set(calculatedSpeedKph);
 
-    // Ensure monotonic progress when moving forward:
-    // If we are already smoothly moving forward and an incoming discrete fix has projectedMile
-    // that is slightly behind the current 60fps interpolatedMile (due to setInterval timer jitter),
-    // do NOT jerk the rider backward. Keep the progress strictly monotonic.
+    // Ensure monotonic progress when moving forward or backward:
     const currentInterp = this.interpolatedMile();
     const isMovingForward = calculatedSpeedKph >= MIN_MOVING_SPEED_KPH;
+    const isMovingBackward = calculatedSpeedKph <= -MIN_MOVING_SPEED_KPH;
 
     let initialMile = fix.projectedMile ?? currentInterp;
     if (isMovingForward && fix.projectedMile !== undefined && fix.projectedMile !== null && currentInterp > 0) {
       initialMile = Math.max(currentInterp, fix.projectedMile);
+    } else if (isMovingBackward && fix.projectedMile !== undefined && fix.projectedMile !== null) {
+      initialMile = Math.min(currentInterp, fix.projectedMile);
     }
     this.interpolatedMile.set(initialMile);
 
@@ -100,7 +100,10 @@ export class DeadReckoningService implements OnDestroy {
     if (initialMile !== undefined && initialMile !== null && pts.length >= 2 && this.turnGuidance) {
       const coords = this.turnGuidance.interpolatePointAtMile(pts, initialMile);
       this.interpolatedCoords.set([coords[0], coords[1]]);
-      const heading = this.turnGuidance.getRouteTangentBearing(pts, initialMile, 25.0);
+      let heading = this.turnGuidance.getRouteTangentBearing(pts, initialMile, 25.0);
+      if (calculatedSpeedKph < 0) {
+        heading = (heading + 180) % 360;
+      }
       this.interpolatedHeading.set(heading);
     } else {
       this.interpolatedCoords.set([fix.latitude, fix.longitude]);
@@ -138,7 +141,7 @@ export class DeadReckoningService implements OnDestroy {
     if (!this.currentFix) return;
 
     const speed = this.speedKph();
-    if (speed < MIN_MOVING_SPEED_KPH) {
+    if (Math.abs(speed) < MIN_MOVING_SPEED_KPH) {
       // Standing still - keep exact fix coordinates
       this.interpolatedCoords.set([this.currentFix.latitude, this.currentFix.longitude]);
       if (this.currentFix.projectedMile !== undefined && this.currentFix.projectedMile !== null) {
@@ -168,17 +171,21 @@ export class DeadReckoningService implements OnDestroy {
     const pts = guidance && guidance.length >= 2 ? guidance : (this.routeService?.trackPoints() || []);
 
     if (baseMile !== undefined && baseMile !== null && pts.length >= 2) {
-      // Advance distance along the route track
+      // Advance distance along the route track (forward if speed > 0, backward if speed < 0)
       const targetMile = baseMile + distanceTraveledMiles;
       const totalTrackMiles = pts[pts.length - 1][4];
-      const clampedMile = Math.min(totalTrackMiles, targetMile);
+      const minTrackMiles = pts[0][4];
+      const clampedMile = Math.max(minTrackMiles, Math.min(totalTrackMiles, targetMile));
 
       this.interpolatedMile.set(clampedMile);
 
       if (this.turnGuidance) {
         const coords = this.turnGuidance.interpolatePointAtMile(pts, clampedMile);
         this.interpolatedCoords.set([coords[0], coords[1]]);
-        const heading = this.turnGuidance.getRouteTangentBearing(pts, clampedMile, 25.0);
+        let heading = this.turnGuidance.getRouteTangentBearing(pts, clampedMile, 25.0);
+        if (effectiveSpeed < 0) {
+          heading = (heading + 180) % 360;
+        }
         this.interpolatedHeading.set(heading);
       }
     } else {

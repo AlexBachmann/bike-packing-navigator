@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+/* Full-viewport height container for Map & Ride Cockpit tabs that accounts for mobile browser address bar / chrome */
+.cockpit-root-container {
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+}
+
+/* Main layout padding ensuring cockpit container and speedometer sit cleanly above bottom navigation bar */
+.cockpit-main-layout {
+  padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 640px) {
+  .cockpit-main-layout {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Safe-area cushioned bottom padding for scrollable tabs */
+.scrolling-tab-layout {
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+}
