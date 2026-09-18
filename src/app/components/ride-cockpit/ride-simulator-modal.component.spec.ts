@@ -164,5 +164,27 @@ describe('RideSimulatorModalComponent Unit Tests', () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it('10. should apply top positioning classes when position input is top', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('position', 'top');
+    fixture.detectChanges();
+
+    const modal = fixture.nativeElement.querySelector('[data-testid="simulator-modal"]') as HTMLElement;
+    expect(modal.classList.contains('top-full')).toBe(true);
+    expect(modal.classList.contains('inset-x-0')).toBe(true);
+    expect(modal.classList.contains('mx-auto')).toBe(true);
+  });
+
+  it('11. should apply bottom positioning classes when position input is bottom', () => {
+    fixture.componentRef.setInput('isOpen', true);
+    fixture.componentRef.setInput('position', 'bottom');
+    fixture.detectChanges();
+
+    const modal = fixture.nativeElement.querySelector('[data-testid="simulator-modal"]') as HTMLElement;
+    expect(modal.classList.contains('bottom-20')).toBe(true);
+    expect(modal.classList.contains('inset-x-0')).toBe(true);
+    expect(modal.classList.contains('mx-auto')).toBe(true);
+  });
 });
 

@@ -21,8 +21,8 @@ import { CommonModule } from '@angular/common';
       <div
         data-testid="simulator-modal"
         [ngClass]="position() === 'top'
-          ? 'top-full mt-2 right-0'
-          : 'bottom-16 right-0'"
+          ? 'top-full mt-2 inset-x-0 mx-auto sm:inset-x-auto sm:mx-0 sm:right-0'
+          : 'bottom-20 sm:bottom-16 inset-x-0 mx-auto sm:inset-x-auto sm:mx-0 sm:right-0'"
         class="absolute w-72 max-w-[calc(100vw-2rem)] bg-slate-900/95 backdrop-blur-xl border border-slate-700 rounded-2xl p-4 shadow-2xl flex flex-col gap-3 animate-in fade-in duration-150 z-50 pointer-events-auto"
       >
         <!-- Modal Header -->
