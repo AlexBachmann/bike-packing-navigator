@@ -42,11 +42,14 @@ describe('RouteMapStatusPillComponent', () => {
     expect(el.textContent).toContain('Raster Map');
   });
 
-  it('4. should render Vector Map indicator when in vector mode', () => {
+  it('4. should render Vector (Offline ready) indicator and switch to raster button when in vector mode', () => {
     fixture.componentRef.setInput('activeMapMode', 'vector');
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Vector Map (Offline Ready)');
+    expect(el.textContent).toContain('Vector (Offline ready)');
+    expect(el.textContent).not.toContain('Offline Ready Offline Ready');
+    const switchBtn = el.querySelector('button[aria-label="Switch to raster map"]');
+    expect(switchBtn).toBeTruthy();
   });
 
   it('5. should render download button with file size estimate when vector is not cached', () => {
@@ -78,21 +81,34 @@ describe('RouteMapStatusPillComponent', () => {
     expect(el.querySelector('.bg-emerald-500')?.getAttribute('style')).toContain('width: 65%');
   });
 
-  it('8. should render forced raster message when settings force raster', () => {
+  it('8. should render switch to vector button when in raster mode and vector is cached', () => {
     fixture.componentRef.setInput('isVectorCached', true);
-    fixture.componentRef.setInput('isForcedRaster', true);
+    fixture.componentRef.setInput('activeMapMode', 'raster');
     fixture.detectChanges();
 
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Forced Raster (Settings)');
+    expect(el.textContent).toContain('Raster Map');
+    const switchBtn = el.querySelector('button[aria-label="Switch to vector map"]');
+    expect(switchBtn).toBeTruthy();
   });
 
-  it('9. should render offline ready badge when cached and not forced raster', () => {
-    fixture.componentRef.setInput('isVectorCached', true);
-    fixture.componentRef.setInput('isForcedRaster', false);
+  it('9. should emit toggleMapMode when raster switch button or vector switch button is clicked', () => {
+    let toggleCount = 0;
+    component.toggleMapMode.subscribe(() => toggleCount++);
+
+    fixture.componentRef.setInput('activeMapMode', 'vector');
     fixture.detectChanges();
 
-    const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Offline Ready');
+    const toRasterBtn = fixture.nativeElement.querySelector('button[aria-label="Switch to raster map"]') as HTMLButtonElement;
+    toRasterBtn.click();
+    expect(toggleCount).toBe(1);
+
+    fixture.componentRef.setInput('activeMapMode', 'raster');
+    fixture.componentRef.setInput('isVectorCached', true);
+    fixture.detectChanges();
+
+    const toVectorBtn = fixture.nativeElement.querySelector('button[aria-label="Switch to vector map"]') as HTMLButtonElement;
+    toVectorBtn.click();
+    expect(toggleCount).toBe(2);
   });
 });

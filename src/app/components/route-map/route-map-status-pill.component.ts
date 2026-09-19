@@ -26,39 +26,53 @@ import { CommonModule } from '@angular/common';
         @if (activeMapMode() === 'vector') {
           <span class="inline-flex items-center gap-1.5 text-emerald-400 font-bold text-[11px]">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            Vector Map (Offline Ready)
+            Vector (Offline ready)
           </span>
+          <button
+            type="button"
+            (click)="toggleMapMode.emit()"
+            class="ml-1 px-2 py-0.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 hover:text-white border border-slate-700/80 rounded-lg font-mono text-[10px] transition shadow cursor-pointer flex items-center gap-1 active:scale-95"
+            aria-label="Switch to raster map"
+            title="Switch to raster map (contains additional topographic and aerial details)"
+          >
+            <span>⇄</span>
+            <span>Raster</span>
+          </button>
         } @else {
           <span class="inline-flex items-center gap-1.5 text-amber-300 font-medium text-[11px]">
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
             Raster Map
           </span>
-        }
 
-        @if (isDownloading()) {
-          <div class="flex items-center gap-1.5 text-slate-300 text-[11px] ml-1">
-            <span>{{ downloadPercentage() }}%</span>
-            <div class="w-12 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-              <div class="h-full bg-emerald-500 transition-all duration-200" [style.width.%]="downloadPercentage()"></div>
+          @if (isDownloading()) {
+            <div class="flex items-center gap-1.5 text-slate-300 text-[11px] ml-1">
+              <span>{{ downloadPercentage() }}%</span>
+              <div class="w-12 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                <div class="h-full bg-emerald-500 transition-all duration-200" [style.width.%]="downloadPercentage()"></div>
+              </div>
             </div>
-          </div>
-        } @else if (!isVectorCached()) {
-          <button
-            type="button"
-            (click)="downloadVector.emit()"
-            class="ml-1 px-2 py-0.5 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white rounded-lg font-bold text-[10px] transition shadow cursor-pointer flex items-center gap-1 active:scale-95"
-            aria-label="Download offline vector map for active route"
-          >
-            <span>⚡</span>
-            <span>Download Vector ({{ activeRouteSizeEstimate() }})</span>
-          </button>
-        } @else if (isForcedRaster()) {
-          <span class="text-[10px] text-slate-400 font-mono ml-1">Forced Raster (Settings)</span>
-        } @else {
-          <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 ml-1">
-            <span>✓</span>
-            <span>Offline Ready</span>
-          </span>
+          } @else if (isVectorCached()) {
+            <button
+              type="button"
+              (click)="toggleMapMode.emit()"
+              class="ml-1 px-2 py-0.5 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white rounded-lg font-mono font-bold text-[10px] transition shadow cursor-pointer flex items-center gap-1 active:scale-95"
+              aria-label="Switch to vector map"
+              title="Switch to offline vector map"
+            >
+              <span>⇄</span>
+              <span>Vector</span>
+            </button>
+          } @else {
+            <button
+              type="button"
+              (click)="downloadVector.emit()"
+              class="ml-1 px-2 py-0.5 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white rounded-lg font-bold text-[10px] transition shadow cursor-pointer flex items-center gap-1 active:scale-95"
+              aria-label="Download offline vector map for active route"
+            >
+              <span>⚡</span>
+              <span>Download Vector ({{ activeRouteSizeEstimate() }})</span>
+            </button>
+          }
         }
       </div>
 
@@ -80,4 +94,5 @@ export class RouteMapStatusPillComponent {
   readonly isForcedRaster = input<boolean>(false);
 
   readonly downloadVector = output<void>();
+  readonly toggleMapMode = output<void>();
 }

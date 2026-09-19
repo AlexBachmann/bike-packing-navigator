@@ -908,20 +908,21 @@ describe('RouteMapComponent', () => {
       expect(downloadBtn?.textContent).toContain('Download Vector');
     });
 
-    it('should render vector ready pill and offline ready indicator when vector is active and cached', () => {
+    it('should render vector ready pill when vector is active and cached', () => {
       component.activeMapMode.set('vector');
       component.isVectorCached.set(true);
       settingsService.setMapRenderer('auto');
       fixture.detectChanges();
 
       const el = fixture.nativeElement as HTMLElement;
-      expect(el.textContent).toContain('Vector Map (Offline Ready)');
-      expect(el.textContent).toContain('Offline Ready');
+      expect(el.textContent).toContain('Vector (Offline ready)');
+      const switchBtn = el.querySelector('button[aria-label="Switch to raster map"]');
+      expect(switchBtn).toBeTruthy();
       const downloadBtn = el.querySelector('button[aria-label="Download offline vector map for active route"]');
       expect(downloadBtn).toBeNull();
     });
 
-    it('should render forced raster indicator when cached but settings force raster', () => {
+    it('should render switch to vector button when cached and in raster mode', () => {
       component.activeMapMode.set('raster');
       component.isVectorCached.set(true);
       settingsService.setMapRenderer('raster');
@@ -929,7 +930,23 @@ describe('RouteMapComponent', () => {
 
       const el = fixture.nativeElement as HTMLElement;
       expect(el.textContent).toContain('Raster Map');
-      expect(el.textContent).toContain('Forced Raster (Settings)');
+      const switchBtn = el.querySelector('button[aria-label="Switch to vector map"]');
+      expect(switchBtn).toBeTruthy();
+    });
+
+    it('should toggle map mode between vector and raster on toggleMapMode()', async () => {
+      component.activeMapMode.set('vector');
+      component.isVectorCached.set(true);
+      settingsService.setMapRenderer('auto');
+      fixture.detectChanges();
+
+      await component.toggleMapMode();
+      expect(settingsService.mapRenderer()).toBe('raster');
+      expect(component.activeMapMode()).toBe('raster');
+
+      await component.toggleMapMode();
+      expect(settingsService.mapRenderer()).toBe('auto');
+      expect(component.activeMapMode()).toBe('vector');
     });
 
     it('should trigger downloadActiveRouteVector when download button in DOM is clicked', () => {

@@ -335,6 +335,14 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
     this.settings.toggleMapStyle();
   }
 
+  async toggleMapMode(): Promise<void> {
+    if (!this.isVectorCached()) return;
+    const nextMode: 'vector' | 'raster' = this.activeMapMode() === 'vector' ? 'raster' : 'vector';
+    this.settings.setMapRenderer(nextMode === 'vector' ? 'auto' : 'raster');
+    await this.applyMapRenderer(nextMode);
+    this.toast?.show(nextMode === 'raster' ? 'Switched to Raster Map' : 'Switched to Vector Map', 'info');
+  }
+
   createTileLayer(url: string, options: any = {}): any {
     return createTileLayer(url, options);
   }
