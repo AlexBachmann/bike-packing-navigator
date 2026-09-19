@@ -458,4 +458,79 @@ describe('TelemetryHeaderComponent', () => {
       expect(component.simSpeedInput()).toBe(-25);
     });
   });
+
+  describe('Weather Pill Integration in Telemetry Header', () => {
+    it('should render temperature and wind speed and direction on mobile without hidden classes', () => {
+      const mockWeather: any = {
+        tempC: 21.1,
+        tempF: 70.0,
+        precipitationMm: 0,
+        precipitationInches: 0,
+        windSpeedKmh: 24.7,
+        windSpeedMph: 15.3,
+        windCardinal: 'SW',
+        windDirectionDeg: 225,
+        weatherCode: 0,
+        weatherDescription: 'Clear sky'
+      };
+      vi.spyOn(component.weatherService, 'currentWeather').mockReturnValue(mockWeather);
+      fixture.detectChanges();
+
+      const el = fixture.nativeElement as HTMLElement;
+      expect(el.textContent).toContain('21.1°C');
+      expect(el.textContent).toContain('24.7km/h SW');
+
+      // Ensure wind span does NOT have hidden class so it displays on mobile
+      const windSpan = el.querySelector('.text-cyan-400');
+      expect(windSpan).toBeTruthy();
+      expect(windSpan?.className).not.toContain('hidden');
+      expect(windSpan?.textContent).toContain('24.7km/h SW');
+    });
+
+    it('should display precipitation when precipitation is greater than zero', () => {
+      const mockWeather: any = {
+        tempC: 18.0,
+        tempF: 64.4,
+        precipitationMm: 3.5,
+        precipitationInches: 0.14,
+        windSpeedKmh: 12.0,
+        windSpeedMph: 7.5,
+        windCardinal: 'NW',
+        windDirectionDeg: 315,
+        weatherCode: 61,
+        weatherDescription: 'Rain'
+      };
+      vi.spyOn(component.weatherService, 'currentWeather').mockReturnValue(mockWeather);
+      fixture.detectChanges();
+
+      const el = fixture.nativeElement as HTMLElement;
+      expect(el.textContent).toContain('3.5mm');
+      expect(el.textContent).toContain('12km/h NW');
+    });
+
+    it('should emit openWeatherModal when weather pill is clicked', () => {
+      const mockWeather: any = {
+        tempC: 21.1,
+        tempF: 70.0,
+        precipitationMm: 0,
+        precipitationInches: 0,
+        windSpeedKmh: 24.7,
+        windSpeedMph: 15.3,
+        windCardinal: 'SW',
+        windDirectionDeg: 225,
+        weatherCode: 0,
+        weatherDescription: 'Clear sky'
+      };
+      vi.spyOn(component.weatherService, 'currentWeather').mockReturnValue(mockWeather);
+      fixture.detectChanges();
+
+      let modalOpened = false;
+      component.openWeatherModal.subscribe(() => (modalOpened = true));
+
+      const weatherBtn = fixture.nativeElement.querySelector('button[title*="Click to view full forecast"]') as HTMLButtonElement;
+      expect(weatherBtn).toBeTruthy();
+      weatherBtn.click();
+      expect(modalOpened).toBe(true);
+    });
+  });
 });

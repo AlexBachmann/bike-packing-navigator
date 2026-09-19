@@ -165,8 +165,10 @@
           >
             <span class="text-xs" [title]="outlook.title">{{ outlook.icon }}</span>
             <span class="font-bold text-white">{{ unit() === 'miles' ? weather.tempF + '°F' : weather.tempC + '°C' }}</span>
-            <span class="text-slate-400 hidden xs:inline">{{ unit() === 'miles' ? weather.precipitationInches + 'in' : weather.precipitationMm + 'mm' }}</span>
-            <span class="text-cyan-400 hidden sm:inline">{{ unit() === 'miles' ? weather.windSpeedMph + 'mph' : weather.windSpeedKmh + 'km/h' }} {{ weather.windCardinal }}</span>
+            @if ((unit() === 'miles' ? weather.precipitationInches : weather.precipitationMm) > 0) {
+              <span class="text-slate-400">{{ unit() === 'miles' ? weather.precipitationInches + 'in' : weather.precipitationMm + 'mm' }}</span>
+            }
+            <span class="text-cyan-400">{{ unit() === 'miles' ? weather.windSpeedMph + 'mph' : weather.windSpeedKmh + 'km/h' }} {{ weather.windCardinal }}</span>
           </button>
         }
 
