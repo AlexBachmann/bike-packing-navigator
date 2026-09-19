@@ -376,6 +376,93 @@ describe('ProximityAlertService & computeProximityAlerts', () => {
     });
   });
 
+  describe('Radial Proximity Safeguard (<= 250m GPS distance)', () => {
+    // 34.034, -108.328 is approx Valle Tio Vences
+    const campLocation = { lat: 34.0345, lon: -108.3280 };
+
+    it('should trigger alert via radial distance when along-trail distance is outside window but GPS is within 250m', () => {
+      // Along-trail distance is 1500m ahead (outside 1000m window)
+      const places: Place[] = [
+        createPlace({
+          id: 'camp-1',
+          name: 'Valle Tio Vences Campground',
+          category: 'campground',
+          route_mile: 10.0 + 1500 / METERS_PER_MILE,
+          location: campLocation
+        })
+      ];
+
+      // Rider GPS coords are ~100m away from camp
+      // 1 deg lat ~ 111,000m => 0.0009 deg ~ 100m
+      const riderCoords: [number, number] = [campLocation.lat - 0.0009, campLocation.lon];
+
+      const alerts = computeProximityAlerts(10.0, places, 'km', riderCoords);
+      expect(alerts.length).toBe(1);
+      expect(alerts[0].id).toBe('camp-1');
+      expect(alerts[0].distanceMeters).toBeCloseTo(100, 0);
+      expect(alerts[0].chunk).toBe('100m');
+      expect(alerts[0].displayText).toContain('in 100m');
+    });
+
+    it('should not trigger alert when along-trail distance is outside window and GPS distance exceeds 250m', () => {
+      // Along-trail distance is 1500m ahead
+      const places: Place[] = [
+        createPlace({
+          id: 'camp-1',
+          name: 'Valle Tio Vences Campground',
+          category: 'campground',
+          route_mile: 10.0 + 1500 / METERS_PER_MILE,
+          location: campLocation
+        })
+      ];
+
+      // Rider GPS coords are ~400m away (0.0036 deg lat)
+      const riderCoords: [number, number] = [campLocation.lat - 0.0036, campLocation.lon];
+
+      const alerts = computeProximityAlerts(10.0, places, 'km', riderCoords);
+      expect(alerts.length).toBe(0);
+    });
+
+    it('should prefer along-trail distance when waypoint is already in the along-trail window', () => {
+      // Along-trail distance is 300m
+      const places: Place[] = [
+        createPlace({
+          id: 'camp-1',
+          name: 'Valle Tio Vences Campground',
+          category: 'campground',
+          route_mile: 10.0 + 300 / METERS_PER_MILE,
+          location: campLocation
+        })
+      ];
+
+      // Rider GPS coords are 80m away
+      const riderCoords: [number, number] = [campLocation.lat - 0.0007, campLocation.lon];
+
+      const alerts = computeProximityAlerts(10.0, places, 'km', riderCoords);
+      expect(alerts.length).toBe(1);
+      // Along-trail distance should be used: 300m (chunk 250m)
+      expect(alerts[0].distanceMeters).toBeCloseTo(300, 1);
+      expect(alerts[0].chunk).toBe('250m');
+    });
+
+    it('should pass riderCoords cleanly through ProximityAlertService.computeAlerts', () => {
+      const places: Place[] = [
+        createPlace({
+          id: 'camp-1',
+          name: 'Valle Tio Vences Campground',
+          category: 'campground',
+          route_mile: 10.0 + 1500 / METERS_PER_MILE,
+          location: campLocation
+        })
+      ];
+      const riderCoords: [number, number] = [campLocation.lat - 0.0009, campLocation.lon];
+
+      const alerts = service.computeAlerts(10.0, places, 'km', riderCoords);
+      expect(alerts.length).toBe(1);
+      expect(alerts[0].id).toBe('camp-1');
+    });
+  });
+
   describe('chunkProximityDistance [1k, 750m, 500m, 250m, 100m, 50m, 25m, here]', () => {
     it('quantizes metric distances into exact specification chunks', () => {
       expect(chunkProximityDistance(1000, 'km')).toBe('1k');

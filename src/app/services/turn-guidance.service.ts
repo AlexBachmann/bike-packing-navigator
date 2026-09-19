@@ -498,13 +498,54 @@ export class TurnGuidanceService {
    * by looking ahead along the track by lookaheadMeters (default: 25m).
    */
   getRouteTangentBearing(
-    trackPoints: [number, number, number, number, number][],
+    trackPoints: [number, number, number, number, number, ...number[]][],
     targetMile: number,
-    lookaheadMeters = 25.0
+    lookaheadMeters = 25.0,
+    canonicalTotalMiles?: number
   ): number {
     if (!trackPoints || trackPoints.length < 2) return 0;
-    const currentMeters = Math.max(0, targetMile * 1609.344);
+
+    let currentMeters: number;
+    const is7D = trackPoints[0].length >= 7;
     const totalTrackMeters = trackPoints[trackPoints.length - 1][3] * 1000;
+
+    if (is7D) {
+      const lastIdx = trackPoints.length - 1;
+      if (targetMile <= trackPoints[0][6]) {
+        currentMeters = trackPoints[0][3] * 1000;
+      } else if (targetMile >= trackPoints[lastIdx][6]) {
+        currentMeters = totalTrackMeters;
+      } else {
+        let low = 0;
+        let high = lastIdx;
+        while (low <= high) {
+          const mid = Math.floor((low + high) / 2);
+          if (trackPoints[mid][6] <= targetMile) {
+            low = mid + 1;
+          } else {
+            high = mid - 1;
+          }
+        }
+        const idxA = Math.max(0, low - 1);
+        const idxB = Math.min(lastIdx, idxA + 1);
+        const span = trackPoints[idxB][6] - trackPoints[idxA][6];
+        const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - trackPoints[idxA][6]) / span));
+        currentMeters = (trackPoints[idxA][3] + t * (trackPoints[idxB][3] - trackPoints[idxA][3])) * 1000;
+      }
+    } else {
+      let effectiveTarget = targetMile;
+      const lastIdx = trackPoints.length - 1;
+      const trackTotalMiles = trackPoints[lastIdx][4];
+      if (
+        typeof canonicalTotalMiles === 'number' &&
+        canonicalTotalMiles > 0 &&
+        trackTotalMiles > 0 &&
+        Math.abs(trackTotalMiles - canonicalTotalMiles) > 0.1
+      ) {
+        effectiveTarget = (targetMile / canonicalTotalMiles) * trackTotalMiles;
+      }
+      currentMeters = Math.max(0, effectiveTarget * 1609.344);
+    }
 
     const forwardMeters = Math.min(totalTrackMeters, currentMeters + lookaheadMeters);
     if (forwardMeters > currentMeters + 0.1) {
@@ -524,14 +565,45 @@ export class TurnGuidanceService {
    * Helper to linearly interpolate coordinate along route trackpoints at targetMile
    */
   interpolatePointAtMile(
-    trackPoints: [number, number, number, number, number][],
+    trackPoints: [number, number, number, number, number, ...number[]][],
     targetMile: number,
     canonicalTotalMiles?: number
   ): [number, number] {
     if (!trackPoints || trackPoints.length === 0) return [0, 0];
 
-    let effectiveTarget = targetMile;
+    const is7D = trackPoints[0].length >= 7;
     const lastIdx = trackPoints.length - 1;
+
+    if (is7D) {
+      if (targetMile <= trackPoints[0][6]) {
+        return [trackPoints[0][0], trackPoints[0][1]];
+      }
+      if (targetMile >= trackPoints[lastIdx][6]) {
+        return [trackPoints[lastIdx][0], trackPoints[lastIdx][1]];
+      }
+
+      let low = 0;
+      let high = lastIdx;
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        if (trackPoints[mid][6] <= targetMile) {
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      const idxA = Math.max(0, low - 1);
+      const idxB = Math.min(lastIdx, idxA + 1);
+      const span = trackPoints[idxB][6] - trackPoints[idxA][6];
+      const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - trackPoints[idxA][6]) / span));
+
+      const lat = trackPoints[idxA][0] + t * (trackPoints[idxB][0] - trackPoints[idxA][0]);
+      const lon = trackPoints[idxA][1] + t * (trackPoints[idxB][1] - trackPoints[idxA][1]);
+      return [lat, lon];
+    }
+
+    let effectiveTarget = targetMile;
     const trackTotalMiles = trackPoints[lastIdx][4];
     if (
       typeof canonicalTotalMiles === 'number' &&
@@ -575,7 +647,7 @@ export class TurnGuidanceService {
    * Helper to linearly interpolate coordinate along route trackpoints
    */
   interpolatePointAtDistance(
-    trackPoints: [number, number, number, number, number][],
+    trackPoints: [number, number, number, number, number, ...number[]][],
     targetMeters: number
   ): [number, number] {
     if (targetMeters <= trackPoints[0][3] * 1000) {

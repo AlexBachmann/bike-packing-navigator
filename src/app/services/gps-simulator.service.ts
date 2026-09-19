@@ -18,7 +18,7 @@ export class GpsSimulatorService implements OnDestroy {
   private readonly deadReckoning = inject(DeadReckoningService, { optional: true });
   private readonly appRef = inject(ApplicationRef, { optional: true });
 
-  private points: [number, number, number, number, number][] = [];
+  private points: [number, number, number, number, number, ...number[]][] = [];
   private lastIndex = 0;
   private intervalId: any = null;
   private lastTimestamp = 0;
@@ -47,13 +47,41 @@ export class GpsSimulatorService implements OnDestroy {
   /**
    * Set or replace trackpoints used for simulation
    */
+  private getCanonicalTotalMiles(): number | undefined {
+    const rawPoints = typeof this.routeDataService?.trackPoints === 'function'
+      ? this.routeDataService.trackPoints()
+      : (this.routeDataService as any)?.trackPoints;
+    if (rawPoints && rawPoints.length > 0) {
+      return rawPoints[rawPoints.length - 1][4];
+    }
+    const totalSignal = this.routeDataService?.totalMilesSignal;
+    const total = typeof totalSignal === 'function' ? totalSignal() : totalSignal;
+    return typeof total === 'number' && total > 0 ? total : undefined;
+  }
+
+  private toTrackMile(canonicalMile: number): number {
+    const pts = this.points;
+    if (!pts || pts.length < 2) return canonicalMile;
+    const trackTotalMiles = pts[pts.length - 1][4];
+    const canonicalTotalMiles = this.getCanonicalTotalMiles();
+    if (
+      typeof canonicalTotalMiles === 'number' &&
+      canonicalTotalMiles > 0 &&
+      trackTotalMiles > 0 &&
+      Math.abs(trackTotalMiles - canonicalTotalMiles) > 0.1
+    ) {
+      return (canonicalMile / canonicalTotalMiles) * trackTotalMiles;
+    }
+    return canonicalMile;
+  }
+
   setTrackPoints(trackPoints: [number, number, number, number, number][]): void {
     this.points = trackPoints || [];
     this.lastIndex = 0;
     if (this.points.length > 0 && !this._state().running) {
       const currentSimMile = this._state().simulatedMile;
-      const totalMiles = this.points[this.points.length - 1][4];
-      const clampedMile = Math.max(this.points[0][4], Math.min(totalMiles, currentSimMile));
+      const canonicalTotal = this.getCanonicalTotalMiles() || this.points[this.points.length - 1][4];
+      const clampedMile = Math.max(this.points[0][4], Math.min(canonicalTotal, currentSimMile));
       const position = this.interpolate(clampedMile);
       this._state.update((s) => ({
         ...s,
@@ -90,12 +118,12 @@ export class GpsSimulatorService implements OnDestroy {
     const currentSpeed = typeof speedKph === 'number'
       ? (isNaN(speedKph) ? 0 : speedKph)
       : this._state().speedKph;
-    const totalMiles = this.points[this.points.length - 1][4];
+    const canonicalTotal = this.getCanonicalTotalMiles() || this.points[this.points.length - 1][4];
     const minMile = this.points[0][4];
 
     // If at or past route end when moving forward, loop or restart from 0
     let startMile = this._state().simulatedMile;
-    if (currentSpeed >= 0 && startMile >= totalMiles) {
+    if (currentSpeed >= 0 && startMile >= canonicalTotal) {
       startMile = minMile;
       this.lastIndex = 0;
     } else if (currentSpeed < 0 && startMile <= minMile) {
@@ -193,16 +221,16 @@ export class GpsSimulatorService implements OnDestroy {
       return;
     }
 
-    const totalMiles = this.points[this.points.length - 1][4];
-    const clampedMile = Math.max(this.points[0][4], Math.min(totalMiles, mile));
+    const canonicalTotal = this.getCanonicalTotalMiles() || this.points[this.points.length - 1][4];
+    const clampedMile = Math.max(this.points[0][4], Math.min(canonicalTotal, mile));
     const position = this.interpolate(clampedMile);
 
-    if (clampedMile >= totalMiles) {
+    if (clampedMile >= canonicalTotal) {
       this.stop();
       this._state.set({
         running: false,
         speedKph: this._state().speedKph,
-        simulatedMile: totalMiles,
+        simulatedMile: canonicalTotal,
         simulatedCoords: position.coords,
         simulatedHeading: position.heading,
         simulatedSpeedKph: 0
@@ -247,11 +275,11 @@ export class GpsSimulatorService implements OnDestroy {
     const speed = this._state().speedKph;
     const deltaMiles = (speed * deltaSeconds) / (3600 * KM_PER_MILE);
     const targetMile = this._state().simulatedMile + deltaMiles;
-    const totalMiles = this.points[this.points.length - 1][4];
+    const canonicalTotal = this.getCanonicalTotalMiles() || this.points[this.points.length - 1][4];
     const minMile = this.points[0][4];
 
     // Forward termination at end of route
-    if (speed >= 0 && targetMile >= totalMiles) {
+    if (speed >= 0 && targetMile >= canonicalTotal) {
       this.stop();
       const lastPoint = this.points[this.points.length - 1];
       const prevPoint = this.points[this.points.length - 2];
@@ -260,7 +288,7 @@ export class GpsSimulatorService implements OnDestroy {
       this._state.set({
         running: false,
         speedKph: speed,
-        simulatedMile: totalMiles,
+        simulatedMile: canonicalTotal,
         simulatedCoords: [lastPoint[0], lastPoint[1]],
         simulatedHeading: finalHeading,
         simulatedSpeedKph: 0
@@ -270,7 +298,7 @@ export class GpsSimulatorService implements OnDestroy {
           latitude: lastPoint[0],
           longitude: lastPoint[1],
           timestamp: Date.now(),
-          projectedMile: totalMiles,
+          projectedMile: canonicalTotal,
           heading: finalHeading
         }, 0);
         this.deadReckoning.stop();
@@ -384,14 +412,18 @@ export class GpsSimulatorService implements OnDestroy {
       return { coords: single!, heading: 0 };
     }
 
+    const is7D = pts[0].length >= 7;
+    const effectiveMile = is7D ? mile : this.toTrackMile(mile);
+    const getMile = (idx: number) => is7D ? pts[idx][6] : pts[idx][4];
     const last = pts.length - 1;
-    if (mile <= pts[0][4]) {
+
+    if (effectiveMile <= getMile(0)) {
       return {
         coords: [pts[0][0], pts[0][1]],
         heading: calculateBearing(pts[0][0], pts[0][1], pts[1][0], pts[1][1])
       };
     }
-    if (mile >= pts[last][4]) {
+    if (effectiveMile >= getMile(last)) {
       return {
         coords: [pts[last][0], pts[last][1]],
         heading: calculateBearing(pts[last - 1][0], pts[last - 1][1], pts[last][0], pts[last][1])
@@ -400,14 +432,14 @@ export class GpsSimulatorService implements OnDestroy {
 
     // Locate segment
     let i = this.lastIndex;
-    if (i < 0 || i >= last || pts[i][4] > mile || pts[i + 1][4] < mile) {
+    if (i < 0 || i >= last || getMile(i) > effectiveMile || getMile(i + 1) < effectiveMile) {
       // Binary search fallback
       let low = 0;
       let high = last - 1;
       i = 0;
       while (low <= high) {
         const mid = (low + high) >> 1;
-        if (pts[mid][4] <= mile) {
+        if (getMile(mid) <= effectiveMile) {
           i = mid;
           low = mid + 1;
         } else {
@@ -419,8 +451,8 @@ export class GpsSimulatorService implements OnDestroy {
 
     const p1 = pts[i];
     const p2 = pts[i + 1];
-    const span = p2[4] - p1[4];
-    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (mile - p1[4]) / span));
+    const span = getMile(i + 1) - getMile(i);
+    const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (effectiveMile - getMile(i)) / span));
 
     const lat = p1[0] + t * (p2[0] - p1[0]);
     const lon = p1[1] + t * (p2[1] - p1[1]);

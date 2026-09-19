@@ -26,13 +26,14 @@ export class RouteProjectionService {
   projectOntoPoints(
     lat: number,
     lon: number,
-    points: [number, number, number, number, number][]
+    points: [number, number, number, number, number, ...number[]][]
   ): ProjectionResult | null {
     if (!points || points.length < 2) return null;
 
     const R = 6371.0; // Mean Earth radius in km
     const rad = Math.PI / 180;
     const cosLat = Math.cos(lat * rad);
+    const is7D = points[0].length >= 7;
 
     let bestDist = Infinity;
     let bestKm = 0;
@@ -70,8 +71,13 @@ export class RouteProjectionService {
 
       if (d < bestDist) {
         bestDist = d;
-        bestKm = p1[3] + t * (p2[3] - p1[3]);
-        bestMile = p1[4] + t * (p2[4] - p1[4]);
+        if (is7D) {
+          bestKm = p1[5] + t * (p2[5] - p1[5]);
+          bestMile = p1[6] + t * (p2[6] - p1[6]);
+        } else {
+          bestKm = p1[3] + t * (p2[3] - p1[3]);
+          bestMile = p1[4] + t * (p2[4] - p1[4]);
+        }
         bestPoint = {
           lat: p1[0] + t * (p2[0] - p1[0]),
           lon: p1[1] + t * (p2[1] - p1[1]),
@@ -106,8 +112,13 @@ export class RouteProjectionService {
 
         if (d < bestDist) {
           bestDist = d;
-          bestKm = p1[3] + t * (p2[3] - p1[3]);
-          bestMile = p1[4] + t * (p2[4] - p1[4]);
+          if (is7D) {
+            bestKm = p1[5] + t * (p2[5] - p1[5]);
+            bestMile = p1[6] + t * (p2[6] - p1[6]);
+          } else {
+            bestKm = p1[3] + t * (p2[3] - p1[3]);
+            bestMile = p1[4] + t * (p2[4] - p1[4]);
+          }
           bestPoint = {
             lat: p1[0] + t * (p2[0] - p1[0]),
             lon: p1[1] + t * (p2[1] - p1[1]),

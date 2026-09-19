@@ -138,6 +138,9 @@ class Place:
     distance_to_trail_km: float
     route_km: float
     route_mile: float
+    guidance_km: Optional[float] = None
+    guidance_mile: Optional[float] = None
+    guidance_distance_to_trail_km: Optional[float] = None
     is_in_town: bool = False
     town: str = ""
     address: str = ""
@@ -159,6 +162,19 @@ class Place:
             self.route_mile = round(km_to_miles(self.route_km), 3)
         else:
             self.route_mile = round(float(self.route_mile), 3)
+
+        if self.guidance_km is not None:
+            self.guidance_km = round(float(self.guidance_km), 3)
+            if self.guidance_mile is None or self.guidance_mile == 0.0:
+                self.guidance_mile = round(km_to_miles(self.guidance_km), 3)
+            else:
+                self.guidance_mile = round(float(self.guidance_mile), 3)
+        elif self.guidance_mile is not None:
+            self.guidance_mile = round(float(self.guidance_mile), 3)
+            self.guidance_km = round(self.guidance_mile * 1.609344, 3)
+
+        if self.guidance_distance_to_trail_km is not None:
+            self.guidance_distance_to_trail_km = round(float(self.guidance_distance_to_trail_km), 3)
 
         if isinstance(self.location, dict):
             self.location = PlaceLocation(
@@ -192,6 +208,12 @@ class Place:
             "route_km": round(self.route_km, 1),
             "route_mile": round(self.route_mile, 1),
         }
+        if self.guidance_km is not None:
+            res["guidance_km"] = round(self.guidance_km, 1)
+        if self.guidance_mile is not None:
+            res["guidance_mile"] = round(self.guidance_mile, 1)
+        if self.guidance_distance_to_trail_km is not None:
+            res["guidance_distance_to_trail_km"] = round(self.guidance_distance_to_trail_km, 2)
         if self.address:
             res["address"] = self.address
         if self.open_now is not None:
@@ -236,6 +258,9 @@ class Place:
             distance_to_trail_km=float(d.get("distance_to_trail_km", 0.0)),
             route_km=float(d.get("route_km", 0.0)),
             route_mile=float(d.get("route_mile", 0.0)),
+            guidance_km=float(d["guidance_km"]) if d.get("guidance_km") is not None else None,
+            guidance_mile=float(d["guidance_mile"]) if d.get("guidance_mile") is not None else None,
+            guidance_distance_to_trail_km=float(d["guidance_distance_to_trail_km"]) if d.get("guidance_distance_to_trail_km") is not None else None,
             is_in_town=bool(d.get("is_in_town", False)),
             town=str(d.get("town", "")),
             address=str(d.get("address", "")),

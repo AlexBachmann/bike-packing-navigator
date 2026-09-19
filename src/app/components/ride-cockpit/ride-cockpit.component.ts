@@ -416,7 +416,8 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     return computeProximityAlerts(
       this.effectiveMile(),
       this.routeService.places(),
-      this.unit()
+      this.unit(),
+      this.effectiveCoords()
     );
   });
 
@@ -1378,8 +1379,10 @@ export class RideCockpitComponent implements OnInit, AfterViewInit, OnDestroy {
     const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
     const points = guidance && guidance.length >= 2 ? guidance : this.routeService.trackPoints();
     if (!points || points.length < 2) return 0;
+    const rawPoints = this.routeService?.trackPoints();
+    const rawTotal = rawPoints && rawPoints.length > 0 ? rawPoints[rawPoints.length - 1][4] : undefined;
     if (typeof this.turnGuidance?.getRouteTangentBearing === 'function') {
-      return this.turnGuidance.getRouteTangentBearing(points, mile, 25.0);
+      return this.turnGuidance.getRouteTangentBearing(points, mile, 25.0, rawTotal);
     }
     const p1 = points[0];
     const p2 = points[1];

@@ -107,10 +107,11 @@ export class DeadReckoningService implements OnDestroy {
 
     const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
     const pts = guidance && guidance.length >= 2 ? guidance : (this.routeService?.trackPoints() || []);
+    const canonicalTotal = this.getCanonicalTotalMiles();
     if (initialMile !== undefined && initialMile !== null && pts.length >= 2 && this.turnGuidance) {
-      const coords = this.turnGuidance.interpolatePointAtMile(pts, initialMile);
+      const coords = this.turnGuidance.interpolatePointAtMile(pts, initialMile, canonicalTotal);
       this.interpolatedCoords.set([coords[0], coords[1]]);
-      let heading = this.turnGuidance.getRouteTangentBearing(pts, initialMile, 25.0);
+      let heading = this.turnGuidance.getRouteTangentBearing(pts, initialMile, 25.0, canonicalTotal);
       if (calculatedSpeedKph < 0) {
         heading = (heading + 180) % 360;
       }
@@ -125,6 +126,15 @@ export class DeadReckoningService implements OnDestroy {
     if (!this.isRunning) {
       this.startLoop();
     }
+  }
+
+  private getCanonicalTotalMiles(): number | undefined {
+    const rawPoints = this.routeService?.trackPoints?.();
+    if (rawPoints && rawPoints.length > 0) {
+      return rawPoints[rawPoints.length - 1][4];
+    }
+    const total = this.routeService?.totalMilesSignal?.();
+    return typeof total === 'number' && total > 0 ? total : undefined;
   }
 
   /**
@@ -179,20 +189,21 @@ export class DeadReckoningService implements OnDestroy {
     const baseMile = this.currentFix.projectedMile;
     const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
     const pts = guidance && guidance.length >= 2 ? guidance : (this.routeService?.trackPoints() || []);
+    const canonicalTotal = this.getCanonicalTotalMiles();
 
     if (baseMile !== undefined && baseMile !== null && pts.length >= 2) {
       // Advance distance along the route track (forward if speed > 0, backward if speed < 0)
       const targetMile = baseMile + distanceTraveledMiles;
-      const totalTrackMiles = pts[pts.length - 1][4];
+      const totalTrackMiles = canonicalTotal || pts[pts.length - 1][4];
       const minTrackMiles = pts[0][4];
       const clampedMile = Math.max(minTrackMiles, Math.min(totalTrackMiles, targetMile));
 
       this.interpolatedMile.set(clampedMile);
 
       if (this.turnGuidance) {
-        const coords = this.turnGuidance.interpolatePointAtMile(pts, clampedMile);
+        const coords = this.turnGuidance.interpolatePointAtMile(pts, clampedMile, canonicalTotal);
         this.interpolatedCoords.set([coords[0], coords[1]]);
-        let heading = this.turnGuidance.getRouteTangentBearing(pts, clampedMile, 25.0);
+        let heading = this.turnGuidance.getRouteTangentBearing(pts, clampedMile, 25.0, canonicalTotal);
         if (effectiveSpeed < 0) {
           heading = (heading + 180) % 360;
         }

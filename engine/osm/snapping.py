@@ -185,10 +185,11 @@ class SnappedGuidanceTrack:
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to standard guidance-track.json schema expected by Angular frontend."""
+        has_canonical = any(p.canonical_km is not None for p in self.points) if self.points else False
         return {
             "total_km": round(self.total_km, 1),
             "total_miles": round(self.total_miles, 1),
-            "points": [p.to_list_5d() for p in self.points]
+            "points": [p.to_list_7d() if has_canonical else p.to_list_5d() for p in self.points]
         }
 
     def to_route_track(self, name: str = "") -> RouteTrack:
@@ -588,6 +589,120 @@ def _predensify_track(
     return densified
 
 
+def map_guidance_to_canonical(
+    guidance_points: Sequence[RoutePoint],
+    canonical_points: Sequence[Sequence[float]],
+    window_size: int = 150
+) -> None:
+    """
+    Project each guidance point onto the nearest segment of the canonical route,
+    enriching each RoutePoint in-place with monotonic canonical_km and canonical_mi.
+    """
+    if not guidance_points or not canonical_points:
+        return
+
+    r_len = len(canonical_points)
+    if r_len == 1:
+        c0 = canonical_points[0]
+        c_km = c0[3] if len(c0) > 3 else 0.0
+        c_mi = c0[4] if len(c0) > 4 else km_to_miles(c_km)
+        for g in guidance_points:
+            g.canonical_km = round(float(c_km), 3)
+            g.canonical_mi = round(float(c_mi), 3)
+        return
+
+    last_r_idx = 0
+    prev_can_mi = 0.0
+    final_can_km = float(canonical_points[-1][3]) if len(canonical_points[-1]) > 3 else 0.0
+    final_can_mi = float(canonical_points[-1][4]) if len(canonical_points[-1]) > 4 else km_to_miles(final_can_km)
+
+    for idx, g in enumerate(guidance_points):
+        glat, glon = g.lat, g.lon
+        cos_lat = math.cos(math.radians(glat))
+
+        # Search window in canonical_points around last matched index
+        w_start = max(0, last_r_idx - 50)
+        w_end = min(r_len - 1, last_r_idx + window_size)
+
+        best_d_sq = float('inf')
+        best_km = 0.0
+        best_mi = 0.0
+        best_idx = last_r_idx
+
+        for i in range(w_start, w_end):
+            p1 = canonical_points[i]
+            p2 = canonical_points[i + 1]
+
+            dx = (p2[1] - p1[1]) * 111139.0 * cos_lat
+            dy = (p2[0] - p1[0]) * 111139.0
+            seg_len_sq = dx * dx + dy * dy
+
+            gx = (glon - p1[1]) * 111139.0 * cos_lat
+            gy = (glat - p1[0]) * 111139.0
+
+            t = 0.0 if seg_len_sq <= 1e-6 else max(0.0, min(1.0, (gx * dx + gy * dy) / seg_len_sq))
+
+            proj_x = p1[1] * 111139.0 * cos_lat + t * dx
+            proj_y = p1[0] * 111139.0 + t * dy
+            g_x = glon * 111139.0 * cos_lat
+            g_y = glat * 111139.0
+
+            d_sq = (g_x - proj_x) ** 2 + (g_y - proj_y) ** 2
+            if d_sq < best_d_sq:
+                best_d_sq = d_sq
+                best_km = p1[3] + t * (p2[3] - p1[3])
+                p1_mi = p1[4] if len(p1) > 4 else km_to_miles(p1[3])
+                p2_mi = p2[4] if len(p2) > 4 else km_to_miles(p2[3])
+                best_mi = p1_mi + t * (p2_mi - p1_mi)
+                best_idx = i
+
+        # Fallback to global search if window match exceeds 500m
+        if best_d_sq > 250000.0:
+            for i in range(0, r_len - 1, 5):
+                p_mid = canonical_points[i]
+                dlat = (p_mid[0] - glat) * 111139.0
+                dlon = (p_mid[1] - glon) * 111139.0 * cos_lat
+                if dlat * dlat + dlon * dlon < best_d_sq:
+                    for j in range(max(0, i - 10), min(r_len - 1, i + 10)):
+                        p1 = canonical_points[j]
+                        p2 = canonical_points[j + 1]
+                        dx = (p2[1] - p1[1]) * 111139.0 * cos_lat
+                        dy = (p2[0] - p1[0]) * 111139.0
+                        seg_len_sq = dx * dx + dy * dy
+                        gx = (glon - p1[1]) * 111139.0 * cos_lat
+                        gy = (glat - p1[0]) * 111139.0
+                        t = 0.0 if seg_len_sq <= 1e-6 else max(0.0, min(1.0, (gx * dx + gy * dy) / seg_len_sq))
+                        proj_x = p1[1] * 111139.0 * cos_lat + t * dx
+                        proj_y = p1[0] * 111139.0 + t * dy
+                        g_x = glon * 111139.0 * cos_lat
+                        g_y = glat * 111139.0
+                        d_sq = (g_x - proj_x) ** 2 + (g_y - proj_y) ** 2
+                        if d_sq < best_d_sq:
+                            best_d_sq = d_sq
+                            best_km = p1[3] + t * (p2[3] - p1[3])
+                            p1_mi = p1[4] if len(p1) > 4 else km_to_miles(p1[3])
+                            p2_mi = p2[4] if len(p2) > 4 else km_to_miles(p2[3])
+                            best_mi = p1_mi + t * (p2_mi - p1_mi)
+                            best_idx = j
+
+        last_r_idx = best_idx
+
+        # Enforce non-decreasing monotonicity
+        if best_mi < prev_can_mi:
+            best_mi = prev_can_mi
+            best_km = prev_can_mi * 1.609344
+        else:
+            prev_can_mi = best_mi
+
+        # Clamp final point to route terminus
+        if idx == len(guidance_points) - 1:
+            best_km = max(best_km, final_can_km)
+            best_mi = max(best_mi, final_can_mi)
+
+        g.canonical_km = round(best_km, 3)
+        g.canonical_mi = round(best_mi, 3)
+
+
 def snap_track_to_osm(
     route: Union[RouteTrack, Sequence[Union[RoutePoint, Sequence[float]]], Dict[str, Any]],
     network_or_pmtiles: Union[Any, Path, str],
@@ -618,7 +733,13 @@ def snap_track_to_osm(
 
     if len(raw_points) == 1:
         p0 = raw_points[0]
-        pt = RoutePoint(lat=p0[0], lon=p0[1], ele=p0[2], cum_km=p0[3], cum_mi=km_to_miles(p0[3]))
+        c_km = p0[3] if len(p0) > 3 else 0.0
+        c_mi = p0[4] if len(p0) > 4 else km_to_miles(c_km)
+        pt = RoutePoint(
+            lat=p0[0], lon=p0[1], ele=p0[2],
+            cum_km=c_km, cum_mi=c_mi,
+            canonical_km=c_km, canonical_mi=c_mi
+        )
         return SnappedGuidanceTrack(
             points=[pt],
             total_km=0.0,
@@ -773,6 +894,8 @@ def snap_track_to_osm(
     total_km = round(cum_km, 1)
     total_mi = round(km_to_miles(cum_km), 1)
     bbox = BoundingBox.from_points([(p.lat, p.lon) for p in final_points])
+
+    map_guidance_to_canonical(final_points, raw_points)
 
     return SnappedGuidanceTrack(
         points=final_points,

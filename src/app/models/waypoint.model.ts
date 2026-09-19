@@ -17,6 +17,8 @@ export interface PlaceLocation {
   lon: number;
 }
 
+export type TrackPointTuple = [number, number, number, number, number, ...number[]];
+
 export interface Place {
   id: string;
   name: string;
@@ -28,6 +30,9 @@ export interface Place {
   distance_to_trail_km: number;
   route_km: number;
   route_mile: number;
+  guidance_km?: number;
+  guidance_mile?: number;
+  guidance_distance_to_trail_km?: number;
   address?: string;
   open_now?: boolean;
   opening_hours?: string[];

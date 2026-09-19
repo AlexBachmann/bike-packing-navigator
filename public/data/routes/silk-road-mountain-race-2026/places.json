@@ -18,7 +18,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Grand Depart of the Silk Road Mountain Race 2026. Full resupply with markets, hotels, ATMs, and bike mechanics before heading into the mountains."
+    "description": "Grand Depart of the Silk Road Mountain Race 2026. Full resupply with markets, hotels, ATMs, and bike mechanics before heading into the mountains.",
+    "guidance_km": 0.0,
+    "guidance_mile": 0.0,
+    "guidance_distance_to_trail_km": 0.002
   },
   {
     "id": "water_osm_jana_river_0km",
@@ -37,7 +40,10 @@
     "address": "Jana River",
     "google_maps_url": "https://maps.google.com/?q=42.51338,72.24871",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Jana River). 29m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Jana River). 29m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 0.9,
+    "guidance_mile": 0.6,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_бешташ_22km",
@@ -56,7 +62,10 @@
     "address": "Бешташ",
     "google_maps_url": "https://maps.google.com/?q=42.34867,72.31557",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Бешташ). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Бешташ). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 22.5,
+    "guidance_mile": 14.0,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "srmr_terekti_pass_50km",
@@ -77,7 +86,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Beautiful views. Best ridden from north to south."
+    "description": "Beautiful views. Best ridden from north to south.",
+    "guidance_km": 50.7,
+    "guidance_mile": 31.5,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_узун_ахмат_84km",
@@ -96,7 +108,10 @@
     "address": "Узун-Ахмат",
     "google_maps_url": "https://maps.google.com/?q=42.02068,72.45725",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Узун-Ахмат). 14m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Узун-Ахмат). 14m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 84.9,
+    "guidance_mile": 52.7,
+    "guidance_distance_to_trail_km": 0.014
   },
   {
     "id": "srmr_kara_kungei_88km",
@@ -117,7 +132,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 88.6,
+    "guidance_mile": 55.1,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "srmr_ak_tekir_94km",
@@ -138,7 +156,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 94.7,
+    "guidance_mile": 58.8,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_кара_кульджа_ала_тай_101km",
@@ -157,7 +178,10 @@
     "address": "Кара Кульджа (Ала Тай)",
     "google_maps_url": "https://maps.google.com/?q=41.92968,72.58405",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кара Кульджа (Ала Тай)). 234m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кара Кульджа (Ала Тай)). 234m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 102.1,
+    "guidance_mile": 63.4,
+    "guidance_distance_to_trail_km": 0.233
   },
   {
     "id": "water_osm_чычкан_135km",
@@ -176,7 +200,10 @@
     "address": "Чычкан",
     "google_maps_url": "https://maps.google.com/?q=41.90480,72.89744",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чычкан). 60m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чычкан). 60m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 136.0,
+    "guidance_mile": 84.5,
+    "guidance_distance_to_trail_km": 0.06
   },
   {
     "id": "srmr_main_road_136km",
@@ -197,7 +224,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Silk Road Mountain Race official waypoint: Main Road."
+    "description": "Silk Road Mountain Race official waypoint: Main Road.",
+    "guidance_km": 136.8,
+    "guidance_mile": 85.0,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_бала_чычкан_137km",
@@ -216,7 +246,10 @@
     "address": "Бала-Чычкан",
     "google_maps_url": "https://maps.google.com/?q=41.90898,72.91504",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Бала-Чычкан). 67m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Бала-Чычкан). 67m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 138.4,
+    "guidance_mile": 86.0,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "srmr_toktogul_141km",
@@ -237,7 +270,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Major resupply with shops, restaurants & hotels"
+    "description": "Major resupply with shops, restaurants & hotels",
+    "guidance_km": 142.5,
+    "guidance_mile": 88.5,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "srmr_main_road_159km",
@@ -258,7 +294,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Silk Road Mountain Race official waypoint: Main Road."
+    "description": "Silk Road Mountain Race official waypoint: Main Road.",
+    "guidance_km": 159.9,
+    "guidance_mile": 99.4,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "srmr_main_road_171km",
@@ -279,7 +318,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Silk Road Mountain Race official waypoint: Main Road."
+    "description": "Silk Road Mountain Race official waypoint: Main Road.",
+    "guidance_km": 172.2,
+    "guidance_mile": 107.0,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "srmr_torkent_171km",
@@ -300,7 +342,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Several shops on main road"
+    "description": "Several shops on main road",
+    "guidance_km": 172.6,
+    "guidance_mile": 107.2,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_торкент_177km",
@@ -319,7 +364,10 @@
     "address": "Торкент",
     "google_maps_url": "https://maps.google.com/?q=41.85347,73.21432",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Торкент). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Торкент). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 178.8,
+    "guidance_mile": 111.1,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_бурлы_кыя_180km",
@@ -338,7 +386,10 @@
     "address": "Бурлы-Кыя",
     "google_maps_url": "https://maps.google.com/?q=41.87135,73.22293",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Бурлы-Кыя). 39m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Бурлы-Кыя). 39m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 181.1,
+    "guidance_mile": 112.5,
+    "guidance_distance_to_trail_km": 0.038
   },
   {
     "id": "water_osm_бел_алды_181km",
@@ -357,7 +408,10 @@
     "address": "Бел-Алды",
     "google_maps_url": "https://maps.google.com/?q=41.88541,73.21945",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Бел-Алды). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Бел-Алды). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 182.7,
+    "guidance_mile": 113.5,
+    "guidance_distance_to_trail_km": 0.014
   },
   {
     "id": "water_osm_кишен_суу_182km",
@@ -376,7 +430,10 @@
     "address": "Кишен-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.88690,73.21727",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кишен-Суу). 66m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кишен-Суу). 66m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 183.0,
+    "guidance_mile": 113.7,
+    "guidance_distance_to_trail_km": 0.066
   },
   {
     "id": "water_osm_туздуу_суу_212km",
@@ -395,7 +452,10 @@
     "address": "Туздуу-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.88350,73.40208",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Туздуу-Суу). 34m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Туздуу-Суу). 34m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 213.8,
+    "guidance_mile": 132.9,
+    "guidance_distance_to_trail_km": 0.032
   },
   {
     "id": "srmr_toluk_250km",
@@ -416,7 +476,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 252.3,
+    "guidance_mile": 156.8,
+    "guidance_distance_to_trail_km": 0.007
   },
   {
     "id": "water_osm_мазар_суу_250km",
@@ -435,7 +498,10 @@
     "address": "Мазар-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.90001,73.58869",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Мазар-Суу). 40m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Мазар-Суу). 40m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 252.3,
+    "guidance_mile": 156.8,
+    "guidance_distance_to_trail_km": 0.032
   },
   {
     "id": "water_osm_толук_250km",
@@ -454,7 +520,10 @@
     "address": "Толук",
     "google_maps_url": "https://maps.google.com/?q=41.90020,73.58757",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Толук). 40m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Толук). 40m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 252.2,
+    "guidance_mile": 156.7,
+    "guidance_distance_to_trail_km": 0.025
   },
   {
     "id": "water_osm_кашка_суу_269km",
@@ -473,7 +542,10 @@
     "address": "Кашка-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.87956,73.69518",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кашка-Суу). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кашка-Суу). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 271.0,
+    "guidance_mile": 168.4,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_р_кебюк_суу_289km",
@@ -492,7 +564,10 @@
     "address": "р. Кебюк-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.85347,73.86541",
     "business_status": "OPERATIONAL",
-    "description": "River Access (р. Кебюк-Суу). 56m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (р. Кебюк-Суу). 56m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 291.1,
+    "guidance_mile": 180.9,
+    "guidance_distance_to_trail_km": 0.051
   },
   {
     "id": "srmr_kyzl_oi_328km",
@@ -513,7 +588,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Guesthouses & village shop"
+    "description": "Guesthouses & village shop",
+    "guidance_km": 330.6,
+    "guidance_mile": 205.4,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "water_osm_көкөмерен_331km",
@@ -532,7 +610,10 @@
     "address": "Көкөмерен",
     "google_maps_url": "https://maps.google.com/?q=41.97709,74.16460",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Көкөмерен). 29m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Көкөмерен). 29m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 333.8,
+    "guidance_mile": 207.4,
+    "guidance_distance_to_trail_km": 0.028
   },
   {
     "id": "water_osm_mostly_clear_stream_ok_for_filtering_some_small_particles_339km",
@@ -551,7 +632,10 @@
     "address": "mostly clear stream, ok for filtering (some small particles)",
     "google_maps_url": "https://maps.google.com/?q=42.03677,74.16213",
     "business_status": "OPERATIONAL",
-    "description": "Spring (mostly clear stream, ok for filtering (some small particles)). 68m from trail. Natural water source (filtration/treatment required)."
+    "description": "Spring (mostly clear stream, ok for filtering (some small particles)). 68m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 341.9,
+    "guidance_mile": 212.4,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_көкөмерен_340km",
@@ -570,7 +654,10 @@
     "address": "Көкөмерен",
     "google_maps_url": "https://maps.google.com/?q=42.04285,74.15626",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Көкөмерен). 22m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Көкөмерен). 22m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 342.7,
+    "guidance_mile": 212.9,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "srmr_kojomkul_352km",
@@ -591,7 +678,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 355.4,
+    "guidance_mile": 220.8,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_пруд_форельный_359km",
@@ -610,7 +700,10 @@
     "address": "Пруд форельный",
     "google_maps_url": "https://maps.google.com/?q=42.18223,74.04828",
     "business_status": "OPERATIONAL",
-    "description": "Reservoir Access (Пруд форельный). 32m from trail. Natural water source (filtration/treatment required)."
+    "description": "Reservoir Access (Пруд форельный). 32m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 362.1,
+    "guidance_mile": 225.0,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "water_osm_соколук_383km",
@@ -629,7 +722,10 @@
     "address": "Соколук",
     "google_maps_url": "https://maps.google.com/?q=42.29934,74.25770",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Соколук). 38m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Соколук). 38m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 386.2,
+    "guidance_mile": 240.0,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_ортобалыкты_390km",
@@ -648,7 +744,10 @@
     "address": "Ортобалыкты",
     "google_maps_url": "https://maps.google.com/?q=42.31915,74.32874",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ортобалыкты). 98m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ортобалыкты). 98m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 392.9,
+    "guidance_mile": 244.1,
+    "guidance_distance_to_trail_km": 0.098
   },
   {
     "id": "water_osm_терен_джаламыш_392km",
@@ -667,7 +766,10 @@
     "address": "Терен-Джаламыш",
     "google_maps_url": "https://maps.google.com/?q=42.31250,74.35391",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Терен-Джаламыш). 50m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Терен-Джаламыш). 50m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 395.2,
+    "guidance_mile": 245.6,
+    "guidance_distance_to_trail_km": 0.044
   },
   {
     "id": "water_osm_алаарча_411km",
@@ -686,7 +788,10 @@
     "address": "Алаарча",
     "google_maps_url": "https://maps.google.com/?q=42.33847,74.54082",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Алаарча). 49m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Алаарча). 49m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 414.4,
+    "guidance_mile": 257.5,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_каракол_413km",
@@ -705,7 +810,10 @@
     "address": "Каракол",
     "google_maps_url": "https://maps.google.com/?q=42.33935,74.55827",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Каракол). 20m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Каракол). 20m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 415.9,
+    "guidance_mile": 258.4,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "water_osm_каракол_424km",
@@ -724,7 +832,10 @@
     "address": "Каракол",
     "google_maps_url": "https://maps.google.com/?q=42.35954,74.68683",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Каракол). 162m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Каракол). 162m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 427.8,
+    "guidance_mile": 265.8,
+    "guidance_distance_to_trail_km": 0.162
   },
   {
     "id": "water_osm_иссыката_юж_434km",
@@ -743,7 +854,10 @@
     "address": "Иссыката Юж.",
     "google_maps_url": "https://maps.google.com/?q=42.36573,74.79658",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Иссыката Юж.). 51m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Иссыката Юж.). 51m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 437.2,
+    "guidance_mile": 271.7,
+    "guidance_distance_to_trail_km": 0.025
   },
   {
     "id": "water_osm_каракол_436km",
@@ -762,7 +876,10 @@
     "address": "Каракол",
     "google_maps_url": "https://maps.google.com/?q=42.36096,74.81823",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Каракол). 48m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Каракол). 48m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 439.3,
+    "guidance_mile": 273.0,
+    "guidance_distance_to_trail_km": 0.049
   },
   {
     "id": "water_osm_чыгыш_каракол_442km",
@@ -781,7 +898,10 @@
     "address": "Чыгыш Каракол",
     "google_maps_url": "https://maps.google.com/?q=42.37285,74.85619",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Чыгыш Каракол). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Чыгыш Каракол). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 444.8,
+    "guidance_mile": 276.4,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_кара_төр_442km",
@@ -800,7 +920,10 @@
     "address": "Кара-Төр",
     "google_maps_url": "https://maps.google.com/?q=42.37292,74.85601",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кара-Төр). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кара-Төр). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 444.8,
+    "guidance_mile": 276.4,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_кегеты_456km",
@@ -819,7 +942,10 @@
     "address": "Кегеты",
     "google_maps_url": "https://maps.google.com/?q=42.37126,75.02218",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кегеты). 72m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кегеты). 72m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 459.5,
+    "guidance_mile": 285.5,
+    "guidance_distance_to_trail_km": 0.014
   },
   {
     "id": "water_osm_каракол_472km",
@@ -838,7 +964,10 @@
     "address": "Каракол",
     "google_maps_url": "https://maps.google.com/?q=42.28232,75.16184",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Каракол). 216m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Каракол). 216m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 475.6,
+    "guidance_mile": 295.5,
+    "guidance_distance_to_trail_km": 0.215
   },
   {
     "id": "water_osm_сөөк_486km",
@@ -857,7 +986,10 @@
     "address": "Сөөк",
     "google_maps_url": "https://maps.google.com/?q=42.19858,75.25743",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Сөөк). 83m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Сөөк). 83m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 489.7,
+    "guidance_mile": 304.3,
+    "guidance_distance_to_trail_km": 0.055
   },
   {
     "id": "srmr_mantysh_487km",
@@ -878,7 +1010,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 490.6,
+    "guidance_mile": 304.9,
+    "guidance_distance_to_trail_km": 0.007
   },
   {
     "id": "water_osm_чаарарча_517km",
@@ -897,7 +1032,10 @@
     "address": "Чаарарча",
     "google_maps_url": "https://maps.google.com/?q=42.01789,75.13907",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Чаарарча). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Чаарарча). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 521.3,
+    "guidance_mile": 323.9,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_базартурук_518km",
@@ -916,7 +1054,10 @@
     "address": "Базартурук",
     "google_maps_url": "https://maps.google.com/?q=42.01515,75.13431",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Базартурук). 101m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Базартурук). 101m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 521.8,
+    "guidance_mile": 324.2,
+    "guidance_distance_to_trail_km": 0.11
   },
   {
     "id": "water_osm_келемчи_519km",
@@ -935,7 +1076,10 @@
     "address": "Келемчи",
     "google_maps_url": "https://maps.google.com/?q=42.00518,75.14178",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Келемчи). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Келемчи). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 523.0,
+    "guidance_mile": 325.0,
+    "guidance_distance_to_trail_km": 0.012
   },
   {
     "id": "srmr_cp1__son_kul_562km",
@@ -956,7 +1100,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Silk Road Mountain Race official waypoint: CP1 : Son Kul."
+    "description": "Silk Road Mountain Race official waypoint: CP1 : Son Kul.",
+    "guidance_km": 566.3,
+    "guidance_mile": 351.9,
+    "guidance_distance_to_trail_km": 0.195
   },
   {
     "id": "water_osm_куртка_597km",
@@ -975,7 +1122,10 @@
     "address": "Куртка",
     "google_maps_url": "https://maps.google.com/?q=41.57385,75.01965",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Куртка). 54m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Куртка). 54m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 601.5,
+    "guidance_mile": 373.7,
+    "guidance_distance_to_trail_km": 0.054
   },
   {
     "id": "water_osm_көл_кайың_600km",
@@ -994,7 +1144,10 @@
     "address": "Көл-Кайың",
     "google_maps_url": "https://maps.google.com/?q=41.54991,75.02968",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Көл-Кайың). 41m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Көл-Кайың). 41m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 604.5,
+    "guidance_mile": 375.6,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_жон_арык_611km",
@@ -1013,7 +1166,10 @@
     "address": "Жон Арык",
     "google_maps_url": "https://maps.google.com/?q=41.46411,75.02897",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Жон Арык). 134m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Жон Арык). 134m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 614.9,
+    "guidance_mile": 382.1,
+    "guidance_distance_to_trail_km": 0.135
   },
   {
     "id": "srmr_djangy_talap_612km",
@@ -1034,7 +1190,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop & guesthouses"
+    "description": "Village shop & guesthouses",
+    "guidance_km": 616.4,
+    "guidance_mile": 383.0,
+    "guidance_distance_to_trail_km": 0.002
   },
   {
     "id": "water_osm_уч_кара_суу_631km",
@@ -1053,7 +1212,10 @@
     "address": "Уч-кара-суу",
     "google_maps_url": "https://maps.google.com/?q=41.41381,74.86551",
     "business_status": "OPERATIONAL",
-    "description": "Reservoir Access (Уч-кара-суу). 22m from trail. Natural water source (filtration/treatment required)."
+    "description": "Reservoir Access (Уч-кара-суу). 22m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 635.8,
+    "guidance_mile": 395.1,
+    "guidance_distance_to_trail_km": 0.022
   },
   {
     "id": "water_osm_терек_647km",
@@ -1072,7 +1234,10 @@
     "address": "Терек",
     "google_maps_url": "https://maps.google.com/?q=41.31774,74.94081",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Терек). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Терек). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 651.8,
+    "guidance_mile": 405.0,
+    "guidance_distance_to_trail_km": 0.015
   },
   {
     "id": "srmr_baetov_653km",
@@ -1093,7 +1258,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Proper resupply, multiple shops, hotel and a couple guesthouses"
+    "description": "Proper resupply, multiple shops, hotel and a couple guesthouses",
+    "guidance_km": 657.6,
+    "guidance_mile": 408.6,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "srmr_kara_burgon_681km",
@@ -1114,7 +1282,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 686.2,
+    "guidance_mile": 426.4,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_ак_сай_дарыясы_694km",
@@ -1133,7 +1304,10 @@
     "address": "Ак-Сай дарыясы",
     "google_maps_url": "https://maps.google.com/?q=41.28267,74.62158",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ак-Сай дарыясы). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ак-Сай дарыясы). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 699.5,
+    "guidance_mile": 434.6,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "srmr_kosh_dobo_734km",
@@ -1154,7 +1328,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 739.1,
+    "guidance_mile": 459.2,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "srmr_long_stretch_with_plenty_of_elevation_gain_but_no_resupply_740km",
@@ -1175,7 +1352,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Silk Road Mountain Race official waypoint: Long stretch with plenty of elevation gain but no resupply."
+    "description": "Silk Road Mountain Race official waypoint: Long stretch with plenty of elevation gain but no resupply.",
+    "guidance_km": 745.1,
+    "guidance_mile": 463.0,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_пчан_758km",
@@ -1194,7 +1374,10 @@
     "address": "Пчан",
     "google_maps_url": "https://maps.google.com/?q=40.97575,74.18064",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Пчан). 13m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Пчан). 13m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 762.9,
+    "guidance_mile": 474.0,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "water_osm_биргузы_762km",
@@ -1213,7 +1396,10 @@
     "address": "Биргузы",
     "google_maps_url": "https://maps.google.com/?q=40.94615,74.16556",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Биргузы). 158m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Биргузы). 158m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 767.2,
+    "guidance_mile": 476.7,
+    "guidance_distance_to_trail_km": 0.153
   },
   {
     "id": "water_osm_семиз_762km",
@@ -1232,7 +1418,10 @@
     "address": "Семиз",
     "google_maps_url": "https://maps.google.com/?q=40.94187,74.16569",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Семиз). 155m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Семиз). 155m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 767.5,
+    "guidance_mile": 476.9,
+    "guidance_distance_to_trail_km": 0.159
   },
   {
     "id": "water_osm_читты_773km",
@@ -1251,7 +1440,10 @@
     "address": "Читты",
     "google_maps_url": "https://maps.google.com/?q=40.87877,74.22516",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Читты). 82m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Читты). 82m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 777.9,
+    "guidance_mile": 483.4,
+    "guidance_distance_to_trail_km": 0.087
   },
   {
     "id": "water_osm_джилангач_774km",
@@ -1270,7 +1462,10 @@
     "address": "Джилангач",
     "google_maps_url": "https://maps.google.com/?q=40.87085,74.23668",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Джилангач). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Джилангач). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 779.3,
+    "guidance_mile": 484.2,
+    "guidance_distance_to_trail_km": 0.002
   },
   {
     "id": "water_osm_агаман_775km",
@@ -1289,7 +1484,10 @@
     "address": "Агаман",
     "google_maps_url": "https://maps.google.com/?q=40.86534,74.24375",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Агаман). 47m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Агаман). 47m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 780.2,
+    "guidance_mile": 484.8,
+    "guidance_distance_to_trail_km": 0.045
   },
   {
     "id": "water_osm_ойтал_786km",
@@ -1308,7 +1506,10 @@
     "address": "Ойтал",
     "google_maps_url": "https://maps.google.com/?q=40.82299,74.32294",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ойтал). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ойтал). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 791.4,
+    "guidance_mile": 491.8,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_ойтал_южный_787km",
@@ -1327,7 +1528,10 @@
     "address": "Ойтал Южный",
     "google_maps_url": "https://maps.google.com/?q=40.82766,74.32944",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ойтал Южный). 15m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ойтал Южный). 15m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 792.3,
+    "guidance_mile": 492.3,
+    "guidance_distance_to_trail_km": 0.014
   },
   {
     "id": "water_osm_арпа_788km",
@@ -1346,7 +1550,10 @@
     "address": "Арпа",
     "google_maps_url": "https://maps.google.com/?q=40.82887,74.33538",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Арпа). 38m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Арпа). 38m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 792.8,
+    "guidance_mile": 492.6,
+    "guidance_distance_to_trail_km": 0.039
   },
   {
     "id": "water_osm_кызылбелес_798km",
@@ -1365,7 +1572,10 @@
     "address": "Кызылбелес",
     "google_maps_url": "https://maps.google.com/?q=40.77366,74.36658",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кызылбелес). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кызылбелес). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 803.5,
+    "guidance_mile": 499.3,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_кичи_коман_803km",
@@ -1384,7 +1594,10 @@
     "address": "Кичи-Коман",
     "google_maps_url": "https://maps.google.com/?q=40.74542,74.39955",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кичи-Коман). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кичи-Коман). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 809.4,
+    "guidance_mile": 502.9,
+    "guidance_distance_to_trail_km": 0.04
   },
   {
     "id": "water_osm_очи_коман_808km",
@@ -1403,7 +1616,10 @@
     "address": "Очи-Коман",
     "google_maps_url": "https://maps.google.com/?q=40.72458,74.43453",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Очи-Коман). 15m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Очи-Коман). 15m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 813.9,
+    "guidance_mile": 505.7,
+    "guidance_distance_to_trail_km": 0.004
   },
   {
     "id": "water_osm_чон_коман_816km",
@@ -1422,7 +1638,10 @@
     "address": "Чон-Коман",
     "google_maps_url": "https://maps.google.com/?q=40.74615,74.50293",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чон-Коман). 174m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чон-Коман). 174m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 821.8,
+    "guidance_mile": 510.7,
+    "guidance_distance_to_trail_km": 0.175
   },
   {
     "id": "water_osm_каракол_828km",
@@ -1441,7 +1660,10 @@
     "address": "Каракол",
     "google_maps_url": "https://maps.google.com/?q=40.78622,74.58672",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Каракол). 49m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Каракол). 49m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 834.4,
+    "guidance_mile": 518.5,
+    "guidance_distance_to_trail_km": 0.04
   },
   {
     "id": "water_osm_суек_838km",
@@ -1460,7 +1682,10 @@
     "address": "Суек",
     "google_maps_url": "https://maps.google.com/?q=40.76340,74.69064",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Суек). 28m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Суек). 28m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 844.8,
+    "guidance_mile": 524.9,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "water_osm_мустыр_862km",
@@ -1479,7 +1704,10 @@
     "address": "Мустыр",
     "google_maps_url": "https://maps.google.com/?q=40.74420,74.91189",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Мустыр). 70m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Мустыр). 70m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 868.4,
+    "guidance_mile": 539.6,
+    "guidance_distance_to_trail_km": 0.054
   },
   {
     "id": "water_osm_карасу_862km",
@@ -1498,7 +1726,10 @@
     "address": "Карасу",
     "google_maps_url": "https://maps.google.com/?q=40.75156,74.91865",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Карасу). 63m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Карасу). 63m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 869.3,
+    "guidance_mile": 540.1,
+    "guidance_distance_to_trail_km": 0.046
   },
   {
     "id": "water_osm_джаманты_868km",
@@ -1517,7 +1748,10 @@
     "address": "Джаманты",
     "google_maps_url": "https://maps.google.com/?q=40.78852,74.95314",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Джаманты). 97m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Джаманты). 97m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 874.5,
+    "guidance_mile": 543.4,
+    "guidance_distance_to_trail_km": 0.114
   },
   {
     "id": "water_osm_карганташ_869km",
@@ -1536,7 +1770,10 @@
     "address": "Карганташ",
     "google_maps_url": "https://maps.google.com/?q=40.78514,74.96997",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Карганташ). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Карганташ). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 876.1,
+    "guidance_mile": 544.4,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_кызылкюнгей_879km",
@@ -1555,7 +1792,10 @@
     "address": "Кызылкюнгей",
     "google_maps_url": "https://maps.google.com/?q=40.76967,75.07983",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кызылкюнгей). 184m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кызылкюнгей). 184m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 885.5,
+    "guidance_mile": 550.2,
+    "guidance_distance_to_trail_km": 0.185
   },
   {
     "id": "srmr_military_checkpoint_880km",
@@ -1576,7 +1816,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Your border zone permit will be checked as you enter the border zone with China."
+    "description": "Your border zone permit will be checked as you enter the border zone with China.",
+    "guidance_km": 887.0,
+    "guidance_mile": 551.1,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "srmr_the_blue_caravan_934km",
@@ -1597,7 +1840,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Location and colour may vary"
+    "description": "Location and colour may vary",
+    "guidance_km": 941.0,
+    "guidance_mile": 584.7,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_чингырсай_968km",
@@ -1616,7 +1862,10 @@
     "address": "Чингырсай",
     "google_maps_url": "https://maps.google.com/?q=40.72311,75.72102",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Чингырсай). 22m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Чингырсай). 22m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 975.4,
+    "guidance_mile": 606.1,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "water_osm_кенсу_969km",
@@ -1635,7 +1884,10 @@
     "address": "Кенсу",
     "google_maps_url": "https://maps.google.com/?q=40.72185,75.73212",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кенсу). 132m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кенсу). 132m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 976.2,
+    "guidance_mile": 606.6,
+    "guidance_distance_to_trail_km": 0.121
   },
   {
     "id": "water_osm_карасай_971km",
@@ -1654,7 +1906,10 @@
     "address": "Карасай",
     "google_maps_url": "https://maps.google.com/?q=40.71872,75.74989",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Карасай). 49m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Карасай). 49m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 978.1,
+    "guidance_mile": 607.7,
+    "guidance_distance_to_trail_km": 0.022
   },
   {
     "id": "water_osm_ак_сай_980km",
@@ -1673,7 +1928,10 @@
     "address": "Ак-Сай",
     "google_maps_url": "https://maps.google.com/?q=40.71682,75.85492",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ак-Сай). 19m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ак-Сай). 19m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 987.1,
+    "guidance_mile": 613.4,
+    "guidance_distance_to_trail_km": 0.021
   },
   {
     "id": "water_osm_ак_сай_992km",
@@ -1692,7 +1950,10 @@
     "address": "Ак-Сай",
     "google_maps_url": "https://maps.google.com/?q=40.74101,75.98298",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ак-Сай). 94m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ак-Сай). 94m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 998.6,
+    "guidance_mile": 620.5,
+    "guidance_distance_to_trail_km": 0.094
   },
   {
     "id": "water_osm_текелик_1011km",
@@ -1711,7 +1972,10 @@
     "address": "Текелик",
     "google_maps_url": "https://maps.google.com/?q=40.83478,76.16950",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Текелик). 37m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Текелик). 37m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1018.0,
+    "guidance_mile": 632.5,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_улкен_кулджабаши_1019km",
@@ -1730,7 +1994,10 @@
     "address": "Улкен Кулджабаши",
     "google_maps_url": "https://maps.google.com/?q=40.86417,76.25443",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Улкен Кулджабаши). 165m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Улкен Кулджабаши). 165m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1026.4,
+    "guidance_mile": 637.8,
+    "guidance_distance_to_trail_km": 0.161
   },
   {
     "id": "water_osm_улкен_кулджабаши_1030km",
@@ -1749,7 +2016,10 @@
     "address": "Улкен Кулджабаши",
     "google_maps_url": "https://maps.google.com/?q=40.77591,76.28681",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Улкен Кулджабаши). 15m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Улкен Кулджабаши). 15m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1036.9,
+    "guidance_mile": 644.3,
+    "guidance_distance_to_trail_km": 0.063
   },
   {
     "id": "srmr_the_old_soviet_road_1045km",
@@ -1770,7 +2040,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "This section of the route used to be a military access road in a zone that was much more tightly controlled in soviet times because of the proximity with China. Much of this section of road follows old barbed wire fences. There is still barbed wire strewn on the floor in places."
+    "description": "This section of the route used to be a military access road in a zone that was much more tightly controlled in soviet times because of the proximity with China. Much of this section of road follows old barbed wire fences. There is still barbed wire strewn on the floor in places.",
+    "guidance_km": 1051.5,
+    "guidance_mile": 653.4,
+    "guidance_distance_to_trail_km": 0.089
   },
   {
     "id": "water_osm_ак_сай_1063km",
@@ -1789,7 +2062,10 @@
     "address": "Ак-Сай",
     "google_maps_url": "https://maps.google.com/?q=40.88852,76.36094",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ак-Сай). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ак-Сай). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1070.2,
+    "guidance_mile": 665.0,
+    "guidance_distance_to_trail_km": 0.007
   },
   {
     "id": "water_osm_аксай_1063km",
@@ -1808,7 +2084,10 @@
     "address": "Аксай",
     "google_maps_url": "https://maps.google.com/?q=40.88852,76.36094",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Аксай). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Аксай). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1070.2,
+    "guidance_mile": 665.0,
+    "guidance_distance_to_trail_km": 0.007
   },
   {
     "id": "srmr_military_checkpoint_1092km",
@@ -1829,7 +2108,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Your Border Zone Permit will be checked as you leave the border zone with China."
+    "description": "Your Border Zone Permit will be checked as you leave the border zone with China.",
+    "guidance_km": 1098.3,
+    "guidance_mile": 682.4,
+    "guidance_distance_to_trail_km": 0.03
   },
   {
     "id": "water_osm_кынды_1112km",
@@ -1848,7 +2130,10 @@
     "address": "Кынды",
     "google_maps_url": "https://maps.google.com/?q=41.21928,76.45460",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кынды). 44m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кынды). 44m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1118.4,
+    "guidance_mile": 694.9,
+    "guidance_distance_to_trail_km": 0.048
   },
   {
     "id": "water_osm_уюрме_1112km",
@@ -1867,7 +2152,10 @@
     "address": "Уюрме",
     "google_maps_url": "https://maps.google.com/?q=41.22054,76.45345",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Уюрме). 50m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Уюрме). 50m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1118.5,
+    "guidance_mile": 695.0,
+    "guidance_distance_to_trail_km": 0.033
   },
   {
     "id": "water_osm_ачакаманды_1115km",
@@ -1886,7 +2174,10 @@
     "address": "Ачакаманды",
     "google_maps_url": "https://maps.google.com/?q=41.24042,76.44077",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ачакаманды). 82m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ачакаманды). 82m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1121.7,
+    "guidance_mile": 697.0,
+    "guidance_distance_to_trail_km": 0.086
   },
   {
     "id": "water_osm_ат_башы_дарыясы_1120km",
@@ -1905,7 +2196,10 @@
     "address": "Ат башы дарыясы",
     "google_maps_url": "https://maps.google.com/?q=41.24790,76.38274",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ат башы дарыясы). 37m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ат башы дарыясы). 37m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1126.9,
+    "guidance_mile": 700.2,
+    "guidance_distance_to_trail_km": 0.037
   },
   {
     "id": "water_osm_ичкокаманды_1120km",
@@ -1924,7 +2218,10 @@
     "address": "Ичкокаманды",
     "google_maps_url": "https://maps.google.com/?q=41.24816,76.38268",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ичкокаманды). 45m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ичкокаманды). 45m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1126.9,
+    "guidance_mile": 700.2,
+    "guidance_distance_to_trail_km": 0.047
   },
   {
     "id": "water_osm_башача_1129km",
@@ -1943,7 +2240,10 @@
     "address": "Башача",
     "google_maps_url": "https://maps.google.com/?q=41.23786,76.27550",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Башача). 63m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Башача). 63m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1136.2,
+    "guidance_mile": 706.0,
+    "guidance_distance_to_trail_km": 0.038
   },
   {
     "id": "water_osm_ача_1133km",
@@ -1962,7 +2262,10 @@
     "address": "Ача",
     "google_maps_url": "https://maps.google.com/?q=41.23571,76.23618",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ача). 27m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ача). 27m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1139.5,
+    "guidance_mile": 708.1,
+    "guidance_distance_to_trail_km": 0.027
   },
   {
     "id": "water_osm_латок_1136km",
@@ -1981,7 +2284,10 @@
     "address": "Латок",
     "google_maps_url": "https://maps.google.com/?q=41.23812,76.19957",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Латок). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Латок). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1142.6,
+    "guidance_mile": 710.0,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_кайырма_арык_1139km",
@@ -2000,7 +2306,10 @@
     "address": "Кайырма Арык",
     "google_maps_url": "https://maps.google.com/?q=41.24374,76.16170",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кайырма Арык). 19m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кайырма Арык). 19m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1145.9,
+    "guidance_mile": 712.0,
+    "guidance_distance_to_trail_km": 0.019
   },
   {
     "id": "water_osm_колонка48_1141km",
@@ -2019,7 +2328,10 @@
     "address": "колонка48",
     "google_maps_url": "https://maps.google.com/?q=41.24781,76.14184",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка48). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка48). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.6,
+    "guidance_mile": 713.1,
+    "guidance_distance_to_trail_km": 0.012
   },
   {
     "id": "water_osm_колонка12_1141km",
@@ -2038,7 +2350,10 @@
     "address": "колонка12",
     "google_maps_url": "https://maps.google.com/?q=41.24975,76.14271",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка12). 216m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка12). 216m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.6,
+    "guidance_mile": 713.1,
+    "guidance_distance_to_trail_km": 0.216
   },
   {
     "id": "water_osm_колонка41_1141km",
@@ -2057,7 +2372,10 @@
     "address": "колонка41",
     "google_maps_url": "https://maps.google.com/?q=41.24838,76.13904",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка41). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка41). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.8,
+    "guidance_mile": 713.2,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_колонка42_1141km",
@@ -2076,7 +2394,10 @@
     "address": "колонка42",
     "google_maps_url": "https://maps.google.com/?q=41.24708,76.13878",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка42). 161m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка42). 161m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.8,
+    "guidance_mile": 713.2,
+    "guidance_distance_to_trail_km": 0.161
   },
   {
     "id": "water_osm_колонка14_1141km",
@@ -2095,7 +2416,10 @@
     "address": "колонка14",
     "google_maps_url": "https://maps.google.com/?q=41.25029,76.13940",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка14). 201m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка14). 201m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.8,
+    "guidance_mile": 713.2,
+    "guidance_distance_to_trail_km": 0.201
   },
   {
     "id": "water_osm_колонка13_1141km",
@@ -2114,7 +2438,10 @@
     "address": "колонка13",
     "google_maps_url": "https://maps.google.com/?q=41.25003,76.14080",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка13). 217m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка13). 217m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.7,
+    "guidance_mile": 713.1,
+    "guidance_distance_to_trail_km": 0.208
   },
   {
     "id": "water_osm_колонка36_1141km",
@@ -2133,7 +2460,10 @@
     "address": "колонка36",
     "google_maps_url": "https://maps.google.com/?q=41.24669,76.13719",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка36). 234m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка36). 234m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1147.9,
+    "guidance_mile": 713.3,
+    "guidance_distance_to_trail_km": 0.238
   },
   {
     "id": "srmr_ak_muz_1141km",
@@ -2154,7 +2484,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 1148.0,
+    "guidance_mile": 713.4,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_колонка34_1141km",
@@ -2173,7 +2506,10 @@
     "address": "колонка34",
     "google_maps_url": "https://maps.google.com/?q=41.24911,76.13596",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка34). 38m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка34). 38m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.0,
+    "guidance_mile": 713.4,
+    "guidance_distance_to_trail_km": 0.038
   },
   {
     "id": "water_osm_колонка35_1141km",
@@ -2192,7 +2528,10 @@
     "address": "колонка35",
     "google_maps_url": "https://maps.google.com/?q=41.24733,76.13591",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка35). 201m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка35). 201m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.0,
+    "guidance_mile": 713.4,
+    "guidance_distance_to_trail_km": 0.201
   },
   {
     "id": "water_osm_колонка15_1141km",
@@ -2211,7 +2550,10 @@
     "address": "колонка15",
     "google_maps_url": "https://maps.google.com/?q=41.25093,76.13633",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка15). 204m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка15). 204m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.0,
+    "guidance_mile": 713.4,
+    "guidance_distance_to_trail_km": 0.204
   },
   {
     "id": "water_osm_колонка18_1141km",
@@ -2230,7 +2572,10 @@
     "address": "колонка18",
     "google_maps_url": "https://maps.google.com/?q=41.24989,76.13285",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка18). 22m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка18). 22m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.4,
+    "guidance_mile": 713.6,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "water_osm_колонка17_1141km",
@@ -2249,7 +2594,10 @@
     "address": "колонка17",
     "google_maps_url": "https://maps.google.com/?q=41.24960,76.13404",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка17). 125m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка17). 125m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.4,
+    "guidance_mile": 713.6,
+    "guidance_distance_to_trail_km": 0.125
   },
   {
     "id": "water_osm_колонка16_1141km",
@@ -2268,7 +2616,10 @@
     "address": "колонка16",
     "google_maps_url": "https://maps.google.com/?q=41.25145,76.13293",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка16). 158m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка16). 158m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.4,
+    "guidance_mile": 713.6,
+    "guidance_distance_to_trail_km": 0.157
   },
   {
     "id": "water_osm_колонка21_1141km",
@@ -2287,7 +2638,10 @@
     "address": "колонка21",
     "google_maps_url": "https://maps.google.com/?q=41.24785,76.13234",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка21). 245m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка21). 245m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.4,
+    "guidance_mile": 713.6,
+    "guidance_distance_to_trail_km": 0.246
   },
   {
     "id": "water_osm_колонка19_1142km",
@@ -2306,7 +2660,10 @@
     "address": "колонка19",
     "google_maps_url": "https://maps.google.com/?q=41.25035,76.13087",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка19). 13m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка19). 13m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.5,
+    "guidance_mile": 713.7,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_вулканизация_1142km",
@@ -2325,7 +2682,10 @@
     "address": "Вулканизация",
     "google_maps_url": "https://maps.google.com/?q=41.25168,76.13138",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (Вулканизация). 141m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (Вулканизация). 141m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.5,
+    "guidance_mile": 713.7,
+    "guidance_distance_to_trail_km": 0.136
   },
   {
     "id": "water_osm_колонка20_1142km",
@@ -2344,7 +2704,10 @@
     "address": "колонка20",
     "google_maps_url": "https://maps.google.com/?q=41.24860,76.12927",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка20). 247m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка20). 247m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1148.5,
+    "guidance_mile": 713.7,
+    "guidance_distance_to_trail_km": 0.252
   },
   {
     "id": "water_osm_колонка7_1142km",
@@ -2363,7 +2726,10 @@
     "address": "колонка7",
     "google_maps_url": "https://maps.google.com/?q=41.25337,76.13209",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка7). 144m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка7). 144m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1149.0,
+    "guidance_mile": 714.0,
+    "guidance_distance_to_trail_km": 0.144
   },
   {
     "id": "water_osm_колонка8_1142km",
@@ -2382,7 +2748,10 @@
     "address": "колонка8",
     "google_maps_url": "https://maps.google.com/?q=41.25310,76.13329",
     "business_status": "OPERATIONAL",
-    "description": "Drinking Water (колонка8). 249m from trail. Natural water source (filtration/treatment required)."
+    "description": "Drinking Water (колонка8). 249m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1149.0,
+    "guidance_mile": 714.0,
+    "guidance_distance_to_trail_km": 0.249
   },
   {
     "id": "water_osm_бороонду_суусу_1142km",
@@ -2401,7 +2770,10 @@
     "address": "Бороонду суусу",
     "google_maps_url": "https://maps.google.com/?q=41.25476,76.12872",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Бороонду суусу). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Бороонду суусу). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1149.2,
+    "guidance_mile": 714.1,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "water_osm_кара_суу_1167km",
@@ -2420,7 +2792,10 @@
     "address": "Кара-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.38729,76.01037",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кара-Суу). 11m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кара-Суу). 11m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1173.7,
+    "guidance_mile": 729.3,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "srmr_naryn_1171km",
@@ -2441,7 +2816,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Major resupply with many shops, guesthouses and hotels"
+    "description": "Major resupply with many shops, guesthouses and hotels",
+    "guidance_km": 1178.4,
+    "guidance_mile": 732.2,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_шаардык_суу_каналы_1172km",
@@ -2460,7 +2838,10 @@
     "address": "Шаардык суу каналы",
     "google_maps_url": "https://maps.google.com/?q=41.42182,76.02729",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Шаардык суу каналы). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Шаардык суу каналы). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1179.4,
+    "guidance_mile": 732.9,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_городской_водный_канал_1172km",
@@ -2479,7 +2860,10 @@
     "address": "Городской водный канал",
     "google_maps_url": "https://maps.google.com/?q=41.42167,76.02720",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Городской водный канал). 11m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Городской водный канал). 11m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1179.4,
+    "guidance_mile": 732.9,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_нарын_1176km",
@@ -2498,7 +2882,10 @@
     "address": "Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.42959,76.06816",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Нарын). 47m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Нарын). 47m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1183.0,
+    "guidance_mile": 735.1,
+    "guidance_distance_to_trail_km": 0.048
   },
   {
     "id": "water_osm_текесекрик_1176km",
@@ -2517,7 +2904,10 @@
     "address": "Текесекрик",
     "google_maps_url": "https://maps.google.com/?q=41.42873,76.06861",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Текесекрик). 17m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Текесекрик). 17m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1183.1,
+    "guidance_mile": 735.1,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_алыш_1186km",
@@ -2536,7 +2926,10 @@
     "address": "Алыш",
     "google_maps_url": "https://maps.google.com/?q=41.44431,76.18357",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Алыш). 37m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Алыш). 37m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1193.0,
+    "guidance_mile": 741.3,
+    "guidance_distance_to_trail_km": 0.037
   },
   {
     "id": "water_osm_ченкурсай_1188km",
@@ -2555,7 +2948,10 @@
     "address": "Ченкурсай",
     "google_maps_url": "https://maps.google.com/?q=41.44478,76.21032",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Ченкурсай). 20m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Ченкурсай). 20m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1195.2,
+    "guidance_mile": 742.6,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "water_osm_дөбөлүү_1193km",
@@ -2574,7 +2970,10 @@
     "address": "Дөбөлүү",
     "google_maps_url": "https://maps.google.com/?q=41.44805,76.26273",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Дөбөлүү). 23m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Дөбөлүү). 23m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1199.7,
+    "guidance_mile": 745.5,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "water_osm_нарын_1195km",
@@ -2593,7 +2992,10 @@
     "address": "Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.44798,76.28791",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Нарын). 36m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Нарын). 36m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1202.1,
+    "guidance_mile": 746.9,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "water_osm_куденгач_1198km",
@@ -2612,7 +3014,10 @@
     "address": "Куденгач",
     "google_maps_url": "https://maps.google.com/?q=41.45241,76.31829",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Куденгач). 17m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Куденгач). 17m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1204.7,
+    "guidance_mile": 748.5,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_тѳѳ_жайлоо_1199km",
@@ -2631,7 +3036,10 @@
     "address": "Тѳѳ-Жайлоо",
     "google_maps_url": "https://maps.google.com/?q=41.45336,76.32908",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Тѳѳ-Жайлоо). 20m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Тѳѳ-Жайлоо). 20m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1205.6,
+    "guidance_mile": 749.1,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "water_osm_бурган_суу_1201km",
@@ -2650,7 +3058,10 @@
     "address": "Бурган-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.45625,76.35497",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Бурган-Суу). 24m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Бурган-Суу). 24m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1207.8,
+    "guidance_mile": 750.5,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "water_osm_кайыңды_1203km",
@@ -2669,7 +3080,10 @@
     "address": "Кайыңды",
     "google_maps_url": "https://maps.google.com/?q=41.45984,76.38524",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кайыңды). 78m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кайыңды). 78m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1210.4,
+    "guidance_mile": 752.1,
+    "guidance_distance_to_trail_km": 0.078
   },
   {
     "id": "srmr_tash_bashat_1204km",
@@ -2690,7 +3104,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop and a couple guesthouses"
+    "description": "Village shop and a couple guesthouses",
+    "guidance_km": 1211.1,
+    "guidance_mile": 752.5,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_нарын_1212km",
@@ -2709,7 +3126,10 @@
     "address": "Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.49550,76.42478",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Нарын). 38m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Нарын). 38m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1219.1,
+    "guidance_mile": 757.5,
+    "guidance_distance_to_trail_km": 0.037
   },
   {
     "id": "srmr_eki_naryn_1216km",
@@ -2730,7 +3150,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Guesthouse"
+    "description": "Guesthouse",
+    "guidance_km": 1222.8,
+    "guidance_mile": 759.8,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_калмак_ашуу_1221km",
@@ -2749,7 +3172,10 @@
     "address": "Калмак-Ашуу",
     "google_maps_url": "https://maps.google.com/?q=41.56168,76.44501",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Калмак-Ашуу). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Калмак-Ашуу). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1227.8,
+    "guidance_mile": 762.9,
+    "guidance_distance_to_trail_km": 0.009
   },
   {
     "id": "water_osm_малый_нарын_1234km",
@@ -2768,7 +3194,10 @@
     "address": "Малый Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.65027,76.42837",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Малый Нарын). 17m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Малый Нарын). 17m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1241.1,
+    "guidance_mile": 771.2,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_малый_нарын_1238km",
@@ -2787,7 +3216,10 @@
     "address": "Малый Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.66816,76.45325",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Малый Нарын). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Малый Нарын). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1245.6,
+    "guidance_mile": 774.0,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_тамды_суу_1252km",
@@ -2806,7 +3238,10 @@
     "address": "Тамды-Суу",
     "google_maps_url": "https://maps.google.com/?q=41.66935,76.60701",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Тамды-Суу). 72m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Тамды-Суу). 72m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1259.6,
+    "guidance_mile": 782.7,
+    "guidance_distance_to_trail_km": 0.07
   },
   {
     "id": "water_osm_малый_нарын_1258km",
@@ -2825,7 +3260,10 @@
     "address": "Малый Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.68913,76.65919",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Малый Нарын). 24m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Малый Нарын). 24m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1264.9,
+    "guidance_mile": 786.0,
+    "guidance_distance_to_trail_km": 0.024
   },
   {
     "id": "water_osm_джиналач_1262km",
@@ -2844,7 +3282,10 @@
     "address": "Джиналач",
     "google_maps_url": "https://maps.google.com/?q=41.68684,76.69547",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Джиналач). 233m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Джиналач). 233m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1269.0,
+    "guidance_mile": 788.5,
+    "guidance_distance_to_trail_km": 0.233
   },
   {
     "id": "water_osm_малый_нарын_1263km",
@@ -2863,7 +3304,10 @@
     "address": "Малый Нарын",
     "google_maps_url": "https://maps.google.com/?q=41.68902,76.71237",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Малый Нарын). 38m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Малый Нарын). 38m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1270.4,
+    "guidance_mile": 789.4,
+    "guidance_distance_to_trail_km": 0.037
   },
   {
     "id": "water_osm_болгарт_1266km",
@@ -2882,7 +3326,10 @@
     "address": "Болгарт",
     "google_maps_url": "https://maps.google.com/?q=41.70721,76.73048",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Болгарт). 41m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Болгарт). 41m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1273.3,
+    "guidance_mile": 791.2,
+    "guidance_distance_to_trail_km": 0.041
   },
   {
     "id": "water_osm_карагоман_1272km",
@@ -2901,7 +3348,10 @@
     "address": "Карагоман",
     "google_maps_url": "https://maps.google.com/?q=41.72841,76.77441",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Карагоман). 28m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Карагоман). 28m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1279.7,
+    "guidance_mile": 795.2,
+    "guidance_distance_to_trail_km": 0.027
   },
   {
     "id": "water_osm_бурхан_1323km",
@@ -2920,7 +3370,10 @@
     "address": "Бурхан",
     "google_maps_url": "https://maps.google.com/?q=41.75739,77.31526",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Бурхан). 112m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Бурхан). 112m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1330.8,
+    "guidance_mile": 826.9,
+    "guidance_distance_to_trail_km": 0.113
   },
   {
     "id": "srmr_arabel_pass_1359km",
@@ -2941,7 +3394,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Beautiful high alpine pass between the Burkhan and Arabel valleys. The weather is notoriously capricious up on Arabel."
+    "description": "Beautiful high alpine pass between the Burkhan and Arabel valleys. The weather is notoriously capricious up on Arabel.",
+    "guidance_km": 1366.9,
+    "guidance_mile": 849.3,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_арабель_1361km",
@@ -2960,7 +3416,10 @@
     "address": "Арабель",
     "google_maps_url": "https://maps.google.com/?q=41.81790,77.68317",
     "business_status": "OPERATIONAL",
-    "description": "Lake Access (Арабель). 63m from trail. Natural water source (filtration/treatment required)."
+    "description": "Lake Access (Арабель). 63m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1368.8,
+    "guidance_mile": 850.6,
+    "guidance_distance_to_trail_km": 0.063
   },
   {
     "id": "water_osm_барскоон_1376km",
@@ -2979,7 +3438,10 @@
     "address": "Барскоон",
     "google_maps_url": "https://maps.google.com/?q=41.89288,77.69295",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Барскоон). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Барскоон). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1385.2,
+    "guidance_mile": 860.8,
+    "guidance_distance_to_trail_km": 0.012
   },
   {
     "id": "srmr_barskoon_pass_1377km",
@@ -3000,7 +3462,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "High alpine pass. Kumtor mining road. Incredible descent when dry, mudfest when wet. Careful of the mining traffic."
+    "description": "High alpine pass. Kumtor mining road. Incredible descent when dry, mudfest when wet. Careful of the mining traffic.",
+    "guidance_km": 1385.4,
+    "guidance_mile": 860.8,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_кереге_таш_1390km",
@@ -3019,7 +3484,10 @@
     "address": "Кереге-Таш",
     "google_maps_url": "https://maps.google.com/?q=41.92599,77.64146",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кереге-Таш). 95m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кереге-Таш). 95m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1399.3,
+    "guidance_mile": 869.5,
+    "guidance_distance_to_trail_km": 0.095
   },
   {
     "id": "water_osm_дүңгүрөмө_1392km",
@@ -3038,7 +3506,10 @@
     "address": "Дүңгүрөмө",
     "google_maps_url": "https://maps.google.com/?q=41.93639,77.65581",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Дүңгүрөмө). 21m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Дүңгүрөмө). 21m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1401.0,
+    "guidance_mile": 870.6,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "water_osm_барскоон_1393km",
@@ -3057,7 +3528,10 @@
     "address": "Барскоон",
     "google_maps_url": "https://maps.google.com/?q=41.94604,77.65406",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Барскоон). 14m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Барскоон). 14m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1402.1,
+    "guidance_mile": 871.2,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_шаркыратма_1401km",
@@ -3076,7 +3550,10 @@
     "address": "Шаркыратма",
     "google_maps_url": "https://maps.google.com/?q=42.00960,77.61456",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Шаркыратма). 11m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Шаркыратма). 11m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1410.3,
+    "guidance_mile": 876.3,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_барскоон_1401km",
@@ -3095,7 +3572,10 @@
     "address": "Барскоон",
     "google_maps_url": "https://maps.google.com/?q=42.01298,77.61246",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Барскоон). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Барскоон). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1410.8,
+    "guidance_mile": 876.6,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "water_osm_барскоон_1408km",
@@ -3114,7 +3594,10 @@
     "address": "Барскоон",
     "google_maps_url": "https://maps.google.com/?q=42.06604,77.59388",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Барскоон). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Барскоон). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1417.1,
+    "guidance_mile": 880.6,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "srmr_tamga_1421km",
@@ -3135,7 +3618,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Several shops in town"
+    "description": "Several shops in town",
+    "guidance_km": 1430.7,
+    "guidance_mile": 889.0,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "water_osm_тамга_1425km",
@@ -3154,7 +3640,10 @@
     "address": "Тамга",
     "google_maps_url": "https://maps.google.com/?q=42.15394,77.52755",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Тамга). 37m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Тамга). 37m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1434.3,
+    "guidance_mile": 891.2,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "srmr_tosor_1432km",
@@ -3175,7 +3664,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "1-2 small shops in town"
+    "description": "1-2 small shops in town",
+    "guidance_km": 1442.0,
+    "guidance_mile": 896.0,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "water_osm_тоссор_1447km",
@@ -3194,7 +3686,10 @@
     "address": "Тоссор",
     "google_maps_url": "https://maps.google.com/?q=42.09168,77.37174",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Тоссор). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Тоссор). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1456.4,
+    "guidance_mile": 905.0,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_сарытөр_1448km",
@@ -3213,7 +3708,10 @@
     "address": "Сарытөр",
     "google_maps_url": "https://maps.google.com/?q=42.08083,77.37510",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Сарытөр). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Сарытөр). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1458.1,
+    "guidance_mile": 906.0,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "srmr_tosor_pass_1471km",
@@ -3234,7 +3732,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Beautiful high altitude pass"
+    "description": "Beautiful high altitude pass",
+    "guidance_km": 1481.1,
+    "guidance_mile": 920.3,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_джилусу_1484km",
@@ -3253,7 +3754,10 @@
     "address": "Джилусу",
     "google_maps_url": "https://maps.google.com/?q=41.88524,77.26861",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Джилусу). 52m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Джилусу). 52m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1494.1,
+    "guidance_mile": 928.4,
+    "guidance_distance_to_trail_km": 0.052
   },
   {
     "id": "water_osm_кашкасу_1505km",
@@ -3272,7 +3776,10 @@
     "address": "Кашкасу",
     "google_maps_url": "https://maps.google.com/?q=41.86319,77.03604",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кашкасу). 23m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кашкасу). 23m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1515.0,
+    "guidance_mile": 941.3,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "water_osm_арчалы_1531km",
@@ -3291,7 +3798,10 @@
     "address": "Арчалы",
     "google_maps_url": "https://maps.google.com/?q=41.72538,76.83617",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Арчалы). 118m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Арчалы). 118m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1541.3,
+    "guidance_mile": 957.7,
+    "guidance_distance_to_trail_km": 0.119
   },
   {
     "id": "water_osm_кара_кужур_1588km",
@@ -3310,7 +3820,10 @@
     "address": "Кара-Кужур",
     "google_maps_url": "https://maps.google.com/?q=41.89172,76.31023",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кара-Кужур). 23m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кара-Кужур). 23m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1597.8,
+    "guidance_mile": 992.8,
+    "guidance_distance_to_trail_km": 0.024
   },
   {
     "id": "srmr_ak_kiya_1617km",
@@ -3331,7 +3844,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop and guesthouse"
+    "description": "Village shop and guesthouse",
+    "guidance_km": 1627.2,
+    "guidance_mile": 1011.1,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_кара_кужур_1618km",
@@ -3350,7 +3866,10 @@
     "address": "Кара-Кужур",
     "google_maps_url": "https://maps.google.com/?q=41.92088,75.97048",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кара-Кужур). 20m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кара-Кужур). 20m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1627.6,
+    "guidance_mile": 1011.4,
+    "guidance_distance_to_trail_km": 0.021
   },
   {
     "id": "water_osm_ашуу_төр_1629km",
@@ -3369,7 +3888,10 @@
     "address": "Ашуу Төр",
     "google_maps_url": "https://maps.google.com/?q=42.00971,75.96002",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ашуу Төр). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ашуу Төр). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1638.7,
+    "guidance_mile": 1018.2,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "srmr_ukok_pass_1630km",
@@ -3390,7 +3912,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Long hike up to the pass. Likely one of the hardest parts of the race. Will take a considerable amount of time."
+    "description": "Long hike up to the pass. Likely one of the hardest parts of the race. Will take a considerable amount of time.",
+    "guidance_km": 1640.5,
+    "guidance_mile": 1019.4,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_каракум_1641km",
@@ -3409,7 +3934,10 @@
     "address": "Каракум",
     "google_maps_url": "https://maps.google.com/?q=42.07854,75.92128",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Каракум). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Каракум). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1651.4,
+    "guidance_mile": 1026.2,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_көл_үкөк_1642km",
@@ -3428,7 +3956,10 @@
     "address": "Көл-Үкөк",
     "google_maps_url": "https://maps.google.com/?q=42.08241,75.91744",
     "business_status": "OPERATIONAL",
-    "description": "Reservoir Access (Көл-Үкөк). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Reservoir Access (Көл-Үкөк). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1652.1,
+    "guidance_mile": 1026.6,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "srmr_kok_ulok_1644km",
@@ -3449,7 +3980,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Yurt camp"
+    "description": "Yurt camp",
+    "guidance_km": 1654.0,
+    "guidance_mile": 1027.8,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_үкөк_1649km",
@@ -3468,7 +4002,10 @@
     "address": "Үкөк",
     "google_maps_url": "https://maps.google.com/?q=42.10920,75.85665",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Үкөк). 79m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Үкөк). 79m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1659.4,
+    "guidance_mile": 1031.1,
+    "guidance_distance_to_trail_km": 0.08
   },
   {
     "id": "water_osm_ирригационный_водоем_1661km",
@@ -3487,7 +4024,10 @@
     "address": "Ирригационный водоем",
     "google_maps_url": "https://maps.google.com/?q=42.16823,75.77580",
     "business_status": "OPERATIONAL",
-    "description": "Reservoir Access (Ирригационный водоем). 185m from trail. Natural water source (filtration/treatment required)."
+    "description": "Reservoir Access (Ирригационный водоем). 185m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1671.2,
+    "guidance_mile": 1038.4,
+    "guidance_distance_to_trail_km": 0.184
   },
   {
     "id": "water_osm_шамен_1664km",
@@ -3506,7 +4046,10 @@
     "address": "Шамен",
     "google_maps_url": "https://maps.google.com/?q=42.19371,75.76134",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Шамен). 34m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Шамен). 34m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1674.8,
+    "guidance_mile": 1040.7,
+    "guidance_distance_to_trail_km": 0.034
   },
   {
     "id": "srmr_kochkor_1667km",
@@ -3527,7 +4070,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Major resupply. Many shops and guesthouses"
+    "description": "Major resupply. Many shops and guesthouses",
+    "guidance_km": 1677.3,
+    "guidance_mile": 1042.2,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_чүй_1668km",
@@ -3546,7 +4092,10 @@
     "address": "Чүй",
     "google_maps_url": "https://maps.google.com/?q=42.22582,75.74915",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чүй). 65m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чүй). 65m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1678.9,
+    "guidance_mile": 1043.2,
+    "guidance_distance_to_trail_km": 0.019
   },
   {
     "id": "water_osm_кочкор_1672km",
@@ -3565,7 +4114,10 @@
     "address": "Кочкор",
     "google_maps_url": "https://maps.google.com/?q=42.22406,75.71753",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кочкор). 109m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кочкор). 109m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1682.1,
+    "guidance_mile": 1045.2,
+    "guidance_distance_to_trail_km": 0.11
   },
   {
     "id": "srmr_kum_dobo_1687km",
@@ -3586,7 +4138,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 1697.2,
+    "guidance_mile": 1054.6,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "srmr_don_alysh_1715km",
@@ -3607,7 +4162,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 1725.8,
+    "guidance_mile": 1072.4,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_каракол_1734km",
@@ -3626,7 +4184,10 @@
     "address": "Каракол",
     "google_maps_url": "https://maps.google.com/?q=42.35659,75.04940",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Каракол). 17m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Каракол). 17m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 462.6,
+    "guidance_mile": 287.4,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_кегеты_1744km",
@@ -3645,7 +4206,10 @@
     "address": "Кегеты",
     "google_maps_url": "https://maps.google.com/?q=42.42265,75.02132",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кегеты). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кегеты). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1755.5,
+    "guidance_mile": 1090.8,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "srmr_kegeti_pass_1748km",
@@ -3666,7 +4230,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Beautiful pass. Was cleared for the first time in 30 years in 2025. Epic views and descent."
+    "description": "Beautiful pass. Was cleared for the first time in 30 years in 2025. Epic views and descent.",
+    "guidance_km": 1759.4,
+    "guidance_mile": 1093.2,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_кегети_1753km",
@@ -3685,7 +4252,10 @@
     "address": "Кегети",
     "google_maps_url": "https://maps.google.com/?q=42.43869,75.04388",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кегети). 15m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кегети). 15m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1763.7,
+    "guidance_mile": 1095.9,
+    "guidance_distance_to_trail_km": 0.015
   },
   {
     "id": "water_osm_кегети_1765km",
@@ -3704,7 +4274,10 @@
     "address": "Кегети",
     "google_maps_url": "https://maps.google.com/?q=42.50589,75.08790",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кегети). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кегети). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1776.7,
+    "guidance_mile": 1104.0,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_кегети_1770km",
@@ -3723,7 +4296,10 @@
     "address": "Кегети",
     "google_maps_url": "https://maps.google.com/?q=42.54055,75.11054",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кегети). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кегети). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1781.8,
+    "guidance_mile": 1107.2,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_коль_тор_көл_төр_1778km",
@@ -3742,7 +4318,10 @@
     "address": "Коль-Тор / Көл-Төр",
     "google_maps_url": "https://maps.google.com/?q=42.60023,75.13723",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Коль-Тор / Көл-Төр). 36m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Коль-Тор / Көл-Төр). 36m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1789.9,
+    "guidance_mile": 1112.2,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "water_osm_кегети_1778km",
@@ -3761,7 +4340,10 @@
     "address": "Кегети",
     "google_maps_url": "https://maps.google.com/?q=42.60187,75.13726",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кегети). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кегети). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1790.2,
+    "guidance_mile": 1112.4,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_кегети_1790km",
@@ -3780,7 +4362,10 @@
     "address": "Кегети",
     "google_maps_url": "https://maps.google.com/?q=42.69180,75.16171",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кегети). 16m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кегети). 16m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1801.5,
+    "guidance_mile": 1119.4,
+    "guidance_distance_to_trail_km": 0.016
   },
   {
     "id": "srmr_kegeti_1791km",
@@ -3801,7 +4386,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 1802.9,
+    "guidance_mile": 1120.3,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "srmr_koshoy_1810km",
@@ -3822,7 +4410,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village shop"
+    "description": "Village shop",
+    "guidance_km": 1821.7,
+    "guidance_mile": 1132.0,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_шамшы_1822km",
@@ -3841,7 +4432,10 @@
     "address": "Шамшы",
     "google_maps_url": "https://maps.google.com/?q=42.61218,75.39971",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Шамшы). 16m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Шамшы). 16m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1833.8,
+    "guidance_mile": 1139.5,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_тункжар_1842km",
@@ -3860,7 +4454,10 @@
     "address": "Тункжар",
     "google_maps_url": "https://maps.google.com/?q=42.55629,75.55045",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Тункжар). 151m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Тункжар). 151m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1854.6,
+    "guidance_mile": 1152.4,
+    "guidance_distance_to_trail_km": 0.14
   },
   {
     "id": "water_osm_кызылсуу_1842km",
@@ -3879,7 +4476,10 @@
     "address": "Кызылсуу",
     "google_maps_url": "https://maps.google.com/?q=42.55629,75.55045",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кызылсуу). 151m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кызылсуу). 151m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1854.6,
+    "guidance_mile": 1152.4,
+    "guidance_distance_to_trail_km": 0.14
   },
   {
     "id": "water_osm_кызыл_cуу_1845km",
@@ -3898,7 +4498,10 @@
     "address": "Кызыл-Cуу",
     "google_maps_url": "https://maps.google.com/?q=42.56953,75.54532",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кызыл-Cуу). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кызыл-Cуу). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1856.8,
+    "guidance_mile": 1153.8,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_окторкой_1853km",
@@ -3917,7 +4520,10 @@
     "address": "Окторкой",
     "google_maps_url": "https://maps.google.com/?q=42.61581,75.50062",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Окторкой). 21m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Окторкой). 21m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1865.2,
+    "guidance_mile": 1159.0,
+    "guidance_distance_to_trail_km": 0.026
   },
   {
     "id": "water_osm_родник_1869km",
@@ -3936,7 +4542,10 @@
     "address": "родник",
     "google_maps_url": "https://maps.google.com/?q=42.65391,75.66587",
     "business_status": "OPERATIONAL",
-    "description": "Spring (родник). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Spring (родник). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1881.3,
+    "guidance_mile": 1169.0,
+    "guidance_distance_to_trail_km": 0.012
   },
   {
     "id": "srmr_the_secret_oasis_1888km",
@@ -3957,7 +4566,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Shops and Restaurants"
+    "description": "Shops and Restaurants",
+    "guidance_km": 1900.9,
+    "guidance_mile": 1181.2,
+    "guidance_distance_to_trail_km": 0.015
   },
   {
     "id": "water_osm_холодные_воды_1889km",
@@ -3976,7 +4588,10 @@
     "address": "Холодные воды",
     "google_maps_url": "https://maps.google.com/?q=42.70684,75.84933",
     "business_status": "OPERATIONAL",
-    "description": "Spring (Холодные воды). 28m from trail. Natural water source (filtration/treatment required)."
+    "description": "Spring (Холодные воды). 28m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1901.5,
+    "guidance_mile": 1181.5,
+    "guidance_distance_to_trail_km": 0.028
   },
   {
     "id": "water_osm_чүй_1892km",
@@ -3995,7 +4610,10 @@
     "address": "Чүй",
     "google_maps_url": "https://maps.google.com/?q=42.69191,75.87912",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чүй). 17m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чүй). 17m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1905.0,
+    "guidance_mile": 1183.7,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_чоң_кемин_1895km",
@@ -4014,7 +4632,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.68970,75.89861",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1907.2,
+    "guidance_mile": 1185.1,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "water_osm_алтын_булак_1898km",
@@ -4033,7 +4654,10 @@
     "address": "Алтын - Булак",
     "google_maps_url": "https://maps.google.com/?q=42.68645,75.93104",
     "business_status": "OPERATIONAL",
-    "description": "Spring (Алтын - Булак). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "Spring (Алтын - Булак). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1910.3,
+    "guidance_mile": 1187.0,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_жаӊгыз_тал_1898km",
@@ -4052,7 +4676,10 @@
     "address": "Жаӊгыз-тал",
     "google_maps_url": "https://maps.google.com/?q=42.68443,75.93603",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Жаӊгыз-тал). 47m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Жаӊгыз-тал). 47m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1910.8,
+    "guidance_mile": 1187.3,
+    "guidance_distance_to_trail_km": 0.048
   },
   {
     "id": "water_osm_боожетпес_1901km",
@@ -4071,7 +4698,10 @@
     "address": "Боожетпес",
     "google_maps_url": "https://maps.google.com/?q=42.68846,75.96977",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Боожетпес). 55m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Боожетпес). 55m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1913.6,
+    "guidance_mile": 1189.1,
+    "guidance_distance_to_trail_km": 0.045
   },
   {
     "id": "water_osm_чоң_кемин_1902km",
@@ -4090,7 +4720,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.69133,75.97958",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 24m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 24m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1914.5,
+    "guidance_mile": 1189.6,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "water_osm_ак_ташкара_1904km",
@@ -4109,7 +4742,10 @@
     "address": "Ак-Ташкара",
     "google_maps_url": "https://maps.google.com/?q=42.69510,76.00183",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ак-Ташкара). 31m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ак-Ташкара). 31m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1916.7,
+    "guidance_mile": 1191.0,
+    "guidance_distance_to_trail_km": 0.031
   },
   {
     "id": "water_osm_тар_суу_1907km",
@@ -4128,7 +4764,10 @@
     "address": "Тар-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.70527,76.03444",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Тар-Суу). 16m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Тар-Суу). 16m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1919.8,
+    "guidance_mile": 1192.9,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "srmr_kalmak_ashuu_1913km",
@@ -4149,7 +4788,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "A couple shops in these villages. A bigger one off route across the river in Shabdan."
+    "description": "A couple shops in these villages. A bigger one off route across the river in Shabdan.",
+    "guidance_km": 1925.5,
+    "guidance_mile": 1196.5,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_шалак_кайыӊды_1917km",
@@ -4168,7 +4810,10 @@
     "address": "Шалак-Кайыӊды",
     "google_maps_url": "https://maps.google.com/?q=42.73520,76.13495",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Шалак-Кайыӊды). 11m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Шалак-Кайыӊды). 11m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1929.8,
+    "guidance_mile": 1199.2,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "srmr_kaindy_1920km",
@@ -4189,7 +4834,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "CBT guesthouses in the area"
+    "description": "CBT guesthouses in the area",
+    "guidance_km": 1932.3,
+    "guidance_mile": 1200.7,
+    "guidance_distance_to_trail_km": 0.045
   },
   {
     "id": "water_osm_чоң_кемин_1921km",
@@ -4208,7 +4856,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.75098,76.16202",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 23m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 23m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1933.3,
+    "guidance_mile": 1201.3,
+    "guidance_distance_to_trail_km": 0.024
   },
   {
     "id": "water_osm_орто_кайыңды_1922km",
@@ -4227,7 +4878,10 @@
     "address": "Орто-Кайыңды",
     "google_maps_url": "https://maps.google.com/?q=42.75047,76.17028",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Орто-Кайыңды). 239m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Орто-Кайыңды). 239m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1934.1,
+    "guidance_mile": 1201.8,
+    "guidance_distance_to_trail_km": 0.239
   },
   {
     "id": "water_osm_тайыз_булак_1927km",
@@ -4246,7 +4900,10 @@
     "address": "Тайыз-булак",
     "google_maps_url": "https://maps.google.com/?q=42.76293,76.23221",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Тайыз-булак). 17m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Тайыз-булак). 17m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1939.5,
+    "guidance_mile": 1205.1,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_чимбулак_1928km",
@@ -4265,7 +4922,10 @@
     "address": "Чимбулак",
     "google_maps_url": "https://maps.google.com/?q=42.75972,76.24444",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Чимбулак). 71m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Чимбулак). 71m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1940.6,
+    "guidance_mile": 1205.9,
+    "guidance_distance_to_trail_km": 0.055
   },
   {
     "id": "water_osm_кашка_суу_1929km",
@@ -4284,7 +4944,10 @@
     "address": "Кашка-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.75956,76.25693",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Кашка-Суу). 19m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Кашка-Суу). 19m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1941.9,
+    "guidance_mile": 1206.7,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_тору_айгыр_1931km",
@@ -4303,7 +4966,10 @@
     "address": "Тору-Айгыр",
     "google_maps_url": "https://maps.google.com/?q=42.76654,76.27006",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Тору-Айгыр). 83m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Тору-Айгыр). 83m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1943.3,
+    "guidance_mile": 1207.5,
+    "guidance_distance_to_trail_km": 0.056
   },
   {
     "id": "water_osm_чоң_кемин_1933km",
@@ -4322,7 +4988,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.77029,76.29719",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 40m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 40m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1945.8,
+    "guidance_mile": 1209.1,
+    "guidance_distance_to_trail_km": 0.029
   },
   {
     "id": "water_osm_четинди_1936km",
@@ -4341,7 +5010,10 @@
     "address": "Четинди",
     "google_maps_url": "https://maps.google.com/?q=42.77421,76.32840",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Четинди). 25m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Четинди). 25m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1948.5,
+    "guidance_mile": 1210.7,
+    "guidance_distance_to_trail_km": 0.026
   },
   {
     "id": "water_osm_жашыл_көл_1938km",
@@ -4360,7 +5032,10 @@
     "address": "Жашыл-Көл",
     "google_maps_url": "https://maps.google.com/?q=42.78333,76.35373",
     "business_status": "OPERATIONAL",
-    "description": "Lake Access (Жашыл-Көл). 20m from trail. Natural water source (filtration/treatment required)."
+    "description": "Lake Access (Жашыл-Көл). 20m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1951.0,
+    "guidance_mile": 1212.3,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "water_osm_чоң_кемин_1942km",
@@ -4379,7 +5054,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.79282,76.38608",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 37m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 37m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1954.4,
+    "guidance_mile": 1214.4,
+    "guidance_distance_to_trail_km": 0.038
   },
   {
     "id": "water_osm_ичке_суу_1945km",
@@ -4398,7 +5076,10 @@
     "address": "Ичке-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.80501,76.41136",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ичке-Суу). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ичке-Суу). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1957.3,
+    "guidance_mile": 1216.2,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_чоң_кемин_1946km",
@@ -4417,7 +5098,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.80780,76.42209",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 12m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 12m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1958.2,
+    "guidance_mile": 1216.8,
+    "guidance_distance_to_trail_km": 0.037
   },
   {
     "id": "water_osm_бузулган_сай_1951km",
@@ -4436,7 +5120,10 @@
     "address": "Бузулган-Сай",
     "google_maps_url": "https://maps.google.com/?q=42.81934,76.47796",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Бузулган-Сай). 32m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Бузулган-Сай). 32m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1964.2,
+    "guidance_mile": 1220.5,
+    "guidance_distance_to_trail_km": 0.033
   },
   {
     "id": "water_osm_таш_кыя_1956km",
@@ -4455,7 +5142,10 @@
     "address": "Таш-Кыя",
     "google_maps_url": "https://maps.google.com/?q=42.83732,76.53036",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Таш-Кыя). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Таш-Кыя). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1969.2,
+    "guidance_mile": 1223.6,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_дүрөө_1957km",
@@ -4474,7 +5164,10 @@
     "address": "Дүрөө",
     "google_maps_url": "https://maps.google.com/?q=42.84054,76.53417",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Дүрөө). 132m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Дүрөө). 132m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1969.6,
+    "guidance_mile": 1223.9,
+    "guidance_distance_to_trail_km": 0.135
   },
   {
     "id": "water_osm_кашкелен_1960km",
@@ -4493,7 +5186,10 @@
     "address": "Кашкелен",
     "google_maps_url": "https://maps.google.com/?q=42.85214,76.57017",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кашкелен). 23m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кашкелен). 23m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1973.0,
+    "guidance_mile": 1225.9,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_кашка_суу_1961km",
@@ -4512,7 +5208,10 @@
     "address": "Кашка-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.85426,76.57445",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кашка-Суу). 49m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кашка-Суу). 49m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1973.5,
+    "guidance_mile": 1226.2,
+    "guidance_distance_to_trail_km": 0.046
   },
   {
     "id": "water_osm_кек_булак_1961km",
@@ -4531,7 +5230,10 @@
     "address": "Кек-Булак",
     "google_maps_url": "https://maps.google.com/?q=42.85502,76.57682",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Кек-Булак). 46m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Кек-Булак). 46m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1973.7,
+    "guidance_mile": 1226.4,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_ак_булак_1962km",
@@ -4550,7 +5252,10 @@
     "address": "Ак-Булак",
     "google_maps_url": "https://maps.google.com/?q=42.85365,76.58470",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Ак-Булак). 99m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Ак-Булак). 99m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1974.9,
+    "guidance_mile": 1227.1,
+    "guidance_distance_to_trail_km": 0.092
   },
   {
     "id": "water_osm_чоң_кемин_1963km",
@@ -4569,7 +5274,10 @@
     "address": "Чоң-Кемин",
     "google_maps_url": "https://maps.google.com/?q=42.85314,76.59047",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Чоң-Кемин). 18m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Чоң-Кемин). 18m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1975.3,
+    "guidance_mile": 1227.4,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "water_osm_жая_1963km",
@@ -4588,7 +5296,10 @@
     "address": "Жая",
     "google_maps_url": "https://maps.google.com/?q=42.85266,76.60027",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Жая). 106m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Жая). 106m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1976.2,
+    "guidance_mile": 1227.9,
+    "guidance_distance_to_trail_km": 0.097
   },
   {
     "id": "water_osm_жинди_суу_1969km",
@@ -4607,7 +5318,10 @@
     "address": "Жинди-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.86374,76.65909",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Жинди-Суу). 25m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Жинди-Суу). 25m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1982.0,
+    "guidance_mile": 1231.5,
+    "guidance_distance_to_trail_km": 0.015
   },
   {
     "id": "water_osm_северный_койсуу_1978km",
@@ -4626,7 +5340,10 @@
     "address": "Северный КойСуу",
     "google_maps_url": "https://maps.google.com/?q=42.86165,76.75794",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Северный КойСуу). Directly on trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Северный КойСуу). Directly on trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1991.7,
+    "guidance_mile": 1237.6,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "water_osm_чон_аксай_1981km",
@@ -4645,7 +5362,10 @@
     "address": "Чон-Аксай",
     "google_maps_url": "https://maps.google.com/?q=42.86988,76.79575",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Чон-Аксай). 152m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Чон-Аксай). 152m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 1995.0,
+    "guidance_mile": 1239.7,
+    "guidance_distance_to_trail_km": 0.138
   },
   {
     "id": "water_osm_орто_кой_суу_1992km",
@@ -4664,7 +5384,10 @@
     "address": "Орто-Кой-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.81621,76.83526",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Орто-Кой-Суу). 38m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Орто-Кой-Суу). 38m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 2005.6,
+    "guidance_mile": 1246.2,
+    "guidance_distance_to_trail_km": 0.038
   },
   {
     "id": "srmr_kok_ayrik_1999km",
@@ -4685,7 +5408,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Massive mountain pass, epic views and final challenge. Badly damaged road. A fair bit of hiking involved."
+    "description": "Massive mountain pass, epic views and final challenge. Badly damaged road. A fair bit of hiking involved.",
+    "guidance_km": 2013.4,
+    "guidance_mile": 1251.1,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_орто_кой_суу_2005km",
@@ -4704,7 +5430,10 @@
     "address": "Орто-Кой-Суу",
     "google_maps_url": "https://maps.google.com/?q=42.76894,76.84589",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Орто-Кой-Суу). 34m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Орто-Кой-Суу). 34m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 2019.6,
+    "guidance_mile": 1254.9,
+    "guidance_distance_to_trail_km": 0.034
   },
   {
     "id": "water_osm_туйк_тёр_2008km",
@@ -4723,7 +5452,10 @@
     "address": "Туйк-Тёр",
     "google_maps_url": "https://maps.google.com/?q=42.75405,76.85149",
     "business_status": "OPERATIONAL",
-    "description": "River Access (Туйк-Тёр). 21m from trail. Natural water source (filtration/treatment required)."
+    "description": "River Access (Туйк-Тёр). 21m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 2022.1,
+    "guidance_mile": 1256.5,
+    "guidance_distance_to_trail_km": 0.021
   },
   {
     "id": "srmr_chong_sary_oy_2034km",
@@ -4744,7 +5476,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Village Shop"
+    "description": "Village Shop",
+    "guidance_km": 2047.8,
+    "guidance_mile": 1272.4,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_поливной_ручей_2046km",
@@ -4763,7 +5498,10 @@
     "address": "Поливной ручей",
     "google_maps_url": "https://maps.google.com/?q=42.63990,77.05465",
     "business_status": "OPERATIONAL",
-    "description": "Creek Access (Поливной ручей). 71m from trail. Natural water source (filtration/treatment required)."
+    "description": "Creek Access (Поливной ручей). 71m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 2060.0,
+    "guidance_mile": 1280.0,
+    "guidance_distance_to_trail_km": 0.02
   },
   {
     "id": "water_osm_затон_2049km",
@@ -4782,7 +5520,10 @@
     "address": "Затон",
     "google_maps_url": "https://maps.google.com/?q=42.63838,77.08922",
     "business_status": "OPERATIONAL",
-    "description": "Reservoir Access (Затон). 48m from trail. Natural water source (filtration/treatment required)."
+    "description": "Reservoir Access (Затон). 48m from trail. Natural water source (filtration/treatment required).",
+    "guidance_km": 2063.8,
+    "guidance_mile": 1282.4,
+    "guidance_distance_to_trail_km": 0.048
   },
   {
     "id": "srmr_cholpon_ata_finish",
@@ -4803,6 +5544,9 @@
     "business_status": "OPERATIONAL",
     "province_state": "KG",
     "country": "Kyrgyzstan",
-    "description": "Official Finish Line of the Silk Road Mountain Race on the shores of Lake Issyk-Kul. Celebration resort, beaches, hotels, and banquets."
+    "description": "Official Finish Line of the Silk Road Mountain Race on the shores of Lake Issyk-Kul. Celebration resort, beaches, hotels, and banquets.",
+    "guidance_km": 2064.0,
+    "guidance_mile": 1282.5,
+    "guidance_distance_to_trail_km": 0.013
   }
 ]

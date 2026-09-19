@@ -919,11 +919,45 @@ export class RouteMapComponent implements AfterViewInit, OnDestroy {
   private getCoordsForMile(targetMile: number): [number, number, number] | null {
     const rawPoints = this.routeService.trackPoints();
     const guidance = typeof this.routeService?.guidanceTrackPoints === 'function' ? this.routeService.guidanceTrackPoints() : [];
-    const points = guidance && guidance.length > 0 ? guidance : rawPoints;
-    if (!points || points.length === 0) return null;
+    const pointsList = guidance && guidance.length > 0 ? guidance : rawPoints;
+    if (!pointsList || pointsList.length === 0) return null;
+    const points = pointsList as [number, number, number, number, number, ...number[]][];
+
+    const is7D = points[0].length >= 7;
+    const lastIdx = points.length - 1;
+
+    if (is7D) {
+      if (points.length === 1 || targetMile <= points[0][6]) {
+        return [points[0][0], points[0][1], points[0][2]];
+      }
+      if (targetMile >= points[lastIdx][6]) {
+        return [points[lastIdx][0], points[lastIdx][1], points[lastIdx][2]];
+      }
+
+      let low = 0;
+      let high = lastIdx;
+      while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        if (points[mid][6] <= targetMile) {
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      const idxA = Math.max(0, low - 1);
+      const idxB = Math.min(lastIdx, idxA + 1);
+      const span = points[idxB][6] - points[idxA][6];
+      const t = span <= 1e-9 ? 0 : Math.max(0, Math.min(1, (targetMile - points[idxA][6]) / span));
+
+      const lat = points[idxA][0] + t * (points[idxB][0] - points[idxA][0]);
+      const lon = points[idxA][1] + t * (points[idxB][1] - points[idxA][1]);
+      const ele = points[idxA][2] + t * (points[idxB][2] - points[idxA][2]);
+
+      return [lat, lon, ele];
+    }
 
     let effectiveTarget = targetMile;
-    const lastIdx = points.length - 1;
     const rawTotal = rawPoints && rawPoints.length > 0 ? rawPoints[rawPoints.length - 1][4] : undefined;
     if (typeof rawTotal === 'number' && rawTotal > 0 && points[lastIdx][4] > 0 && Math.abs(points[lastIdx][4] - rawTotal) > 0.1) {
       effectiveTarget = (targetMile / rawTotal) * points[lastIdx][4];

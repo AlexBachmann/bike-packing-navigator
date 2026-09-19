@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Place, PlaceCategory, getCategoryBadge } from '../models/waypoint.model';
+import { haversineMeters } from '../utils/geo-math.utils';
 
 export const PROXIMITY_TRIGGER_METERS = 1000;
 export const PROXIMITY_DISMISSAL_METERS = -25;
+export const RADIAL_PROXIMITY_THRESHOLD_METERS = 250;
 export const LOOKAHEAD_MIN_DISTANCE_MILES = 1.0;
 export const METERS_PER_MILE = 1609.344;
 export const START_PROXIMITY_SUPPRESSION_METERS = 50;
@@ -183,7 +185,8 @@ export function formatAlertText(
 export function computeProximityAlerts(
   riderMile: number,
   places: Place[],
-  unit: 'miles' | 'km'
+  unit: 'miles' | 'km',
+  riderCoords?: [number, number] | null
 ): ProximityAlert[] {
   if (!places || places.length === 0) return [];
 
@@ -193,12 +196,23 @@ export function computeProximityAlerts(
     return [];
   }
 
-  // Step 1: Filter waypoints in window [-25m, 500m]
+  // Step 1: Filter waypoints in along-trail window [-25m, 1000m] or radial window <= 250m
   const qualifying: { place: Place; distanceMeters: number; normCat: string }[] = [];
   for (const p of places) {
     const deltaMiles = p.route_mile - riderMile;
-    const distanceMeters = deltaMiles * METERS_PER_MILE;
-    if (distanceMeters >= PROXIMITY_DISMISSAL_METERS - 1e-6 && distanceMeters <= PROXIMITY_TRIGGER_METERS + 1e-6) {
+    let distanceMeters = deltaMiles * METERS_PER_MILE;
+    let inWindow = distanceMeters >= PROXIMITY_DISMISSAL_METERS - 1e-6 && distanceMeters <= PROXIMITY_TRIGGER_METERS + 1e-6;
+
+    // Hybrid radial safeguard: if within RADIAL_PROXIMITY_THRESHOLD_METERS of place coordinates
+    if (!inWindow && riderCoords && p.location && Number.isFinite(riderCoords[0]) && Number.isFinite(riderCoords[1])) {
+      const radialMeters = haversineMeters(riderCoords[0], riderCoords[1], p.location.lat, p.location.lon);
+      if (radialMeters <= RADIAL_PROXIMITY_THRESHOLD_METERS) {
+        distanceMeters = radialMeters;
+        inWindow = true;
+      }
+    }
+
+    if (inWindow) {
       qualifying.push({
         place: p,
         distanceMeters,
@@ -264,7 +278,12 @@ export function computeProximityAlerts(
   providedIn: 'root'
 })
 export class ProximityAlertService {
-  computeAlerts(riderMile: number, places: Place[], unit: 'miles' | 'km'): ProximityAlert[] {
-    return computeProximityAlerts(riderMile, places, unit);
+  computeAlerts(
+    riderMile: number,
+    places: Place[],
+    unit: 'miles' | 'km',
+    riderCoords?: [number, number] | null
+  ): ProximityAlert[] {
+    return computeProximityAlerts(riderMile, places, unit, riderCoords);
   }
 }

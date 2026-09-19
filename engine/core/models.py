@@ -60,6 +60,8 @@ class RoutePoint:
     ele: float = 0.0
     cum_km: float = 0.0
     cum_mi: float = 0.0
+    canonical_km: Optional[float] = None
+    canonical_mi: Optional[float] = None
     time: Optional[datetime] = None
     grade: Optional[float] = None
     surface: Optional[str] = None
@@ -77,6 +79,10 @@ class RoutePoint:
         self.ele = float(self.ele)
         self.cum_km = float(self.cum_km)
         self.cum_mi = float(self.cum_mi)
+        if self.canonical_km is not None:
+            self.canonical_km = float(self.canonical_km)
+        if self.canonical_mi is not None:
+            self.canonical_mi = float(self.canonical_mi)
 
         if not (-90.0 <= self.lat <= 90.0):
             raise ValueError(f"Latitude out of range [-90.0, 90.0]: {self.lat}")
@@ -130,6 +136,23 @@ class RoutePoint:
             round(self.ele, 1),
             round(self.cum_km, 3),
             round(self.cum_mi, 3)
+        ]
+
+    def to_list_7d(self) -> List[float]:
+        """
+        Return rounded 7D list formatted for guidance-track.json:
+        [lat (6 dec), lon (6 dec), ele (1 dec), cum_km (3 dec), cum_mi (3 dec), canonical_km (3 dec), canonical_mi (3 dec)]
+        """
+        c_km = self.canonical_km if self.canonical_km is not None else self.cum_km
+        c_mi = self.canonical_mi if self.canonical_mi is not None else self.cum_mi
+        return [
+            round(self.lat, 6),
+            round(self.lon, 6),
+            round(self.ele, 1),
+            round(self.cum_km, 3),
+            round(self.cum_mi, 3),
+            round(c_km, 3),
+            round(c_mi, 3)
         ]
 
     def to_dict(self) -> Dict[str, Any]:

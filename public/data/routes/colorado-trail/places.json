@@ -15,7 +15,10 @@
     "route_mile": 0.0,
     "province_state": "CO",
     "country": "USA",
-    "description": "Northern terminus of the Colorado Trail at Waterton Canyon Trailhead."
+    "description": "Northern terminus of the Colorado Trail at Waterton Canyon Trailhead.",
+    "guidance_km": 0.0,
+    "guidance_mile": 0.0,
+    "guidance_distance_to_trail_km": 0.007
   },
   {
     "id": "town_buffalo_creek",
@@ -33,7 +36,10 @@
     "route_mile": 23.3,
     "province_state": "CO",
     "country": "USA",
-    "description": "Pike National Forest mountain bike paradise: general store, fire station, camping."
+    "description": "Pike National Forest mountain bike paradise: general store, fire station, camping.",
+    "guidance_km": 36.9,
+    "guidance_mile": 22.9,
+    "guidance_distance_to_trail_km": 2.541
   },
   {
     "id": "town_bailey",
@@ -51,7 +57,10 @@
     "route_mile": 39.6,
     "province_state": "CO",
     "country": "USA",
-    "description": "Highway 285 mountain town: grocery, restaurants, coffee, lodging."
+    "description": "Highway 285 mountain town: grocery, restaurants, coffee, lodging.",
+    "guidance_km": 62.9,
+    "guidance_mile": 39.1,
+    "guidance_distance_to_trail_km": 9.666
   },
   {
     "id": "town_jefferson",
@@ -69,7 +78,10 @@
     "route_mile": 117.0,
     "province_state": "CO",
     "country": "USA",
-    "description": "South Park resupply at the base of Kenosha and Georgia Passes."
+    "description": "South Park resupply at the base of Kenosha and Georgia Passes.",
+    "guidance_km": 188.5,
+    "guidance_mile": 117.1,
+    "guidance_distance_to_trail_km": 4.804
   },
   {
     "id": "town_breckenridge",
@@ -87,7 +99,10 @@
     "route_mile": 149.6,
     "province_state": "CO",
     "country": "USA",
-    "description": "Major mountain resort: full bike shops, City Market supermarket, lodging, restaurants."
+    "description": "Major mountain resort: full bike shops, City Market supermarket, lodging, restaurants.",
+    "guidance_km": 241.0,
+    "guidance_mile": 149.8,
+    "guidance_distance_to_trail_km": 6.174
   },
   {
     "id": "town_frisco",
@@ -105,7 +120,10 @@
     "route_mile": 150.8,
     "province_state": "CO",
     "country": "USA",
-    "description": "Summit County cycling hub: Whole Foods, bike shops, hotels, laundromat."
+    "description": "Summit County cycling hub: Whole Foods, bike shops, hotels, laundromat.",
+    "guidance_km": 243.1,
+    "guidance_mile": 151.0,
+    "guidance_distance_to_trail_km": 4.071
   },
   {
     "id": "town_copper_mountain",
@@ -123,7 +141,10 @@
     "route_mile": 162.3,
     "province_state": "CO",
     "country": "USA",
-    "description": "Resort village at the foot of Searles Pass: dining, lodging, convenience store."
+    "description": "Resort village at the foot of Searles Pass: dining, lodging, convenience store.",
+    "guidance_km": 261.9,
+    "guidance_mile": 162.7,
+    "guidance_distance_to_trail_km": 0.092
   },
   {
     "id": "town_camp_hale",
@@ -141,7 +162,10 @@
     "route_mile": 180.4,
     "province_state": "CO",
     "country": "USA",
-    "description": "Historic 10th Mountain Division training grounds and national monument."
+    "description": "Historic 10th Mountain Division training grounds and national monument.",
+    "guidance_km": 290.7,
+    "guidance_mile": 180.6,
+    "guidance_distance_to_trail_km": 2.177
   },
   {
     "id": "town_leadville",
@@ -159,7 +183,10 @@
     "route_mile": 195.7,
     "province_state": "CO",
     "country": "USA",
-    "description": "Historic highest incorporated city (10,152 ft): Safeway, Cycles of Life bike shop, hostels, motels."
+    "description": "Historic highest incorporated city (10,152 ft): Safeway, Cycles of Life bike shop, hostels, motels.",
+    "guidance_km": 316.0,
+    "guidance_mile": 196.3,
+    "guidance_distance_to_trail_km": 3.264
   },
   {
     "id": "town_twin_lakes",
@@ -177,7 +204,10 @@
     "route_mile": 218.3,
     "province_state": "CO",
     "country": "USA",
-    "description": "Collegiate gateway: General store, historic inn, food truck, lakeside camping."
+    "description": "Collegiate gateway: General store, historic inn, food truck, lakeside camping.",
+    "guidance_km": 350.4,
+    "guidance_mile": 217.7,
+    "guidance_distance_to_trail_km": 4.274
   },
   {
     "id": "town_buena_vista",
@@ -195,7 +225,10 @@
     "route_mile": 242.0,
     "province_state": "CO",
     "country": "USA",
-    "description": "Arkansas River hub: The Trailhead outfitter, supermarkets, breweries, lodging."
+    "description": "Arkansas River hub: The Trailhead outfitter, supermarkets, breweries, lodging.",
+    "guidance_km": 391.1,
+    "guidance_mile": 243.0,
+    "guidance_distance_to_trail_km": 0.039
   },
   {
     "id": "town_mt_princeton",
@@ -213,7 +246,10 @@
     "route_mile": 258.8,
     "province_state": "CO",
     "country": "USA",
-    "description": "Hot springs resort, store, and Chalk Creek canyon resupply."
+    "description": "Hot springs resort, store, and Chalk Creek canyon resupply.",
+    "guidance_km": 418.1,
+    "guidance_mile": 259.8,
+    "guidance_distance_to_trail_km": 0.27
   },
   {
     "id": "town_salida",
@@ -231,7 +267,10 @@
     "route_mile": 273.1,
     "province_state": "CO",
     "country": "USA",
-    "description": "World-famous cycling community: Absolute Bikes, hostels, supermarkets, hot springs."
+    "description": "World-famous cycling community: Absolute Bikes, hostels, supermarkets, hot springs.",
+    "guidance_km": 441.3,
+    "guidance_mile": 274.2,
+    "guidance_distance_to_trail_km": 18.498
   },
   {
     "id": "town_poncha_springs",
@@ -249,7 +288,10 @@
     "route_mile": 278.1,
     "province_state": "CO",
     "country": "USA",
-    "description": "Crossroads at the base of Monarch Pass: gas, dining, camping."
+    "description": "Crossroads at the base of Monarch Pass: gas, dining, camping.",
+    "guidance_km": 449.3,
+    "guidance_mile": 279.2,
+    "guidance_distance_to_trail_km": 13.849
   },
   {
     "id": "town_monarch",
@@ -267,7 +309,10 @@
     "route_mile": 287.3,
     "province_state": "CO",
     "country": "USA",
-    "description": "Monarch Pass scenic tram, store, and pass crest at 11,312 ft."
+    "description": "Monarch Pass scenic tram, store, and pass crest at 11,312 ft.",
+    "guidance_km": 464.2,
+    "guidance_mile": 288.4,
+    "guidance_distance_to_trail_km": 4.301
   },
   {
     "id": "town_sargents",
@@ -285,7 +330,10 @@
     "route_mile": 305.8,
     "province_state": "CO",
     "country": "USA",
-    "description": "Base of Marshall Pass: Sargents Country Store, gas, cabins, and cafe."
+    "description": "Base of Marshall Pass: Sargents Country Store, gas, cabins, and cafe.",
+    "guidance_km": 495.2,
+    "guidance_mile": 307.7,
+    "guidance_distance_to_trail_km": 10.96
   },
   {
     "id": "town_creede",
@@ -303,7 +351,10 @@
     "route_mile": 381.0,
     "province_state": "CO",
     "country": "USA",
-    "description": "Historic silver mining canyon town: grocery, hotel, dining."
+    "description": "Historic silver mining canyon town: grocery, hotel, dining.",
+    "guidance_km": 617.7,
+    "guidance_mile": 383.8,
+    "guidance_distance_to_trail_km": 26.195
   },
   {
     "id": "town_lake_city",
@@ -321,7 +372,10 @@
     "route_mile": 391.0,
     "province_state": "CO",
     "country": "USA",
-    "description": "Remote San Juan mountain town: Sportsman outfitter, grocery, cabins, bakery."
+    "description": "Remote San Juan mountain town: Sportsman outfitter, grocery, cabins, bakery.",
+    "guidance_km": 633.8,
+    "guidance_mile": 393.8,
+    "guidance_distance_to_trail_km": 9.099
   },
   {
     "id": "town_silverton",
@@ -339,7 +393,10 @@
     "route_mile": 439.4,
     "province_state": "CO",
     "country": "USA",
-    "description": "Historic high San Juan mining town: grocery, motels, hostels, cafes, bike repairs."
+    "description": "Historic high San Juan mining town: grocery, motels, hostels, cafes, bike repairs.",
+    "guidance_km": 712.7,
+    "guidance_mile": 442.9,
+    "guidance_distance_to_trail_km": 0.144
   },
   {
     "id": "town_durango",
@@ -357,6 +414,9 @@
     "route_mile": 514.7,
     "province_state": "CO",
     "country": "USA",
-    "description": "Southern terminus of the Colorado Trail: full bike shops, supermarkets, hotels, transit."
+    "description": "Southern terminus of the Colorado Trail: full bike shops, supermarkets, hotels, transit.",
+    "guidance_km": 835.7,
+    "guidance_mile": 519.3,
+    "guidance_distance_to_trail_km": 6.558
   }
 ]

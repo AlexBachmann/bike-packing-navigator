@@ -425,4 +425,47 @@ describe('TurnGuidanceService', () => {
       expect(chunkTurnDistance(0)).toBe(5);
     });
   });
+
+  describe('7D Dual-Track Canonical Mapping', () => {
+    // 7D points: [lat, lon, ele, guidance_km, guidance_mi, canonical_km, canonical_mi]
+    // Notice non-linear stretch between guidance and canonical miles:
+    // Pt 0: canonical = 0.0 mi, guidance = 0.0 mi
+    // Pt 1: canonical = 5.0 mi, guidance = 6.0 mi (guidance has switchbacks)
+    // Pt 2: canonical = 10.0 mi, guidance = 11.0 mi
+    const track7D: [number, number, number, number, number, number, number][] = [
+      [34.0, -108.0, 2000, 0.0, 0.0, 0.0, 0.0],
+      [34.1, -108.1, 2100, 9.656, 6.0, 8.046, 5.0],
+      [34.2, -108.2, 2200, 17.702, 11.0, 16.093, 10.0]
+    ];
+
+    it('interpolates coordinates directly using canonical miles (index 6) without linear ratio drift', () => {
+      // If linear ratio were used: targetMile 5.0 / 10.0 * 11.0 = guidance 5.5 mi (which would interpolate at 5.5/6.0 = 91.6% towards Pt 1)
+      // With 7D canonical mapping, targetMile 5.0 matches Pt 1 exactly!
+      const coordsAt5 = service.interpolatePointAtMile(track7D, 5.0);
+      expect(coordsAt5[0]).toBeCloseTo(34.1, 5);
+      expect(coordsAt5[1]).toBeCloseTo(-108.1, 5);
+
+      // Midpoint between canonical 0.0 and 5.0 is canonical 2.5
+      const coordsAt2_5 = service.interpolatePointAtMile(track7D, 2.5);
+      expect(coordsAt2_5[0]).toBeCloseTo(34.05, 5);
+      expect(coordsAt2_5[1]).toBeCloseTo(-108.05, 5);
+    });
+
+    it('clamps to endpoints when targetMile is outside bounds in 7D track', () => {
+      const startCoords = service.interpolatePointAtMile(track7D, -1.0);
+      expect(startCoords[0]).toBeCloseTo(34.0, 5);
+      expect(startCoords[1]).toBeCloseTo(-108.0, 5);
+
+      const endCoords = service.interpolatePointAtMile(track7D, 12.0);
+      expect(endCoords[0]).toBeCloseTo(34.2, 5);
+      expect(endCoords[1]).toBeCloseTo(-108.2, 5);
+    });
+
+    it('computes route tangent bearing accurately using 7D canonical miles', () => {
+      const bearing = service.getRouteTangentBearing(track7D, 2.5, 25.0);
+      // Bearing from (34.0, -108.0) to (34.1, -108.1) is northwest (~315°)
+      expect(bearing).toBeGreaterThan(300);
+      expect(bearing).toBeLessThan(330);
+    });
+  });
 });

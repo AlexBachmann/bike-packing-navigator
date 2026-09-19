@@ -18,7 +18,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Official Start of the Atlas Mountain Race 2026. Major city with hotels, bike mechanics, pharmacies, and supermarkets."
+    "description": "Official Start of the Atlas Mountain Race 2026. Major city with hotels, bike mechanics, pharmacies, and supermarkets.",
+    "guidance_km": 0.0,
+    "guidance_mile": 0.0,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_charij2_9km",
@@ -39,7 +42,10 @@
     "business_status": "OPERATIONAL",
     "description": "Drinking Water (Charij2). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 9.8,
+    "guidance_mile": 6.1,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "amr_village_shop_tagleft",
@@ -60,7 +66,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Village shop with basic snacks, canned goods, biscuits, and bottled water resupply."
+    "description": "Village shop with basic snacks, canned goods, biscuits, and bottled water resupply.",
+    "guidance_km": 35.7,
+    "guidance_mile": 22.2,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_oued_al_abid_49km",
@@ -81,7 +90,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Al Abid). 18m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 49.1,
+    "guidance_mile": 30.5,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "amr_town_tilouguite",
@@ -102,7 +114,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Berber mountain outpost before the Ahansal river canyon. Village stores and cafes."
+    "description": "Berber mountain outpost before the Ahansal river canyon. Village stores and cafes.",
+    "guidance_km": 100.2,
+    "guidance_mile": 62.3,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "water_osm_assif_dunachale_100km",
@@ -123,7 +138,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Dunachale). 21m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 101.1,
+    "guidance_mile": 62.8,
+    "guidance_distance_to_trail_km": 0.019
   },
   {
     "id": "amr_town_zawyat_ahansal",
@@ -144,7 +162,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Historic climbing and trekking hub near Taghia gorge. Guesthouses, food, and drinking water."
+    "description": "Historic climbing and trekking hub near Taghia gorge. Guesthouses, food, and drinking water.",
+    "guidance_km": 133.3,
+    "guidance_mile": 82.8,
+    "guidance_distance_to_trail_km": 0.01
   },
   {
     "id": "water_osm_aghbalou_ntadout_135km",
@@ -165,7 +186,10 @@
     "business_status": "OPERATIONAL",
     "description": "Spring (Aghbalou N´Tadout). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 136.2,
+    "guidance_mile": 84.6,
+    "guidance_distance_to_trail_km": 0.017
   },
   {
     "id": "water_osm_assif_nait_hkim_172km",
@@ -186,7 +210,10 @@
     "business_status": "OPERATIONAL",
     "description": "Creek Access (Assif n'Ait Hkim). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 174.1,
+    "guidance_mile": 108.2,
+    "guidance_distance_to_trail_km": 0.009
   },
   {
     "id": "water_osm_akka_ntsedoune_177km",
@@ -207,7 +234,10 @@
     "business_status": "OPERATIONAL",
     "description": "Creek Access (Akka n'Tsedoune). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 178.8,
+    "guidance_mile": 111.1,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "amr_tabant_guesthouses",
@@ -228,7 +258,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Mountain guesthouses and Berber auberges in the Ait Bouguemez valley."
+    "description": "Mountain guesthouses and Berber auberges in the Ait Bouguemez valley.",
+    "guidance_km": 188.9,
+    "guidance_mile": 117.4,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_assif_nait_hkim_188km",
@@ -249,7 +282,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif n'Ait Hkim). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 189.9,
+    "guidance_mile": 118.0,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "amr_tabant_centre",
@@ -270,7 +306,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Main village and administrative centre of the Ait Bouguemez (Happy) Valley with shops, bakeries, cafes, and tagine restaurants."
+    "description": "Main village and administrative centre of the Ait Bouguemez (Happy) Valley with shops, bakeries, cafes, and tagine restaurants.",
+    "guidance_km": 190.6,
+    "guidance_mile": 118.5,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_assif_rbat_193km",
@@ -291,7 +330,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Rbat). 13m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 194.4,
+    "guidance_mile": 120.8,
+    "guidance_distance_to_trail_km": 0.014
   },
   {
     "id": "water_osm_assif_mgoune_214km",
@@ -312,7 +354,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Mgoune). 151m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 215.8,
+    "guidance_mile": 134.1,
+    "guidance_distance_to_trail_km": 0.146
   },
   {
     "id": "water_osm_akka_nait_ou_sekka_223km",
@@ -333,7 +378,10 @@
     "business_status": "OPERATIONAL",
     "description": "Creek Access (Akka n'Ait Ou Sekka). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 225.5,
+    "guidance_mile": 140.1,
+    "guidance_distance_to_trail_km": 0.026
   },
   {
     "id": "water_osm_assif_mgoune_231km",
@@ -354,7 +402,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Mgoune). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 233.7,
+    "guidance_mile": 145.2,
+    "guidance_distance_to_trail_km": 0.016
   },
   {
     "id": "water_osm_assif_mgoune_236km",
@@ -375,7 +426,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Mgoune). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 239.0,
+    "guidance_mile": 148.5,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "water_osm_source_243km",
@@ -396,7 +450,10 @@
     "business_status": "OPERATIONAL",
     "description": "Spring (source). 11m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 246.7,
+    "guidance_mile": 153.3,
+    "guidance_distance_to_trail_km": 0.022
   },
   {
     "id": "water_osm_assif_mgoune_249km",
@@ -417,7 +474,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Mgoune). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 252.5,
+    "guidance_mile": 156.9,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "amr_mgoun_gorge_trail_end",
@@ -438,7 +498,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "From here on out you're back on a gravel road and out of the river. End of the remote M'Goun river canyon."
+    "description": "From here on out you're back on a gravel road and out of the river. End of the remote M'Goun river canyon.",
+    "guidance_km": 252.6,
+    "guidance_mile": 156.9,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "water_osm_assif_mgoune_255km",
@@ -459,7 +522,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Mgoune). 150m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 258.7,
+    "guidance_mile": 160.7,
+    "guidance_distance_to_trail_km": 0.139
   },
   {
     "id": "amr_road_construction_alert",
@@ -480,7 +546,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Trail alert: Road under construction. Precise route may change before the start. Watch for loose rock and heavy machinery."
+    "description": "Trail alert: Road under construction. Precise route may change before the start. Watch for loose rock and heavy machinery.",
+    "guidance_km": 260.2,
+    "guidance_mile": 161.7,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "water_osm_assif_znag_268km",
@@ -501,7 +570,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Znag). 15m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 273.7,
+    "guidance_mile": 170.1,
+    "guidance_distance_to_trail_km": 0.014
   },
   {
     "id": "water_osm_oued_mgoun_273km",
@@ -522,7 +594,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued M'Goun). 13m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 278.7,
+    "guidance_mile": 173.2,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "amr_town_boutaghrar",
@@ -543,7 +618,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Traditional adobe Kasbah guesthouse in the Valley of the Roses."
+    "description": "Traditional adobe Kasbah guesthouse in the Valley of the Roses.",
+    "guidance_km": 291.2,
+    "guidance_mile": 180.9,
+    "guidance_distance_to_trail_km": 1.782
   },
   {
     "id": "amr_kalaat_mgouna_resupply",
@@ -564,7 +642,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Major resupply town in the Valley of the Roses with supermarkets, pharmacies, ATMs, restaurants, and hotels. Last real resupply before 100KM of rocky desert crossing to Afra!"
+    "description": "Major resupply town in the Valley of the Roses with supermarkets, pharmacies, ATMs, restaurants, and hotels. Last real resupply before 100KM of rocky desert crossing to Afra!",
+    "guidance_km": 304.7,
+    "guidance_mile": 189.3,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "water_osm_oued_dades_304km",
@@ -585,7 +666,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Dades). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 310.6,
+    "guidance_mile": 193.0,
+    "guidance_distance_to_trail_km": 0.011
   },
   {
     "id": "water_osm_aqqa_isamlal_315km",
@@ -606,7 +690,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Aqqa Isamlal). 26m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 322.6,
+    "guidance_mile": 200.5,
+    "guidance_distance_to_trail_km": 0.026
   },
   {
     "id": "water_osm_imi_ougni_324km",
@@ -627,7 +714,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Imi Ougni). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 331.5,
+    "guidance_mile": 206.0,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_issil_oumsaourou_329km",
@@ -648,7 +738,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Issil Oumsaourou). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 336.7,
+    "guidance_mile": 209.2,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "water_osm_aqqa_oughallay_341km",
@@ -669,7 +762,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Aqqa Oughallay). 11m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 348.5,
+    "guidance_mile": 216.5,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "amr_town_ikniouen",
@@ -690,7 +786,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Vital Saghro mountain village resupply. Small grocery shops and water before Tizi n'Tazazert."
+    "description": "Vital Saghro mountain village resupply. Small grocery shops and water before Tizi n'Tazazert.",
+    "guidance_km": 357.5,
+    "guidance_mile": 222.1,
+    "guidance_distance_to_trail_km": 0.019
   },
   {
     "id": "water_osm_assif_tanguerfa_390km",
@@ -711,7 +810,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Tanguerfa). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 399.9,
+    "guidance_mile": 248.5,
+    "guidance_distance_to_trail_km": 0.012
   },
   {
     "id": "amr_town_afra",
@@ -732,7 +834,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Crucial desert resupply oasis following the 100km waterless crossing from Kalaat M'Gouna."
+    "description": "Crucial desert resupply oasis following the 100km waterless crossing from Kalaat M'Gouna.",
+    "guidance_km": 409.4,
+    "guidance_mile": 254.4,
+    "guidance_distance_to_trail_km": 0.004
   },
   {
     "id": "water_osm_taghya_419km",
@@ -753,7 +858,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Taghya). 44m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 429.3,
+    "guidance_mile": 266.7,
+    "guidance_distance_to_trail_km": 0.039
   },
   {
     "id": "amr_town_agdz",
@@ -774,7 +882,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Gateway town of the Draa Valley with pharmacies, grocery stores, cafes, and hotels."
+    "description": "Gateway town of the Draa Valley with pharmacies, grocery stores, cafes, and hotels.",
+    "guidance_km": 437.0,
+    "guidance_mile": 271.6,
+    "guidance_distance_to_trail_km": 6.283
   },
   {
     "id": "water_osm_oued_drâa_ⴰⵙⵉⴼ_ⵏ_ⴷⵔⵄⴰ_واد_درعة_427km",
@@ -795,7 +906,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة). 11m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 438.3,
+    "guidance_mile": 272.4,
+    "guidance_distance_to_trail_km": 0.028
   },
   {
     "id": "water_osm_oued_drâa_ⴰⵙⵉⴼ_ⵏ_ⴷⵔⵄⴰ_واد_درعة_438km",
@@ -816,7 +930,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Drâa ⴰⵙⵉⴼ ⵏ ⴷⵔⵄⴰ واد درعة). 89m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 448.8,
+    "guidance_mile": 278.9,
+    "guidance_distance_to_trail_km": 0.089
   },
   {
     "id": "amr_town_tansifte",
@@ -837,7 +954,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Village grocery store and fresh bread along the Draa river escarpment."
+    "description": "Village grocery store and fresh bread along the Draa river escarpment.",
+    "guidance_km": 511.4,
+    "guidance_mile": 317.8,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "water_osm_oued_ait_douchen_521km",
@@ -858,7 +978,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Ait Douchen). 25m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 532.9,
+    "guidance_mile": 331.1,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "water_osm_oued_ait_douchen_528km",
@@ -879,7 +1002,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Ait Douchen). 32m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 540.5,
+    "guidance_mile": 335.9,
+    "guidance_distance_to_trail_km": 0.038
   },
   {
     "id": "water_osm_assif_ntagdalt_534km",
@@ -900,7 +1026,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif n'Tagdalt). 91m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 545.8,
+    "guidance_mile": 339.2,
+    "guidance_distance_to_trail_km": 0.087
   },
   {
     "id": "water_osm_assif_ntagdalt_539km",
@@ -921,7 +1050,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif n'Tagdalt). 201m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 550.8,
+    "guidance_mile": 342.3,
+    "guidance_distance_to_trail_km": 0.2
   },
   {
     "id": "amr_town_taznakht",
@@ -942,7 +1074,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Full resupply crossroads town with supermarkets, restaurants, ATMs, and hotels."
+    "description": "Full resupply crossroads town with supermarkets, restaurants, ATMs, and hotels.",
+    "guidance_km": 551.1,
+    "guidance_mile": 342.4,
+    "guidance_distance_to_trail_km": 0.085
   },
   {
     "id": "amr_town_siroua_saffron",
@@ -963,7 +1098,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Berber mountain village outpost in the Jbel Siroua saffron region. Small shops, cafes, and drinking water before descending to Aguinane."
+    "description": "Berber mountain village outpost in the Jbel Siroua saffron region. Small shops, cafes, and drinking water before descending to Aguinane.",
+    "guidance_km": 598.0,
+    "guidance_mile": 371.6,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "amr_town_aguinane",
@@ -984,7 +1122,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Spectacular hidden oasis canyon with spring water, fresh dates, and Berber hospitality."
+    "description": "Spectacular hidden oasis canyon with spring water, fresh dates, and Berber hospitality.",
+    "guidance_km": 654.3,
+    "guidance_mile": 406.6,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "amr_town_igherm",
@@ -1005,7 +1146,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "High Anti-Atlas crossroads hub with grocery shops, cafes, pharmacy, and mechanical help."
+    "description": "High Anti-Atlas crossroads hub with grocery shops, cafes, pharmacy, and mechanical help.",
+    "guidance_km": 713.6,
+    "guidance_mile": 443.4,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "water_osm_oued_tata_730km",
@@ -1026,7 +1170,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Tata). 157m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 746.2,
+    "guidance_mile": 463.6,
+    "guidance_distance_to_trail_km": 0.156
   },
   {
     "id": "water_osm_oued_akka_ⴰⵙⵉⴼ_ⵏ_ⴰⵇⵇⴰ_وادي_أقا_807km",
@@ -1047,7 +1194,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا). 130m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 824.3,
+    "guidance_mile": 512.2,
+    "guidance_distance_to_trail_km": 0.123
   },
   {
     "id": "water_osm_oued_akka_ⴰⵙⵉⴼ_ⵏ_ⴰⵇⵇⴰ_وادي_أقا_811km",
@@ -1068,7 +1218,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Akka ⴰⵙⵉⴼ ⵏ ⴰⵇⵇⴰ وادي أقا). 196m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 828.2,
+    "guidance_mile": 514.6,
+    "guidance_distance_to_trail_km": 0.192
   },
   {
     "id": "water_osm_oued_tamanart_وادي_تمنارت_883km",
@@ -1089,7 +1242,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Tamanart وادي تمنارت). 41m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 900.8,
+    "guidance_mile": 559.7,
+    "guidance_distance_to_trail_km": 0.036
   },
   {
     "id": "water_osm_assif_tizirt_918km",
@@ -1110,7 +1266,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif Tizirt). 44m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 936.5,
+    "guidance_mile": 581.9,
+    "guidance_distance_to_trail_km": 0.044
   },
   {
     "id": "water_osm_oued_massa_ⴰⵙⵙⵉⴼ_ⵏ_ⵎⴰⵙⵙⴰ_وادي_ماسة_924km",
@@ -1131,7 +1290,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Massa ⴰⵙⵙⵉⴼ ⵏ ⵎⴰⵙⵙⴰ وادي ماسة). 20m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 942.6,
+    "guidance_mile": 585.7,
+    "guidance_distance_to_trail_km": 0.018
   },
   {
     "id": "amr_town_tafraoute",
@@ -1152,7 +1314,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Famous pink granite basin town with hotels, bike repairs, supermarkets, bakeries, and outdoor camping."
+    "description": "Famous pink granite basin town with hotels, bike repairs, supermarkets, bakeries, and outdoor camping.",
+    "guidance_km": 943.7,
+    "guidance_mile": 586.4,
+    "guidance_distance_to_trail_km": 0.291
   },
   {
     "id": "water_osm_assif_nammelene_واد_أملن_932km",
@@ -1173,7 +1338,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Assif n'ammelene واد أملن). 59m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 950.5,
+    "guidance_mile": 590.6,
+    "guidance_distance_to_trail_km": 0.061
   },
   {
     "id": "amr_town_tizourgane",
@@ -1194,7 +1362,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "13th-century fortified hilltop kasbah offering authentic lodging and traditional meals."
+    "description": "13th-century fortified hilltop kasbah offering authentic lodging and traditional meals.",
+    "guidance_km": 1000.0,
+    "guidance_mile": 621.4,
+    "guidance_distance_to_trail_km": 0.006
   },
   {
     "id": "amr_town_ait_baha",
@@ -1215,7 +1386,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Foothill market town with supermarkets, cafes, and bakeries before the descent towards the Sous plain."
+    "description": "Foothill market town with supermarkets, cafes, and bakeries before the descent towards the Sous plain.",
+    "guidance_km": 1062.5,
+    "guidance_mile": 660.2,
+    "guidance_distance_to_trail_km": 0.292
   },
   {
     "id": "water_osm_asif_oussaka_1060km",
@@ -1236,7 +1410,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Asif Oussaka). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1082.1,
+    "guidance_mile": 672.4,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "water_osm_asif_oussaka_1065km",
@@ -1257,7 +1434,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Asif Oussaka). 41m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1087.4,
+    "guidance_mile": 675.7,
+    "guidance_distance_to_trail_km": 0.041
   },
   {
     "id": "water_osm_oued_souss_وادي_سوس_1099km",
@@ -1278,7 +1458,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Souss وادي سوس). 13m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1121.2,
+    "guidance_mile": 696.7,
+    "guidance_distance_to_trail_km": 0.013
   },
   {
     "id": "water_osm_oued_tagenza_ⴰⵙⵉⴼ_ⵏ_ⵜⴳⴰⵏⵣⴰ_واد_تگنزا_1104km",
@@ -1299,7 +1482,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Tagenza ⴰⵙⵉⴼ ⵏ ⵜⴳⴰⵏⵣⴰ واد تگنزا). 28m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1126.7,
+    "guidance_mile": 700.1,
+    "guidance_distance_to_trail_km": 0.026
   },
   {
     "id": "amr_town_amskroud",
@@ -1320,7 +1506,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Convenience store and petrol station resupply at the base of the Western High Atlas climb."
+    "description": "Convenience store and petrol station resupply at the base of the Western High Atlas climb.",
+    "guidance_km": 1143.3,
+    "guidance_mile": 710.4,
+    "guidance_distance_to_trail_km": 0.711
   },
   {
     "id": "water_osm_oued_tamraght_ⴰⵙⵉⴼ_ⵏ_ⵜⴰⵎⵔⴰⵖⵜ_وادي_تامراغت_1165km",
@@ -1341,7 +1530,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Tamraght ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⴰⵖⵜ وادي تامراغت). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1187.7,
+    "guidance_mile": 738.0,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "amr_town_imouzzer",
@@ -1362,7 +1554,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Famous mountain honey town above waterfalls with cafes, restaurants, and food stores."
+    "description": "Famous mountain honey town above waterfalls with cafes, restaurants, and food stores.",
+    "guidance_km": 1216.9,
+    "guidance_mile": 756.2,
+    "guidance_distance_to_trail_km": 7.558
   },
   {
     "id": "water_osm_oued_tamri_ⴰⵙⵉⴼ_ⵏ_ⵜⴰⵎⵔⵉ_واد_تامري_1207km",
@@ -1383,7 +1578,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Tamri ⴰⵙⵉⴼ ⵏ ⵜⴰⵎⵔⵉ واد تامري). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1229.8,
+    "guidance_mile": 764.1,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "water_osm_oued_ougar_ⴰⵙⵉⴼ_ⵏ_oⵓⴳⴰⵔ_واد_اوغار_1231km",
@@ -1404,7 +1602,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Ougar ⴰⵙⵉⴼ ⵏ oⵓⴳⴰⵔ واد اوغار). Directly on trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1253.9,
+    "guidance_mile": 779.1,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "amr_town_tafedna",
@@ -1425,7 +1626,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Sheltered coastal fishing cove with beach camping, seafood cafes, and fresh water."
+    "description": "Sheltered coastal fishing cove with beach camping, seafood cafes, and fresh water.",
+    "guidance_km": 1307.0,
+    "guidance_mile": 812.1,
+    "guidance_distance_to_trail_km": 1.448
   },
   {
     "id": "amr_town_sidi_kaouki",
@@ -1446,7 +1650,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "Wild Atlantic surf beach with oceanfront campgrounds, cafes, and tagines."
+    "description": "Wild Atlantic surf beach with oceanfront campgrounds, cafes, and tagines.",
+    "guidance_km": 1352.9,
+    "guidance_mile": 840.6,
+    "guidance_distance_to_trail_km": 0.106
   },
   {
     "id": "water_osm_oued_ksob_ⴰⵙⵉⴼ_ⵏ_ⵇⵚⵓⴱ_وادي_القصب_1348km",
@@ -1467,7 +1674,10 @@
     "business_status": "OPERATIONAL",
     "description": "River Access (Oued Ksob ⴰⵙⵉⴼ ⵏ ⵇⵚⵓⴱ وادي القصب). 24m from trail. Natural water source (filtration/treatment required).",
     "province_state": "Morocco",
-    "country": "Morocco"
+    "country": "Morocco",
+    "guidance_km": 1372.0,
+    "guidance_mile": 852.5,
+    "guidance_distance_to_trail_km": 0.023
   },
   {
     "id": "amr_town_essaouira_finish",
@@ -1488,6 +1698,9 @@
     "business_status": "OPERATIONAL",
     "province_state": "Morocco",
     "country": "Morocco",
-    "description": "The official finish line of the Atlas Mountain Race 2026 at the historic 18th-century sea ramparts of Essaouira on the Atlantic coast."
+    "description": "The official finish line of the Atlas Mountain Race 2026 at the historic 18th-century sea ramparts of Essaouira on the Atlantic coast.",
+    "guidance_km": 1375.6,
+    "guidance_mile": 854.8,
+    "guidance_distance_to_trail_km": 0.005
   }
 ]

@@ -18,7 +18,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Southern terminus of the Arizona Trail Race 300 at the US-Mexico international border."
+    "description": "Southern terminus of the Arizona Trail Race 300 at the US-Mexico international border.",
+    "guidance_km": 0.0,
+    "guidance_mile": 0.0,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "azt_montezuma_pass",
@@ -39,7 +42,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Trailhead parking, interpretive signs, and dispersed backcountry camping at the base of the Huachucas."
+    "description": "Trailhead parking, interpretive signs, and dispersed backcountry camping at the base of the Huachucas.",
+    "guidance_km": 3.9,
+    "guidance_mile": 2.4,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "azt_parker_canyon_marina",
@@ -60,7 +66,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "General store with cold drinks, packaged foods, water spigot, and camping supplies."
+    "description": "General store with cold drinks, packaged foods, water spigot, and camping supplies.",
+    "guidance_km": 32.4,
+    "guidance_mile": 20.1,
+    "guidance_distance_to_trail_km": 0.966
   },
   {
     "id": "azt_parker_canyon_camp",
@@ -81,7 +90,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "USFS campground with potable water spigots, picnic tables, and shaded oak campsites."
+    "description": "USFS campground with potable water spigots, picnic tables, and shaded oak campsites.",
+    "guidance_km": 32.6,
+    "guidance_mile": 20.3,
+    "guidance_distance_to_trail_km": 1.21
   },
   {
     "id": "azt_canelo_pass_th",
@@ -102,7 +114,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Trailhead camping area with horse corral and seasonal water tank."
+    "description": "Trailhead camping area with horse corral and seasonal water tank.",
+    "guidance_km": 40.1,
+    "guidance_mile": 24.9,
+    "guidance_distance_to_trail_km": 0.008
   },
   {
     "id": "azt_red_rock_spring",
@@ -123,7 +138,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Perennial stream and spring pool in Red Rock Canyon. Reliable water filter source."
+    "description": "Perennial stream and spring pool in Red Rock Canyon. Reliable water filter source.",
+    "guidance_km": 54.1,
+    "guidance_mile": 33.6,
+    "guidance_distance_to_trail_km": 0.004
   },
   {
     "id": "town_patagonia",
@@ -144,7 +162,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Historic trail town and premier southern resupply hub: organic grocery, restaurants, lodging, and bike repair."
+    "description": "Historic trail town and premier southern resupply hub: organic grocery, restaurants, lodging, and bike repair.",
+    "guidance_km": 80.4,
+    "guidance_mile": 49.9,
+    "guidance_distance_to_trail_km": 6.176
   },
   {
     "id": "azt_patagonia_bike",
@@ -165,7 +186,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Emergency bikepacking repair station, sealant, tubes, chains, and pump tools."
+    "description": "Emergency bikepacking repair station, sealant, tubes, chains, and pump tools.",
+    "guidance_km": 80.4,
+    "guidance_mile": 49.9,
+    "guidance_distance_to_trail_km": 6.407
   },
   {
     "id": "azt_gathering_grounds",
@@ -186,7 +210,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Beloved hiker/biker friendly cafe serving espresso, huge breakfast burritos, and hearty sandwiches."
+    "description": "Beloved hiker/biker friendly cafe serving espresso, huge breakfast burritos, and hearty sandwiches.",
+    "guidance_km": 80.4,
+    "guidance_mile": 49.9,
+    "guidance_distance_to_trail_km": 6.427
   },
   {
     "id": "azt_patagonia_red_mountain",
@@ -207,7 +234,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Full natural foods market with fresh produce, bulk dried foods, energy bars, and drinks."
+    "description": "Full natural foods market with fresh produce, bulk dried foods, energy bars, and drinks.",
+    "guidance_km": 80.4,
+    "guidance_mile": 49.9,
+    "guidance_distance_to_trail_km": 6.484
   },
   {
     "id": "azt_stage_stop_inn",
@@ -228,7 +258,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Historic hotel in the heart of Patagonia with clean rooms, courtyard pool, and bike storage."
+    "description": "Historic hotel in the heart of Patagonia with clean rooms, courtyard pool, and bike storage.",
+    "guidance_km": 80.4,
+    "guidance_mile": 49.9,
+    "guidance_distance_to_trail_km": 6.551
   },
   {
     "id": "azt_gardner_canyon_camp",
@@ -249,7 +282,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "USFS dispersed camping area beneath Mount Wrightson with seasonal creek."
+    "description": "USFS dispersed camping area beneath Mount Wrightson with seasonal creek.",
+    "guidance_km": 102.7,
+    "guidance_mile": 63.8,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "azt_kentucky_camp",
@@ -270,7 +306,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Crucial historic gold mining station with reliable outdoor potable water spigot and museum."
+    "description": "Crucial historic gold mining station with reliable outdoor potable water spigot and museum.",
+    "guidance_km": 124.2,
+    "guidance_mile": 77.2,
+    "guidance_distance_to_trail_km": 0.007
   },
   {
     "id": "azt_las_colinas_th",
@@ -291,7 +330,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Dispersed camping and trailhead in the rolling foothills between Santa Ritas and Cienega Creek."
+    "description": "Dispersed camping and trailhead in the rolling foothills between Santa Ritas and Cienega Creek.",
+    "guidance_km": 144.6,
+    "guidance_mile": 89.9,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "azt_cienega_creek_water",
@@ -312,7 +354,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "AZT water cache box and perennial stream in the Cienega Creek preserve beneath I-10."
+    "description": "AZT water cache box and perennial stream in the Cienega Creek preserve beneath I-10.",
+    "guidance_km": 150.9,
+    "guidance_mile": 93.8,
+    "guidance_distance_to_trail_km": 0.0
   },
   {
     "id": "azt_colossal_cave_camp",
@@ -333,7 +378,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "County park campground with potable water, restrooms, hot showers, and shaded campsites."
+    "description": "County park campground with potable water, restrooms, hot showers, and shaded campsites.",
+    "guidance_km": 190.6,
+    "guidance_mile": 118.5,
+    "guidance_distance_to_trail_km": 0.768
   },
   {
     "id": "azt_colossal_cave_cafe",
@@ -354,7 +402,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Park cafe serving burgers, cold drinks, ice cream, and snacks for trail users."
+    "description": "Park cafe serving burgers, cold drinks, ice cream, and snacks for trail users.",
+    "guidance_km": 190.7,
+    "guidance_mile": 118.5,
+    "guidance_distance_to_trail_km": 0.712
   },
   {
     "id": "azt_redington_pass_camp",
@@ -375,7 +426,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Scenic pass summit camping with dramatic sunset views back across the Tucson mountain skyline."
+    "description": "Scenic pass summit camping with dramatic sunset views back across the Tucson mountain skyline.",
+    "guidance_km": 251.6,
+    "guidance_mile": 156.3,
+    "guidance_distance_to_trail_km": 0.003
   },
   {
     "id": "azt_molino_basin_camp",
@@ -396,7 +450,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Developed Forest Service campground with potable water, fire rings, and oak trees."
+    "description": "Developed Forest Service campground with potable water, fire rings, and oak trees.",
+    "guidance_km": 275.0,
+    "guidance_mile": 170.9,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "azt_summerhaven_store",
@@ -417,7 +474,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Alpine village general store with hot coffee, groceries, snacks, homemade fudge, and gear."
+    "description": "Alpine village general store with hot coffee, groceries, snacks, homemade fudge, and gear.",
+    "guidance_km": 310.1,
+    "guidance_mile": 192.7,
+    "guidance_distance_to_trail_km": 0.079
   },
   {
     "id": "town_summerhaven",
@@ -438,7 +498,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "High-altitude mountain enclave (8,200 ft) atop Mount Lemmon: general store, cafes, bakery, and alpine lodging."
+    "description": "High-altitude mountain enclave (8,200 ft) atop Mount Lemmon: general store, cafes, bakery, and alpine lodging.",
+    "guidance_km": 310.0,
+    "guidance_mile": 192.6,
+    "guidance_distance_to_trail_km": 0.11
   },
   {
     "id": "azt_cookie_cabin",
@@ -459,7 +522,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Legendary fresh hot pizza and giant skillet cookies with ice cream atop Mount Lemmon."
+    "description": "Legendary fresh hot pizza and giant skillet cookies with ice cream atop Mount Lemmon.",
+    "guidance_km": 310.1,
+    "guidance_mile": 192.7,
+    "guidance_distance_to_trail_km": 0.161
   },
   {
     "id": "azt_mt_lemmon_hotel",
@@ -480,7 +546,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Boutique individual alpine cabins with heating, hot showers, and bike-friendly service."
+    "description": "Boutique individual alpine cabins with heating, hot showers, and bike-friendly service.",
+    "guidance_km": 310.2,
+    "guidance_mile": 192.7,
+    "guidance_distance_to_trail_km": 0.034
   },
   {
     "id": "azt_oracle_patio_cafe",
@@ -501,7 +570,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Premier AZT trail angel hub serving massive breakfasts, fresh pies, espresso, and groceries."
+    "description": "Premier AZT trail angel hub serving massive breakfasts, fresh pies, espresso, and groceries.",
+    "guidance_km": 348.2,
+    "guidance_mile": 216.3,
+    "guidance_distance_to_trail_km": 3.737
   },
   {
     "id": "azt_oracle_inn",
@@ -522,7 +594,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Historic roadside lodging and hearty steakhouse dining in the mountain foothills."
+    "description": "Historic roadside lodging and hearty steakhouse dining in the mountain foothills.",
+    "guidance_km": 348.2,
+    "guidance_mile": 216.3,
+    "guidance_distance_to_trail_km": 3.755
   },
   {
     "id": "town_oracle",
@@ -543,7 +618,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Historic mining community in the northern Catalina foothills: 24-hr market, cafe, and motel resupply."
+    "description": "Historic mining community in the northern Catalina foothills: 24-hr market, cafe, and motel resupply.",
+    "guidance_km": 348.2,
+    "guidance_mile": 216.3,
+    "guidance_distance_to_trail_km": 3.766
   },
   {
     "id": "azt_circle_k_oracle",
@@ -564,7 +642,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "24-hour convenience store with fountain drinks, packaged meals, coffee, and ice."
+    "description": "24-hour convenience store with fountain drinks, packaged meals, coffee, and ice.",
+    "guidance_km": 348.2,
+    "guidance_mile": 216.3,
+    "guidance_distance_to_trail_km": 3.852
   },
   {
     "id": "azt_tiger_mine_th",
@@ -585,7 +666,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Critical northern trail angel water cache station marking the entry into the Black Hills desert."
+    "description": "Critical northern trail angel water cache station marking the entry into the Black Hills desert.",
+    "guidance_km": 348.6,
+    "guidance_mile": 216.6,
+    "guidance_distance_to_trail_km": 3.546
   },
   {
     "id": "azt_freeman_road_cache",
@@ -606,7 +690,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Vital lifeline water cache maintained by the Arizona Trail Association in the Tortilla Mountains."
+    "description": "Vital lifeline water cache maintained by the Arizona Trail Association in the Tortilla Mountains.",
+    "guidance_km": 393.0,
+    "guidance_mile": 244.2,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "azt_ripsey_crest_view",
@@ -627,7 +714,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Breathtaking dry campsite atop Ripsey Ridge with 360-degree desert vistas and starlit skies."
+    "description": "Breathtaking dry campsite atop Ripsey Ridge with 360-degree desert vistas and starlit skies.",
+    "guidance_km": 429.1,
+    "guidance_mile": 266.6,
+    "guidance_distance_to_trail_km": 0.001
   },
   {
     "id": "town_kearny",
@@ -648,7 +738,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Gila River valley mining town: grocery supermarket, gas station, cafe, and lodging (approx. 4 mi via Kelvin-Kearny Hwy)."
+    "description": "Gila River valley mining town: grocery supermarket, gas station, cafe, and lodging (approx. 4 mi via Kelvin-Kearny Hwy).",
+    "guidance_km": 431.0,
+    "guidance_mile": 267.8,
+    "guidance_distance_to_trail_km": 5.921
   },
   {
     "id": "azt_riverside_store_kearny",
@@ -669,7 +762,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Resupply stop 3 miles off-route via Kelvin highway: hot food, cold drinks, groceries, and pharmacy."
+    "description": "Resupply stop 3 miles off-route via Kelvin highway: hot food, cold drinks, groceries, and pharmacy.",
+    "guidance_km": 431.0,
+    "guidance_mile": 267.8,
+    "guidance_distance_to_trail_km": 5.929
   },
   {
     "id": "azt_kelvin_bridge_water",
@@ -690,7 +786,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Trailhead kiosk, trash disposal, and perennial river water source (filtering required)."
+    "description": "Trailhead kiosk, trash disposal, and perennial river water source (filtering required).",
+    "guidance_km": 445.5,
+    "guidance_mile": 276.8,
+    "guidance_distance_to_trail_km": 0.005
   },
   {
     "id": "azt_alamo_canyon_camp",
@@ -711,7 +810,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Shaded sycamore grove campsite with seasonal stream pools in the White Canyon Wilderness."
+    "description": "Shaded sycamore grove campsite with seasonal stream pools in the White Canyon Wilderness.",
+    "guidance_km": 481.5,
+    "guidance_mile": 299.2,
+    "guidance_distance_to_trail_km": 0.535
   },
   {
     "id": "azt_los_hermanos_superior",
@@ -732,7 +834,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Celebratory finish line Mexican feast: massive burritos, chimichangas, and sweet Mexican pastries."
+    "description": "Celebratory finish line Mexican feast: massive burritos, chimichangas, and sweet Mexican pastries.",
+    "guidance_km": 500.4,
+    "guidance_mile": 310.9,
+    "guidance_distance_to_trail_km": 7.577
   },
   {
     "id": "town_superior",
@@ -753,7 +858,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Historic finish-line gateway town beneath Picketpost Mountain: full grocery, bike shop, restaurants, and lodging."
+    "description": "Historic finish-line gateway town beneath Picketpost Mountain: full grocery, bike shop, restaurants, and lodging.",
+    "guidance_km": 500.4,
+    "guidance_mile": 310.9,
+    "guidance_distance_to_trail_km": 7.68
   },
   {
     "id": "azt_superior_bike",
@@ -774,7 +882,10 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Historic mining town bike shop, tools, repair stands, tires, and local riding intelligence."
+    "description": "Historic mining town bike shop, tools, repair stands, tires, and local riding intelligence.",
+    "guidance_km": 500.4,
+    "guidance_mile": 310.9,
+    "guidance_distance_to_trail_km": 7.692
   },
   {
     "id": "azt_picketpost_th",
@@ -795,6 +906,9 @@
     "business_status": "OPERATIONAL",
     "province_state": "AZ",
     "country": "USA",
-    "description": "Northern finish line of the AZT 300! Equestrian trailhead, shade ramadas, water tank, and camping."
+    "description": "Northern finish line of the AZT 300! Equestrian trailhead, shade ramadas, water tank, and camping.",
+    "guidance_km": 500.8,
+    "guidance_mile": 311.2,
+    "guidance_distance_to_trail_km": 0.005
   }
 ]
