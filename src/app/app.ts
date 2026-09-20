@@ -229,7 +229,7 @@ export class App implements OnInit, OnDestroy {
   readonly availableCategories: CategoryItem[] = AVAILABLE_CATEGORIES;
 
   readonly selectedCategories = signal<Set<string>>(
-    new Set(['town', 'grocery', 'food', 'campground', 'hotel', 'bike_shop', 'gas_station', 'pharmacy', 'laundromat'])
+    new Set(['town', 'grocery', 'food', 'campground', 'hotel', 'bike_shop', 'gas_station', 'pharmacy', 'laundromat', 'water'])
   );
 
   // Key milestone towns for quick navigation jumping

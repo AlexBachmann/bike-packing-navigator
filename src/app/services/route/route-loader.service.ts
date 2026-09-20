@@ -14,6 +14,97 @@ import { resolveBaseHref } from '../../interceptors/base-href.interceptor';
 
 export type RouteTrackData = RouteTrack;
 
+/**
+ * Deduplicates and merges water waypoints into existing places array.
+ * Normalizes coordinates, distance, ensures category is 'water', and sorts by route_mile ascending.
+ */
+export function mergeWaterPlaces(existingPlaces: Place[], waterWaypoints: any[]): Place[] {
+  if (!Array.isArray(waterWaypoints) || waterWaypoints.length === 0) {
+    return existingPlaces || [];
+  }
+
+  const placeMap = new Map<string, Place>();
+  for (const p of existingPlaces || []) {
+    if (p && p.id) {
+      placeMap.set(p.id, { ...p });
+    }
+  }
+
+  for (const w of waterWaypoints) {
+    if (!w || !w.id) continue;
+
+    let lat = 0;
+    let lon = 0;
+    if (w.location && typeof w.location.lat === 'number' && typeof w.location.lon === 'number') {
+      lat = w.location.lat;
+      lon = w.location.lon;
+    } else if (Array.isArray(w.coordinates) && w.coordinates.length >= 2) {
+      lat = Number(w.coordinates[0]) || 0;
+      lon = Number(w.coordinates[1]) || 0;
+    }
+
+    const distance_to_trail_km =
+      typeof w.distance_to_trail_km === 'number'
+        ? w.distance_to_trail_km
+        : typeof w.dist_off_route_m === 'number'
+          ? w.dist_off_route_m / 1000
+          : 0;
+
+    const route_km =
+      typeof w.route_km === 'number'
+        ? w.route_km
+        : typeof w.km === 'number'
+          ? w.km
+          : typeof w.route_mile === 'number'
+            ? w.route_mile / 0.621371
+            : typeof w.mile === 'number'
+              ? w.mile / 0.621371
+              : 0;
+
+    const route_mile =
+      typeof w.route_mile === 'number'
+        ? w.route_mile
+        : typeof w.mile === 'number'
+          ? w.mile
+          : route_km * 0.621371;
+
+    const google_maps_url =
+      w.google_maps_url || (lat !== 0 || lon !== 0 ? `https://maps.google.com/?q=${lat},${lon}` : undefined);
+
+    if (placeMap.has(w.id)) {
+      const existing = placeMap.get(w.id)!;
+      placeMap.set(w.id, {
+        ...existing,
+        ...w,
+        category: 'water',
+        location: existing.location && existing.location.lat != null ? existing.location : { lat, lon },
+        distance_to_trail_km: existing.distance_to_trail_km ?? distance_to_trail_km,
+        route_km: existing.route_km ?? route_km,
+        route_mile: existing.route_mile ?? route_mile,
+        google_maps_url: existing.google_maps_url || google_maps_url
+      });
+    } else {
+      const newPlace: Place = {
+        ...w,
+        id: w.id,
+        name: w.name || 'Water Access Point',
+        category: 'water',
+        type: w.type || 'water',
+        town: w.town || '',
+        is_in_town: w.is_in_town ?? false,
+        location: { lat, lon },
+        distance_to_trail_km,
+        route_km,
+        route_mile,
+        google_maps_url
+      };
+      placeMap.set(w.id, newPlace);
+    }
+  }
+
+  return Array.from(placeMap.values()).sort((a, b) => (a.route_mile || 0) - (b.route_mile || 0));
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -190,6 +281,7 @@ export class RouteLoaderService implements OnDestroy {
 
         // Load road-snapped guidance track alongside raw track (progressive enhancement)
         this.loadGuidanceTrack(routeId);
+        this.loadWaterAccess(routeId);
       },
       error: (err) => {
         this.activeSub = undefined;
@@ -254,6 +346,9 @@ export class RouteLoaderService implements OnDestroy {
     if ((!pkg.guidanceTrack || !pkg.guidanceTrack.points || pkg.guidanceTrack.points.length === 0) && pkg.routeId) {
       this.loadGuidanceTrack(pkg.routeId);
     }
+    if (pkg.routeId) {
+      this.loadWaterAccess(pkg.routeId);
+    }
   }
 
   async loadGuidanceTrack(routeId: string): Promise<void> {
@@ -285,6 +380,46 @@ export class RouteLoaderService implements OnDestroy {
     } catch {
       // Graceful fallback to route-track.json already in place
     }
+  }
+
+  async loadWaterAccess(routeId: string): Promise<void> {
+    if (!routeId) return;
+    try {
+      let url = resolveBaseHref(`/data/routes/${routeId}/water_access.json`);
+      let res = await fetch(url);
+      if (!res.ok && res.status === 404) {
+        url = resolveBaseHref(`/data/routes/${routeId}/water_bothies.json`);
+        res = await fetch(url);
+      }
+      if (res && res.ok) {
+        const waterData = await res.json();
+        if (this.activeRouteId() === routeId && Array.isArray(waterData) && waterData.length > 0) {
+          const merged = mergeWaterPlaces(this.places(), waterData);
+          this.places.set(merged);
+
+          // Update cached offline package with merged places
+          this.offlineStorage
+            .getRoutePackage(routeId)
+            .then(async (pkg) => {
+              if (!pkg) {
+                await new Promise((r) => setTimeout(r, 100));
+                pkg = await this.offlineStorage.getRoutePackage(routeId);
+              }
+              if (pkg) {
+                pkg.places = merged;
+                this.offlineStorage.saveRoutePackage(pkg).catch(() => {});
+              }
+            })
+            .catch(() => {});
+        }
+      }
+    } catch {
+      // Gracefully handle missing water files, network errors, or unmocked fetch in tests
+    }
+  }
+
+  mergeWaterPlaces(existingPlaces: Place[], waterWaypoints: any[]): Place[] {
+    return mergeWaterPlaces(existingPlaces, waterWaypoints);
   }
 
   loadTurns(routeId: string): void {

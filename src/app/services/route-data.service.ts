@@ -69,6 +69,10 @@ export class RouteDataService implements OnDestroy {
     return this.loader.loadGuidanceTrack(routeId);
   }
 
+  loadWaterAccess(routeId: string): Promise<void> {
+    return this.loader.loadWaterAccess(routeId);
+  }
+
   unloadRoute(): void {
     this.loader.unloadRoute();
   }

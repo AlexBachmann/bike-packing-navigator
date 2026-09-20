@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createPoiPopupHtml, getPoiIconConfig } from './route-map-poi.helper';
+import { createPoiPopupHtml, getPoiIconConfig, filterPlaces } from './route-map-poi.helper';
 import { Place } from '../../models/waypoint.model';
 
 describe('route-map-poi.helper', () => {
@@ -57,5 +57,25 @@ describe('route-map-poi.helper', () => {
     const milesHtml = createPoiPopupHtml(offRoutePlace, config, 'miles');
     expect(milesHtml).toContain('Mile 2145.0');
     expect(milesHtml).toContain('1.6 mi off route');
+  });
+
+  it('should filter places by water category correctly', () => {
+    const places: Place[] = [
+      { ...basePlace, id: 'water-1', category: 'water' },
+      { ...basePlace, id: 'town-1', category: 'town', type: 'locality' },
+      { ...basePlace, id: 'camp-1', category: 'campground' },
+      { ...basePlace, id: 'water-2', category: 'water', name: 'Spring' }
+    ];
+
+    const waterResults = filterPlaces(places, 'water');
+    expect(waterResults.length).toBe(2);
+    expect(waterResults.map((p) => p.id)).toEqual(['water-1', 'water-2']);
+
+    const townResults = filterPlaces(places, 'town');
+    expect(townResults.length).toBe(1);
+    expect(townResults[0].id).toBe('town-1');
+
+    const allResults = filterPlaces(places, 'all');
+    expect(allResults.length).toBe(4);
   });
 });

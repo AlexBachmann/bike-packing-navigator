@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     {
       id: 'cockpit',
       name: 'Live Ride Cockpit',
-      tag: '60fps Telemetry HUD',
+      tag: 'High-Contrast 60fps HUD',
       title: 'Glanceable Heads-Up Cockpit with Proximity Intelligence',
       description:
         'Continuous speed, gradient-colored climb profiles, turn cues, and 4-tier water proximity countdown alerts. Tested at 24 km/h across Tour Divide Mile 150 near Fernie, BC.',
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
     {
       id: 'elevation',
       name: 'Elevation & Climb Weather',
-      tag: 'Copernicus 30m DEM',
+      tag: 'Topographic Elevation',
       title: 'Slope Gradient Spectrum & Summit Thunderstorm Pins',
       description:
         'Microsegmented 50m grade bands (<4% rolling green, 4-8% yellow, 8-12% orange, >12% crimson hike-a-bike) with real-time cursor scrubbing and projected summit storm windows.',
@@ -96,16 +96,16 @@ export class HomeComponent implements OnInit {
     {
       id: 'resupply',
       name: 'Resupply & Nutrition',
-      tag: 'BMR & Grocery Math',
+      tag: 'Metabolic Resupply & Nutrition',
       title: 'Metabolic Caloric Planner & Department-Grouped Shopping Lists',
       description:
-        'Calculates active energy expenditure at 24% gross mechanical efficiency plus clinical Mifflin-St Jeor BMR. Simulates multi-day sleep blocks and generates aisle-by-aisle grocery checklists.',
+        'Calculates active energy expenditure from pedal wattage and vertical climbing alongside baseline resting burn. Simulates multi-day sleep schedules and generates aisle-by-aisle grocery checklists.',
       hasVideo: false,
       desktopImg: 'assets/images/screenshot-resupply-desktop.webp',
       mobileImg: 'assets/images/screenshot-resupply-mobile.webp',
       telemetryPills: [
         { label: 'Daily Burn', value: '5,840 kcal', color: 'text-amber-400' },
-        { label: 'Riding Efficiency', value: '24% Gross', color: 'text-emerald-400' },
+        { label: 'Fueling Target', value: '60g Carbs/Hour', color: 'text-emerald-400' },
         { label: 'Recipes Loaded', value: '18 Field-Tested', color: 'text-cyan-400' },
         { label: 'Carrying Schedule', value: '3.2 Days to Town', color: 'text-emerald-400' },
       ],
@@ -113,29 +113,29 @@ export class HomeComponent implements OnInit {
     {
       id: 'map',
       name: 'Vector Map & Offline Cache',
-      tag: 'PMTiles + MapLibre GL',
+      tag: 'Offline Vector Cartography',
       title: 'Complete 18km Route Corridor Offline Vector Cartography',
       description:
-        'Compact single-file PMTiles archives stored locally in IndexedDB. Multi-section route stitching across provinces/states, 60fps dead-reckoning during GPS canyon dropouts, and switchback filtering.',
+        'Compact single-file route corridor packages stored locally on your device. Seamless multi-region route stitching, 60fps dead-reckoning during GPS canyon dropouts, and intelligent switchback filtering.',
       hasVideo: true,
       videoWebm: 'assets/videos/map-loop.webm',
       videoMp4: 'assets/videos/map-loop.mp4',
       desktopImg: 'assets/images/screenshot-map-desktop.webp',
       mobileImg: 'assets/images/screenshot-map-mobile.webp',
       telemetryPills: [
-        { label: 'Tile Archive', value: 'PMTiles Hilbert', color: 'text-emerald-400' },
+        { label: 'Corridor Cache', value: 'Single-File Package', color: 'text-emerald-400' },
         { label: 'Corridor Buffer', value: '18 km Width', color: 'text-cyan-400' },
-        { label: 'Dead-Reckoning', value: '60fps Loop', color: 'text-emerald-400' },
-        { label: 'Offline Storage', value: 'IndexedDB', color: 'text-amber-400' },
+        { label: 'Canyon Tracking', value: '60fps Dead-Reckon', color: 'text-emerald-400' },
+        { label: 'Offline Storage', value: '100% Local Device', color: 'text-amber-400' },
       ],
     },
     {
       id: 'waypoints',
       name: 'Waypoint & Water Filters',
-      tag: '4-Tier Verification',
+      tag: '4-Tier Water Verification',
       title: 'Curated Water Reliability & Spatial Deduplication',
       description:
-        'Deduplicates overlapping water features within 200m, applies 5km density throttling to prevent cockpit clutter, and alerts riders when the next verified water point is >30km away.',
+        'Deduplicates overlapping water features within 200m, applies density buffering to eliminate screen clutter, and triggers immediate alarms when entering dry stretches longer than 30 kilometers.',
       hasVideo: false,
       desktopImg: 'assets/images/screenshot-waypoints-desktop.webp',
       mobileImg: 'assets/images/screenshot-waypoints-mobile.webp',
@@ -153,16 +153,17 @@ export class HomeComponent implements OnInit {
       id: 'eta-modeling',
       pillarNumber: 1,
       title: 'Physics-Based Dynamic ETA Modeling',
-      badge: '12-Iter Newton-Raphson',
+      badge: 'Loaded Cycling Physics',
       badgeColor: 'border-emerald-500/30 text-emerald-400 bg-emerald-950/40',
-      formula: '½ ρ CdA v³ + m g (sin θ + Crr cos θ) v - η P = 0',
+      formula:
+        'Know your exact arrival time at remote towns before the single grocery store closes at 7 PM.',
       description:
-        'Calculates real travel velocity over 50m microsegments using Newtonian power equilibrium, surface rolling resistance (Crr), loaded rig weight, aerodynamic drag, and exponential rider fatigue.',
+        'Calculates real travel velocity over 50m microsegments using Newtonian power equilibrium, surface rolling resistance, loaded rig weight, aerodynamic drag, and exponential rider fatigue.',
       deepDiveSpecs: [
-        'Newton-Raphson 12-iteration solver converged to < 10⁻⁵ precision',
-        'Crr table: Asphalt 0.0055, Hardpack 0.0100, Gravel 0.0160, Mud 0.0600',
-        'Firmness multipliers from OSM tracktype grade1 (1.0x) to grade5 (2.3x)',
-        'Automatic hike-a-bike transition speed formula on steep alpine gradients',
+        'Mountain power balance accounts for 40kg bike, gear, and water weight',
+        'Rolling resistance calibrated for chunky gravel, loose scree, and deep sand',
+        'Automatic transition to hike-a-bike pacing on steep alpine pitches >14%',
+        'Fatigue modeling factors multi-day exhaustion and headwinds into ETA',
       ],
       route: '/features/eta-modeling',
       iconSvg: 'M13 10V3L4 14h7v7l9-11h-7z',
@@ -171,16 +172,17 @@ export class HomeComponent implements OnInit {
       id: 'weather-hazards',
       pillarNumber: 2,
       title: 'Predictive Trail Weather & Hazard Intelligence',
-      badge: 'Trajectory Weather Matching',
+      badge: 'Forward-Trajectory Forecasts',
       badgeColor: 'border-cyan-500/30 text-cyan-400 bg-cyan-950/40',
-      formula: 'V_headwind = V_wind · cos((θ_wind - θ_travel + 540) % 360 - 180)',
+      formula:
+        'Get warned of opposing 30 km/h headwinds and derailleur-snapping bentonite mud before you ride into them.',
       description:
-        'Matches chronological rider arrival times (T_now + ETA) to localized Open-Meteo atmospheric forecasts. Decomposes wind vectors into relative headwind/tailwind resistance and alerts for mountain storms.',
+        'Matches your projected arrival time at upcoming trail miles to localized hourly atmospheric forecasts. Decomposes wind into true headwind resistance and warns of afternoon alpine storm windows.',
       deepDiveSpecs: [
-        'Trajectory ETA matching: samples weather at exact future arrival miles',
-        '5-tier hazard priority: Thunderstorms > Heavy Mud > Headwinds > Tailwinds > Benign',
-        'OSM clay soil + rainfall mud detection warns of derailleur-snapping peanut-butter clay',
-        'Mountain pass lapse rate: 6.5°C drop and wind acceleration per 1,000m ascent',
+        'Forward-trajectory matching forecasts conditions where you will be tomorrow, not where you stand today',
+        '5-tier hazard hierarchy: Severe Thunderstorms > Heavy Mud > Headwinds > Crosswinds > Clear',
+        'Unpaved clay warnings alert to impassable bentonite peanut-butter mud during rain',
+        'High-pass temperature modeling guides critical bivvy vs push-through decisions',
       ],
       route: '/features/weather-hazards',
       iconSvg:
@@ -190,16 +192,17 @@ export class HomeComponent implements OnInit {
       id: 'resupply-nutrition',
       pillarNumber: 3,
       title: 'Resupply & Nutrition Intelligence',
-      badge: '24% Gross Mechanical Efficiency',
+      badge: 'Power-Based Calorie Engine',
       badgeColor: 'border-amber-500/30 text-amber-400 bg-amber-950/40',
-      formula: 'kcal_active = (Watts × Duration_sec) / (0.24 × 4184)',
+      formula:
+        'Eliminate backcountry bonking with calorie targets tuned to your loaded rig weight and climbing meters.',
       description:
-        'Eliminates remote bonking by modeling active mechanical energy at 24% gross human efficiency alongside clinical Mifflin-St Jeor BMR, multi-day sleep schedules, and grocery lists.',
+        'Eliminates remote bonking by translating mechanical pedaling work and elevation gain into real calorie burn, active hydration requirements, and aisle-by-aisle grocery checklists.',
       deepDiveSpecs: [
-        'Clinical Mifflin-St Jeor BMR calculated from weight, height, age, and sex offset',
-        'Multi-day simulator accounts for 21:00 nightfall camp triggers and sleep blocks',
-        '18 backcountry field recipes catalog with carbohydrate, fat, and protein ratios',
-        'Automated department-grouped grocery shopping list (Produce, Bakery, Canned, Snacks)',
+        'Power-based active burn calculation converts mechanical wattage directly into calories needed',
+        'Department-organized grocery lists (Produce, Bakery, Canned, Snacks) for 5-minute town resupply',
+        'Consumable weight tracking helps you avoid hauling redundant food over high passes',
+        'Field-tested backcountry recipe catalog with optimized carb, protein, and sodium ratios',
       ],
       route: '/features/resupply-nutrition',
       iconSvg:
@@ -211,14 +214,15 @@ export class HomeComponent implements OnInit {
       title: 'Enriched Waypoint & Water Intelligence',
       badge: '4-Tier Water Classification',
       badgeColor: 'border-blue-500/30 text-blue-400 bg-blue-950/40',
-      formula: 'Lookahead_water = min_distance(upcoming > 1.0 mi in [water, camp, store])',
+      formula:
+        'Clear 4-tier water reliability and automatic alarms when dry stretches exceed 30 kilometers.',
       description:
-        'Protects against dehydration in arid stretches (Great Divide Basin, Arizona desert) through rigorous 4-tier water classification, 200m spatial deduplication, and proximity countdown HUD alerts.',
+        'Protects against life-threatening dehydration in arid expanses like the Great Divide Basin through 4-tier reliability classification, spatial deduplication, and proximity countdown alerts.',
       deepDiveSpecs: [
-        'Tier 1: Potable Municipal, Tier 2: Natural Springs, Tier 3: Streams, Tier 4: Lakes/Tanks',
-        '200m spatial deduplication strictly preserves highest quality source',
-        '5km density throttling with 3.75km anti-crowding boundary prevents cockpit clutter',
-        '>30 km dry carry warning banner triggers heavy hydration planning',
+        'Tier 1: Potable Tap, Tier 2: Artesian Spring, Tier 3: Filtered Creek, Tier 4: Emergency Tank',
+        '30 km dry stretch alarm prompts carrying 4-6L of water before entering arid basins',
+        'Glanceable heads-up countdown alerts (1k, 500m, 250m, 50m, HERE) in top cockpit corner',
+        'Spatial deduplication merges duplicate markers so rough descents remain decluttered',
       ],
       route: '/features/waypoint-water',
       iconSvg:
@@ -228,16 +232,17 @@ export class HomeComponent implements OnInit {
       id: 'climb-analytics',
       pillarNumber: 5,
       title: 'Climb & Pass Analytics',
-      badge: 'Copernicus 30m Global DEM',
+      badge: 'Satellite Elevation Contours',
       badgeColor: 'border-orange-500/30 text-orange-400 bg-orange-950/40',
-      formula: 'Grade = (ΔElevation / ΔDistance) × 100% via 50m Microsegments',
+      formula:
+        'Time high-altitude summits to crest 12,000 ft passes before dangerous afternoon lightning storms build.',
       description:
-        'Replaces noisy barometric sensors with Copernicus GLO-30 DEM. Renders slope gradient color spectrums, dynamic SVG mini-profiles with crest shoulders, and summit lightning window pins.',
+        'Replaces drifting barometric sensors with satellite digital elevation contours. Displays slope gradient color spectrums, real-time vertical ascent metrics, and summit storm arrival windows.',
       deepDiveSpecs: [
-        'Color spectrum: <4% green, 4-8% yellow, 8-12% orange, >12% crimson, <-4% cyan',
-        'Dynamic width scaling: gentle climbs expand to 150px, steep climbs contract to 70px',
-        'Live rider location dot on climb slope with remaining vertical ascent counter',
-        'Pass summit storm pin alerts riders to crest high mountain passes before noon storms',
+        'Color-coded gradient bands: <4% rolling green, 4-8% yellow, 8-12% orange, >12% crimson hike-a-bike',
+        'Daylight pass arrival calculations help you crest exposed passes before afternoon lightning',
+        'Hike-a-bike fatigue modeling accounts for walking loaded rigs on brutal gradients',
+        'Glanceable vertical climbing meters, current grade %, and distance to pass crest',
       ],
       route: '/features/climb-analytics',
       iconSvg: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
@@ -246,16 +251,17 @@ export class HomeComponent implements OnInit {
       id: 'offline-mapping',
       pillarNumber: 6,
       title: 'Offline Vector Cartography & Navigation',
-      badge: 'PMTiles + MapLibre GL 60fps',
+      badge: '100% Offline 60fps Vector',
       badgeColor: 'border-teal-500/30 text-teal-400 bg-teal-950/40',
-      formula: 'Virtual Hilbert Indexing in IndexedDB + 60fps Dead Reckoning',
+      formula:
+        'Fluid 60fps topo navigation that runs for weeks with zero cellular reception and minimal battery drain.',
       description:
-        'Zero raster tiles. Delivers compact single-file PMTiles vector archives cached in IndexedDB. Features composite multi-section route stitching, 60fps dead-reckoning, and switchback filtering.',
+        'Zero fragile image tiles. Delivers compact single-file vector packages saved to your device in seconds. Features full 18km trail corridor contours, 60fps dead-reckoning, and off-course alerts.',
       deepDiveSpecs: [
-        'PMTiles Hilbert-indexed vector archives cached permanently in browser IndexedDB',
-        'Composite route stitching joins multi-state tile packages without seam artifacts',
-        '60fps dead-reckoning advances rider position during canyon GPS dropouts',
-        'Switchback elimination: cues trigger only when ≥3 direction branches diverge',
+        'Entire 4,300 km trail corridor downloads in seconds and takes minimal device storage',
+        'Smooth 60fps vector navigation with high-contrast topographic styling for bright sunlight',
+        'Canyon dead-reckoning keeps route guidance moving during deep mountain GPS blackouts',
+        'Off-course vibration and sound alarms trigger immediately if you take a wrong fork at night',
       ],
       route: '/features/offline-mapping',
       iconSvg:
@@ -267,14 +273,15 @@ export class HomeComponent implements OnInit {
       title: 'Open-Source Philosophy & Community Trust',
       badge: '100% Free MIT · 0 Telemetry',
       badgeColor: 'border-emerald-500/30 text-emerald-400 bg-emerald-950/40',
-      formula: 'Privacy = 100% Client-Side (0 Servers, 0 Accounts, 0 Trackers)',
+      formula:
+        '100% free under MIT with zero subscriptions, zero accounts, and zero telemetry tracking.',
       description:
-        'Built for endurance athletes, not venture capitalists. 100% Free and Open Source under MIT License. All data lives in local browser storage with zero telemetry and zero backend tracking.',
+        'Built for endurance athletes, not venture capitalists. 100% Free and Open Source under MIT License. All data lives on your device with zero telemetry and zero corporate paywalls.',
       deepDiveSpecs: [
-        'MIT License guarantees freedom to use, modify, and build custom route packages',
-        'Zero accounts, zero passwords, zero email harvesting, and zero subscription paywalls',
-        'Full data sovereignty: complete GPX and JSON route export/import directly on device',
-        'Offline-first PWA works autonomously on phone bike mounts in remote wilderness',
+        'Permissive MIT License guarantees the platform remains permanently free and open to everyone',
+        'Zero accounts, zero passwords, zero credit cards, and zero $80/year subscription paywalls',
+        'Complete data sovereignty: zero GPS tracks, health stats, or coordinates ever leave your phone',
+        'Community-driven: inspect all calculations, contribute verified water points, or add custom GPX routes',
       ],
       route: '/features/open-source',
       iconSvg:
@@ -285,7 +292,7 @@ export class HomeComponent implements OnInit {
   readonly comparisonRows: ComparisonRow[] = [
     {
       feature: 'Physics-Based Wattage & Mass ETAs',
-      navigator: '✅ Newton-Raphson 12-iter solver',
+      navigator: '✅ Loaded bike physics & fatigue model',
       navigatorCheck: true,
       strava: '❌ Flat average speed only',
       komoot: '❌ Flat average speed only',
@@ -303,7 +310,7 @@ export class HomeComponent implements OnInit {
     },
     {
       feature: 'Unpaved Road Mud Hazard Alerts',
-      navigator: '✅ OSM clay soil + rain analysis',
+      navigator: '✅ Rain + bentonite clay detection',
       navigatorCheck: true,
       strava: '❌ None',
       komoot: '❌ None',
@@ -312,7 +319,7 @@ export class HomeComponent implements OnInit {
     },
     {
       feature: '4-Tier Water & >30km Carry Warnings',
-      navigator: '✅ 4 tiers + lookahead gating',
+      navigator: '✅ 4 tiers + 30km dry alarm',
       navigatorCheck: true,
       strava: '❌ None',
       komoot: '⚠️ Generic unverified POIs',
@@ -320,8 +327,8 @@ export class HomeComponent implements OnInit {
       garmin: '⚠️ Basic waypoint dots',
     },
     {
-      feature: 'Metabolic BMR & Grocery Lists',
-      navigator: '✅ Mifflin-St Jeor + 18 recipes',
+      feature: 'Metabolic Resupply & Grocery Lists',
+      navigator: '✅ Power-based calories + 18 recipes',
       navigatorCheck: true,
       strava: '❌ None',
       komoot: '❌ None',
@@ -330,7 +337,7 @@ export class HomeComponent implements OnInit {
     },
     {
       feature: 'Full Vector Offline Maps',
-      navigator: '✅ PMTiles in IndexedDB (Free)',
+      navigator: '✅ Single-file offline corridor (Free)',
       navigatorCheck: true,
       strava: '⚠️ Subscription required',
       komoot: '⚠️ Regional paywalls ($30+)',
@@ -361,7 +368,7 @@ export class HomeComponent implements OnInit {
     this.seoService.setMeta({
       title: 'The Autonomous Backcountry Copilot',
       description:
-        "When you're 40 miles past cell service, hope is not a navigation strategy. Physics-based ETAs, trajectory weather hazards, 4-tier water intelligence, and 100% offline vector mapping under MIT license.",
+        "When you're 40 miles past cell service, hope is not a navigation strategy. Physics-based arrival times, trajectory weather hazards, 4-tier water intelligence, and 100% offline vector mapping under MIT license.",
       urlPath: '',
       keywords:
         'bikepacking, Tour Divide, Colorado Trail, bikepacking navigation, GPX routing, cycling physics, offline maps, PMTiles, trail weather, resupply planner',

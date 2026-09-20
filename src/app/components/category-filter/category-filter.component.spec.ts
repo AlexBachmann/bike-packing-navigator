@@ -26,8 +26,8 @@ describe('CategoryFilterComponent', () => {
   it('should render All button and category buttons', () => {
     const el = fixture.nativeElement as HTMLElement;
     const buttons = el.querySelectorAll('button');
-    // 1 "All" button + 9 category buttons = 10 buttons
-    expect(buttons.length).toBe(10);
+    // 1 "All" button + 10 category buttons = 11 buttons
+    expect(buttons.length).toBe(11);
     expect(buttons[0].textContent?.trim()).toBe('All');
   });
 

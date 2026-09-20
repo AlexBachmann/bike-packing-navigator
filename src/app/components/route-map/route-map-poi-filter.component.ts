@@ -83,6 +83,17 @@ import { CommonModule } from '@angular/common';
         <span>🧺</span>
         <span>Laundry</span>
       </button>
+      <button
+        type="button"
+        (click)="selectFilter('water')"
+        class="px-2.5 py-1 rounded-full text-xs font-semibold font-mono shadow-md backdrop-blur-md transition border flex items-center gap-1 cursor-pointer shrink-0"
+        [ngClass]="activeFilter() === 'water'
+          ? 'bg-cyan-500 text-slate-950 border-cyan-400 font-bold'
+          : 'bg-slate-900/90 text-slate-300 border-slate-700 hover:text-white'"
+      >
+        <span>💧</span>
+        <span>Water</span>
+      </button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

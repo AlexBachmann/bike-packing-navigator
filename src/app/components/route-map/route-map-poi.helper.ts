@@ -113,6 +113,7 @@ export function filterPlaces(places: Place[], filterCategory: string): Place[] {
     const isCamp = p.category === 'campground' || /recreation site|rec site/i.test(p.name);
     const isHotel = p.category === 'hotel' && !isCamp;
 
+    if (filterCategory === 'water' && p.category === 'water') return true;
     if (filterCategory === 'town' && (p.category === 'town' || p.type === 'locality')) return true;
     if (filterCategory === 'bike_shop' && p.category === 'bike_shop') return true;
     if (filterCategory === 'grocery' && (p.category === 'grocery' || p.category === 'gas_station' || p.category === 'water')) return true;

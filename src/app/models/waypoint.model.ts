@@ -39,6 +39,12 @@ export interface Place {
   google_maps_url?: string;
   business_status?: string;
   province_state?: string;
+  country?: string;
+  description?: string;
+  tier?: number;
+  reliability?: string;
+  treatment_required?: boolean;
+  source_type?: string;
 }
 
 export interface WaypointViewModel extends Place {
@@ -107,6 +113,7 @@ export const AVAILABLE_CATEGORIES: CategoryItem[] = [
   { key: 'gas_station', label: 'Gas / Store', icon: '⛽', badgeClass: 'bg-orange-500/20 text-orange-400 border-orange-500/30' },
   { key: 'pharmacy', label: 'Pharmacy', icon: '💊', badgeClass: 'bg-rose-500/20 text-rose-400 border-rose-500/30' },
   { key: 'laundromat', label: 'Laundry', icon: '🧺', badgeClass: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' },
+  { key: 'water', label: 'Water', icon: '💧', badgeClass: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' }
 ];
 
 export function getCategoryBadge(category: string): { icon: string; label: string; badgeClass: string } {

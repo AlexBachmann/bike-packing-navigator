@@ -139,9 +139,9 @@
     <!-- Specialized Technical Diagram / Visual Architecture -->
     <div class="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 mb-12 shadow-xl">
       <div class="text-xs font-mono uppercase tracking-wider text-cyan-400 font-semibold mb-2">
-        Mathematical & Structural Model
+        Visual Model & Field Architecture
       </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Technical Architecture Diagram</h2>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Field Architecture & Practical Dynamics</h2>
 
       <!-- Diagram: Power Balance (Pillar 1) -->
       <div *ngIf="detail.diagramType === 'power-balance'" class="space-y-4">
@@ -167,7 +167,7 @@
               fill="none"
             />
             <text x="130" y="172" fill="#10b981" font-size="12" font-family="monospace">
-              Slope θ = arctan(grade)
+              Slope: Mountain Incline (Grade %)
             </text>
 
             <!-- Bike loaded center box -->
@@ -189,7 +189,7 @@
               font-family="monospace"
               text-anchor="middle"
             >
-              Rig Mass (m)
+              Rig Mass (45 lb)
             </text>
 
             <!-- Force vectors -->
@@ -204,31 +204,57 @@
               marker-end="url(#arrow-red)"
             />
             <text x="370" y="200" fill="#ef4444" font-size="11" font-family="monospace">
-              F_gravity = m · g · sin(θ)
+              Gravity Drag: 45 lb Rig on Incline
             </text>
 
             <!-- Rolling resistance vector -->
             <line x1="320" y1="125" x2="240" y2="139" stroke="#f59e0b" stroke-width="3" />
             <text x="180" y="150" fill="#f59e0b" font-size="11" font-family="monospace">
-              F_rolling = Crr · m · g · cos(θ)
+              Surface Friction: Gravel Rolling Drag
             </text>
 
             <!-- Aerodynamic drag vector -->
             <line x1="320" y1="110" x2="210" y2="110" stroke="#06b6d4" stroke-width="3" />
             <text x="120" y="105" fill="#06b6d4" font-size="11" font-family="monospace">
-              F_drag = ½ ρ CdA v²
+              Aerodynamic Drag: Wind & Packs
             </text>
 
             <!-- Mechanical propulsion vector -->
             <line x1="400" y1="125" x2="490" y2="109" stroke="#10b981" stroke-width="3" />
             <text x="500" y="112" fill="#10b981" font-size="11" font-family="monospace">
-              P_wheel = η · P_rider
+              Propulsion: Rider Output (Watts)
             </text>
           </svg>
         </div>
+
+        <!-- Side-by-Side Comparison: Naive Flat Average vs Bikepack Navigator Physics ETA -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-xl border border-rose-900/40 bg-rose-950/20 p-4">
+            <div class="flex items-center gap-2 text-xs font-mono font-bold text-rose-400 uppercase mb-2">
+              <span>❌ Naive Flat Average (Garmin / Strava)</span>
+            </div>
+            <div class="text-sm font-semibold text-white mb-1">
+              70 km @ 20 km/h = 3.5h ETA (Arrival: 15:30)
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Assumes flat paved speed. Completely ignores the 2,200m vertical climb, loose gravel traction loss, and a 45 lb loaded bikepacking rig. Result: disastrous 3-hour calculation error, stranding the rider in pitch darkness.
+            </p>
+          </div>
+          <div class="rounded-xl border border-emerald-500/40 bg-emerald-950/30 p-4">
+            <div class="flex items-center gap-2 text-xs font-mono font-bold text-emerald-400 uppercase mb-2">
+              <span>✅ Bikepack Navigator Physics ETA</span>
+            </div>
+            <div class="text-sm font-semibold text-white mb-1">
+              70 km @ Mountain Physics = 6.5h ETA (Arrival: 18:30)
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Models 45 lb gear weight, 9% average loose gravel slope, and multi-day fatigue decay. Realistic 18:30 arrival gives the rider clear notice to push pacing and reach town 30 minutes before the 19:00 grocery store deadline.
+            </p>
+          </div>
+        </div>
+
         <p class="text-xs font-mono text-slate-400">
-          The 12-iteration Newton-Raphson solver computes velocity v by finding the zero of the
-          cubic function f(v) = ½ρCdA·v³ + mg(sinθ + Crr·cosθ)v - ηP.
+          Continuous power equilibrium balances gravity on loaded rigs, gravel rolling resistance, and wind drag across 50-meter trail segments.
         </p>
       </div>
 
@@ -284,19 +310,18 @@
             <!-- Opposing headwind component -->
             <line x1="350" y1="110" x2="300" y2="152" stroke="#ef4444" stroke-width="3" />
             <text x="180" y="170" fill="#ef4444" font-size="11" font-family="monospace">
-              Effective Headwind = V_wind · cos(Δθ)
+              Effective Headwind Resistance
             </text>
 
             <!-- Crosswind component -->
             <line x1="350" y1="110" x2="392" y2="160" stroke="#f59e0b" stroke-width="3" />
             <text x="405" y="170" fill="#f59e0b" font-size="11" font-family="monospace">
-              Crosswind Shear = |V_wind · sin(Δθ)|
+              Crosswind Handling Shear
             </text>
           </svg>
         </div>
         <p class="text-xs font-mono text-slate-400">
-          Decomposes wind along the rider's forward travel vector. Triggering aerodynamic alerts
-          when headwind ≥ 20 km/h or crosswind shear endangers handling.
+          Resolves incoming weather wind angles against your forward travel trajectory, alerting you to opposing headwinds and dangerous crosswinds on exposed ridge lines.
         </p>
       </div>
 
@@ -306,17 +331,17 @@
           <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
             <div class="text-xs font-mono uppercase text-slate-400">Mechanical Active Burn</div>
             <div class="text-2xl font-bold font-mono text-amber-400 mt-1">3,650 kcal</div>
-            <div class="text-[11px] text-slate-500 mt-1">150W × 8.2h @ 24% gross efficiency</div>
+            <div class="text-[11px] text-slate-500 mt-1">150W steady pedal output × 8.2h climbing</div>
           </div>
           <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
-            <div class="text-xs font-mono uppercase text-slate-400">Clinical BMR Baseline</div>
+            <div class="text-xs font-mono uppercase text-slate-400">Baseline Resting Burn</div>
             <div class="text-2xl font-bold font-mono text-cyan-400 mt-1">1,780 kcal</div>
-            <div class="text-[11px] text-slate-500 mt-1">Mifflin-St Jeor (75kg, 180cm, 32yo)</div>
+            <div class="text-[11px] text-slate-500 mt-1">Daily resting metabolism (75kg athlete)</div>
           </div>
           <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
             <div class="text-xs font-mono uppercase text-slate-400">Total Daily Target</div>
             <div class="text-2xl font-bold font-mono text-emerald-400 mt-1">5,840 kcal</div>
-            <div class="text-[11px] text-slate-500 mt-1">Including 1.25x camp activity setup</div>
+            <div class="text-[11px] text-slate-500 mt-1">Total burn including camp chores & recovery</div>
           </div>
         </div>
         <div
@@ -462,8 +487,8 @@
           </svg>
         </div>
         <p class="text-xs font-mono text-slate-400">
-          Generated from Copernicus GLO-30 Digital Elevation Model. Features dynamic width scaling
-          (gentle 150px vs steep 70px) and a crest shoulder buffer.
+          Generated from high-resolution satellite elevation contours. Features daylight pass summit
+          ETA calculations, grade color bands, and hike-a-bike fatigue modeling.
         </p>
       </div>
 
@@ -477,23 +502,23 @@
               Traditional Raster Tile Pyramid
             </div>
             <ul class="space-y-1.5">
-              <li>• 100,000+ individual PNG/PBF tile files</li>
-              <li>• Severe browser storage quota failures</li>
-              <li>• Broken blank tiles in mountain dead-zones</li>
-              <li>• High battery drain rendering images</li>
+              <li>• 100,000+ individual image tile files</li>
+              <li>• Gigabytes of storage and failed downloads</li>
+              <li>• Broken blank map squares in mountain dead-zones</li>
+              <li>• Heavy battery drain downloading loose images</li>
             </ul>
           </div>
           <div
             class="p-5 rounded-xl bg-slate-950 border border-emerald-500/40 text-slate-300 text-xs font-mono"
           >
             <div class="text-emerald-400 font-bold uppercase mb-2">
-              PMTiles Hilbert Vector Archive
+              Single-File Offline Vector Package
             </div>
             <ul class="space-y-1.5">
-              <li>• 1 single archive file cached in IndexedDB</li>
-              <li>• Hilbert curve space-filling byte range queries</li>
-              <li>• 60fps vector rendering via MapLibre GL</li>
-              <li>• 18km corridor buffer saved in one click</li>
+              <li>• 1 single archive file cached locally on device</li>
+              <li>• Instant byte-range corridor queries without server latency</li>
+              <li>• Smooth 60fps vector rendering with high-contrast topo</li>
+              <li>• Full 18km corridor buffer saved in one quick download</li>
             </ul>
           </div>
         </div>
@@ -538,12 +563,12 @@
       </div>
     </div>
 
-    <!-- Mathematical Formulas & Exact Formulations -->
+    <!-- Field Principles & Survival Logic -->
     <div class="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8 mb-12 shadow-xl">
       <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold mb-2">
-        Equations & Logic
+        Field Principles & Survival Logic
       </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Core Mathematical Formulations</h2>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Field Principles & Survival Logic</h2>
 
       <div class="space-y-4">
         <div

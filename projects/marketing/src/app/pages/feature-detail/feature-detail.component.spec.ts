@@ -58,13 +58,13 @@ describe('FeatureDetailComponent', () => {
     );
   });
 
-  it('should render breadcrumbs, formula code block, and capabilities', () => {
+  it('should render breadcrumbs, field principles, and capabilities', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Home');
     expect(compiled.textContent).toContain('Features');
     expect(compiled.textContent).toContain('Physics-Based Dynamic ETA Modeling');
-    expect(compiled.textContent).toContain('½ ρ CdA v³ + m g (sin θ + Crr cos θ) v - η P = 0');
-    expect(compiled.textContent).toContain('Core Mathematical Formulations');
+    expect(compiled.textContent).toContain('Field Principles & Survival Logic');
+    expect(compiled.textContent).toContain('Mountain Power Equilibrium');
     expect(compiled.textContent).toContain('Field Capabilities');
   });
 

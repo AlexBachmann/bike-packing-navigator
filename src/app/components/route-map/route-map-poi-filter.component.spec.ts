@@ -21,10 +21,10 @@ describe('RouteMapPoiFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('2. should render all 7 POI filter buttons with type="button"', () => {
+  it('2. should render all 8 POI filter buttons with type="button"', () => {
     const el = fixture.nativeElement as HTMLElement;
     const buttons = el.querySelectorAll('button');
-    expect(buttons.length).toBe(7);
+    expect(buttons.length).toBe(8);
     buttons.forEach((btn) => {
       expect(btn.getAttribute('type')).toBe('button');
     });
@@ -40,6 +40,12 @@ describe('RouteMapPoiFilterComponent', () => {
 
     const bikeShopBtn = el.querySelectorAll('button')[2] as HTMLButtonElement;
     expect(bikeShopBtn.className).toContain('bg-blue-500');
+
+    fixture.componentRef.setInput('activeFilter', 'water');
+    fixture.detectChanges();
+
+    const waterBtn = el.querySelectorAll('button')[7] as HTMLButtonElement;
+    expect(waterBtn.className).toContain('bg-cyan-500');
   });
 
   it('4. should emit filterChange when a category button is clicked', () => {
@@ -53,5 +59,10 @@ describe('RouteMapPoiFilterComponent', () => {
     campBtn.click();
 
     expect(emittedFilter).toBe('campground');
+
+    const waterBtn = el.querySelectorAll('button')[7] as HTMLButtonElement;
+    waterBtn.click();
+
+    expect(emittedFilter).toBe('water');
   });
 });

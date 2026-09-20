@@ -67,11 +67,14 @@ describe('HomeComponent', () => {
     expect(component.showcaseDevice()).toBe('mobile');
   });
 
-  it('should render all 7 feature pillars with exact formulas', () => {
+  it('should render all 7 feature pillars with athlete survival advantages', () => {
     expect(component.pillars.length).toBe(7);
     const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain(
+      'The 7 Survival Advantages of Autonomous Trail Intelligence',
+    );
     expect(compiled.textContent).toContain('Physics-Based Dynamic ETA Modeling');
-    expect(compiled.textContent).toContain('½ ρ CdA v³ + m g (sin θ + Crr cos θ) v - η P = 0');
+    expect(compiled.textContent).toContain('single grocery store closes at 7 PM');
     expect(compiled.textContent).toContain('Predictive Trail Weather & Hazard Intelligence');
     expect(compiled.textContent).toContain('Resupply & Nutrition Intelligence');
     expect(compiled.textContent).toContain('Enriched Waypoint & Water Intelligence');
