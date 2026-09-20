@@ -42,12 +42,13 @@ describe('RouteMapStatusPillComponent', () => {
     expect(el.textContent).toContain('Raster Map');
   });
 
-  it('4. should render Vector (Offline ready) indicator and switch to raster button when in vector mode', () => {
+  it('4. should render Vector Map indicator and switch to raster button when in vector mode', () => {
     fixture.componentRef.setInput('activeMapMode', 'vector');
     fixture.detectChanges();
     const el = fixture.nativeElement as HTMLElement;
-    expect(el.textContent).toContain('Vector (Offline ready)');
-    expect(el.textContent).not.toContain('Offline Ready Offline Ready');
+    expect(el.textContent).toContain('Vector Map');
+    expect(el.textContent).not.toContain('Offline Ready');
+    expect(el.textContent).not.toContain('Offline ready');
     const switchBtn = el.querySelector('button[aria-label="Switch to raster map"]');
     expect(switchBtn).toBeTruthy();
   });

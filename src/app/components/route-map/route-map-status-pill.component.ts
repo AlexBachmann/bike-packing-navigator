@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
         @if (activeMapMode() === 'vector') {
           <span class="inline-flex items-center gap-1.5 text-emerald-400 font-bold text-[11px]">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            Vector (Offline ready)
+            Vector Map
           </span>
           <button
             type="button"

@@ -101,7 +101,7 @@ async function replayQueuedAnalytics() {
         method: entry.method,
         headers: headers,
         body: entry.body,
-        mode: 'no-cors'
+        mode: 'no-cors',
       };
 
       try {
@@ -136,7 +136,7 @@ async function queueAnalyticsRequest(request) {
       method: request.method,
       headers: headersObj,
       body: bodyText,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
     await addRequestToDb(entry);
   } catch (err) {
@@ -176,7 +176,7 @@ const PRECACHE_URLS = [
   './assets/sprites/dark.json',
   './assets/sprites/dark.png',
   './assets/sprites/dark@2x.json',
-  './assets/sprites/dark@2x.png'
+  './assets/sprites/dark@2x.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -186,7 +186,7 @@ self.addEventListener('install', (event) => {
       return cache.addAll(PRECACHE_URLS).catch((err) => {
         console.warn('[SW] Pre-cache warning (will cache dynamically):', err);
       });
-    })
+    }),
   );
 });
 
@@ -198,16 +198,19 @@ self.addEventListener('activate', (event) => {
         return Promise.all(
           keys
             .filter((k) => k.startsWith('bikepack-app-shell-') && k !== SHELL_CACHE_NAME)
-            .map((k) => caches.delete(k))
+            .map((k) => caches.delete(k)),
         );
       }),
-      replayQueuedAnalytics()
-    ])
+      replayQueuedAnalytics(),
+    ]),
   );
 });
 
 self.addEventListener('message', (event) => {
-  if (event.data && (event.data.type === 'FLUSH_OFFLINE_ANALYTICS' || event.data.type === 'SYNC_ANALYTICS')) {
+  if (
+    event.data &&
+    (event.data.type === 'FLUSH_OFFLINE_ANALYTICS' || event.data.type === 'SYNC_ANALYTICS')
+  ) {
     event.waitUntil(replayQueuedAnalytics());
   }
 });
@@ -220,6 +223,10 @@ self.addEventListener('sync', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
+
+  // Marketing SSG Bypass: completely ignore any requests to /welcome or /bike-packing-navigator/welcome
+  // Let the browser fetch directly from the network without Service Worker interference or cache pollution.
+  if (/^(?:\/bike-packing-navigator)?\/welcome(?:\/|$)/.test(url.pathname)) return;
 
   // A. Google Tag Manager / gtag.js script caching for offline availability
   const isGtagScript =
@@ -241,9 +248,9 @@ self.addEventListener('fetch', (event) => {
           if (cached) return cached;
           return new Response('/* gtag offline fallback */', {
             headers: { 'Content-Type': 'application/javascript' },
-            status: 200
+            status: 200,
           });
-        })
+        }),
     );
     return;
   }
@@ -268,9 +275,9 @@ self.addEventListener('fetch', (event) => {
           // Return synthetic accepted response so client gtag runtime doesn't error
           return new Response(JSON.stringify({ offlineQueued: true }), {
             status: 202,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
           });
-        })
+        }),
     );
     return;
   }
@@ -300,22 +307,20 @@ self.addEventListener('fetch', (event) => {
           // Transparent 1x1 GIF fallback when offline
           return new Response(
             Uint8Array.from([
-              71, 73, 70, 56, 57, 97, 1, 0, 1, 0, 128, 0, 0, 0, 0, 0, 255, 255,
-              255, 33, 249, 4, 1, 0, 0, 0, 0, 44, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2,
-              2, 68, 1, 0, 59
+              71, 73, 70, 56, 57, 97, 1, 0, 1, 0, 128, 0, 0, 0, 0, 0, 255, 255, 255, 33, 249, 4, 1,
+              0, 0, 0, 0, 44, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 2, 68, 1, 0, 59,
             ]),
-            { status: 200, headers: { 'Content-Type': 'image/gif' } }
+            { status: 200, headers: { 'Content-Type': 'image/gif' } },
           );
         }
-      })
+      }),
     );
     return;
   }
 
   // 2. Navigation Requests (HTML document / page reloads with or without query params) -> Network-First, Cache Fallback
   const isNavigate =
-    event.request.mode === 'navigate' ||
-    event.request.headers.get('accept')?.includes('text/html');
+    event.request.mode === 'navigate' || event.request.headers.get('accept')?.includes('text/html');
 
   if (isNavigate) {
     const scopeUrl = self.registration.scope;
@@ -326,9 +331,12 @@ self.addEventListener('fetch', (event) => {
         .then((networkResponse) => {
           if (networkResponse && networkResponse.ok) {
             const copy = networkResponse.clone();
-            caches.open(SHELL_CACHE_NAME).then((cache) => {
-              cache.put(indexUrl, copy);
-            }).catch(() => {});
+            caches
+              .open(SHELL_CACHE_NAME)
+              .then((cache) => {
+                cache.put(indexUrl, copy);
+              })
+              .catch(() => {});
           }
           return networkResponse;
         })
@@ -345,16 +353,17 @@ self.addEventListener('fetch', (event) => {
           }
           return new Response(
             '<!doctype html><html><head><meta charset="utf-8"><title>Offline</title></head><body><h1>Bike Packing Navigator</h1><p>Please connect to internet once to download route data.</p></body></html>',
-            { headers: { 'Content-Type': 'text/html' }, status: 200 }
+            { headers: { 'Content-Type': 'text/html' }, status: 200 },
           );
-        })
+        }),
     );
     return;
   }
 
   // 3. Static App Shell Assets (JS scripts, CSS styles, fonts, icons, data JSON) -> Network-First with Cache Fallback
   const isSameOrigin = url.origin === self.location.origin;
-  const isFont = url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com');
+  const isFont =
+    url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com');
 
   if (isSameOrigin || isFont) {
     // Skip websocket / dev server live reload connections
@@ -367,9 +376,12 @@ self.addEventListener('fetch', (event) => {
         .then((networkResponse) => {
           if (networkResponse && networkResponse.ok) {
             const copy = networkResponse.clone();
-            caches.open(SHELL_CACHE_NAME).then((cache) => {
-              cache.put(event.request, copy);
-            }).catch(() => {});
+            caches
+              .open(SHELL_CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, copy);
+              })
+              .catch(() => {});
           }
           return networkResponse;
         })
@@ -384,11 +396,11 @@ self.addEventListener('fetch', (event) => {
           if (url.pathname.endsWith('.json')) {
             return new Response(JSON.stringify({ error: 'Offline asset not cached' }), {
               status: 404,
-              headers: { 'Content-Type': 'application/json' }
+              headers: { 'Content-Type': 'application/json' },
             });
           }
           return new Response('Offline asset unavailable', { status: 503 });
-        })
+        }),
     );
   }
 });

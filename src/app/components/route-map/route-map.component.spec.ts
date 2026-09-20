@@ -915,7 +915,8 @@ describe('RouteMapComponent', () => {
       fixture.detectChanges();
 
       const el = fixture.nativeElement as HTMLElement;
-      expect(el.textContent).toContain('Vector (Offline ready)');
+      expect(el.textContent).toContain('Vector Map');
+      expect(el.textContent).not.toContain('Offline ready');
       const switchBtn = el.querySelector('button[aria-label="Switch to raster map"]');
       expect(switchBtn).toBeTruthy();
       const downloadBtn = el.querySelector('button[aria-label="Download offline vector map for active route"]');
